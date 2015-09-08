@@ -27,6 +27,6 @@ This is a coding contest which pushes developers to contribute back to open-sour
 This is the dashboard that will show the current team standings.
 Teams of 3 will be Alpha, Bravo, Charlie, ...
 
-Repositories will be forked in this account and code commited there, so that we this dashboard can monitor commits. The dashboard will show statistical data of commits of all team members. This is not a rule for judging but gives a good idea of the competitiveness between the team. 
+Repositories will be forked in this account and code commited there, so that this dashboard can monitor commits. The dashboard will show statistical data of commits of all team members. This is not a rule for judging but gives a good idea of the competitiveness between the team. 
 
 Let the games begin. 
