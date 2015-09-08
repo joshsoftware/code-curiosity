@@ -38,8 +38,15 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.8)
     arel (6.0.3)
+    autoprefixer-rails (5.1.7.1)
+      execjs
+      json
+    bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.3.4.1)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.2.19)
     bson (3.2.4)
     builder (3.2.2)
     byebug (6.0.2)
@@ -54,6 +61,13 @@ GEM
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
+    devise (3.4.1)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      responders
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.6.0)
     faraday (0.9.1)
@@ -68,6 +82,8 @@ GEM
       oauth2
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    haml (4.0.6)
+      tilt
     hashie (3.4.2)
     i18n (0.7.0)
     jbuilder (2.3.1)
@@ -108,6 +124,7 @@ GEM
       rack (~> 1.2)
     optionable (0.2.0)
     origin (2.1.1)
+    orm_adapter (0.5.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -137,6 +154,8 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
+    responders (2.1.0)
+      railties (>= 4.2.0, < 5)
     sass (3.4.18)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -164,6 +183,8 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    warden (1.2.3)
+      rack (>= 1.0)
     web-console (2.2.1)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -174,11 +195,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass
   byebug
   coffee-rails (~> 4.1.0)
+  devise
   github_api
+  haml
   jbuilder (~> 2.0)
   jquery-rails
+  minitest
   mongoid (~> 4.0.2)
   rails (= 4.2.0)
   sass-rails (~> 5.0)
