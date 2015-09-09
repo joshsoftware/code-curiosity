@@ -1,0 +1,4 @@
+- if @team.is_a? Team
+ $("#teams tbody").append("<tr><td>#{@team.name}</td><td>#{@team.members.pluck(:username).join(", ")}</td><td>#{@team.active_from}</td></tr>")
+ $("#team_name").val('')
+ $("#team_members").multiselect("clearSelection")

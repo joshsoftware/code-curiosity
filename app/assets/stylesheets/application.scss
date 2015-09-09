@@ -11,9 +11,39 @@
  * file per style scope.
  *
  *= require_self
+ *= require bootstrap_multiselect
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "dashboard.scss";
 
+
+.st_search{
+  @extend .form-control;
+  max-width: 200px;
+  float: right;
+  margin-bottom: 10px;
+  
+}
+
+.pagination{
+  float: right;
+  margin-top: 0px;
+}
+
+.pagination li.active a{
+  background-color: #DCDCDC;
+}
+
+.st_per_page{
+  @extend .form-control;
+  width: 50px;
+  height: 34px !important;
+  float: right;
+  margin-right: 20px;
+}
+
+.row.link {
+  margin-bottom: 10px;
+}

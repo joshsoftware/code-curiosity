@@ -1,0 +1,30 @@
+%h1.page-header
+  %font Teams 
+
+.row.link
+  = form_for Team.new, remote: true do |f|
+    .row
+      .col-md-4
+        = f.text_field :name, class: 'form-control', placeholder: 'Name', required: true
+      .col-md-2
+        = f.select :members, @devs, {}, include_blank: true, class: 'form-control', multiple: true 
+      .col-md-4
+        = f.submit "Add Team", class: 'btn btn-success'
+          
+
+.row
+  %table.table.table-striped.table-bordered#teams
+    %thead
+      %tr
+        %th Name
+        %th Members 
+        %th Active from
+    %tbody     
+      - @teams.each do |team|
+        %tr
+          %td= team.name
+          %td= team.members.pluck(:username).join(", ")
+          %td= team.active_from
+
+:javascript
+  $("#team_members").multiselect({enableFiltering: true})

@@ -25,4 +25,4 @@ group :development, :test do
   gem 'spring'
   gem 'minitest'
 end
-
+gem 'quiet_assets', group: :development

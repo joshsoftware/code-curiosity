@@ -1,0 +1,19 @@
+%h1.page-header
+  %font Repositories 
+
+%table#stream_table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Watchers
+  %tbody     
+
+%script#template{type: "text/html"}
+  %tr
+    %td {{record.name}}
+    %td {{record.description}}
+    %td {{record.watchers}}
+
+:javascript
+  load_repos(#{@repos.to_json})

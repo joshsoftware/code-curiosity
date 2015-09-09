@@ -4,5 +4,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+
+  resources :teams
+  get 'repositories' => "dashboard#repositories"
   root 'dashboard#index'
 end
