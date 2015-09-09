@@ -1,4 +1,4 @@
 - if @team.is_a? Team
- $("#teams tbody").append("<tr><td>#{@team.name}</td><td>#{@team.members.pluck(:username).join(", ")}</td><td>#{@team.active_from}</td></tr>")
+ $("#teams tbody").append("<tr id='team_#{@team.id.to_s}'><td>#{@team.name}</td><td>#{@team.members.pluck(:username).join(", ")}</td><td>#{@team.active_from}</td><td><a data-remote='true' rel='nofollow' data-method='delete' href='/teams/#{@team.id.to_s}'><span class='glyphicon glyphicon-trash'></span></a></td></tr>")
  $("#team_name").val('')
  $("#team_members").multiselect("clearSelection")

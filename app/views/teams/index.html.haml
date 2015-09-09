@@ -19,12 +19,16 @@
         %th Name
         %th Members 
         %th Active from
+        %th Actions
     %tbody     
       - @teams.each do |team|
-        %tr
+        %tr{id: "team_#{team.id.to_s}"}
           %td= team.name
           %td= team.members.pluck(:username).join(", ")
           %td= team.active_from
+          %td
+            = link_to team, method: :delete, remote: true do
+              %span.glyphicon.glyphicon-trash
 
 :javascript
   $("#team_members").multiselect({enableFiltering: true})

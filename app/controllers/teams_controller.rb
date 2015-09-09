@@ -8,4 +8,9 @@ class TeamsController < ApplicationController
   def create
     @team = Team.create_with_members(params[:team])
   end
+
+  def destroy
+    @team = Team.find(params[:id])
+    @team.destroy
+  end
 end
