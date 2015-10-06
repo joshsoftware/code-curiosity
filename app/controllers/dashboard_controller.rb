@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
 
   def repositories
-    @repos = GITHUB.orgs.teams.list_repos(ORG_TEAM_ID).as_json(only: [:name, :description, :watchers])
+    @repos = Repository.fetch_remote_repos.as_json(only: [:name, :description, :watchers])
   end
 end
