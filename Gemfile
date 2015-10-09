@@ -18,6 +18,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'github_api'
 gem 'devise'
+gem "highcharts-rails", "~> 3.0.0"
+gem 'bootstrap-datepicker-rails'
 
 group :development, :test do
   gem 'byebug'

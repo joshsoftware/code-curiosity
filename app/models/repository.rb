@@ -4,6 +4,7 @@ class Repository
 
   field :name, type: String
 
+  has_many :commits
   has_and_belongs_to_many :teams
 
   def self.fetch_remote_repos

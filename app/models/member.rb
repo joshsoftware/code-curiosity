@@ -5,6 +5,7 @@ class Member
   field :username, type: String
   
   belongs_to :team
+  has_many :commits
 
   validates :username, presence: true
 end

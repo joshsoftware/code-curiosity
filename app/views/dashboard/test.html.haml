@@ -28,38 +28,35 @@
     $('#datepicker2').datepicker({format: 'dd/mm/yyyy', defaultDate: #{@end_date}});
   });
 
+  categories = #{@categories}
   data = #{@data}
   $(function () { 
     $('#container').highcharts({
       chart: {
-      type: 'column'
+      type: 'bar'
      },
       title: {
       text: 'Code Curiosity Stats'
      },
       xAxis: {
-      type: 'category'
+      categories: categories,
+      title: {
+        text: null
+      }
      },
       yAxis: {
        title: {
-        text: 'Commits Count'
+        text: 'Count'
        }
      },
-     legend: {
-       enabled: false
-     },
      plotOptions: {
-       series: {
-         borderWidth: 0,
+       bar: {
          dataLabels: {
-           enabled: true                  
-        }
-      }
+         enabled: true
+         }
+       }
     },
-      series: [{ name: "Commits",
-      colorByPoint: true,
-      data: data
-      }]
+       series: data
     });
   });
 

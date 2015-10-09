@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   resources :teams
   get 'repositories' => "dashboard#repositories"
+  post 'index' => "dashboard#index"
   root 'dashboard#index'
 end
