@@ -23,19 +23,15 @@
 %div{id: "container", style: "width:100%; height:400px;"}
 
 :javascript
-  $(function () {
-    $('#datepicker1').datepicker({format: 'dd/mm/yyyy', defaultDate: #{@start_date}});
-    $('#datepicker2').datepicker({format: 'dd/mm/yyyy', defaultDate: #{@end_date}});
-  });
-
   data = #{@data}
+  title = #{@title.to_json}
   $(function () { 
     $('#container').highcharts({
       chart: {
       type: 'column'
      },
       title: {
-      text: 'Code Curiosity Stats'
+      text: title
      },
       xAxis: {
       type: 'category'
