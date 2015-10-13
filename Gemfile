@@ -29,3 +29,4 @@ group :development, :test do
 end
 gem 'quiet_assets', group: :development
 gem 'rails_12factor'
+gem 'heroku'
