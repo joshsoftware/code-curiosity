@@ -10,13 +10,18 @@ namespace :fetch_data do
         if team
           repos = team.repos
           repos.each do |repo|
-            response = GITHUB.repos.commits.all 'joshsoftware', repo.name, author: member.username, since: last_fetch_time, until: Time.now
-            unless response.body.blank?
-              response.body.each do |data|
-                commit = data["commit"].to_hash
-                Commit.create(message: commit["message"], commit_date: commit["author"]["date"], 
-                              member: member, team: team, repository: repo, html_url: data["html_url"])
+            branches = GITHUB.repos.branches(user: 'joshsoftware', repo: repo.name).collect(&:name)
+            
+            branches.each do |branch|
+              response = GITHUB.repos.commits.all('joshsoftware', repo.name, author: member.username, since: last_fetch_time, until: Time.now, sha: branch)
+              
+              unless response.body.blank?
+                response.body.each do |data|
+                  commit = data["commit"].to_hash
+                  Commit.create(message: commit["message"], commit_date: commit["author"]["date"], 
+                                member: member, team: team, repository: repo, html_url: data["html_url"])
 
+                end
               end
             end
           end
