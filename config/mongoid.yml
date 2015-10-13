@@ -105,5 +105,7 @@ production:
     default:
       uri: <%= ENV['MONGOLAB_URI'] %> 
       options:
-        skip_version_check: true
-        safe: true
+        max_retries: 30 
+        retry_interval: 1
+        timeout: 15
+        refresh_interval: 10 
