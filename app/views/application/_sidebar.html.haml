@@ -1,5 +1,5 @@
 %ul.nav.nav-sidebar
-  %li.active= link_to 'Dashboard', root_path
-  %li= link_to 'Teams', teams_path 
-  %li= link_to 'Repos', repositories_path 
+  %li{class: is_active('index', 'dashboard')}= link_to 'Dashboard', root_path
+  %li{class: is_active('index','teams')}= link_to 'Teams', teams_path 
+  %li{class: is_active('repositories', 'dashboard')}= link_to 'Repos', repositories_path 
     

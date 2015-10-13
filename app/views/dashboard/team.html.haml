@@ -1,0 +1,39 @@
+%div{id: "container", style: "width:100%; height:400px;"}
+
+:javascript
+  data = #{@data}
+  title = #{@title.to_json}
+  $(function () { 
+    $('#container').highcharts({
+      chart: {
+      type: 'column'
+     },
+      title: {
+      text: "Last 30 Day's " + title
+     },
+      xAxis: {
+      type: 'category'
+     },
+      yAxis: {
+       title: {
+        text: 'Commits Count'
+       }
+     },
+     legend: {
+       enabled: false
+     },
+     plotOptions: {
+       series: {
+         borderWidth: 0,
+         dataLabels: {
+           enabled: true                  
+        }
+      }
+    },
+      series: [{ name: "Commits",
+      colorByPoint: true,
+      data: data
+      }]
+    });
+  });
+
