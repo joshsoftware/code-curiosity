@@ -28,3 +28,4 @@ group :development, :test do
   gem 'minitest'
 end
 gem 'quiet_assets', group: :development
+gem 'rails_12factor'
