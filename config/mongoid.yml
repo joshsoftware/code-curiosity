@@ -109,4 +109,3 @@ production:
         retry_interval: 1
         timeout: 15
         refresh_interval: 10 
-        connect: 'sharded'
