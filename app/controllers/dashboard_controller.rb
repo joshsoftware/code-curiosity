@@ -5,6 +5,7 @@ class DashboardController < ApplicationController
     @category =  params[:category] || "Team"
     @start_date =  params[:start_date] || (Time.now - 1.month).strftime("%d/%m/%Y")
     @end_date =  params[:end_date] || Time.now.strftime("%d/%m/%Y")
+    @inverted = @category == "Team" ? false : true
     @data, @title = Commit.get_data(@category, @start_date, @end_date)
   end
 

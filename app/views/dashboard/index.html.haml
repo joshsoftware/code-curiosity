@@ -30,19 +30,21 @@
 
   data = #{@data}
   title = #{@title.to_json}
+  inverted = #{@inverted}
   $(function () { 
     $('#container').highcharts({
       chart: {
-      type: 'column'
+        type: 'column',
+        inverted: inverted
      },
       title: {
-      text: title
+       text: title
      },
       xAxis: {
-      type: 'category'
+        type: 'category',
      },
       yAxis: {
-       title: {
+        title: {
         text: 'Commits Count'
        }
      },
