@@ -1,0 +1,19 @@
+%h3.page-header
+  %font= "Team #{@team.name } commits" 
+
+.row
+  %table.table.table-striped.table-bordered#commits
+    %thead
+      %tr
+        %th Member
+        %th Date
+        %th Message
+        %th Commit url
+    %tbody     
+      - @commits.each do |commit|
+        %tr{data: {commit: commit.id.to_s}}
+          %td= commit.member.username
+          %td= commit.commit_date.strftime("%d/%m/%Y")
+          %td= commit.message
+          %td= link_to commit.html_url, commit.html_url, target: "_blank"
+

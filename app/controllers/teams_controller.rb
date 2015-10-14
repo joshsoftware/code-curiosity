@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  before_action :set_team, except: [:index, :create]
 
   def index
     @teams = Team.all.asc(:name)
@@ -11,13 +12,19 @@ class TeamsController < ApplicationController
   end
 
   def update
-    team = Team.find(params[:id])
-    team.add_repos(params[:repos])
+    @team.add_repos(params[:repos])
     render nothing: true
   end
 
+  def show
+    @commits = @team.commits.order("commit_data desc")
+  end
+
   def destroy
-    @team = Team.find(params[:id])
     @team.destroy
+  end
+
+  def set_team
+    @team = Team.find(params[:id])
   end
 end
