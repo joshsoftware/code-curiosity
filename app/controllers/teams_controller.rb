@@ -2,8 +2,8 @@ class TeamsController < ApplicationController
 
   def index
     @teams = Team.all.asc(:name)
-    @devs  = GITHUB.orgs.teams.all_members(ORG_TEAM_ID).map(&:login)
-    @repos = Repository.fetch_remote_repos.map(&:name)
+    @devs  = Member.all.map(&:username)
+    @repos = Repository.all.map(&:name)
   end
 
   def create

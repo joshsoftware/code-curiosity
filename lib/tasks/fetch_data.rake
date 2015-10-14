@@ -26,4 +26,20 @@ namespace :fetch_data do
       p "Error: #{e}"
     end
   end
+
+  desc "Fetch new members and store in database"
+  task :members => :environment do |t|
+    members  = GITHUB.orgs.teams.all_members(ORG_TEAM_ID).map(&:login)
+    members.each do |member|
+      Member.create(username: member) if member and !Member.find_by(username: member)
+    end
+  end
+  
+  desc "Fetch new repository and store in database"
+  task :repos => :environment do |t|
+    repos  = Repository.fetch_remote_repos.as_json(only: [:name, :description, :watchers])
+    repos.each do |repo|
+      Repository.create(name: repo["name"], description: repo["description"], watchers: repo["watchers"]) if repo["name"] and !Repository.find_by(name: repo[:name])
+    end
+  end
 end
