@@ -15,8 +15,8 @@ class Commit
   def self.get_data(category, start_date, end_date)
     data = []
     last_commit = Commit.order("created_at asc").last
-    title = last_commit && "Code Curiosity Stats (Last Updated: #{last_commit.created_at.strftime("%d/%m/%Y %H:%M %p")})" 
-    c_objects = category == "Team" ? Team.all.order("name asc") : Member.all.order("username asc")
+    title = last_commit.present? ? "Code Curiosity Stats (Last Updated: #{last_commit.created_at.strftime("%d/%m/%Y %H:%M %p")})" : "No Data"
+    c_objects = category == "Team" ? Team.all.order("name asc") : Member.team_members.order("username asc")
 
     c_objects.each do |obj|
       commit_count = obj.commits.where(:commit_date.gte => start_date, :commit_date.lte => end_date).count

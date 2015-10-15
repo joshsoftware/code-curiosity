@@ -15,7 +15,7 @@ class Team
 
   def self.create_with_members(params)
     team = Team.new(name: params[:name])
-    params[:members].reject(&:blank?).collect{|m| team.members.build(username: m)}
+    team.members = Member.where(:username.in => params[:members].reject(&:blank?))
     team.save && team
   end
 
@@ -32,6 +32,6 @@ class Team
   end
   
   def add_repos(repos)
-    repos.each{ |repo| self.repos.push(Repository.find_or_initialize_by(name: repo)) } 
+    repos.each{ |repo| self.repos.push(Repository.find_by(name: repo)) } 
   end
 end

@@ -8,4 +8,7 @@ class Member
   has_many :commits
 
   validates :username, presence: true
+  validates :username, uniqueness: true
+
+  scope :team_members, -> { where(:team_id.ne => nil) }
 end

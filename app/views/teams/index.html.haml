@@ -29,8 +29,10 @@
           %td= select_tag :repos, options_for_select(@repos, team.repos.pluck(:name)), multiple: true, class: "form-control"
           %td= team.active_from
           %td
-            = link_to team, method: :delete, remote: true do
+            = link_to team, method: :delete, remote: true, "data-confirm" => "Are you sure?" do
               %span.glyphicon.glyphicon-trash
+            = link_to team do
+              %span.glyphicon.glyphicon-file
 
 :javascript
   window.repos = #{@repos.to_json}
