@@ -34,12 +34,15 @@ namespace :fetch_data do
 
   desc "Fetch new members and store in database"
   task :members => :environment do |t|
-    members  = GITHUB.orgs.teams.all_members(ORG_TEAM_ID).map(&:login)
-    members.each do |member|
-      Member.create(username: member) if member and !Member.find_by(username: member)
+    pages =  [1,2]
+    pages.each do |page|
+      members  = GITHUB.orgs.teams.all_members(ORG_TEAM_ID, page: page).map(&:login)
+      members.each do |member|
+        Member.create(username: member) if member and !Member.find_by(username: member)
+      end
     end
   end
-  
+
   desc "Fetch new repository and store in database"
   task :repos => :environment do |t|
     repos  = Repository.fetch_remote_repos.as_json(only: [:name, :description, :watchers])
