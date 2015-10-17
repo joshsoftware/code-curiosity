@@ -36,5 +36,4 @@ class Commit
 
     return { title: title, teams: teams.pluck(:name), graph_series: graph_series }
   end
-
 end

@@ -138,4 +138,5 @@ production:
   clients:
     default:
       uri: <%= ENV['MONGOLAB_URI'] %>
-      options:
+  options:
+    raise_not_found_error: false

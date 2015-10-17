@@ -8,4 +8,8 @@ class Score
   belongs_to :user
 
   validates :user, presence: true
+
+  def self.my_score(user)
+    where(user: user).first.try(:rank)
+  end
 end

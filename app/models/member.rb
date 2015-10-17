@@ -5,7 +5,8 @@ class Member
   field :username, type: String
   
   belongs_to :team
-  has_many :commits
+  has_many :commits, dependent: :destroy
+  has_many :activities, dependent: :destroy
 
   validates :username, presence: true
   validates :username, uniqueness: true
