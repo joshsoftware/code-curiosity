@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get 'widget/team' => "dashboard#team"
   get 'widget/individual' => "dashboard#individual"
   root 'dashboard#index'
+
+  resources :scores, except: [:destoy, :index]
 end

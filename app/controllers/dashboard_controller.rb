@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
 
   def index
     @category =  params[:category] || "Team"
-    @start_date =  params[:start_date] || (Time.now - 1.month).strftime("%d/%m/%Y")
+    @start_date =  params[:start_date] || current_month
     @end_date =  params[:end_date] || Time.now.strftime("%d/%m/%Y")
     @inverted = @category == "Team" ? false : true
     @data, @title = Commit.get_data(@category, @start_date, @end_date)
@@ -14,16 +14,22 @@ class DashboardController < ApplicationController
   end
 
   def team
-    @start_date = (Time.now - 1.month).strftime("%d/%m/%Y")
+    @start_date = current_month
     @end_date = Time.now.strftime("%d/%m/%Y")
     @data, @title = Commit.get_data("Team", @start_date, @end_date)
     render layout: 'widget'
   end
 
   def individual
-    @start_date = (Time.now - 1.month).strftime("%d/%m/%Y")
+    @start_date = current_month
     @end_date = Time.now.strftime("%d/%m/%Y")
     @data, @title = Commit.get_data("Individual", @start_date, @end_date)
     render layout: 'widget'
+  end
+
+  private
+
+  def current_month
+    (Time.now - 1.month).strftime('%d/%m/%Y')
   end
 end

@@ -3,7 +3,6 @@ class Team
   include Mongoid::Timestamps
   
   field :name, type: String
-
   
   has_many :members
   has_many :commits
