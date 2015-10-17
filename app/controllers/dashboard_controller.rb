@@ -2,17 +2,16 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!, only: [:repositories]
 
   def index
+    @category =  params[:category] || "Team commits"
+    @teams = Team.all.pluck(:name)
     if current_user
-      @category =  params[:category] || "Team"
       @start_date =  params[:start_date] || (Time.now - 1.month).strftime("%d/%m/%Y")
       @end_date =  params[:end_date] || Time.now.strftime("%d/%m/%Y")
-      @inverted = @category == "Team" ? false : true
-      @data, @title = Commit.get_data(@category, @start_date, @end_date)
+      @data, @title = Commit.get_graphdata(@category, @start_date, @end_date)
     else
       @round_periods = Snapshot.order("from_date desc")
-      @category =  params[:category] || "Team commits"
       @round = params[:round] || (@round_periods.first ? @round_periods.first.round_period : nil)
-      @data, @teams = Snapshot.get_graphdata(@category, @round)
+      @data, @title = Snapshot.get_graphdata(@category, @round)
     end
   end
 
@@ -21,16 +20,22 @@ class DashboardController < ApplicationController
   end
 
   def team
-    @start_date = (Time.now - 1.month).strftime("%d/%m/%Y")
+    @start_date = current_month
     @end_date = Time.now.strftime("%d/%m/%Y")
     @data, @title = Commit.get_data("Team", @start_date, @end_date)
     render layout: 'widget'
   end
 
   def individual
-    @start_date = (Time.now - 1.month).strftime("%d/%m/%Y")
+    @start_date = current_month
     @end_date = Time.now.strftime("%d/%m/%Y")
     @data, @title = Commit.get_data("Individual", @start_date, @end_date)
     render layout: 'widget'
+  end
+
+  private
+
+  def current_month
+    (Time.now - 1.month).strftime('%d/%m/%Y')
   end
 end

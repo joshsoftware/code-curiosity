@@ -4,12 +4,12 @@
 .row.link
   = form_for Team.new, remote: true do |f|
     .row
-      .col-md-4
+      .col-md-3
         = f.text_field :name, class: 'form-control', placeholder: 'Name', required: true
-      .col-md-2
+      .col-md-6
         = f.select :members, @devs, {}, include_blank: true, class: 'form-control', multiple: true, placeholder: "select members" 
-      .col-md-4
-        = f.submit "Add Team", class: 'btn btn-success'
+      .col-md-3
+        = f.submit "Add Team", class: 'btn btn-success pull-right'
           
 
 .row
@@ -23,13 +23,13 @@
         %th Actions
     %tbody     
       - @teams.each do |team|
-        %tr{data: {team: team.id.to_s}}
+        %tr{data: {team: team.id.to_s}, class: team_color(team)}
           %td= team.name
           %td= team.member_names
           %td= select_tag :repos, options_for_select(@repos, team.repos.pluck(:name)), multiple: true, class: "form-control"
           %td= team.active_from
           %td
-            = link_to team, method: :delete, remote: true, "data-confirm" => "Are you sure?" do
+            = link_to team, method: :delete, remote: true, data: { confirm: "Are you sure?" } do
               %span.glyphicon.glyphicon-trash
             = link_to team do
               %span.glyphicon.glyphicon-file

@@ -5,3 +5,16 @@
   = render "admin_view"
 - else 
   = render "public_view"
+#chart-container.chart-container
+
+:javascript
+  initDashboardChart({
+     startDateEle: "#datepicker1",
+     startDate: #{@start_date},
+     endDateEle: "#datepicker2",
+     endDate: #{@end_date},
+     data: #{@data},
+     title: #{@title.to_json},
+     teams: #{@teams}
+  });
+
