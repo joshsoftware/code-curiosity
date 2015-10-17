@@ -10,6 +10,8 @@ class Commit
   belongs_to :repository
   belongs_to :team
 
+  has_many :scores, as: :scorable
+
   validates :message, uniqueness: {:scope => :commit_date}
 
   def self.get_data(category, start_date, end_date)

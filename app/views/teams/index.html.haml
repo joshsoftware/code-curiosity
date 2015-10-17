@@ -23,7 +23,7 @@
         %th Actions
     %tbody     
       - @teams.each do |team|
-        %tr{data: {team: team.id.to_s}}
+        %tr{data: {team: team.id.to_s}, class: team_color(team)}
           %td= team.name
           %td= team.member_names
           %td= select_tag :repos, options_for_select(@repos, team.repos.pluck(:name)), multiple: true, class: "form-control"
