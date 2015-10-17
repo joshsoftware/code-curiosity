@@ -74,7 +74,8 @@ namespace :fetch_data do
             event_type: type,
             repo: activity.repo,
             ref_url: activity.payload[type].html_url,
-            team: member.team
+            team: member.team,
+            commented_on: Time.parse(activity.created_at)
           ) 
         end
       end

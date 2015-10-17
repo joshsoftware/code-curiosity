@@ -19,3 +19,26 @@
           %td= commit.message
           %td= link_to "Details", commit.html_url, target: "_blank"
 
+%h3.page-header
+  %font= "Team #{@team.name } Activities" 
+
+.row
+  %table.table.table-striped.table-bordered#activities
+    %thead
+      %tr
+        %th Score
+        %th Member
+        %th Date
+        %th Type
+        %th Message
+        %th url
+    %tbody     
+      - @activities.each do |activity|
+        %tr{data: {member_activity: activity.id.to_s}, class: score_color(activity)}
+          %td.score.commit= select_tag :score, options_for_select((0..10).map.to_a)
+          %td= activity.member.username
+          %td= activity.commented_on.strftime("%d/%m/%Y")
+          %td= activity.event_type
+          %td= activity.description 
+          %td= link_to "Details", activity.ref_url, target: "_blank"
+

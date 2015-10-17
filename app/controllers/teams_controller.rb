@@ -18,7 +18,7 @@ class TeamsController < ApplicationController
 
   def show
     @commits  = @team.commits.order("commit_data desc")
-    @activies = @team.member_activies.order("created_at desc")
+    @activities = @team.member_activities.order("created_at desc")
   end
 
   def destroy
