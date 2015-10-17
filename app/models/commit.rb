@@ -10,13 +10,13 @@ class Commit
   belongs_to :repository
   belongs_to :team
 
-  has_many :scores, as: :scorable
+  has_many :scores, as: :scorable, dependent: :destroy
 
   validates :message, uniqueness: {:scope => :commit_date}
 
   def self.graph_data(start_date, end_date, type)
     last_commit = Commit.order(created_at: :asc).last
-    title = last_commit.present? ? "Code Curiosity Stats (Last Updated: #{last_commit.created_at.strftime("%D %r")})" : "No Data"
+    title = last_commit.present? ? "Code Curiosity Stats (Last Updated: #{last_commit.created_at.strftime('%c')})" : "No Data"
 
     graph_series = []
     blank_row = [-1]*Team.count
