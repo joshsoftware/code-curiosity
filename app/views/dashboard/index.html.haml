@@ -1,20 +1,21 @@
 %h1.page-header
   %font Dashboard
-
-- if current_user
-  = render "admin_view"
-- else 
-  = render "public_view"
+.row.link
+  = form_tag index_path do
+    .row
+      .col-md-2
+        = select_tag :category, options_for_select(Commit::COMMIT_TYPE.to_a.collect{|c| [c[1], c[0]] }, @category), class: 'form-control'
+      .col-md-3
+        = select_tag :round, options_for_select(@rounds.collect{ |r| [r.name, r.id] }, @round), class: 'form-control'
+      .col-md-4
+        = submit_tag "Search", class: 'btn btn-success'
 #chart-container.chart-container
 
 :javascript
   initDashboardChart({
-     startDateEle: "#datepicker1",
-     startDate: #{@start_date},
-     endDateEle: "#datepicker2",
-     endDate: #{@end_date},
      title: #{@stats[:title].to_json},
      teams: #{@stats[:teams].to_json},
-     series: #{@stats[:graph_series].to_json},
+     ytitle: #{@stats[:yaxis_title].to_json},
+     series: #{@stats[:graph_series].to_json}
   });
 

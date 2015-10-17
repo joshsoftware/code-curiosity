@@ -1,9 +1,4 @@
 function initDashboardChart(options){
-  $('#stats.input-daterange').datepicker({
-    format: 'dd/mm/yyyy',
-    endDate: new Date()
-  });
-
   $('#chart-container').highcharts({
     chart: {
         type: 'column'
@@ -17,7 +12,7 @@ function initDashboardChart(options){
     yAxis: {
         min: 0,
         title: {
-            text: 'Total commits'
+            text: options.ytitle
         },
         stackLabels: {
             enabled: true,
