@@ -53,7 +53,7 @@ namespace :fetch_data do
   
   desc "Fetch comments,issues created by existing members"
   task activities: :environment do |t|
-    last_fetch_time = MemberActivity.desc(:created_at).first || (Time.now - 1.month).beginning_of_day
+    last_fetch_time = Activity.desc(:created_at).first || (Time.now - 1.month).beginning_of_day
     
     # currrenty tracking event
     TRACKING_EVENTS = {"IssueCommentEvent" => 'comment', "IssuesEvent" => 'issue'}
@@ -69,7 +69,7 @@ namespace :fetch_data do
         activities.each do |activity|
           type = TRACKING_EVENTS[activity.type] 
 
-          member.member_activities.create!(
+          member.activities.create!(
             description: activity.payload[type].body,
             event_type: type,
             repo: activity.repo,

@@ -1,4 +1,4 @@
-class MemberActivity
+class Activity
   include Mongoid::Document
   field :description,   type: String
   field :event_type,    type: String
@@ -10,4 +10,5 @@ class MemberActivity
   belongs_to :team
 
   has_many :scores, as: :scorable
+
 end

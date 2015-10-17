@@ -27,5 +27,4 @@ class Commit
 
     return data.to_json, title
   end
-
 end

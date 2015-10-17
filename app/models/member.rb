@@ -6,7 +6,7 @@ class Member
   
   belongs_to :team
   has_many :commits, dependent: :destroy
-  has_many :member_activities, dependent: :destroy
+  has_many :activities, dependent: :destroy
 
   validates :username, presence: true
   validates :username, uniqueness: true

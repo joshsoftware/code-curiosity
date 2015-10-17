@@ -6,7 +6,7 @@ class Team
   
   has_many :members
   has_many :commits
-  has_many :member_activities
+  has_many :activities
   has_and_belongs_to_many :repos, class_name: "Repository"
 
   accepts_nested_attributes_for :members, :repos, reject_if: :blank?

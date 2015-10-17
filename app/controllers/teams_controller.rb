@@ -17,8 +17,8 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @commits  = @team.commits.order("commit_data desc")
-    @activities = @team.member_activities.order("created_at desc")
+    @commits = @team.commits.includes(:scores).order("commit_data desc")
+    @activities = @team.activities.includes(:scores).desc("commented_on")
   end
 
   def destroy
