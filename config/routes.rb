@@ -8,8 +8,6 @@ Rails.application.routes.draw do
   resources :teams
   get 'repositories' => "dashboard#repositories"
   post 'index' => "dashboard#index"
-  get 'widget/team' => "dashboard#team"
-  get 'widget/individual' => "dashboard#individual"
   root 'dashboard#index'
 
   resources :scores, except: [:destoy, :index]

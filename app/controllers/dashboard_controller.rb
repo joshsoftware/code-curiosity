@@ -19,20 +19,6 @@ class DashboardController < ApplicationController
     @repos = Repository.all.order("name asc")
   end
 
-  def team
-    @start_date = current_month
-    @end_date = Time.now.strftime("%d/%m/%Y")
-    @data, @title = Commit.get_data("Team", @start_date, @end_date)
-    render layout: 'widget'
-  end
-
-  def individual
-    @start_date = current_month
-    @end_date = Time.now.strftime("%d/%m/%Y")
-    @data, @title = Commit.get_data("Individual", @start_date, @end_date)
-    render layout: 'widget'
-  end
-
   private
 
   def current_month
