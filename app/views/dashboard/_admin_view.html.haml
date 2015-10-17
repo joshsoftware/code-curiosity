@@ -1,0 +1,21 @@
+.row.link
+  = form_tag index_path do
+    .row
+      .col-md-2
+        = select_tag :category, options_for_select([ "Team", "Individual" ], @category), class: 'form-control'
+      .col-md-2
+        #datepicker1.input-group.date
+          = text_field_tag :start_date, @start_date, class: "form-control"
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+      .col-md-1{style: "width:2px"}
+        %label To
+      .col-md-2
+        #datepicker2.input-group.date
+          = text_field_tag :end_date, @end_date, class: "form-control"
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+      .col-md-4
+        = submit_tag "Search", class: 'btn btn-success'
+%div{id: "container", style: "width:100%; height:400px;"}
+
