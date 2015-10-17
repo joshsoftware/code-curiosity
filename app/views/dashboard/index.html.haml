@@ -13,8 +13,14 @@
      startDate: #{@start_date},
      endDateEle: "#datepicker2",
      endDate: #{@end_date},
+<<<<<<< HEAD
      data: #{@data},
      title: #{@title.to_json},
      teams: #{@teams}
+=======
+     title: #{@stats[:title].to_json},
+     teams: #{@stats[:teams].to_json},
+     series: #{@stats[:graph_series].to_json},
+>>>>>>> 43fd85d8cef53cba509c6dc99169d68690be8581
   });
 

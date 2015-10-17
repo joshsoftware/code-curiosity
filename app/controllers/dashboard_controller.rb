@@ -2,16 +2,15 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!, only: [:repositories]
 
   def index
-    @category =  params[:category] || "Team commits"
-    @teams = Team.all.pluck(:name)
     if current_user
-      @start_date =  params[:start_date] || (Time.now - 1.month).strftime("%d/%m/%Y")
+      @category =  params[:category] || "Team commits"
+      @start_date =  params[:start_date] || current_month
       @end_date =  params[:end_date] || Time.now.strftime("%d/%m/%Y")
-      @data, @title = Commit.get_graphdata(@category, @start_date, @end_date)
+      @stats = Commit.graph_data(@start_date, @end_date)
     else
       @round_periods = Snapshot.order("from_date desc")
       @round = params[:round] || (@round_periods.first ? @round_periods.first.round_period : nil)
-      @data, @title = Snapshot.get_graphdata(@category, @round)
+      @stats = Snapshot.graph_data(@round)
     end
   end
 
