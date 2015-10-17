@@ -28,4 +28,7 @@ class Commit
     return data.to_json, title
   end
 
+  def user_score(user)
+    scores.where(user: user).first.try(:rank)
+  end
 end
