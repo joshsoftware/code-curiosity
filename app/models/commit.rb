@@ -14,7 +14,7 @@ class Commit
 
   validates :message, uniqueness: {:scope => :commit_date}
 
-  def self.graph_data(start_date, end_date, type = :commit)
+  def self.graph_data(start_date, end_date, type)
     last_commit = Commit.order(created_at: :asc).last
     title = last_commit.present? ? "Code Curiosity Stats (Last Updated: #{last_commit.created_at.strftime("%D %r")})" : "No Data"
 
@@ -26,7 +26,7 @@ class Commit
        team.members.each do |member|
           data = blank_row.clone
 
-          if type == :commit
+          if type == "Team commits"
             data[i] = member.commits.between(commit_date: start_date..end_date).count
           end
 

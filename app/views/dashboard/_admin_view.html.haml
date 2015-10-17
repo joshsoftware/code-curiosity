@@ -2,7 +2,7 @@
   = form_tag index_path do
     .row
       .col-md-2
-        = select_tag :category, options_for_select([ "Team", "Individual" ], @category), class: 'form-control'
+        = select_tag :category, options_for_select([ "Team commits", "Team scores", "Team activities"], @category), class: 'form-control'
       .col-md-2
         #datepicker1.input-group.date
           = text_field_tag :start_date, @start_date, class: "form-control"

@@ -2,7 +2,7 @@
   = form_tag index_path do
     .row
       .col-md-2
-        = select_tag :category, options_for_select([ "Team commits", "Team scores" ], @category), class: 'form-control'
+        = select_tag :category, options_for_select([ "Team commits", "Team scores", "Team activities"], @category), class: 'form-control'
       .col-md-3
         = select_tag :round, options_for_select(@round_periods.map(&:round_period), @round), class: 'form-control'
       .col-md-4
