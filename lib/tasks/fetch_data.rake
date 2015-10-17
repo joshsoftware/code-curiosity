@@ -50,4 +50,34 @@ namespace :fetch_data do
       Repository.create(name: repo["name"], description: repo["description"], watchers: repo["watchers"]) if repo["name"] and !Repository.find_by(name: repo[:name])
     end
   end
+  
+  desc "Fetch comments,issues created by existing members"
+  task activities: :environment do |t|
+    last_fetch_time = MemberActivity.desc(:created_at).first || (Time.now - 1.month).beginning_of_day
+    
+    # currrenty tracking event
+    TRACKING_EVENTS = {"IssueCommentEvent" => 'comment', "IssuesEvent" => 'issue'}
+ 
+    Member.all.each do |member|
+      activities  = GITHUB.activity.events.performed user: member.username, per_page: 100
+
+      if member.team
+        repos       = member.team.repos.pluck(:name).join("|")
+
+        activities = activities.select{|a| Time.parse(a.created_at) > last_fetch_time && TRACKING_EVENTS.keys.include?(a.type) && a.repo.name.match(repos) }
+
+        activities.each do |activity|
+          type = TRACKING_EVENTS[activity.type] 
+
+          member.member_activities.create!(
+            description: activity.payload[type].body,
+            event_type: type,
+            repo: activity.repo,
+            ref_url: activity.payload[type].html_url,
+            team: member.team
+          ) 
+        end
+      end
+    end
+  end
 end
