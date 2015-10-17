@@ -28,8 +28,8 @@
      startDate: #{@start_date},
      endDateEle: "#datepicker2",
      endDate: #{@end_date},
-     data: #{@data},
-     title: #{@title.to_json},
-     inverted: #{@inverted}
+     title: #{@stats[:title].to_json},
+     teams: #{@stats[:teams].to_json},
+     series: #{@stats[:graph_series].to_json},
   });
 

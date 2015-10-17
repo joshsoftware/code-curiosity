@@ -5,8 +5,7 @@ class DashboardController < ApplicationController
     @category =  params[:category] || "Team"
     @start_date =  params[:start_date] || current_month
     @end_date =  params[:end_date] || Time.now.strftime("%d/%m/%Y")
-    @inverted = @category == "Team" ? false : true
-    @data, @title = Commit.get_data(@category, @start_date, @end_date)
+    @stats = Commit.graph_data(@start_date, @end_date)
   end
 
   def repositories
