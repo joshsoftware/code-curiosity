@@ -10,7 +10,7 @@ class Commit
   belongs_to :repository
   belongs_to :team
 
-  has_many :scores, as: :scorable
+  has_many :scores, as: :scorable, dependent: :destroy
 
   validates :message, uniqueness: {:scope => :commit_date}
 

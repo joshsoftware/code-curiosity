@@ -9,6 +9,6 @@ class Activity
   belongs_to :member
   belongs_to :team
 
-  has_many :scores, as: :scorable
+  has_many :scores, as: :scorable, dependent: :destroy
 
 end
