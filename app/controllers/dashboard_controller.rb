@@ -3,9 +3,7 @@ class DashboardController < ApplicationController
 
   def index
     @category =  params[:category] || :commit
-    @rounds = Round.order(from_date: :desc)
-    @round = params[:round] || @current_round.id
-    @stats = Round.graph_data(@round, @category)
+    @stats = Round.graph_data(@current_round.id, @category)
   end
 
   def repositories
@@ -18,6 +16,11 @@ class DashboardController < ApplicationController
     if @current_round.valid?
       @current_round.take_snapshot(end_date)
     end
+    redirect_to root_path
+  end
+
+  def change_round
+    session[:current_round] = Round.find(params[:round]).id
     redirect_to root_path
   end
 end

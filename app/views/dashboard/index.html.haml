@@ -8,8 +8,6 @@
     .row
       .col-md-2
         = select_tag :category, options_for_select(Commit::COMMIT_TYPE.to_a.collect{|c| [c[1], c[0]] }, @category), class: 'form-control', :onchange => "this.form.submit()"
-      .col-md-4
-        = select_tag :round, options_for_select(@rounds.collect{ |r| [r.name, r.id] }, @round), class: 'form-control', :onchange => "this.form.submit()"
 #chart-container.chart-container
 
 .modal.fade#myModal

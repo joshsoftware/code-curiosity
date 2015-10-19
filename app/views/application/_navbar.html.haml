@@ -4,6 +4,10 @@
       = link_to root_path, class: "navbar-brand" do 
         %font Code Curiosity
     #navbar.navbar-collapse.collapse
+      .pull-left{style: "margin-top:10px;margin-left:780px;"}
+        = form_tag change_round_path do
+          .row
+            = select_tag :round, options_for_select(@rounds.collect{ |r| [r.name, r.id] }, @current_round.id), class: 'form-control', :onchange => "this.form.submit()"
       %ul.nav.navbar-nav.navbar-right
         - if current_user
           %li= link_to "Log out", destroy_user_session_path, method: :delete 

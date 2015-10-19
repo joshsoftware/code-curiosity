@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'index' => "dashboard#index"
   post 'score' => 'application#score'
   post 'take_snapshot' => "dashboard#take_snapshot"
+  post 'change_round' => "dashboard#change_round"
   root 'dashboard#index'
 
 
