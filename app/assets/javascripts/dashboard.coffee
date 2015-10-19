@@ -9,7 +9,7 @@
 
   $("#stream_table").stream_table({view: view}, repos)
 
-$ ->
+$(document).on "page:change", ->
   $('#datepicker1').datepicker format: 'dd/mm/yyyy'
 
   
