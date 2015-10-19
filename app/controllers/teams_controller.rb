@@ -2,13 +2,13 @@ class TeamsController < ApplicationController
   before_action :set_team, except: [:index, :create]
 
   def index
-    @teams = Team.all.asc(:name)
+    @teams = @current_round.teams.asc(:name)
     @devs  = Member.all.map(&:username)
     @repos = Repository.all.map(&:name)
   end
 
   def create
-    @team = Team.create_with_members(params[:team])
+    @team = Team.create_with_members(params[:team], @current_round.id)
   end
 
   def update

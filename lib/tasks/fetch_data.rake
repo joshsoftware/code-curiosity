@@ -4,6 +4,7 @@ namespace :fetch_data do
     members = Member.all
     last_record = Commit.all.order("created_at DESC").last
     last_fetch_time = last_record ? last_record.created_at : Time.now - 3.month
+    round = Round.find_by({status: 'open'})
     begin
       members.each do |member|
         team = member.team
@@ -19,7 +20,7 @@ namespace :fetch_data do
                 response.body.each do |data|
                   commit = data["commit"].to_hash
                   Commit.create(message: commit["message"], commit_date: commit["author"]["date"], 
-                                member: member, team: team, repository: repo, html_url: data["html_url"])
+                                member: member, team: team, repository: repo, html_url: data["html_url"], round: round)
 
                 end
               end
@@ -54,6 +55,7 @@ namespace :fetch_data do
   desc "Fetch comments,issues created by existing members"
   task activities: :environment do |t|
     last_fetch_time = Activity.desc(:created_at).first || (Time.now - 1.month).beginning_of_day
+    round = Round.find_by({status: 'open'})
     
     # currrenty tracking event
     TRACKING_EVENTS = {"IssueCommentEvent" => 'comment', "IssuesEvent" => 'issue'}
@@ -75,7 +77,8 @@ namespace :fetch_data do
             repo: activity.repo,
             ref_url: activity.payload[type].html_url,
             team: member.team,
-            commented_on: Time.parse(activity.created_at)
+            commented_on: Time.parse(activity.created_at),
+            round: round
           ) 
         end
       end

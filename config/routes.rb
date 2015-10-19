@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'repositories' => "dashboard#repositories"
   post 'index' => "dashboard#index"
   post 'score' => 'application#score'
+  post 'take_snapshot' => "dashboard#take_snapshot"
   root 'dashboard#index'
 
 

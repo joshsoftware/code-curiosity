@@ -1,20 +1,42 @@
 %h1.page-header
   %font Dashboard
+  - if current_user
+    %button.btn.btn-primary.pull-right{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
+      Take Snapshot
 .row.link
   = form_tag index_path do
     .row
       .col-md-2
-        = select_tag :category, options_for_select(Commit::COMMIT_TYPE.to_a.collect{|c| [c[1], c[0]] }, @category), class: 'form-control'
-      .col-md-3
-        = select_tag :round, options_for_select(@rounds.collect{ |r| [r.name, r.id] }, @round), class: 'form-control'
+        = select_tag :category, options_for_select(Commit::COMMIT_TYPE.to_a.collect{|c| [c[1], c[0]] }, @category), class: 'form-control', :onchange => "this.form.submit()"
       .col-md-4
-        = submit_tag "Search", class: 'btn btn-success'
+        = select_tag :round, options_for_select(@rounds.collect{ |r| [r.name, r.id] }, @round), class: 'form-control', :onchange => "this.form.submit()"
 #chart-container.chart-container
+
+.modal.fade#myModal
+  .modal-dialog
+    .modal-content
+      = form_tag take_snapshot_path do
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+          %h4.modal-title Take snapshot of #{@current_round.name}
+        .modal-body
+          .row
+            .col-md-2
+              %label End date
+            .col-md-4
+              #datepicker1.input-group.date
+                = text_field_tag :end_date, Time.now.strftime("%d/%m/%Y"), class: "form-control", require: true, readonly: true
+                %span.input-group-addon
+                  %span.glyphicon.glyphicon-calendar
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+          %button.btn.btn-primary{:type => "submit"} Save
 
 :javascript
   initDashboardChart({
-     title: #{@stats[:title].to_json},
-     teams: #{@stats[:teams].to_json},
+    title: #{@stats[:title].to_json},
+      teams: #{@stats[:teams].to_json},
      ytitle: #{@stats[:yaxis_title].to_json},
      series: #{@stats[:graph_series].to_json}
   });

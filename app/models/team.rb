@@ -3,7 +3,8 @@ class Team
   include Mongoid::Timestamps
   
   field :name, type: String
-  
+ 
+  belongs_to :round
   has_many :members
   has_many :commits
   has_many :activities
@@ -11,10 +12,10 @@ class Team
 
   accepts_nested_attributes_for :members, :repos, reject_if: :blank?
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
 
-  def self.create_with_members(params)
-    team = Team.new(name: params[:name])
+  def self.create_with_members(params, round_id)
+    team = Team.new(name: params[:name], round_id: round_id)
     team.members = Member.where(:username.in => params[:members].reject(&:blank?))
     team.save && team
   end

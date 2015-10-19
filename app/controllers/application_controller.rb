@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
+  before_action :get_current_round
+  
+  def get_current_round
+    @current_round = Round.find_by({status: 'open'})
+  end
 
   # common polymorphic method for scoring. 
   def score
