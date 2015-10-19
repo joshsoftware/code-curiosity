@@ -4,7 +4,7 @@ class Member
   
   field :username, type: String
   
-  has_and_belongs_to_many :team
+  has_and_belongs_to_many :teams
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
 

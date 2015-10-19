@@ -7,7 +7,7 @@ namespace :fetch_data do
     round = Round.find_by({status: 'open'})
     begin
       members.each do |member|
-        team = member.team
+        team = member.teams.where(round: round).first
         if team
           repos = team.repos
           repos.each do |repo|
@@ -63,8 +63,9 @@ namespace :fetch_data do
     Member.all.each do |member|
       activities  = GITHUB.activity.events.performed user: member.username, per_page: 100
 
-      if member.team
-        repos       = member.team.repos.pluck(:name).join("|")
+      team = member.teams.where(round: round).first
+      if team
+        repos       = team.repos.pluck(:name).join("|")
 
         activities = activities.select{|a| Time.parse(a.created_at) > last_fetch_time && TRACKING_EVENTS.keys.include?(a.type) && a.repo.name.match(repos) }
 
@@ -76,7 +77,7 @@ namespace :fetch_data do
             event_type: type,
             repo: activity.repo,
             ref_url: activity.payload[type].html_url,
-            team: member.team,
+            team: team,
             commented_on: Time.parse(activity.created_at),
             round: round
           ) 
