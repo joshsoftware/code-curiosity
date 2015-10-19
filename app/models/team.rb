@@ -5,7 +5,7 @@ class Team
   field :name, type: String
  
   belongs_to :round
-  has_many :members
+  has_and_belongs_to_many :members
   has_many :commits
   has_many :activities
   has_and_belongs_to_many :repos, class_name: "Repository"
