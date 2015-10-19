@@ -8,11 +8,7 @@ Rails.application.routes.draw do
   resources :teams
   get 'repositories' => "dashboard#repositories"
   post 'index' => "dashboard#index"
-  get 'widget/team' => "dashboard#team"
-  get 'widget/individual' => "dashboard#individual"
-
   post 'score' => 'application#score'
-
   root 'dashboard#index'
 
 

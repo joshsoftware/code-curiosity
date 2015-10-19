@@ -1,29 +1,15 @@
 class DashboardController < ApplicationController
-  before_action :authenticate_user!, except: [:team, :individual]
+  before_action :authenticate_user!, only: [:repositories]
 
   def index
-    @category =  params[:category] || "Team"
-    @start_date =  params[:start_date] || current_month
-    @end_date =  params[:end_date] || Time.now.strftime("%d/%m/%Y")
-    @stats = Commit.graph_data(@start_date, @end_date)
+    @category =  params[:category] || :commit
+    @rounds = Round.order(from_date: :desc)
+    @round = params[:round] || Round.find_by(status: "open").try(:id)
+    @stats = Round.graph_data(@round, @category)
   end
 
   def repositories
     @repos = Repository.all.order("name asc")
-  end
-
-  def team
-    @start_date = current_month
-    @end_date = Time.now.strftime("%d/%m/%Y")
-    @data, @title = Commit.get_data("Team", @start_date, @end_date)
-    render layout: 'widget'
-  end
-
-  def individual
-    @start_date = current_month
-    @end_date = Time.now.strftime("%d/%m/%Y")
-    @data, @title = Commit.get_data("Individual", @start_date, @end_date)
-    render layout: 'widget'
   end
 
   private
