@@ -26,9 +26,11 @@ class Round
        data = blank_row.clone
 
        if type == "activity"
-         data[i] = 0
+         data[i] = member.activities.where(:commented_on.gte => round.from_date).count
        elsif type == "score"
-         data[i] = 0
+         commit_scores = member.commits.map(&:scores).collect{|c| c.map(&:rank)}.collect{ |c| c.sum}.sum
+         activity_scores = member.activities.map(&:scores).collect{|c| c.map(&:rank)}.collect{ |c| c.sum}.sum
+         data[i] = commit_scores + activity_scores
        else
          data[i] = member.commits.where(:commit_date.gte => round.from_date).count
        end
