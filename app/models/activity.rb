@@ -1,5 +1,7 @@
 class Activity
   include Mongoid::Document
+  include Mongoid::Timestamps
+
   field :description,   type: String
   field :event_type,    type: String
   field :repo,          type: String
