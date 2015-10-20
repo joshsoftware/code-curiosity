@@ -16,7 +16,11 @@ module ScoresHelper
     # TODO: optimize this using mongoDB aggregation query to get the number
     # of commits that have less than 3 scores.
     # Kept a case statement incase we need more color codes later on
-    case team.commits.includes(:scores).select { |c| c.scores.count < 3 }.count
+    counter = team.commits.for_round(team.round.id).includes(:scores).select { |c| c.scores.count < 3 }.count
+    if counter == 0
+      counter = team.activities.for_round(team.round.id).includes(:scores).select { |c| c.scores.count < 3 }.count
+    end
+    case counter
     when 0
       'bs-callout bs-callout-success'
     else
