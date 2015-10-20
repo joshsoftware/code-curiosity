@@ -32,7 +32,7 @@
             = link_to team, method: :delete, remote: true, data: { confirm: "Are you sure?" } do
               %span.glyphicon.glyphicon-trash
             = link_to team do
-              %span.glyphicon.glyphicon-file
+              %span{class: my_color(team)}
 
 :javascript
   window.repos = #{@repos.to_json}

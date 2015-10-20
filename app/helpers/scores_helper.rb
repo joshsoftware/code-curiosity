@@ -27,4 +27,17 @@ module ScoresHelper
       'bs-callout bs-callout-warning'
     end
   end
+
+  def my_color(team)
+    pending = team.commits.for_round(team.round.id).includes(:scores).select { |c| c.scores.where(user: current_user).first == nil}.count 
+    if pending == 0
+      pending = team.activities.for_round(team.round.id).includes(:scores).select { |c| c.scores.where(user: current_user).first == nil}.count 
+    end
+    case pending
+    when 0
+      'glyphicon glyphicon-ok text-success'
+    else
+      'glyphicon glyphicon-exclamation-sign text-danger'
+    end
+  end
 end
