@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :teams
   get 'repositories' => "dashboard#repositories"
-  post 'index' => "dashboard#index"
+  match 'index', to: 'dashboard#index', via: [:get, :post]
   post 'score' => 'application#score'
   post 'take_snapshot' => "dashboard#take_snapshot"
   post 'change_round' => "dashboard#change_round"
