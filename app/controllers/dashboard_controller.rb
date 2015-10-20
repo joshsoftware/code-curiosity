@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!, only: [:repositories, :take_snapshot]
 
   def index
-    @category =  params[:category] || :commit
+    @category =  params[:category] || :score
     @stats = Round.graph_data(@current_round.id, @category)
   end
 

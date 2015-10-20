@@ -50,8 +50,8 @@ class Round
   end
 
   def self.get_score(round, member)
-    commit_scores = member.commits.for_round(round.id).map(&:scores).collect{|c| c.map(&:rank)}.collect{ |c| c.sum}.sum
-    activity_scores = member.activities.for_round(round.id).map(&:scores).collect{|c| c.map(&:rank)}.collect{ |c| c.sum}.sum
+    commit_scores = member.commits.for_round(round.id).map(&:scores).collect{|c| c.map(&:rank)}.collect{ |c| c.empty? ? 0 : (c.sum / c.size)}.sum
+    activity_scores = member.activities.for_round(round.id).map(&:scores).collect{|c| c.map(&:rank)}.collect{ |c| c.empty? ? 0 : (c.sum / c.size)}.sum
     commit_scores + activity_scores
   end
 
