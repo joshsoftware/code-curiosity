@@ -31,7 +31,7 @@ module ScoresHelper
   def my_color(team)
     pending = team.commits.for_round(team.round.id).includes(:scores).select { |c| c.scores.where(user: current_user).first == nil}.count 
     if pending == 0
-      pending = team.commits.for_round(team.round.id).includes(:scores).select { |c| c.scores.where(user: current_user).first == nil}.count 
+      pending = team.activities.for_round(team.round.id).includes(:scores).select { |c| c.scores.where(user: current_user).first == nil}.count 
     end
     case pending
     when 0
