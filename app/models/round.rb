@@ -1,11 +1,11 @@
 class Round
   include Mongoid::Document
   include Mongoid::Timestamps
-  
+
   field :name, type: String
   field :from_date, type: DateTime
   field :end_date, type: DateTime
-  field :status, type: String, default: "open" 
+  field :status, type: String, default: "open"
 
   validates :name, :from_date, presence: true
   validate :validate_end_date
@@ -24,6 +24,8 @@ class Round
     teams = round.teams.order(name: :asc)
     graph_series = []
     blank_row = [-1]*round.teams.count
+    total = 0
+
     teams.each_with_index do |team, i|
       team.members.each do |member|
         data = blank_row.clone
@@ -35,9 +37,20 @@ class Round
         else
           data[i] = get_commits(round, member)
         end
+
         graph_series << { name: member.username, data: data }
+        total += data[i]
       end
     end
+
+    if total == 0
+      zero_row = [0]*round.teams.count
+
+      graph_series.each do |series|
+        series[:data] = zero_row
+      end
+    end
+
     return { title: title, teams: teams.pluck(:name), graph_series: graph_series, yaxis_title: Commit::COMMIT_TYPE[type.to_sym]}
   end
 
@@ -58,7 +71,7 @@ class Round
   def take_snapshot(end_date)
     return false unless self.from_date < end_date
     self.update_attributes({name: self.update_round_name(end_date), end_date: end_date.end_of_day, status: 'close'})
-    new_round = Round.new(name: "Round-#{Round.count + 1} (#{(end_date + 1.day).beginning_of_day.strftime("%d %b %Y")})", 
+    new_round = Round.new(name: "Round-#{Round.count + 1} (#{(end_date + 1.day).beginning_of_day.strftime("%d %b %Y")})",
                           from_date: (end_date + 1.day).beginning_of_day)
     new_round.save
   end
