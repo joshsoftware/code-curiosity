@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, except: [:index, :create]
+  before_action :authenticate_user!, except: [:index]
 
   def index
     @teams = @current_round.teams.asc(:name)
