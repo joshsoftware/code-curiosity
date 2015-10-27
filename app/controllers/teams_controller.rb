@@ -18,8 +18,8 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @commits = @team.commits.includes(:scores).desc(:commit_date)
-    @activities = @team.activities.includes(:scores).desc(:commented_on)
+    @commits = @team.commits.for_round(@current_round.id).includes(:scores).desc(:commit_date)
+    @activities = @team.activities.for_round(@current_round.id).includes(:scores).desc(:commented_on)
   end
 
   def destroy
