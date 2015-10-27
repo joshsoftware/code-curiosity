@@ -23,4 +23,8 @@ class DashboardController < ApplicationController
     session[:current_round] = Round.find(params[:round]).id
     redirect_to root_path
   end
+
+  def webhook
+    render :nothing
+  end
 end

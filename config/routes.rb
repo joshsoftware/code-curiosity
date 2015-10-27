@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'repositories' => "dashboard#repositories"
   match 'index', to: 'dashboard#index', via: [:get, :post]
   post 'score' => 'application#score'
+  post 'webhook' => 'dashboard#webhook'
   post 'take_snapshot' => "dashboard#take_snapshot"
   post 'change_round' => "dashboard#change_round"
   root 'dashboard#index'
