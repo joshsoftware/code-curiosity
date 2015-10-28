@@ -43,14 +43,6 @@ namespace :fetch_data do
       end
     end
   end
-
-  desc "Fetch new repository and store in database"
-  task :repos => :environment do |t|
-    repos  = Repository.fetch_remote_repos.as_json(only: [:name, :description, :watchers])
-    repos.each do |repo|
-      Repository.create(name: repo["name"], description: repo["description"], watchers: repo["watchers"]) if repo["name"] and !Repository.find_by(name: repo[:name])
-    end
-  end
   
   desc "Fetch comments,issues created by existing members"
   task activities: :environment do |t|

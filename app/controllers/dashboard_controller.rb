@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :authenticate_user!, only: [:repositories, :take_snapshot]
+  before_action :authenticate_user!, only: [:repositories, :take_snapshot, :get_new_repos]
 
   def index
     @category =  params[:category] || "score"
@@ -8,6 +8,16 @@ class DashboardController < ApplicationController
 
   def repositories
     @repos = Repository.all.order("name asc")
+  end
+
+  def get_new_repos
+    repos  = Repository.fetch_remote_repos.as_json(only: [:name, :description, :watchers])
+    existing_repos = Repository.all.pluck(:name)
+    new_repos = repos.collect{|r| r["name"]} - existing_repos 
+    repos.each do |repo|
+      Repository.create(name: repo["name"], description: repo["description"], watchers: repo["watchers"]) if new_repos.include?(repo["name"])
+    end
+    redirect_to repositories_path
   end
 
   def take_snapshot

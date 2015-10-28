@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :teams
   get 'repositories' => "dashboard#repositories"
+  get 'get_new_repos' => "dashboard#get_new_repos"
   match 'index', to: 'dashboard#index', via: [:get, :post]
   post 'score' => 'application#score'
   post 'webhook' => 'dashboard#webhook'
