@@ -2,8 +2,6 @@ namespace :fetch_data do
   desc "Fetch code-curiosity github repositories commits periodically."
   task :commits => :environment do |t|
     members = Member.all
-    last_record = Commit.all.order("created_at DESC").last
-    last_fetch_time = last_record ? last_record.created_at : Time.now - 3.month
     round = Round.find_by({status: 'open'})
     begin
       members.each do |member|
@@ -14,7 +12,7 @@ namespace :fetch_data do
             branches = GITHUB.repos.branches(user: 'joshsoftware', repo: repo.name).collect(&:name)
             
             branches.each do |branch|
-              response = GITHUB.repos.commits.all('joshsoftware', repo.name, author: member.username, since: last_fetch_time, until: Time.now, sha: branch)
+              response = GITHUB.repos.commits.all('joshsoftware', repo.name, author: member.username, since: round.from_date.beginning_of_day, until: Time.now, sha: branch)
               
               unless response.body.blank?
                 response.body.each do |data|
@@ -46,7 +44,6 @@ namespace :fetch_data do
   
   desc "Fetch comments,issues created by existing members"
   task activities: :environment do |t|
-    last_fetch_time = Activity.desc(:created_at).first.try(:created_at) || (Time.now - 1.month).beginning_of_day
     round = Round.find_by({status: 'open'})
     
     # currrenty tracking event
@@ -59,12 +56,12 @@ namespace :fetch_data do
       if team
         repos       = team.repos.pluck(:name).join("|")
 
-        activities = activities.select{|a| Time.parse(a.created_at) > last_fetch_time && TRACKING_EVENTS.keys.include?(a.type) && a.repo.name.match(repos) }
+        activities = activities.select{|a| Time.parse(a.created_at) > round.from_date.beginning_of_day && TRACKING_EVENTS.keys.include?(a.type) && a.repo.name.match(repos) }
 
         activities.each do |activity|
           type = TRACKING_EVENTS[activity.type] 
 
-          member.activities.create!(
+          member.activities.create(
             description: activity.payload[type].body,
             event_type: type,
             repo: activity.repo,
