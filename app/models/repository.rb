@@ -11,6 +11,6 @@ class Repository
   validates :name, uniqueness: true
 
   def self.fetch_remote_repos
-    GITHUB.orgs.teams.list_repos(ORG_TEAM_ID)
+    GITHUB.orgs.teams.list_repos(ORG_TEAM_ID, per_page: 100)
   end
 end
