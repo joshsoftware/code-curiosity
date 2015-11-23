@@ -2,7 +2,7 @@ namespace :fetch_data do
   desc "Fetch code-curiosity github repositories commits periodically."
   task :commits => :environment do |t|
     members = Member.all
-    round = Round.find_by({status: 'open'})
+    round = ENV['ROUND_ID'] ? Round.find(ENV['ROUND_ID']) : Round.find_by({status: 'open'})
     begin
       members.each do |member|
         team = member.teams.where(round: round).first
@@ -12,7 +12,7 @@ namespace :fetch_data do
             branches = GITHUB.repos.branches(user: 'joshsoftware', repo: repo.name).collect(&:name)
             
             branches.each do |branch|
-              response = GITHUB.repos.commits.all('joshsoftware', repo.name, author: member.username, since: round.from_date.beginning_of_day, until: Time.now, sha: branch)
+              response = GITHUB.repos.commits.all('joshsoftware', repo.name, author: member.username, since: round.from_date.beginning_of_day, until: ( round.end_date ? round.end_date.end_of_day : Time.now ), sha: branch)
               
               unless response.body.blank?
                 response.body.each do |data|
