@@ -61,15 +61,17 @@ namespace :fetch_data do
         activities.each do |activity|
           type = TRACKING_EVENTS[activity.type] 
 
-          member.activities.create(
-            description: activity.payload[type].body,
-            event_type: type,
-            repo: activity.repo,
-            ref_url: activity.payload[type].html_url,
-            team: team,
-            commented_on: Time.parse(activity.created_at),
-            round: round
-          ) 
+          if member.username == activity.payload[type].user.login
+            member.activities.create(
+              description: activity.payload[type].body,
+              event_type: type,
+              repo: activity.repo,
+              ref_url: activity.payload[type].html_url,
+              team: team,
+              commented_on: Time.parse(activity.created_at),
+              round: round
+            ) 
+          end
         end
       end
     end
