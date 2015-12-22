@@ -5,6 +5,7 @@ class Repository
   field :name, type: String
   field :description, type: String
   field :watchers, type: Integer
+  field :owner, type: String
 
   has_many :commits
   has_and_belongs_to_many :teams
