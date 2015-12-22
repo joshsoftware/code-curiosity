@@ -9,10 +9,11 @@ namespace :fetch_data do
         if team
           repos = team.repos
           repos.each do |repo|
-            branches = GITHUB.repos.branches(user: 'joshsoftware', repo: repo.name).collect(&:name)
+            user = repo.owner == member.username ? repo.owner : 'joshsoftware'
+            branches = GITHUB.repos.branches(user: user, repo: repo.name).collect(&:name)
             
             branches.each do |branch|
-              response = GITHUB.repos.commits.all('joshsoftware', repo.name, author: member.username, since: round.from_date.beginning_of_day, until: ( round.end_date ? round.end_date.end_of_day : Time.now ), sha: branch)
+              response = GITHUB.repos.commits.all(user, repo.name, author: member.username, since: round.from_date.beginning_of_day, until: ( round.end_date ? round.end_date.end_of_day : Time.now ), sha: branch)
               
               unless response.body.blank?
                 response.body.each do |data|
