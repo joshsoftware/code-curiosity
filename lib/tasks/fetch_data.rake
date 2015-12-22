@@ -44,7 +44,7 @@ namespace :fetch_data do
   
   desc "Fetch comments,issues created by existing members"
   task activities: :environment do |t|
-    round = Round.find_by({status: 'open'})
+    round = ENV['ROUND_ID'] ? Round.find(ENV['ROUND_ID']) : Round.find_by({status: 'open'})
     
     # currrenty tracking event
     TRACKING_EVENTS = {"IssueCommentEvent" => 'comment', "IssuesEvent" => 'issue'}
