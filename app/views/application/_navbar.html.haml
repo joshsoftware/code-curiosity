@@ -13,6 +13,6 @@
           %li= link_to current_user.email, "#"
           %li= link_to "Log out", destroy_user_session_path, method: :delete 
         - else
-          %li= link_to "Login", new_user_session_path
+          %li= link_to "Login", omniauth_authorize_path(:user, :github) 
 
         
