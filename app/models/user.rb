@@ -1,8 +1,10 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
@@ -23,6 +25,11 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
 
+  field :github_handle,      type: String
+  field :active,             type: Boolean, default: true
+  field :is_judge,           type: Boolean, default: false
+  field :name,               type: String
+
   ## Confirmable
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time
@@ -33,4 +40,12 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+
+  has_many :commits, dependent: :destroy
+  has_many :activities, dependent: :destroy
+  has_and_belongs_to_many :repositories
+
+  scope :contestants, -> { where(is_judge: false) }
+
+  validates :github_handle, :name, presence: true
 end

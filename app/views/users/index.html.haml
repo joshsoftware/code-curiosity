@@ -1,0 +1,16 @@
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Name 
+      %th Email 
+      %th Github Handle
+      %th Active since
+      %th Actions
+  %tbody     
+    - @users.each do |user|
+      %tr{data: {user: user.id.to_s}, class: status_color(user)}
+        %td=user.name
+        %td=user.email
+        %td=user.github_handle
+        %td=user.created_at
+        %td= link_to "activities", user 

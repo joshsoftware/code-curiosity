@@ -7,7 +7,7 @@ function initDashboardChart(options){
         text: options.title 
     },
     xAxis: {
-        categories: options.teams 
+        categories: options.users 
     },
     yAxis: {
         min: 0,

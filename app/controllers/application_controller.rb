@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
       Round.find_by({status: 'open'})
     end
   end
+  helper_method :current_round
 
   # common polymorphic method for scoring. 
   def score

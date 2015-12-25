@@ -1,0 +1,31 @@
+%button.btn.btn-success{ "data-toggle" => "modal",  "data-target" => "#new_repo"} Add New Repository 
+%table#stream_table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Owner
+      %th Name
+      %th Description
+  %tbody     
+
+%script#template{type: "text/html"}
+  %tr
+    %td {{record.owner}}
+    %td {{record.name}}
+    %td {{record.description}}
+
+.modal.fade#new_repo
+  .modal-dialog
+    .modal-content
+      = simple_form_for Repository.new do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+          %h4.modal-title Add new repository 
+        .modal-body
+          = f.input :source_url
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+          %button.btn.btn-primary{:type => "submit"} Save
+
+:javascript
+  load_repos(#{@repos.to_json})

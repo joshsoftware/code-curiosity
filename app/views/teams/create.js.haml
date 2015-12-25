@@ -1,7 +1,0 @@
-- if @team.is_a? Team
- $("#teams tbody").append("<tr data-team='#{@team.id.to_s}'><td>#{@team.name}</td><td>#{@team.member_names}</td><td><select name='repos[]' id='repos' multiple='multiple' class='form-control'></select></td><td>#{@team.active_from}</td><td><a data-remote='true' rel='nofollow' data-method='delete' href='/teams/#{@team.id.to_s}'><span class='glyphicon glyphicon-trash'></span></a></td></tr>")
- $("#team_name").val('')
- $("#team_members").multiselect("clearSelection")
-
- $.each(repos, function() { $("#teams tbody tr:last select").append("<option value="+this+">"+this+"</option>") })
- apply_multiselect("#teams tbody tr:last select")
