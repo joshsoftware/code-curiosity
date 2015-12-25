@@ -11,7 +11,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :domain, 'codecuriosity.org'
-set :deploy_to, '/home/deploy/projects'
+set :deploy_to, '/home/deploy/projects/codecuriosity'
 set :repository, 'git@github.com:joshsoftware/code-curiosity.git'
 set :user, 'deploy'
 set :ssh_options, '-A'
