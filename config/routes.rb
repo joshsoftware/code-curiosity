@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   resources :teams
   resources :repositories 
-  resources :users
+  resources :users do
+    get 'mark_as_judge'
+  end
 
   get 'get_new_repos' => "dashboard#get_new_repos"
   match 'index', to: 'dashboard#index', via: [:get, :post]

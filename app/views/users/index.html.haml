@@ -13,4 +13,12 @@
         %td=user.email
         %td=user.github_handle
         %td=user.created_at
-        %td= link_to "activities", user 
+        %td
+          = link_to "activities", user
+          - if current_user.is_judge?
+            | 
+            
+            - if user.is_judge?
+              = link_to "Remove as judge", user_mark_as_judge_path(user, flag: false)
+            - else  
+              = link_to "Mark as judge", user_mark_as_judge_path(user, flag: true)
