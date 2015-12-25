@@ -22,6 +22,7 @@ gem "highcharts-rails", "~> 3.0.0"
 gem 'bootstrap-datepicker-rails'
 gem 'simple_form'
 gem 'omniauth-github'
+gem 'mina'
 
 group :development, :test do
   gem 'byebug'
@@ -33,4 +34,3 @@ group :development, :test do
 end
 gem 'quiet_assets', group: :development
 gem 'rails_12factor'
-gem 'heroku'
