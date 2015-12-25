@@ -19,6 +19,6 @@
             | 
             
             - if user.is_judge?
-              = link_to "Remove as judge", user_mark_as_judge_path(user, flag: false)
+              = link_to "Remove as judge", user_mark_as_judge_path(user, flag: false), data: {confirm: "Are you sure?"}
             - else  
-              = link_to "Mark as judge", user_mark_as_judge_path(user, flag: true)
+              = link_to "Mark as judge", user_mark_as_judge_path(user, flag: true), data: {confirm: "Are you sure?"}
