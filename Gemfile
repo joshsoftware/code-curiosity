@@ -21,6 +21,7 @@ gem 'devise'
 gem "highcharts-rails", "~> 3.0.0"
 gem 'bootstrap-datepicker-rails'
 gem 'simple_form'
+gem 'omniauth-github'
 
 group :development, :test do
   gem 'byebug'
