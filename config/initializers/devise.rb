@@ -1,4 +1,3 @@
-require "#{Rails.root.join("config/initializers/local_env")}" if Rails.env.development?
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
