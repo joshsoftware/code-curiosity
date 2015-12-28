@@ -6,11 +6,14 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 
   resources :teams
-  resources :repositories 
+  resources :repositories do
+    get 'sync'
+  end
   resources :users do
     get 'mark_as_judge'
+    get 'sync'
   end
-
+  
   get 'get_new_repos' => "dashboard#get_new_repos"
   match 'index', to: 'dashboard#index', via: [:get, :post]
   post 'score' => 'application#score'

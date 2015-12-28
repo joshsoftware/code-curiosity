@@ -14,4 +14,11 @@ class UsersController < ApplicationController
     User.find(params[:user_id]).set(is_judge: params[:flag])
     redirect_to users_path
   end
+
+  def sync
+    CommitJob.perform_later(params[:user_id])
+    ActivityJob.perform_later(params[:user_id])
+    flash[:notice] = "Your Repositories are getting in Sync. Please wait for sometime."
+    redirect_to current_user 
+  end
 end

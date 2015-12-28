@@ -61,4 +61,5 @@ class User
       user.password       = Devise.friendly_token[0,20]
     end
   end
+
 end
