@@ -1,0 +1,1 @@
+$("tr[data-#{@scorable.class.to_s.downcase}='#{@scorable.id.to_s}']").removeClass().addClass("#{score_color(@scorable)}")
