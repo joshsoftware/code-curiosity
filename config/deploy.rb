@@ -24,7 +24,7 @@ set :branch, 'feature'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/mongoid.yml', 'config/secrets.yml', 'log']
+set :shared_paths, ['config/mongoid.yml', 'config/secrets.yml', 'log', 'config/git.yml']
 
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
@@ -54,6 +54,7 @@ task :setup => :environment do
 
   queue! %[touch "#{deploy_to}/#{shared_path}/config/mongoid.yml"]
   queue! %[touch "#{deploy_to}/#{shared_path}/config/secrets.yml"]
+  queue! %[touch "#{deploy_to}/#{shared_path}/config/git.yml"]
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/mongoid.yml' and 'secrets.yml'."]
 
   queue %[
