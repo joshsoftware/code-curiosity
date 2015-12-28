@@ -20,6 +20,6 @@ class Commit
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
 
   def list_scores
-    self.scores.inject(""){|r, s| r += "#{s.user.name}: #{s.rank}<br/>"}
+    self.scores.inject(""){|r, s| r += "#{s.user.email}: #{s.rank}<br/>"}
   end
 end
