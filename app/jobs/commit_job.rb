@@ -1,5 +1,5 @@
 class CommitJob < ActiveJob::Base
-  queue_as :default
+  queue_as :git
 
   def perform(user_id=nil, repo_id=nil, round_id=nil)
     round = round_id ? Round.find(round_id) : Round.find_by({status: 'open'})
