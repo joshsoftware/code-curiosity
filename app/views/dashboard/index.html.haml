@@ -4,10 +4,10 @@
     %button.btn.btn-primary.pull-right{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
       Take Snapshot
 .row.link
-  = form_tag index_path do
-    .row
-      .col-md-2
-        = select_tag :category, options_for_select(Commit::COMMIT_TYPE.to_a.collect{|c| [c[1], c[0]] }, @category), class: 'form-control', :onchange => "this.form.submit()"
+  .btn-group.pull-right
+    = link_to "Scores", dashboard_path("score"), class: "btn btn-default #{check_if_active('score')}"
+    = link_to "Commit", dashboard_path("commit"), class: "btn btn-default #{check_if_active('commit')}"
+    = link_to "Activity", dashboard_path("activity"), class: "btn btn-default #{check_if_active('activity')}"
 #chart-container.chart-container
 
 .modal.fade#myModal

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
   
   get 'get_new_repos' => "dashboard#get_new_repos"
-  match 'index', to: 'dashboard#index', via: [:get, :post]
+  get  'dashboard(/:category)', to: 'dashboard#index', as: :dashboard
   post 'score' => 'application#score'
   post 'webhook' => 'dashboard#webhook'
   post 'take_snapshot' => "dashboard#take_snapshot"
