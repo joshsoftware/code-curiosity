@@ -132,9 +132,9 @@ Highcharts.setOptions(Highcharts.theme);
         bar: {
             dataLabels: {
                 enabled: true,
-                color: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+                color: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#6e6e70',
                 style: {
-                    textShadow: '0 0 3px black'
+                    textShadow: '0 0 1px black'
                 }
             }
         }
