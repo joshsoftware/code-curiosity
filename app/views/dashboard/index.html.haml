@@ -6,8 +6,8 @@
 .row.link
   .btn-group.pull-right
     = link_to "Scores", dashboard_path("score"), class: "btn btn-default #{check_if_active('score')}"
-    = link_to "Commit", dashboard_path("commit"), class: "btn btn-default #{check_if_active('commit')}"
-    = link_to "Activity", dashboard_path("activity"), class: "btn btn-default #{check_if_active('activity')}"
+    = link_to "Commits", dashboard_path("commit"), class: "btn btn-default #{check_if_active('commit')}"
+    = link_to "Activities", dashboard_path("activity"), class: "btn btn-default #{check_if_active('activity')}"
 #chart-container.chart-container
 
 .modal.fade#myModal
