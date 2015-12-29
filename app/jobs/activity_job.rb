@@ -10,9 +10,9 @@ class ActivityJob < ActiveJob::Base
     users = user_id ? [User.find(user_id)] : User.contestants
     users.each do |user|
       activities  = GITHUB.activity.events.performed user: user.github_handle, per_page: 100
-      repos       = user.repositories.pluck(:name).join("|")
+      repos       = user.repositories.pluck(:name)
 
-      activities = activities.select{|a| Time.parse(a.created_at) > round.from_date.beginning_of_day && events.keys.include?(a.type) && a.repo.name.match(repos) }
+      activities = activities.select{|a| Time.parse(a.created_at) > round.from_date.beginning_of_day && events.keys.include?(a.type) && repos.include?(a.repo.name.split("/").last) }
 
       activities.each do |activity|
         type = events[activity.type] 

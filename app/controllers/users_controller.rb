@@ -19,6 +19,6 @@ class UsersController < ApplicationController
     CommitJob.perform_later(params[:user_id])
     ActivityJob.perform_later(params[:user_id])
     flash[:notice] = "Your Repositories are getting in Sync. Please wait for sometime."
-    redirect_to current_user 
+    redirect_to user_path(params[:user_id]) 
   end
 end
