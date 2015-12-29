@@ -2,7 +2,7 @@ class Commit
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  COMMIT_TYPE = {score: "Team scores", commit: "Team commits", activity: "Team activities"}
+  COMMIT_TYPE = {score: "Scores", commit: "Commits", activity: "Activities"}
 
   field :message, type: String
   field :commit_date, type: DateTime

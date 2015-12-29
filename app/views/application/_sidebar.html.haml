@@ -2,5 +2,8 @@
   %li{class: is_active('index', 'dashboard')}= link_to 'Dashboard', root_path
   - if current_user
     %li{class: is_active('index', 'repositories')}= link_to 'Repos', repositories_path 
-    %li{class: is_active('index', 'users')}= link_to 'Users', users_path 
+    - if current_user.is_judge?
+      %li{class: is_active('index', 'users')}= link_to 'Users', users_path 
+    - else  
+      %li{class: is_active('index', 'users')}= link_to 'Activities', current_user 
     
