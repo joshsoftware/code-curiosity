@@ -2,7 +2,8 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!, only: [:repositories, :take_snapshot, :get_new_repos]
 
   def index
-    @stats = @current_round.graph_data
+    @category = params[:category] || "score"
+    @stats = @current_round.graph_data(@category)
   end
 
   def take_snapshot

@@ -3,6 +3,12 @@
   - if current_user && current_user.is_judge?
     %button.btn.btn-primary.pull-right{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
       Take Snapshot
+.row.link
+  .btn-group.pull-right
+    = link_to "Scores", dashboard_path("score"), class: "btn btn-default #{check_if_active('score')}"
+    = link_to "Commit", dashboard_path("commit"), class: "btn btn-default #{check_if_active('commit')}"
+    = link_to "Activity", dashboard_path("activity"), class: "btn btn-default #{check_if_active('activity')}"
+      
 #chart-container.chart-container
 
 .modal.fade#myModal
@@ -29,6 +35,6 @@
   initDashboardChart({
     title: #{@stats[:title].to_json},
     users: #{@stats[:users].to_json},
-    series: #{@stats[:graph_series].values.to_json}
+    series: #{@stats[:graph_series].to_json}
   });
 

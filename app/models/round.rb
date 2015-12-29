@@ -17,21 +17,34 @@ class Round
     errors.add("End date", "should be greater than start date.") if  self.end_date and self.end_date <= self.from_date
   end
 
-  def graph_data
+  def graph_data(type)
     title = "Code Curiosity Stats for #{self.name}"
     users = User.contestants
-    data = {
-      activities: {name: "Activities", data: Array.new(users.count, 0)},
-      commits: {name: "Commits", data: Array.new(users.count, 0)},
-      scores: {name: "Scores", data: Array.new(users.count, 0)}
-    }  
+    ### COMMENTING THIS AS GRAPH DOES NOT LOOK GOOD ####
+    #data = {
+    #  activities: {name: "Activities", data: Array.new(users.count, 0)},
+    #  commits: {name: "Commits", data: Array.new(users.count, 0)},
+    #  scores: {name: "Scores", data: Array.new(users.count, 0)}
+    #}  
 
+    #users.each_with_index do |user, i|
+    #  data[:activities][:data][i]  = get_activities(user)
+    #  data[:scores][:data][i]      = get_score(user)
+    #  data[:commits][:data][i]     = get_commits(user)
+    #end
+
+    data = Array.new(users.count, 0)
     users.each_with_index do |user, i|
-      data[:activities][:data][i]  = get_activities(user)
-      data[:scores][:data][i]      = get_score(user)
-      data[:commits][:data][i]     = get_commits(user)
+      data[i] = case type
+                when 'activity'
+                  get_activities(user)
+                when 'score'
+                  get_score(user)
+                else
+                  get_commits(user)
+                end
     end
-    return { title: title, users: users.pluck(:name), graph_series: data}
+    return { title: title, users: users.pluck(:name), graph_series: [{name: type.titleize, data: data}]}
   end
 
   def get_activities(user)
