@@ -1,6 +1,6 @@
 %h1.page-header
   %font Dashboard
-  - if current_user
+  - if current_user && current_user.is_judge?
     %button.btn.btn-primary.pull-right{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
       Take Snapshot
 .row.link
