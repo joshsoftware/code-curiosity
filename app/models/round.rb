@@ -17,36 +17,34 @@ class Round
     errors.add("End date", "should be greater than start date.") if  self.end_date and self.end_date <= self.from_date
   end
 
-  def self.graph_data(id, type)
-    round = Round.find(id)
-    title = round.present? ? "Code Curiosity Stats for #{round.name}" : "No Data"
+  def graph_data
+    title = "Code Curiosity Stats for #{self.name}"
     users = User.contestants
-    data = Array.new(users.count, 0) 
+    data = {
+      activities: {name: "Activities", data: Array.new(users.count, 0)},
+      commits: {name: "Commits", data: Array.new(users.count, 0)},
+      scores: {name: "Scores", data: Array.new(users.count, 0)}
+    }  
 
     users.each_with_index do |user, i|
-      data[i] = case type
-                when "activity"
-                  get_activities(round, user)
-                when "score"
-                  get_score(round, user)
-                else
-                  get_commits(round, user)
-                end
+      data[:activities][:data][i]  = get_activities(user)
+      data[:scores][:data][i]      = get_score(user)
+      data[:commits][:data][i]     = get_commits(user)
     end
-    return { title: title, users: users.pluck(:name), graph_series:{name: type, data: data}, yaxis_title: Commit::COMMIT_TYPE[type.to_sym]}
+    return { title: title, users: users.pluck(:name), graph_series: data}
   end
 
-  def self.get_activities(round, user)
-    user.activities.for_round(round.id).count
+  def get_activities(user)
+    user.activities.for_round(self.id).count
   end
 
-  def self.get_commits(round, user)
-    user.commits.for_round(round.id).count
+  def get_commits(user)
+    user.commits.for_round(self.id).count
   end
 
-  def self.get_score(round, user)
-    commit_scores = user.commits.for_round(round.id).map(&:scores).reject(&:empty?).collect{|c| c.sum(:rank).to_f / c.size.to_f }.sum.round(2)
-    activity_scores = user.activities.for_round(round.id).map(&:scores).reject(&:empty?).collect{|c| c.sum(:rank).to_f / c.size.to_f }.sum.round(2)
+  def get_score(user)
+    commit_scores = user.commits.for_round(self.id).map(&:scores).reject(&:empty?).collect{|c| c.sum(:rank).to_f / c.size.to_f }.sum.round(2)
+    activity_scores = user.activities.for_round(self.id).map(&:scores).reject(&:empty?).collect{|c| c.sum(:rank).to_f / c.size.to_f }.sum.round(2)
     commit_scores + activity_scores
   end
 

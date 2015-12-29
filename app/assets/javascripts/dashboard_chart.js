@@ -19,7 +19,7 @@ Highcharts.wrap(Highcharts.Chart.prototype, 'getContainer', function (proceed) {
 
 
 Highcharts.theme = {
-   colors: ["#2b908f", "#8085e9", "#8d4654", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+   colors: ["#2b908f", "#8085e9", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
       "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
    chart: {
       backgroundColor: null,
@@ -117,9 +117,6 @@ Highcharts.setOptions(Highcharts.theme);
     },
     yAxis: {
         min: 0,
-        title: {
-            text: options.ytitle
-        },
         labels: {
           overflow: 'justify'
         }
@@ -139,7 +136,7 @@ Highcharts.setOptions(Highcharts.theme);
             }
         }
     },
-    series: [options.series]
+    series: options.series
 });
 }
 
