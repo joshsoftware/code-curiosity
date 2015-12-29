@@ -21,13 +21,9 @@ class Round
     round = Round.find(id)
     title = round.present? ? "Code Curiosity Stats for #{round.name}" : "No Data"
     users = User.contestants
-    graph_series = []
-    blank_row = [-1]*users.count
-    total = 0
+    data = Array.new(users.count, 0) 
 
     users.each_with_index do |user, i|
-      data = blank_row.clone
-
       data[i] = case type
                 when "activity"
                   get_activities(round, user)
@@ -36,20 +32,8 @@ class Round
                 else
                   get_commits(round, user)
                 end
-
-      graph_series << { name: user.name, data: data }
-      total += data[i]
     end
-
-    if total == 0
-      zero_row = [0]*users.count
-
-      graph_series.each do |series|
-        series[:data] = zero_row
-      end
-    end
-
-    return { title: title, users: users.pluck(:name), graph_series: graph_series, yaxis_title: Commit::COMMIT_TYPE[type.to_sym]}
+    return { title: title, users: users.pluck(:name), graph_series:{name: type, data: data}, yaxis_title: Commit::COMMIT_TYPE[type.to_sym]}
   end
 
   def self.get_activities(round, user)
