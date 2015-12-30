@@ -8,7 +8,7 @@ class CommitJob < ActiveJob::Base
       users.each do |user|
         repos = repo_id ? [Repository.find(repo_id)] : user.repositories 
         repos.each do |repo|
-          branches = GITHUB.repos.branches(user: repo.owner, repo: repo.name).collect(&:name)
+          branches = GITHUB.repos.branches(user: repo.owner, repo: repo.name, per_page: 1000).collect(&:name)
 
           branches.each do |branch|
             response = GITHUB.repos.commits.all(
@@ -17,7 +17,7 @@ class CommitJob < ActiveJob::Base
               author: user.github_handle,
               since: round.from_date.beginning_of_day, 
               until: ( round.end_date ? round.end_date.end_of_day : Time.now ),
-                sha: branch
+              sha: branch
             )
             unless response.body.blank?
               response.body.each do |data|
