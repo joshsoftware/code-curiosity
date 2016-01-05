@@ -17,7 +17,7 @@
           %td.score.commit
             - if current_user.is_judge?
               = select_tag :score, options_for_select((0..5).map, commit.scores.my_score(current_user)), include_blank: "-"
-              %span.glyphicon.glyphicon-info-sign{"data-toggle" => "popover", title: "Scores", "data-content" => raw(commit.list_scores), "data-html" => "true", "data-placement" => "bottom" }
+              %span.glyphicon.glyphicon-info-sign{"data-toggle" => "popover", title: "Scores", "data-content" => raw(commit.list_scores), "data-html" => "true", "data-placement" => "bottom", "data-trigger" => "hover" }
             - else
               = commit.avg_score
           %td= commit.commit_date.strftime("%d/%m/%Y")
@@ -54,4 +54,4 @@
           %td= link_to "Details", activity.ref_url, target: "_blank"
 
 :javascript
-  $('[data-toggle="popover"]').popover()
+  $('[data-toggle="popover"]').popover({trigger: "hover"})
