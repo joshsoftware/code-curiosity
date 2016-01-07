@@ -1,0 +1,12 @@
+.modal-dialog
+  .modal-content
+    = simple_form_for (@repo || Repository.new) do |f|
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+        %h4.modal-title Add new repository 
+      .modal-body
+        = f.input :source_url, hint: "For example your forked repo: 'https://github.com/joshsoftware/devise'"
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+        %button.btn.btn-primary{:type => "submit"} Save
