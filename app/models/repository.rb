@@ -10,7 +10,8 @@ class Repository
 
   has_many :commits
   has_and_belongs_to_many :users
-  validates :name, :source_url, uniqueness: true, presence: true
+  validates :source_url, uniqueness: true, presence: true
+  validates :name, presence: true, uniqueness: {scope: :owner}
 
   before_validation :parse_owner_info
 
