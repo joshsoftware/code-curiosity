@@ -12,21 +12,15 @@ class Repository
   has_and_belongs_to_many :users
   validates :name, :source_url, uniqueness: true, presence: true
 
-  before_update :parse_owner_info
+  before_validation :parse_owner_info
 
   def self.add_new(params, user)
-    repo  = Repository.find_or_initialize_by(source_url: params[:source_url])
-
-    if repo.new_record?
-      parse_owner_info
-      repo.save
-    end
-
+    repo  = Repository.find_or_create_by(source_url: params[:source_url])
     repo.users << user unless repo.users.include?(user)
   end
 
   def parse_owner_info
-    names = self.source_url.remove("https://github.com/").split("/")
+    names = self.source_url.sub(/(https|http):\/\/github.com\//, '').split("/")
     self.owner, self.name = names
   end
 end

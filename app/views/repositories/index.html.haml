@@ -1,4 +1,4 @@
-%button.btn.btn-success{ "data-toggle" => "modal",  "data-target" => "#new_repo"} Add New Repository 
+= link_to 'Add New Repository', new_repository_path, class: "btn btn-success", remote: true
 %table#stream_table.table.table-striped.table-bordered
   %thead
     %tr

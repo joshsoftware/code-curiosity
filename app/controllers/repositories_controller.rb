@@ -4,6 +4,11 @@ class RepositoriesController < ApplicationController
     @repos = current_user.is_judge? ? Repository.all : current_user.repositories
   end
 
+  def new
+    @repo = Repository.new
+    render 'edit'
+  end
+
   def create
     Repository.add_new(params[:repository], current_user)   
     redirect_to repositories_path

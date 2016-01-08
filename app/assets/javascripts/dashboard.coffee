@@ -44,13 +44,12 @@ window.close_noty_in = (time)->
 
 $(document).on 'submit', "#new_repository", ->
   parent_obj = $("#repository_source_url").closest(".form-group")
-  return false if parent_obj.hasClass("has-error")
-
+  parent_obj.removeClass("has-error")
+  $(this).find("span").remove()
+  
   if $("#repository_source_url").val() == ""
     parent_obj.addClass("has-error")
     parent_obj.append("<span class='help-block text-danger'>can't be blank</span>")
     return false
   else
-    parent_obj.removeClass("has-error")
-    $(this).find("span").remove()
-    return true 
+    return true
