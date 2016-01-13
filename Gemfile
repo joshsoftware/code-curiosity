@@ -37,3 +37,5 @@ end
 
 gem 'quiet_assets', group: :development
 gem 'rails_12factor'
+
+gem 'nokogiri', '1.6.7.1'
