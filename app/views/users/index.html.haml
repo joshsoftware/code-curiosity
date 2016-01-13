@@ -1,0 +1,24 @@
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Name 
+      %th Email 
+      %th Github Handle
+      %th Active since
+      %th Actions
+  %tbody     
+    - @users.each do |user|
+      %tr{data: {user: user.id.to_s}, class: status_color(user)}
+        %td=user.name
+        %td=user.email
+        %td=user.github_handle
+        %td=user.created_at
+        %td
+          = link_to "activities", user
+          - if current_user.is_judge?
+            | 
+            
+            - if user.is_judge?
+              = link_to "Remove as judge", user_mark_as_judge_path(user, flag: false), data: {confirm: "Are you sure?"}
+            - else  
+              = link_to "Mark as judge", user_mark_as_judge_path(user, flag: true), data: {confirm: "Are you sure?"}

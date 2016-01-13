@@ -1,0 +1,23 @@
+= link_to 'Add New Repository', new_repository_path, class: "btn btn-success", remote: true
+%table#stream_table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Owner
+      %th Name
+      %th Description
+      %th Actions
+  %tbody     
+
+%script#template{type: "text/html"}
+  %tr
+    %td {{record.owner}}
+    %td {{record.name}}
+    %td {{record.description}}
+    %td
+      %a{href: "repositories/{{record._id.$oid}}/sync", class: "btn btn-info"} Sync
+      %a{href: "repositories/{{record._id.$oid}}/edit", class: "btn btn-danger", "data-remote" => true} Edit 
+
+.modal.fade#new_repo
+
+:javascript
+  load_repos(#{@repos.to_json})

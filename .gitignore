@@ -17,4 +17,3 @@
 /tmp
 .ruby-gemset
 .ruby-version
-config/initializers/local_env.rb

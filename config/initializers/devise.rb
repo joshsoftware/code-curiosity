@@ -1,10 +1,11 @@
+require "#{Rails.root.join("config/initializers/globals")}"
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = 'a53736543c9980baeb1f9dc40df9ae86b7addc68e9812589ac41835df2fe8e163a2e31a28d4fed5b827cfddaf3783e5607da586b91e7677f4a57254b39ca926a'
+  config.secret_key = '444305658617db8e4358c6d21be424076f71d39fba58883d21894bcfcfa50cae6460cb0081bb069a08ca40dc089aeda36d47879e70f8fdf28272588e48a35754'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -232,7 +233,7 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :github, ENV['git_app_id'], ENV['git_app_secret'], scope: 'user,public_repo'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

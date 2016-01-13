@@ -12,4 +12,5 @@ class Score
   def self.my_score(user)
     where(user: user).first.try(:rank)
   end
+
 end

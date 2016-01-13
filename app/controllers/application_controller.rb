@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
       Round.find_by({status: 'open'})
     end
   end
+  helper_method :current_round
 
   # common polymorphic method for scoring. 
   def score
@@ -21,14 +22,14 @@ class ApplicationController < ActionController::Base
     begin
       # This can potentially raise a NameError for an unknown model
       model = params.keys.first.titleize.constantize
-      scorable = model.find(params.values.first)
+      @scorable = model.find(params.values.first)
 
       # If the object is not found, there's nothing we can do about it anyway!
-      if scorable
+      if @scorable
         # Check if the score is to be updated or a new one!
         # This can potentially raise a NoMethodError for scores, incase the
         # model is not polymorphic with Scores.
-        score = scorable.scores.where(user: current_user).first
+        score = @scorable.scores.where(user: current_user).first
         if score
           # Special condition: If the judge selectes the blank option, it means 
           # he is not intersted in ranking this item. Delete the score.
@@ -40,13 +41,11 @@ class ApplicationController < ActionController::Base
             score.save!
           end
         else
-          scorable.scores.create!(rank: rank, user: current_user)
+          @scorable.scores.create!(rank: rank, user: current_user)
         end
       end
     rescue NameError, NoMethodError => e
       # Ignore -- otherwise raise hell!
     end
-
-    render nothing: true
   end
 end

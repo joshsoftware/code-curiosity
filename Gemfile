@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.0'
+ruby '2.2.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 gem 'mongoid' #, '~> 4.0.2'
@@ -20,13 +20,18 @@ gem 'github_api'
 gem 'devise'
 gem "highcharts-rails", "~> 3.0.0"
 gem 'bootstrap-datepicker-rails'
+gem 'simple_form'
+gem 'omniauth-github'
+gem 'mina'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'minitest'
+  gem 'pry'
+  gem 'pry-nav'
 end
 gem 'quiet_assets', group: :development
 gem 'rails_12factor'
-gem 'heroku'

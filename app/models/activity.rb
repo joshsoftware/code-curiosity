@@ -8,8 +8,7 @@ class Activity
   field :ref_url,       type: String
   field :commented_on,  type: Time
 
-  belongs_to :member
-  belongs_to :team
+  belongs_to :user
   belongs_to :round
 
   has_many :scores, as: :scorable, dependent: :destroy
@@ -18,7 +17,11 @@ class Activity
   
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
 
+  def avg_score
+    self.scores.avg(:rank)
+  end
+
   def list_scores
-    self.scores.inject(""){|r, s| r += "#{s.user.email}: #{s.rank}<br/>"}
+    self.scores.inject(""){|r, s| r += "#{s.user.name}: #{s.rank}<br/>"}
   end
 end
