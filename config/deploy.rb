@@ -17,7 +17,7 @@ set :user, 'deploy'
 set :ssh_options, '-A'
 set :rail_env, 'production'
 set :keep_releases, 5
-set :branch, 'feature'
+set :branch, 'master'
 
 # For system-wide RVM install.
 #   set :rvm_path, '/usr/local/rvm/bin/rvm'
