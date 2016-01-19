@@ -30,3 +30,9 @@ Teams of 3 will be Alpha, Bravo, Charlie, ...
 Repositories will be forked in this account and code commited there, so that this dashboard can monitor commits. The dashboard will show statistical data of commits of all team members. This is not a rule for judging but gives a good idea of the competitiveness between the team. 
 
 Let the games begin. 
+
+
+### Github keys setup
+
+* create file .env file based on your environment i.e .env.development, .env.production. For local development user .env.local
+* Add github app id and secret to .env file, refer env.sample
