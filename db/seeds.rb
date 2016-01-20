@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create!(
-  email: 'admin@joshsoftware.com',
-  password: 'admin123#' 
-)
+Round.first_or_create!({
+  name: 'Round 1',
+  from_date: Date.today.at_beginning_of_month
+})

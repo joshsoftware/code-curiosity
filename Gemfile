@@ -18,7 +18,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'github_api', '~> 0.13.1'
 gem 'devise', '~> 3.5.4'
-gem 'highcharts-rails', '~> 3.0.0'
+gem 'highcharts-rails', '~> 4.1.9'
 gem 'bootstrap-datepicker-rails'
 gem 'simple_form', '~> 3.2.1'
 gem 'omniauth-github', '~> 1.1.2'
@@ -37,3 +37,5 @@ end
 
 gem 'quiet_assets', group: :development
 gem 'rails_12factor'
+
+gem 'nokogiri', '1.6.7.1'
