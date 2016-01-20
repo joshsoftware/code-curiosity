@@ -115,9 +115,9 @@ GEM
       rake
     mini_portile2 (2.0.0)
     minitest (5.8.1)
-    mongo (2.1.1)
-      bson (~> 3.0)
-    mongoid (5.0.0)
+    mongo (2.2.1)
+      bson (~> 4.0)
+    mongoid (5.0.2)
       activemodel (~> 4.0)
       mongo (~> 2.1)
       origin (~> 2.1)
@@ -251,9 +251,9 @@ DEPENDENCIES
   jquery-rails
   mina
   minitest
-  mongoid
+  mongoid (~> 5.0.2)
   nokogiri (= 1.6.7.1)
-  omniauth-github
+  omniauth-github (~> 1.1.2)
   pry
   pry-nav
   quiet_assets
