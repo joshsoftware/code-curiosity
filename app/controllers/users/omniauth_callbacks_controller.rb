@@ -1,4 +1,5 @@
 class Users::OmniauthCallbacksController < ApplicationController
+  skip_before_action :current_round
   before_action :authenticate_user!, except: [:github, :failure] 
 
   def github
