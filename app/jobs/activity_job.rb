@@ -5,7 +5,7 @@ class ActivityJob < ActiveJob::Base
     round = round_id ? Round.find(round_id) : Round.find_by({status: 'open'})
 
     # currrenty tracking event
-    events = {"IssueCommentEvent" => 'comment', "IssuesEvent" => 'issue'}
+    events = {"IssueCommentEvent" => 'comment', "IssuesEvent" => 'issue', 'PullRequestReviewCommentEvent' => 'comment'}
 
     users = user_id ? [User.find(user_id)] : User.contestants
     users.each do |user|
