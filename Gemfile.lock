@@ -92,7 +92,7 @@ GEM
     haml (4.0.7)
       tilt
     hashie (3.4.3)
-    highcharts-rails (3.0.10)
+    highcharts-rails (4.1.9)
       railties (>= 3.1)
     i18n (0.7.0)
     jbuilder (2.4.0)
@@ -246,7 +246,7 @@ DEPENDENCIES
   dotenv-rails
   github_api (~> 0.13.1)
   haml
-  highcharts-rails (~> 3.0.0)
+  highcharts-rails (~> 4.1.9)
   jbuilder (~> 2.0)
   jquery-rails
   mina

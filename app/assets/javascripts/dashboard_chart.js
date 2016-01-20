@@ -98,7 +98,7 @@ Highcharts.theme = {
 
    // General
    background2: '#E0E0E8'
-   
+
 };
 
 // Apply the theme
@@ -107,13 +107,16 @@ Highcharts.setOptions(Highcharts.theme);
 
   $('#chart-container').highcharts({
     chart: {
-        type: 'bar'
+        type: 'bar',
+        marginTop: 40,
+        marginBottom: 80,
+        height: options.users.length * 20 + 120 // 20px per data item plus top and bottom margins
     },
     title: {
-        text: options.title 
+        text: options.title
     },
     xAxis: {
-        categories: options.users 
+        categories: options.users
     },
     yAxis: {
         min: 0,
@@ -139,4 +142,3 @@ Highcharts.setOptions(Highcharts.theme);
     series: options.series
 });
 }
-
