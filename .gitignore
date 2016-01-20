@@ -17,3 +17,8 @@
 /tmp
 .ruby-gemset
 .ruby-version
+*.swp
+/extra
+
+# Ignore ENV variables
+*.env.*
