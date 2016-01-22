@@ -131,7 +131,6 @@ test:
         - localhost:27017
       options:
         read:
-          mode: primary
         max_pool_size: 1
 
 production:
@@ -140,3 +139,4 @@ production:
       uri: <%= ENV['MONGOLAB_URI'] %>
   options:
     raise_not_found_error: false
+
