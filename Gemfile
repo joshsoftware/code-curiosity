@@ -4,7 +4,7 @@ ruby '2.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 gem 'mongoid', '~> 5.0.2'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -20,6 +20,7 @@ gem 'github_api', '~> 0.13.1'
 gem 'devise', '~> 3.5.4'
 gem 'highcharts-rails', '~> 3.0.0'
 gem 'bootstrap-datepicker-rails'
+gem 'font-awesome-rails'
 gem 'simple_form', '~> 3.2.1'
 gem 'omniauth-github', '~> 1.1.2'
 gem 'sidekiq', '~> 4.0.2'
@@ -38,5 +39,7 @@ group :development, :test do
   gem 'mina'
 end
 
-gem 'quiet_assets', group: :development
-gem 'rails_12factor'
+group :development do
+  gem 'haml-rails'
+  gem 'quiet_assets'
+end

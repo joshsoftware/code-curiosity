@@ -3,8 +3,8 @@ class User
   include Mongoid::Timestamps
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  # :confirmable, :lockable, :timeoutable and :omniauthable, :registerable
+  devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   ## Database authenticatable
@@ -26,6 +26,7 @@ class User
   field :last_sign_in_ip,    type: String
 
   field :github_handle,      type: String
+  field :avatar_url,         type: String
   field :active,             type: Boolean, default: true
   field :is_judge,           type: Boolean, default: false
   field :name,               type: String
@@ -51,13 +52,14 @@ class User
 
   validates :github_handle, :name, presence: true
 
-  def self.from_omniauth(auth)  
+  def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider       = auth.provider
       user.uid            = auth.uid
       user.email          = auth.info.email
       user.name           = auth.info.name
       user.github_handle  = auth.extra.raw_info.login
+      user.avatar_url     = auth.info.avatar_url
       user.password       = Devise.friendly_token[0,20]
     end
   end

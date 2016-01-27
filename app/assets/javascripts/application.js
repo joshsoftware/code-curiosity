@@ -15,7 +15,6 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
-//= require highcharts
-//= require highcharts/highcharts-more
+//= require AdminLTE
 //= require_tree .
 
