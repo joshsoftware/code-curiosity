@@ -1,4 +1,3 @@
-
 GITHUB = Github.new oauth_token: ENV['GIT_OAUTH_TOKEN']
-
-WALLET_CONFIG = YAML.load_file('config/wallet.yml')
+WALLET_CONFIG = YAML.load_file('config/code_curiosity_config.yml')['wallet']
+ROUND_CONFIG =  YAML.load_file('config/code_curiosity_config.yml')['round']

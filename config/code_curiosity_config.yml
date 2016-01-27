@@ -1,5 +1,10 @@
 wallet:
-  transaction_signup: "signup"
-  transaction_commit: "commit"
+  transaction_signup: "Signup"
+  transaction_commit: "Commit"
   signup_amount: 500
+  subscription_amount: 150
+  challenge_subscription: "Challenge Subscription"
+
+round:
+  states: {"inactive":"inactive","open":"open","close":"close"}
 

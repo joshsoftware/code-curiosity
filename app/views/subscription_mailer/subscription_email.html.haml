@@ -1,0 +1,6 @@
+%h5 Hello,
+= @user.name
+
+=# url_for(host:"http://localhost:3000",controller: 'users',  action: 'index', only_path: false)
+
+= link_to 'I am Participating', subscription_url(@user)

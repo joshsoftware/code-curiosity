@@ -10,6 +10,7 @@
             = select_tag :round, options_for_select(@rounds.collect{ |r| [r.name, r.id] }, @current_round.id), class: 'form-control', :onchange => "this.form.submit()"
       %ul.nav.navbar-nav.navbar-right
         - if current_user
+          %li= link_to "My Profile" ,users_path(id:current_user._id)
           %li= link_to current_user.email, "#"
           %li= link_to "Log out", destroy_user_session_path, method: :delete 
         - else
