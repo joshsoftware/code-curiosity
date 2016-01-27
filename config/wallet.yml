@@ -1,5 +1,0 @@
-wallet:
-  transaction_signup: "signup"
-  transaction_commit: "commit"
-  signup_amount: 500
-
