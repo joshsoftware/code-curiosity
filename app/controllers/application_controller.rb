@@ -3,20 +3,19 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :authenticate_user!
   before_action :current_round
-  
+
   def current_round
     @rounds = Round.order(from_date: :desc)
     @current_round = if session[:current_round]
-      Round.find(session[:current_round]) 
-    else
-      Round.find_by({status: 'open'})
-    end
+                       Round.find(session[:current_round])
+                     else
+                       Round.find_by({status: 'open'})
+                     end
   end
   helper_method :current_round
 
-  # common polymorphic method for scoring. 
+  # common polymorphic method for scoring.
   def score
     rank = params.delete(:rank)
     begin
@@ -31,7 +30,7 @@ class ApplicationController < ActionController::Base
         # model is not polymorphic with Scores.
         score = @scorable.scores.where(user: current_user).first
         if score
-          # Special condition: If the judge selectes the blank option, it means 
+          # Special condition: If the judge selectes the blank option, it means
           # he is not intersted in ranking this item. Delete the score.
           if rank.empty?
             score.delete
@@ -46,6 +45,17 @@ class ApplicationController < ActionController::Base
       end
     rescue NameError, NoMethodError => e
       # Ignore -- otherwise raise hell!
+    end
+  end
+
+  protected
+
+  def after_sign_in_path_for(resource)
+    if session[:subscription_url]
+      redirect_to session[:subscription_url]
+      session[:subscription_url] = nil
+    else
+      dashboard_path
     end
   end
 end

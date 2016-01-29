@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
     @users = current_user.is_judge? ? User.contestants : [current_user]
   end
@@ -18,7 +20,6 @@ class UsersController < ApplicationController
   def sync
     CommitJob.perform_later(params[:user_id])
     ActivityJob.perform_later(params[:user_id])
-    flash[:notice] = "Your Repositories are getting in Sync. Please wait for sometime."
-    redirect_to user_path(params[:user_id]) 
+    redirect_to user_path(params[:user_id]), :notice => I18.t('messages.repository_sync')
   end
 end

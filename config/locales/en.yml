@@ -20,4 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  messages:
+    already_subscribed: "You have already subscribed for this challenge"
+    insufficient_points: "You have insufficient points for subscription. Minimum Points required - 150"
+    unauthorized_access: "You are not authorized to access this page"
+    login_required: "You must signin/signup to continue"
+    subscription_successfull: "You have successfully subcribed for this challenge"
+    repository_sync: "Your Repositories are getting in Sync. Please wait for sometime."

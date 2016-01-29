@@ -1,0 +1,45 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.home-wrapper{
+  background-color: #778899; 
+}
+
+.jumbotron{
+  position:relative;
+  font-size:16px;
+  color:#fff;
+  color:rgba(255,255,255,0.75);
+  text-align:center;
+  border-radius:0;
+  padding-bottom:80px;
+  background-color: #778899; 
+
+  h1{
+    margin-bottom:25px;
+    margin-top: 100px;
+    letter-spacing:-1px;color:#fff;
+  }
+
+  p a,.jumbotron .jumbotron-links a{
+    font-weight:500;
+    color:#fff;
+  }
+  .jumbotron-links{
+    margin-top:15px;
+    margin-bottom:0;
+    padding-left:0;
+    list-style:none;
+    font-size:14px;
+    
+    li {
+      display: inline;
+    }
+
+    li+li{
+      margin-left:20px
+    }
+  }
+}
+

@@ -1,19 +1,40 @@
-.navbar.navbar-inverse.navbar-fixed-top
-  .container-fluid
-    .navbar-header
-      = link_to root_path, class: "navbar-brand" do 
-        %font Code Curiosity
-    #navbar.navbar-collapse.collapse
-      .pull-left{style: "margin-top:10px;margin-left:580px;"}
-        = form_tag change_round_path do
-          .row
-            = select_tag :round, options_for_select(@rounds.collect{ |r| [r.name, r.id] }, @current_round.id), class: 'form-control', :onchange => "this.form.submit()"
-      %ul.nav.navbar-nav.navbar-right
-        - if current_user
-          %li= link_to "My Profile" ,users_path(id:current_user._id)
-          %li= link_to current_user.email, "#"
-          %li= link_to "Log out", destroy_user_session_path, method: :delete 
-        - else
-          %li= link_to "Login", omniauth_authorize_path(:user, :github) 
+%header.main-header
+  %a.logo{:href => '/'}
+    %span.logo-mini
+      %b> C
+      Cu
+    %span.logo-lg
+      %b> Code
+      Curiosity
+  %nav.navbar.navbar-static-top{:role => 'navigation'}
+    %a.sidebar-toggle{'data-toggle' => 'offcanvas', :href => '#', :role => 'button'}
+      %span.sr-only Toggle navigation
+    .navbar-custom-menu
+      %ul.nav.navbar-nav
+        %li.dropdown.user.user-menu
+          %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
+            %img.user-image{:alt => current_user.name, :src => avatar_url}/
+            %span.hidden-xs= current_user.name.titleize
+          %ul.dropdown-menu
+            %li.user-header
+              %img.img-circle{:alt => current_user.name, :src => avatar_url}/
+              %p
+                = current_user.name.titleize 
+                %small Github - #{current_user.github_handle}
+            %li.user-body
+              .row
+                .col-xs-4.text-center
+                  %a{:href => '#'} Subscription
+                .col-xs-4.text-center
+                  %a{:href => '#'} e-Wallet
+                .col-xs-4.text-center
+                  %a{:href => '#'} Rounds
+            %li.user-footer
+              .pull-left
+                = link_to "Profile" , users_path, class: "btn btn-default btn-flat"
+              .pull-right
+                = link_to 'Sign out', destroy_user_session_path,  class: 'btn btn-default btn-flat'
+        %li
+          %a{href: '#'}
+            %i.fa
 
-        

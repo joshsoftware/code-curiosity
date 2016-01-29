@@ -15,7 +15,7 @@ class Round
   has_many :subscriptions
 
   def validate_end_date
-    errors.add("End date", "should be greater than start date.") if  self.end_date and self.end_date <= self.from_date
+    errors.add(:end_date, "should be greater than start date.") if  self.end_date and self.end_date.to_i <= self.from_date.to_i
   end
 
   def graph_data(type)

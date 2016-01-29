@@ -8,3 +8,7 @@ wallet:
 round:
   states: {"inactive":"inactive","open":"open","close":"close"}
 
+messages:
+  already_subscribed: "You have already subscribed for this challenge"
+  insufficient_points: "You have insufficient points for this transaction"
+  login_required: "You must signin/signup to continue"

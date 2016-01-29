@@ -1,9 +1,23 @@
-%ul.nav.nav-sidebar
-  %li{class: is_active('index', 'dashboard')}= link_to 'Dashboard', root_path
-  - if current_user
-    %li{class: is_active('index', 'repositories')}= link_to 'Repos', repositories_path 
-    - if current_user.is_judge?
-      %li{class: is_active('index', 'users')}= link_to 'Users', users_path 
-    - else  
-      %li{class: is_active('index', 'users')}= link_to 'Activities', current_user 
-    
+%aside.main-sidebar
+  %section.sidebar
+    .user-panel
+      .pull-left.image
+        %img.img-circle{:alt => current_user.name, :src => avatar_url}/
+      .pull-left.info
+        %p=current_user.name.titleize
+        %a{href: github_url}
+          %i.fa.fa-github
+            = current_user.github_handle
+    %ul.sidebar-menu
+      %li{class: is_active('index', 'dashboard')}
+        = link_to root_path do
+          %i.fa.fa-dashboard
+          %span Dashboard
+      %li{class: is_active('index', 'repositories')}
+        = link_to repositories_path do
+          %i.fa.fa-cubes
+          %span Repositories
+      %li{class: is_active('index', 'users')}
+        = link_to current_user do
+          %i.fa.fa-tasks
+          %span Activities

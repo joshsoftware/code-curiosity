@@ -4,26 +4,34 @@ class User
 
   after_create :add_signup_points_to_wallet
 
-  devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable, :registerable
+  devise :database_authenticatable,
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
+  ## Database authenticatable
+  field :email,              type: String, default: ""
+  field :encrypted_password, type: String, default: ""
 
-  field :email,                         type: String, default: ""
-  field :remember_created_at,           type: Time 
-  field :current_sign_in_at,            type: Time 
-  field :last_sign_in_at,               type: Time
-  field :current_sign_in_ip,            type: String
-  field :last_sign_in_ip,               type: String
-  field :encrypted_password,            type: String
-  field :sign_in_count,                 type: Integer, default: 0
-  field :github_handle,                 type: String, default: ""
-  field :active,                        type: Boolean, default: true
-  field :is_judge,                      type: Boolean, default: false
-  field :name,                          type: String, default: ""
-  field :provider,                      type: String
-  field :uid,                           type: String
-  field :points,                        type: Integer , default: 0
-  field :avatar_url,                    type: String , default:""
+  ## Rememberable
+  field :remember_created_at, type: Time
+
+  ## Trackable
+  field :sign_in_count,      type: Integer, default: 0
+  field :current_sign_in_at, type: Time
+  field :last_sign_in_at,    type: Time
+  field :current_sign_in_ip, type: String
+  field :last_sign_in_ip,    type: String
+
+  field :github_handle,      type: String
+  field :avatar_url,         type: String
+  field :active,             type: Boolean, default: true
+  field :is_judge,           type: Boolean, default: false
+  field :name,               type: String
+  field :provider,           type: String
+  field :uid,                type: String
+  field :points,             type: Integer, default: 0
+  field :avatar_url,         type: String
 
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
@@ -35,7 +43,7 @@ class User
 
   validates :email, :github_handle, :name, presence: true
 
-  def self.from_omniauth(auth)  
+  def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider       = auth.provider
       user.uid            = auth.uid

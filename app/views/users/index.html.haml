@@ -26,7 +26,7 @@
               = link_to "Mark as judge", user_mark_as_judge_path(user, flag: true), data: {confirm: "Are you sure?"}
 
 %div
-  = link_to "View Transaction History",user_transactions_path(:user_id=>current_user._id),remote: true
+  = link_to "View Transaction History",transactions_path(:user_id=>current_user._id),remote: true
 %br
 #history
 
