@@ -16,5 +16,14 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require AdminLTE
+//= require jquery.noty.packaged
 //= require_tree .
 
+Turbolinks.enableProgressBar();
+
+function onDocReady(){
+  $.AdminLTE.layout.activate();
+}
+
+$(document).ready(onDocReady);
+$(document).on('page:load', onDocReady);

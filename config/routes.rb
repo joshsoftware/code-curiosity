@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' },
                      skip: [:sessions, :registrations, :passwords]
 
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :repositories do
+  resources :repositories, except: [:edit, :update] do
     get 'sync'
   end
 
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
     get 'mark_as_judge'
     get 'sync'
   end
+
+  resources :activities, only: [:index]
 
   get 'get_new_repos' => "dashboard#get_new_repos"
   get  'dashboard(/:category)', to: 'dashboard#index', as: :dashboard

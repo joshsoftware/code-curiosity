@@ -5,7 +5,7 @@
         %img.img-circle{:alt => current_user.name, :src => avatar_url}/
       .pull-left.info
         %p=current_user.name.titleize
-        %a{href: github_url}
+        %a{href: github_url, target: '_blank'}
           %i.fa.fa-github
             = current_user.github_handle
     %ul.sidebar-menu
@@ -17,7 +17,7 @@
         = link_to repositories_path do
           %i.fa.fa-cubes
           %span Repositories
-      %li{class: is_active('index', 'users')}
-        = link_to current_user do
+      %li{class: is_active('index', 'activities')}
+        = link_to activities_path do
           %i.fa.fa-tasks
           %span Activities

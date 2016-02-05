@@ -1,4 +1,6 @@
 class RepositoriesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :find_repo, only: [:destroy, :sync]
 
   def index
     @repos = current_user.is_judge? ? Repository.all : current_user.repositories
@@ -10,25 +12,49 @@ class RepositoriesController < ApplicationController
   end
 
   def create
-    Repository.add_new(params[:repository], current_user)   
-    redirect_to repositories_path
+    @repo = Repository.add_new(params[:repository], current_user)
   end
 
   def edit
-    @repo = Repository.find params[:id]
   end
 
   def update
-    @repo = Repository.find params[:id]
-    @repo.update_attributes(source_url: params[:repository][:source_url])
+    @repo.update_attributes(repository_params)
+
+    if @repo.valid?
+      redirect_to repositories_path, notice: 'Successfully updated'
+    else
+      redirect_to repositories_path, alert: ''
+    end
+
+    render 'create'
+  end
+
+  def destroy
+    current_user.repositories.delete(@repo)
     redirect_to repositories_path
   end
 
   def sync
     CommitJob.perform_later(current_user.id.to_s, params[:repository_id])
     ActivityJob.perform_later(current_user.id.to_s)
-    flash[:notice] = "Your Repositories are getting in Sync. Please wait for sometime."
+    flash[:notice] = 'Your Repositories are getting in Sync. Please wait for sometime.'
     redirect_to repositories_path
+  end
+
+  private
+
+  def find_repo
+    @repo = current_user.repositories.where(id: params[:id] || params[:repository_id]).first
+
+    unless @repo
+      flash[:alert] = 'Repository not found.'
+      redirect_to repositories_path
+    end
+  end
+
+  def repository_params
+    params.fetch(:repository).permit(:source_url)
   end
 
 end

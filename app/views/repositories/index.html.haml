@@ -1,21 +1,59 @@
-= link_to 'Add New Repository', new_repository_path, class: "btn btn-success", remote: true
-%table#stream_table.table.table-striped.table-bordered
-  %thead
-    %tr
-      %th Owner
-      %th Name
-      %th Description
-      %th Actions
-  %tbody     
+%section.content-header
+  %h1 
+    Repositories
+    = link_to new_repository_path, class: "btn btn-success btn-social pull-right", remote: true do
+      %i.fa.fa-plus
+      %b Add New Repository
+
+%section.content
+  .row
+    .col-xs-12
+      .box.box-primary
+        .box-header
+          %h3.box-title
+            - if @repos.none?
+              Add new
+              = link_to 'Repository', new_repository_path, remote: true
+            - else
+              = link_to user_sync_path(current_user), class: 'btn btn-primary pull-left' do
+                %i.fa.fa-refresh
+                Sync All
+
+          .box-tools
+            .input-group.input-group-sm.col-xs-3.pull-right
+              - if @repos.any?
+                %input#repo-search-box.form-control.pull-right{placeholder: 'Search here...', name: 'search'}
+                .input-group-btn
+                  %button.btn.btn-default{disabled: true}
+                    %i.fa.fa-search
+        .box-body.table-responsive
+          - if @repos.any?
+            %table#stream_table.table.table-bordered
+              %thead
+                %tr
+                  %th #
+                  %th Name
+                  %th Owner
+                  %th Description
+                  %th.col-xs-2 Actions
+              %tbody     
+        .box-footer.clearfix
+          #repos-pagination.cc-pagination
 
 %script#template{type: "text/html"}
   %tr
+    %td {{ index }}.
+    %td 
+      <a href={{record.source_url}} target="_blank"> {{ record.name }}
     %td {{record.owner}}
-    %td {{record.name}}
     %td {{record.description}}
-    %td
-      %a{href: "repositories/{{record._id.$oid}}/sync", class: "btn btn-info"} Sync
-      %a{href: "repositories/{{record._id.$oid}}/edit", class: "btn btn-danger", "data-remote" => true} Edit 
+    %td.col-xs-2
+      %a{href: "repositories/{{record._id.$oid}}/sync", class: "btn btn-primary btn-sm"} 
+        %i.fa.fa-refresh
+        Sync
+      %a{href: "repositories/{{record._id.$oid}}", class: "btn btn-danger btn-sm", data: { method: 'delete', confirm: 'Are your sure?'}}
+        %i.fa.fa-trash-o
+        Remove
 
 .modal.fade#new_repo
 

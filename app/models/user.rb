@@ -54,13 +54,13 @@ class User
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider       = auth.provider
-      user.uid            = auth.uid
-      user.email          = auth.info.email
-      user.name           = auth.info.name
-      user.github_handle  = auth.extra.raw_info.login
-      user.avatar_url     = auth.info.avatar_url
-      user.password       = Devise.friendly_token[0,20]
+      user.set({
+        email: auth.info.email,
+        name: auth.info.name,
+        github_handle: auth.extra.raw_info.login,
+        avatar_url: auth.info.image,
+        password:  Devise.friendly_token[0,20]
+      })
     end
   end
 

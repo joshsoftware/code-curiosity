@@ -1,12 +1,14 @@
 .modal-dialog
   .modal-content
-    = simple_form_for (@repo || Repository.new) do |f|
+    = simple_form_for (@repo || Repository.new), remote: true do |f|
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} &times;
         %h4.modal-title Add new repository 
       .modal-body
-        = f.input :source_url, hint: "For example your forked repo: 'https://github.com/joshsoftware/devise'"
+        = f.input :source_url, wrapper: :vertical_input_group, hint: 'i.e https://github.com/"joshsoftware/devise" or paste github url', label: 'Repository' do
+          %span.input-group-addon https://github.com/
+          = f.input_field :source_url, placeholder: 'your name/your repository', class: 'form-control', autocomplete: false, value: repository_uri 
       .modal-footer
-        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Cancel
         %button.btn.btn-primary{:type => "submit"} Save

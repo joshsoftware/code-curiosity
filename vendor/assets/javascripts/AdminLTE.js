@@ -272,7 +272,6 @@ function _init() {
           if (controlSidebar.height() > postSetWidth)
             $(".content-wrapper, .right-side").css('min-height', controlSidebar.height());
         }
-
       }
     },
     fixSidebar: function () {

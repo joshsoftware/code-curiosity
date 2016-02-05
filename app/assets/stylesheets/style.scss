@@ -1,3 +1,8 @@
+html.turbolinks-progress-bar::before {
+  background-color: #dd4b39 !important;
+  height: 3px !important;
+}
+
 .home {
   .center-logo{
     font-size: 40px;
@@ -9,5 +14,17 @@
     margin: 200px auto;
     border: 2px solid #87CEFA;
     color: #555;
+  }
+}
+
+.cc-pagination{
+  text-align: center;
+}
+
+.simple_form{
+  .input-group{
+    .input-group-addon {
+      background-color: #eee;
+    }
   }
 }
