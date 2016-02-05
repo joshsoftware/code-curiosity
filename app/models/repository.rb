@@ -2,15 +2,16 @@ class Repository
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :name,        type: String
-  field :description, type: String
-  field :watchers,    type: Integer
-  field :owner,       type: String
-  field :source_url,     type: String
+  field :name,          type: String
+  field :description,   type: String
+  field :watchers,      type: Integer
+  field :owner,         type: String
+  field :source_url,    type: String
 
   has_many :commits
   has_and_belongs_to_many :users
-  validates :source_url, uniqueness: true, presence: true
+
+  validates :source_url, uniqueness: true, presence: true, format: { with: /\A(https|http):\/\/github.com\/[\.\w-]+\/[\.\w-]+\z/ }
   validates :name, presence: true, uniqueness: {scope: :owner}
 
   before_validation :parse_owner_info

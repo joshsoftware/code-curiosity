@@ -27,6 +27,7 @@ window.show_notification = (text, type)->
     text: text
     type: type
     theme: 'relax'
+    closeWith: 'click'
     animation:
       open: "animated bounceInRight"
       close: "animated bounceOutRight"

@@ -8,10 +8,10 @@ class ApplicationController < ActionController::Base
   def current_round
     @rounds = Round.order(from_date: :desc)
     @current_round = if session[:current_round]
-      Round.find(session[:current_round])
-    else
-      Round.find_by({status: 'open'})
-    end
+                       Round.find(session[:current_round])
+                     else
+                       Round.find_by({status: 'open'})
+                     end
   end
   helper_method :current_round
 
@@ -45,6 +45,17 @@ class ApplicationController < ActionController::Base
       end
     rescue NameError, NoMethodError => e
       # Ignore -- otherwise raise hell!
+    end
+  end
+
+  protected
+
+  def after_sign_in_path_for(resource)
+    if session[:subscription_url]
+      redirect_to session[:subscription_url]
+      session[:subscription_url] = nil
+    else
+      dashboard_path
     end
   end
 end

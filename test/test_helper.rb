@@ -12,6 +12,5 @@ require "minitest/rails"
 
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
-  include FactoryGirl::Syntax::Methods
- 
+  include FactoryGirl::Syntax::Methods  
 end

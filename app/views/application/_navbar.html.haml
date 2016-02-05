@@ -31,7 +31,7 @@
                   %a{:href => '#'} Rounds
             %li.user-footer
               .pull-left
-                %a.btn.btn-default.btn-flat{:href => '#'} Profile
+                = link_to "Profile" , users_path, class: "btn btn-default btn-flat"
               .pull-right
                 = link_to 'Sign out', destroy_user_session_path,  class: 'btn btn-default btn-flat'
         %li

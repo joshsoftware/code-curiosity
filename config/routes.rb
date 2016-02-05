@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' },
-                     skip: [:sessions, :registrations, :passwords]
+    skip: [:sessions, :registrations, :passwords]
 
   devise_scope :user do
     get 'sign_in', :to => 'home#index', :as => :new_user_session
@@ -14,11 +14,14 @@ Rails.application.routes.draw do
     get 'sync'
   end
 
+  resources :transactions
+
   resources :users do
     get 'mark_as_judge'
     get 'sync'
   end
 
+  get '/subscriptions/:id' => 'subscriptions#subscribe', as: :subscription 
   get 'get_new_repos' => "dashboard#get_new_repos"
   get  'dashboard(/:category)', to: 'dashboard#index', as: :dashboard
   post 'score' => 'application#score'
