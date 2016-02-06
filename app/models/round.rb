@@ -5,16 +5,17 @@ class Round
   field :name, type: String
   field :from_date, type: DateTime
   field :end_date, type: DateTime
-  field :status, type: String, default: "open"
+  field :status, type: String, default: ROUND_CONFIG['states']['inactive']
 
   validates :name, :from_date, presence: true
   validate :validate_end_date
 
   has_many :commits
   has_many :activities
+  has_many :subscriptions
 
   def validate_end_date
-    errors.add("End date", "should be greater than start date.") if  self.end_date and self.end_date <= self.from_date
+    errors.add(:end_date, "should be greater than start date.") if  self.end_date and self.end_date.to_i <= self.from_date.to_i
   end
 
   def graph_data(type)

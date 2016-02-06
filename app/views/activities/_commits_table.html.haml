@@ -1,0 +1,12 @@
+%table.table.table-hover.table-bordered
+  %thead
+    %tr
+      %th.col-xs-1 Score
+      %th.col-xs-1 Date
+      %th.col-xs-1 Repo
+      %th.col-xs-8 Message
+      %th.col-xs-1 View
+  %tbody
+    = render partial: 'commit', collection: @commits
+.pagination-container
+  = paginate @commits, params: { controller: 'activities', action: 'commits'}, remote: true

@@ -2,6 +2,8 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  after_create :add_signup_points_to_wallet
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable, :registerable
   devise :database_authenticatable,
@@ -10,10 +12,6 @@ class User
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
-
-  ## Recoverable
-  field :reset_password_token,   type: String
-  field :reset_password_sent_at, type: Time
 
   ## Rememberable
   field :remember_created_at, type: Time
@@ -32,25 +30,18 @@ class User
   field :name,               type: String
   field :provider,           type: String
   field :uid,                type: String
-
-  ## Confirmable
-  # field :confirmation_token,   type: String
-  # field :confirmed_at,         type: Time
-  # field :confirmation_sent_at, type: Time
-  # field :unconfirmed_email,    type: String # Only if using reconfirmable
-
-  ## Lockable
-  # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
-  # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
-  # field :locked_at,       type: Time
+  field :points,             type: Integer, default: 0
+  field :avatar_url,         type: String
 
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_and_belongs_to_many :repositories
-
+  has_many :transactions
+  has_many :subscriptions
+  has_many :rounds
   scope :contestants, -> { where(is_judge: false) }
 
-  validates :github_handle, :name, presence: true
+  validates :email, :github_handle, :name, presence: true
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -62,6 +53,20 @@ class User
         password:  Devise.friendly_token[0,20]
       })
     end
+
   end
+
+  def create_transaction(attrs = {})
+    self.transactions.create(attrs)
+    points = attrs[:transaction_type] == 'credited' ? attrs[:points] : -attrs[:points]
+    self.set(points: self.points + points)
+  end
+
+  private
+
+  def add_signup_points_to_wallet
+    create_transaction(type: WALLET_CONFIG['transaction_signup'], points: WALLET_CONFIG['signup_amount'],transaction_type: "credited")
+  end
+
 
 end

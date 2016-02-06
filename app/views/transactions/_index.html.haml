@@ -1,0 +1,25 @@
+- count = ((params[:page] || 1).to_i - 1) * 10
+- if @transactions.any?
+  %div.content-wrapper  
+    %section.content-header
+      %h1 Transaction History
+    %section.content
+      %div.box-body
+        %table.table.table-bordered
+          %thead
+            %tr
+              %th S.No
+              %th Type 
+              %th Points Added 
+              %th Time
+          %tbody
+            - @transactions.each_with_index do |t,idx|
+              %tr
+                %td=count + idx + 1
+                %td=t.type
+                %td=t.points
+                %td=t.created_at.strftime("%d-%b-%Y %H:%M %p")
+
+
+= paginate @transactions, :remote => true
+= page_entries_info @transactions

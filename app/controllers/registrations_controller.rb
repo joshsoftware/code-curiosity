@@ -9,7 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def sign_up_params
-    params.require(:user).permit(:email, :github_handle, :password, :password_confirmation, :name)
+    params.require(:user).permit(:email, :github_handle, :name)
   end
 
 end

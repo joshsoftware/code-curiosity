@@ -1,0 +1,11 @@
+%tr{data: {activity: activity.id.to_s}, class: score_color(activity)}
+  %td.score.commit
+    = activity.avg_score || 'In review'
+  %td= activity.commented_on.strftime("%d/%m/%Y")
+  %td= activity.repo
+  %td= activity.event_type
+  %td= activity.description 
+  %td
+    = link_to activity.ref_url, target: '_blank', class: 'btn btn-block btn-default btn-xs' do
+      %i.fa.fa-fw.fa-share
+      Open

@@ -19,7 +19,6 @@
 //= require jquery.noty.packaged
 //= require_tree .
 
-Turbolinks.enableProgressBar();
 
 function onDocReady(){
   $.AdminLTE.layout.activate();
@@ -27,3 +26,5 @@ function onDocReady(){
 
 $(document).ready(onDocReady);
 $(document).on('page:load', onDocReady);
+
+Turbolinks.enableProgressBar();

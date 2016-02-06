@@ -26,16 +26,8 @@
 
 $(document).on "page:change", ->
   $('#datepicker1').datepicker format: 'dd/mm/yyyy'
-
   
 $(document).on "change", "td.score select", ->
   params = $(this).closest("tr").data()
   params["rank"] = $(this).val()
   $.post("/score", params)
-  
-$(document).on "paste", "#repository_source_url", (e) ->
-  url = e.originalEvent.clipboardData.getData('text') 
-  url = url.replace(/(http|https):\/\/github.com\//, "")
-  url = url.replace(/\.git$/, '')
-  $(this).val(url)
-  return false
