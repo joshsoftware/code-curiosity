@@ -21,3 +21,8 @@
         = link_to activities_path do
           %i.fa.fa-cubes
           %span Contributions
+      - if current_user.is_judge
+        %li{class: is_active('index', 'judging')}
+          = link_to judging_path do
+            %i.fa.ion-ribbon-b
+            %span Judging

@@ -58,4 +58,10 @@ class ApplicationController < ActionController::Base
       dashboard_path
     end
   end
+
+  def authenticate_judge!
+    unless current_user.is_judge
+      redirect_to :back, notice: I18n.t('messages.unauthorized_access')
+    end
+  end
 end

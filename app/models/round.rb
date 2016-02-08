@@ -26,7 +26,7 @@ class Round
     #  activities: {name: "Activities", data: Array.new(users.count, 0)},
     #  commits: {name: "Commits", data: Array.new(users.count, 0)},
     #  scores: {name: "Scores", data: Array.new(users.count, 0)}
-    #}  
+    #}
 
     #users.each_with_index do |user, i|
     #  data[:activities][:data][i]  = get_activities(user)

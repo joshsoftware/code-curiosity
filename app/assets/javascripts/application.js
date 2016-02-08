@@ -28,3 +28,12 @@ $(document).ready(onDocReady);
 $(document).on('page:load', onDocReady);
 
 Turbolinks.enableProgressBar();
+
+
+function selectTabUsingUrlHash(){
+  var hash = window.location.hash;
+
+  if(hash){
+    $(hash + '_tab_link').tab('show');
+  }
+}

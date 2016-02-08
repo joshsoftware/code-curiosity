@@ -37,6 +37,7 @@ class User
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_and_belongs_to_many :repositories
+  has_and_belongs_to_many :judges_repositories, class_name: 'Repository', inverse_of: 'judges'
   has_many :transactions
   has_many :subscriptions
   has_many :rounds
@@ -61,8 +62,8 @@ class User
 
   def create_transaction(attrs = {})
     self.transactions.create(attrs)
-    points = attrs[:transaction_type] == 'credited' ? attrs[:points] : -attrs[:points]
-    self.set(points: self.points + points)
+    value  = attrs[:transaction_type] == 'credited' ? attrs[:points] : -attrs[:points]
+    self.inc(points: value)
   end
 
   private

@@ -9,9 +9,9 @@
     .col-xs-12
       .nav-tabs-custom
         %ul.nav.nav-tabs
-          %li.active
+          %li.active#commits_tab_link
             %a{href: '#commits_tab', data: { toggle: 'tab' }} Commits
-          %li
+          %li#activities_tab_link
             %a{href: '#activities_tab', data: { toggle: 'tab' }} Activities
         .tab-content
           .tab-pane.active#commits_tab
@@ -26,3 +26,6 @@
                 = render 'activities_table'
               - else
                 = render partial: 'callout_box', locals: { type: 'success', title: 'Keep Contributing', message: 'There are no activities for this round.'} 
+                
+:javascript
+  selectTabUsingUrlHash()

@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'judging' => 'judging#index', as: 'judging'
+
   get '/subscriptions/:id' => 'subscriptions#subscribe', as: :subscription
   get 'get_new_repos' => "dashboard#get_new_repos"
   get  'dashboard(/:category)', to: 'dashboard#index', as: :dashboard
@@ -37,6 +39,7 @@ Rails.application.routes.draw do
   post 'take_snapshot' => "dashboard#take_snapshot"
   get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'
+  get 'leaderboard' => 'dashboard#leaderboard'
 
   root 'home#index'
 end

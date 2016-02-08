@@ -36,11 +36,11 @@
             %li.user-body
               .row
                 .col-xs-4.text-center
-                  %a{:href => '#'} Subscription
+                  = link_to 'Subscription', '#' 
                 .col-xs-4.text-center
-                  %a{:href => '#'} e-Wallet
+                  = link_to 'e-Wallet', user_path(current_user, anchor: 'wallet' )
                 .col-xs-4.text-center
-                  %a{:href => '#'} Rounds
+                  = link_to 'Rounds', user_path(current_user, anchor: 'rounds')
             %li.user-footer
               .pull-left
                 = link_to "Profile" , user_path(current_user), class: "btn btn-default btn-flat"

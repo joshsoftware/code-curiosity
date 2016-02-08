@@ -5,4 +5,8 @@ class HomeController < ApplicationController
       return
     end
   end
+
+  def leaderboard
+    @users = User.order(points: :desc).page(params[:page]).per(25)
+  end
 end

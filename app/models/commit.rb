@@ -18,6 +18,10 @@ class Commit
 
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
 
+  index({ user_id: 1, round_id: 1 })
+  index({ repository_id: 1 })
+  index({ created_at: -1 })
+
   after_create do |c|
     c.user.inc(commits_count: 1)
   end

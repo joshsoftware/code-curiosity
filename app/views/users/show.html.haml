@@ -23,10 +23,52 @@
     .col-xs-9
       .nav-tabs-custom
         %ul.nav.nav-tabs
-          %li.active
+          %li.active#rounds_tab_link
             %a{href: '#rounds', data: { toggle: 'tab'}} Rounds 
-          %li
-            %a{href: '#wallet', data: { toggle: 'tab'}} Points History 
+          %li#wallet_tab_link
+            %a{href: '#wallet', data: { toggle: 'tab'}} Transactions History 
         .tab-content
           .tab-pane.active#rounds
-          .tab-pane.active#wallet
+            %table.table.table-bordered
+              %thead
+                %tr
+                  %th.col-xs-1 #
+                  %th Name
+                  %th.col-xs-1 Commits
+                  %th.col-xs-1 Activities
+                  %th.col-xs-1 Points
+              %tbody
+                - @user.subscriptions.order(created_at: :desc).each_with_index do |s, i|
+                  %tr
+                    %td= i+1
+                    %td=s.round.name
+                    %td=s.commits_count
+                    %td=s.activities_count
+                    %td=s.points
+          .tab-pane#wallet
+            %table.table.table-bordered
+              %thead
+                %tr
+                  %th.col-xs-1 #
+                  %th.col-xs-3  Points
+                  %th Detail
+                  %th Date
+                  %th.col-xs-2 Type
+              %tbody
+                - @user.transactions.order(created_at: :desc).each_with_index do |t, i|
+                  %tr
+                    %td= i+1
+                    %td= t.points
+                    %td= t.type
+                    %td= t.created_at.strftime('%D %T')
+                    %td
+                      - if t.transaction_type == 'credited'
+                        %span.badge.bg-green Cr
+                      - else
+                        %span.badge.bg-red Dr
+                %tr
+                  %td 
+                    %b Total
+                  %td{ colspan: 4 }= @user.points  
+:javascript                  
+  selectTabUsingUrlHash()

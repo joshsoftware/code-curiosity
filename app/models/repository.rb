@@ -10,7 +10,7 @@ class Repository
 
   has_many :commits
   has_and_belongs_to_many :users
-  #validates :source_url, uniqueness: true, presence: { message: 'invalid repository url'}
+  has_and_belongs_to_many :judges, class_name: 'User', inverse_of: 'judges_repositories'
   validates :source_url, uniqueness: true, presence: true, format: { with: /\A(https|http):\/\/github.com\/[\.\w-]+\/[\.\w-]+\z/ }
   validates :name, presence: true, uniqueness: {scope: :owner}
 
