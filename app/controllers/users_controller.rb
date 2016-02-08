@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_action :authenticate_user!
 
   def index
@@ -7,9 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user       = User.find(params[:id])
-    @commits    = @user.commits.for_round(@current_round.id).includes(:scores).desc(:commit_date)
-    @activities = @user.activities.for_round(@current_round.id).includes(:scores).desc(:commented_on)
+    @user = current_user
   end
 
   def mark_as_judge

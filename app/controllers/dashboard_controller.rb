@@ -16,8 +16,8 @@ class DashboardController < ApplicationController
   end
 
   def change_round
-    session[:current_round] = Round.find(params[:round]).id
-    redirect_to root_path
+    session[:current_round] = Round.find(params[:id]).id
+    redirect_to :back
   end
 
   def webhook

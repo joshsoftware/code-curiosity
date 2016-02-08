@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :transactions
 
-  resources :users do
+  resources :users, except: [:destroy] do
     get 'mark_as_judge'
     get 'sync'
   end
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   post 'score' => 'application#score'
   post 'webhook' => 'dashboard#webhook'
   post 'take_snapshot' => "dashboard#take_snapshot"
-  post 'change_round' => "dashboard#change_round"
+  get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'
 
   root 'home#index'

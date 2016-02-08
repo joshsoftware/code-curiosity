@@ -2,8 +2,6 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  after_create :add_signup_points_to_wallet
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable, :registerable
   devise :database_authenticatable,
@@ -33,6 +31,9 @@ class User
   field :points,             type: Integer, default: 0
   field :avatar_url,         type: String
 
+  field :activities_count,   type: Integer, default: 0
+  field :commits_count,      type: Integer, default: 0
+
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_and_belongs_to_many :repositories
@@ -42,6 +43,8 @@ class User
   scope :contestants, -> { where(is_judge: false) }
 
   validates :email, :github_handle, :name, presence: true
+
+  after_create :add_signup_points_to_wallet
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -65,7 +68,7 @@ class User
   private
 
   def add_signup_points_to_wallet
-    create_transaction(type: WALLET_CONFIG['transaction_signup'], points: WALLET_CONFIG['signup_amount'],transaction_type: "credited")
+    create_transaction(type: WALLET_CONFIG['transaction_signup'], points: WALLET_CONFIG['signup_amount'], transaction_type: 'credited')
   end
 
 

@@ -1,0 +1,25 @@
+%section.content-header
+  %h1 
+    Dashboard
+%section.content
+  .row
+    .col-lg-3.col-xs-6
+      .small-box.bg-green
+        .inner
+          %h3= current_user.commits_count
+          %p Commits
+        .icon
+          %i.ion.ion-stats-bars
+        = link_to activities_path, class: 'small-box-footer' do
+          More info
+          %i.fa.fa-arrow-circle-right
+    .col-lg-3.col-xs-6
+      .small-box.bg-yellow
+        .inner
+          %h3= current_user.commits_count
+          %p Activities
+        .icon
+          %i.ion.ion-chatboxes
+        = link_to activities_path, class: 'small-box-footer' do
+          More info
+          %i.fa.fa-arrow-circle-right

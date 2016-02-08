@@ -1,4 +1,4 @@
-%tr{data: {activity: activity.id.to_s}, class: score_color(activity)}
+%tr{data: {activity: activity.id.to_s}}
   %td.score.commit
     = activity.avg_score || 'In review'
   %td= activity.commented_on.strftime("%d/%m/%Y")

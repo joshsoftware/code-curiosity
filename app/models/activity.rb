@@ -12,10 +12,14 @@ class Activity
   belongs_to :round
 
   has_many :scores, as: :scorable, dependent: :destroy
-  
+
   validates :description, uniqueness: {:scope => :commented_on}
-  
+
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
+
+  after_create do |a|
+    a.user.inc(activities_count: 1)
+  end
 
   def avg_score
     self.scores.avg(:rank)

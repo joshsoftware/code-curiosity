@@ -11,6 +11,18 @@
       %span.sr-only Toggle navigation
     .navbar-custom-menu
       %ul.nav.navbar-nav
+        %li.dropdown.tasks-menu
+          %a.dropdown-toggle{ data: { toggle: 'dropdown' }}
+            %i.fa.fa-calendar
+            Rounds : 
+            %span.current-round= current_round.name
+          %ul.dropdown-menu
+            %li.header Total rounds #{Round.count}
+            %li
+              %ul.menu
+                - Round.all.each do |round|
+                  %li
+                    = link_to "#{round.name} : #{round.status}", change_round_path(round)
         %li.dropdown.user.user-menu
           %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
             %img.user-image{:alt => current_user.name, :src => avatar_url}/
@@ -31,7 +43,7 @@
                   %a{:href => '#'} Rounds
             %li.user-footer
               .pull-left
-                = link_to "Profile" , users_path, class: "btn btn-default btn-flat"
+                = link_to "Profile" , user_path(current_user), class: "btn btn-default btn-flat"
               .pull-right
                 = link_to 'Sign out', destroy_user_session_path,  class: 'btn btn-default btn-flat'
         %li
