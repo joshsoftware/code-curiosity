@@ -45,6 +45,7 @@ class User
   has_many :rounds
   has_and_belongs_to_many :roles, inverse_of: nil
   scope :contestants, -> { where(is_judge: false) }
+  scope :judges, -> { where(is_judge: true) }
 
   validates :email, :github_handle, :name, presence: true
 

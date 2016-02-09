@@ -26,3 +26,26 @@
           = link_to judging_path do
             %i.fa.ion-ribbon-b
             %span Judging
+      - if current_user.is_admin?
+        %li.treeview
+          %a{href: "#"}
+            %i.fa.fa-gears
+            %span Admin
+            %i.fa.fa-angle-left.pull-right
+          %ul.treeview-menu
+            %li
+              %a{href: admin_repositories_path}
+                %i.fa.fa-database
+                %span Repositories
+            %li
+              %a{href: admin_users_path}
+                %i.fa.fa-users
+                %span Users
+            %li
+              %a{href: admin_judges_path}
+                %i.fa.ion-ribbon-b
+                %span Judges
+            %li
+              %a{href: admin_rounds_path}
+                %i.fa.ion-ribbon-b
+                %span Rounds

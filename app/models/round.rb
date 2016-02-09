@@ -62,11 +62,11 @@ class Round
     commit_scores + activity_scores
   end
 
-  def take_snapshot(end_date)
-    return false unless self.from_date < end_date
-    self.update_attributes({name: self.update_round_name(end_date), end_date: end_date.end_of_day, status: 'close'})
-    new_round = Round.new(name: "Round-#{Round.count + 1} (#{(end_date + 1.day).beginning_of_day.strftime("%d %b %Y")})",
-                          from_date: (end_date + 1.day).beginning_of_day)
+  def round_close
+    end_date = from_date.end_of_month
+    self.set({name: self.update_round_name(end_date), end_date: end_date.end_of_day, status: 'close'})
+    new_round = Round.new(name: "Round-#{Round.count + 1} (#{(end_date + 1.day).beginning_of_month.strftime("%d %b %Y")})",
+                          from_date: (end_date + 1.day).beginning_of_month, status:  ROUND_CONFIG['states']['open'])
                           new_round.save
   end
 

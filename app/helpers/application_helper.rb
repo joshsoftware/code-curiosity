@@ -24,4 +24,8 @@ module ApplicationHelper
     notification_js
   end
 
+  def round_date_format(date)
+    date.strftime("%d %b %Y") if date
+  end
+
 end
