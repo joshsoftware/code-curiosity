@@ -2,6 +2,8 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  ROLES = {admin: 'Admin'}
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable, :registerable
   devise :database_authenticatable,
@@ -41,6 +43,7 @@ class User
   has_many :transactions
   has_many :subscriptions
   has_many :rounds
+  has_and_belongs_to_many :roles, inverse_of: nil
   scope :contestants, -> { where(is_judge: false) }
 
   validates :email, :github_handle, :name, presence: true
@@ -64,6 +67,10 @@ class User
     self.transactions.create(attrs)
     value  = attrs[:transaction_type] == 'credited' ? attrs[:points] : -attrs[:points]
     self.inc(points: value)
+  end
+
+  def is_admin?
+    roles.find_by(name: ROLES[:admin]).present?
   end
 
   private
