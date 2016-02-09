@@ -6,15 +6,6 @@ class DashboardController < ApplicationController
     #@stats = @current_round.graph_data(@category)
   end
 
-  def take_snapshot
-    end_date =  Time.parse(params[:end_date]).end_of_day
-    @current_round.end_date = end_date
-    if @current_round.valid?
-      @current_round.take_snapshot(end_date)
-    end
-    redirect_to root_path
-  end
-
   def change_round
     session[:current_round] = Round.find(params[:id]).id
     redirect_to :back

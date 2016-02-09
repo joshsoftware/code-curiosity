@@ -1,0 +1,23 @@
+%table.table.table-hover.table-bordered#users
+  %thead
+    %tr
+      %th.col-xs-2 Name
+      %th.col-xs-5 Email
+      %th.col-xs-2 Handler  
+      %th.col-xs-2 Actions
+  %tbody     
+    - @users.each do |user|
+      %tr
+        %td.col-xs-2 
+          = link_to user.name, user_path(user._id)
+        %td.col-xs-5= user.email
+        %td.col-xs-2= user.github_handle
+        %td.col-xs-2 
+          - if user.is_judge?
+            %a{href: admin_user_mark_as_judge_path(user, flag: false), class: "btn btn-danger btn-sm", data: {confirm: "Are you sure?"}}
+              %i.fa.fa-close
+                Remove as judge
+          - else  
+            %a{href: admin_user_mark_as_judge_path(user, flag: true), class: "btn btn-primary btn-sm", data: {confirm: "Are you sure?"}}
+              %i.fa.fa-check
+                Mark as judge

@@ -2,6 +2,8 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  ROLES = {admin: 'Admin'}
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable, :registerable
   devise :database_authenticatable,
@@ -38,12 +40,14 @@ class User
   has_many :activities, dependent: :destroy
   has_and_belongs_to_many :repositories
   has_and_belongs_to_many :judges_repositories, class_name: 'Repository', inverse_of: 'judges'
+  has_and_belongs_to_many :roles, inverse_of: nil
   has_many :transactions
   has_many :subscriptions
   has_many :rounds
   has_many :comments
 
   scope :contestants, -> { where(is_judge: false) }
+  scope :judges, -> { where(is_judge: true) }
 
   validates :email, :github_handle, :name, presence: true
 
@@ -68,11 +72,14 @@ class User
     self.inc(points: value)
   end
 
+  def is_admin?
+    roles.find_by(name: ROLES[:admin]).present?
+  end
+
   private
 
   def add_signup_points_to_wallet
     create_transaction(type: WALLET_CONFIG['transaction_signup'], points: WALLET_CONFIG['signup_amount'], transaction_type: 'credited')
   end
-
 
 end

@@ -13,7 +13,7 @@ class Activity
   belongs_to :user
   belongs_to :round
   has_many :comments
-  has_many :scores, as: :scorable
+  embeds_many :scores, as: :scorable
 
   validates :description, uniqueness: {:scope => :commented_on}
 

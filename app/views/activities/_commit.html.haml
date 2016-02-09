@@ -1,5 +1,5 @@
 %tr{data: {commit: commit.id.to_s}}
-  %td.score.commit= commit.avg_score || 'In review'
+  %td.score.commit= commit.scores.any? ? 'Reviewed' : 'In review'
   %td= commit.commit_date.strftime('%d/%m/%Y')
   %td= commit.repository.name
   %td= commit.message

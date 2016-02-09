@@ -1,0 +1,12 @@
+%section.content-header
+  %h1 
+    Users
+%section.content
+  .row
+    .col-xs-12
+      .box.box-primary
+        .box-body.table-responsive
+          - if @users.any?
+            = render 'users_table'
+            .pagination-container
+              = paginate @users, params: { controller: 'admin/users', action: 'index'}, remote: true

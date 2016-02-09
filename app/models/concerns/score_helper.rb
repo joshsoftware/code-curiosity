@@ -1,6 +1,8 @@
 module ScoreHelper
   def avg_score
-    self.scores.avg(:rank)
+    if self.scores.any?
+      scores.pluck(:value).sum/scores.count
+    end
   end
 
   def list_scores

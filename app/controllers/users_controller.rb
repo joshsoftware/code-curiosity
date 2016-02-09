@@ -6,12 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-  end
-
-  def mark_as_judge
-    User.find(params[:user_id]).set(is_judge: params[:flag])
-    redirect_to users_path
+    @user = User.find(params[:id])
   end
 
   def sync

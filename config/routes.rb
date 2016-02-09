@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   resources :transactions
 
   resources :users, except: [:destroy] do
-    get 'mark_as_judge'
     get 'sync'
   end
 
@@ -37,12 +36,22 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :repositories
+    resources :users do
+      get 'mark_as_judge'
+    end
+    resources :judges
+    resources :rounds do
+      get :mark_as_close
+    end
+  end
+
   get '/subscriptions/:id' => 'subscriptions#subscribe', as: :subscription
   get 'get_new_repos' => "dashboard#get_new_repos"
   get  'dashboard(/:category)', to: 'dashboard#index', as: :dashboard
   post 'score' => 'application#score'
   post 'webhook' => 'dashboard#webhook'
-  post 'take_snapshot' => "dashboard#take_snapshot"
   get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'
   get 'leaderboard' => 'dashboard#leaderboard'
