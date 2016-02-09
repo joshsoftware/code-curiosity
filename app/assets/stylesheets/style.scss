@@ -32,3 +32,26 @@ html.turbolinks-progress-bar::before {
 .current-round{
   color: #00a65a;
 }
+
+.commits-tools{
+  .pagination{
+    margin: 0px;
+  }
+}
+
+.judging-row{
+  padding: 0px 10px 5px 10px;
+
+  a{
+    margin-right: 10px;
+  }
+  
+  .info-links{
+    a{
+      color: #778899;
+    }
+  }
+}
+
+.star-rating{
+}

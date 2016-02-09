@@ -1,17 +1,19 @@
 class Activity
   include Mongoid::Document
   include Mongoid::Timestamps
+  include ScoreHelper
 
-  field :description,   type: String
-  field :event_type,    type: String
-  field :repo,          type: String
-  field :ref_url,       type: String
-  field :commented_on,  type: Time
+  field :description,     type: String
+  field :event_type,      type: String
+  field :repo,            type: String
+  field :ref_url,         type: String
+  field :commented_on,    type: Time
+  field :comments_count,  type: Integer, default: 0
 
   belongs_to :user
   belongs_to :round
-
-  has_many :scores, as: :scorable, dependent: :destroy
+  has_many :comments
+  has_many :scores, as: :scorable
 
   validates :description, uniqueness: {:scope => :commented_on}
 
@@ -21,13 +23,5 @@ class Activity
 
   after_create do |a|
     a.user.inc(activities_count: 1)
-  end
-
-  def avg_score
-    self.scores.avg(:rank)
-  end
-
-  def list_scores
-    self.scores.inject(""){|r, s| r += "#{s.user.name}: #{s.rank}<br/>"}
   end
 end

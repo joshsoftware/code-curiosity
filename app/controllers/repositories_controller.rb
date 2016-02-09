@@ -3,7 +3,7 @@ class RepositoriesController < ApplicationController
   before_action :find_repo, only: [:destroy, :sync]
 
   def index
-    @repos = current_user.is_judge? ? Repository.all : current_user.repositories
+    @repos = current_user.repositories
   end
 
   def new

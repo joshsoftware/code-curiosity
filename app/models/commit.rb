@@ -1,18 +1,20 @@
 class Commit
   include Mongoid::Document
   include Mongoid::Timestamps
+  include ScoreHelper
 
   COMMIT_TYPE = {score: "Scores", commit: "Commits", activity: "Activities"}
 
   field :message, type: String
   field :commit_date, type: DateTime
   field :html_url, type: String
+  field :comments_count, type: Integer, default: 0
 
   belongs_to :user
   belongs_to :repository
   belongs_to :round
-
-  has_many :scores, as: :scorable, dependent: :destroy
+  has_many :comments
+  embeds_many :scores, as: :scorable
 
   validates :message, uniqueness: {:scope => :commit_date}
 
@@ -26,11 +28,4 @@ class Commit
     c.user.inc(commits_count: 1)
   end
 
-  def avg_score
-    self.scores.avg(:rank)
-  end
-
-  def list_scores
-    self.scores.inject(""){|r, s| r += "#{s.user.name}: #{s.rank}<br/>"}
-  end
 end

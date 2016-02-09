@@ -1,13 +1,5 @@
 %aside.main-sidebar
   %section.sidebar
-    .user-panel
-      .pull-left.image
-        %img.img-circle{:alt => current_user.name, :src => avatar_url}/
-      .pull-left.info
-        %p=current_user.name.titleize
-        %a{href: github_url, target: '_blank'}
-          %i.fa.fa-github
-            = current_user.github_handle
     %ul.sidebar-menu
       %li{class: is_active('index', 'dashboard')}
         = link_to root_path do
@@ -22,7 +14,7 @@
           %i.fa.fa-cubes
           %span Contributions
       - if current_user.is_judge
-        %li{class: is_active('index', 'judging')}
-          = link_to judging_path do
+        %li{class: is_active('commits', 'judging') || is_active('activities', 'judging')}
+          = link_to commits_judging_index_path do
             %i.fa.ion-ribbon-b
             %span Judging

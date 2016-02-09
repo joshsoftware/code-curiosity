@@ -37,3 +37,4 @@ function selectTabUsingUrlHash(){
     $(hash + '_tab_link').tab('show');
   }
 }
+

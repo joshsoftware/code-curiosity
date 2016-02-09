@@ -1,0 +1,24 @@
+.post.judging-row
+  .user-block
+    %span.info-links
+      = link_to github_url(commit.user), target: '_blank' do
+        %i.fa.fa-user
+        = commit.user.github_handle
+      = link_to commit.html_url, target: '_blank' do
+        %i.fa.fa-database
+        = commit.repository.name
+      = link_to commit.html_url, target: '_blank' do
+        %i.fa.fa-github-alt
+        View
+    %span.time.pull-right
+      = commit.commit_date.strftime('%H:%m, %d %b %Y')
+  %p= commit.message
+  %ul.list-inline
+    %li.rating-control.br-theme-bars-square{ data: { url: rate_judging_index_path('commit', commit.id) }}
+      = select_tag :points, options_for_select(STAR_RATINGS, commit.judge_rating(current_user)), include_blank: 'NR' 
+    %li.pull-right
+      %a.link-black.text-sm.comments{href: '#', id: ''}
+        %i.fa.fa-comments-o.margin-r-5
+        Comments 
+        (#{commit.comments_count})
+  %input.form-control.input-sm{:placeholder => "Type a comment", :type => "text"}/

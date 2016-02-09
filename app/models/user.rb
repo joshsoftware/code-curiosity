@@ -41,6 +41,8 @@ class User
   has_many :transactions
   has_many :subscriptions
   has_many :rounds
+  has_many :comments
+
   scope :contestants, -> { where(is_judge: false) }
 
   validates :email, :github_handle, :name, presence: true

@@ -1,0 +1,24 @@
+.post.judging-row
+  .user-block
+    %span.info-links
+      = link_to github_url(activity.user), target: '_blank', class: 'user' do
+        %i.fa.fa-user
+        = activity.user.github_handle
+      = link_to activity.ref_url, target: '_blank' do
+        %i.fa.fa-database
+        = activity.repository.name
+      = link_to activity.html_url, target: '_blank', class: 'github-view' do
+        %i.fa.fa-github-alt
+        View
+    %span.time.pull-right
+      = activity.created_at.strftime('%T, %d %b %Y')
+  %p= activity.message
+  %ul.list-inline
+    %li.rating-control.br-theme-bars-square
+      = select_tag :points, options_for_select(STAR_RATINGS, commit.judge_rating(current_user)), include_blank: 'NR' 
+    %li.pull-right
+      %a.link-black.text-sm.comments{href: '#', id: ''}
+        %i.fa.fa-comments-o.margin-r-5
+        Comments 
+        (#{activity.comments_count})
+  %input.form-control.input-sm{:placeholder => "Type a comment", :type => "text"}/

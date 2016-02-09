@@ -29,7 +29,13 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'judging' => 'judging#index', as: 'judging'
+  resources :judging, only: [] do
+    collection do
+      get 'commits'
+      get 'activities'
+      post 'rate/:type/:id', action: 'rate', as: :rate
+    end
+  end
 
   get '/subscriptions/:id' => 'subscriptions#subscribe', as: :subscription
   get 'get_new_repos' => "dashboard#get_new_repos"

@@ -8,8 +8,9 @@ module ApplicationHelper
     user.avatar_url || 'http://robohash.org/dummy?set=3&size=160x160'
   end
 
-  def github_url
-    "http://github.com/#{current_user.github_handle}"
+  def github_url(user = nil)
+     user = current_user if user.nil?
+    "http://github.com/#{user.github_handle}"
   end
 
   def show_flash_notifications
