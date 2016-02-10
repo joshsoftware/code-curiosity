@@ -8,4 +8,4 @@ WALLET_CONFIG = YAML.load_file('config/code_curiosity_config.yml')['wallet']
 ROUND_CONFIG =  YAML.load_file('config/code_curiosity_config.yml')['round']
 MESSAGE_LIST =  YAML.load_file('config/code_curiosity_config.yml')['messages']
 
-STAR_RATINGS = (1..5).to_a
+STAR_RATINGS = (0..5).to_a

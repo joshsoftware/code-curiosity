@@ -1,6 +1,6 @@
 function showRatingControl(){
   $('.rating-control select').barrating('show', {
-    theme: 'bars-square',
+    theme: 'bars-pill',
     showValues: true,
     showSelectedRating: false,
     onSelect: function(value, text, event) {
