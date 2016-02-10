@@ -13,7 +13,7 @@ class Commit
   belongs_to :user
   belongs_to :repository
   belongs_to :round
-  has_many :comments
+  has_many :comments, as: :commentable
   embeds_many :scores, as: :scorable
 
   validates :message, uniqueness: {:scope => :commit_date}

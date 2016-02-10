@@ -42,16 +42,39 @@ html.turbolinks-progress-bar::before {
 .judging-row{
   padding: 0px 10px 5px 10px;
 
-  a{
-    margin-right: 10px;
-  }
-  
   .info-links{
     a{
-      color: #778899;
+      margin-right: 10px;
+      color: #2F4F4F;
+      font-weight: 600;
     }
   }
-}
 
-.star-rating{
+  .time{
+    font-weight: 600;
+    color: #778899;
+  }
+
+  li.comments{
+    margin-top: 10px;
+  }
+
+  .direct-chat-messages{
+    height: auto;
+    padding: 0px;
+  }
+
+  .input-group-addon{
+    padding: 0px 12px;
+    
+    label{
+      font-weight: normal;
+    }
+  }
+
+  .comment-type{
+    margin-right: 10px;
+    padding: 2px 4px;
+    border-radius: .25em;
+  }
 }

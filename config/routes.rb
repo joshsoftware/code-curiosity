@@ -33,6 +33,8 @@ Rails.application.routes.draw do
       get 'commits'
       get 'activities'
       post 'rate/:type/:id', action: 'rate', as: :rate
+      get 'comments/:type/:id', action: 'comments', as: :comments
+      post 'comments/:type/:id', action: 'comment', as: :comment
     end
   end
 

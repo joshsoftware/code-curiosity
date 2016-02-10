@@ -1,0 +1,9 @@
+.direct-chat-msg{class: comment.user_id == current_user.id ? 'left' : 'right'}
+  .direct-chat-info.clearfix
+    %span.direct-chat-name.pull-left= comment.user.github_handle
+    %span.direct-chat-timestamp.pull-right= comment.created_at.strftime('%d %b %H:%m')
+    %label.pull-right.comment-type{ class: comment.is_public ? 'bg-green' : 'bg-yellow' }
+      = comment.is_public ? 'Public' : 'Private'
+  = image_tag avatar_url(comment.user), class: 'direct-chat-img', alt: comment.user.github_handle
+  .direct-chat-text
+    = comment.content

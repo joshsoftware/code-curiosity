@@ -5,16 +5,13 @@ class Comment
   field :content, type: String
   field :is_public, type: Boolean, default: false
 
-  belongs_to :commit
-  belongs_to :activity
+  belongs_to :commentable, polymorphic: true
   belongs_to :user
 
+  validates :content, presence: true
+
   after_create do |c|
-     if c.commit.present?
-        c.commit.inc(comments_count: 1)
-     else
-        c.activity.inc(comments_count: 1)
-     end
+    c.commentable.inc(comments_count: 1)
   end
 
 end
