@@ -27,7 +27,10 @@ function onDocReady(){
 $(document).ready(onDocReady);
 $(document).on('page:load', onDocReady);
 
-Turbolinks.enableProgressBar();
+$(document).on('page:change', function(event) {
+  $('.sidebar').off('click')
+  $.AdminLTE.tree('.sidebar');
+});
 
 
 function selectTabUsingUrlHash(){
@@ -38,3 +41,4 @@ function selectTabUsingUrlHash(){
   }
 }
 
+Turbolinks.enableProgressBar();
