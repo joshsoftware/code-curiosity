@@ -7,10 +7,13 @@ class Repository
   field :watchers,    type: Integer
   field :owner,       type: String
   field :source_url,  type: String
+  field :gh_id,       type: Integer
 
   has_many :commits
+  has_many :activities
   has_and_belongs_to_many :users
   has_and_belongs_to_many :judges, class_name: 'User', inverse_of: 'judges_repositories'
+
   validates :source_url, uniqueness: true, presence: true, format: { with: /\A(https|http):\/\/github.com\/[\.\w-]+\/[\.\w-]+\z/ }
   validates :name, presence: true, uniqueness: {scope: :owner}
 
@@ -31,7 +34,7 @@ class Repository
 
     if repo.valid?
       repo.users << user unless repo.users.include?(user)
-      repo.set(description: info.description, watchers: info.watchers)
+      repo.set(description: info.description, watchers: info.watchers, gh_id: info.id)
     end
 
     repo

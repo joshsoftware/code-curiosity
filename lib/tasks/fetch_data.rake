@@ -57,15 +57,16 @@ namespace :fetch_data do
         type = TRACKING_EVENTS[activity.type] 
 
         if user.github_handle == activity.payload[type].user.login
-          user.activities.create(
-            description: activity.payload[type].body,
-            event_type: type,
-            repo: activity.repo.name,
-            ref_url: activity.payload[type].html_url,
-            commented_on: Time.parse(activity.created_at),
-            round: round,
-            user: user
-          ) 
+          user_activity = user.activities.find_or_initialize_by(event_type: 'IssueCommentEvent', gh_id: activity.id)
+
+          user_activity.description = activity.payload[type].body
+          user_activity.repo = activity.repo.name
+          user_activity.ref_url = activity.payload[type].html_url
+          user_activity.commented_on = Time.parse(activity.created_at)
+          user_activity.round = round
+          user_activity.user = user
+          user_activity.repository = Repository.where(gh_id: activity.repo.id).first
+          user_activity.save
         end
       end
     end
