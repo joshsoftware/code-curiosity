@@ -37,7 +37,12 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :repositories
+    resources :repositories do
+      member do
+        patch :add_judges
+        get :assign_judge
+      end
+    end
     resources :users do
       get 'mark_as_judge'
     end

@@ -1,0 +1,17 @@
+.modal-dialog
+  .modal-content
+    = simple_form_for @repo, url: add_judges_admin_repository_path(@repo), remote: true do |f|
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+        %h4.modal-title Assign Judges
+      .modal-body
+        .from-group
+          %label.control-label
+            Select Judge for #{@repo.name} repository
+          .input-group.col-sm-6
+            = select_tag :judges, options_from_collection_for_select(@judges, "_id", "github_handle", :selected => @repo.judges.map(&:_id)), class: 'form-control', multiple: true, placeholder: "select members" 
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Cancel
+        %button.btn.btn-primary{:type => "submit"} Save
+

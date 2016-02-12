@@ -47,4 +47,8 @@ class Repository
     self.source_url.to_s.sub(/(https|http):\/\/github.com\//, '')
   end
 
+  def judges_name
+    judges.map(&:github_handle).join(",")
+  end
+
 end

@@ -76,6 +76,10 @@ class User
     roles.find_by(name: ROLES[:admin]).present?
   end
 
+  def repo_names
+    judges_repositories.map(&:name).join(",")
+  end
+
   private
 
   def add_signup_points_to_wallet

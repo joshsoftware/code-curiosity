@@ -5,48 +5,10 @@
   .row
     .col-xs-12
       .box.box-primary
-        .box-header
-          %h3.box-title
-            - if @repos.none?
-              Add new
-              = link_to 'Repository', new_repository_path, remote: true
-            - else
-              = link_to user_sync_path(current_user), class: 'btn btn-primary pull-left' do
-                %i.fa.fa-refresh
-                Sync All
-
-          .box-tools
-            .input-group.input-group-sm.col-xs-3.pull-right
-              - if @repos.any?
-                %input#repo-search-box.form-control.pull-right{placeholder: 'Search here...', name: 'search'}
-                .input-group-btn
-                  %button.btn.btn-default{disabled: true}
-                    %i.fa.fa-search
         .box-body.table-responsive
           - if @repos.any?
-            %table#stream_table.table.table-bordered
-              %thead
-                %tr
-                  %th.col-xs-1 #
-                  %th.col-xs-2 Name
-                  %th.col-xs-5 Description
-                  %th.col-xs-2 Judges
-                  %th.col-xs-2 Actions
-              %tbody     
-        .box-footer.clearfix
-          #repos-pagination.pagination-container
+            = render 'repos_table'
+            .pagination-container
+              = paginate @repos, params: { controller: 'admin/repositories', action: 'index'}, remote: true
 
-%script#template{type: "text/html"}
-  %tr
-    %td {{ index }}.
-    %td 
-      <a href={{record.source_url}} target="_blank"> {{ record.name }}
-    %td {{record.description}}
-    %td 
-    %td.col-xs-2
-      %a{href: "admin/repositories/{{record._id.$oid}}/assign_judge", class: "btn btn-primary btn-sm"} 
-        %i.fa.fa-plus
-        Assign Judge
-
-:javascript
-  load_repos(#{@repos.to_json})
+.modal.fade#assign_judge_form
