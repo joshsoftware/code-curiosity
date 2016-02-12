@@ -1,0 +1,9 @@
+.direct-chat-messages
+  - if @comments
+    = render partial: 'comments/comment', collection: @comments, as: :comment
+= simple_form_for (@comment || Comment.new), url: comment_judging_index_path(resource.class.name.downcase, resource.id) ,remote: true do |f|
+  .input-group
+    %span.input-group-addon
+      %label Public
+      = f.input_field :is_public, as: :boolean, label: false
+    = f.input_field :content, placeholder: 'Type a comment', class: 'form-control input-sm', autocomplete: false

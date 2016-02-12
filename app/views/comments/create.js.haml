@@ -1,0 +1,2 @@
+$("#comments_#{@resource.id.to_s}").html("#{j(render partial: 'comments/form', locals: { resource: @resource } )}")
+$("#comments_count_#{@resource.id}").html("Comments (#{@resource.comments_count})")

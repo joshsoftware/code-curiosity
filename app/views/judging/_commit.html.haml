@@ -16,9 +16,11 @@
   %ul.list-inline
     %li.rating-control.br-theme-bars-square{ data: { url: rate_judging_index_path('commit', commit.id) }}
       = select_tag :points, options_for_select(STAR_RATINGS, commit.judge_rating(current_user)), include_blank: 'NR' 
-    %li.pull-right
-      %a.link-black.text-sm.comments{href: '#', id: ''}
+    %li.pull-right.comments
+      = link_to '#', class: 'link-black text-sm show-comments', data: { id: commit.id.to_s, url: comments_judging_index_path('commit', commit.id) } do
         %i.fa.fa-comments-o.margin-r-5
-        Comments 
-        (#{commit.comments_count})
-  %input.form-control.input-sm{:placeholder => "Type a comment", :type => "text"}/
+        %span{id: "comments_count_#{commit.id}"}
+          Comments 
+          (#{commit.comments_count})
+  .comments{id: "comments_#{commit.id.to_s}"}
+    = render partial: 'comments/form', locals: { resource: commit }

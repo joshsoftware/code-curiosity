@@ -9,11 +9,12 @@ class Commit
   field :commit_date, type: DateTime
   field :html_url, type: String
   field :comments_count, type: Integer, default: 0
+  field :gh_id,           type: Integer
 
   belongs_to :user
   belongs_to :repository
   belongs_to :round
-  has_many :comments
+  has_many :comments, as: :commentable
   embeds_many :scores, as: :scorable
 
   validates :message, uniqueness: {:scope => :commit_date}
