@@ -54,7 +54,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/subscriptions/:id' => 'subscriptions#subscribe', as: :subscription
+  # get '/subscriptions/:id' => 'subscriptions#subscribe', as: :subscription
   get 'get_new_repos' => "dashboard#get_new_repos"
   get  'dashboard(/:category)', to: 'dashboard#index', as: :dashboard
   post 'score' => 'application#score'

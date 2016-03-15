@@ -35,5 +35,8 @@ module CodeCuriosity
     config.to_prepare do
       Devise::SessionsController.layout 'devise'
     end
+
+    #config.active_job.queue_name_prefix = Rails.env
+    #config.active_job.queue_name_delimiter = '.'
   end
 end

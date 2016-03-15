@@ -18,6 +18,10 @@ class Round
     errors.add(:end_date, "should be greater than start date.") if  self.end_date and self.end_date.to_i <= self.from_date.to_i
   end
 
+  def open?
+    status ==  ROUND_CONFIG['states']['open']
+  end
+
   def graph_data(type)
     title = "Code Curiosity Stats for #{self.name}"
     users = User.contestants
@@ -65,9 +69,15 @@ class Round
   def round_close
     end_date = from_date.end_of_month
     self.set({name: self.update_round_name(end_date), end_date: end_date.end_of_day, status: 'close'})
-    new_round = Round.new(name: "Round-#{Round.count + 1} (#{(end_date + 1.day).beginning_of_month.strftime("%d %b %Y")})",
-                          from_date: (end_date + 1.day).beginning_of_month, status:  ROUND_CONFIG['states']['open'])
-                          new_round.save
+
+    next_start_date = end_date + 1.second
+
+    new_round = Round.new({
+      name: "Round-#{Round.count + 1} (#{next_start_date.strftime("%d %b %Y")})",
+      from_date: next_start_date,
+      status:  ROUND_CONFIG['states']['open']
+    })
+    new_round.save
   end
 
   def update_round_name(end_date)

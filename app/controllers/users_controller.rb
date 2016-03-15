@@ -1,12 +1,18 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
 
   def index
     @users = current_user.is_judge? ? User.contestants : [current_user]
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.where(id: params[:id]).first || User.where(github_handle: params[:id]).first
+
+    if @user
+      render layout: current_user ? 'application' : 'public'
+    else
+      redirect_to root_url, notice: 'Invalid user name'
+    end
   end
 
   def sync

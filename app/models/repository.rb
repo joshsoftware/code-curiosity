@@ -4,13 +4,19 @@ class Repository
 
   field :name,        type: String
   field :description, type: String
-  field :watchers,    type: Integer
+  field :watchers,    type: Integer, default: 0
+  field :forks,       type: Integer, default: 0
   field :owner,       type: String
   field :source_url,  type: String
   field :gh_id,       type: Integer
+  field :languages,   type: Array
+  field :ssh_url,     type: String
+  field :code_dir,    type: String
+  field :ignore_files, type: Array, default: []
 
   has_many :commits
   has_many :activities
+  has_many :code_files
   has_and_belongs_to_many :users
   has_and_belongs_to_many :judges, class_name: 'User', inverse_of: 'judges_repositories'
 
@@ -20,8 +26,6 @@ class Repository
   before_validation :parse_owner_info
 
   index({source_url: 1})
-
-  GITHUB_URL = 'https://github.com'
 
   def self.add_new(params, user)
     owner, name = params[:source_url].split('/')
@@ -34,7 +38,14 @@ class Repository
 
     if repo.valid?
       repo.users << user unless repo.users.include?(user)
-      repo.set(description: info.description, watchers: info.watchers, gh_id: info.id)
+      repo.set({
+        description: info.description,
+        watchers: info.watchers,
+        forks: info.forks,
+        languages: [info.language],
+        gh_id: info.id,
+        ssh_url: info.ssh_url
+      })
     end
 
     repo
@@ -54,4 +65,37 @@ class Repository
     judges.map(&:github_handle).join(",")
   end
 
+  def git
+    @git ||= Git.open(code_dir)
+  end
+
+  def score_commits(round)
+    engine = ScoringEngine.new(self)
+    git = engine.refresh_repo
+    self.set(code_dir: git.dir.path) if git
+
+    round_commits = self.commits.where(round_id: round).map do |commit|
+      commit.branch = git.gcommit(commit.sha).branch rescue nil
+      commit
+    end
+
+    round_commits.group_by(&:branch).each do |branch, commits|
+      commits.each do |commit|
+        commit.default_score = engine.default_score(commit.info)
+        commit.bugspots_score = engine.bugspots_score(commit.info, branch || 'master')
+        commit.auto_score = commit.calculate_score
+        commit.save
+      end
+    end
+
+    return true
+  end
+
+  def set_files_commit_count
+    git.ls_files.each do |file, options|
+      code_file = self.code_files.find_or_initialize_by(name: file)
+      code_file.commits_count = git.file_commits_count(file)
+      code_file.save
+    end
+  end
 end

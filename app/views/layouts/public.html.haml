@@ -15,11 +15,10 @@
   %body.sidebar-mini.skin-black-light
     .wrapper
       = render 'navbar'
-      = render 'sidebar'
-      .content-wrapper
+      .content
         = yield 
-      - cache do
-        %footer.main-footer
+      .content
+        - cache do
           = render 'footer'
     - if flash.any?
       :javascript

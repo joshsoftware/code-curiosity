@@ -6,25 +6,26 @@
     .col-xs-12
       .box.box-primary
         .box-body.table-responsive
-          - if @rounds.any?
-            %table.table.table-hover.table-bordered
-              %thead
+          %table.table.table-hover.table-bordered
+            %thead
+              %tr
+                %th.col-xs-5 Name
+                %th.col-xs-2 Start
+                %th.col-xs-2 End  
+                %th.col-xs-1 Status
+                %th.col-xs-2 Actions
+            %tbody     
+              - @rounds.each do |round|
                 %tr
-                  %th.col-xs-5 Name
-                  %th.col-xs-2 Start
-                  %th.col-xs-2 End  
-                  %th.col-xs-3 Status
-              %tbody     
-                - @rounds.each do |round|
-                  %tr
-                    %td.col-xs-5= round.name
-                    %td.col-xs-2= round_date_format(round.from_date)
-                    %td.col-xs-2= round_date_format(round.end_date)
-                    %td.col-xs-3
-                      = round.status 
-                      - if round.status ==  ROUND_CONFIG['states']['open']
-                        %a{href: admin_round_mark_as_close_path(round._id), class: "btn btn-danger btn-sm", data: {confirm: "Are you sure?"}}
-                          %i.fa.fa-close
-                          Close
-            .pagination-container
-              = paginate @rounds, params: { controller: 'admin/rounds', action: 'index'}
+                  %td.col-xs-5= round.name
+                  %td.col-xs-2= round_date_format(round.from_date)
+                  %td.col-xs-2= round_date_format(round.end_date)
+                  %td.col-xs-1
+                    = round.status 
+                  %td.col-xs-2
+                    - if round.open?
+                      %a{href: admin_round_mark_as_close_path(round._id), class: "btn btn-danger btn-sm", data: {confirm: "Are you sure?"}}
+                        %i.fa.fa-close
+                        Close
+          .pagination-container
+            = paginate @rounds, params: { controller: 'admin/rounds', action: 'index'}

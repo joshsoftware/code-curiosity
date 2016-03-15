@@ -1,7 +1,9 @@
 namespace :subscription do
-  desc "TODO"
+  desc "Send subscription renew notfication email "
   task send_email: :environment do
-      SubscriptionMailer.subscription_email(User.all.to_a[1]).deliver_now
+    #User.all.each do |user| 
+    #  SubscriptionMailer.subscription_email(user).deliver_now
+    #end
   end
 
 end

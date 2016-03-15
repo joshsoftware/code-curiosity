@@ -31,6 +31,7 @@ class User
   field :provider,           type: String
   field :uid,                type: String
   field :points,             type: Integer, default: 0
+  field :total_points,       type: Integer, default: 0
   field :avatar_url,         type: String
 
   field :activities_count,   type: Integer, default: 0
@@ -51,7 +52,7 @@ class User
 
   validates :email, :github_handle, :name, presence: true
 
-  after_create :add_signup_points_to_wallet
+  #after_create :add_signup_points_to_wallet
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -67,9 +68,14 @@ class User
   end
 
   def create_transaction(attrs = {})
-    self.transactions.create(attrs)
-    value  = attrs[:transaction_type] == 'credited' ? attrs[:points] : -attrs[:points]
-    self.inc(points: value)
+    transaction = self.transactions.create(attrs)
+    return false if transaction.errors.any?
+
+    if attrs[:transaction_type] == 'credited'
+      self.inc(points: attrs[:points], total_points: attrs[:total_points])
+    else
+      self.inc(points: -attrs[:points])
+    end
   end
 
   def is_admin?
@@ -78,6 +84,14 @@ class User
 
   def repo_names
     judges_repositories.map(&:name).join(",")
+  end
+
+  def score_all
+    Round.all.each do |round|
+      self.repositories.each do |repository|
+        repository.score_commits(round)
+      end
+    end
   end
 
   private

@@ -12,5 +12,9 @@ class GithubClient
     rescue
       nil
     end
+
+    def user(name)
+      @client.users.get(user: name)
+    end
   end
 end

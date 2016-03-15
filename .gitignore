@@ -22,3 +22,7 @@
 
 # Ignore ENV variables
 *.env.*
+
+1
+dump.rdb
+/repositories

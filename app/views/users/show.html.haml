@@ -26,7 +26,7 @@
           %li.active#rounds_tab_link
             %a{href: '#rounds', data: { toggle: 'tab'}} Rounds 
           %li#wallet_tab_link
-            %a{href: '#wallet', data: { toggle: 'tab'}} Transactions History 
+            %a{href: '#wallet', data: { toggle: 'tab'}} Points History 
         .tab-content
           .tab-pane.active#rounds
             %table.table.table-bordered
@@ -53,7 +53,6 @@
                   %th.col-xs-3  Points
                   %th Detail
                   %th Date
-                  %th.col-xs-2 Type
               %tbody
                 - @user.transactions.order(created_at: :desc).each_with_index do |t, i|
                   %tr
@@ -61,11 +60,6 @@
                     %td= t.points
                     %td= t.type
                     %td= t.created_at.strftime('%D %T')
-                    %td
-                      - if t.transaction_type == 'credited'
-                        %span.badge.bg-green Cr
-                      - else
-                        %span.badge.bg-red Dr
                 %tr
                   %td 
                     %b Total
