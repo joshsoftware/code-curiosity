@@ -9,7 +9,7 @@
       %ul.menu
         - Round.all.each do |round|
           %li
-            = link_to "#{round.name} : #{round.status}", change_round_path(round)
+            = link_to "#{round.name} : #{round.status}", '#'
 %li.dropdown.user.user-menu
   %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
     %img.user-image{:alt => current_user.name, :src => avatar_url}/
@@ -20,12 +20,6 @@
       %p
         = current_user.name.titleize 
         %small Github - #{current_user.github_handle}
-    %li.user-body
-      .row
-        .col-xs-6.text-center
-          = link_to 'e-Wallet', user_path(current_user, anchor: 'wallet' )
-        .col-xs-6.text-center
-          = link_to 'Rounds', user_path(current_user, anchor: 'rounds')
     %li.user-footer
       .pull-left
         = link_to "Profile" , user_path(current_user), class: "btn btn-default btn-flat"

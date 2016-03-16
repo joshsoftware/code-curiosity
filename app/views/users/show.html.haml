@@ -1,5 +1,6 @@
 %section.content-header
-  %h1 User Profile
+  %h1 
+    Profile
 %section.content
   .row
     .col-xs-3
@@ -12,8 +13,11 @@
             = @user.github_handle
           %ul.list-group.list-group-unbordered
             %li.list-group-item
+              %b Level
+              %a.pull-right= @user.level
+            %li.list-group-item
               %b Points
-              %a.pull-right= @user.points
+              %a.pull-right= @user.total_points
             %li.list-group-item
               %b Commits
               %a.pull-right= @user.commits_count
@@ -32,19 +36,12 @@
             %table.table.table-bordered
               %thead
                 %tr
-                  %th.col-xs-1 #
                   %th Name
                   %th.col-xs-1 Commits
                   %th.col-xs-1 Activities
                   %th.col-xs-1 Points
               %tbody
-                - @user.subscriptions.order(created_at: :desc).each_with_index do |s, i|
-                  %tr
-                    %td= i+1
-                    %td=s.round.name
-                    %td=s.commits_count
-                    %td=s.activities_count
-                    %td=s.points
+                = render partial: 'subscription', collection: @user.subscriptions.order(created_at: :desc)
           .tab-pane#wallet
             %table.table.table-bordered
               %thead
@@ -54,15 +51,11 @@
                   %th Detail
                   %th Date
               %tbody
-                - @user.transactions.order(created_at: :desc).each_with_index do |t, i|
-                  %tr
-                    %td= i+1
-                    %td= t.points
-                    %td= t.type
-                    %td= t.created_at.strftime('%D %T')
+                = render partial: 'transaction', collection: @user.transactions.order(created_at: :desc)
                 %tr
                   %td 
                     %b Total
                   %td{ colspan: 4 }= @user.points  
+= #render 'thanks'                 
 :javascript                  
-  selectTabUsingUrlHash()
+  selectTabUsingUrlHash();

@@ -32,6 +32,7 @@ class User
   field :uid,                type: String
   field :points,             type: Integer, default: 0
   field :total_points,       type: Integer, default: 0
+  field :level,              type: Integer, default: 1
   field :avatar_url,         type: String
 
   field :activities_count,   type: Integer, default: 0
