@@ -53,7 +53,7 @@ class User
 
   validates :email, :github_handle, :name, presence: true
 
-  #after_create :add_signup_points_to_wallet
+  after_create :subscribe_to_latest_round
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -97,8 +97,13 @@ class User
 
   private
 
-  def add_signup_points_to_wallet
-    create_transaction(type: WALLET_CONFIG['transaction_signup'], points: WALLET_CONFIG['signup_amount'], transaction_type: 'credited')
+  def subscribe_to_latest_round
+    round = Round.find_by({status: 'open'})
+    if round
+      round.subscriptions.create(user: self)
+    end
+
+    return true
   end
 
 end
