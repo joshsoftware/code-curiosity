@@ -39,7 +39,7 @@ class User
 
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
-  has_and_belongs_to_many :repositories
+  has_and_belongs_to_many :repositories, class_name: 'Repository', inverse_of: 'users'
   has_and_belongs_to_many :judges_repositories, class_name: 'Repository', inverse_of: 'judges'
   has_and_belongs_to_many :roles, inverse_of: nil
   has_many :transactions
@@ -51,8 +51,6 @@ class User
   scope :judges, -> { where(is_judge: true) }
 
   validates :email, :github_handle, :name, presence: true
-
-  #after_create :add_signup_points_to_wallet
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -96,8 +94,12 @@ class User
 
   private
 
-  def add_signup_points_to_wallet
-    create_transaction(type: WALLET_CONFIG['transaction_signup'], points: WALLET_CONFIG['signup_amount'], transaction_type: 'credited')
-  end
+  def subscribe_to_latest_round
+    round = Round.find_by({status: 'open'})
+    if round
+      round.subscriptions.create(user: self)
+    end
 
+    return true
+  end
 end

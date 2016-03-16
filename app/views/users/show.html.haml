@@ -13,7 +13,7 @@
           %ul.list-group.list-group-unbordered
             %li.list-group-item
               %b Points
-              %a.pull-right= @user.points
+              %a.pull-right= @user.total_points
             %li.list-group-item
               %b Commits
               %a.pull-right= @user.commits_count
@@ -34,6 +34,7 @@
                 %tr
                   %th.col-xs-1 #
                   %th Name
+                  %th Status
                   %th.col-xs-1 Commits
                   %th.col-xs-1 Activities
                   %th.col-xs-1 Points
@@ -41,10 +42,13 @@
                 - @user.subscriptions.order(created_at: :desc).each_with_index do |s, i|
                   %tr
                     %td= i+1
-                    %td=s.round.name
-                    %td=s.commits_count
-                    %td=s.activities_count
-                    %td=s.points
+                    %td= s.round.name 
+                    %td
+                      %small.label{class: s.round.open? ? 'bg-green' : 'bg-yellow'}
+                        = s.round.status
+                    %td= s.commits_count
+                    %td= s.activities_count
+                    %td= s.points
           .tab-pane#wallet
             %table.table.table-bordered
               %thead

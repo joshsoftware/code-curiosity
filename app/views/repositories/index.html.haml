@@ -33,7 +33,8 @@
                   %th.col-xs-1 #
                   %th.col-xs-2 Name
                   %th.col-xs-2 Owner
-                  %th.col-xs-5 Description
+                  %th.col-xs-1 Star
+                  %th.col-xs-4 Description
                   %th.col-xs-2 Actions
               %tbody     
         .box-footer.clearfix
@@ -45,6 +46,7 @@
     %td 
       <a href={{record.source_url}} target="_blank"> {{ record.name }}
     %td {{record.owner}}
+    %td {{record.watchers}}
     %td {{record.description}}
     %td.col-xs-2
       %a{href: "repositories/{{record._id.$oid}}/sync", class: "btn btn-primary btn-sm"} 

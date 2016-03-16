@@ -4,6 +4,16 @@
 %section.content
   .row
     .col-lg-3.col-xs-6
+      .small-box.bg-aqua
+        .inner
+          %h3= current_user.total_points
+          %p Points
+        .icon
+          %i.ion.ion-pie-graph
+        = link_to user_path(current_user), class: 'small-box-footer' do
+          More info
+          %i.fa.fa-arrow-circle-right
+    .col-lg-3.col-xs-6
       .small-box.bg-green
         .inner
           %h3= current_user.commits_count

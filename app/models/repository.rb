@@ -17,7 +17,7 @@ class Repository
   has_many :commits
   has_many :activities
   has_many :code_files
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, class_name: 'User', inverse_of: 'repositories'
   has_and_belongs_to_many :judges, class_name: 'User', inverse_of: 'judges_repositories'
 
   validates :source_url, uniqueness: true, presence: true, format: { with: /\A(https|http):\/\/github.com\/[\.\w-]+\/[\.\w-]+\z/ }
