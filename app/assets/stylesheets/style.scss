@@ -85,3 +85,11 @@ html.turbolinks-progress-bar::before {
     border-radius: .25em;
   }
 }
+
+.social-sharing{
+  margin-right: 50px;
+
+  .twitter-share-button{
+    vertical-align: bottom
+  }
+}

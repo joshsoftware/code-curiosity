@@ -1,5 +1,8 @@
 %tr
   %td= subscription.round.name
+  %td
+    %small.label{class: subscription.round.open? ? 'bg-green' : 'bg-yellow'}
+      = subscription.round.status
   %td= subscription.commits_count
   %td= subscription.activities_count
   %td= subscription.points

@@ -1,6 +1,10 @@
 %section.content-header
   %h1 
     Profile
+    /
+      .pull-right.social-sharing
+        = render 'twitter_sharing'
+        .fb-share-button{data: {href: "http://codecuriosity.org", layout: "button_count"}}
 %section.content
   .row
     .col-xs-3
@@ -37,6 +41,7 @@
               %thead
                 %tr
                   %th Name
+                  %th.col-xs-1 Status
                   %th.col-xs-1 Commits
                   %th.col-xs-1 Activities
                   %th.col-xs-1 Points
