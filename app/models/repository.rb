@@ -69,28 +69,6 @@ class Repository
     @git ||= Git.open(code_dir)
   end
 
-  def score_commits(round)
-    engine = ScoringEngine.new(self)
-    git = engine.refresh_repo
-    self.set(code_dir: git.dir.path) if git
-
-    round_commits = self.commits.where(round_id: round).map do |commit|
-      commit.branch = git.gcommit(commit.sha).branch rescue nil
-      commit
-    end
-
-    round_commits.group_by(&:branch).each do |branch, commits|
-      commits.each do |commit|
-        commit.default_score = engine.default_score(commit.info)
-        commit.bugspots_score = engine.bugspots_score(commit.info, branch || 'master')
-        commit.auto_score = commit.calculate_score
-        commit.save
-      end
-    end
-
-    return true
-  end
-
   def set_files_commit_count
     git.ls_files.each do |file, options|
       code_file = self.code_files.find_or_initialize_by(name: file)

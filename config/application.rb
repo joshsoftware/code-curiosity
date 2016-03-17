@@ -25,12 +25,13 @@ module CodeCuriosity
     # Run 'rake -D time' for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Mumbai'
 
-    config.autoload_paths << Rails.root.join("lib")
+    config.autoload_paths += [
+      Rails.root.join('lib', '*.rb'),
+      Rails.root.join('lib', 'code_curiosity', '*.rb')
+    ]
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-
-    config.autoload_paths << Rails.root.join('github_client')
 
     config.to_prepare do
       Devise::SessionsController.layout 'devise'

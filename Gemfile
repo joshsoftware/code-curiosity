@@ -27,7 +27,6 @@ gem 'omniauth-github', '~> 1.1.2'
 gem 'sidekiq', '~> 4.0.2'
 gem 'dotenv-rails'
 gem 'git', '~> 1.3.0'
-gem 'bugspots', '~> 0.2.1'
 
 group :development, :test do
   gem 'byebug'
