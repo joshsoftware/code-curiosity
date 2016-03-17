@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   end
 
   def leaderboard
-    @users = User.order(points: :desc).page(params[:page]).per(25)
+    @users = User.order(total_points: :desc).page(params[:page]).per(10)
+    render layout: 'application'
   end
 end

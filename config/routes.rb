@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   post 'webhook' => 'dashboard#webhook'
   get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'
-  get 'leaderboard' => 'dashboard#leaderboard'
+  get 'leaderboard' => 'home#leaderboard'
 
   root 'home#index'
 end

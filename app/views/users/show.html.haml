@@ -12,6 +12,9 @@
             = @user.github_handle
           %ul.list-group.list-group-unbordered
             %li.list-group-item
+              %b Level
+              %a.pull-right= @user.level
+            %li.list-group-item
               %b Points
               %a.pull-right= @user.total_points
             %li.list-group-item

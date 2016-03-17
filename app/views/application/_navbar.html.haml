@@ -10,6 +10,10 @@
       %span.sr-only Toggle navigation
     .navbar-custom-menu
       %ul.nav.navbar-nav
+        %li
+          = link_to leaderboard_path do
+            %span.fa.fa-street-view
+            Leaderboard
         - if current_user
           = render 'user_nav'
         - else

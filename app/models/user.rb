@@ -31,6 +31,7 @@ class User
   field :provider,           type: String
   field :uid,                type: String
   field :points,             type: Integer, default: 0
+  field :level,              type: Integer, default: 1
   field :total_points,       type: Integer, default: 0
   field :avatar_url,         type: String
 
@@ -90,6 +91,10 @@ class User
         repository.score_commits(round)
       end
     end
+  end
+
+  def info
+    @info ||= GithubClient.user(self.github_handle)
   end
 
   private

@@ -85,3 +85,10 @@ html.turbolinks-progress-bar::before {
     border-radius: .25em;
   }
 }
+
+.leaderboard{
+  .rank{
+    margin-right: 15px;
+    font-weight: bold;
+  }
+}
