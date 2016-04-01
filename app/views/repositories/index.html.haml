@@ -1,7 +1,7 @@
 %section.content-header
   %h1 
     Repositories
-    = link_to new_repository_path, class: "btn btn-success btn-social pull-right", remote: true do
+    = link_to github_repos_path, class: 'btn btn-success btn-social pull-right' do
       %i.fa.fa-plus
       %b Add New Repository
 %section.content
@@ -12,12 +12,11 @@
           %h3.box-title
             - if @repos.none?
               Add new
-              = link_to 'Repository', new_repository_path, remote: true
+              = link_to 'Repository', github_repos_path 
             - else
               = link_to user_sync_path(current_user), class: 'btn btn-primary pull-left' do
                 %i.fa.fa-refresh
                 Sync All
-
           .box-tools
             .input-group.input-group-sm.col-xs-3.pull-right
               - if @repos.any?

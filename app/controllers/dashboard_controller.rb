@@ -1,9 +1,7 @@
 class DashboardController < ApplicationController
-  before_action :authenticate_user! #, only: [:repositories, :take_snapshot, :get_new_repos]
+  before_action :authenticate_user!, except: [:webhook]
 
   def index
-    #@category = params[:category] || "score"
-    #@stats = @current_round.graph_data(@category)
   end
 
   def change_round

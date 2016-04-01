@@ -1,6 +1,9 @@
-- if @repo && @repo.valid?
-  Turbolinks.visit("#{repositories_path}")
+- if @repo.nil?
+  flashNotification("#{t('repositories.not_found')}", 'error');
+- elsif @repo.valid?
+  $("#repo-#{@repo.gh_id} td:last").html('Contributing')
 - else 
-  $("#new_repo").html("#{escape_javascript(render 'form.html.haml')}")
-  $('#new_repo').modal('show')
+  - @repo.errors.full_messages.each do |m|
+    flashNotification("#{m}", 'error', false);
+
   

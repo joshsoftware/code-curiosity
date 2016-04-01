@@ -27,3 +27,6 @@ en:
     login_required: "You must signin/signup to continue"
     subscription_successfull: "You have successfully subcribed for this challenge"
     repository_sync: "Your Repositories are getting in Sync. Please wait for sometime."
+  repositories:
+    contribute_to: "Repository you would like to contribute or source(fork) repository requires minimum %{stars} stars."
+    not_found: 'Repository not exists on github.'

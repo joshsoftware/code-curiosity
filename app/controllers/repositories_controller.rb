@@ -54,7 +54,7 @@ class RepositoriesController < ApplicationController
   end
 
   def repository_params
-    params.fetch(:repository).permit(:source_url)
+    params.fetch(:repository).permit(:source_url, :popular_repository_url)
   end
 
 end

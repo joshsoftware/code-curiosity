@@ -1,0 +1,28 @@
+%section.content-header
+  %h1 
+    Github Repositories
+%section.content
+  .row
+    .col-xs-12
+      .nav-tabs-custom
+        %ul.nav.nav-tabs
+          %li.active
+            %a{ data: { toggle: 'tab' }, href: '#my-repos-tab'} My Repositories
+          %li.dropdown
+            %a.dropdown-toggle{ data: { toggle: 'dropdown' }, href: '#'} 
+              Organizations 
+              %span.caret
+            %ul.dropdown-menu#orgs-list
+        .tab-content
+          .tab-pane.active#my-repos-tab
+            = render 'repos'
+          .tab-pane#org-repos-tab
+            #gh-orgs-title
+              %h3
+            #gh-orgs-repos
+  
+%script#org-href-tpl{type: 'text/html'}
+  %li{role: 'presentation'}
+    %a.gh-org-repos{ role: 'menuitem', tabindex: '-1', href: '#org-repos-tab', data: { toggle: 'tab', href: '/github/repos/orgs/{{login}}' }} {{ login }}
+:javascript 
+  renderOrgsMenu();

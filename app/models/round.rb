@@ -1,6 +1,7 @@
 class Round
   include Mongoid::Document
   include Mongoid::Timestamps
+  include GlobalID::Identification
 
   field :name, type: String
   field :from_date, type: DateTime

@@ -1,6 +1,7 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
+  include GlobalID::Identification
 
   ROLES = {admin: 'Admin'}
 
@@ -30,13 +31,18 @@ class User
   field :name,               type: String
   field :provider,           type: String
   field :uid,                type: String
+  field :avatar_url,         type: String
   field :points,             type: Integer, default: 0
   field :level,              type: Integer, default: 1
   field :total_points,       type: Integer, default: 0
-  field :avatar_url,         type: String
 
   field :activities_count,   type: Integer, default: 0
   field :commits_count,      type: Integer, default: 0
+
+  # Github profile info
+  field :followers,          type: Integer, default: 0
+  field :public_repos,       type: Integer, default: 0
+  field :github_user_since,  type: Date
 
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
@@ -54,16 +60,21 @@ class User
   validates :email, :github_handle, :name, presence: true
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.set({
-        email: auth.info.email,
-        name: auth.info.name,
-        github_handle: auth.extra.raw_info.login,
-        avatar_url: auth.info.image,
-        password:  Devise.friendly_token[0,20]
-      })
+    user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.password = Devise.friendly_token[0, 20]
     end
 
+    user.set({
+      email: auth.info.email,
+      name: auth.info.name,
+      avatar_url: auth.info.image,
+      github_handle: auth.extra.raw_info.login,
+      followers: auth.extra.raw_info.followers,
+      public_repos: auth.extra.raw_info.public_repos
+    })
+
+    user.save
+    user
   end
 
   def create_transaction(attrs = {})
@@ -95,6 +106,10 @@ class User
 
   def info
     @info ||= GithubClient.user(self.github_handle)
+  end
+
+  def gh_orgs
+    @gh_orgs ||= GITHUB.organizations.all(user: self.github_handle)
   end
 
   private

@@ -15,8 +15,6 @@ Rails.application.routes.draw do
     get 'sync'
   end
 
-  resources :transactions
-
   resources :users, except: [:destroy] do
     get 'sync'
   end
@@ -54,10 +52,14 @@ Rails.application.routes.draw do
     end
   end
 
-  # get '/subscriptions/:id' => 'subscriptions#subscribe', as: :subscription
-  get 'get_new_repos' => "dashboard#get_new_repos"
-  get  'dashboard(/:category)', to: 'dashboard#index', as: :dashboard
-  post 'score' => 'application#score'
+  namespace :github do
+    resources :repos, only: [:index] do
+      collection do
+        get 'orgs/:org_name', action: 'orgs'
+      end
+    end
+  end
+
   post 'webhook' => 'dashboard#webhook'
   get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'

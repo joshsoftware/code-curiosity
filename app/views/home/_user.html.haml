@@ -1,0 +1,9 @@
+%tr
+  %td
+    %span.rank= user_counter  + 1
+    = image_tag avatar_url(user), widht: 40, height: 40, class: 'img-circle'
+  %td
+    = link_to user.github_handle, user_path(user), class: 'users-list-name'
+  %td= user.commits_count
+  %td= user.activities_count
+  %td= user.total_points

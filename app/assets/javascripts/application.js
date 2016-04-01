@@ -32,7 +32,6 @@ $(document).on('page:change', function(event) {
   $.AdminLTE.tree('.sidebar');
 });
 
-
 function selectTabUsingUrlHash(){
   var hash = window.location.hash;
 

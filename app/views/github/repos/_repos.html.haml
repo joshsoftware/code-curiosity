@@ -1,0 +1,11 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th.col-xs-2 Name
+      %th.col-xs-1 Stars
+      %th.col-xs-4 Description
+      %th.col-xs-1 Actions
+  %tbody     
+    = render partial: 'repo_row', collection: @repos, as: :repo
+.pagination-container
+  = paginate @pagination, params: { total_count: @total_count }, remote: true

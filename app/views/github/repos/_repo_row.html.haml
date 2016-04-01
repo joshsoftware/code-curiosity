@@ -1,0 +1,13 @@
+%tr{id: "repo-#{repo.id}"}
+  %td= link_to repo.name, repo.html_url, target: '_blank'
+  %td= repo.stargazers_count
+  %td= repo.description
+  %td{ align: 'center'}
+    - if current_user.repositories.where(gh_id: repo.id).none?
+      = simple_form_for Repository.new, remote: true do |f|
+        = f.hidden_field :owner, value: repo.owner.login
+        = f.hidden_field :name, value: repo.name
+        = f.hidden_field :gh_id, value: repo.id
+        = f.submit 'Add', data: { :'disable-with' => 'Adding...'}, class: 'btn btn-block btn-success btn-sm'
+    - else
+      Contributing

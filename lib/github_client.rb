@@ -1,6 +1,7 @@
 class GithubClient
-  class << self
+  URL = 'https://github.com'
 
+  class << self
     attr_accessor :client
 
     def init(options = {})

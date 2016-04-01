@@ -27,9 +27,9 @@
       .nav-tabs-custom
         %ul.nav.nav-tabs
           %li.active#rounds_tab_link
-            %a{href: '#rounds', data: { toggle: 'tab'}} Rounds 
+            = link_to 'Rounds', '#rounds', data: { toggle: 'tab'}
           %li#wallet_tab_link
-            %a{href: '#wallet', data: { toggle: 'tab'}} Points History 
+            = link_to 'Points History', '#wallet', data: { toggle: 'tab' }
         .tab-content
           .tab-pane.active#rounds
             %table.table.table-bordered
@@ -42,16 +42,7 @@
                   %th.col-xs-1 Activities
                   %th.col-xs-1 Points
               %tbody
-                - @user.subscriptions.order(created_at: :desc).each_with_index do |s, i|
-                  %tr
-                    %td= i+1
-                    %td= s.round.name 
-                    %td
-                      %small.label{class: s.round.open? ? 'bg-green' : 'bg-yellow'}
-                        = s.round.status
-                    %td= s.commits_count
-                    %td= s.activities_count
-                    %td= s.points
+                = render partial: 'subscription', collection:  @user.subscriptions.order(created_at: :desc)
           .tab-pane#wallet
             %table.table.table-bordered
               %thead
@@ -61,12 +52,7 @@
                   %th Detail
                   %th Date
               %tbody
-                - @user.transactions.order(created_at: :desc).each_with_index do |t, i|
-                  %tr
-                    %td= i+1
-                    %td= t.points
-                    %td= t.type
-                    %td= t.created_at.strftime('%D %T')
+                = render partial: 'transaction', collection: @user.transactions.order(created_at: :desc)
                 %tr
                   %td 
                     %b Total

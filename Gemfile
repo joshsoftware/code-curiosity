@@ -27,7 +27,7 @@ gem 'omniauth-github', '~> 1.1.2'
 gem 'sidekiq', '~> 4.0.2'
 gem 'dotenv-rails'
 gem 'git', '~> 1.3.0'
-gem 'bugspots', '~> 0.2.1'
+gem 'rugged', git: 'git://github.com/libgit2/rugged.git', submodules: true
 
 group :development, :test do
   gem 'byebug'

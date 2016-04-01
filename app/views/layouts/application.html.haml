@@ -14,6 +14,7 @@
       <script src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js'></script>
   %body.sidebar-mini.skin-black-light
     .wrapper
+      %span#gh-user{ data: { login: current_user.github_handle }, style: 'display: none;' }}
       = render 'navbar'
       = render 'sidebar'
       .content-wrapper

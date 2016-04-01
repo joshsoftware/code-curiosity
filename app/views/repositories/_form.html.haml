@@ -2,13 +2,16 @@
   .modal-content
     = simple_form_for (@repo || Repository.new), remote: true do |f|
       .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} &times;
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', :type => 'button'}
+          %span{'aria-hidden' => 'true'} &times;
         %h4.modal-title Add new repository 
       .modal-body
-        = f.input :source_url, wrapper: :vertical_input_group, hint: 'i.e https://github.com/"joshsoftware/devise" or paste github url', label: 'Repository' do
+        = f.input :popular_repository_url, wrapper: :vertical_input_group, hint: 'i.e https://github.com/rails/rails\'', label: t('repositories.contribute_to', stars: REPOSITORY_CONFIG['popular']['stars']) do
+          %span.input-group-addon https://github.com/
+          = f.input_field :popular_repository_url, placeholder: 'your name/your repository', class: 'form-control', autocomplete: false, value: repository_uri(:popular_repository_url) 
+        = f.input :source_url, wrapper: :vertical_input_group, hint: 'i.e https://github.com/joshsoftware/devise\'', label: 'Your fork' do
           %span.input-group-addon https://github.com/
           = f.input_field :source_url, placeholder: 'your name/your repository', class: 'form-control', autocomplete: false, value: repository_uri 
       .modal-footer
-        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Cancel
-        %button.btn.btn-primary{:type => "submit"} Save
+        %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Cancel
+        %button.btn.btn-primary{:type => 'submit'} Save
