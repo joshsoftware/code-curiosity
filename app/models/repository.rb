@@ -14,7 +14,6 @@ class Repository
   field :gh_id,       type: Integer
   field :languages,   type: Array
   field :ssh_url,     type: String
-  field :code_dir,    type: String
   field :ignore_files, type: Array, default: []
   field :type,        type: String
 
@@ -92,6 +91,9 @@ class Repository
     })
   end
 
+  def create_repo_owner_account
+  end
+
   def repository_uri
     self.source_url.to_s.sub(/(https|http):\/\/github.com\//, '')
   end
@@ -104,23 +106,15 @@ class Repository
     @git ||= Git.open(code_dir)
   end
 
-  def score_commits(round)
+  def score_commits(round = nil)
     engine = ScoringEngine.new(self)
-    git = engine.refresh_repo
-    self.set(code_dir: git.dir.path) if git
 
-    round_commits = self.commits.where(round_id: round).map do |commit|
+    _commits = self.commits.all
+    _commits = self.commits.where(round: round) if round
+
+    _commits.each do |commit|
       commit.branch = git.gcommit(commit.sha).branch rescue nil
-      commit
-    end
-
-    round_commits.group_by(&:branch).each do |branch, commits|
-      commits.each do |commit|
-        commit.default_score = engine.default_score(commit.info)
-        commit.bugspots_score = engine.bugspots_score(commit.info, branch || 'master')
-        commit.auto_score = commit.calculate_score
-        commit.save
-      end
+      commit.set(auto_score: engine.calculate_score(commit))
     end
 
     return true

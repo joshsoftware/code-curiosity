@@ -14,6 +14,10 @@ class GithubClient
       nil
     end
 
+    def repos
+      @client.repos.get(ownder)
+    end
+
     def user(name)
       @client.users.get(user: name)
     end

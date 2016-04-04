@@ -43,6 +43,7 @@ class User
   field :followers,          type: Integer, default: 0
   field :public_repos,       type: Integer, default: 0
   field :github_user_since,  type: Date
+  field :repos_stars,        type: Integer, default: 0
 
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
@@ -58,6 +59,10 @@ class User
   scope :judges, -> { where(is_judge: true) }
 
   validates :email, :github_handle, :name, presence: true
+
+  after_create do |user|
+    User.delay.update_total_repos_stars
+  end
 
   def self.from_omniauth(auth)
     user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -110,6 +115,16 @@ class User
 
   def gh_orgs
     @gh_orgs ||= GITHUB.organizations.all(user: self.github_handle)
+  end
+
+  def update_total_repos_stars
+    star_count = 0
+
+    GITHUB.repositories.list(user: github_handle).each_page do |repos|
+      star_count += repos.inject(0){|result, repo| result += repo.stargazers_count; result }
+    end
+
+    self.set(repos_stars: star_count)
   end
 
   private

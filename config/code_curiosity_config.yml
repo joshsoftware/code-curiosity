@@ -17,3 +17,11 @@ repository:
 
 scoring_engine:
   :repositories: 'repositories' # repositories dir
+  :max_score: 5
+  :code_lines_to_points: 10
+  :code_change_threshold: 200
+  :code_change_threshold_score: 1
+  :comments_to_points: 3
+  :commit_comments_weightage: 0.1
+  :commit_default_weightage: 0.45
+  :bugspot_weightage: 0.45

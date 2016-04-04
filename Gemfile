@@ -28,6 +28,7 @@ gem 'sidekiq', '~> 4.0.2'
 gem 'dotenv-rails'
 gem 'git', '~> 1.3.0'
 gem 'rugged', git: 'git://github.com/libgit2/rugged.git', submodules: true
+gem 'bugspots', '~> 0.2.1'
 
 group :development, :test do
   gem 'byebug'

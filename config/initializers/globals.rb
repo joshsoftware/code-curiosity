@@ -7,7 +7,7 @@ GithubClient.init(oauth_token: ENV['GIT_OAUTH_TOKEN'], client_id: ENV['GIT_APP_I
 YAML.load_file('config/code_curiosity_config.yml').tap do |config|
   ROUND_CONFIG =  config['round']
   REPOSITORY_CONFIG = config['repository']
-  ScoringEngine.config = config['scoring_engine']
+  SCORING_ENGINE_CONFIG = config['scoring_engine']
 end
 
 STAR_RATINGS = (0..5).to_a
