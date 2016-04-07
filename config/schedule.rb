@@ -28,7 +28,7 @@ every :day, :at => '1:01am' do
 end
 
 #
-#every :month,  do
-# rake 'auto_score'
-#end
+every '0 2 30 * *'  do
+ rake "auto_score"
+end
 
