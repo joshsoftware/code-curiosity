@@ -1,10 +1,13 @@
 .jumbotron
   .container
-    %h1 
-      %b>CODECURIOSITY
-    /  
-      %p
-        Opensource livelihood  
-    %a.btn.btn-outline.btn-lg{  href: omniauth_authorize_path(:user, :github) }
-      %span.fa.fa-github
-      Sign in with GitHub
+    .row
+      = image_tag 'logo-home.png'
+    .row
+      %a.btn.btn-primary.btn-lg{  href: omniauth_authorize_path(:user, :github) }
+        %span.fa.fa-github
+        Sign in with GitHub
+    .row.marketing
+      .col-md-12.col-lg-offset-1.col-md-offset-1
+        - INFO['home'].each_slice(2) do |data|
+          .col-lg-5.col-md-5
+            = render partial: 'info', collection: data, as: 'info'

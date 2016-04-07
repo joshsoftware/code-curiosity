@@ -8,6 +8,11 @@ class HomeController < ApplicationController
 
   def leaderboard
     @users = User.order(total_points: :desc).page(params[:page]).per(10)
-    render layout: 'application'
+
+    if user_signed_in?
+      render layout: 'application'
+    else
+      render layout: 'info'
+    end
   end
 end

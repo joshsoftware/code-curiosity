@@ -74,7 +74,7 @@ class Round
     next_start_date = end_date + 1.second
 
     new_round = Round.new({
-      name: "Round-#{Round.count + 1} (#{next_start_date.strftime("%d %b %Y")})",
+      name: next_start_date.strftime("%b %Y"),
       from_date: next_start_date,
       status:  ROUND_CONFIG['states']['open']
     })

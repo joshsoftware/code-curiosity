@@ -1,3 +1,16 @@
+home:
+  -
+    question: Who should use Code-curiosity?
+    answer: Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum. 
+  -
+    question: How does code curiosity benefit me?
+    answer: Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
+  -
+    question: How does it work?
+    answer: Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
+  -
+    question: I'm a newbie. What's in it for me?
+    answer: Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
 faq:
   - 
     question: What is code curiosity?
@@ -29,4 +42,3 @@ faq:
   -
     question: How are organisations rated?
     answer: Organisations are rated by weighted average of its employees scores
-  

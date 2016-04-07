@@ -2,14 +2,14 @@
   %a.dropdown-toggle{ data: { toggle: 'dropdown' }}
     %i.fa.fa-calendar
     Rounds : 
-    %span.current-round= current_round.name
+    %span.current-round= "Round - #{current_round.from_date.strftime("%b %Y")}"
   %ul.dropdown-menu
     %li.header Total rounds #{Round.count}
     %li
       %ul.menu
         - Round.all.desc(:created_at).each do |round|
           %li
-            = link_to "#{round.name} : #{round.status}", change_round_path(round)
+            = link_to "Round - #{round.from_date.strftime("%b %Y")}", change_round_path(round)
 %li.dropdown.user.user-menu
   %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
     %img.user-image{:alt => current_user.name, :src => avatar_url}/

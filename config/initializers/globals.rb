@@ -12,4 +12,4 @@ end
 
 STAR_RATINGS = (0..5).to_a
 
-FAQ = YAML.load_file('config/faq.yml')['faq']
+INFO = YAML.load_file('config/info.yml')
