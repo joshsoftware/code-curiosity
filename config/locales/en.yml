@@ -30,3 +30,4 @@ en:
   repositories:
     contribute_to: "Repository you would like to contribute or source(fork) repository requires minimum %{stars} stars."
     not_found: 'Repository not exists on github.'
+    github_sync: 'Wait for few moments. Repositories syncing in process....'

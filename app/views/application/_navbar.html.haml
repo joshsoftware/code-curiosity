@@ -11,6 +11,10 @@
     .navbar-custom-menu
       %ul.nav.navbar-nav
         %li
+          = link_to faq_path do
+            %i.fa.fa-question
+            FAQS
+        %li
           = link_to leaderboard_path do
             %span.fa.fa-street-view
             Leaderboard
@@ -21,6 +25,3 @@
             = link_to omniauth_authorize_path(:user, :github) do
               %span.fa.fa-github
               Sign in with GitHub
-        %li
-          %a{href: '#'}
-            %i.fa

@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .home-wrapper{
-  background-color: #778899; 
+  //background-color: #778899; 
 }
 
 .jumbotron{
@@ -14,12 +14,18 @@
   text-align:center;
   border-radius:0;
   padding-bottom:80px;
-  background-color: #778899; 
+  background-color: #fff; 
 
   h1{
     margin-bottom:25px;
     margin-top: 100px;
     letter-spacing:-1px;color:#fff;
+    color: #333;
+  }
+
+  a.btn-outline{
+    border: 1px solid #333;
+    color: #333;
   }
 
   p a,.jumbotron .jumbotron-links a{

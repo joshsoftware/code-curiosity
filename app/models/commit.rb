@@ -35,16 +35,22 @@ class Commit
     c.user.inc(commits_count: 1)
   end
 
-  SCORE_BOOSTER = { default: 0.5, bugspots: 0.5 }
-  MAX_SCORE = 5
-
-  def calculate_score
-    score = self.default_score * SCORE_BOOSTER[:default] + self.bugspots_score * SCORE_BOOSTER[:bugspots]
-    [score.round, MAX_SCORE].min
-  end
-
   def info
     @info ||= GITHUB.repos.commits.get(repository.owner, repository.name, sha)
+  end
+
+  def avg_score
+    if self.scores.any?
+      scores.pluck(:value).sum/scores.count
+    end
+  end
+
+  def list_scores
+    self.scores.inject(""){|r, s| r += "#{s.user.name}: #{s.rank}<br/>"}
+  end
+
+  def judge_rating(user)
+    scores.where(user: user).first.try(:value)
   end
 
 end

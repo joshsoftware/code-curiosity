@@ -36,7 +36,6 @@
   };
 
   GA.prototype.orgs = function(callback){
-    console.log(this)
     this.get(['users', this.username, 'orgs'], callback);
   };
   

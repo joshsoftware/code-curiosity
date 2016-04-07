@@ -11,3 +11,5 @@ YAML.load_file('config/code_curiosity_config.yml').tap do |config|
 end
 
 STAR_RATINGS = (0..5).to_a
+
+FAQ = YAML.load_file('config/faq.yml')['faq']

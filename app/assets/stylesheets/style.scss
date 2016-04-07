@@ -92,3 +92,38 @@ html.turbolinks-progress-bar::before {
     font-weight: bold;
   }
 }
+
+.score-bar {
+  list-style: none;
+  width: 140px;
+  margin: 0 auto;
+
+  li{
+    float: left;
+    position: relative;
+    width: 12px;
+    height: 12px;
+    margin-left: 3px;
+    vertical-align: middle;
+  }
+
+  .zero{
+    background: lightgrey;
+  }
+
+  .one, .two{
+    background: orange;
+  }
+
+  .three{
+    background: green;
+  }
+
+  .four{
+    background: green;
+  }
+
+  .five{
+    background: darkgreen;
+  }
+}

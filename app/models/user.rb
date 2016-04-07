@@ -25,7 +25,6 @@ class User
   field :last_sign_in_ip,    type: String
 
   field :github_handle,      type: String
-  field :avatar_url,         type: String
   field :active,             type: Boolean, default: true
   field :is_judge,           type: Boolean, default: false
   field :name,               type: String
@@ -43,7 +42,10 @@ class User
   field :followers,          type: Integer, default: 0
   field :public_repos,       type: Integer, default: 0
   field :github_user_since,  type: Date
-  field :repos_stars,        type: Integer, default: 0
+  field :repos_star_count,   type: Integer, default: 0
+
+  # Sidekiq job id
+  field :gh_sync_jobs,       type: Hash, default: {}
 
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
@@ -61,7 +63,7 @@ class User
   validates :email, :github_handle, :name, presence: true
 
   after_create do |user|
-    User.delay.update_total_repos_stars
+    User.delay(queue: 'git').update_total_repos_stars(user.id)
   end
 
   def self.from_omniauth(auth)
@@ -117,14 +119,19 @@ class User
     @gh_orgs ||= GITHUB.organizations.all(user: self.github_handle)
   end
 
-  def update_total_repos_stars
+  def gh_syncing?(type)
+    gh_sync_jobs[type].present?
+  end
+
+  def self.update_total_repos_stars(user_id)
+    user = User.find(user_id)
     star_count = 0
 
-    GITHUB.repositories.list(user: github_handle).each_page do |repos|
+    GITHUB.repositories.list(user: user.github_handle).each_page do |repos|
       star_count += repos.inject(0){|result, repo| result += repo.stargazers_count; result }
     end
 
-    self.set(repos_stars: star_count)
+    user.set(repos_star_count: star_count)
   end
 
   private

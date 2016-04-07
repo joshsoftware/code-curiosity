@@ -72,6 +72,8 @@ class Repository
       return repo if gh_repo.stargazers_count < REPOSITORY_CONFIG['popular']['stars']
     end
 
+    self.create_repo_owner_account(gh_repo.fork ? gh_repo.source : gh_repo)
+
     user.repositories << repo
     return repo
   end
@@ -91,7 +93,18 @@ class Repository
     })
   end
 
-  def create_repo_owner_account
+  def self.create_repo_owner_account(repo)
+    return unless repo.owner.type == 'User'
+
+    user = User.find_or_initialize_by(provider: 'github', uid: repo.owner.id)
+
+    return user if user.persisted?
+
+    user.github_handle = repo.owner.login
+    user.avatar_url = repo.owner.avatar_url
+    user.password = Devise.friendly_token[0, 20]
+    user.save(validate: false)
+    user
   end
 
   def repository_uri

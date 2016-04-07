@@ -1,0 +1,30 @@
+// Place all the styles related to the info controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.info{
+  h1.faq-title{
+    margin-top: 80px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  h4.faq-subtitle{
+    color: #697176;
+    margin-bottom: 60px;
+    text-align: center;
+  }
+
+  .faqs{
+    .faq{
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 30px;
+
+      .question{
+        font-weight: 700;
+      }
+    }
+  }
+}

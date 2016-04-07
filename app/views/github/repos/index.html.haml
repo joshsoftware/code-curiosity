@@ -1,6 +1,9 @@
 %section.content-header
   %h1 
     Github Repositories
+    = link_to sync_github_repos_path, class: 'btn btn-primary pull-right', remote: true do
+      %i.fa.fa-refresh
+      %b Sync Repositories
 %section.content
   .row
     .col-xs-12
@@ -15,7 +18,10 @@
             %ul.dropdown-menu#orgs-list
         .tab-content
           .tab-pane.active#my-repos-tab
-            = render 'repos'
+            - if current_user.gh_syncing?('user') &&  @repos.blank?
+              %h3= t('repositories.github_sync')
+            - else
+              = render 'repos'
           .tab-pane#org-repos-tab
             #gh-orgs-title
               %h3

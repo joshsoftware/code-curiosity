@@ -1,0 +1,32 @@
+faq:
+  - 
+    question: What is code curiosity?
+    answer: Code curiosity is a web platform which encourages the software developers to contribute to open source and reward them for their open source contributions. Also, it rates the organisation of the open source contributors.
+  - 
+    question: How do I signup?
+    answer: You can signup using your github account and it is free.
+  -
+    question: Can I add any repository?
+    answer: You can add any number of open source repositories only from Github and those repositories should have at least 25 stars.
+  -
+    question: How does the level work?
+    answer:
+  - 
+    question: How does the repository owner get the royalty points?
+    answer: When a user adds a repository to Code Curiosity, the system will automatically allocate the points to the owner whether the owners is part of Code Curiosity or not. Also, when someone contribute to the repository x% of the score will be added to the owner as well.
+  - 
+    question: When will be the scoring done?
+    answer: It is a rolling competition, each month end the scoring will done for that month
+  -
+    question: How is the scoring done?
+    answer:
+  -
+    question: Does it only consider commits for scoring?
+    answer: No, it considers commits, comments, opening an issue and closing an issue
+  -
+    question:  How do I redeem my points?
+    answer: Once you accumulate the score above 1500, you can redeem digital goods from the associate merchandise. 
+  -
+    question: How are organisations rated?
+    answer: Organisations are rated by weighted average of its employees scores
+  

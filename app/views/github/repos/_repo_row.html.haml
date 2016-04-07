@@ -8,6 +8,6 @@
         = f.hidden_field :owner, value: repo.owner.login
         = f.hidden_field :name, value: repo.name
         = f.hidden_field :gh_id, value: repo.id
-        = f.submit 'Add', data: { :'disable-with' => 'Adding...'}, class: 'btn btn-block btn-success btn-sm'
+        = f.submit 'Add', data: { :'disable-with' => 'Adding...'}, class: 'btn btn-block btn-success btn-xs'
     - else
       Contributing

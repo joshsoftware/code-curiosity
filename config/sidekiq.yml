@@ -1,3 +1,4 @@
 :concurrency: 25
+:logfile: ./log/sidekiq.log
 :queues:
   - git

@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     resources :repos, only: [:index] do
       collection do
         get 'orgs/:org_name', action: 'orgs'
+        get 'sync'
       end
     end
   end
@@ -64,6 +65,8 @@ Rails.application.routes.draw do
   get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'
   get 'leaderboard' => 'home#leaderboard'
+
+  get 'faq' => 'info#faq'
 
   root 'home#index'
 end

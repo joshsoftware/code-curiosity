@@ -38,5 +38,6 @@ module CodeCuriosity
 
     #config.active_job.queue_name_prefix = Rails.env
     #config.active_job.queue_name_delimiter = '.'
+    config.cache_store = :redis_store, ENV['REDIS'] #, { expires_in: 1.month }
   end
 end
