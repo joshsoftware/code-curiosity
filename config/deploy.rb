@@ -4,6 +4,7 @@ require 'mina/git'
 require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (http://rvm.io)
 require 'mina_sidekiq/tasks'
+require 'mina/whenever'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -82,6 +83,8 @@ task :deploy => :environment do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
       invoke :'sidekiq:restart'
+      invoke :'whenever:clear'
+      invoke :'whenever:write'
       #queue 'sudo monit restart cksidekiq'
     end
   end

@@ -16,7 +16,8 @@ namespace :fetch_data do
               author: user.github_handle,
               since: round.from_date.beginning_of_day, 
               until: ( round.end_date ? round.end_date.end_of_day : Time.now ),
-                sha: branch
+              sha: branch,
+              per_page: 200
             )
             unless response.body.blank?
               response.body.each do |data|
@@ -48,7 +49,7 @@ namespace :fetch_data do
 
     users = args[:user] ? [User.find(args[:user])] : User.contestants
     users.each do |user|
-      activities  = GITHUB.activity.events.performed user: user.github_handle, per_page: 100
+      activities  = GITHUB.activity.events.performed(user: user.github_handle, per_page: 200)
       repos       = user.repositories.pluck(:name).join("|")
 
       activities = activities.select{|a| Time.parse(a.created_at) > round.from_date.beginning_of_day && TRACKING_EVENTS.keys.include?(a.type) && a.repo.name.match(repos) }
