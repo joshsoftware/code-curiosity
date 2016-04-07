@@ -42,6 +42,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'mina'
+  gem 'mina-sidekiq'
 end
 
 group :development do

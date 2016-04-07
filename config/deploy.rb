@@ -1,8 +1,9 @@
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
-# require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
-require 'mina/rvm'    # for rvm support. (http://rvm.io)
+require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
+# require 'mina/rvm'    # for rvm support. (http://rvm.io)
+require 'mina_sidekiq/tasks'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -10,11 +11,13 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, 'codecuriosity.org'
+#set :domain, 'codecuriosity.org'
+set :domain, '188.166.181.193'
 set :deploy_to, '/home/deploy/projects/codecuriosity'
-set :repository, 'git@github.com:joshsoftware/code-curiosity.git'
+#set :repository, 'git@github.com:joshsoftware/code-curiosity.git'
+set :repository, 'https://github.com/joshsoftware/code-curiosity.git'
 set :user, 'deploy'
-set :ssh_options, '-A'
+# set :ssh_options, '-A'
 set :rail_env, 'production'
 set :keep_releases, 5
 set :branch, 'master'
@@ -24,7 +27,7 @@ set :branch, 'master'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/mongoid.yml', 'config/secrets.yml', 'log', 'config/git.yml']
+set :shared_paths, ['config/mongoid.yml', 'config/secrets.yml', 'log', 'config/git.yml', '.env.production']
 
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
@@ -36,10 +39,10 @@ set :shared_paths, ['config/mongoid.yml', 'config/secrets.yml', 'log', 'config/g
 task :environment do
   # If you're using rbenv, use this to load the rbenv environment.
   # Be sure to commit your .ruby-version or .rbenv-version to your repository.
-  # invoke :'rbenv:load'
+  invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use[ruby-2.2.4@codecuriosity]'
+  # invoke :'rvm:use[ruby-2.2.4@codecuriosity]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -54,15 +57,10 @@ task :setup => :environment do
 
   queue! %[touch "#{deploy_to}/#{shared_path}/config/mongoid.yml"]
   queue! %[touch "#{deploy_to}/#{shared_path}/config/secrets.yml"]
-  queue! %[touch "#{deploy_to}/#{shared_path}/config/git.yml"]
-  queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/mongoid.yml' and 'secrets.yml'."]
+  queue! %[touch "#{deploy_to}/#{shared_path}/.env.production"]
 
-  queue %[
-    repo_host=`echo $repo | sed -e 's/.*@//g' -e 's/:.*//g'` &&
-    repo_port=`echo $repo | grep -o ':[0-9]*' | sed -e 's/://g'` &&
-    if [ -z "${repo_port}" ]; then repo_port=22; fi &&
-    ssh-keyscan -p $repo_port -H $repo_host >> ~/.ssh/known_hosts
-  ]
+  queue! %[mkdir -p "#{deploy_to}/shared/pids/"]
+  queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/mongoid.yml' and 'secrets.yml'."]
 end
 
 desc "Deploys the current version to the server."
@@ -77,12 +75,14 @@ task :deploy => :environment do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:assets_precompile'
+    invoke :'sidekiq:quiet'
     invoke :'deploy:cleanup'
 
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
-      queue 'sudo monit restart cksidekiq'
+      invoke :'sidekiq:restart'
+      #queue 'sudo monit restart cksidekiq'
     end
   end
 end
