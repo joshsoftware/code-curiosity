@@ -1,16 +1,16 @@
 home:
   -
     question: Who should use Code-curiosity?
-    answer: Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum. 
+    answer: Everyone who contributes to open source. It's not only fun but you're also making a differnece!
   -
     question: How does code curiosity benefit me?
-    answer: Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
+    answer: You earn points for good contributions. You can redeem points for rewards. You're contributing back!
   -
     question: How does it work?
-    answer: Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
+    answer: We gamify open-source contributions. Everyone is rewarded and everything is rewarded.
   -
     question: I'm a newbie. What's in it for me?
-    answer: Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
+    answer: If you need a push to start contributing, this is it! You not only build your profile, you earn points and your contributing back.
 faq:
   - 
     question: What is code curiosity?
