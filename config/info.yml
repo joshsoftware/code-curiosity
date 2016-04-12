@@ -1,16 +1,16 @@
 home:
   -
     question: Who should use Code Curiosity?
-    answer: Everyone who contributes to open source. It's not only fun but you're also making a differnece!
+    answer: Everyone who contributes to open source. It's not only fun but you're also making a difference!
   -
     question: How does Code Curiosity benefit me?
-    answer: You earn points for good contributions. You can redeem points for rewards. You're contributing back!
+    answer: You earn points for contributions. You can redeem points for rewards. You're contributing back to the community!
   -
     question: How does it work?
     answer: We gamify open-source contributions. Everyone is rewarded and everything is rewarded.
   -
     question: I'm a newbie. What's in it for me?
-    answer: If you need a push to start contributing, this is it! You not only build your profile, you earn points and your contributing back.
+    answer: If you need a push to start contributing, this is it! You not only build your profile, you earn points and you're contributing back.
 faq:
   - 
     question: What is Code Curiosity?
