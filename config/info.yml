@@ -1,9 +1,9 @@
 home:
   -
-    question: Who should use Code-curiosity?
+    question: Who should use Code Curiosity?
     answer: Everyone who contributes to open source. It's not only fun but you're also making a differnece!
   -
-    question: How does code curiosity benefit me?
+    question: How does Code Curiosity benefit me?
     answer: You earn points for good contributions. You can redeem points for rewards. You're contributing back!
   -
     question: How does it work?
@@ -13,8 +13,8 @@ home:
     answer: If you need a push to start contributing, this is it! You not only build your profile, you earn points and your contributing back.
 faq:
   - 
-    question: What is code curiosity?
-    answer: Code curiosity is a web platform which encourages the software developers to contribute to open source and reward them for their open source contributions. Also, it rates the organisation of the open source contributors.
+    question: What is Code Curiosity?
+    answer: Code Curiosity is a web platform which encourages the software developers to contribute to open source and reward them for their open source contributions. Also, it rates the organisation of the open source contributors.
   - 
     question: How do I signup?
     answer: You can signup using your github account and it is free.
