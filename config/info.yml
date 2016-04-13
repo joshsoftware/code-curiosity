@@ -20,10 +20,10 @@ faq:
     answer: You can signup using your github account and it is free.
   -
     question: Can I add any repository?
-    answer: You can add any number of open source repositories only from Github and those repositories should have at least 25 stars.
+    answer: You can add any number of open source forked repositories only from Github and those origin repositories should have at least 25 stars.
   -
-    question: How does the level work?
-    answer:
+    question: Why aren't all my repositories or forked repositories showing up?
+    answer: There could be couple of reasons, 1. The origin repository of your forked repository may not have sufficient stars or 2. It is sysncing in the background and would take sometime to reflect.
   - 
     question: How does the repository owner get the royalty points?
     answer: When a user adds a repository to Code Curiosity, the system will automatically allocate the points to the owner whether the owners is part of Code Curiosity or not. Also, when someone contribute to the repository x% of the score will be added to the owner as well.
@@ -32,7 +32,7 @@ faq:
     answer: It is a rolling competition, each month end the scoring will done for that month
   -
     question: How is the scoring done?
-    answer:
+    answer: Scoring is done based on few creterias, like, critical part of the code, user open source contribution level, etc.
   -
     question: Does it only consider commits for scoring?
     answer: No, it considers commits, comments, opening an issue and closing an issue
