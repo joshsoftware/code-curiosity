@@ -32,7 +32,7 @@ faq:
     answer: You can signup using your github account and it's free.
   -
     question: Why only Github? Why not BitBucket or GitLab or any other open-source systems?
-    answer: We believe that Github is the center of the universe and we do hope Github shows us the same love back! :) Having said that, we believe that most of the open-source contributions happen on Github and it helps to take baby steps. If we see a definite need to integrate with others, we shall do that in the far future!
+    answer: We believe that Github is the center of the universe and we do hope Github shows us the same love back! Having said that, we believe that most of the open-source contributions happen on Github and it helps to take baby steps. If we see a definite need to integrate with others, we shall do that in the far future!
   -
     question: Can I add any repository?
     answer: No. It's important that we stick to "valuable contributions". You are *not* rewarded for adding commits to your test repository! You will be able to see only those repositories that have more than 25 stars or whose origin (i.e. from where your forked it) has 25 stars.
@@ -44,7 +44,7 @@ faq:
     answer: When a user signs up, Code Curiosity profiles the user's and the user's owned repositories. For every repository that has more than 25 stars, a royalty bonus is credited based on a factor of number of stars and number of followers. Organization contributions are not counted (yet) and commits as collaborator to another repository is not counted.
   -
     question: How is the scoring done?
-    answer: The scoring is done automatically using an algorithm based on criteria: is the commit in the ciritical path, does it fix an issue, the number of lines commited, the expertize of the user etc. This is always evolving and ideas are welcome. These scores can be over-ridden by langauge or domain experts as and when required.
+    answer: The scoring is done automatically using an algorithm based on certain criteria. For example, is the commit in the critical path, does it fix an issue, the number of lines commited, the expertize of the user etc. This is always evolving and ideas are welcome. These scores can be over-ridden by langauge or domain experts as and when required.
   -
     question: When is the scoring done?
     answer: Scoring is done continuously but the results may take some time to show. Every month-end, your wallet gets credited with the cumulative scores. If you are among that month's winners, you get more points credited to your wallet!
