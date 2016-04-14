@@ -14,7 +14,7 @@ home:
 faq:
   -
     question: What is Code Curiosity?
-    answer: Code Curiosity is a platform that encourages contribution to open source. Everyone is rewarded for their efforts, however big or small. This is not a "winner takes all" competition. Code Curiosity rewards code commits, opening or commenting on issues and even consistency in open-source contribution. In short, we create a healthy competition among contributors and gives them the incentive to contribute. Our aim is to make open-source contribution a habit! 
+    answer: Code Curiosity is a platform that encourages contribution to open source. Everyone is rewarded for their efforts, however big or small. This is not a "winner takes all" competition. Code Curiosity rewards code commits, opening or commenting on issues and even consistency in open-source contribution. In short, we create a healthy competition among contributors and gives them the incentive to contribute. Our aim is to make open-source contribution a habit!
   -
     question: Who should use Code Curiosity?
     answer: Everyone who contributes to open source. It's not only fun but you're also making a difference! Since all commits are rewarded and everyone (experts and newbies alike) is rewarded, it's always encouraging. There are so many repository owners that are looking out for help from developers and Code Curiosity not only helps you help others but also rewards you while doing it. It's about having your cake and eating it too!.
@@ -23,7 +23,7 @@ faq:
     answer: You earn points for contributions. You can redeem points for rewards. You're contributing back to the community! This helps you build your open-source profile, helps your organization recognize your hard work, helps you contribute back to the the community and also helps you learn new things and get advice from the community - not to mention it's very satisfying.
   -
     question: How does it work?
-    answer: We gamify open-source contributions. Everyone is rewarded and everything is rewarded. We level the playing field by ensuring that you compete in a group that has a profile similar to yours. When you add a repository to Code Curiosity, we start analysing your commits and other activity. They are automatically scored and shown on your dashboard. Every month-end, the cumulative scores are added to your wallet and monthly winners declared. 
+    answer: We gamify open-source contributions. Everyone is rewarded and everything is rewarded. We level the playing field by ensuring that you compete in a group that has a profile similar to yours. When you add a repository to Code Curiosity, we start analysing your commits and other activity. They are automatically scored and shown on your dashboard. Every month-end, the cumulative scores are added to your wallet and monthly winners declared.
   -
     question: I'm a newbie. What's in it for me?
     answer: If you need a push to start contributing, this is it! You not only build your profile, you earn points and you're contributing back.
@@ -47,7 +47,7 @@ faq:
     answer: The scoring is done automatically using an algorithm based on criteria: is the commit in the ciritical path, does it fix an issue, the number of lines commited, the expertize of the user etc. This is always evolving and ideas are welcome. These scores can be over-ridden by langauge or domain experts as and when required.
   -
     question: When is the scoring done?
-    answer: Scoring is done continuously but the results may take some time to show. Every month-end, your wallet gets credited with the cumulative scores. If you are among that month's winners, you get more points credited to your wallet! 
+    answer: Scoring is done continuously but the results may take some time to show. Every month-end, your wallet gets credited with the cumulative scores. If you are among that month's winners, you get more points credited to your wallet!
   -
     question: What all is scored?
     answer: Automated scoring is done on commits, comments, opening an issue and closing an issue today. As we evolve, this may get more streamlined and we may include other factors too.
