@@ -12,7 +12,7 @@ home:
     question: I'm a newbie. What's in it for me?
     answer: If you need a push to start contributing, this is it! You not only build your profile, you earn points and you're contributing back.
 faq:
-  - 
+  -
     question: What is Code Curiosity?
     answer: Code Curiosity is a platform that encourages contribution to open source. Everyone is rewarded for their efforts, however big or small. This is not a "winner takes all" competition. Code Curiosity rewards code commits, opening or commenting on issues and even consistency in open-source contribution. In short, we create a healthy competition among contributors and gives them the incentive to contribute. Our aim is to make open-source contribution a habit! 
   -
