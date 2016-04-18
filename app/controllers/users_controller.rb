@@ -16,8 +16,9 @@ class UsersController < ApplicationController
   end
 
   def sync
-    CommitJob.perform_later(params[:user_id])
-    ActivityJob.perform_later(params[:user_id])
-    redirect_to user_path(params[:user_id]), :notice => I18.t('messages.repository_sync')
+    CommitJob.perform_later(current_user)
+    ActivityJob.perform_later(current_user)
+
+    redirect_to repositories_path, notice: I18n.t('messages.repository_sync')
   end
 end

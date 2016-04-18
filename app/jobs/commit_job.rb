@@ -1,7 +1,15 @@
 class CommitJob < ActiveJob::Base
   queue_as :git
 
-  def perform(user = nil, repo = nil, round_id = nil)
-    CommitsFetcher.new(repo, user, round_id).fetch
+  def perform(user, repo = nil, round = nil)
+    round = Round.opened unless round
+
+    if repo
+       CommitsFetcher.new(repo, user, round).fetch
+    else
+      user.repositories.each do |repo|
+        CommitsFetcher.new(repo, user, round).fetch
+      end
+    end
   end
 end

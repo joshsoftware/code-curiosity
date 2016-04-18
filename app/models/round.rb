@@ -19,6 +19,10 @@ class Round
     errors.add(:end_date, "should be greater than start date.") if  self.end_date and self.end_date.to_i <= self.from_date.to_i
   end
 
+  def self.opened
+    Round.where(status: 'open').first
+  end
+
   def open?
     status ==  ROUND_CONFIG['states']['open']
   end

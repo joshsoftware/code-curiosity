@@ -17,6 +17,9 @@ class CommitsFetcher
   end
 
   def fetch
+    if repo.owner.blank? || repo.name.blank?
+    end
+
     GITHUB.repos.branches(user: repo.owner, repo: repo.name).each do |branch|
       branch_commits(branch.name)
     end

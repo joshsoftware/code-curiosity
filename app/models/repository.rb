@@ -126,7 +126,6 @@ class Repository
     _commits = self.commits.where(round: round) if round
 
     _commits.each do |commit|
-      commit.branch = git.gcommit(commit.sha).branch rescue nil
       commit.set(auto_score: engine.calculate_score(commit))
     end
 

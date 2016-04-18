@@ -65,6 +65,7 @@ class User
 
   after_create do |user|
     User.delay(queue: 'git').update_total_repos_stars(user.id)
+    user.subscriptions.find_or_create_by(round: Round.opened)
   end
 
   def self.from_omniauth(auth)

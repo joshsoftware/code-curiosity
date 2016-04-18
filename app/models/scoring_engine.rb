@@ -12,7 +12,7 @@ class ScoringEngine
 
   def fetch_repo
     if Dir.exist?(repo_dir)
-      self.git = Git.open(repo_dir) #.tap{|g| g.pull}
+      self.git = Git.open(repo_dir).tap{|g| g.pull}
     else
       self.git = Git.clone(repo.ssh_url, repo.id, path: config[:repositories])
     end
@@ -46,6 +46,7 @@ class ScoringEngine
   def bugspots_score(commit)
     fetch_repo unless git
 
+    branch = git.gcommit(commit.sha).branch rescue nil
     branch = commit.branch.present? ? commit.branch : git.branch.name
 
     bugspots = Bugspots.scan(repo_dir, branch).last

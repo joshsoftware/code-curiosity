@@ -19,16 +19,15 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every :day, :at => '12:01am' do
-  rake "fetch_data:commits"
+every :day, :at => '12:00am' do
+  rake "fetch_data:commits_and_activities"
 end
 
-every :day, :at => '1:01am' do
-  rake "fetch_data:activities"
-end
-
-#
-every '0 2 30 * *'  do
+every :day, :at => '6:00am' do
  rake "auto_score"
+end
+
+every '1 0 30 * *' do
+  rake 'round:next'
 end
 
