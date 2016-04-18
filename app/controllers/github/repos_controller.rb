@@ -2,8 +2,7 @@ class Github::ReposController < ApplicationController
   before_action :authenticate_user!
 
   def index
-   find_repos("repos/#{current_user.id}", 'user')
-   fetch_repo_data('org')
+    find_repos("repos/#{current_user.id}", 'user')
   end
 
   def orgs
@@ -11,7 +10,7 @@ class Github::ReposController < ApplicationController
   end
 
   def sync
-    %w(org user).each{|t| fetch_repo_data(t)}
+    %w(user org).each{|t| fetch_repo_data(t)}
   end
 
   private
@@ -28,11 +27,17 @@ class Github::ReposController < ApplicationController
   end
 
   def fetch_repo_data(type)
-    return if current_user.gh_sync_jobs[type].present?
+    return if current_user.repo_syncing?(type)
 
     # Syching users repos
-    job = UserGhReposJob.perform_later(current_user, type)
-    current_user.gh_sync_jobs[type] = job.job_id
+    UserGhReposJob.perform_later(current_user, type)
+
+    if type == 'user'
+      current_user.last_repo_sync_at = Time.now
+    else
+      current_user.last_org_repo_sync_at = Time.now
+    end
+
     current_user.save
   end
 

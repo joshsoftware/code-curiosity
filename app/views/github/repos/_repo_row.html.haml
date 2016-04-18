@@ -1,6 +1,5 @@
 %tr{id: "repo-#{repo.id}"}
   %td= link_to repo.name, repo.html_url, target: '_blank'
-  %td= repo.stargazers_count
   %td= repo.description
   %td{ align: 'center'}
     - if current_user.repositories.where(gh_id: repo.id).none?

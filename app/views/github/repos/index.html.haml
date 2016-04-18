@@ -4,6 +4,9 @@
     = link_to sync_github_repos_path, class: 'btn btn-primary pull-right', remote: true do
       %i.fa.fa-refresh
       %b Sync Repositories
+%section
+  .callout-info.col-xs-12
+    = render partial: 'callout_box', locals: { type: 'info', title: 'Not seeing a repository?', message: t('repositories.criteria_message')}
 %section.content
   .row
     .col-xs-12
@@ -18,8 +21,10 @@
             %ul.dropdown-menu#orgs-list
         .tab-content
           .tab-pane.active#my-repos-tab
-            - if current_user.gh_syncing?('user') &&  @repos.blank?
+            - if current_user.repo_syncing?('user')
               %h3= t('repositories.github_sync')
+            - elsif @repos.blank?
+              %h3= t('repositories.dont_have_populer_repos')
             - else
               = render 'repos'
           .tab-pane#org-repos-tab

@@ -45,7 +45,8 @@ class User
   field :repos_star_count,   type: Integer, default: 0
 
   # Sidekiq job id
-  field :gh_sync_jobs,       type: Hash, default: {}
+  field :last_repo_sync_at,  type: Time
+  field :last_org_repo_sync_at, type: Time
 
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
@@ -119,8 +120,9 @@ class User
     @gh_orgs ||= GITHUB.organizations.all(user: self.github_handle)
   end
 
-  def gh_syncing?(type)
-    gh_sync_jobs[type].present?
+  def repo_syncing?(type)
+    sync_at = type == 'user' ? last_repo_sync_at : last_org_repo_sync_at
+    sync_at.present? && (Time.now - sync_at) < 3600
   end
 
   def self.update_total_repos_stars(user_id)
@@ -128,7 +130,13 @@ class User
     star_count = 0
 
     GITHUB.repositories.list(user: user.github_handle).each_page do |repos|
-      star_count += repos.inject(0){|result, repo| result += repo.stargazers_count; result }
+      star_count += repos.inject(0) do |result, repo|
+        if repo.stargazers_count >= REPOSITORY_CONFIG['popular']['stars']
+          result += repo.stargazers_count
+        end
+
+        result
+      end
     end
 
     user.set(repos_star_count: star_count)
@@ -138,6 +146,7 @@ class User
 
   def subscribe_to_latest_round
     round = Round.find_by({status: 'open'})
+
     if round
       round.subscriptions.create(user: self)
     end

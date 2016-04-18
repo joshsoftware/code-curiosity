@@ -28,6 +28,8 @@ en:
     subscription_successfull: "You have successfully subcribed for this challenge"
     repository_sync: "Your Repositories are getting in Sync. Please wait for sometime."
   repositories:
+    criteria_message: "It’s probably not met the minimum criteria - either the repos or it’s origin should have at least 25 stars. This makes your contributions valuable." 
     contribute_to: "Repository you would like to contribute or source(fork) repository requires minimum %{stars} stars."
     not_found: 'Repository not exists on github.'
-    github_sync: 'Wait for few moments. Repositories syncing in process....'
+    github_sync: 'Wait for few minutes. Repositories syncing in process....'
+    dont_have_populer_repos: "There are no repositories with more then 25 stars in github."
