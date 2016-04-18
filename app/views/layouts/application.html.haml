@@ -19,9 +19,8 @@
       = render 'sidebar'
       .content-wrapper
         = yield 
-      - cache do
-        %footer.main-footer
-          = render 'footer'
+      %footer.main-footer
+        = render 'footer'
     - if flash.any?
       :javascript
         #{show_flash_notifications}

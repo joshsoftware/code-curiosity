@@ -18,8 +18,7 @@
       .content
         = yield 
       .content
-        - cache do
-          = render 'footer'
+        = render 'footer'
     - if flash.any?
       :javascript
         #{show_flash_notifications}

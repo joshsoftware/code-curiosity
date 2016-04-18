@@ -25,7 +25,7 @@ class UserGhReposJob < ActiveJob::Base
     self.repos_star_count = 0
 
     user_repos = fetch_repos(GITHUB.repos(user: user.github_handle))
-    Rails.cache.write("repos/#{user.id}", user_repos.to_json)
+    Rails.cache.write("repos/#{user.id}", user_repos.to_json, expires_in: 1.month)
     user.set(repos_star_count: repos_star_count)
   end
 
@@ -35,7 +35,7 @@ class UserGhReposJob < ActiveJob::Base
         repos = fetch_repos(GITHUB.repos(org: org.login))
 
         if repos.any?
-          Rails.cache.write("repos/org/#{org.login}", repos.to_json)
+          Rails.cache.write("repos/org/#{org.login}", repos.to_json, expires_in: 1.month)
         end
       end
     end
