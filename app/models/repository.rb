@@ -103,6 +103,7 @@ class Repository
     user.github_handle = repo.owner.login
     user.avatar_url = repo.owner.avatar_url
     user.password = Devise.friendly_token[0, 20]
+    user.auto_created = true
     user.save(validate: false)
     user
   end

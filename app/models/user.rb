@@ -35,6 +35,7 @@ class User
   field :points,             type: Integer, default: 0
   field :level,              type: Integer, default: 1
   field :total_points,       type: Integer, default: 0
+  field :auto_created,       type: Boolean, default: false
 
   field :activities_count,   type: Integer, default: 0
   field :commits_count,      type: Integer, default: 0
@@ -82,7 +83,8 @@ class User
       avatar_url: auth.info.image,
       github_handle: auth.extra.raw_info.login,
       followers: auth.extra.raw_info.followers,
-      public_repos: auth.extra.raw_info.public_repos
+      public_repos: auth.extra.raw_info.public_repos,
+      auto_created: false
     })
 
     user.save
