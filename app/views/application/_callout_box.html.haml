@@ -1,3 +1,4 @@
 .callout{class: "callout-#{type}"}
-  %h4=title
+  - if title
+    %h4=title
   %p= message

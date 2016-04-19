@@ -1,0 +1,24 @@
+group:
+  1:
+    name: Horses
+    desc: Prancing among the horses
+    default: true
+  2:
+    name: Wolves
+    desc: Dancing with wolves
+    followers: 15
+    own_repositories: 
+      count: 1
+      stars: 50
+    popular_repositories:
+      count: 1
+      stars: 500
+  3:
+    name: Eagles
+    desc: Flying with the eagles
+    repositories: 
+      count: 2
+      stars: 50
+    popular_repositories:
+      count: 2
+      stars: 500

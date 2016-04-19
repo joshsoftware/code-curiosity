@@ -15,6 +15,9 @@ repository:
   popular: 
     stars: 25
 
+user:
+  :royalty_points_threshold: 5_00_000
+
 scoring_engine:
   :repositories: 'repositories' # repositories dir
   :max_score: 5

@@ -1,13 +1,15 @@
 namespace :round do
   desc "Creat next round"
   task :next => :environment do |t, args|
-    round = Round.find_by({status: 'open'})
+    round = Round.opened
     round.round_close
+    opened_round = Round.opened
+    per_batch = 1000
 
-    next_round = Round.find_by({status: 'open'})
-
-    User.all.each do |user|
-      user.subscriptions.find_or_create_by(round: next_round)
+    0.step(User.count, per_batch) do |offset|
+      User.limit(per_batch).skip(offset).each do |user|
+        user.subscribe_to_round(opened_round)
+      end
     end
   end
 end

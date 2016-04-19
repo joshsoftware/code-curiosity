@@ -2,6 +2,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include GlobalID::Identification
+  include UserLevelHelper
 
   ROLES = {admin: 'Admin'}
 
@@ -37,6 +38,7 @@ class User
 
   field :activities_count,   type: Integer, default: 0
   field :commits_count,      type: Integer, default: 0
+  field :celebrity,          type: Boolean, default: false
 
   # Github profile info
   field :followers,          type: Integer, default: 0
@@ -44,9 +46,10 @@ class User
   field :github_user_since,  type: Date
   field :repos_star_count,   type: Integer, default: 0
 
-  # Sidekiq job id
+  # Background sync
   field :last_repo_sync_at,  type: Time
   field :last_org_repo_sync_at, type: Time
+
 
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
@@ -64,8 +67,8 @@ class User
   validates :email, :github_handle, :name, presence: true
 
   after_create do |user|
-    User.delay(queue: 'git').update_total_repos_stars(user.id)
-    user.subscriptions.find_or_create_by(round: Round.opened)
+    User.delay_for(2.second, queue: 'git').update_total_repos_stars(user.id.to_s)
+    user.subscribe_to_round
   end
 
   def self.from_omniauth(auth)
@@ -126,32 +129,40 @@ class User
     sync_at.present? && (Time.now - sync_at) < 3600
   end
 
+  # NOTE: If round nil the subscribe to latest round.
+  def subscribe_to_round(round = nil)
+    round = Round.opened unless round
+    self.subscriptions.find_or_create_by(round: round) if round
+  end
+
+  def set_royalty_bonus
+    royalty_points = (repos_star_count*100) * ([followers, 100].min/100.0)
+
+    if royalty_points >= USER[:royalty_points_threshold]
+      self.celebrity = true
+    else
+      self.total_points = royalty_points
+      self.points = royalty_points
+    end
+
+    self.transactions.create(points: royalty_points, transaction_type: 'royalty_bonus', type: 'credit')
+    self.save
+  end
+
   def self.update_total_repos_stars(user_id)
     user = User.find(user_id)
     star_count = 0
 
-    GITHUB.repositories.list(user: user.github_handle).each_page do |repos|
-      star_count += repos.inject(0) do |result, repo|
+    GITHUB.repos(user: user.github_handle).list(per_page: 100).each_page do |repos|
+      repos.each do |repo|
         if repo.stargazers_count >= REPOSITORY_CONFIG['popular']['stars']
-          result += repo.stargazers_count
+          star_count += repo.stargazers_count
         end
-
-        result
       end
     end
 
     user.set(repos_star_count: star_count)
+    user.set_royalty_bonus
   end
 
-  private
-
-  def subscribe_to_latest_round
-    round = Round.find_by({status: 'open'})
-
-    if round
-      round.subscriptions.create(user: self)
-    end
-
-    return true
-  end
 end

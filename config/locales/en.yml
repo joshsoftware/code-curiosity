@@ -27,6 +27,8 @@ en:
     login_required: "You must signin/signup to continue"
     subscription_successfull: "You have successfully subcribed for this challenge"
     repository_sync: "Your Repositories are getting in Sync. Please wait for sometime."
+  user:
+    celebrity_signup: "You're way over the top - contact the team and we shall work out a fixed income per month for you "
   repositories:
     criteria_message: "It’s probably not met the minimum criteria - either the repos or it’s origin should have at least 25 stars. This makes your contributions valuable." 
     contribute_to: "Repository you would like to contribute or source(fork) repository requires minimum %{stars} stars."

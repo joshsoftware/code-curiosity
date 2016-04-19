@@ -8,29 +8,25 @@ class CommitsFetcher
     @round = round
   end
 
-  def self.fetch(repo, round_id = nil)
-    round = round_id ? Round.find(round_id) : Round.find_by({status: 'open'})
-
-    repo.users.each do |user|
-      CommitsFetcher.new(repo, user, round).fetch
-    end
-  end
-
-  def fetch
-    if repo.owner.blank? || repo.name.blank?
-    end
-
+  def fetch(type = :daily)
     GITHUB.repos.branches(user: repo.owner, repo: repo.name).each do |branch|
-      branch_commits(branch.name)
+      branch_commits(branch.name, type)
     end
   end
 
-  def branch_commits(branch)
+  def branch_commits(branch, type)
+    since_time = if type == :daily
+                   Time.now - 30.hours
+                 else
+                   round.from_date.beginning_of_day
+                 end
+
     response = GITHUB.repos.commits.all( repo.owner, repo.name, {
       author: user.github_handle,
-      since: round.from_date.beginning_of_day,
+      since: since_time,
       'until': round.end_date ? round.end_date.end_of_day : Time.now,
-      sha: branch
+      sha: branch,
+      per_page: 200
     })
 
     return if response.body.blank?

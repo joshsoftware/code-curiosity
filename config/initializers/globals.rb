@@ -8,6 +8,7 @@ YAML.load_file('config/code_curiosity_config.yml').tap do |config|
   ROUND_CONFIG =  config['round']
   REPOSITORY_CONFIG = config['repository']
   SCORING_ENGINE_CONFIG = config['scoring_engine']
+  USER = config['user']
 end
 
 STAR_RATINGS = (0..5).to_a

@@ -1,7 +1,7 @@
 class UserGhReposJob < ActiveJob::Base
   queue_as :git
 
-  attr_accessor :user, :type, :repos_star_count
+  attr_accessor :user, :type
 
   rescue_from(StandardError) do |exception|
     if user
@@ -22,11 +22,8 @@ class UserGhReposJob < ActiveJob::Base
   end
 
   def fetch_users_repos
-    self.repos_star_count = 0
-
     user_repos = fetch_repos(GITHUB.repos(user: user.github_handle))
     Rails.cache.write("repos/#{user.id}", user_repos.to_json, expires_in: 1.month)
-    user.set(repos_star_count: repos_star_count)
   end
 
   def fetch_orgs_repos
@@ -47,7 +44,6 @@ class UserGhReposJob < ActiveJob::Base
     gh_query.list(per_page: 100).each_page do |repos|
       repos.each do |repo|
         matched_repos << repo if can_contribute?(repo)
-        self.repos_star_count += repo.stargazers_count if gh_query.org.nil?
       end
     end
 

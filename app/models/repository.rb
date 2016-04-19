@@ -49,7 +49,7 @@ class Repository
   end
 
   def self.add_new(params, user)
-    repo = user.repositories.where(gh_id: params[:gh_id]).first
+    repo = Repository.where(gh_id: params[:gh_id]).first
 
     if repo
       repo.users << user unless repo.users.include?(user)

@@ -7,7 +7,7 @@
     %li.header Total rounds #{Round.count}
     %li
       %ul.menu
-        - Round.all.desc(:created_at).each do |round|
+        - Round.all.desc(:from_date).each do |round|
           %li
             = link_to "Round - #{round.from_date.strftime("%b %Y")} (#{round.status})", change_round_path(round)
 %li.dropdown.user.user-menu

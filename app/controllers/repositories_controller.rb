@@ -36,7 +36,7 @@ class RepositoriesController < ApplicationController
   end
 
   def sync
-    CommitJob.perform_later(current_user, @repo)
+    CommitJob.perform_later(current_user, 'all', @repo)
     #ActivityJob.perform_later(current_user)
 
     flash[:notice] = 'Your Repositories are getting in Sync. Please wait for sometime.'

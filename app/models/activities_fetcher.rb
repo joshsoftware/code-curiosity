@@ -8,21 +8,21 @@ class ActivitiesFetcher
     @round = round
   end
 
-  def self.fetch(round_id = nil)
-    round = round_id ? Round.find(round_id) : Round.find_by({status: 'open'})
+  def fetch(type = :daily)
+    since_time = if type == :daily
+                   Time.now - 30.hours
+                 else
+                   round.from_date.beginning_of_day
+                 end
 
-    User.contestants.all.each do |user|
-      ActivitiesFetcher.new(user, round).fetch
-    end
-  end
-
-  def fetch
-    repos      = user.repositories.pluck(:name)
+    repos = user.repositories.pluck(:name)
     event_types = TRACKING_EVENTS.keys
-    activities = GITHUB.activity.events.performed(user: user.github_handle, per_page: 100)
+    activities = GITHUB.activity.events.performed(user: user.github_handle, per_page: 200)
 
-    activities = activities.select do |a|
-      Time.parse(a.created_at) > round.from_date.beginning_of_day && event_types.include?(a.type) && repos.include?(a.repo.name)
+    activities.each do |a|
+      if Time.parse(a.created_at) > since_time && event_types.include?(a.type) && repos.include?(a.repo.name)
+        create_activity(a)
+      end
     end
   end
 

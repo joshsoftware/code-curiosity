@@ -21,12 +21,12 @@
             %ul.dropdown-menu#orgs-list
         .tab-content
           .tab-pane.active#my-repos-tab
-            - if current_user.repo_syncing?('user')
+            - if @repos.any?
+              = render 'repos'
+            - elsif @repos.blank? && current_user.repo_syncing?('user')
               %h3= t('repositories.github_sync')
             - elsif @repos.blank?
               %h3= t('repositories.dont_have_populer_repos')
-            - else
-              = render 'repos'
           .tab-pane#org-repos-tab
             #gh-orgs-title
               %h3
