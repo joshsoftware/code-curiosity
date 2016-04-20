@@ -4,14 +4,18 @@
 %section.content
   .row
     .col-xs-12
-      .box
-        .box-body.table-responsive.no-padding
-          %table.table.leaderboard
-            %tbody
-              %tr
-                %th.col-xs-2 #
-                %th User
-                %th Commits
-                %th Activities
-                %th Points
-              = render partial: 'user', collection: @users
+      - if @users.none?
+        .callout-info
+          = render partial: 'callout_box', locals: { type: 'success', title: t('user.no_leaders'), message: ''}
+      - else
+        .box
+          .box-body.table-responsive.no-padding
+            %table.table.leaderboard
+              %tbody
+                %tr
+                  %th.col-xs-2 #
+                  %th User
+                  %th Commits
+                  %th Activities
+                  %th Points
+                = render partial: 'user', collection: @users

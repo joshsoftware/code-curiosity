@@ -48,7 +48,7 @@ class CommitsFetcher
     commit.html_url = html_url
     commit.comments_count = data['comment_count']
     commit.round = round
-    commit.save
+    commit.save!
   end
 
   def self.by_sha(repo, sha)

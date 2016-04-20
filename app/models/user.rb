@@ -51,7 +51,6 @@ class User
   field :last_repo_sync_at,  type: Time
   field :last_org_repo_sync_at, type: Time
 
-
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_and_belongs_to_many :repositories, class_name: 'Repository', inverse_of: 'users'
@@ -61,6 +60,10 @@ class User
   has_many :subscriptions
   has_many :rounds
   has_many :comments
+
+  index(uid: 1)
+  index(github_handle: 1)
+  index(auto_created: 1)
 
   scope :contestants, -> { where(is_judge: false) }
   scope :judges, -> { where(is_judge: true) }

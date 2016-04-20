@@ -29,4 +29,10 @@ module ApplicationHelper
     date.strftime("%d %b %Y") if date
   end
 
+  def format_points(points)
+    return points if points < 9999
+
+    "#{(points/1000.0).round(1)}k"
+  end
+
 end

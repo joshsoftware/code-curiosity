@@ -6,19 +6,20 @@ group:
   2:
     name: Wolves
     desc: Dancing with wolves
-    followers: 15
+    followers: 5
     own_repositories: 
       count: 1
-      stars: 50
+      stars: 15
     popular_repositories:
       count: 1
-      stars: 500
+      stars: 25
   3:
     name: Eagles
     desc: Flying with the eagles
+    followers: 15
     repositories: 
       count: 2
-      stars: 50
+      stars: 25 
     popular_repositories:
       count: 2
-      stars: 500
+      stars: 75

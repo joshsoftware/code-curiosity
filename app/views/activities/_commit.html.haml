@@ -1,9 +1,12 @@
 %tr{data: {commit: commit.id.to_s}}
   %td.score.commit
-    %ul.score-bar
-      - commit.auto_score.times do |i|
-        %li.score{class: score_css_class(commit.auto_score)}
-    =# commit.auto_score.present? ? commit.auto_score :  'In review'
+    = commit.auto_score
+    - if commit.auto_score.blank?
+      In Review
+    - else
+      %ul.score-bar
+        - commit.auto_score.times do |i|
+          %li.score{class: score_css_class(commit.auto_score)}
   %td= commit.commit_date.strftime('%d/%m/%Y')
   %td= commit.repository.name
   %td= commit.message

@@ -44,6 +44,8 @@ class ScoringEngine
   end
 
   def bugspots_score(commit)
+    return 0 if commit.info.nil?
+
     fetch_repo unless git
 
     branch = git.gcommit(commit.sha).branch rescue nil

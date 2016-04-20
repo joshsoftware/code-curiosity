@@ -26,3 +26,4 @@
 1
 dump.rdb
 /repositories
+app/models/app_test.rb

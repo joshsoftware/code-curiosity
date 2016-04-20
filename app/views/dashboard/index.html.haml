@@ -1,7 +1,7 @@
 %section.content-header
   %h1 
     Dashboard
-= render 'celebrity_box' if current_user.celebrity
+= render 'celebrity_box' if current_user && current_user.celebrity
 %section.content
   .row
     .col-lg-3.col-xs-6

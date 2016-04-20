@@ -2,10 +2,14 @@ namespace :fetch_data do
   desc "Fetch code-curiosity github repositories commits and activities periodically."
   task :commits_and_activities, [:type] => :environment do |t, args|
     type = args[:type] || 'daily'
+    puts "Running for #{type}"
+
     per_batch = 1000
 
-    0.step(User.count, per_batch) do |offset|
-      User.limit(per_batch).skip(offset).each do |user|
+    users = User.where(auto_created: false)
+
+    0.step(users.count, per_batch) do |offset|
+      users.limit(per_batch).skip(offset).each do |user|
         CommitJob.perform_later(user, type)
         ActivityJob.perform_later(user, type)
       end

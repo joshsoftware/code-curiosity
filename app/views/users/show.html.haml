@@ -1,6 +1,6 @@
 %section.content-header
   %h1 User Profile
-= render 'celebrity_box' if current_user.celebrity
+= render 'celebrity_box' if current_user && current_user.celebrity
 %section.content
   .row
     .col-xs-3
@@ -17,7 +17,7 @@
               %a.pull-right= @user.level
             %li.list-group-item
               %b Points
-              %a.pull-right= @user.total_points
+              %a.pull-right= format_points(@user.total_points)
             %li.list-group-item
               %b Commits
               %a.pull-right= @user.commits_count

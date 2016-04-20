@@ -12,7 +12,7 @@ class Commit
   field :html_url,       type: String
   field :comments_count, type: Integer, default: 0
   field :sha,            type: String
-  field :auto_score,     type: Integer, default: 0
+  field :auto_score,     type: Integer
   field :default_score,  type: Float, default: 0
   field :bugspots_score, type: Float, default: 0
 
@@ -36,7 +36,7 @@ class Commit
   end
 
   def info
-    @info ||= GITHUB.repos.commits.get(repository.owner, repository.name, sha)
+    @info ||= GITHUB.repos.commits.get(repository.owner, repository.name, sha) rescue nil
   end
 
   def avg_score

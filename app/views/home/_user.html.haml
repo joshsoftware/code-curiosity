@@ -6,4 +6,4 @@
     = link_to user.github_handle, user_path(user), class: 'users-list-name'
   %td= user.commits_count
   %td= user.activities_count
-  %td= user.total_points
+  %td= format_points(user.total_points)
