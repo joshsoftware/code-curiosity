@@ -2,7 +2,6 @@ class Repository
   include Mongoid::Document
   include Mongoid::Timestamps
   include GlobalID::Identification
-  include RepositoryVerification
 
   field :name,        type: String
   field :description, type: String
@@ -49,6 +48,10 @@ class Repository
     end
   end
 
+  def info
+    @info ||= GITHUB.repos.get(owner, name)
+  end
+
   def self.add_new(params, user)
     repo = Repository.where(gh_id: params[:gh_id]).first
 
@@ -57,7 +60,7 @@ class Repository
       return repo
     end
 
-    gh_repo = GithubClient.repo(params[:owner], params[:name])
+    gh_repo = GITHUB.repos.get(params[:owner], params[:name])
     return unless gh_repo
 
     repo = build_from_gh_info(gh_repo)
@@ -121,6 +124,8 @@ class Repository
     @git ||= Git.open(code_dir)
   end
 
+  PULL_REQ_MERGE_REGX = /merge pull/i
+
   def score_commits(round = nil)
     engine = ScoringEngine.new(self)
 
@@ -128,7 +133,11 @@ class Repository
     _commits = self.commits.where(round: round) if round
 
     _commits.each do |commit|
-      commit.set(auto_score: engine.calculate_score(commit))
+      if commit.message =~ PULL_REQ_MERGE_REGX
+        commit.set(auto_score: 0)
+      else
+        commit.set(auto_score: engine.calculate_score(commit))
+      end
     end
 
     return true

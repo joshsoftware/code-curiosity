@@ -15,21 +15,21 @@ class ActivitiesFetcher
                    round.from_date.beginning_of_day
                  end
 
-    repos = user.repositories.pluck(:name)
+    repos = user.repositories.pluck(:gh_id)
     event_types = TRACKING_EVENTS.keys
-    activities = GITHUB.activity.events.performed(user: user.github_handle, per_page: 200)
+    activities = GITHUB.activity.events.performed(user.github_handle, per_page: 200)
 
     activities.each do |a|
-      if Time.parse(a.created_at) > since_time && event_types.include?(a.type) && repos.include?(a.repo.name)
+      if Time.parse(a.created_at) > since_time && event_types.include?(a.type) && repos.include?(a.repo.id)
         create_activity(a)
       end
     end
   end
 
   def create_activity(activity)
-    return unless user.github_handle == activity.payload[type].user.login
-
     type = TRACKING_EVENTS[activity.type]
+
+    return unless user.github_handle == activity.payload[type].user.login
 
     user_activity = user.activities.find_or_initialize_by(gh_id: activity.id)
     user_activity.event_type = type
