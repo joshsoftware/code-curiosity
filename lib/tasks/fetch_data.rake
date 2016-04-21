@@ -5,7 +5,6 @@ namespace :fetch_data do
     puts "Running for #{type}"
 
     per_batch = 1000
-
     users = User.where(auto_created: false)
 
     0.step(users.count, per_batch) do |offset|

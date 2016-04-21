@@ -32,23 +32,23 @@ class CommitsFetcher
     return if response.body.blank?
 
     response.body.each do |data|
-      create_commit(data['commit'].to_hash, data['html_url'])
+      create_commit(data)
     end
   end
 
-  def create_commit(data, html_url)
-    commit = repo.commits.find_or_initialize_by(sha: data['tree']['sha'])
+  def create_commit(data)
+    commit = repo.commits.find_or_initialize_by(sha: data['sha'])
 
     return if commit.persisted?
 
-    commit.message = data['message']
-    commit.commit_date = data['author']['date']
+    commit.message = data['commit']['message']
+    commit.commit_date = data['commit']['author']['date']
     commit.user = user
     commit.repository = repo
-    commit.html_url = html_url
-    commit.comments_count = data['comment_count']
+    commit.html_url = data['html_url']
+    commit.comments_count = data['commit']['comment_count']
     commit.round = round
-    commit.save!
+    commit.save
   end
 
   def self.by_sha(repo, sha)

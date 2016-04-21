@@ -36,7 +36,7 @@ class Commit
   end
 
   def info
-    @info ||= GITHUB.repos.commits.get(repository.owner, repository.name, sha) rescue nil
+    @info ||= GITHUB.repos.commits.get(repository.owner, repository.name, sha) #rescue nil
   end
 
   def avg_score
