@@ -36,7 +36,7 @@ function selectTabUsingUrlHash(){
   var hash = window.location.hash;
 
   if(hash){
-    $(hash + '_tab_link').tab('show');
+    $(hash + '_tab_link a').tab('show');
   }
 }
 
