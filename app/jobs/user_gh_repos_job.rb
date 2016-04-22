@@ -41,7 +41,7 @@ class UserGhReposJob < ActiveJob::Base
   def fetch_repos(gh_query)
     matched_repos = []
 
-    gh_query.list(per_page: 100).each_page do |repos|
+    gh_query.list(per_page: 100, type: 'all').each_page do |repos|
       repos.each do |repo|
         matched_repos << repo if can_contribute?(repo)
       end
