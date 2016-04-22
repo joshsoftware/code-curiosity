@@ -46,6 +46,7 @@ class User
   field :public_repos,       type: Integer, default: 0
   field :github_user_since,  type: Date
   field :repos_star_count,   type: Integer, default: 0
+  field :auth_token,         type: String
 
   # Background sync
   field :last_repo_sync_at,  type: Time
@@ -87,7 +88,8 @@ class User
       github_handle: auth.extra.raw_info.login,
       followers: auth.extra.raw_info.followers,
       public_repos: auth.extra.raw_info.public_repos,
-      auto_created: false
+      auto_created: false,
+      auth_token: User.encrypter.encrypt_and_sign(auth.credentials.token)
     })
 
     user.save
@@ -122,7 +124,7 @@ class User
   end
 
   def info
-    @info ||= GithubClient.user(self.github_handle)
+    @info ||= GITHUB.users.get(user: github_handle)
   end
 
   def gh_orgs
@@ -168,6 +170,22 @@ class User
 
     user.set(repos_star_count: star_count)
     user.set_royalty_bonus
+  end
+
+  def self.encrypter
+    @_encrypter ||= ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['ENC_KEY']))
+  end
+
+  def gh_auth_token
+    User.encrypter.decrypt_and_verify(auth_token)
+  end
+
+  def gh_client
+    @gh_client ||= Github.new({
+      oauth_token: auth_token.present? ? gh_auth_token : ENV['GIT_OAUTH_TOKEN'],
+      client_id: ENV['GIT_APP_ID'],
+      client_secret: ENV['GIT_APP_SECRET']
+    })
   end
 
 end

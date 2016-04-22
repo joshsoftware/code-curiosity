@@ -16,14 +16,14 @@ namespace :fetch_data do
   end
 
   desc "Fetch data for all rounds"
-  task :all_round => :environment do |t, args|
+  task :all_rounds => :environment do |t, args|
     users = User.where(auto_created: false)
     type = 'all'
     
-    Round.all.each do |round|
-      users.each do |user|
-        CommitJob.perform_later(user, type, nil, round)
-        ActivityJob.perform_later(user, type, round)
+    User.where(auto_created: false).each do |user|
+      user.subscriptions.each do |s|
+        CommitJob.perform_later(user, type, nil, s.round)
+        ActivityJob.perform_later(user, type, s.round)
       end
     end
   end
