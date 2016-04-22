@@ -1,6 +1,6 @@
 %tr
   %td= subscription_counter + 1
-  %td= subscription.round.name 
+  %td= subscription.round.from_date.strftime("%b %Y") 
   %td
     %small.label{class: subscription.round.open? ? 'bg-green' : 'bg-yellow'}
       = subscription.round.status
