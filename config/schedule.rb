@@ -23,8 +23,12 @@ every :day, :at => '12:00am' do
   rake "fetch_data:commits_and_activities"
 end
 
-every :day, :at => '6:00am' do
+every :day, :at => '3:00am' do
  rake "auto_score"
+end
+
+every :day, :at => '6:00am' do
+ rake "round:update_scores"
 end
 
 every '1 0 30 * *' do

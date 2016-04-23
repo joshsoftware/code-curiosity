@@ -81,6 +81,7 @@ class ScoringEngine
 
   def calculate_score(commit)
     score = commit_score(commit) + comments_score(commit) + bugspots_score(commit)
+    return 1 if score == 0
     return [score.round, config[:max_score]].min
   end
 
