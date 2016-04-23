@@ -54,7 +54,7 @@ class ScoringEngine
     bugspots = Bugspots.scan(repo_dir, branch).last
     bugspots_scores = bugspots.inject({}){|r, s| r[s.file] = s; r}
 
-    if bugspots_score.any?
+    if bugspots_scores.any?
       max_score = bugspots_scores.max_by{|k,v| v.first.to_f}.last.score.to_f
     else
       max_score = 0
