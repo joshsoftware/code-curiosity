@@ -1,4 +1,4 @@
-lass ScoringJob < ActiveJob::Base
+class ScoringJob < ActiveJob::Base
   queue_as :git
 
   def perform(repository, round = nil)
