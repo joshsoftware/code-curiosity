@@ -4,7 +4,7 @@
 %section.content
   .row
     .col-xs-12
-      - if @users.none?
+      - if @subscriptions.none?
         .callout-info
           = render partial: 'callout_box', locals: { type: 'success', title: t('user.no_leaders'), message: ''}
       - else
@@ -18,4 +18,4 @@
                   %th Commits
                   %th Activities
                   %th Points
-                = render partial: 'user', collection: @users
+                = render partial: 'user', collection: @subscriptions, as: :subscription
