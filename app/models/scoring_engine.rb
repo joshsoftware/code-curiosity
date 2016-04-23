@@ -53,9 +53,14 @@ class ScoringEngine
 
     bugspots = Bugspots.scan(repo_dir, branch).last
     bugspots_scores = bugspots.inject({}){|r, s| r[s.file] = s; r}
-    max_score = bugspots_scores.max_by{|k,v| v.first.to_f}.last.score.to_f
 
-    return 0 if max_score == 0
+    if bugspots_score.any?
+      max_score = bugspots_scores.max_by{|k,v| v.first.to_f}.last.score.to_f
+    else
+      max_score = 0
+    end
+
+    return 0 if max_score.to_i == 0
 
     total_score = commit.info.files.inject(0) do |result, file|
       file_score = bugspots_scores[file.filename]
@@ -75,8 +80,8 @@ class ScoringEngine
   end
 
   def calculate_score(commit)
-     score = commit_score(commit) + comments_score(commit) + bugspots_score(commit)
-     return [score.round, config[:max_score]].min
+    score = commit_score(commit) + comments_score(commit) + bugspots_score(commit)
+    return [score.round, config[:max_score]].min
   end
 
 end
