@@ -67,6 +67,8 @@ class ScoringEngine
       result
     end
 
+    return 0 if total_score == 0
+
     score = [ total_score/commit.info.files.count, config[:max_score] ].min
 
     return score * config[:bugspot_weightage]
