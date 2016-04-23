@@ -19,7 +19,7 @@ namespace :round do
      # subscriptions = Round.opened.subscriptions
 
      Subscription.all.each do |s|
-       s.set(points: s.round.commits.where(user: s.user).sum(:auto_score)
+       s.set(points: s.round.commits.where(user: s.user).sum(:auto_score))
      end 
   end
 end

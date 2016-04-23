@@ -11,6 +11,7 @@ YAML.load_file('config/code_curiosity_config.yml').tap do |config|
   USER = config['user']
 end
 
+USER_GROUPS = YAML.load_file('config/user_group.yml')['groups']
 STAR_RATINGS = (0..5).to_a
 
 INFO = YAML.load_file('config/info.yml')

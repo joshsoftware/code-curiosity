@@ -188,4 +188,8 @@ class User
     })
   end
 
+  def group_name
+    USER_GROUPS[level || 1]['name']
+  end
+
 end
