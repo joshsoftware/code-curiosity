@@ -14,7 +14,7 @@ namespace :round do
   end
 
   desc "Update Round scores" 
-  task :update_scores =>  [:round] => :environment do |t, args|
+  task :update_scores,  [:round] => :environment do |t, args|
      subscriptions = Subscription.all
      # subscriptions = Round.opened.subscriptions
 
