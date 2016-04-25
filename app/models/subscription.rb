@@ -28,9 +28,9 @@ class Subscription
     self.set(points: commits_score + activities_score)
 
     if points == 0
-      self.transaction.dstroy if transaction
+      self.transaction.destroy if transaction
     else
-      self.create_or_update_transaction
+      create_or_update_transaction
     end
   end
 
