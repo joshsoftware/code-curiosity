@@ -13,5 +13,4 @@ class Comment
   after_create do |c|
     c.commentable.inc(comments_count: 1)
   end
-
 end

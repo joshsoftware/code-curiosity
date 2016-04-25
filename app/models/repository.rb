@@ -150,4 +150,9 @@ class Repository
       code_file.save
     end
   end
+
+  def score_activities(round = nil)
+    _activities = round ? activities.where(round: round) : activities
+    _activities.each(&:calculate_score_and_set)
+  end
 end

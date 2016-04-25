@@ -16,9 +16,6 @@ namespace :round do
   desc "Update Round scores" 
   task :update_scores,  [:round] => :environment do |t, args|
      round = Round.find(args[:round]) || Round.opened
-
-     round.subscriptions.all.each do |s|
-       s.set(points: s.round.commits.where(user: s.user).sum(:auto_score))
-     end 
+     round.subscriptions.all.each(&:update_points)
   end
 end

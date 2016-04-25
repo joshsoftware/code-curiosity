@@ -34,7 +34,6 @@ class User
   field :avatar_url,         type: String
   field :points,             type: Integer, default: 0
   field :level,              type: Integer, default: 1
-  field :total_points,       type: Integer, default: 0
   field :auto_created,       type: Boolean, default: false
 
   field :activities_count,   type: Integer, default: 0
@@ -101,7 +100,7 @@ class User
     return false if transaction.errors.any?
 
     if attrs[:transaction_type] == 'credited'
-      self.inc(points: attrs[:points], total_points: attrs[:total_points])
+      self.inc(points: attrs[:points])
     else
       self.inc(points: -attrs[:points])
     end
@@ -147,9 +146,6 @@ class User
 
     if royalty_points >= USER[:royalty_points_threshold]
       self.celebrity = true
-    else
-      self.total_points = royalty_points
-      self.points = royalty_points
     end
 
     self.transactions.create(points: royalty_points, transaction_type: 'royalty_bonus', type: 'credit')
@@ -190,6 +186,10 @@ class User
 
   def group_name
     USER_GROUPS[level || 1]['name']
+  end
+
+  def total_points
+    @_t_p ||= self.transactions.sum(:points)
   end
 
 end

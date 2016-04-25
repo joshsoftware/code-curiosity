@@ -17,7 +17,7 @@
               %a.pull-right= @user.group_name
             %li.list-group-item
               %b Points
-              %a.pull-right= format_points(@user.total_points)
+              %a.pull-right= format_points(@user.transactions.sum(:points))
             %li.list-group-item
               %b Commits
               %a.pull-right= @user.commits_count
@@ -57,6 +57,6 @@
                 %tr
                   %td 
                     %b Total
-                  %td{ colspan: 4 }= @user.points  
+                  %td{ colspan: 4 }= @user.total_points 
 :javascript                  
   selectTabUsingUrlHash()

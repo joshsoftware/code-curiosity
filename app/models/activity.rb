@@ -1,7 +1,6 @@
 class Activity
   include Mongoid::Document
   include Mongoid::Timestamps
-  include ScoreHelper
 
   field :description,     type: String
   field :event_type,      type: String
@@ -10,6 +9,7 @@ class Activity
   field :commented_on,    type: Time
   field :comments_count,  type: Integer, default: 0
   field :gh_id,           type: String
+  field :auto_score,      type: Integer
 
   belongs_to :user
   belongs_to :round
@@ -26,5 +26,13 @@ class Activity
 
   after_create do |a|
     a.user.inc(activities_count: 1)
+  end
+
+  def calculate_score_and_set
+    words = description.to_s.split(/\W+/)
+    self.auto_score = 0
+    self.auto_score = 2 if words.length > 40
+    self.auto_score = 1 if words.length > 25
+    self.save
   end
 end
