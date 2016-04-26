@@ -14,9 +14,11 @@ module UserGithubHelper
   def fetch_all_github_repos
     all_repos = []
     gh_client.repos.list(per_page: 100).each_page do |repos|
-      all_repos << repos
+      repos.each{|r| all_repos << r }
+      # hashie warning on concat
+      # all_repos.concat(repos)
     end
 
-    all_repos.flatten
+    all_repos
   end
 end
