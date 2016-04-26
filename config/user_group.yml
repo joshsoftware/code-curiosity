@@ -17,7 +17,7 @@ groups:
     name: Eagles
     desc: Flying with the eagles
     followers: 15
-    repositories: 
+    own_repositories:
       count: 2
       stars: 25 
     popular_repositories:

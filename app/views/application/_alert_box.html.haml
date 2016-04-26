@@ -1,0 +1,7 @@
+.alert.alert-dismissible{class: "alert-#{type}"}
+  %button.close{ data: { dismiss: 'alert'}}×
+  - if title
+    %h4
+      %i.icon.fa.fa-info
+      = title
+  %p= message

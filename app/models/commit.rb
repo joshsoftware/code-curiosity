@@ -1,7 +1,6 @@
 class Commit
   include Mongoid::Document
   include Mongoid::Timestamps
-  include ScoreHelper
 
   COMMIT_TYPE = {score: 'Scores', commit: 'Commits', activity: 'Activities'}
 
@@ -41,12 +40,8 @@ class Commit
 
   def avg_score
     if self.scores.any?
-      scores.pluck(:value).sum/scores.count
+      (scores.pluck(:value).sum/scores.count.to_f).round
     end
-  end
-
-  def list_scores
-    self.scores.inject(""){|r, s| r += "#{s.user.name}: #{s.rank}<br/>"}
   end
 
   def judge_rating(user)

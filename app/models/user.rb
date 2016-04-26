@@ -2,7 +2,8 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include GlobalID::Identification
-  include UserLevelHelper
+  include UserGroupHelper
+  include UserGithubHelper
 
   ROLES = {admin: 'Admin'}
 
@@ -49,7 +50,6 @@ class User
 
   # Background sync
   field :last_repo_sync_at,  type: Time
-  field :last_org_repo_sync_at, type: Time
 
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
@@ -71,8 +71,11 @@ class User
   validates :email, :github_handle, :name, presence: true
 
   after_create do |user|
-    User.delay_for(2.second, queue: 'git').update_total_repos_stars(user.id.to_s)
-    user.subscribe_to_round
+    unless user.auto_created
+      user.subscribe_to_round
+      User.delay_for(2.second, queue: 'git').update_total_repos_stars(user.id.to_s)
+      UserReposJob.perform_later(user)
+    end
   end
 
   def self.from_omniauth(auth)
@@ -130,9 +133,8 @@ class User
     @gh_orgs ||= GITHUB.organizations.all(user: self.github_handle)
   end
 
-  def repo_syncing?(type)
-    sync_at = type == 'user' ? last_repo_sync_at : last_org_repo_sync_at
-    sync_at.present? && (Time.now - sync_at) < 3600
+  def repo_syncing?
+    last_repo_sync_at.present? && (Time.now - last_repo_sync_at) < 3600
   end
 
   # NOTE: If round nil the subscribe to latest round.
@@ -169,19 +171,7 @@ class User
   end
 
   def self.encrypter
-    @_encrypter ||= ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['ENC_KEY']))
-  end
-
-  def gh_auth_token
-    User.encrypter.decrypt_and_verify(auth_token)
-  end
-
-  def gh_client
-    @gh_client ||= Github.new({
-      oauth_token: auth_token.present? ? gh_auth_token : ENV['GIT_OAUTH_TOKEN'],
-      client_id: ENV['GIT_APP_ID'],
-      client_secret: ENV['GIT_APP_SECRET']
-    })
+   @_encrypter ||= ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['ENC_KEY']))
   end
 
   def group_name

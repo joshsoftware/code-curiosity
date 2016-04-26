@@ -1,22 +1,21 @@
 %section.content-header
   %h1 
     Repositories
-    = link_to github_repos_path, class: 'btn btn-success btn-social pull-right' do
-      %i.fa.fa-plus
-      %b Add New Repository
+    = link_to github_repos_sync_path, class: 'btn btn-success btn-social pull-right', remote: true do
+      %i.fa.fa-refresh
+      %b Sync Github Repositories
+%section
+  .callout-info.col-xs-12
+    = render partial: 'alert_box', locals: { type: 'info', title: 'Not seeing a repository?', message: t('repositories.criteria_message')}
 %section.content
   .row
     .col-xs-12
       .box.box-primary
         .box-header
           %h3.box-title
-            - if @repos.none?
-              Add new
-              = link_to 'Repository', github_repos_path 
-            - else
-              = link_to user_sync_path(current_user), class: 'btn btn-primary pull-left' do
-                %i.fa.fa-refresh
-                Sync All
+            = link_to user_sync_path(current_user), class: 'btn btn-primary pull-left' do
+              %i.fa.fa-refresh
+              Sync All
           .box-tools
             .input-group.input-group-sm.col-xs-3.pull-right
               - if @repos.any?
@@ -25,7 +24,11 @@
                   %button.btn.btn-default{disabled: true}
                     %i.fa.fa-search
         .box-body.table-responsive
-          - if @repos.any?
+          - if @repos.blank? && current_user.repo_syncing?
+            %h3= t('repositories.github_sync')
+          - elsif @repos.blank?
+            %h3= t('repositories.dont_have_populer_repos')
+          - else
             %table#stream_table.table.table-bordered
               %thead
                 %tr
@@ -33,7 +36,7 @@
                   %th.col-xs-2 Name
                   %th.col-xs-2 Owner
                   %th.col-xs-4 Description
-                  %th.col-xs-2 Actions
+                  %th.col-xs-1 Actions
               %tbody     
         .box-footer.clearfix
           #repos-pagination.pagination-container
@@ -45,13 +48,14 @@
       <a href={{record.source_url}} target="_blank"> {{ record.name }}
     %td {{record.owner}}
     %td {{record.description}}
-    %td.col-xs-2
+    %td
       %a{href: "repositories/{{record._id.$oid}}/sync", class: "btn btn-primary btn-sm"} 
         %i.fa.fa-refresh
         Sync
-      %a{href: "repositories/{{record._id.$oid}}", class: "btn btn-danger btn-sm", data: { method: 'delete', confirm: 'Are your sure?'}}
-        %i.fa.fa-trash-o
-        Remove
+      /
+        %a{href: "repositories/{{record._id.$oid}}", class: "btn btn-danger btn-sm", data: { method: 'delete', confirm: 'Are your sure?'}}
+          %i.fa.fa-trash-o
+          Remove
 
 .modal.fade#new_repo
 

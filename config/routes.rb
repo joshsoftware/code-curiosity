@@ -53,12 +53,7 @@ Rails.application.routes.draw do
   end
 
   namespace :github do
-    resources :repos, only: [:index] do
-      collection do
-        get 'orgs/:org_name', action: 'orgs'
-        get 'sync'
-      end
-    end
+    get 'repos/sync' => 'repos#sync'
   end
 
   post 'webhook' => 'dashboard#webhook'
