@@ -5,16 +5,16 @@ class JudgingController < ApplicationController
 
   def commits
     @commits = current_round.commits
-                            .in(repository: current_user.judges_repository_ids)
                             .page(params[:page])
                             .per(20)
+    #                       .in(repository: current_user.judges_repository_ids)
   end
 
   def activities
     @activities = current_round.activities
-                            .in(repository: current_user.judges_repository_ids)
                             .page(params[:page])
                             .per(20)
+    #                       .in(repository: current_user.judges_repository_ids)
   end
 
   def rate
