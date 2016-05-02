@@ -4,7 +4,7 @@ class CommitJob < ActiveJob::Base
   def perform(user, duration, repo = nil, round = nil)
     round = Round.opened unless round
 
-    duration = 'all' if user.created_at > round.from_date.beginning_of_day
+    #duration = 'all' if user.created_at > round.from_date.beginning_of_day
 
     if repo
        CommitsFetcher.new(repo, user, round).fetch(duration.to_sym)

@@ -24,7 +24,9 @@ namespace :fetch_data do
       round = Round.find(subscription.round_id)
       user  = User.find(subscription.user_id)
       
-      CommitJob.perform_later(user, type, nil, round)
+      user.repositories.each do |repo| 
+        CommitJob.perform_later(user, type, repo, round)
+      end
       ActivityJob.perform_later(user, type, round)
     end
   end
