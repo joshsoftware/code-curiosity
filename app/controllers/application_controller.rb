@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :signout_old_login
   before_action :current_round
+
 
   def current_round
     @rounds = Round.order(from_date: :desc)
@@ -13,16 +15,16 @@ class ApplicationController < ActionController::Base
                        Round.find_by({status: 'open'})
                      end
   end
+
   helper_method :current_round
 
   protected
 
-  def after_sign_in_path_for(resource)
-    if session[:subscription_url]
-      redirect_to session[:subscription_url]
-      session[:subscription_url] = nil
-    else
-      dashboard_path
+  def signout_old_login
+    if current_user && current_user.auth_token.blank?
+      sign_out current_user
+      redirect_to root_path
+      return false
     end
   end
 
