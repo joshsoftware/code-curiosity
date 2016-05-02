@@ -9,7 +9,7 @@ class CommitsFetcher
   end
 
   def fetch(type = :daily)
-    GITHUB.repos.branches(user: repo.owner, repo: repo.name).each do |branch|
+    user.gh_client.repos.branches(user: repo.owner, repo: repo.name).each do |branch|
       branch_commits(branch.name, type)
     end
   end
@@ -21,7 +21,7 @@ class CommitsFetcher
                    round.from_date.beginning_of_day
                  end
 
-    response = GITHUB.repos.commits.all( repo.owner, repo.name, {
+    response = user.gh_client.repos.commits.all( repo.owner, repo.name, {
       author: user.github_handle,
       since: since_time,
       'until': round.end_date ? round.end_date.end_of_day : Time.now,
@@ -52,7 +52,7 @@ class CommitsFetcher
   end
 
   def self.by_sha(repo, sha)
-    GITHUB.repos.commits.get(repo.owner, repo.name, sha)
+    user.gh_client.repos.commits.get(repo.owner, repo.name, sha)
   end
 
 end

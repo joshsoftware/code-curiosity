@@ -17,7 +17,7 @@ class ActivitiesFetcher
 
     repos = user.repositories.pluck(:gh_id)
     event_types = TRACKING_EVENTS.keys
-    activities = GITHUB.activity.events.performed(user.github_handle, per_page: 200)
+    activities = user.gh_client.activity.events.performed(user.github_handle, per_page: 200)
 
     activities.each do |a|
       if Time.parse(a.created_at) > since_time && event_types.include?(a.type) && repos.include?(a.repo.id)
