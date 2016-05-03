@@ -23,6 +23,7 @@ class Repository
   has_and_belongs_to_many :judges, class_name: 'User', inverse_of: 'judges_repositories'
   has_many :repositories, class_name: 'Repository', inverse_of: 'popular_repository'
   belongs_to :popular_repository, class_name: 'Repository', inverse_of: 'repositories'
+  belongs_to :organization
 
   validates :name, :source_url, :ssh_url, presence: true
   validate :verify_popularity

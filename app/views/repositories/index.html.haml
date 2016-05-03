@@ -36,7 +36,8 @@
                   %th.col-xs-2 Name
                   %th.col-xs-2 Owner
                   %th.col-xs-4 Description
-                  %th.col-xs-1 Actions
+                  /
+                    %th.col-xs-1 Actions
               %tbody     
         .box-footer.clearfix
           #repos-pagination.pagination-container
@@ -48,16 +49,11 @@
       <a href={{record.source_url}} target="_blank"> {{ record.name }}
     %td {{record.owner}}
     %td {{record.description}}
-    %td
-      %a{href: "repositories/{{record._id.$oid}}/sync", class: "btn btn-primary btn-sm"} 
-        %i.fa.fa-refresh
-        Sync
-      /
-        %a{href: "repositories/{{record._id.$oid}}", class: "btn btn-danger btn-sm", data: { method: 'delete', confirm: 'Are your sure?'}}
-          %i.fa.fa-trash-o
-          Remove
-
-.modal.fade#new_repo
+    /
+      %td
+        %a{href: "repositories/{{record._id.$oid}}/sync", class: "btn btn-primary btn-sm"} 
+          %i.fa.fa-refresh
+          Sync
 
 :javascript
   load_repos(#{@repos.to_json})

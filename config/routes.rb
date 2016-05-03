@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :repositories, except: [:edit, :update] do
-    get 'sync'
+  resources :repositories, only: [:index, :show] do
+    #get 'sync'
   end
 
   resources :users, except: [:destroy] do
@@ -54,6 +54,15 @@ Rails.application.routes.draw do
 
   namespace :github do
     get 'repos/sync' => 'repos#sync'
+  end
+
+  resources :organizations, only: [:show, :edit, :update] do
+    resources :users, only: [:create, :destroy], controller: 'organization/users'
+    resources :repositories, only: [:index], controller: 'organization/repositories' do
+      collection do
+        get :sync
+      end
+    end
   end
 
   post 'webhook' => 'dashboard#webhook'

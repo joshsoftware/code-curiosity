@@ -16,8 +16,10 @@ class UsersController < ApplicationController
   end
 
   def sync
-    CommitJob.perform_later(current_user, 'all')
-    ActivityJob.perform_later(current_user, 'all')
+    unless current_user.gh_data_syncing?
+      CommitJob.perform_later(current_user, 'all')
+      ActivityJob.perform_later(current_user, 'all')
+    end
 
     redirect_to repositories_path, notice: I18n.t('messages.repository_sync')
   end

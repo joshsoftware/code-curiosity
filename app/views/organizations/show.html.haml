@@ -1,0 +1,8 @@
+%section.content-header
+  %h1= @org.name.titleize
+%section.content
+  = render 'info'
+  = render 'users'
+  = render 'repos'
+.modal#org-user-add
+  = render 'organization/users/create_modal' 

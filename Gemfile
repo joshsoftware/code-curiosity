@@ -31,6 +31,7 @@ gem 'rugged', git: 'git://github.com/libgit2/rugged.git', submodules: true
 gem 'bugspots', '~> 0.2.1'
 gem 'redis-rails'
 gem 'whenever', :require => false
+gem 'mongoid-slug', '~> 5.2.0'
 
 group :development, :test do
   gem 'byebug'

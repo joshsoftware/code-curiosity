@@ -36,8 +36,9 @@ class RepositoriesController < ApplicationController
   end
 
   def sync
-    CommitJob.perform_later(current_user, 'all', @repo)
-    #ActivityJob.perform_later(current_user)
+    unless current_user.gh_data_syncing?
+      CommitJob.perform_later(current_user, 'all', @repo)
+    end
 
     flash[:notice] = 'Your Repositories are getting in Sync. Please wait for sometime.'
     redirect_to repositories_path

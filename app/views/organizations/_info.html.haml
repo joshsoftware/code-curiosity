@@ -1,0 +1,19 @@
+.row
+  .col-xs-12
+    .box.box-primary
+      .box-header
+        .box-tools
+          .pull-right
+            = link_to edit_organization_path(@org), class: 'btn btn-primary btn-social pull-right' do
+              %i.fa.fa-pencil
+              %b Edit
+      .box-body
+        %dl.dl-horizontal
+          %dt Name
+          %dd= @org.name
+          %dt Website
+          %dd= link_to @org.website, @org.website, target: '_blank'
+          %dt Github
+          %dd= link_to @org.github_handle, github_url(@org), target: '_blank'
+          %dt Description
+          %dd= @org.description || '-' 

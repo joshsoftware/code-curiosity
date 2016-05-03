@@ -1,0 +1,24 @@
+.row
+  .col-xs-12
+    .box.box-primary
+      .box-header
+        %h3.box-title Repositories
+        .box-tools
+          .no-margin.pull-right
+            = link_to sync_organization_repositories_path(@org), class: 'btn btn-primary btn-social', data: { remote: true } do
+              %i.fa.fa-refresh
+              %b Sync Github Repositories
+      .box-body
+        %table.table.table-bordered
+          %tbody
+            %tr
+              %th.col-sm-1 #
+              %th Name
+              %th Stars
+              %th Description
+            - @org.repositories.each_with_index do |repo, index|
+              %tr
+                %td= "#{index + 1}."
+                %td= link_to repo.name, repo.source_url, target: '_blank'
+                %td= repo.stars
+                %td= repo.description

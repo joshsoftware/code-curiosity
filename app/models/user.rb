@@ -50,6 +50,7 @@ class User
 
   # Background sync
   field :last_repo_sync_at,  type: Time
+  field :last_gh_data_sync_at, type: Time
 
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
@@ -60,6 +61,7 @@ class User
   has_many :subscriptions
   has_many :rounds
   has_many :comments
+  has_and_belongs_to_many :organizations
 
   index(uid: 1)
   index(github_handle: 1)
@@ -135,6 +137,10 @@ class User
 
   def repo_syncing?
     last_repo_sync_at.present? && (Time.now - last_repo_sync_at) < 3600
+  end
+
+  def gh_data_syncing?
+    last_gh_data_sync_at.present? && (Time.now - last_gh_data_sync_at) < 3600
   end
 
   # NOTE: If round nil the subscribe to latest round.
