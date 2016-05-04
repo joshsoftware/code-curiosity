@@ -8,6 +8,6 @@ module OrganizationHelper
       return true
     end
 
-    redirect_to :back, notice: I18n.t('messages.not_foud')
+    redirect_back notice: I18n.t('messages.not_foud')
   end
 end

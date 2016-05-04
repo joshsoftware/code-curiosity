@@ -39,4 +39,8 @@ class ApplicationController < ActionController::Base
       redirect_to :back, notice: I18n.t('messages.unauthorized_access')
     end
   end
+
+  def redirect_back(opts = {})
+    redirect_to(request.env["HTTP_REFERER"] || root_path, opts)
+  end
 end

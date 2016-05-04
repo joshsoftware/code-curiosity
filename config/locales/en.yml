@@ -23,7 +23,7 @@ en:
   messages:
     already_subscribed: "You have already subscribed for this challenge"
     insufficient_points: "You have insufficient points for subscription. Minimum Points required - 150"
-    unauthorized_access: "You are not authorized to access this page"
+    unauthorized_access: "You are not authorized to access this page."
     login_required: "You must signin/signup to continue"
     subscription_successfull: "You have successfully subcribed for this challenge"
     repository_sync: "Your Repositories are getting in Sync. Please wait for sometime."
@@ -37,5 +37,7 @@ en:
     criteria_message: "It’s probably not met the minimum criteria - either the repos or it’s origin should have at least 25 stars. This makes your contributions valuable." 
     contribute_to: "Repository you would like to contribute or source(fork) repository requires minimum %{stars} stars."
     not_found: 'Repository not exists on github.'
-    github_sync: 'Wait for few minutes. Repositories syncing in process....'
+    github_sync: 'Your Repositories are getting in Sync. Please wait for sometime.'
     dont_have_populer_repos: "There are no repositories with more then 25 stars in github."
+  organizations:
+    minimum_admin_users: "You cant't remove users. At least one user required in admn group."

@@ -4,11 +4,16 @@ class Organization
   include GlobalID::Identification
   include Mongoid::Slug
 
-  field :name, type: String
+  field :gh_id, type: String
   field :github_handle, type: String
+  field :name, type: String
+  field :company, type: String
   field :description, type: String
   field :website, type: String
-  field :contact, type: String
+  field :blog, type: String
+  field :location, type: String
+  field :email, type: String
+  field :avatar_url, type: String
 
   # Background sync
   field :last_repo_sync_at,  type: Time
@@ -19,6 +24,9 @@ class Organization
   has_many :repositories
 
   validates :name, :website, :github_handle, presence: true
+  validates :github_handle, uniqueness: true
+
+  before_create :set_info
 
   after_create do |org|
     OrgReposJob.perform_later(org)
@@ -26,5 +34,17 @@ class Organization
 
   def repo_syncing?
     last_repo_sync_at.present? && (Time.now - last_repo_sync_at) < 3600
+  end
+
+  def set_info
+    ['avatar_url', 'description', 'name', 'company', 'blog', 'location', 'email'].each do |f|
+      self[f] = info[f]
+    end
+    self.gh_id = info.id
+    self.save
+  end
+
+  def info
+    @info ||= GITHUB.orgs.get(github_handle)
   end
 end

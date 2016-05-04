@@ -5,9 +5,10 @@
         %h3.box-title Repositories
         .box-tools
           .no-margin.pull-right
-            = link_to sync_organization_repositories_path(@org), class: 'btn btn-primary btn-social', data: { remote: true } do
-              %i.fa.fa-refresh
-              %b Sync Github Repositories
+            - if is_org_admin?
+              = link_to sync_organization_repositories_path(@org), class: 'btn btn-primary btn-social', data: { remote: true } do
+                %i.fa.fa-refresh
+                %b Sync Github Repositories
       .box-body
         %table.table.table-bordered
           %tbody

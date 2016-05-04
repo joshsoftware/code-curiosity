@@ -1,15 +1,12 @@
 class OrganizationsController < ApplicationController
   include OrganizationHelper
 
-  before_action :authenticate_user!
-  before_action :find_org, except: [:index]
+  before_action :authenticate_user!, except: [:show]
+  before_action :find_org, except: [:index, :show]
 
   def index
     @orgs = current_user.organizations
-    redirect_to :back
-  end
-
-  def show
+    redirect_back
   end
 
   def edit
@@ -23,10 +20,20 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def show
+    @org = Organization.find(params[:id])
+
+    if @org
+      render :show , layout: current_user ? 'application' : 'public'
+    else
+      redirect_back
+    end
+  end
+
   private
 
   def org_params
-    params.fetch(:organization).permit(:name, :github_handle, :website, :contact, :description)
+    params.fetch(:organization).permit(:name, :website, :email, :company, :description)
   end
 
 end

@@ -4,16 +4,26 @@
       .box-header
         .box-tools
           .pull-right
-            = link_to edit_organization_path(@org), class: 'btn btn-primary btn-social pull-right' do
-              %i.fa.fa-pencil
-              %b Edit
+            - if is_org_admin?
+              = link_to edit_organization_path(@org), class: 'btn btn-primary btn-social pull-right' do
+                %i.fa.fa-pencil
+                %b Edit
       .box-body
-        %dl.dl-horizontal
-          %dt Name
-          %dd= @org.name
-          %dt Website
-          %dd= link_to @org.website, @org.website, target: '_blank'
-          %dt Github
-          %dd= link_to @org.github_handle, github_url(@org), target: '_blank'
-          %dt Description
-          %dd= @org.description || '-' 
+        .col-xs-12
+          .col-xs-2
+            = image_tag @org.avatar_url, title: @org.name, height: 120, widht: 120
+          .col-xs-10
+            %dl.dl-horizontal
+              %dt Name
+              %dd= @org.name
+              %dt Company
+              %dd= @org.company || '-'
+              %dt Website
+              %dd= link_to @org.website, @org.website, target: '_blank'
+              %dt Github
+              %dd= link_to @org.github_handle, github_url(@org), target: '_blank'
+              %dt Description
+              %dd= @org.description || '-' 
+              %dt Contact
+              %dd= @org.email || '-' 
+

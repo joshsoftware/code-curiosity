@@ -7,8 +7,6 @@ class Organization::UsersController < ApplicationController
   def create
     @user = User.where(github_handle: params[:user][:github_handle]).first
 
-    puts @user.inspect
-
     if @user
       @org.users << @user
       redirect_via_turbolinks_to organization_path(@org)
@@ -19,7 +17,11 @@ class Organization::UsersController < ApplicationController
   end
 
   def destroy
-    @org.users.delete(@user)
+    if @org.users.count > 1
+      @org.users.delete(@user)
+    else
+      flash[:warning] = I18n.t('organizations.minimum_admin_users')
+    end
 
     redirect_to organization_path(@org)
   end

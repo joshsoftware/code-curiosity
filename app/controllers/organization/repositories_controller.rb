@@ -4,7 +4,7 @@ class Organization::RepositoriesController < ApplicationController
   before_action :find_org
 
   def index
-    redirect_to :back
+    redirect_back
   end
 
   def sync
@@ -12,6 +12,6 @@ class Organization::RepositoriesController < ApplicationController
       OrgReposJob.perform_later(@org)
     end
 
-    flash.now[:notice] = 'Your Repositories are getting in Sync. Please wait for sometime.'
+    flash.now[:notice] = I18n.t('repositories.github_sync')
   end
 end
