@@ -3,18 +3,19 @@ class Repository
   include Mongoid::Timestamps
   include GlobalID::Identification
 
-  field :name,        type: String
-  field :description, type: String
-  field :stars,       type: Integer, default: 0
-  field :watchers,    type: Integer, default: 0
-  field :forks,       type: Integer, default: 0
-  field :owner,       type: String
-  field :source_url,  type: String
-  field :gh_id,       type: Integer
-  field :languages,   type: Array
-  field :ssh_url,     type: String
+  field :name,         type: String
+  field :description,  type: String
+  field :stars,        type: Integer, default: 0
+  field :watchers,     type: Integer, default: 0
+  field :forks,        type: Integer, default: 0
+  field :owner,        type: String
+  field :source_url,   type: String
+  field :gh_id,        type: Integer
+  field :source_gh_id, type: Integer
+  field :languages,    type: Array
+  field :ssh_url,      type: String
   field :ignore_files, type: Array, default: []
-  field :type,        type: String
+  field :type,         type: String
 
   has_many :commits
   has_many :activities
@@ -26,12 +27,13 @@ class Repository
   belongs_to :organization
 
   validates :name, :source_url, :ssh_url, presence: true
-  validate :verify_popularity
+  #validate :verify_popularity
 
-  index({source_url: 1})
+  index(source_url: 1)
+  index(gh_id: 1)
 
   scope :popular, -> { where(type: 'popular') }
-  scope :users_repos, -> { where(:type.ne => 'popular' )}
+  scope :users_repos, -> { where(:type.ne =>  'popular') }
 
   def popular?
     self.type == 'popular'

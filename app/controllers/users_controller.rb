@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.where(id: params[:id]).first || User.where(github_handle: params[:id]).first
+    @user = User.find_by_slug(params[:id])
 
     if @user
       render layout: current_user ? 'application' : 'public'

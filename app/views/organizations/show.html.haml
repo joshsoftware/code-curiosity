@@ -1,5 +1,11 @@
 %section.content-header
-  %h1= @org.name.titleize
+  %h1
+    = @org.name.titleize
+    %span.pull-right
+      = link_to activities_organization_path, class: 'btn btn-success' do
+        %b Activities
+      = link_to commits_organization_path, class: 'btn btn-success' do
+        %b Commits
 %section.content
   = render 'info'
   - if is_org_admin?

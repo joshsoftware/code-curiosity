@@ -20,6 +20,7 @@ class Commit
   belongs_to :round
   has_many :comments, as: :commentable
   embeds_many :scores, as: :scorable
+  belongs_to :organization
 
   validates :message, uniqueness: {:scope => :commit_date}
 

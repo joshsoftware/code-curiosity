@@ -4,26 +4,28 @@ class Organization
   include GlobalID::Identification
   include Mongoid::Slug
 
-  field :gh_id, type: String
+  field :gh_id,         type: String
   field :github_handle, type: String
-  field :name, type: String
-  field :company, type: String
-  field :description, type: String
-  field :website, type: String
-  field :blog, type: String
-  field :location, type: String
-  field :email, type: String
-  field :avatar_url, type: String
+  field :name,          type: String
+  field :company,       type: String
+  field :description,   type: String
+  field :website,       type: String
+  field :blog,          type: String
+  field :location,      type: String
+  field :email,         type: String
+  field :avatar_url,    type: String
 
   # Background sync
   field :last_repo_sync_at,  type: Time
 
-  slug :name
+  slug { |obj| obj.github_handle }
 
   has_and_belongs_to_many :users
   has_many :repositories
+  has_many :commits
+  has_many :activities
 
-  validates :name, :website, :github_handle, presence: true
+  validates :name, :github_handle, presence: true
   validates :github_handle, uniqueness: true
 
   before_create :set_info

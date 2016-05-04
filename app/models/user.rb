@@ -188,4 +188,8 @@ class User
     @_t_p ||= self.transactions.sum(:points)
   end
 
+  def self.find_by_slug(slug)
+    User.find(slug) || User.where(github_handle: slug).first
+  end
+
 end

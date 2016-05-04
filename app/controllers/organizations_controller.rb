@@ -30,6 +30,14 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def commits
+    redirect_back
+  end
+
+  def activities
+    redirect_back
+  end
+
   private
 
   def org_params

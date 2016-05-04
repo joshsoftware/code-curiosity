@@ -57,6 +57,11 @@ Rails.application.routes.draw do
   end
 
   resources :organizations, only: [:show, :edit, :update] do
+    member do
+      get :commits
+      get :activities
+    end
+
     resources :users, only: [:create, :destroy], controller: 'organization/users'
     resources :repositories, only: [:index], controller: 'organization/repositories' do
       collection do

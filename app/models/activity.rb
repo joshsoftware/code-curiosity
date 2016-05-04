@@ -16,8 +16,9 @@ class Activity
   belongs_to :repository
   has_many :comments, as: :commentable
   embeds_many :scores, as: :scorable
+  belongs_to :organization
 
-  validates :description, uniqueness: {:scope => :commented_on}
+  #validates :description, uniqueness: {:scope => :commented_on}
 
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
 

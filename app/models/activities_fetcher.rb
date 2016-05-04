@@ -15,18 +15,17 @@ class ActivitiesFetcher
                    round.from_date.beginning_of_day
                  end
 
-    repos = user.repositories.pluck(:gh_id)
-    event_types = TRACKING_EVENTS.keys
+    repos = user.repositories.inject({}){|o, r| o[r.gh_id] = r; o}
     activities = user.gh_client.activity.events.performed(user.github_handle, per_page: 200)
 
     activities.each do |a|
-      if Time.parse(a.created_at) > since_time && event_types.include?(a.type) && repos.include?(a.repo.id)
-        create_activity(a)
+      if TRACKING_EVENTS.key?(a.type) && Time.parse(a.created_at) > since_time && repos.key?(a.repo.id)
+        create_activity(a, repos[a.repos.id])
       end
     end
   end
 
-  def create_activity(activity)
+  def create_activity(activity, repo)
     type = TRACKING_EVENTS[activity.type]
 
     return unless user.github_handle == activity.payload[type].user.login
@@ -40,6 +39,7 @@ class ActivitiesFetcher
     user_activity.round = round
     user_activity.user = user
     user_activity.repository = Repository.where(gh_id: activity.repo.id).first
+    user_activity.organization_id = repo.organization_id
     user_activity.save
   end
 

@@ -12,8 +12,8 @@ class OrgReposJob < ActiveJob::Base
   end
 
   def add_repo(org, gh_repo)
-    return if org.repositories.where(gh_id: gh_repo.id).any?
-    repo = Repository.build_from_gh_info(gh_repo)
+    repo = Repository.where(gh_id: gh_repo.id).first
+    repo = Repository.build_from_gh_info(gh_repo) unless repo
     repo.organization = org
     repo.save(validate: false)
   end

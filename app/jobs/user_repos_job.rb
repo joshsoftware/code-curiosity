@@ -34,15 +34,27 @@ class UserReposJob < ActiveJob::Base
       return
     end
 
-    if gh_repo.fork
-      return if repo.info.source.stargazers_count < REPOSITORY_CONFIG['popular']['stars']
+    return unless gh_repo.fork
 
-      popular_repo = create_popular_repo(repo.info.source)
-      repo.popular_repository = popular_repo
+    if process_fork_repo(repo)
+      user.repositories << repo
+      user.save
+    end
+  end
+
+  def process_fork_repo(repo)
+    org_repo = Repository.where(:organization_id.ne => nil, gh_id: repo.info.source.id).first
+    repo.source_gh_id = repo.info.source.id
+
+    if org_repo
+      repo.organization_id = org_repo.organization_id
     end
 
-    user.repositories << repo
-    user.save
+    if repo.info.source.stargazers_count >= REPOSITORY_CONFIG['popular']['stars']
+      repo.popular_repository = create_popular_repo(repo.info.source)
+    end
+
+    return repo.organization_id || repo.popular_repository
   end
 
   def create_popular_repo(gh_repo)
