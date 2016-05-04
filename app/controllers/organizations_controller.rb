@@ -31,11 +31,19 @@ class OrganizationsController < ApplicationController
   end
 
   def commits
-    redirect_back
+    @commits = @org.commits
+                   .where(round: current_round)
+                   .order(commit_date: :desc )
+                   .page(params[:page])
+                   .per(20)
   end
 
   def activities
-    redirect_back
+    @activities = @org.activities
+                      .where(round: current_round)
+                      .order(commented_on: :desc )
+                      .page(params[:page])
+                      .per(20)
   end
 
   private

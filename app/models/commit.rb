@@ -28,7 +28,7 @@ class Commit
 
   index({ user_id: 1, round_id: 1 })
   index({ repository_id: 1 })
-  index({ created_at: -1 })
+  index({ commit_date: -1 })
   index({ sha: 1 })
 
   after_create do |c|

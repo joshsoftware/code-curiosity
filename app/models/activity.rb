@@ -22,7 +22,7 @@ class Activity
 
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
 
-  index({ created_at: -1 })
+  index({ commented_on: -1 })
   index({ event_type: 1, gh_id: 1 })
 
   after_create do |a|

@@ -1,0 +1,7 @@
+.box.box-solid
+  .box-body.no-padding
+    %ul.nav.nav-pills.nav-stacked
+      %li{ class: is_active('commits', 'organizations') }
+        = link_to 'Commits', commits_organization_path(@org)
+      %li{ class: is_active('activities', 'organizations') }
+        = link_to 'Activities', activities_organization_path(@org)
