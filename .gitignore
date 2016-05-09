@@ -28,3 +28,6 @@ dump.rdb
 /repositories
 app/models/app_test.rb
 *.diff
+widget.js
+widget_test/
+page_cache

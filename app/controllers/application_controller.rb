@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
 
   def current_round
-    @rounds = Round.order(from_date: :desc)
+    @rounds = Round.order(from_date: :desc).limit(3)
     @current_round = if session[:current_round]
                        Round.find(session[:current_round])
                      else

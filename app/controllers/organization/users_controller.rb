@@ -32,7 +32,7 @@ class Organization::UsersController < ApplicationController
     @user = @org.users.where(id: params[:id]).first
 
     unless @user
-      redirect_to root_path, notice: I18n.t('messages.not_foud')
+      redirect_to root_path, notice: I18n.t('messages.not_found')
     end
   end
 

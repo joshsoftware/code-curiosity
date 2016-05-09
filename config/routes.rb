@@ -70,6 +70,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
+
   post 'webhook' => 'dashboard#webhook'
   get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'

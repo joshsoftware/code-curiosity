@@ -30,6 +30,8 @@ class JudgingController < ApplicationController
       @score.destroy if @score
     end
 
+    @resource.set_judges_avg_score
+
     render nothing: true
   end
 

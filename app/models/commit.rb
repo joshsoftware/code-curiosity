@@ -1,6 +1,7 @@
 class Commit
   include Mongoid::Document
   include Mongoid::Timestamps
+  include JudgeScoringHelper
 
   COMMIT_TYPE = {score: 'Scores', commit: 'Commits', activity: 'Activities'}
 

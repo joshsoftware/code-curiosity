@@ -1,6 +1,7 @@
 class Activity
   include Mongoid::Document
   include Mongoid::Timestamps
+  include JudgeScoringHelper
 
   field :description,     type: String
   field :event_type,      type: String
@@ -10,6 +11,7 @@ class Activity
   field :comments_count,  type: Integer, default: 0
   field :gh_id,           type: String
   field :auto_score,      type: Integer
+  field :judges_score,    type: Float
 
   belongs_to :user
   belongs_to :round

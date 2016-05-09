@@ -17,9 +17,24 @@
               %th Name
               %th Stars
               %th Description
+              %th 
             - @org.repositories.each_with_index do |repo, index|
               %tr
                 %td= "#{index + 1}."
                 %td= link_to repo.name, repo.source_url, target: '_blank'
                 %td= repo.stars
                 %td= repo.description
+                %td
+                  %button.btn.btn-default.btn-sm{ data: { toggle: 'modal', target: '#repo-widget-modal', name: repo.name, url: repo_widget_url(repo)}} Widget
+  #repo-widget-modal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{ data: { dismiss: 'modal'}}
+            %span &times; 
+          %h4.modal-title
+        .modal-body
+          %pre.code
+          %span.hint Copy and insert in your website.
+        .modal-footer
+          %button.btn.btn-default{ data: { dismiss: 'modal' }} Close

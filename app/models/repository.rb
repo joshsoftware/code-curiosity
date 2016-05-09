@@ -2,6 +2,7 @@ class Repository
   include Mongoid::Document
   include Mongoid::Timestamps
   include GlobalID::Identification
+  include RepoLeaders
 
   field :name,         type: String
   field :description,  type: String

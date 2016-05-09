@@ -1,0 +1,7 @@
+%li
+  %a{href: user_url(leader['user']), target: '_blank'}
+    .user-img
+      %img.img-circle{alt: leader['user'].github_handle, src: avatar_url(leader['user']) }/
+    %span.username
+      = leader['user'].github_handle
+    %span.pull-right.badge.bg-blue= leader['value'].to_i
