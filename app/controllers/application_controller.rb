@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   before_action :signout_old_login
   before_action :current_round
 
-
   def current_round
     @rounds = Round.order(from_date: :desc).limit(3)
     @current_round = if session[:current_round]

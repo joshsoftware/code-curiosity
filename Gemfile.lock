@@ -5,13 +5,6 @@ GIT
   specs:
     rugged (0.25.0b1)
 
-GIT
-  remote: git://github.com/rails/actionpack-page_caching.git
-  revision: ff2722d9d1f8d17bddc6b48b92d0a4a56b10183e
-  specs:
-    actionpack-page_caching (1.0.2)
-      actionpack (>= 4.0.0, < 5)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -310,7 +303,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionpack-page_caching!
   bootstrap-datepicker-rails
   bootstrap-sass (~> 3.3.6)
   bugspots (~> 0.2.1)
