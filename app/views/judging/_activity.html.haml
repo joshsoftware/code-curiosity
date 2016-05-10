@@ -12,7 +12,7 @@
   %p= activity.description
   %ul.list-inline
     %li.rating-control.br-theme-bars-square{ data: { url: rate_judging_index_path('activity', activity.id) }}
-      = select_tag :points, options_for_select(STAR_RATINGS, activity.judge_rating(current_user)), include_blank: 'NR' 
+      = select_tag :points, options_for_select(ACTIVITY_RATINGS, activity.judge_rating(current_user)), include_blank: 'NR' 
     %li.pull-right.comments
       = link_to '#', class: 'link-black text-sm show-comments', data: { id: activity.id.to_s, url: comments_judging_index_path('activity', activity.id) } do
         %i.fa.fa-comments-o.margin-r-5

@@ -1,0 +1,10 @@
+%td.score.commit{ valign: 'middle'}
+  - if resource.final_score.blank?
+    In Review
+  - elsif resource.final_score == 0
+    %ul.score-bar
+      %li.score.zero
+  - else
+    %ul.score-bar
+      - resource.final_score.times do |i|
+        %li.score{class: score_css_class(resource.final_score)}

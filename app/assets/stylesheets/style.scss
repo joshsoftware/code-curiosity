@@ -96,8 +96,8 @@ html.turbolinks-progress-bar::before {
 .score-bar {
   list-style: none;
   width: 140px;
-  margin: 0 auto;
-
+  margin: auto !important;
+    
   li{
     float: left;
     position: relative;

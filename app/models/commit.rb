@@ -40,14 +40,8 @@ class Commit
     @info ||= GITHUB.repos.commits.get(repository.owner, repository.name, sha) #rescue nil
   end
 
-  def avg_score
-    if self.scores.any?
-      (scores.pluck(:value).sum/scores.count.to_f).round
-    end
-  end
-
-  def judge_rating(user)
-    scores.where(user: user).first.try(:value)
+  def max_rating
+    COMMIT_RATINGS.last
   end
 
 end

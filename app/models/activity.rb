@@ -11,7 +11,6 @@ class Activity
   field :comments_count,  type: Integer, default: 0
   field :gh_id,           type: String
   field :auto_score,      type: Integer
-  field :judges_score,    type: Float
 
   belongs_to :user
   belongs_to :round
@@ -37,5 +36,9 @@ class Activity
     self.auto_score = 2 if words.length > 40
     self.auto_score = 1 if words.length > 25
     self.save
+  end
+
+  def max_rating
+    ACTIVITY_RATINGS.last
   end
 end

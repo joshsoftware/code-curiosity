@@ -1,5 +1,5 @@
 %tr{data: {activity: activity.id.to_s}}
-  %td.score.commit= activity.scores.any? ? 'Reviewed' : 'In review'
+  = render partial: 'activities/score_cell', locals: { resource: activity }
   %td= activity.commented_on.strftime("%d/%m/%Y")
   %td= activity.repo
   %td= activity.event_type

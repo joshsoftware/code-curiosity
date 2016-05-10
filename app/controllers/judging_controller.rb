@@ -25,7 +25,7 @@ class JudgingController < ApplicationController
     end
 
     if params[:rating].present?
-      @score.update_attributes(value: params[:rating])
+      @score.update_attributes(value: params[:rating].to_i)
     else
       @score.destroy if @score
     end
@@ -58,13 +58,19 @@ class JudgingController < ApplicationController
 
   def find_resource
     @resource = if params[:type] == 'commit'
-                 Commit.where(id: params[:id]).in(repository: current_user.judges_repository_ids).first
+                 Commit.where(id: params[:id]).first
+                 #Commit.where(id: params[:id]).in(repository: current_user.judges_repository_ids).first
                else
-                 Activity.where(id: params[:id]).in(repository: current_user.judges_repository_ids).first
+                 Activity.where(id: params[:id]).first
+                 #Activity.where(id: params[:id]).in(repository: current_user.judges_repository_ids).first
                end
 
     unless @resource
       render nothing: true, status: 404
+    end
+
+    if params[:rating].to_i > @resource.max_rating
+      render nothing: true, status: 401
     end
   end
 
