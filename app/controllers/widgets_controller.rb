@@ -5,7 +5,7 @@ class WidgetsController < ActionController::Base
     @repo = Repository.find(params[:id])
 
     unless @repo
-      render plain: I18.t('messages.not_found')
+      render plain: I18n.t('messages.not_found')
     end
   end
 

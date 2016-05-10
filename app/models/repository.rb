@@ -159,4 +159,17 @@ class Repository
     _activities = round ? activities.where(round: round) : activities
     _activities.each(&:calculate_score_and_set)
   end
+
+  def create_popular_repo
+    gh_repo = self.info.source
+    repo = Repository.where(gh_id: gh_repo.id).first
+    return repo if repo
+
+    repo = Repository.build_from_gh_info(gh_repo)
+    repo.type = 'popular'
+    repo.save
+    Repository.create_repo_owner_account(gh_repo)
+
+    return repo
+  end
 end
