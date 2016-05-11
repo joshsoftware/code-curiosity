@@ -1,0 +1,29 @@
+.col-md-4
+  / Widget: user widget style 1
+  .box.box-widget.widget-user-2
+    / Add the bg color to the header using any of the bg-* classes
+    .widget-user-header.bg-yellow
+      .widget-user-image
+        %img.img-circle{:alt => "User Avatar", :src => "../dist/img/user7-128x128.jpg"}/
+      / /.widget-user-image
+      %h3.widget-user-username Nadia Carmichael
+      %h5.widget-user-desc Lead Developer
+    .box-footer.no-padding
+      %ul.nav.nav-stacked
+        %li
+          %a{:href => "#"}
+            Projects
+            %span.pull-right.badge.bg-blue 31
+        %li
+          %a{:href => "#"}
+            Tasks
+            %span.pull-right.badge.bg-aqua 5
+        %li
+          %a{:href => "#"}
+            Completed Projects
+            %span.pull-right.badge.bg-green 12
+        %li
+          %a{:href => "#"}
+            Followers
+            %span.pull-right.badge.bg-red 842
+  / /.widget-user

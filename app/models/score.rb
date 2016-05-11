@@ -9,5 +9,5 @@ class Score
   belongs_to :user
 
   validates :user, :value, presence: true
-  validates :value, numericality: { only_integer: true }
+  validates :value, numericality: { only_integer: true, greater_than: -1 }
 end

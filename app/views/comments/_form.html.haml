@@ -1,7 +1,6 @@
 .direct-chat-messages
-  - if @comments
-    = render partial: 'comments/comment', collection: @comments, as: :comment
-= simple_form_for (@comment || Comment.new), url: comment_judging_index_path(resource.class.name.downcase, resource.id) ,remote: true do |f|
+  = render partial: 'comments/comment', collection: @comments, as: :comment
+= simple_form_for (@comment || Comment.new), url: add_judge_comment_path(resource), remote: true do |f|
   .input-group
     %span.input-group-addon
       %label Public

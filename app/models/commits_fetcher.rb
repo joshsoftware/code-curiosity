@@ -39,6 +39,7 @@ class CommitsFetcher
   def create_commit(data)
     commit = repo.commits.find_or_initialize_by(sha: data['sha'])
 
+
     return if commit.persisted?
 
     commit.message = data['commit']['message']
@@ -48,6 +49,7 @@ class CommitsFetcher
     commit.html_url = data['html_url']
     commit.comments_count = data['commit']['comment_count']
     commit.round = round
+    commit.organization_id = repo.organization_id
     commit.save
   end
 

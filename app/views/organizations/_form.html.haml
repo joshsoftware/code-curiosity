@@ -1,0 +1,9 @@
+.col-sm-6
+  = simple_form_for @org do |f|
+    = f.input :name
+    = f.input :website
+    = f.input :company
+    = f.input :email
+    = f.input :description, as: :text
+    = f.submit 'Save', class: 'btn btn-primary'
+    = link_to 'Cancel', organization_path(@org), class: 'btn btn-default' 

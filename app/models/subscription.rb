@@ -17,11 +17,11 @@ class Subscription
   end
 
   def commits_score
-    self.round.commits.where(user: user).sum(:auto_score)
+    self.round.commits.where(user: user).inject(0){|r, o| r += o.final_score.to_i; r }
   end
 
   def activities_score
-    self.round.activities.where(user: user).sum(:auto_score)
+    self.round.activities.where(user: user).inject(0){|r, o| r += o.final_score.to_i; r }
   end
 
   def update_points

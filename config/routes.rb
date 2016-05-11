@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :repositories, except: [:edit, :update] do
-    get 'sync'
+  resources :repositories, only: [:index, :show] do
+    #get 'sync'
   end
 
   resources :users, except: [:destroy] do
@@ -23,16 +23,6 @@ Rails.application.routes.draw do
     collection do
       get 'commits'
       get 'activities'
-    end
-  end
-
-  resources :judging, only: [] do
-    collection do
-      get 'commits'
-      get 'activities'
-      post 'rate/:type/:id', action: 'rate', as: :rate
-      get 'comments/:type/:id', action: 'comments', as: :comments
-      post 'comments/:type/:id', action: 'comment', as: :comment
     end
   end
 
@@ -55,6 +45,31 @@ Rails.application.routes.draw do
   namespace :github do
     get 'repos/sync' => 'repos#sync'
   end
+
+  concern :judgeable do |opts|
+    get 'commits', opts
+    get 'activities', opts
+    get 'comments/:type/:resource_id', opts.merge(action: 'comments', as: :comments)
+    post 'comments/:type/:resource_id', opts.merge(action: 'comment', as: :comment)
+    post 'rate/:type/:resource_id', opts.merge(action: 'rate', as: :rate_activity)
+  end
+
+  resources :judging, only: [] do
+    concerns :judgeable, on: :collection
+  end
+
+  resources :organizations, only: [:show, :edit, :update] do
+    concerns :judgeable, on: :member
+
+    resources :users, only: [:create, :destroy], controller: 'organization/users'
+    resources :repositories, only: [:index], controller: 'organization/repositories' do
+      collection do
+        get :sync
+      end
+    end
+  end
+
+  get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
 
   post 'webhook' => 'dashboard#webhook'
   get 'change_round/:id' => "dashboard#change_round", as: :change_round

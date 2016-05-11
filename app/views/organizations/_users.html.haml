@@ -1,0 +1,27 @@
+.row
+  .col-xs-12
+    .box.box-primary
+      .box-header
+        %h3.box-title Admin Users
+        .box-tools
+          .no-margin.pull-right
+            = link_to '#', class: 'btn btn-primary btn-social pull-right', data: { toggle: 'modal', target: '#org-user-add'} do
+              %i.fa.fa-plus
+              %b Add User
+      .box-body
+        %table.table.table-bordered
+          %tbody
+            %tr
+              %th.col-sm-1 #
+              %th Name
+              %th Github
+              %th.col-sm-2 Actions
+            - @org.users.each_with_index do |user, index|
+              %tr
+                %td= "#{index + 1}."
+                %td= user.name
+                %td= link_to user.github_handle, github_url(user), target: '_blank'
+                %td
+                  = link_to organization_user_path(@org, user), class: 'btn btn-danger btn-sm', data: { confirm: 'Are you sure?' }, method: :delete do
+                    %i.fa.fa-remove
+                    Remove

@@ -1,6 +1,7 @@
 class Commit
   include Mongoid::Document
   include Mongoid::Timestamps
+  include JudgeScoringHelper
 
   COMMIT_TYPE = {score: 'Scores', commit: 'Commits', activity: 'Activities'}
 
@@ -20,6 +21,7 @@ class Commit
   belongs_to :round
   has_many :comments, as: :commentable
   embeds_many :scores, as: :scorable
+  belongs_to :organization
 
   validates :message, uniqueness: {:scope => :commit_date}
 
@@ -27,7 +29,7 @@ class Commit
 
   index({ user_id: 1, round_id: 1 })
   index({ repository_id: 1 })
-  index({ created_at: -1 })
+  index({ commit_date: -1 })
   index({ sha: 1 })
 
   after_create do |c|
@@ -38,14 +40,8 @@ class Commit
     @info ||= GITHUB.repos.commits.get(repository.owner, repository.name, sha) #rescue nil
   end
 
-  def avg_score
-    if self.scores.any?
-      (scores.pluck(:value).sum/scores.count.to_f).round
-    end
-  end
-
-  def judge_rating(user)
-    scores.where(user: user).first.try(:value)
+  def max_rating
+    COMMIT_RATINGS.last
   end
 
 end

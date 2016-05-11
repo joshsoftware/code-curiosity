@@ -1,5 +1,6 @@
 
 $(document).on("click", ".show-comments", function(e){
+  e.stopPropagation();
   var $ele = $(this), commentsId, $comments;
 
   if($ele.hasClass("open")){

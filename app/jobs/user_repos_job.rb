@@ -34,26 +34,12 @@ class UserReposJob < ActiveJob::Base
       return
     end
 
-    if gh_repo.fork
-      return if repo.info.source.stargazers_count < REPOSITORY_CONFIG['popular']['stars']
+    return unless gh_repo.fork
+    return if repo.info.source.stargazers_count < REPOSITORY_CONFIG['popular']['stars']
 
-      popular_repo = create_popular_repo(repo.info.source)
-      repo.popular_repository = popular_repo
-    end
-
+    repo.popular_repository = repo.create_popular_repo
+    repo.source_gh_id = repo.info.source.id
     user.repositories << repo
     user.save
-  end
-
-  def create_popular_repo(gh_repo)
-    repo = Repository.where(gh_id: gh_repo.id).first
-    return repo if repo
-
-    repo = Repository.build_from_gh_info(gh_repo)
-    repo.type = 'popular'
-    repo.save
-    Repository.create_repo_owner_account(gh_repo)
-
-    return repo
   end
 end

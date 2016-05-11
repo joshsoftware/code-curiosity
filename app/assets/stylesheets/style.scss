@@ -96,8 +96,8 @@ html.turbolinks-progress-bar::before {
 .score-bar {
   list-style: none;
   width: 140px;
-  margin: 0 auto;
-
+  margin: auto !important;
+    
   li{
     float: left;
     position: relative;
@@ -134,4 +134,14 @@ td.score.commit{
 
 .callout-info{
   margin-top: 15px;
+}
+
+.scoring-color-info{
+  margin-right: 20px !important;
+  border-bottom: 1px solid #000;
+  padding: 4px 8px;
+
+  .score{
+    padding: 0px 6px;
+  }
 }

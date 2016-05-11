@@ -19,6 +19,8 @@
 
 # Learn more: http://github.com/javan/whenever
 
+set :output, "/home/deploy/projects/codecuriosity/current/cron_log.log"
+
 every :day, :at => '12:00am' do
   rake "fetch_data:commits_and_activities"
 end

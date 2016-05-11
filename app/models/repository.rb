@@ -2,19 +2,21 @@ class Repository
   include Mongoid::Document
   include Mongoid::Timestamps
   include GlobalID::Identification
+  include RepoLeaders
 
-  field :name,        type: String
-  field :description, type: String
-  field :stars,       type: Integer, default: 0
-  field :watchers,    type: Integer, default: 0
-  field :forks,       type: Integer, default: 0
-  field :owner,       type: String
-  field :source_url,  type: String
-  field :gh_id,       type: Integer
-  field :languages,   type: Array
-  field :ssh_url,     type: String
+  field :name,         type: String
+  field :description,  type: String
+  field :stars,        type: Integer, default: 0
+  field :watchers,     type: Integer, default: 0
+  field :forks,        type: Integer, default: 0
+  field :owner,        type: String
+  field :source_url,   type: String
+  field :gh_id,        type: Integer
+  field :source_gh_id, type: Integer
+  field :languages,    type: Array
+  field :ssh_url,      type: String
   field :ignore_files, type: Array, default: []
-  field :type,        type: String
+  field :type,         type: String
 
   has_many :commits
   has_many :activities
@@ -23,14 +25,16 @@ class Repository
   has_and_belongs_to_many :judges, class_name: 'User', inverse_of: 'judges_repositories'
   has_many :repositories, class_name: 'Repository', inverse_of: 'popular_repository'
   belongs_to :popular_repository, class_name: 'Repository', inverse_of: 'repositories'
+  belongs_to :organization
 
   validates :name, :source_url, :ssh_url, presence: true
-  validate :verify_popularity
+  #validate :verify_popularity
 
-  index({source_url: 1})
+  index(source_url: 1)
+  index(gh_id: 1)
 
   scope :popular, -> { where(type: 'popular') }
-  scope :users_repos, -> { where(:type.ne => 'popular' )}
+  scope :users_repos, -> { where(:type.ne =>  'popular') }
 
   def popular?
     self.type == 'popular'
@@ -154,5 +158,18 @@ class Repository
   def score_activities(round = nil)
     _activities = round ? activities.where(round: round) : activities
     _activities.each(&:calculate_score_and_set)
+  end
+
+  def create_popular_repo
+    gh_repo = self.info.source
+    repo = Repository.where(gh_id: gh_repo.id).first
+    return repo if repo
+
+    repo = Repository.build_from_gh_info(gh_repo)
+    repo.type = 'popular'
+    repo.save
+    Repository.create_repo_owner_account(gh_repo)
+
+    return repo
   end
 end

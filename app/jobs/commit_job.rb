@@ -5,6 +5,7 @@ class CommitJob < ActiveJob::Base
     round = Round.opened unless round
 
     duration = 'all' if user.created_at > (Time.now - 24.hours)
+    user.set(last_gh_data_sync_at: Time.now)
 
     if repo
        CommitsFetcher.new(repo, user, round).fetch(duration.to_sym)

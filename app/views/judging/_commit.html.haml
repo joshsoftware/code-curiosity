@@ -14,10 +14,10 @@
       = commit.commit_date.strftime('%H:%m, %d %b %Y')
   %p= commit.message
   %ul.list-inline
-    %li.rating-control.br-theme-bars-square{ data: { url: rate_judging_index_path('commit', commit.id) }}
-      = select_tag :points, options_for_select(STAR_RATINGS, commit.judge_rating(current_user) || commit.auto_score), include_blank: 'NR' 
+    %li.rating-control.br-theme-bars-square{ data: { url: judge_rating_path(commit) }}
+      = select_tag :points, options_for_select(COMMIT_RATINGS, commit.judge_rating(current_user) || commit.auto_score), include_blank: 'NR' 
     %li.pull-right.comments
-      = link_to '#', class: 'link-black text-sm show-comments', data: { id: commit.id.to_s, url: comments_judging_index_path('commit', commit.id) } do
+      = link_to '#', class: 'link-black text-sm show-comments', data: { id: commit.id.to_s, url: comments_judging_index_path('commits', commit.id) } do
         %i.fa.fa-comments-o.margin-r-5
         %span{id: "comments_count_#{commit.id}"}
           Comments 

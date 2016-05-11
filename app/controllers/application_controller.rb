@@ -6,9 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :signout_old_login
   before_action :current_round
 
-
   def current_round
-    @rounds = Round.order(from_date: :desc)
+    @rounds = Round.order(from_date: :desc).limit(3)
     @current_round = if session[:current_round]
                        Round.find(session[:current_round])
                      else
@@ -38,5 +37,9 @@ class ApplicationController < ActionController::Base
     unless current_user.is_admin?
       redirect_to :back, notice: I18n.t('messages.unauthorized_access')
     end
+  end
+
+  def redirect_back(opts = {})
+    redirect_to(request.env["HTTP_REFERER"] || root_path, opts)
   end
 end

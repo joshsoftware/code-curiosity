@@ -1,6 +1,7 @@
 class Activity
   include Mongoid::Document
   include Mongoid::Timestamps
+  include JudgeScoringHelper
 
   field :description,     type: String
   field :event_type,      type: String
@@ -16,12 +17,13 @@ class Activity
   belongs_to :repository
   has_many :comments, as: :commentable
   embeds_many :scores, as: :scorable
+  belongs_to :organization
 
-  validates :description, uniqueness: {:scope => :commented_on}
+  #validates :description, uniqueness: {:scope => :commented_on}
 
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
 
-  index({ created_at: -1 })
+  index({ commented_on: -1 })
   index({ event_type: 1, gh_id: 1 })
 
   after_create do |a|
@@ -34,5 +36,9 @@ class Activity
     self.auto_score = 2 if words.length > 40
     self.auto_score = 1 if words.length > 25
     self.save
+  end
+
+  def max_rating
+    ACTIVITY_RATINGS.last
   end
 end
