@@ -13,6 +13,11 @@
             %a{href: '#commits_tab', data: { toggle: 'tab' }} Commits
           %li#activities_tab_link
             %a{href: '#activities_tab', data: { toggle: 'tab' }} Activities
+          %li.pull-right.scoring-color-info
+            %b Info:
+            %span.score-bar
+              Zero score color:
+              %span.score.zero 
         .tab-content
           .tab-pane.active#commits_tab
             .table-responsive.no-padding#commits
