@@ -11,10 +11,10 @@
       = activity.commented_on.strftime('%H:%m, %d %b %Y')
   %p= activity.description
   %ul.list-inline
-    %li.rating-control.br-theme-bars-square{ data: { url: rate_judging_index_path('activity', activity.id) }}
+    %li.rating-control.br-theme-bars-square{ data: { url: judge_rating_path(activity) }}
       = select_tag :points, options_for_select(ACTIVITY_RATINGS, activity.judge_rating(current_user)), include_blank: 'NR' 
     %li.pull-right.comments
-      = link_to '#', class: 'link-black text-sm show-comments', data: { id: activity.id.to_s, url: comments_judging_index_path('activity', activity.id) } do
+      = link_to '#', class: 'link-black text-sm show-comments', data: { id: activity.id.to_s, url: comments_judging_index_path('activities', activity.id) } do
         %i.fa.fa-comments-o.margin-r-5
         %span{id: "comments_count_#{activity.id}"}
           Comments 

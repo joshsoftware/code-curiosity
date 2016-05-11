@@ -1,7 +1,7 @@
 class Organization::RepositoriesController < ApplicationController
   include OrganizationHelper
 
-  before_action :find_org
+  before_action :authenticate_org!
 
   def index
     redirect_back

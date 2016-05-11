@@ -24,4 +24,20 @@ module JudgeScoringHelper
    def final_score
      judges_score || auto_score
    end
+
+  def rate(judge, rating)
+    score = self.scores.where(user: judge).first
+
+    if score.nil?
+      score = self.scores.build(user: judge)
+    end
+
+    if rating.present?
+      score.update_attributes(value: rating.to_i)
+    else
+      score.destroy if score
+    end
+
+    set_judges_avg_score
+  end
 end

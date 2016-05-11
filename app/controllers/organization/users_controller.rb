@@ -1,7 +1,7 @@
 class Organization::UsersController < ApplicationController
   include OrganizationHelper
 
-  before_action :find_org
+  before_action :authenticate_org!
   before_action :find_user, only: :destroy
 
   def create

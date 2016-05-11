@@ -26,16 +26,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :judging, only: [] do
-    collection do
-      get 'commits'
-      get 'activities'
-      post 'rate/:type/:id', action: 'rate', as: :rate
-      get 'comments/:type/:id', action: 'comments', as: :comments
-      post 'comments/:type/:id', action: 'comment', as: :comment
-    end
-  end
-
   namespace :admin do
     resources :repositories do
       member do
@@ -56,11 +46,20 @@ Rails.application.routes.draw do
     get 'repos/sync' => 'repos#sync'
   end
 
+  concern :judgeable do |opts|
+    get 'commits', opts
+    get 'activities', opts
+    get 'comments/:type/:resource_id', opts.merge(action: 'comments', as: :comments)
+    post 'comments/:type/:resource_id', opts.merge(action: 'comment', as: :comment)
+    post 'rate/:type/:resource_id', opts.merge(action: 'rate', as: :rate_activity)
+  end
+
+  resources :judging, only: [] do
+    concerns :judgeable, on: :collection
+  end
+
   resources :organizations, only: [:show, :edit, :update] do
-    member do
-      get :commits
-      get :activities
-    end
+    concerns :judgeable, on: :member
 
     resources :users, only: [:create, :destroy], controller: 'organization/users'
     resources :repositories, only: [:index], controller: 'organization/repositories' do

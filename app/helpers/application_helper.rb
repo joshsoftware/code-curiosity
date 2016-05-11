@@ -35,4 +35,28 @@ module ApplicationHelper
     "#{(points/1000.0).round(1)}k"
   end
 
+  def judge_rating_path(resource)
+    if @org
+      rate_activity_organization_path(@org, resource.collection_name, resource)
+    else
+      rate_activity_judging_index_path(resource.collection_name, resource)
+    end
+  end
+
+  def add_judge_comment_path(resource)
+    if @org
+      comment_organization_path(@org, resource.collection_name, resource)
+    else
+      comment_judging_index_path(resource.collection_name, resource)
+    end
+  end
+
+  def judges_comments_path(resource)
+    if @org
+      comments_organization_path(@org, resource.collection_name, resource)
+    else
+      comments_judging_index(resource.collection_name, resource)
+    end
+  end
+
 end
