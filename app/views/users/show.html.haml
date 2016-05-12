@@ -39,10 +39,9 @@
                 %tr
                   %th.col-xs-1 #
                   %th Name
-                  %th Status
-                  %th.col-xs-1 Commits
-                  %th.col-xs-1 Activities
-                  %th.col-xs-1 Points
+                  %th.col-xs-2 Commits
+                  %th.col-xs-2 Activities
+                  %th.col-xs-2 Points
               %tbody
                 = render partial: 'subscription', collection:  @user.subscriptions.order(created_at: :desc)
           .tab-pane#wallet

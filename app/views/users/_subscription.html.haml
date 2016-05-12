@@ -1,9 +1,6 @@
 %tr
   %td= subscription_counter + 1
   %td= subscription.round.from_date.strftime("%b %Y") 
-  %td
-    %small.label{class: subscription.round.open? ? 'bg-green' : 'bg-yellow'}
-      = subscription.round.status
   %td= subscription.commits_count
   %td= subscription.activities_count
   %td= format_points(subscription.points)
