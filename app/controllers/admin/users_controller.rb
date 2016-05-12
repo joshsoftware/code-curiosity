@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @users = User.all.page(params[:page])
+    @users = User.where(auto_created: false).page(params[:page])
   end
 
   def mark_as_judge
