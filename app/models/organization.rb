@@ -51,4 +51,10 @@ class Organization
   def self.setup(github_handle, admin)
     Organization.create(github_handle: github_handle).tap{|o| o.users << admin }
   end
+
+  def link_user_activities
+    repo_ids = self.repositories.pluck(:id)
+    Commit.where(:repository_id.in => repo_ids).update_all(organization_id: self.id)
+    Activity.where(:repository_id.in => repo_ids).update_all(organization_id: self.id)
+  end
 end
