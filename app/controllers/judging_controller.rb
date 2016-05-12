@@ -9,6 +9,7 @@ class JudgingController < ApplicationController
     @commits = current_round.commits
                             .page(params[:page])
                             .per(20)
+                            .order(commit_date: :desc)
     #                       .in(repository: current_user.judges_repository_ids)
   end
 
@@ -16,6 +17,7 @@ class JudgingController < ApplicationController
     @activities = current_round.activities
                             .page(params[:page])
                             .per(20)
+                            .order(:commented_on)
     #                       .in(repository: current_user.judges_repository_ids)
   end
 

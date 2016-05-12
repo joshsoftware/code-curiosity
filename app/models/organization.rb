@@ -25,8 +25,7 @@ class Organization
   has_many :commits
   has_many :activities
 
-  validates :github_handle, presence: true
-  validates :github_handle, uniqueness: true
+  validates :github_handle, presence: true, uniqueness: true
 
   before_create :set_info
 
@@ -47,5 +46,9 @@ class Organization
 
   def info
     @info ||= GITHUB.orgs.get(github_handle)
+  end
+
+  def self.setup(github_handle, admin)
+    Organization.create(github_handle: github_handle).tap{|o| o.users << admin }
   end
 end

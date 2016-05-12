@@ -150,7 +150,7 @@ class User
   end
 
   def set_royalty_bonus
-    royalty_points = (repos_star_count*100) * ([followers, 100].min/100.0)
+    royalty_points = repos_star_count * ([followers, 100].min/100)
 
     if royalty_points >= USER[:royalty_points_threshold]
       self.celebrity = true
@@ -189,7 +189,6 @@ class User
   end
 
   def self.find_by_slug(slug)
-    User.find(slug) || User.where(github_handle: slug).first
+    User.where(id: slug).first || User.where(github_handle: slug).first
   end
-
 end

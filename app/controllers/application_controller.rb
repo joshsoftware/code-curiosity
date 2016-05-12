@@ -29,13 +29,13 @@ class ApplicationController < ActionController::Base
 
   def authenticate_judge!
     unless current_user.is_judge
-      redirect_to :back, notice: I18n.t('messages.unauthorized_access')
+      redirect_back(notice: I18n.t('messages.unauthorized_access'))
     end
   end
 
   def authenticate_admin!
     unless current_user.is_admin?
-      redirect_to :back, notice: I18n.t('messages.unauthorized_access')
+      redirect_back(notice: I18n.t('messages.unauthorized_access'))
     end
   end
 

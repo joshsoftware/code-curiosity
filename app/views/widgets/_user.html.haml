@@ -4,4 +4,4 @@
       %img.img-circle{alt: leader['user'].github_handle, src: avatar_url(leader['user']) }/
     %span.username
       = leader['user'].github_handle
-    %span.pull-right.badge.bg-blue= leader['value'].to_i
+    %span.pull-right.badge.bg-blue= "#{leader['value'].to_i} points"

@@ -20,7 +20,7 @@ class ActivitiesFetcher
 
     activities.each do |a|
       if TRACKING_EVENTS.key?(a.type) && Time.parse(a.created_at) > since_time && repos.key?(a.repo.id)
-        create_activity(a, repos[a.repos.id])
+        create_activity(a, repos[a.repo.id])
       end
     end
   end
