@@ -41,3 +41,4 @@ en:
     dont_have_populer_repos: "There are no repositories with more then 25 stars in github."
   organizations:
     minimum_admin_users: "You cant't remove users. At least one user required in admn group."
+    no_leaders: 'No one here!'
