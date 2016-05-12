@@ -149,8 +149,12 @@ class User
     self.subscriptions.find_or_create_by(round: round) if round
   end
 
+  def calculate_royalty_bonus
+    (repos_star_count * ([followers, 100].min/100.0)).round
+  end
+
   def set_royalty_bonus
-    royalty_points = repos_star_count * ([followers, 100].min/100)
+    royalty_points = calculate_royalty_bonus
 
     if royalty_points >= USER[:royalty_points_threshold]
       self.celebrity = true
