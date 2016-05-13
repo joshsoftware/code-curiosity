@@ -70,6 +70,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # TODO: implementation
+  # resources :goals, except: [:destroy]
+
   get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
 
   post 'webhook' => 'dashboard#webhook'

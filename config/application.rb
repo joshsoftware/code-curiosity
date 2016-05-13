@@ -36,8 +36,6 @@ module CodeCuriosity
       Devise::SessionsController.layout 'devise'
     end
 
-    #config.active_job.queue_name_prefix = Rails.env
-    #config.active_job.queue_name_delimiter = '.'
-    #config.cache_store = :redis_store, ENV['REDIS'], { expires_in: 1.day }
+    config.cache_store = :file_store, Rails.root.join('cache').to_s
   end
 end

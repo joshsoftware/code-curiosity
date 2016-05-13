@@ -6,6 +6,7 @@ class Subscription
 
   belongs_to :user
   belongs_to :round
+  belongs_to :goal
   has_one :transaction
 
   def commits_count

@@ -1,0 +1,16 @@
+goals:
+  Traker:
+    points: 15
+    bonus_points: 20
+    image_url: 
+    description:
+  Mountaineer:
+    points: 50 
+    bonus_points: 75
+    image_url: 
+    description:
+  Rover:
+    points: 200
+    bonus_points: 250
+    image_url: 
+    description:

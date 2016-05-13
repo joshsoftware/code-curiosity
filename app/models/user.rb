@@ -62,6 +62,7 @@ class User
   has_many :rounds
   has_many :comments
   has_and_belongs_to_many :organizations
+  has_and_belongs_to_many :groups
 
   index(uid: 1)
   index(github_handle: 1)

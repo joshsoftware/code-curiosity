@@ -6,5 +6,6 @@ $(document).on('page:change', function(event) {
 
     modal.find('.modal-title').text('Widget: ' + button.data('name'));
     modal.find('.modal-body .code').text(code);
+    modal.find('.modal-body .widget-preview').html(code);
   })
 });
