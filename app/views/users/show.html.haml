@@ -42,6 +42,7 @@
                   %th.col-xs-2 Commits
                   %th.col-xs-2 Activities
                   %th.col-xs-2 Points
+                  %th.col-xs-2 Goal
               %tbody
                 = render partial: 'subscription', collection:  @user.subscriptions.order(created_at: :desc)
           .tab-pane#wallet

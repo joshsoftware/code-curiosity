@@ -1,0 +1,18 @@
+.col-xs-12.col-sm-6.col-md-4
+  %ul.goals{class: "g-#{color(goal_counter)} #{selected_goal?(goal) && 'selected'}"}
+    %li
+      .row
+        %i.fa.fa-trophy.icon
+      %big= goal.name
+      %li.desc
+        = raw(goal.info['description'] % { points: points_format("#{goal.points} points") })
+      %li.desc
+        Meet the goal and earn 
+        %span.points= "#{goal.bonus_points} more"
+        bonus points. 
+      %li.redeem
+        = raw(goal.info['redeem_text'])
+      %li
+        = link_to 'Set As Goal', set_goal_users_path(goal), class: 'button'
+  - if !selected_goal?(goal) && current_user.goal == goal
+    %h4.next-month-goal Next Month Goal

@@ -3,13 +3,11 @@
     %tr
       %th.col-xs-2 Name
       %th.col-xs-4 Email
-      %th.col-xs-2 Handler  
-      %th.col-xs-5 Repositories  
+      %th.col-xs-2 Github Handler  
   %tbody     
     - @judges.each do |judge|
       %tr
         %td.col-xs-2 
           = link_to judge.name, user_path(judge._id)
         %td.col-xs-4= judge.email
-        %td.col-xs-2= judge.github_handle
-        %td.col-xs-2= judge.repo_names
+        %td.col-xs-2= link_to judge.github_handle, github_url(judge)

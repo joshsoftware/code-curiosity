@@ -42,3 +42,7 @@ en:
   organizations:
     minimum_admin_users: "You cant't remove users. At least one user required in admn group."
     no_leaders: 'No one here!'
+  goal:
+    please_select: 'Please select goal!'
+    set_as_goal: "Goal set to '%{name}'!"
+    set_as_goal_next_month: "You had already set goal to '%{current_goal}' for this month. Goal '%{name}' will set for next month."

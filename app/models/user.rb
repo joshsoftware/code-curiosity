@@ -63,6 +63,7 @@ class User
   has_many :comments
   has_and_belongs_to_many :organizations
   has_and_belongs_to_many :groups
+  belongs_to :goal
 
   index(uid: 1)
   index(github_handle: 1)
@@ -144,10 +145,15 @@ class User
     last_gh_data_sync_at.present? && (Time.now - last_gh_data_sync_at) < 3600
   end
 
-  # NOTE: If round nil the subscribe to latest round.
   def subscribe_to_round(round = nil)
-    round = Round.opened unless round
-    self.subscriptions.find_or_create_by(round: round) if round
+    round = round || Round.opened
+    return false unless round
+
+    last_subscription = subscriptions.desc(:created_at).first
+
+    subscriptions.find_or_create_by(round: round) do |subscription|
+      subscription.goal = self.goal || last_subscription.goal
+    end
   end
 
   def calculate_royalty_bonus
@@ -182,7 +188,7 @@ class User
   end
 
   def self.encrypter
-   @_encrypter ||= ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['ENC_KEY']))
+    @_encrypter ||= ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['ENC_KEY']))
   end
 
   def group_name
@@ -195,5 +201,9 @@ class User
 
   def self.find_by_slug(slug)
     User.where(id: slug).first || User.where(github_handle: slug).first
+  end
+
+  def current_subscription
+    @_csu ||= subscriptions.where(round_id: Round.opened.id).first
   end
 end

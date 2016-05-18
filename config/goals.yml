@@ -1,16 +1,19 @@
 goals:
-  Traker:
+  Hiker:
     points: 15
     bonus_points: 20
     image_url: 
-    description:
+    description: "I think I can earn %{points} in a month"
+    redeem_text: "50 points can get you a pack of Github <a href='https://github.myshopify.com/products/octodex-sticker-packs' target='_blank'>Stickers</a> or <a href='https://github.myshopify.com/products/atom-coasters' target='_blank'>coasters</a>!"
   Mountaineer:
     points: 50 
     bonus_points: 75
     image_url: 
-    description:
+    description: "I'm good! I can earn at least %{points} in a month"
+    redeem_text: "250 points can get you <a href='https://github.myshopify.com/products/github-username-shirt' target='_blank'>t-shirts</a> or <a href='https://github.myshopify.com/products/github-mug' target='_blank'>mugs</a>"
   Rover:
     points: 200
     bonus_points: 250
     image_url: 
-    description:
+    description: "I'm reaching for Mars! Let me target %{points}!"
+    redeem_text: "550 points can get you a <a href='https://github.myshopify.com/products/invertocat-hoodie' target='_blank'>Github hoodie</a>"
