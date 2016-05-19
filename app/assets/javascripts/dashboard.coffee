@@ -26,8 +26,3 @@
 
 $(document).on "page:change", ->
   $('#datepicker1').datepicker format: 'dd/mm/yyyy'
-  
-$(document).on "change", "td.score select", ->
-  params = $(this).closest("tr").data()
-  params["rank"] = $(this).val()
-  $.post("/score", params)

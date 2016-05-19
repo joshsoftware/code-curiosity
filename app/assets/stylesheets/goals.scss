@@ -115,11 +115,17 @@
   &.selected{
     border: 2px solid goldenrod
   }
+  
+  a.info{
+    text-decoration: underline;
+    cursor: auto;
+    color: #999;
+  }
 }
 
 .next-month-goal{
   text-align: center;
-  color: #555;
+  color: red;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 18px;
 }

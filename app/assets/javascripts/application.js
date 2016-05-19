@@ -16,9 +16,10 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require AdminLTE
+//= require highcharts
 //= require jquery.noty.packaged
+//= require stream_table
 //= require_tree .
-
 
 function onDocReady(){
   $.AdminLTE.layout.activate();

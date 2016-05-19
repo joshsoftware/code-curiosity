@@ -46,3 +46,4 @@ en:
     please_select: 'Please select goal!'
     set_as_goal: "Goal set to '%{name}'!"
     set_as_goal_next_month: "You had already set goal to '%{current_goal}' for this month. Goal '%{name}' will set for next month."
+    goal_change_faq: 'User can set current month goal only in first week of the month. If goal set after first week it will going to set for the next month.'

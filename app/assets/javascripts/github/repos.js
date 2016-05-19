@@ -11,12 +11,6 @@ function renderOrgsMenu(){
   });
 }
 
-function refreshPageOnInteval(){
-  window.pageRefreshInterval = setInterval(function(){
-    Turbolinks.visit(location.toString());
-  }, 60*1000)
-}
-
 $(document).on('shown.bs.tab', 'a.gh-org-repos', function (e) {
   $('#gh-orgs-title h3').text('Fetching.....');
   

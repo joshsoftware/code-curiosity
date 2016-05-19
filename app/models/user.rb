@@ -203,7 +203,8 @@ class User
     User.where(id: slug).first || User.where(github_handle: slug).first
   end
 
-  def current_subscription
-    @_csu ||= subscriptions.where(round_id: Round.opened.id).first
+  def current_subscription(round = nil)
+    round = Round.opened unless round
+    @_csu ||= subscriptions.where(round_id: round.id).first
   end
 end

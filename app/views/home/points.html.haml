@@ -1,0 +1,10 @@
+%section.content-header
+  %h1= "Points earning trend for #{current_round.name}"
+%section.content
+  .row
+    .col-xs-12
+      .box
+        .box-body.table-responsive.no-padding
+          #points-chart-container
+:javascript
+  showPointsChart('#{current_round.name}', #{@points.to_json}, #{@user_points} );

@@ -63,3 +63,7 @@ faq:
   -
     question: Do companies or organisations benefit from Code Curiosity?
     answer: Yes. We are in the process of giving a cumulative score to organisations that the github users belongs to. So, if you are working in a company that enourages you to contribute to open-source, the organization overall rating increases too! This is an algorithm that uses a weighted average of it's employees scores. This not only helps the organization get a better profile but also encourages developers to join such companies!
+  - 
+    question: 'What are points?'
+    answer: 'Points are ......'
+    html_anchor: 'what-are-points'

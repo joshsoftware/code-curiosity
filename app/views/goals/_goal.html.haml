@@ -6,6 +6,8 @@
       %big= goal.name
       %li.desc
         = raw(goal.info['description'] % { points: points_format("#{goal.points} points") })
+        %h5
+          = link_to 'What are points?', faq_path(anchor: 'what-are-points'), class: 'info', target: '_blank'
       %li.desc
         Meet the goal and earn 
         %span.points= "#{goal.bonus_points} more"
