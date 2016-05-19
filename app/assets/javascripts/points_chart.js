@@ -1,12 +1,14 @@
 function showPointsChart(round, points, user_points){
-  points.push(0);
+  if(points[points.lenght - 1] != 1){
+    points.push(1);
+  }
 
-   if(user_points || user_points == 0){
-      $.each(points, function(index, value){
-        if(value == user_points){
-          points[index] = { y: points[index], color: 'red' }
-        }
-      });
+  if(user_points || user_points == 0){
+    $.each(points, function(index, value){
+      if(value == user_points){
+        points[index] = { y: points[index], color: 'red' }
+      }
+    });
    }
 
    $('#points-chart-container').highcharts({
@@ -18,14 +20,19 @@ function showPointsChart(round, points, user_points){
         },
         yAxis: {
           type: 'logarithmic',
-          minorTickInterval: 1
+          minorTickInterval: 1,
+          min: 1,
+          title: {
+            enabled: true,
+            text: 'Points'
+          }
         },
         tooltip: {
             headerFormat: '<b>{series.name}</b><br/>',
             pointFormat: '{point.y} points'
         },
         series: [{
-          name: 'Points',
+          name: 'Points Distribution',
           data: points,
           pointStart: 1 
         }]

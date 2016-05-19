@@ -4,4 +4,5 @@
   %td= subscription.commits_count
   %td= subscription.activities_count
   %td= format_points(subscription.points)
+/  
   %td= subscription.goal ? link_to(subscription.goal.name, goals_path) : '-'

@@ -14,9 +14,6 @@
               = @user.github_handle
           %ul.list-group.list-group-unbordered
             %li.list-group-item
-              %b Group
-              %a.pull-right= @user.group_name
-            %li.list-group-item
               %b Points
               %a.pull-right= format_points(@user.transactions.sum(:points))
             %li.list-group-item
@@ -25,6 +22,12 @@
             %li.list-group-item
               %b Activities
               %a.pull-right= @user.activities_count
+            %li.list-group-item
+              %b Goal
+              - if @user.current_subscription
+                = link_to @user.current_subscription.goal.name, points_path, class: 'pull-right'
+              - else
+                = link_to 'Set Goal', goals_path, class: 'pull-right'
     .col-xs-9
       .nav-tabs-custom
         %ul.nav.nav-tabs
@@ -42,7 +45,6 @@
                   %th.col-xs-2 Commits
                   %th.col-xs-2 Activities
                   %th.col-xs-2 Points
-                  %th.col-xs-2 Goal
               %tbody
                 = render partial: 'subscription', collection:  @user.subscriptions.order(created_at: :desc)
           .tab-pane#wallet
