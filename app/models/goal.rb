@@ -32,4 +32,8 @@ class Goal
       goal.save!
     end
   end
+
+  def self.default_goal
+    Goal.where(name: 'Hiker').first
+  end
 end

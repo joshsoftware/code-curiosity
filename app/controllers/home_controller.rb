@@ -22,8 +22,12 @@ class HomeController < ApplicationController
   def points
     subscription = current_user ? current_user.current_subscription(current_round) : nil
 
-    @goal =  params[:goal_id].present? ? Goal.find(params[:goal_id]) : subscription.goal
-    @goal = Goal.where(name: 'Hiker').first unless @goal
+    @goal = if params[:goal_id].present?
+              Goal.where(id: params[:goal_id]).first
+            elsif subscription
+              subscription.goal
+          end
+    @goal = Goal.default_goal unless @goal
 
     @points = current_round.subscriptions
                            .where(goal_id: @goal.id)
