@@ -26,8 +26,10 @@
               %b Goal
               - if @user.current_subscription && @user.current_subscription.goal
                 = link_to @user.current_subscription.goal.name, points_path, class: 'pull-right'
-              - else
+              - elsif current_user == @user
                 = link_to 'Set Goal', goals_path, class: 'pull-right'
+              - else
+                %span.pull-right Not set yet
     .col-xs-9
       .nav-tabs-custom
         %ul.nav.nav-tabs
