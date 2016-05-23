@@ -15,7 +15,7 @@
           %ul.list-group.list-group-unbordered
             %li.list-group-item
               %b Points
-              %a.pull-right= format_points(@user.transactions.sum(:points))
+              %a.pull-right= format_points(@user.total_points)
             %li.list-group-item
               %b Commits
               %a.pull-right= @user.commits_count
@@ -61,5 +61,8 @@
                   %td 
                     %b Total
                   %td{ colspan: 4 }= @user.total_points 
+          %b 
+            Info:
+            %i= t('transaction.points_credit_info') 
 :javascript                  
   selectTabUsingUrlHash()

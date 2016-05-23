@@ -27,17 +27,11 @@ class Subscription
 
   def update_points
     self.set(points: commits_score + activities_score)
-
-    if points == 0
-      self.transaction.destroy if transaction
-    else
-      create_or_update_transaction
-    end
   end
 
-  private
-
   def create_or_update_transaction
+    return if self.points == 0
+
     self.build_transaction unless transaction
     self.transaction.points = self.points
     self.transaction.transaction_type = "Round : #{self.round.from_date.strftime("%b %Y")}"

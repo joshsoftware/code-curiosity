@@ -8,6 +8,8 @@ namespace :round do
 
     0.step(User.count, per_batch) do |offset|
       User.limit(per_batch).skip(offset).each do |user|
+        subscription = user.subscriptions.where(round_id: round.id).first
+        subscription.create_or_update_transaction if subscription
         user.subscribe_to_round(opened_round)
       end
     end

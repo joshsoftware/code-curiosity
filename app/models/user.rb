@@ -152,7 +152,7 @@ class User
     last_subscription = subscriptions.desc(:created_at).first
 
     subscriptions.find_or_create_by(round: round) do |subscription|
-      subscription.goal = self.goal || last_subscription.goal
+      subscription.goal = self.goal || last_subscription.try(:goal)
     end
   end
 
@@ -168,6 +168,7 @@ class User
     end
 
     self.transactions.create(points: royalty_points, transaction_type: 'royalty_bonus', type: 'credit')
+    self.points = royalty_points
     self.save
   end
 
