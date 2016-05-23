@@ -1,4 +1,4 @@
-$.noty.defaults.timeout = 3000;
+$.noty.defaults.timeout = 5000;
 $.noty.defaults.theme = "relax";
 $.noty.defaults.type = "notification"
 

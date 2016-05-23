@@ -10,7 +10,7 @@
             = link_to round.from_date.strftime("%b %Y"), change_round_path(round)
 %li.dropdown.user.user-menu
   %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
-    %img.user-image{:alt => current_user.name, :src => avatar_url}/
+    %img.user-image#profile-pic{:alt => current_user.name, :src => avatar_url}/
     %span.hidden-xs= current_user.name.titleize
   %ul.dropdown-menu
     %li.user-header

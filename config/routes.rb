@@ -77,8 +77,8 @@ Rails.application.routes.draw do
 
   get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'
-  get 'leaderboard' => 'home#leaderboard'
-  get 'points' => 'home#points'
+  #get 'leaderboard' => 'home#leaderboard'
+  get 'points/(:goal_id)' => 'home#points', as: :points
 
   get 'faq' => 'info#faq'
 

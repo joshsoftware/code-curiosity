@@ -84,6 +84,7 @@
 
   .redeem a{
     font-size: 18px;
+    text-decoration: underline;
   }
 
   @mixin goal-color($color) {

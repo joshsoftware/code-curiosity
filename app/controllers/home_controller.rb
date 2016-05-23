@@ -20,13 +20,20 @@ class HomeController < ApplicationController
   end
 
   def points
+    subscription = current_user ? current_user.current_subscription(current_round) : nil
+
+    @goal =  params[:goal_id].present? ? Goal.find(params[:goal_id]) : subscription.goal
+    @goal = Goal.where(name: 'Hiker').first unless @goal
+
     @points = current_round.subscriptions
-                                 .where(:points.gt => 0)
-                                 .order(points: :desc)
-                                 .pluck(:points).uniq
+                           .where(goal_id: @goal.id)
+                           .order(points: :desc)
+                           .pluck(:points)
 
     if current_user
-      @user_points = current_user.current_subscription.try(:points)
+      if subscription && subscription.goal == @goal
+        @user_points = subscription.points
+      end
     end
 
     if user_signed_in?

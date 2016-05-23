@@ -35,14 +35,13 @@ class UsersController < ApplicationController
 
     current_user.set(goal_id: @goal.id)
 
-    # NOTE: User can change goal in first month.
-    if subscription.goal && (Round.opened.from_date + 7.days) <= Time.now
+    if subscription.goal
       message = I18n.t('goal.set_as_goal_next_month', { name: @goal.name, current_goal: subscription.goal.name })
     else
       message = I18n.t('goal.set_as_goal', { name: @goal.name })
       subscription.set(goal_id: @goal.id)
     end
 
-    redirect_to user_path(current_user), notice: message
+    redirect_to goals_path, notice: message
   end
 end

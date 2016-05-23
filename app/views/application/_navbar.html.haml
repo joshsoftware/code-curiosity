@@ -15,13 +15,9 @@
             %i.fa.fa-question
             FAQS
         %li
-          = link_to leaderboard_path do
-            %span.fa.fa-street-view
-            Leaderboard
-        %li
           = link_to points_path do
-            %span.fa.fa-diamond
-            Points earning trend
+            %span.fa.fa-line-chart
+            Trends
         - if current_user
           = render 'user_nav'
         - else
