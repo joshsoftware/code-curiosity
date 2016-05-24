@@ -8,6 +8,7 @@ class Transaction
 
   belongs_to :user
   belongs_to :subscription
+  belongs_to :redeem_request
 
   validates :type, :points , presence: true
   validates :type, inclusion: { in: %w(credit debit) }
@@ -21,4 +22,15 @@ class Transaction
   def credit?
     type == 'credit'
   end
+
+  def redeem_transaction?
+    transaction_type == 'redeem_points'
+  end
+
+  def coupon_code
+    if redeem_transaction?
+      return (@ccode ||= redeem_request.coupon_code)
+    end
+  end
+
 end

@@ -1,0 +1,4 @@
+- if @redeem.valid?
+  Turbolinks.visit("#{user_path(current_user, anchor: 'wallet')}");
+- else
+  $('#redeem-modal .modal').html("#{j render('new_modal')}");

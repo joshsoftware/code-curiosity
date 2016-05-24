@@ -1,0 +1,14 @@
+.modal-dialog
+  .modal-content
+    = simple_form_for(@redeem || RedeemRequest.new(user: current_user), url: redeem_path, remote: true) do |f|
+      .modal-header
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', :type => 'button'}
+          %span{'aria-hidden' => 'true'} &times;
+        %h4.modal-title Redeem Points
+      .modal-body
+        = f.input :points
+        %b Info: 
+        %i Minimum redemption limits is 50 points.
+      .modal-footer
+        %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Cancel
+        %button.btn.btn-primary{:type => 'submit'} Redeem

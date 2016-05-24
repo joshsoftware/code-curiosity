@@ -31,6 +31,8 @@ $(document).on('page:load', onDocReady);
 $(document).on('page:change', function(event) {
   $('.sidebar').off('click')
   $.AdminLTE.tree('.sidebar');
+
+  selectTabUsingUrlHash();
 });
 
 function selectTabUsingUrlHash(){

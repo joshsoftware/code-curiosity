@@ -26,17 +26,21 @@
               %b Goal
               - if @user.current_subscription && @user.current_subscription.goal
                 = link_to @user.current_subscription.goal.name, points_path, class: 'pull-right'
-              - elsif current_user == @user
+              - elsif logged_in_user?
                 = link_to 'Set Goal', goals_path, class: 'pull-right'
               - else
                 %span.pull-right Not set yet
+          - if logged_in_user?
+            = link_to '#', class: 'btn btn-primary btn-block', data: { toggle: 'modal', target: '#redeem-modal .modal' } do
+              %b Redeem Points
     .col-xs-9
       .nav-tabs-custom
         %ul.nav.nav-tabs
           %li.active#rounds_tab_link
             = link_to 'Rounds', '#rounds', data: { toggle: 'tab'}
-          %li#wallet_tab_link
-            = link_to 'Points History', '#wallet', data: { toggle: 'tab' }
+          - if logged_in_user?
+            %li#wallet_tab_link
+              = link_to 'Points History', '#wallet', data: { toggle: 'tab' }
         .tab-content
           .tab-pane.active#rounds
             %table.table.table-bordered
@@ -48,23 +52,14 @@
                   %th.col-xs-2 Activities
                   %th.col-xs-2 Points
               %tbody
-                = render partial: 'subscription', collection:  @user.subscriptions.order(created_at: :desc)
-          .tab-pane#wallet
-            %table.table.table-bordered
-              %thead
-                %tr
-                  %th.col-xs-1 #
-                  %th.col-xs-3  Points
-                  %th Detail
-                  %th Date
-              %tbody
-                = render partial: 'transaction', collection: @user.transactions.order(created_at: :desc)
-                %tr
-                  %td 
-                    %b Total
-                  %td{ colspan: 4 }= @user.total_points 
+                = render partial: 'subscription', collection:  @user.subscriptions.desc(:created_at)
+          - if logged_in_user?
+            .tab-pane#wallet
+              = render 'transactions'
           %b 
             Info:
             %i= t('transaction.points_credit_info') 
-:javascript                  
-  selectTabUsingUrlHash()
+- if logged_in_user?
+  #redeem-modal
+    .modal.fade
+      = render 'redeem/new_modal'            

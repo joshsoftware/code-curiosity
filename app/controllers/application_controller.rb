@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
     return true unless current_user
     return true if params[:controller] == 'goals' && params[:action] == 'index'
     return true if params[:action] == 'set_goal' || params[:controller] == 'devise/sessions'
+    return true if current_user.is_admin?
 
     if current_user.goal.blank?
       redirect_to goals_path, notice: I18n.t('goal.please_select')
@@ -50,6 +51,6 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_back(opts = {})
-    redirect_to(request.env["HTTP_REFERER"] || root_path, opts)
+    redirect_to(request.env['HTTP_REFERER'] || root_path, opts)
   end
 end

@@ -2,7 +2,6 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include GlobalID::Identification
-  include UserGroupHelper
   include UserGithubHelper
 
   ROLES = {admin: 'Admin'}
@@ -63,6 +62,7 @@ class User
   has_many :comments
   has_and_belongs_to_many :organizations
   has_and_belongs_to_many :groups
+  has_many :redeem_requests
   belongs_to :goal
 
   index(uid: 1)
@@ -129,14 +129,6 @@ class User
     end
   end
 
-  def info
-    @info ||= GITHUB.users.get(user: github_handle)
-  end
-
-  def gh_orgs
-    @gh_orgs ||= GITHUB.organizations.all(user: self.github_handle)
-  end
-
   def repo_syncing?
     last_repo_sync_at.present? && (Time.now - last_repo_sync_at) < 3600
   end
@@ -167,7 +159,10 @@ class User
       self.celebrity = true
     end
 
-    self.transactions.create(points: royalty_points, transaction_type: 'royalty_bonus', type: 'credit')
+    if royalty_points > 0
+      self.transactions.create(points: royalty_points, transaction_type: 'royalty_bonus', type: 'credit')
+    end
+
     self.points = royalty_points
     self.save
   end
@@ -190,10 +185,6 @@ class User
 
   def self.encrypter
     @_encrypter ||= ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['ENC_KEY']))
-  end
-
-  def group_name
-    USER_GROUPS[level || 1]['name']
   end
 
   def total_points

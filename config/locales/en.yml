@@ -49,3 +49,5 @@ en:
     goal_change_faq: 'User can set current month goal only in first week of the month. If goal set after first week it will going to set for the next month.'
   transaction:
     points_credit_info: End of the month points will be credited to account.
+  redeem:
+    request_created: 'We will send you coupon code in couple of days.'

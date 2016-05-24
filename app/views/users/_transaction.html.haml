@@ -6,4 +6,8 @@
       = transaction.transaction_type.humanize
     %small.label{class: transaction.credit? ? 'bg-green' : 'bg-red'}
       = transaction.type.upcase
+    - if transaction.coupon_code.present? 
+      %h5
+        Coupon code:
+        %i= transaction.coupon_code
   %td= transaction.created_at.strftime('%D %T')

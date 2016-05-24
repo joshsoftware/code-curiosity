@@ -1,0 +1,33 @@
+%section.content-header
+  %h1 
+    Redeem Requests
+%section.content
+  .row
+    .col-xs-12
+      .box.box-primary
+        .box-body.table-responsive
+          %table.table.table-bordered
+            %thead
+              %tr
+                %th.col-xs-3 User
+                %th.col-xs-2 Points
+                %th.col-xs-2 Date
+                %th.col-xs-3 Coupon Code
+                %th.col-xs-2 Actions
+            %tbody     
+              = render @redeem_requests
+          .pagination-container
+            = paginate @redeem_requests
+.modal.fade#coupon-code-modal            
+  .modal-dialog
+    .modal-content
+      = simple_form_for(RedeemRequest.new, url: '#', method: 'put') do |f|
+        .modal-header
+          %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', :type => 'button'}
+            %span{'aria-hidden' => 'true'} &times;
+          %h4.modal-title Redeem Request
+        .modal-body
+          = f.input :coupon_code
+        .modal-footer
+          %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Cancel
+          %button.btn.btn-primary{:type => 'submit'} Save

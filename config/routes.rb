@@ -17,7 +17,10 @@ Rails.application.routes.draw do
 
   resources :users, except: [:destroy] do
     get 'sync'
-    get 'set_goal/:goal_id', action: :set_goal, on: :collection, as: 'set_goal'
+
+    collection do
+      get 'set_goal/:goal_id', action: :set_goal, as: 'set_goal'
+    end
   end
 
   resources :activities, only: [:index] do
@@ -42,6 +45,7 @@ Rails.application.routes.draw do
     resources :rounds do
       get :mark_as_close
     end
+    resources :redeem_requests, only: [:index, :update]
   end
 
   namespace :github do
@@ -72,6 +76,7 @@ Rails.application.routes.draw do
   end
 
   resources :goals, only: [:index]
+  resource :redeem, only: [:create], controller: 'redeem'
 
   get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
 

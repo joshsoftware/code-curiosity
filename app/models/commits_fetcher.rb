@@ -39,7 +39,6 @@ class CommitsFetcher
   def create_commit(data)
     commit = repo.commits.find_or_initialize_by(sha: data['sha'])
 
-
     return if commit.persisted?
 
     commit.message = data['commit']['message']

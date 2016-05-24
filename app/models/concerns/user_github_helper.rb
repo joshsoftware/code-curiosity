@@ -21,4 +21,12 @@ module UserGithubHelper
 
     all_repos
   end
+
+   def gh_orgs
+    @gh_orgs ||= gh_client.organizations.all(user: self.github_handle)
+  end
+
+  def info
+    @info ||= gh_client.users.get(user: github_handle)
+  end
 end
