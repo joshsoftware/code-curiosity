@@ -25,7 +25,7 @@
             %li.list-group-item
               %b Goal
               - if @user.current_subscription && @user.current_subscription.goal
-                = link_to @user.current_subscription.goal.name, points_path, class: 'pull-right'
+                = link_to @user.current_subscription.goal.name, trend_path, class: 'pull-right'
               - elsif logged_in_user?
                 = link_to 'Set Goal', goals_path, class: 'pull-right'
               - else

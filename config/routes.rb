@@ -77,13 +77,14 @@ Rails.application.routes.draw do
 
   resources :goals, only: [:index]
   resource :redeem, only: [:create], controller: 'redeem'
+  #resources :groups
 
   get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
 
   get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'
   #get 'leaderboard' => 'home#leaderboard'
-  get 'points/(:goal_id)' => 'home#points', as: :points
+  get 'trend/(:goal_id)' => 'home#trend', as: :trend
 
   get 'faq' => 'info#faq'
 

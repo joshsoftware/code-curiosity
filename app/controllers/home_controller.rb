@@ -19,7 +19,7 @@ class HomeController < ApplicationController
     end
   end
 
-  def points
+  def trend
     subscription = current_user ? current_user.current_subscription(current_round) : nil
 
     @goal = if params[:goal_id].present?

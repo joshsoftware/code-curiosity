@@ -8,7 +8,7 @@
           #points-chart-container
     .col-xs-12.text-center.goal-trend-btns
       - Goal.asc(:points).each do |g|
-        = link_to points_path(g), class: 'btn btn-success' do
+        = link_to trend_path(g), class: 'btn btn-success' do
           %i.fa.fa-line-chart
           =  "Trend for #{g.name}"
 

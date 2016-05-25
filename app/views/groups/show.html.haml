@@ -1,0 +1,30 @@
+%section.content-header
+  %h1 
+    Group: #{@group.name}
+    = link_to edit_group_path(@group), class: 'btn btn-success pull-right'do
+      %i.fa.fa-group
+      %b Edit
+%section.content
+  .row
+    .col-xs-12
+      .box.box-primary
+        .box-body
+          %dl.dl-horizontal
+            %dt Description
+            %dd= @group.description
+            %dt Created On
+            %dd= @group.created_at.strftime('%D %T')
+  .row
+    .col-xs-12
+      .box.box-solid
+        .box-header.with-border 
+          %h3.box-title Users
+          = link_to 'Add Users', '#', class: 'btn btn-sm btn-primary pull-right'
+        .box-body.table-responsive
+          %table.table.table-bordered
+            %thead
+              %tr
+                %th.col-xs-2 Name
+                %th.col-xs-2 Actions
+            %tbody     
+              = render partial: 'user', collection: @group.users
