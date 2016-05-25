@@ -1,4 +1,5 @@
 class RedeemController < ApplicationController
+  before_action :work_in_progress
   before_action :authenticate_user!
 
   def create

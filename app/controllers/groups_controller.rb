@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_action :work_in_progress
   before_action :authenticate_user!
   before_action :find_group, except: [:index, :new, :create]
 

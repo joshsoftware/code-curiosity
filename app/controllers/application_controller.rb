@@ -53,4 +53,9 @@ class ApplicationController < ActionController::Base
   def redirect_back(opts = {})
     redirect_to(request.env['HTTP_REFERER'] || root_path, opts)
   end
+
+  def work_in_progress
+    redirect_back
+    return false
+  end
 end

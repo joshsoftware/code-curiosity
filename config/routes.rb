@@ -77,7 +77,7 @@ Rails.application.routes.draw do
 
   resources :goals, only: [:index]
   resource :redeem, only: [:create], controller: 'redeem'
-  #resources :groups
+  resources :groups
 
   get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
 
