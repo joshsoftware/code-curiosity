@@ -20,4 +20,17 @@ class Admin::UsersController < ApplicationController
 
     redirect_to root_path
   end
+
+  def search
+    if params[:q].blank?
+      redirect_to admin_users_path
+      return
+    end
+
+    @users = User.where(github_handle: params[:q])
+    @users = User.where(email: params[:q]) if @users.none?
+    @users = @users.page(1)
+
+    render :index
+  end
 end

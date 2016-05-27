@@ -1,4 +1,4 @@
-%table.table.table-hover.table-bordered#users
+%table.table.table-hover.table-bordered
   %thead
     %tr
       %th.col-xs-2 Name
@@ -21,6 +21,8 @@
             %a{href: admin_user_mark_as_judge_path(user, flag: true), class: "btn btn-primary btn-sm", data: {confirm: "Are you sure?"}}
               %i.fa.fa-check
                 Mark as judge
-          %a{href: login_as_admin_users_path(user, flag: true), class: "btn btn-primary btn-sm", data: {confirm: "Are you sure?"}}
+          %a{href: admin_user_login_as_path(user), class: "btn btn-primary btn-sm", data: {confirm: "Are you sure?"}}
             %i.fa.fa-user
             Login as
+.pagination-container
+  = paginate @users, params: { controller: 'admin/users', action: 'index'}, remote: true

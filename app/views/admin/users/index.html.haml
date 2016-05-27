@@ -1,12 +1,15 @@
-%section.content-header
-  %h1 
-    Users
 %section.content
   .row
     .col-xs-12
       .box.box-primary
+        .box-header
+          %h3.box-title Users
+          .box-tools
+            = form_tag(search_admin_users_path, method: :get, class: 'col-xs-4 pull-right') do
+              .input-group.input-group-sm
+                = text_field_tag('q', params[:q], class: 'form-control pull-right', placeholder: 'github handle/email')
+                .input-group-btn
+                  %button.btn.btn-default{type: 'submit'} Go
         .box-body.table-responsive
-          - if @users.any?
+          #users
             = render 'users_table'
-            .pagination-container
-              = paginate @users, params: { controller: 'admin/users', action: 'index'}, remote: true

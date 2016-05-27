@@ -39,8 +39,10 @@ Rails.application.routes.draw do
     end
     resources :users do
       get 'mark_as_judge'
-      get 'login_as/:user_id', action: :login_as, on: :collection, as: :login_as
+      get :login_as
+      get :search, on: :collection
     end
+
     resources :judges
     resources :rounds do
       get :mark_as_close
