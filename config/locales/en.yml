@@ -21,33 +21,33 @@
 
 en:
   messages:
-    already_subscribed: "You have already subscribed for this challenge"
-    insufficient_points: "You have insufficient points for subscription. Minimum Points required - 150"
+    already_subscribed: "You have already subscribed for this challenge."
+    insufficient_points: "You have insufficient points for subscription. Minimum of 150 points required."
     unauthorized_access: "You are not authorized to access this page."
-    login_required: "You must signin/signup to continue"
-    subscription_successfull: "You have successfully subcribed for this challenge"
-    repository_sync: "Your Repositories are getting in Sync. Please wait for sometime."
+    login_required: "You must signin/signup to continue."
+    subscription_successfull: "You have successfully subscribed for this challenge."
+    repository_sync: "Your repositories are getting synced, this may take a while."
     not_found: 'Invalid url.'
   user:
-    celebrity_signup: "You're way over the top - contact the team and we shall work out a fixed income per month for you "
+    celebrity_signup: "You're way over the top - contact the team and we shall work out a fixed income per month for you."
     no_leaders: 'Still waiting for leaders to emerge!'
     not_found: 'User #{name} not found.'
-    not_exist_in_system: 'User not exist in CodeCuriosity.'
+    not_exist_in_system: 'User does not exist in CodeCuriosity.'
   repositories:
-    criteria_message: "It’s probably not met the minimum criteria - either the repos or it’s origin should have at least 25 stars. This makes your contributions valuable." 
+    criteria_message: "It’s probably not met the minimum criteria - either the repos or their origins should have at least 25 stars. This makes your contributions valuable." 
     contribute_to: "Repository you would like to contribute or source(fork) repository requires minimum %{stars} stars."
-    not_found: 'Repository not exists on github.'
-    github_sync: 'Your Repositories are getting in Sync. Please wait for sometime.'
-    dont_have_populer_repos: "There are no repositories with more then 25 stars in github."
+    not_found: 'Repository does not exist on GitHub.'
+    github_sync: 'Your repositories are getting synced, this may take a while.'
+    dont_have_populer_repos: "There are no repositories with more than 25 stars in GitHub."
   organizations:
-    minimum_admin_users: "You cant't remove users. At least one user required in admn group."
+    minimum_admin_users: "You can't remove users. At least one user is required in admin group."
     no_leaders: 'No one here!'
   goal:
-    please_select: 'Please select goal!'
+    please_select: 'Please select a goal!'
     set_as_goal: "Goal set to '%{name}'!"
-    set_as_goal_next_month: "You had already set goal to '%{current_goal}' for this month. Goal change to '%{name}' will be effective from next month."
-    goal_change_faq: 'User can set current month goal only in first week of the month. If goal set after first week it will going to set for the next month.'
+    set_as_goal_next_month: "You had already set your goal to '%{current_goal}' for this month. Goal change to '%{name}' will be effective from next month."
+    goal_change_faq: 'A user can set his or her current month goal only in the first week of the month. If a goal is set after the first week it will be activated in the next month.'
   transaction:
     points_credit_info: End of the month points will be credited to account.
   redeem:
-    request_created: 'We will send you coupon code in couple of days.'
+    request_created: 'We will send you a coupon code in a couple of days.'
