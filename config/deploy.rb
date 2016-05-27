@@ -12,8 +12,7 @@ require 'mina/whenever'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-#set :domain, 'codecuriosity.org'
-set :domain, '188.166.181.193'
+set :domain, 'codecuriosity.org'
 set :deploy_to, '/home/deploy/projects/codecuriosity'
 #set :repository, 'git@github.com:joshsoftware/code-curiosity.git'
 set :repository, 'https://github.com/joshsoftware/code-curiosity.git'
