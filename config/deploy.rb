@@ -97,6 +97,17 @@ task :deploy => :environment do
   end
 end
 
+desc "db backup"
+task :db_backup => :environment do
+  home = "/home/#{user}/db_dump"
+  name = "mongodump-#{Time.now.strftime('%F')}"
+
+  queue "mongodump --db codecuriosity_#{rail_env} --out #{home}/#{name}"
+  queue "cd #{home}; tar -cvf #{name}.tar.gz #{name}/"
+  queue "rm -rf #{home}/#{name}"
+  queue "echo 'path : #{home}/#{name}.tar.gz'"
+end
+
 # For help in making your deploy script, see the Mina documentation:
 #
 #  - http://nadarei.co/mina

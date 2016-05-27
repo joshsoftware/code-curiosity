@@ -31,3 +31,5 @@ app/models/app_test.rb
 widget.js
 widget_test/
 page_cache
+bin/dbload
+mongodump-*

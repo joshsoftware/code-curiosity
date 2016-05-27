@@ -8,6 +8,8 @@ module GoalsHelper
   end
 
   def selected_goal?(goal)
-    current_user.current_subscription.goal_id == goal.id
+    if goal
+      return current_user.current_subscription.goal_id == goal.id
+    end
   end
 end

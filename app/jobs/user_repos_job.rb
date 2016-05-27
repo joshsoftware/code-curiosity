@@ -8,9 +8,10 @@ class UserReposJob < ActiveJob::Base
   end
 
   def perform(user)
+    return if user.repo_syncing?
+    user.set(last_repo_sync_at: Time.now)
     @user = user
 
-    user.set(last_repo_sync_at: Time.now)
     gh_repos = user.fetch_all_github_repos
 
     gh_repos.each do |gh_repo|
