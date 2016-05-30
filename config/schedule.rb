@@ -33,11 +33,11 @@ every :day, :at => '6:00am' do
  rake "round:update_scores"
 end
 
-every '23 59 30 * *' do
+every '59 23 30 * *' do
   rake 'round:next'
 end
 
-every '23 59 31 * *' do
+every '59 23 31 * *' do
   rake 'round:next'
 end
 
