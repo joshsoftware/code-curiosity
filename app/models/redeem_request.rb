@@ -18,7 +18,7 @@ class RedeemRequest
   before_validation {|r| r.points = r.points.to_i }
   after_create :create_redeem_transaction
 
-  after_create { |r| RedeemMailer.redeem_request(r).deliver_later }
+  #after_create { |r| RedeemMailer.redeem_request(r).deliver_later }
 
   protected
 
