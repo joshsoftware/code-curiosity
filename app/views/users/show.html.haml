@@ -30,10 +30,9 @@
                 = link_to 'Set Goal', goals_path, class: 'pull-right'
               - else
                 %span.pull-right Not set yet
-          /                
-            - if logged_in_user?
-              = link_to '#', class: 'btn btn-primary btn-block', data: { toggle: 'modal', target: '#redeem-modal .modal' } do
-                %b Redeem Points
+          - if logged_in_user?
+            = link_to '#', class: 'btn btn-primary btn-block', data: { toggle: 'modal', target: '#redeem-modal .modal' } do
+              %b Redeem Points
     .col-xs-9
       .nav-tabs-custom
         %ul.nav.nav-tabs

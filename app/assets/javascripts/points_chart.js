@@ -30,7 +30,8 @@ function showPointsChart(round, all_points, user_points){
       text: '' //'Points for ' + round
     },
     xAxis: {
-      tickInterval: tickInterval
+      tickInterval: tickInterval,
+      labels: false
     },
     yAxis: {
       type: 'logarithmic',
@@ -47,6 +48,7 @@ function showPointsChart(round, all_points, user_points){
       }
     },
     series: [{
+      showInLegend: false,
       name: 'Users',
       data: points,
       pointStart: 1,

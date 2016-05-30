@@ -5,6 +5,7 @@ class Transaction
   field :type,              type: String
   field :points ,           type: Integer, default: 0
   field :transaction_type,  type: String
+  field :description,       type: String
 
   belongs_to :user
   belongs_to :subscription

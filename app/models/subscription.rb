@@ -7,7 +7,7 @@ class Subscription
   belongs_to :user
   belongs_to :round
   belongs_to :goal
-  has_one :transaction
+  has_many :transactions
 
   def commits_count
     self.round.commits.where(user: user).count
@@ -29,14 +29,22 @@ class Subscription
     self.set(points: commits_score + activities_score)
   end
 
-  def create_or_update_transaction
-    return if self.points == 0
+  def credit_points
+    return if points == 0
 
-    self.build_transaction unless transaction
-    self.transaction.points = self.points
-    self.transaction.transaction_type = "Round : #{self.round.from_date.strftime("%b %Y")}"
-    self.transaction.type = 'credit'
-    self.transaction.user = self.user
-    self.transaction.save
+    create_credit_transaction('Round', points)
+
+    if goal && points >= goal.points
+      create_credit_transaction('GoalBonus', goal.bonus_points)
+    end
+  end
+
+  def create_credit_transaction(transaction_type, points)
+    transaction = self.transactions.find_or_initialize_by(transaction_type: transaction_type)
+    transaction.points = points
+    transaction.type = 'credit'
+    transaction.description = "#{transaction_type} : #{self.round.from_date.strftime("%b %Y")}"
+    transaction.user = self.user
+    transaction.save
   end
 end
