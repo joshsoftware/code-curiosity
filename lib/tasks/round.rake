@@ -2,6 +2,9 @@ namespace :round do
   desc "Creat next round"
   task :next => :environment do |t, args|
     round = Round.opened
+
+    return if round.from_date.end_of_month > (Time.now + 2.minutes)
+
     round.round_close
     opened_round = Round.opened
     per_batch = 1000
