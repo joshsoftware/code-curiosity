@@ -1,3 +1,22 @@
-%hmtl
-  %body
+%html
+  %body{style: 'padding: 15px;'}
+    :css
+      .dl-horizontal dt{
+        float: left;
+        width: 160px;
+        overflow: hidden;
+        clear: left;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 600;
+      }
+      .dl-horizontal dd{
+        margin-left: 180px;
+      }
     = yield
+    %br/
+    %p
+      Thanks,
+      %br/
+      = image_tag 'logo_50pxh.png', height: 35

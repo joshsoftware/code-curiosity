@@ -32,6 +32,7 @@ gem 'bugspots', '~> 0.2.1'
 gem 'redis-rails'
 gem 'whenever', :require => false
 gem 'mongoid-slug', '~> 5.2.0'
+gem 'twitter-typeahead-rails'
 
 group :development, :test do
   gem 'byebug'

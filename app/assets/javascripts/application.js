@@ -19,6 +19,7 @@
 //= require highcharts
 //= require jquery.noty.packaged
 //= require stream_table
+//= require twitter/typeahead
 //= require_tree .
 
 function onDocReady(){

@@ -3,7 +3,9 @@
     .col-xs-12
       .box.box-primary
         .box-header
-          %h3.box-title Users
+          %h3.box-title
+            %span Users:  
+            %small.label.bg-green= "Count : #{@users.count}"
           .box-tools
             = form_tag(search_admin_users_path, method: :get, class: 'col-xs-4 pull-right') do
               .input-group.input-group-sm
@@ -11,5 +13,16 @@
                 .input-group-btn
                   %button.btn.btn-default{type: 'submit'} Go
         .box-body.table-responsive
-          #users
-            = render 'users_table'
+          %table.table.table-hover.table-bordered
+            %thead
+              %tr
+                %th.col-xs-2 Name
+                %th.col-xs-1 Handler  
+                %th.col-xs-1 Points
+                %th.col-xs-3 Email
+                %th.col-xs-2 Joining Date
+                %th.col-xs-3 Actions
+            %tbody#users
+              = render partial: 'user', collection: @users
+          .pagination-container
+            = paginate @users, remote: true

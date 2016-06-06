@@ -20,6 +20,8 @@ class Transaction
     t.points = t.credit? ? t.points.abs : -(t.points.abs)
   end
 
+  after_create :update_user_total_points
+
   def credit?
     type == 'credit'
   end
@@ -31,6 +33,12 @@ class Transaction
   def coupon_code
     if redeem_transaction?
       return (@ccode ||= redeem_request.coupon_code)
+    end
+  end
+
+  def update_user_total_points
+    if points > 0
+      user.set(points: user.points + points)
     end
   end
 

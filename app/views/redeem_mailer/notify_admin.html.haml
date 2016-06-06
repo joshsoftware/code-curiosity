@@ -1,0 +1,19 @@
+%h4 Hello, Admin
+%p
+  = @redeem_request.points 
+  points redeem request from
+  = link_to @user.github_handle, user_url(@user)
+%p
+  = link_to 'View Reddem Request', admin_users_url(@user)
+%p
+  %dl.dl-horizontal
+    %dt Name
+    %dd= @user.name
+    %dt Points
+    %dd= @redeem_request.points
+    %dt Gift Card Type
+    %dd= @redeem_request.retailer
+    %dt Gift Product Url 
+    %dd= @redeem_request.gift_product_url.present? ? link_to('Product Url', @redeem_request.gift_product_url, target: '_blank') : '-'
+    %dt Address
+    %dd= @redeem_request.address || '-'

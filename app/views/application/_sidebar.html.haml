@@ -24,9 +24,12 @@
         = link_to goals_path do
           %i.fa.fa-trophy
           %span Goals
-      /    
-        %li{class: is_active(params[:action], 'groups')}
-          = # link_to groups_path do
+      %li{class: is_active(params[:action], 'groups')}
+        =  link_to groups_path do
           %i.fa.fa-users
           %span Groups
+      %li{class: is_active(params[:action], 'users')}
+        =  link_to user_path(current_user, anchor: 'wallet') do
+          %i.fa.fa-gift
+          %span Redeem points
 

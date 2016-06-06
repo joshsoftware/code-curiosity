@@ -1,7 +1,13 @@
 %tr
-  %td= link_to redeem_request.user.github_handle, user_path(redeem_request.user), target: "_blank"
+  %td= link_to redeem_request.user.github_handle, user_path(redeem_request.user), target: '_blank'
+  %td
+    - if redeem_request.gift_product_url.present?
+      = link_to redeem_request.retailer, redeem_request.gift_product_url, target: '_blank'
+    - else
+      = redeem_request.retailer
   %td= redeem_request.points
   %td= redeem_request.created_at.strftime('%D %T')
   %td= redeem_request.coupon_code
+  %td= redeem_request.address
   %td
-    = link_to 'Set Coupon', '#', class: 'btn btn-xs btn-default', data: { toggle: 'modal', target: '#coupon-code-modal', url: admin_redeem_request_path(redeem_request), code: redeem_request.coupon_code }
+    = link_to 'Set Coupon', '#', class: 'btn btn-xs btn-primary', data: { toggle: 'modal', target: '#coupon-code-modal', url: admin_redeem_request_path(redeem_request), code: redeem_request.coupon_code }

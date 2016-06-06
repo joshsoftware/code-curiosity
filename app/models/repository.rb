@@ -133,8 +133,8 @@ class Repository
   def score_commits(round = nil)
     engine = ScoringEngine.new(self)
 
-    _commits = self.commits.all
-    _commits = self.commits.where(round: round) if round
+    _commits = self.commits.where(auto_score: nil)
+    _commite = _commits.where(round: round) if round
 
     _commits.each do |commit|
       if commit.message =~ PULL_REQ_MERGE_REGX

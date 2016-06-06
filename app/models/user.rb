@@ -69,7 +69,7 @@ class User
   index(github_handle: 1)
   index(auto_created: 1)
 
-  scope :contestants, -> { where(is_judge: false) }
+  scope :contestants, -> { where(auto_created: false) }
   scope :judges, -> { where(is_judge: true) }
 
   validates :email, :github_handle, :name, presence: true
@@ -199,4 +199,10 @@ class User
     round = Round.opened unless round
     @_csu ||= subscriptions.where(round_id: round.id).first
   end
+
+  def self.search(q)
+    User.where(github_handle: /^#{q}/i).limit(8).pluck(:github_handle, :id, :avatar_url)
+  end
 end
+
+

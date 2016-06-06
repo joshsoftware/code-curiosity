@@ -12,7 +12,7 @@ class RedeemController < ApplicationController
   private
 
   def redeem_params
-    params.fetch(:redeem_request).permit(:points)
+    params.fetch(:redeem_request).permit(:points, :retailer, :gift_product_url, :address)
   end
 
 end

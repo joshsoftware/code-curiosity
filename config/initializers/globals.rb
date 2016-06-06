@@ -9,6 +9,7 @@ YAML.load_file('config/code_curiosity_config.yml').tap do |config|
   REPOSITORY_CONFIG = config['repository']
   SCORING_ENGINE_CONFIG = config['scoring_engine']
   USER = config['user']
+  RETAILERS = config['retailers']
 end
 
 COMMIT_RATINGS = (0..5).to_a

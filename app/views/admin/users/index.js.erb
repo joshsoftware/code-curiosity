@@ -1,1 +1,2 @@
-$('#users').html("<%=j render 'users_table' %>");
+$('#users').html("<%=j render(partial: 'user', collection: @users) %>");
+$(".pagination-container").html("<%=j(paginate @users, remote: true)%>")
