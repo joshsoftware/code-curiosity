@@ -12,7 +12,7 @@ class RedeemMailer < ApplicationMailer
     @redeem_request = request
     @user = request.user
 
-    mail(to: Rails.application.secrets.redeem_request_emails, subject: "Redeem Request from #{request.user.github_handle}")
+    mail(to: ENV['ADMIN_EMAILS'].split(','), subject: "Redeem Request from #{request.user.github_handle}")
   end
 
   def coupon_code(request)
