@@ -1,60 +1,57 @@
 function showPointsChart(round, all_points, user_points){
-  var tickInterval = 1;
+  var points = uniqueValues(all_points);
   var pointGroups = buildPointGroups(all_points);
   var profilePic = $('#profile-pic').attr('src') + '&s=25';
-
-  points = uniqueValues(all_points);
-  
-  if(points[points.length - 1] != 1){
-    points.push(1);
-  }
+  var tickInterval = 1;
 
   $.each(points, function(index, value){
     if(value == user_points){
         points[index] = {
-          y: points[index], color: 'red', 
-          marker: { 
-            enabled: true, 
-            symbol: 'url('+ profilePic  +')' 
-          } 
-        }
+          y: points[index],
+          marker: {
+            enabled: true,
+            symbol: 'url('+ profilePic  +')',
+            width: 25,
+            height: 25
+          }
+      }
     }
   });
 
-  if(points.length > 10){
-    tickInterval = parseInt(points.length/10);
-  }
-
- $('#points-chart-container').highcharts({
-    title: {
-      text: '' //'Points for ' + round
-    },
-    xAxis: {
-      tickInterval: tickInterval,
-      labels: false
-    },
-    yAxis: {
-      type: 'logarithmic',
-      minorTickInterval: 1,
-      min: 1,
+  $('#points-chart-container').highcharts({
       title: {
-        enabled: true,
-        text: 'Points'
-      }
-    },
-    tooltip: {
-      formatter: function() {
-        return '<b>Points</b>: '+ this.y+ '<br/><b>Users</b>: ' + pointGroups[this.y];
-      }
-    },
-    series: [{
-      showInLegend: false,
-      name: 'Users',
-      data: points,
-      pointStart: 1,
-      marker: { enabled: false }
-    }]
-  
+        text: ''
+      },
+
+      xAxis: {
+        tickInterval: tickInterval,
+        labels: {
+          enabled: false
+        }
+      },
+
+      yAxis: {
+        type: 'logarithmic',
+        minorTickInterval: 1,
+        min: 1,
+        title: {
+          enabled: true,
+          text: 'Points'
+        }
+      },
+
+      tooltip: {
+        formatter: function() {
+          return '<b>Points</b>: '+ this.y+ '<br/><b>Users</b>: ' + pointGroups[this.y];
+        }
+      },
+
+      series: [{
+          showInLegend: false,
+          pointStart: 1,
+          marker: { enabled: false },
+          data: points
+      }]
   });
 }
 

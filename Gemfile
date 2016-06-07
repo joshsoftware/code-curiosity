@@ -19,7 +19,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'github_api', '~> 0.13.1'
 gem 'devise', '~> 3.5.4'
-gem 'highcharts-rails', '~> 3.0.0'
+gem 'highcharts-rails', '~> 4.2', '>= 4.2.5'
 gem 'bootstrap-datepicker-rails'
 gem 'font-awesome-rails'
 gem 'simple_form', '~> 3.2.1'

@@ -41,3 +41,8 @@ every '59 23 31 * *' do
   rake 'round:next'
 end
 
+# TODO:
+#every '1 1 25 * *' do
+#  rake 'subscription:send_progress_emails'
+#end
+

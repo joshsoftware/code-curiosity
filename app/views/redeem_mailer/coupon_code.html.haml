@@ -1,4 +1,5 @@
 %h4= "Hello, #{@user.name}"
-%p
-  - if @redeem_request.code.present?
-    = "Your coupon code is #{@redeem_request.coupon_code} for #{@redeem_request.retailer}"
+- if @redeem_request.coupon_code.present?
+  %p= "Your coupon code is #{@redeem_request.coupon_code} for #{@redeem_request.retailer}"
+- if @redeem_request.comment.present?
+  %p= @redeem_request.comment

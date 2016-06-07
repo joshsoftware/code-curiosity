@@ -9,4 +9,9 @@ class RedeemMailerPreview < ActionMailer::Preview
     RedeemMailer.notify_admin(RedeemRequest.first)
   end
 
+  def coupon_code
+    request = RedeemRequest.where(:coupon_code.ne => nil).first || RedeemRequest.first
+    RedeemMailer.coupon_code(request)
+  end
+
 end

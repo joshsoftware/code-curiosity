@@ -8,9 +8,10 @@ namespace :round do
     round.round_close
     opened_round = Round.opened
     per_batch = 1000
+    users = User.contestants
 
-    0.step(User.count, per_batch) do |offset|
-      User.limit(per_batch).skip(offset).each do |user|
+    0.step(users.count, per_batch) do |offset|
+      users.limit(per_batch).skip(offset).each do |user|
         subscription = user.subscriptions.where(round_id: round.id).first
         subscription.credit_points if subscription
         user.subscribe_to_round(opened_round)

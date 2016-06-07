@@ -2,3 +2,4 @@
 :logfile: ./log/sidekiq.log
 :queues:
   - git
+  - mailers

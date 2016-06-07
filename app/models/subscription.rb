@@ -47,4 +47,8 @@ class Subscription
     transaction.user = self.user
     transaction.save
   end
+
+  def goal_achived?
+    points >= goal.points
+  end
 end

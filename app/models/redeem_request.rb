@@ -9,6 +9,7 @@ class RedeemRequest
   field :retailer,    type: String, default: RETAILERS.first
   field :address,     type: String
   field :gift_product_url, type: String
+  field :comment, type: String
 
   belongs_to :user
   has_one :transaction
@@ -26,7 +27,7 @@ class RedeemRequest
     redeemMailer.redeem_request(r).deliver_later
   end
 
-  after_save :send_coupon_code
+  after_save :send_notification
 
   protected
 
@@ -46,8 +47,9 @@ class RedeemRequest
     })
   end
 
-  def send_coupon_code
-    if coupon_code_changed?
+  def send_notification
+    if coupon_code_changed? || comment_changed?
+      binding.pry
       RedeemMailer.coupon_code(self).deliver_later
     end
   end

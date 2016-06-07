@@ -6,4 +6,17 @@ class SubscriptionMailer < ApplicationMailer
     mail(subject:"#{subject_message}")
   end
 
+  def progress(user, round)
+    @user = user
+    @subscription = user.subscriptions.where(round: round).first
+
+    message = if @subscription.goal_achived?
+                "You have achived your goal before time."
+              else
+                "You have still time to achive your goal. Keep it up..."
+              end
+
+    mail(to: user.email, subject: "[CODECURIOSITY] #{message}")
+  end
+
 end

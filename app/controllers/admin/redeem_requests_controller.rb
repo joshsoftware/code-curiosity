@@ -19,6 +19,6 @@ class Admin::RedeemRequestsController < ApplicationController
   private
 
   def redeem_params
-    params.fetch(:redeem_request).permit(:coupon_code)
+    params.fetch(:redeem_request).permit(:coupon_code, :comment)
   end
 end
