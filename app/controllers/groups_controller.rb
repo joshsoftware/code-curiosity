@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  include GroupHelper
   before_action :authenticate_user!
   before_action :find_group, except: [:index, :new, :create]
 
@@ -15,6 +16,7 @@ class GroupsController < ApplicationController
 
   def create
     @group = current_user.groups.build(group_params)
+    @group.owner = current_user
 
     if @group.save
       redirect_to group_path(@group)
@@ -40,18 +42,7 @@ class GroupsController < ApplicationController
     redirect_to groups_path
   end
 
-  def users
-  end
-
   private
-
-  def find_group
-    @group = current_user.groups.where(id: params[:id]).first
-
-    unless @group
-      redirect_back(notice: I18n.t('messages.not_found'))
-    end
-  end
 
   def group_params
     params.fetch(:group).permit(:name, :description)

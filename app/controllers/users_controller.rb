@@ -45,4 +45,14 @@ class UsersController < ApplicationController
 
     redirect_to goals_path, notice: message
   end
+
+  def search
+    users = if params[:query].present?
+              User.where(github_handle: /^#{params[:query]}/i).limit(10).only(:id, :github_handle, :avatar_url, :name)
+            else
+              []
+            end
+
+    render json: users
+  end
 end

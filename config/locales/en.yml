@@ -51,3 +51,12 @@ en:
     points_credit_info: End of the month points will be credited to account.
   redeem:
     request_created: 'We will send you a coupon code in a couple of days.'
+  group:
+    member:
+      create: 
+        user_not_found: 'User is not present. Please try valid user github handle.' 
+        already_member: "%{user} is already member of %{group} group"
+        already_invited: "%{user} is already invited to %{group} group"
+        invitation: "Successfully sent invitation to %{user}."
+      destroy:
+        success: "%{user} is removed from %{group} group."

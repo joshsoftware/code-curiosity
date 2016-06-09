@@ -4,4 +4,5 @@
   %td
     = link_to 'View', group_path(group), class: 'btn btn-xs btn-default'
     = link_to 'Edit', edit_group_path(group), class: 'btn btn-xs btn-primary'
-    = link_to 'Destroy', group_path(group), class: 'btn btn-xs btn-danger', data: { method: 'delete', confirm: 'Are you sure?' } 
+    = link_to 'Delete', group_path(group), class: 'btn btn-xs btn-danger', data: { method: 'delete', confirm: 'Are you sure?' } 
+    = link_to 'Add Members',  group_members_path(group), class: 'btn btn-xs btn-success pull-right'

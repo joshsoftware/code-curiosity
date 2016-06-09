@@ -6,7 +6,7 @@ class RedeemRequest
   field :coupon_code, type: String
   field :status,      type: Boolean, default: false
   field :points,      type: Integer
-  field :retailer,    type: String, default: RETAILERS.first
+  field :retailer,    type: String, default: REDEEM['retailers'].first
   field :address,     type: String
   field :gift_product_url, type: String
   field :comment, type: String
@@ -18,7 +18,7 @@ class RedeemRequest
 
   validates :retailer, presence: true
   validates :gift_product_url, format: { with: URI.regexp }, allow_blank: true
-  validates :points, numericality: { only_integer: true, greater_than_or_equal_to: 50, message: 'minimum redemption limits is %{count} points.' }
+  validates :points, numericality: { only_integer: true, greater_than_or_equal_to: REDEEM['min_points'], message: 'minimum redemption limits is %{count} points.' }
   validate :check_sufficient_balance
 
   before_validation {|r| r.points = r.points.to_i }

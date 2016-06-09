@@ -61,8 +61,9 @@ class User
   has_many :rounds
   has_many :comments
   has_and_belongs_to_many :organizations
-  has_and_belongs_to_many :groups
+  has_and_belongs_to_many :groups, class_name: 'Group', inverse_of: 'members'
   has_many :redeem_requests
+  has_many :group_invitations
   belongs_to :goal
 
   index(uid: 1)

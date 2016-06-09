@@ -1,0 +1,3 @@
+- if @invitation
+  $('#group-invitations').append("#{j render(partial: 'invitation', locals: { invitation: @invitation, invitation_counter: @group.group_invitations.count }) }");
+= raw show_flash_notifications

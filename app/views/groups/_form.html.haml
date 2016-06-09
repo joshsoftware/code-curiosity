@@ -1,5 +1,5 @@
-.col-xs-6
-  = simple_form_for(@group) do |f|
+= simple_form_for(@group) do |f|
+  .col-xs-6
     = f.input :name
     = f.input :description, as: :text
     %button.btn.btn-primary{:type => 'submit'}= @group.persisted? ? 'Update' : 'Create'

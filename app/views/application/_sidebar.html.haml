@@ -24,7 +24,7 @@
         = link_to goals_path do
           %i.fa.fa-trophy
           %span Goals
-      %li{class: is_active(params[:action], 'groups')}
+      %li{class: is_active(params[:action], 'groups') || is_active(params[:action], 'groups/members')}
         =  link_to groups_path do
           %i.fa.fa-users
           %span Groups

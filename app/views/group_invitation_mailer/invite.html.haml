@@ -1,0 +1,8 @@
+%h1= "Hello #{@group_invitation.user.github_handle},"
+
+%p
+  You are invited to 
+  = @group_invitation.group.name
+  Here is your invitation url. Click to accept.
+%p
+  = link_to "Accept Invitation", accept_invitation_url(@group_invitation.group, @group_invitation.token)

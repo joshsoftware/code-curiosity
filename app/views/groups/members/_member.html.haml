@@ -1,0 +1,11 @@
+%tr
+  %td= member_counter + 1
+  %td= member.name || '-'
+  %td= link_to member.github_handle, github_url(member), target: '_blank'
+  %td
+    - if member == @group.owner
+      ADMIN
+  %td
+    - if member != @group.owner && current_user == @group.owner
+      = link_to  group_member_path(@group, member), class: 'btn btn-xs btn-danger', data: { confirm: 'Are you sure?'}, remote: true, method: 'delete' do
+        %i.fa.fa-times Remove

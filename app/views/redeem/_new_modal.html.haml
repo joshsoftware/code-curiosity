@@ -6,11 +6,11 @@
           %span{'aria-hidden' => 'true'} &times;
         %h4.modal-title Redeem Points
       .modal-body
-        = f.input :points, hint: 'Info: Minimum redemption limits is 50 points.'
+        = f.input :points, hint: "Info: Minimum redemption limits is #{REDEEM['min_points']} points."
         .form-group.check_boxes_group 
           %label.control-label Gift Cards Merchants
           %div
-            = f.collection_radio_buttons :retailer, RETAILERS.collect{|r| [r, r]}, :first, :last
+            = f.collection_radio_buttons :retailer, REDEEM['retailers'].collect{|r| [r, r]}, :first, :last
         = f.input :gift_product_url, label: 'Product url from gift shops', placeholder: 'http://github.myshopify.com/products/octodex-sticker-packs',
           hint: 'Info: If you want us to buy some merchandise instead of a gift-card!'
         = f.input :address, as: :text, input_html: { row: 4 }

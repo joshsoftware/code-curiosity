@@ -1,0 +1,10 @@
+%tr
+  %td
+    - if member == @group.owner
+      %small.label.bg-green ADMIN
+  %td
+    = link_to member.github_handle, github_url(member)
+  %td= member.name
+  %td
+    - unless member == @group.owner
+      = link_to 'Remove', '#', class: 'btn btn-xs btn-danger', target: '_blank', data: { confirm: 'Are you sure?'}

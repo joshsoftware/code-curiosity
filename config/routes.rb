@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
     collection do
       get 'set_goal/:goal_id', action: :set_goal, as: 'set_goal'
+      get 'search'
     end
   end
 
@@ -79,8 +80,11 @@ Rails.application.routes.draw do
 
   resources :goals, only: [:index]
   resource :redeem, only: [:create], controller: 'redeem'
-  resources :groups
+  resources :groups do
+    resources :members, only: [:index, :create, :destroy], controller: 'groups/members'
+  end
 
+  get 'accept_invitation/:group_id/:token' => 'groups/members#accept_invitation', as: :accept_invitation
   get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
 
   get 'change_round/:id' => "dashboard#change_round", as: :change_round

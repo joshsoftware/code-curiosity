@@ -23,3 +23,7 @@
 @import "bars-pill";
 @import "info";
 @import "goals";
+
+.typeahead.dropdown-menu, .tt-hint, .tt-input, .tt-menu { 
+  width: 90%; 
+}
