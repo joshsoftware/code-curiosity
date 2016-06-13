@@ -31,7 +31,7 @@ class Repository
   #validate :verify_popularity
 
   index(source_url: 1)
-  index(gh_id: 1)
+  index({ gh_id: 1 }, { unique: true })
 
   scope :popular, -> { where(type: 'popular') }
   scope :users_repos, -> { where(:type.ne =>  'popular') }

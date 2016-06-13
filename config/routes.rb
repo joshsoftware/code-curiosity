@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, except: [:destroy] do
-    get 'sync'
+    #get 'sync'
 
     collection do
       get 'set_goal/:goal_id', action: :set_goal, as: 'set_goal'

@@ -13,9 +13,6 @@
       .box.box-primary
         .box-header
           %h3.box-title
-            = link_to user_sync_path(current_user), class: 'btn btn-primary pull-left' do
-              %i.fa.fa-refresh
-              Sync All
           .box-tools
             .input-group.input-group-sm.col-xs-3.pull-right
               - if @repos.any?
@@ -33,11 +30,9 @@
               %thead
                 %tr
                   %th.col-xs-1 #
-                  %th.col-xs-2 Name
+                  %th.col-xs-3 Name
                   %th.col-xs-2 Owner
-                  %th.col-xs-4 Description
-                  /
-                    %th.col-xs-1 Actions
+                  %th.col-xs-6 Description
               %tbody     
         .box-footer.clearfix
           #repos-pagination.pagination-container
@@ -49,11 +44,6 @@
       <a href={{record.source_url}} target="_blank"> {{ record.name }}
     %td {{record.owner}}
     %td {{record.description}}
-    /
-      %td
-        %a{href: "repositories/{{record._id.$oid}}/sync", class: "btn btn-primary btn-sm"} 
-          %i.fa.fa-refresh
-          Sync
 
 :javascript
   load_repos(#{@repos.to_json})

@@ -6,4 +6,40 @@ namespace :migration do
       user.set(points: points)
     end
   end
+
+  desc 'remove dublicate repos'
+  task remove_dublicate_repos: :environment do
+    repo_groups = {} 
+
+    Repository.all.each do |r|
+      repo_groups[r.gh_id] ||= []
+      repo_groups[r.gh_id] << r
+    end
+
+    repo_groups.select!{|k,v| v.length > 1}
+
+    puts repo_groups
+
+    dublicate_repos_with_activies  = []
+
+    repo_groups.each do |k, v| 
+      repos = v.sort_by &:created_at
+
+      activities = []
+
+      repos[1..-1].collect do |r| 
+        count = r.commits.count + r.activities.count
+
+        if count > 0
+          dublicate_repos_with_activies << r
+        end
+
+        #r.commits.destroy_all
+        #r.activities.destroy_all
+        r.destroy 
+      end
+    end
+
+    puts dublicate_repos_with_activies.collect &:id
+  end
 end
