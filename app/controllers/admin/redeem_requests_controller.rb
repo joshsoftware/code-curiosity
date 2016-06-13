@@ -11,6 +11,7 @@ class Admin::RedeemRequestsController < ApplicationController
 
     if @redeem_request
       @redeem_request.update_attributes(redeem_params)
+      @redeem_request.update_transaction_points if @redeem_request.retailer_other?
     end
 
     redirect_back
@@ -19,6 +20,7 @@ class Admin::RedeemRequestsController < ApplicationController
   private
 
   def redeem_params
-    params.fetch(:redeem_request).permit(:coupon_code, :comment)
+    params.fetch(:redeem_request).permit(:coupon_code, :comment, :points)
   end
+
 end

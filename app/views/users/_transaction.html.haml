@@ -1,7 +1,7 @@
 %tr
   %td= transaction_counter + 1
   %td= transaction.points
-  %td
+  %td.transaction-detail
     %b
       = transaction.description.humanize
     %small.label{class: transaction.credit? ? 'bg-green' : 'bg-red'}
@@ -10,4 +10,6 @@
       %h5
         Coupon code:
         %i= transaction.coupon_code
+    - if transaction.redeem_transaction?
+      %small.label{class: 'bg-primary' }= transaction.redeem_request.retailer.upcase
   %td= transaction.created_at.strftime('%D %T')

@@ -1,0 +1,5 @@
+= simple_form_for(@redeem || RedeemRequest.new(user: current_user), url: redeem_path, remote: true) do |f|
+  = f.input :points, label: 'Points', hint: "Info: Redemption in multiple of #{REDEEM['min_points']} points."
+  = f.input :retailer, as: :hidden, input_html: { value: 'amazon'}
+  %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Cancel
+  %button.btn.btn-primary{:type => 'submit'} Redeem

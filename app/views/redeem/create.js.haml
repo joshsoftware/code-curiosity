@@ -1,4 +1,9 @@
 - if @redeem.valid?
   Turbolinks.visit("#{user_path(current_user, anchor: 'wallet')}");
 - else
-  $('#redeem-modal .modal').html("#{j render('new_modal')}");
+  - if @redeem.retailer == 'github'
+    $("#redeem-modal #github_redeem").html("#{j render('redeem/github')}");
+  - if @redeem.retailer == 'amazon'
+    $("#redeem-modal #amazon_redeem").html("#{j render('redeem/amazon')}");
+  - if @redeem.retailer == 'other'
+    $("#redeem-modal #other_redeem").html("#{j render('redeem/other')}");

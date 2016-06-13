@@ -31,6 +31,13 @@ scoring_engine:
 
 redeem:
   min_points: 100
+  one_dollar_to_points: 10
   retailers:
-    - Github
-    - Amazon
+    - github
+    - amazon
+    - other
+  github_redeem_amounts: 
+    - 10
+    - 25
+    - 50
+    - 100 

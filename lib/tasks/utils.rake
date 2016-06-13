@@ -1,4 +1,4 @@
-namespace :migration do
+namespace :utils do
   desc "Update user points"
   task update_user_total_points: :environment do
     User.contestants.each do |user|
@@ -41,5 +41,9 @@ namespace :migration do
     end
 
     puts dublicate_repos_with_activies.collect &:id
+  end
+
+  desc "Score not scored commits and activities"
+  task scoring_not_scored: :environment do
   end
 end

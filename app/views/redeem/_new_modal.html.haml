@@ -1,19 +1,28 @@
 .modal-dialog
   .modal-content
-    = simple_form_for(@redeem || RedeemRequest.new(user: current_user), url: redeem_path, remote: true) do |f|
-      .modal-header
-        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', :type => 'button'}
-          %span{'aria-hidden' => 'true'} &times;
-        %h4.modal-title Redeem Points
-      .modal-body
-        = f.input :points, hint: "Info: Minimum redemption limits is #{REDEEM['min_points']} points."
-        .form-group.check_boxes_group 
-          %label.control-label Gift Cards Merchants
-          %div
-            = f.collection_radio_buttons :retailer, REDEEM['retailers'].collect{|r| [r, r]}, :first, :last
-        = f.input :gift_product_url, label: 'Product url from gift shops', placeholder: 'http://github.myshopify.com/products/octodex-sticker-packs',
-          hint: 'Info: If you want us to buy some merchandise instead of a gift-card!'
-        = f.input :address, as: :text, input_html: { row: 4 }
-      .modal-footer
-        %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Cancel
-        %button.btn.btn-primary{:type => 'submit'} Redeem
+    .modal-header
+      %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', :type => 'button'}
+        %span{'aria-hidden' => 'true'} &times;
+      %h4.modal-title 
+        Redeem Points 
+        %b.pull-right.maring-right-fifty= "$1.0 = #{REDEEM['one_dollar_to_points']} points"
+    .modal-body
+      .nav-tabs-custom
+        %ul.nav.nav-tabs
+          %li.active
+            %a{href: '#github_redeem', data: { toggle: 'tab'} }
+              %i.fa.fa-github-alt 
+              Github
+          %li
+            %a{href: '#amazon_redeem', data: { toggle: 'tab'} } 
+              %i.fa.fa-amazon
+              Amazon
+          %li
+            %a{href: '#other_redeem', data: { toggle: 'tab'} } Other
+        .tab-content
+          .tab-pane.active#github_redeem
+            = render 'redeem/github'
+          .tab-pane#amazon_redeem
+            = render 'redeem/amazon'
+          .tab-pane#other_redeem
+            = render 'redeem/other'

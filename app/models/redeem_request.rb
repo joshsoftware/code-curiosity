@@ -16,24 +16,43 @@ class RedeemRequest
 
   index({ commit_date: -1 })
 
-  validates :retailer, presence: true
-  validates :gift_product_url, format: { with: URI.regexp }, allow_blank: true
-  validates :points, numericality: { only_integer: true, greater_than_or_equal_to: REDEEM['min_points'], message: 'minimum redemption limits is %{count} points.' }
-  validate :check_sufficient_balance
+  validates :retailer, inclusion: { in: REDEEM['retailers']}
+  validates :points, numericality: { only_integer: true, greater_than: 0 }, unless: :retailer_other?
+  validates :address, presence: true, if: :retailer_other?
+  validates :gift_product_url, format: { with: URI.regexp }, if: :retailer_other?
+  validate :check_sufficient_balance, unless: :retailer_other?
+  validate :points_validations, unless: :retailer_other?
 
   before_validation {|r| r.points = r.points.to_i }
+
   after_create do |r|
     r.create_redeem_transaction
-    redeemMailer.redeem_request(r).deliver_later
+    RedeemMailer.redeem_request(r).deliver_later
   end
 
   after_save :send_notification
+
+  def retailer_other?
+    retailer == 'other'
+  end
+
+  def update_transaction_points
+    self.transaction.set(points: points) if self.points.to_i > 0
+  end
 
   protected
 
   def check_sufficient_balance
     if user.total_points < points
       errors.add(:points, "insufficient balance. You have only #{user.total_points} points in your account.")
+    end
+  end
+
+  def points_validations
+    if retailer == 'amazon'
+      if points.to_i == 0 || points.to_i % REDEEM['min_points'] != 0
+        errors.add(:points, "points must be in multiple of #{REDEEM['min_points']}")
+      end
     end
   end
 
@@ -48,6 +67,7 @@ class RedeemRequest
   end
 
   def send_notification
+    return
     if coupon_code_changed? || comment_changed?
       binding.pry
       RedeemMailer.coupon_code(self).deliver_later

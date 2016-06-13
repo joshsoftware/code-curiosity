@@ -1,0 +1,7 @@
+= simple_form_for(@redeem || RedeemRequest.new(user: current_user), url: redeem_path, remote: true) do |f|
+  = f.input :gift_product_url, label: 'If you want us to buy some merchandise instead of a gift-card, enter the product link.', placeholder: 'http://github.myshopify.com/products/octodex-sticker-packs',
+    hint: 'Info: Ensure you have enough points in your account to include shipping charges too.'
+  = f.input :address, as: :text, label: 'Shipping Address', input_html: { row: 4 }
+  = f.input :retailer, as: :hidden, input_html: { value: 'other'}
+  %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Cancel
+  %button.btn.btn-primary{:type => 'submit'} Redeem
