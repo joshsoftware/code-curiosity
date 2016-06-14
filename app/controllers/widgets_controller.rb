@@ -9,6 +9,10 @@ class WidgetsController < ActionController::Base
     end
   end
 
+  def group
+    @group = Group.find(params[:id])
+  end
+
   private
 
   def allow_iframe

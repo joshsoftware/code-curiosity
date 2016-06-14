@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   include GroupHelper
-  before_action :authenticate_user!
+
+  before_action :authenticate_user!, except: [ :show ]
   before_action :find_group, except: [:index, :new, :create]
   before_action :is_group_admin, only: [:update, :destroy]
 

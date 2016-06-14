@@ -38,15 +38,23 @@ body {
   background-color: #f39c12 !important;
 }
 
-.widget-cc-2 .widget-cc-image>img{
-  width: 65px;
-  height: auto;
-  float: left;
+.widget-cc-2 {
+   .widget-cc-image>img{
+    width: 65px;
+    height: auto;
+    float: left;
+  }
+
+  .group-logo>img{
+    margin-top: 10px;
+  }
 }
 
 .img-circle{
   border-radius: 50%;
 }
+
+
 
 .widget-cc-2 .widget-cc-title, .widget-cc-2 .widget-cc-desc{
   margin-left: 75px;

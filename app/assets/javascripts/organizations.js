@@ -1,5 +1,5 @@
 $(document).on('page:change', function(event) {
-  $('#repo-widget-modal').on('show.bs.modal', function (event) {
+  $('#repo-widget-modal, #group-widget-modal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var modal = $(this);
     var code = '<iframe src="' + button.data('url') + '" height="380" width="340" frameborder="0"></iframe>';

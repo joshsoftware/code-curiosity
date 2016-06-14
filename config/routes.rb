@@ -86,6 +86,7 @@ Rails.application.routes.draw do
 
   get 'accept_invitation/:group_id/:token' => 'groups/members#accept_invitation', as: :accept_invitation
   get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
+  get 'widgets/group/:id(/:round_id)' => 'widgets#group', as: :group_widget
 
   get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'

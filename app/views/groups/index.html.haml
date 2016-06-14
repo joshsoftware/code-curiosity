@@ -13,10 +13,27 @@
             %thead
               %tr
                 %th.col-xs-2 Name
-                %th.col-xs-5 Description
+                %th.col-xs-4 Description
                 %th.col-xs-2 Owner
-                %th.col-xs-3 Actions
+                %th.col-xs-4 Actions
             %tbody     
               = render @groups
           .pagination-container
             = paginate @groups
+#group-widget-modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal'}}
+          %span &times;
+        %h4.modal-title
+      .modal-body
+        %pre.code
+        %span.hint
+          %b Info:
+          Copy and insert in your website.
+          %h4 Preview:
+        .well
+          .widget-preview
+      .modal-footer
+        %button.btn.btn-default{ data: { dismiss: 'modal' }} Close            
