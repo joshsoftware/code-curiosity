@@ -1,7 +1,9 @@
 %tr
   %td= invitation_counter + 1
-  %td= invitation.user.name || '-'
-  %td= link_to invitation.user.github_handle, github_url(invitation.user), target: '_blank'
+  %td= invitation.user ? (invitation.user.name || '-') : invitation.email
+  %td
+    - if invitation.user
+      = link_to invitation.user.github_handle, github_url(invitation.user), target: '_blank'
   %td
     - if invitation.accepted_at.nil?
       = invitation.created_at.strftime('%D %T')

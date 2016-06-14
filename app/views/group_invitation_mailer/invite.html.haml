@@ -1,4 +1,4 @@
-%h1= "Hello #{@group_invitation.user.github_handle},"
+%h1= "Hello #{@group_invitation.user.try(:github_handle) || @email},"
 
 %p
   You are invited to 

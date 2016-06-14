@@ -1,8 +1,8 @@
 = form_tag(group_members_path(@group), remote: true, class: 'col-xs-6 add-members') do |f|
   .form-group
-    %label.text.control-label Search and add member
+    %label.text.control-label Search by github handle or Type email address
     .input-group
-      = text_field_tag :user_search, '', id: 'search-users', class: 'form-control autocomplete', data: { url: search_users_path, min_length: 2}, autocomplete: 'off', placeholder: 'Search...'
+      = text_field_tag :user_search, '', id: 'search-users', class: 'form-control autocomplete', data: { url: search_users_path, min_length: 2}, autocomplete: 'off', placeholder: 'Search... / Email...'
       = hidden_field_tag :user_id, '', id: 'new-member-id'
       .input-group-btn
         %button.btn.btn-default#add_group_member{type: 'submit'} 

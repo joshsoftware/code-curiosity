@@ -81,7 +81,7 @@ Rails.application.configure do
   config.action_mailer.asset_host = 'https://codecuriosity.org'
 
   config.action_mailer.default_url_options = { protocol: 'https', host: 'codecuriosity.org' }
-  config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_deliveries = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:        'smtp.sendgrid.net',

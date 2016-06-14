@@ -4,7 +4,13 @@ class Users::OmniauthCallbacksController < ApplicationController
 
   def github
     @user = User.from_omniauth(request.env["omniauth.auth"])
-    sign_in_and_redirect @user
+    sign_in :user, @user
+
+    if session[:group_invitation_url].present?
+      redirect_to session.delete(:group_invitation_url)
+    else
+      redirect_to root_path
+    end
   end
 
   def failure

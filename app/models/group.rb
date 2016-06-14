@@ -33,4 +33,13 @@ class Group
     return true
   end
 
+  def member?(user)
+    members.where(id: user).any?
+  end
+
+  def invited?(user: nil, email: nil)
+    return group_invitations.where(user: user).any? if user
+    return group_invitations.where(email: email).any? if email
+  end
+
 end

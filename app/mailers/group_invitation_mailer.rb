@@ -7,9 +7,11 @@ class GroupInvitationMailer < ApplicationMailer
   #
   def invite(group_invitation)
     @group_invitation = group_invitation
+    @group = group_invitation.group
+    @email = @group_invitation.user ? @group_invitation.user.email : @group_invitation.email
 
-    if  @group_invitation.user.email
-      mail to: @group_invitation.user.email, subject: "[CODECURIOSITY] You are invited to #{@group_invitation.group.name} by #{@group.owner.github_handle}"
+    if @email.present?
+      mail to: @email, subject: "[CODECURIOSITY] You are invited to #{@group_invitation.group.name} by #{@group.owner.github_handle}"
     end
   end
 end

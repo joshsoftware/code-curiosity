@@ -5,14 +5,16 @@ class GroupInvitation
 
   field :token, type: String
   field :accepted_at, type: Time
+  field :email, type: String
 
   belongs_to :group
   belongs_to :user
 
   index({ token: 1 }, { unique: true })
 
-  before_create :set_invitation_token
+  validates :email, format: { with: Devise.email_regexp }, allow_blank: true
 
+  before_create :set_invitation_token
   after_create :send_invitation
 
   def set_invitation_token
@@ -27,7 +29,7 @@ class GroupInvitation
   end
 
   def send_invitation
-    GroupInvitationMailer.invite(self).deliver_later
+    GroupInvitationMailer.invite(self).deliver_now
   end
 
 end

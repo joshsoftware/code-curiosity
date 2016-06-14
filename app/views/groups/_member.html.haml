@@ -1,10 +1,13 @@
 %tr
-  %td
-    - if member == @group.owner
-      %small.label.bg-green ADMIN
+  %td= member_counter + 1
   %td
     = link_to member.github_handle, github_url(member)
   %td= member.name
   %td
+    - if member == @group.owner
+      %small.label.bg-green ADMIN
+  %td
     - unless member == @group.owner
-      = link_to 'Remove', '#', class: 'btn btn-xs btn-danger', target: '_blank', data: { confirm: 'Are you sure?'}
+      = link_to  group_member_path(@group, member), class: 'btn btn-xs btn-danger', data: { confirm: 'Are you sure?'}, remote: true, method: 'delete' do
+        %i.fa.fa-times 
+        Remove

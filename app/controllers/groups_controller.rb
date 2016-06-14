@@ -2,6 +2,7 @@ class GroupsController < ApplicationController
   include GroupHelper
   before_action :authenticate_user!
   before_action :find_group, except: [:index, :new, :create]
+  before_action :is_group_admin, only: [:update, :destroy]
 
   def index
     @groups = current_user.groups.page(params[:page])
