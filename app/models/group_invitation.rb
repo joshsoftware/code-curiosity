@@ -29,7 +29,7 @@ class GroupInvitation
   end
 
   def send_invitation
-    GroupInvitationMailer.invite(self).deliver_now
+    GroupInvitationMailer.invite(self).deliver_later
   end
 
 end
