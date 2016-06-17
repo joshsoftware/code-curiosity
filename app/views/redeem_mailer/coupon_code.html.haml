@@ -1,5 +1,10 @@
-%h4= "Hello, #{@user.name}"
+%h4= "Hello #{@user.name},"
 - if @redeem_request.coupon_code.present?
   %p= "Your coupon code is #{@redeem_request.coupon_code} for #{@redeem_request.retailer}"
 - if @redeem_request.comment.present?
   %p= @redeem_request.comment
+
+%p
+  Thank You for your valuable open-source contributions.
+%p
+  Team CodeCuriosity!
