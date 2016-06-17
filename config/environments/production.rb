@@ -89,7 +89,7 @@ Rails.application.configure do
     authentication: :plain,
     user_name:      ENV['SENDGRID_USERNAME'],
     password:       ENV['SENDGRID_PASSWORD'],
-    enable_starttls_auto: true,
-    domain: 'codecuriosity.org'
+    enable_starttls_auto: true
+    #domain: 'codecuriosity.org'
   }
 end
