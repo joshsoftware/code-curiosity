@@ -1,8 +1,8 @@
 %h1= "Hello #{@group_invitation.user.try(:github_handle) || @email},"
 
 %p
-  You are invited to 
+  You have been invited to join the group 
   = @group_invitation.group.name
-  Here is your invitation url. Click to accept.
+  This is a great chance for you to contribute to open-source as well as earn points that you can redeem for gifts! So, don't wait. Please accept the invite and join your fellow contributors at Code Curiosity. It's free!
 %p
-  = link_to "Accept Invitation", accept_invitation_url(@group_invitation.group, @group_invitation.token)
+  = link_to "Join Group", accept_invitation_url(@group_invitation.group, @group_invitation.token)

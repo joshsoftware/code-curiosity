@@ -5,20 +5,20 @@ class RedeemMailer < ApplicationMailer
     @user = request.user
     @points = request.points
 
-    mail(to: @user.email, subject: "[CODECURIOSITY] #{@points} points redeem request")
+    mail(to: @user.email, subject: "[CODECURIOSITY] #{@points} points redemption request")
   end
 
   def notify_admin(request)
     @redeem_request = request
     @user = request.user
 
-    mail(to: ENV['ADMIN_EMAILS'].split(','), subject: "Redeem Request from #{request.user.github_handle}")
+    mail(to: ENV['ADMIN_EMAILS'].split(','), subject: "Redemption request from #{request.user.github_handle}")
   end
 
   def coupon_code(request)
     @user = request.user
     @redeem_request = request
 
-    mail(to: request.user.email, subject: "[CODECURIOSITY] Here is your gift...")
+    mail(to: request.user.email, subject: "[CODECURIOSITY] Here is your gift!")
   end
 end

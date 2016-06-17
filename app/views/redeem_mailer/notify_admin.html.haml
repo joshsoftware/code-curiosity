@@ -1,7 +1,7 @@
-%h4 Hello, Admin
+%h4 Hello Admin,
 %p
   = @redeem_request.points 
-  points redeem request from
+  points redemption request from
   = link_to @user.github_handle, user_url(@user)
 %p
   = link_to 'View Reddem Request', admin_users_url(@user)
