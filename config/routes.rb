@@ -49,6 +49,8 @@ Rails.application.routes.draw do
       get :mark_as_close
     end
     resources :redeem_requests, only: [:index, :update]
+
+    get 'dashboard/index', as: 'dashboard'
   end
 
   namespace :github do

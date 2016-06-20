@@ -1,0 +1,14 @@
+%section.content-header
+  %h1 Dashboard
+%section.content
+  = render partial: 'info_box', locals: {title: 'Users', value: User.contestants.count, info_box_bg: 'bg-yellow', icon: 'ion-ios-people-outline'}
+  = render partial: 'info_box', locals: {title: 'Redeem Requests', value: RedeemRequest.where(status: false).count,  info_box_bg: 'bg-green', icon: 'ion-ios-cart-outline'}
+  = render partial: 'info_box', locals: { title: 'Total points(before redemption)', value: Transaction.total_points_before_redemption, info_box_bg: 'bg-aqua', icon: 'ion-cash' }
+  = render partial: 'info_box', locals: { title: 'Total number of points redeemed.', value:  Transaction.total_points_redeemed, info_box_bg: 'bg-red', icon: 'ion-beer'}
+%section.content
+  .box.box-default
+    .box-header.with-border
+      %h4 Note: Home page tagline demo
+    .box-body
+      %h4 "#{User.contestants.count} users have contributed #{Transaction.total_points_before_redemption} points and $#{Transaction.total_points_redeemed/REDEEM['one_dollar_to_points']} has been rewarded back to #{RedeemRequest.where(status: true).count} contributors!”
+

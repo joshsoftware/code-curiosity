@@ -115,7 +115,7 @@ class User
   end
 
   def is_admin?
-    roles.find_by(name: ROLES[:admin]).present?
+    roles.where(name: ROLES[:admin]).any?
   end
 
   def repo_names

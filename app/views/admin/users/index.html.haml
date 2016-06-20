@@ -5,7 +5,6 @@
         .box-header
           %h3.box-title
             %span Users:  
-            %small.label.bg-green= "Count : #{@users.count}"
           .box-tools
             = form_tag(search_admin_users_path, method: :get, class: 'col-xs-4 pull-right') do
               .input-group.input-group-sm

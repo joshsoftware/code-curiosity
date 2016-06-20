@@ -3,7 +3,7 @@
   %td= link_to user.github_handle, github_url(user), target: '_blank'
   %td= user.points
   %td= user.email
-  %td= user.created_at.strftime('%D %T')
+  %td= user.created_at.strftime('%d/%m/%Y %T')
   %td 
     - if user.is_judge?
       %a{href: admin_user_mark_as_judge_path(user, flag: false), class: "btn btn-danger btn-sm", data: {confirm: "Are you sure?"}}
