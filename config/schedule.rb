@@ -33,24 +33,11 @@ every :day, :at => '6:00am' do
  rake "round:update_scores"
 end
 
-every '59 23 30 * *' do
+every '59 23 27-31 * *' do
   rake 'round:next'
 end
 
-every '59 23 31 * *' do
-  rake 'round:next'
+every '1 1 21 * *' do
+  rake 'subscription:send_progress_emails'
 end
-
-every '59 23 28 * *' do
-  rake 'round:next'
-end
-
-every '59 23 29 * *' do
-  rake 'round:next'
-end
-
-# TODO:
-#every '1 1 25 * *' do
-#  rake 'subscription:send_progress_emails'
-#end
 

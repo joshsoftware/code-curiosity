@@ -204,6 +204,7 @@ class User
   def self.search(q)
     User.where(github_handle: /^#{q}/i).limit(8).pluck(:github_handle, :id, :avatar_url)
   end
+
 end
 
 
