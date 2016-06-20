@@ -2,6 +2,8 @@ class Transaction
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  # TRANSACTION_TYPES = %w(royalty_bonus Round redeem_points)
+
   field :type,              type: String
   field :points ,           type: Integer, default: 0
   field :transaction_type,  type: String
@@ -15,6 +17,7 @@ class Transaction
   validates :type, inclusion: { in: %w(credit debit) }
 
   index(user_id: 1, type: 1)
+  index(transaction_type: 1)
 
   before_save do |t|
     t.points = t.credit? ? t.points.abs : -(t.points.abs)
@@ -40,6 +43,14 @@ class Transaction
     if points > 0
       user.set(points: user.points + points)
     end
+  end
+
+  def self.total_points_before_redemption
+    Transaction.where(:transaction_type.in => ['royalty_bonus', 'Round']).sum(:points)
+  end
+
+  def self.total_points_redeemed
+    Transaction.where(transaction_type: 'redeem_points').sum(:points).abs
   end
 
 end

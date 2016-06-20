@@ -14,7 +14,8 @@
                 %th.col-xs-1 Points
                 %th.col-xs-2 Date
                 %th.col-xs-2 Coupon Code
-                %th.col-xs-4 Address
+                %th.col-xs-2 Address
+                %th.col-xs-1 Status
                 %th.col-xs-1 Actions
             %tbody     
               = render @redeem_requests
@@ -32,6 +33,7 @@
           = f.input :coupon_code
           = f.input :points
           = f.input :comment, as: :text, input_html: { row: 4 }
+          = f.input :status, as: :select, collection: { 'Closed' => 'true', 'Open' => 'false'}, include_blank: false
         .modal-footer
           %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Cancel
           %button.btn.btn-primary{:type => 'submit'} Save

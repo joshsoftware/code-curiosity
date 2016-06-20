@@ -11,6 +11,9 @@ class WidgetsController < ActionController::Base
 
   def group
     @group = Group.find(params[:id])
+    start_date = @group.created_at.to_time.beginning_of_month - 1.day
+
+    @rounds = @rounds.where(:created_at.gt => start_date)
   end
 
   private

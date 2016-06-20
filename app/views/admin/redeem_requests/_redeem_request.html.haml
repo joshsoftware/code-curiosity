@@ -9,5 +9,6 @@
   %td= redeem_request.created_at.strftime('%D %T')
   %td= redeem_request.coupon_code
   %td= redeem_request.address
+  %th= redeem_request.status ? 'Closed' : 'Open'
   %td
-    = link_to 'Set Coupon/Points', '#', class: 'btn btn-xs btn-primary', data: { toggle: 'modal', target: '#coupon-code-modal', url: admin_redeem_request_path(redeem_request), code: redeem_request.coupon_code, comment: redeem_request.comment, retailer: redeem_request.retailer }
+    = link_to 'Set Coupon/Points', '#', class: 'btn btn-xs btn-primary', data: { toggle: 'modal', target: '#coupon-code-modal', url: admin_redeem_request_path(redeem_request), code: redeem_request.coupon_code, comment: redeem_request.comment, retailer: redeem_request.retailer, status: redeem_request.status, points: redeem_request.points }

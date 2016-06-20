@@ -20,7 +20,7 @@ class Admin::RedeemRequestsController < ApplicationController
   private
 
   def redeem_params
-    params.fetch(:redeem_request).permit(:coupon_code, :comment, :points)
+    params.fetch(:redeem_request).permit(:coupon_code, :comment, :points, :status)
   end
 
 end
