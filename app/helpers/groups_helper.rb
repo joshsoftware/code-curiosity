@@ -1,6 +1,6 @@
 module GroupsHelper
 
-  def owner?(member)
+  def group_owner?(member)
     @group.owner == member
   end
 end

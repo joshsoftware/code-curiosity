@@ -7,7 +7,8 @@
       .box.box-primary
         .box-header.with-border 
           %h3.box-title Detail
-          = link_to 'Edit', edit_group_path(@group), class: 'btn btn-sm btn-primary pull-right'
+          - if current_user == @group.owner
+            = link_to 'Edit', edit_group_path(@group), class: 'btn btn-sm btn-primary pull-right'
         .box-body
           %dl.dl-horizontal
             %dt Description
@@ -19,7 +20,8 @@
       .box.box-solid
         .box-header.with-border 
           %h3.box-title Users
-          = link_to 'Add Members', group_members_path(@group), class: 'btn btn-sm btn-primary pull-right'
+          - if current_user == @group.owner
+            = link_to 'Add Members', group_members_path(@group), class: 'btn btn-sm btn-primary pull-right'
         .box-body.table-responsive
           %table.table.table-bordered
             %thead
@@ -30,4 +32,4 @@
                 %th.col-xs-1 Role
                 %th.col-xs-2 Actions
             %tbody     
-              = render partial: 'member', collection: @group.members
+              = render partial: 'groups/members/member', collection: @group.members

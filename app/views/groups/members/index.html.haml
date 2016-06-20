@@ -12,7 +12,7 @@
       .box.box-primary
         .box-body.table-responsive
           .col-xs-12
-            = render 'invitation_form' if owner?(current_user)
+            = render 'invitation_form' if group_owner?(current_user)
           .col-xs-12
             .panel.panel-default
               .panel-heading Invited Users

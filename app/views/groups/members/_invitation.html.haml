@@ -8,3 +8,10 @@
     - if invitation.accepted_at.nil?
       = invitation.created_at.strftime('%D %T')
   %td
+    - if group_owner?(current_user)
+      = link_to group_member_destroy_invitation_path(@group, invitation), class: 'btn btn-xs btn-danger', data: { confirm: 'Are you sure?'}, remote: true, method: 'delete' do
+        %i.fa.fa-times
+        Remove
+      = link_to group_member_resend_invitation_path(@group, invitation), class: 'btn btn-xs btn-default', remote: true do
+        %i.fa.fa-refresh
+        Resend Invitation

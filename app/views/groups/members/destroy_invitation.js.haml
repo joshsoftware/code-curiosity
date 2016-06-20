@@ -1,0 +1,2 @@
+$('#group-invitations').html("#{j = render partial: "invitation", collection: @group.group_invitations.where(accepted_at: nil), as: :invitation}");
+= raw show_flash_notifications

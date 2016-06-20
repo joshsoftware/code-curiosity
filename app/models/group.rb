@@ -44,4 +44,9 @@ class Group
     return group_invitations.where(email: email).any? if email
   end
 
+  def can_remove_member?(member, current_user = nil)
+    return false if member == owner
+    return member == current_user || current_user == owner
+  end
+
 end

@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
 
   before_action :authenticate_user!, except: [ :show ]
   before_action :find_group, except: [:index, :new, :create]
-  before_action :is_group_admin, only: [:update, :destroy]
+  before_action :is_group_admin, only: [:update, :destroy, :update]
 
   def index
     @groups = current_user.groups.page(params[:page])

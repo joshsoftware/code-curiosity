@@ -4,7 +4,7 @@ class Groups::MembersController < ApplicationController
   before_action :set_session_url, only: :accept_invitation
   before_action :authenticate_user!
   before_action :find_group, except: :accept_invitation
-  before_action :is_group_admin, only: [:create]
+  before_action :is_group_admin, only: [:create, :destroy_invitation, :resend_invitation]
   before_action :find_and_check_membership, only: :create
 
   def index
@@ -20,13 +20,9 @@ class Groups::MembersController < ApplicationController
   end
 
   def destroy
-    if is_group_admin
-      @user = @group.members.where(id: params[:id]).first
-    elsif @group.member?(current_user)
-      @user = current_user
-    end
+    @user = @group.members.where(id: params[:id]).first
 
-    if @user
+    if @user && @group.can_remove_member?(@user, current_user)
       @group.group_invitations.where(user: @user).destroy_all
       @group.members.delete(@user)
       flash.now[:notice] = I18n.t('group.member.destroy.success', { user: @user.github_handle, group: @group.name})
@@ -40,6 +36,25 @@ class Groups::MembersController < ApplicationController
     @group.accept_invitation(params[:token])
 
     redirect_to group_path(@group)
+  end
+
+  def destroy_invitation
+    invitation = @group.group_invitations.find(params[:member_id])
+    invitation.destroy
+
+    flash.now[:notice] = I18n.t('group.member.destroy.invitation', {
+      user: invitation.user.try(:github_handle) || invitation.email,
+      group: @group.name
+    })
+  end
+
+  def resend_invitation
+    invitation = @group.group_invitations.find(params[:member_id])
+    invitation.send_invitation if invitation
+
+    flash[:notice] = I18n.t('group.member.create.invitation', {
+      user: invitation.user.try(:github_handle) || invitation.email,
+    })
   end
 
   private

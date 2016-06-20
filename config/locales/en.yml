@@ -60,3 +60,4 @@ en:
         invitation: "Successfully sent invitation to %{user}."
       destroy:
         success: "%{user} is removed from %{group} group."
+        invitation: "%{user} invitation deleted from %{group} group."
