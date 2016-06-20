@@ -8,7 +8,6 @@ class Admin::RedeemRequestsController < ApplicationController
 
   def update
     @redeem_request = RedeemRequest.find(params[:id])
-
     if @redeem_request
       @redeem_request.update_attributes(redeem_params)
       @redeem_request.update_transaction_points if @redeem_request.retailer_other?

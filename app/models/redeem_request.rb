@@ -20,7 +20,7 @@ class RedeemRequest
   validates :points, numericality: { only_integer: true, greater_than: 0 }, unless: :retailer_other?
   validates :address, presence: true, if: :retailer_other?
   validates :gift_product_url, format: { with: URI.regexp }, if: :retailer_other?
-  validate :check_sufficient_balance, unless: :retailer_other?
+  validate :check_sufficient_balance, unless: :retailer_other?, on: :create
   validate :points_validations, unless: :retailer_other?
 
   before_validation {|r| r.points = r.points.to_i }

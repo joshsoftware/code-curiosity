@@ -89,9 +89,12 @@ task :deploy => :environment do
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
-      invoke :'sidekiq:restart'
-      invoke :'whenever:clear'
-      invoke :'whenever:write'
+
+      unless ENV['only'] == 'web'
+        invoke :'sidekiq:restart'
+        invoke :'whenever:clear'
+        invoke :'whenever:write'
+      end
       #queue 'sudo monit restart cksidekiq'
     end
   end
