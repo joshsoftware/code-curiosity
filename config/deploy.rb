@@ -83,7 +83,9 @@ task :deploy => :environment do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:assets_precompile'
-    invoke :'sidekiq:quiet'
+    unless ENV['only'] == 'web'
+      invoke :'sidekiq:quiet'
+    end
     invoke :'deploy:cleanup'
 
     to :launch do

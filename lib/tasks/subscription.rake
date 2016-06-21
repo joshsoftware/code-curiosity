@@ -12,7 +12,7 @@ namespace :subscription do
     round = Round.opened
     per_batch = 1000
 
-    0.step(users, per_batch) do |offset|
+    0.step(users.count, per_batch) do |offset|
       users.limit(per_batch).skip(offset).each do |user|
         SubscriptionMailer.progress(user, round).deliver_later
       end
