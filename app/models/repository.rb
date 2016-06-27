@@ -64,7 +64,7 @@ class Repository
       return repo
     end
 
-    gh_repo = GITHUB.repos.get(params[:owner], params[:name])
+    gh_repo = user.gh_client.repos.get(params[:owner], params[:name])
     return unless gh_repo
 
     repo = build_from_gh_info(gh_repo)
