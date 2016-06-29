@@ -50,7 +50,11 @@ class Groups::MembersController < ApplicationController
 
   def resend_invitation
     invitation = @group.group_invitations.find(params[:member_id])
-    invitation.send_invitation if invitation
+
+    if invitation
+      invitation.send_invitation
+      invitation.set(accepted_at: nil)
+    end
 
     flash[:notice] = I18n.t('group.member.create.invitation', {
       user: invitation.user.try(:github_handle) || invitation.email,

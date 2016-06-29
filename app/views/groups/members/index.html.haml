@@ -26,7 +26,7 @@
                       %th Invitation Sent On
                       %th Actions
                   %tbody#group-invitations
-                    = render partial: "invitation", collection: @group.group_invitations.where(accepted_at: nil), as: :invitation
+                    = render partial: "invitation", collection: @group.group_invitations.where(accepted_at: nil)
             .panel.panel-default
               .panel-heading Members
               .panel-body

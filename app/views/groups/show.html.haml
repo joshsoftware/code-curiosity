@@ -33,3 +33,8 @@
                 %th.col-xs-2 Actions
             %tbody     
               = render partial: 'groups/members/member', collection: @group.members
+              - if @group.group_invitations.any?
+                %tr
+                  %th{ colspan: 5}
+                    %h4 Invited Users
+                = render partial: 'groups/members/invitation', collection: @group.group_invitations.where(accepted_at: nil)
