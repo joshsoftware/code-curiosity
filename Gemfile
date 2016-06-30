@@ -33,6 +33,8 @@ gem 'redis-rails'
 gem 'whenever', :require => false
 gem 'mongoid-slug', '~> 5.2.0'
 
+gem 'rollbar'
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

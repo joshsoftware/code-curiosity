@@ -3,3 +3,4 @@
 :queues:
   - git
   - mailers
+  - rollbar
