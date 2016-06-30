@@ -3,7 +3,7 @@
   %td= transaction.points
   %td.transaction-detail
     %b
-      = transaction.description.humanize
+      = (transaction.transaction_type || transaction.description).to_s.humanize
     %small.label{class: transaction.credit? ? 'bg-green' : 'bg-red'}
       = transaction.type.upcase
     - if transaction.coupon_code.present? 
