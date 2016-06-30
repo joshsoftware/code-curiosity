@@ -9,7 +9,12 @@ namespace :fetch_data do
 
     0.step(users.count, per_batch) do |offset|
       users.limit(per_batch).skip(offset).each do |user|
-        CommitJob.perform_later(user, type)
+        #CommitJob.perform_later(user, type)
+
+        user.repositories.each do |repo| 
+          CommitJob.perform_later(user, type, repo, round)
+        end
+
         ActivityJob.perform_later(user, type)
       end
     end
