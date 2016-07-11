@@ -6,7 +6,7 @@ class CommitJob < ActiveJob::Base
       CommitsFetcher.new(repo, user, round).fetch(duration.to_sym)
     rescue Github::Error::NotFound
       # repository moved or deleted means we no longer care about this repos.
-      user.repositories.find(name: repo).destroy
+      repo.destroy
     rescue Github::Error::Unauthorized
       # Auth token issue or Access has been denied. 
 
