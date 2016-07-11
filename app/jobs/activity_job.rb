@@ -8,6 +8,9 @@ class ActivityJob < ActiveJob::Base
       duration = 'all' if user.created_at > (Time.now - 24.hours)
       begin
         ActivitiesFetcher.new(user, round).fetch(duration.to_sym)
+      rescue Github::Error::NotFound
+        # This user does not exist.. ignore and complete the job.
+        {}
       rescue Github::Error::Unauthorized
         # Auth token issue or Access has been denied. 
 

@@ -17,7 +17,7 @@ class CommitsFetcher
 
       # Check if the name of hte branch exists. In case it's moved, it will send
       # ["message", "Moved Permanently"]:Array
-      branch_commits(branch.name, type) unless branch.try(:name)
+      branch_commits(branch.name, type) if branch.try(:name)
     end
   end
 
