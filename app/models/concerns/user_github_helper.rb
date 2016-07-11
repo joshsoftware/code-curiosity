@@ -11,6 +11,17 @@ module UserGithubHelper
     })
   end
 
+  # In case we get a Github::Error::Unauthorized, we cannot use the user token.
+  # Here, we use the app token and the next time user logs in, it will refresh
+  # the user auth_token and start working normally
+  def refresh_gh_client
+    @gh_client = Github.new({
+      oauth_token: ENV['GIT_OAUTH_TOKEN'],
+      client_id: ENV['GIT_APP_ID'],
+      client_secret: ENV['GIT_APP_SECRET']
+    })
+  end
+
   def fetch_all_github_repos
     all_repos = []
     gh_client.repos.list(per_page: 100).each_page do |repos|
