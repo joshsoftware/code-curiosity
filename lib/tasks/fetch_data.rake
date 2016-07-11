@@ -12,7 +12,7 @@ namespace :fetch_data do
         #CommitJob.perform_later(user, type)
 
         user.repositories.each do |repo| 
-          CommitJob.perform_later(user, type, repo, round)
+          CommitJob.perform_later(user, type, repo)
         end
 
         ActivityJob.perform_later(user, type)
