@@ -56,7 +56,7 @@ class ScoringEngine
     fetch_repo unless git
 
     branch = git.gcommit(commit.sha).branch rescue nil
-    branch = commit.branch.present? ? commit.branch : git.branch.name
+    branch = commit.branch.present? ? commit.branch : git.branches.local.first.name
 
     bugspots = Bugspots.scan(repo_dir, branch).last
     bugspots_scores = bugspots.inject({}){|r, s| r[s.file] = s; r}
