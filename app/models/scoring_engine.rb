@@ -3,7 +3,7 @@ class ScoringEngine
 
   def initialize(repo)
     @repo = repo
-    @repo_dir = File.join(config[:repositories], repo.id.to_s)
+    @repo_dir = Rails.root.join(config[:repositories], repo.id.to_s).to_s
   end
 
   def config
