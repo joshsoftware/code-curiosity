@@ -12,7 +12,14 @@ class ScoringEngine
 
   def fetch_repo
     if Dir.exist?(repo_dir)
-      self.git = Git.open(repo_dir).tap{|g| g.pull}
+      # Default git pull will pull 'origin/master'. We need to handle the case 
+      # that repository has no master!
+      # Rollbar#14 
+      self.git = Git.open(repo_dir).tap do |g| 
+        branch = g.branches.local.first.name # usually 'master'
+        remote = g.config["branch.#{branch}.remote"] # usually just 'origin'
+        g.pull(remote, branch)
+      end
     else
       self.git = Git.clone(repo.ssh_url, repo.id, path: config[:repositories])
     end
