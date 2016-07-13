@@ -53,7 +53,7 @@ namespace :utils do
 
     activities_repo_ids = Activity.where(auto_score: nil).distinct(:repository_id)
 
-    Repository.find(commits_repo_ids).each do |repo|
+    Repository.find(activities_repo_ids).each do |repo|
       ScoringJob.perform_later(repo, nil, 'activities')
     end
   end
