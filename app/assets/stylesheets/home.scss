@@ -16,6 +16,25 @@
   padding-bottom:80px;
   background-color: #fff; 
 
+  .box-header{
+    text-align:center;
+    padding-bottom: 2cm;
+    width: auto;
+    height: 50px;
+    border : 1px solid transparent;
+    border-width:1px 0 solid black;
+
+    h4{
+      font-weight: 600;
+      font-family: "Source Sans Pro";
+    }
+
+    .text {
+    font-size:25px;
+    color: steelblue;
+    }  
+  }
+
   h1{
     margin-bottom:25px;
     margin-top: 100px;
