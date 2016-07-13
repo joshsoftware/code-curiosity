@@ -3,9 +3,27 @@
     .row
       = image_tag 'logo-home.png'
     .row
+      .box-header
+        %h4
+          %span.text
+            = User.contestants.count 
+            users
+          &nbsp;have contributed 
+          %span.text
+            = Transaction.total_points_before_redemption 
+            points
+          &nbsp;and 
+          %span.text
+            $
+            = Transaction.total_points_redeemed/REDEEM['one_dollar_to_points'] 
+          &nbsp;has been rewarded back to 
+          %span.text
+            = RedeemRequest.where(status: true).count
+            contributors!  
+    .row
       %a.btn.btn-primary.btn-lg{  href: omniauth_authorize_path(:user, :github) }
         %span.fa.fa-github
-        Sign in with GitHub
+        Sign in
     .row.marketing
       .col-md-12.col-lg-offset-1.col-md-offset-1
         - INFO['home'].each_slice(2) do |data|
