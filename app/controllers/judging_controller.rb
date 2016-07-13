@@ -17,7 +17,7 @@ class JudgingController < ApplicationController
     @activities = current_round.activities
                             .page(params[:page])
                             .per(20)
-                            .order(:commented_on)
+                            .order(commented_on: :desc)
     #                       .in(repository: current_user.judges_repository_ids)
   end
 

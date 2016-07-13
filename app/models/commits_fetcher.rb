@@ -10,7 +10,14 @@ class CommitsFetcher
 
   def fetch(type = :daily)
     user.gh_client.repos.branches(user: repo.owner, repo: repo.name).each do |branch|
-      branch_commits(branch.name, type)
+      # Refer to issue https://rollbar.com/JoshSoftware/CodeCuriosity/items/8/
+      # This is a quick fix where we ignore branches / repos that have moved.
+      # This is related to https://github.com/piotrmurach/github/pull/258 and 
+      # we need to fix properly later.
+
+      # Check if the name of hte branch exists. In case it's moved, it will send
+      # ["message", "Moved Permanently"]:Array
+      branch_commits(branch.name, type) if branch.try(:name)
     end
   end
 

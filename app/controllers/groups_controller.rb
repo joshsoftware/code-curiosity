@@ -14,6 +14,7 @@ class GroupsController < ApplicationController
   end
 
   def show
+    render layout: 'info' unless current_user 
   end
 
   def create

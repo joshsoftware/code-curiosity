@@ -3,7 +3,7 @@ class ScoringEngine
 
   def initialize(repo)
     @repo = repo
-    @repo_dir = File.join(config[:repositories], repo.id.to_s)
+    @repo_dir = Rails.root.join(config[:repositories], repo.id.to_s).to_s
   end
 
   def config
@@ -12,7 +12,14 @@ class ScoringEngine
 
   def fetch_repo
     if Dir.exist?(repo_dir)
-      self.git = Git.open(repo_dir).tap{|g| g.pull}
+      # Default git pull will pull 'origin/master'. We need to handle the case 
+      # that repository has no master!
+      # Rollbar#14 
+      self.git = Git.open(repo_dir).tap do |g| 
+        branch = g.branches.local.first.name # usually 'master'
+        remote = g.config["branch.#{branch}.remote"] # usually just 'origin'
+        g.pull(remote, branch)
+      end
     else
       self.git = Git.clone(repo.ssh_url, repo.id, path: config[:repositories])
     end
@@ -49,7 +56,7 @@ class ScoringEngine
     fetch_repo unless git
 
     branch = git.gcommit(commit.sha).branch rescue nil
-    branch = commit.branch.present? ? commit.branch : git.branch.name
+    branch = commit.branch.present? ? commit.branch : git.branches.local.first.name
 
     bugspots = Bugspots.scan(repo_dir, branch).last
     bugspots_scores = bugspots.inject({}){|r, s| r[s.file] = s; r}
