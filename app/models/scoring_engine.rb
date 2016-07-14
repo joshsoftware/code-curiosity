@@ -21,7 +21,7 @@ class ScoringEngine
         g.pull(remote, branch)
       end
     else
-      self.git = Git.clone(repo.ssh_url, repo.id, path: config[:repositories])
+      self.git = Git.clone(repo.ssh_url, repo.id, path: Rails.root.join(config[:repositories]).to_s)
     end
   end
 
