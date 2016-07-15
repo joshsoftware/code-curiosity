@@ -5,4 +5,9 @@ class SubscriptionMailerPreview < ActionMailer::Preview
     user = User.contestants.first
     SubscriptionMailer.progress(user, Round.opened)
   end
+
+  def redeem_points
+    user = User.contestants.first
+    SubscriptionMailer.redeem_points(user, "You have enough points. Splurge!")
+  end
 end

@@ -1,0 +1,16 @@
+%h4= "Hello, #{@user.name}"
+%p
+  Here is an update on your points for this month of #{Date.today.strftime("%B")}.
+%p
+  = @message
+
+%p
+  - if @user.points < 100
+    = "You have #{@user.points} points! Why don't you "
+    = link_to "redeem some points", user_url(@user, anchor: "wallet")
+    today?
+  - else
+    You have #{100 - @user.points} points. You need at least a 100 points for redemption. Go for it.
+    %p
+      For more details on your points, check your
+      = link_to "CodeCuriosity profile", user_url(@user)

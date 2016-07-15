@@ -19,4 +19,16 @@ namespace :subscription do
     end
   end
 
+  desc "Invite users to redeem"
+  task redeem_points: :environment do
+     range = [ 
+       [85, 100, "You're almost there!"],
+       [100, 150, "You've done it!" ],
+       [150, 1000, "Splurge!"]
+     ].each do |r|
+       User.where(:points.gte => r[0], :points.lt => r[1]).each do |user|
+         SubscriptionMailer.redeem_points(user, r[2]).deliver_later
+       end
+     end
+  end
 end

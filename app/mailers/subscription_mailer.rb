@@ -19,4 +19,11 @@ class SubscriptionMailer < ApplicationMailer
     mail(to: user.email, subject: "[CODECURIOSITY] #{message}")
   end
 
+  def redeem_points(user, message)
+    @user = user
+    @message = message
+
+    mail(to: user.email, subject: "[CODECURIOSITY] Your points for the month of #{Date.today.strftime("%B")}!")
+  end
+
 end
