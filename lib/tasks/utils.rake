@@ -42,19 +42,4 @@ namespace :utils do
 
     puts dublicate_repos_with_activies.collect &:id
   end
-
-  desc "Score not scored commits and activities"
-  task scoring_not_scored_commits_and_activities: :environment do
-    commits_repo_ids = Commit.where(auto_score: nil).distinct(:repository_id)
-
-    Repository.find(commits_repo_ids).each do |repo|
-      ScoringJob.perform_later(repo, nil, 'commits')
-    end
-
-    activities_repo_ids = Activity.where(auto_score: nil).distinct(:repository_id)
-
-    Repository.find(activities_repo_ids).each do |repo|
-      ScoringJob.perform_later(repo, nil, 'activities')
-    end
-  end
 end
