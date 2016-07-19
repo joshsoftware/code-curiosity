@@ -45,9 +45,17 @@ class GroupsController < ApplicationController
     redirect_to groups_path
   end
 
+  def set_advertise
+    @group = Group.find(params[:group_id])
+    @group.advertise = true
+    if @group.save
+      redirect_to groups_path, notice: 'group featured successfully'
+    end
+  end
+
   private
 
   def group_params
-    params.fetch(:group).permit(:name, :description)
+    params.fetch(:group).permit(:name, :description, :advertise)
   end
 end
