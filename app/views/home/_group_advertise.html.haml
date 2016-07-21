@@ -1,0 +1,21 @@
+- if get_advertised_groups.count != 0 
+	%h4
+		Groups actively participating::
+	%a.left.carousel-control{:href => "#slide-images", :data => {:slide => "prev"}}
+		%span.glyphicon.glyphicon-chevron-left
+	%a.right.carousel-control{:href => "#slide-images", :data => {:slide => "next"}}
+		%span.glyphicon.glyphicon-chevron-right
+	.col-md-12.carousel.slide{:id=>"slide-images", :data => {:ride => "carousel" , :interval => "false"}}
+		.carousel-inner
+			- index = 0
+			- get_advertised_groups.each do |group|
+				- if index.eql? 0
+					.active.item
+						.col-md-4
+							%iframe{src: group_widget_url(group), height:"380" ,width: "340" ,frameborder:"0"	}
+				- else
+					.item
+						.col-md-4
+							%iframe{src: group_widget_url(group), height:"380" ,width: "340" ,frameborder:"0"	}
+				- index = index + 1
+			

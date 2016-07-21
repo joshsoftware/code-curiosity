@@ -7,5 +7,6 @@
     - if current_user == group.owner
       = link_to 'Edit', edit_group_path(group), class: 'btn btn-xs btn-primary'
       = link_to 'Delete', group_path(group), class: 'btn btn-xs btn-danger', data: { method: 'delete', confirm: 'Are you sure?' } 
+      = link_to 'Featured', advertise_path(group),class: 'btn btn-xs btn-primary'
       = link_to 'Add Members',  group_members_path(group), class: 'btn btn-xs btn-success'
     %button.btn.btn-default.btn-xs.pull-right{ data: { toggle: 'modal', target: '#group-widget-modal', name: group.name, url: group_widget_url(group)}} Widget

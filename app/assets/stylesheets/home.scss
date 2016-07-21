@@ -79,6 +79,29 @@
     p{
       font-size: 16px;
     }
+
+    .carousel-control {
+    width: 0;
+    }
+
+    .carousel-control.left,
+    .carousel-control.right {
+      background-image: none;
+    }
+
+    .carousel-control.left span {
+      padding-left: 70px;
+      padding-top: 80px;
+    }
+
+    .carousel-control.right span {
+      padding-right: 100px;
+      padding-top: 80px;
+    }
+
+    .carousel-control {
+      color: rgb(241,155,44);
+    }
   }
 }
 

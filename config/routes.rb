@@ -89,6 +89,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'advertise/:group_id' => 'groups#set_advertise', as: :advertise
   get 'accept_invitation/:group_id/:token' => 'groups/members#accept_invitation', as: :accept_invitation
   get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
   get 'widgets/group/:id(/:round_id)' => 'widgets#group', as: :group_widget
