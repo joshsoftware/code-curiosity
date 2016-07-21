@@ -49,6 +49,7 @@ class Subscription
   end
 
   def goal_achived?
-    points >= goal.points
+    #add the blank condition for the auto created users, goal will be blank for those users.
+    !goal.blank? and points >= goal.points
   end
 end
