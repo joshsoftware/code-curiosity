@@ -8,7 +8,7 @@ module HomeHelper
   end
 
   def widget_class
-    if @size == 2
+    if @size > 2
       "col-md-4"
     elsif @size == 2
       "col-md-6"

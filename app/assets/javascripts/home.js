@@ -1,8 +1,6 @@
 $(document).ready(function() {
-  var size = Math.round($('.carousel .item').size()/3);
-  var index = 0;
+  var size = $('.carousel .item').size();
   $('.carousel .item').each(function(){
-    index = index + 1;
 
     var next = $(this).next();
     if (!next.length) {
@@ -24,7 +22,9 @@ $(document).ready(function() {
 	} 
     } 
     else {
-          $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+	  if (size > 3){
+            $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+	  }
     }
   });
 });
