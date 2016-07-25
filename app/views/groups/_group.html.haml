@@ -4,8 +4,9 @@
   %td= link_to group.owner.github_handle, github_url(group.owner), target: '_blank'
   %td
     = link_to 'View', group_path(group), class: 'btn btn-xs btn-default'
-    - if current_user == group.owner
+    - if current_user == group.owner || current_user.is_admin?
       = link_to 'Edit', edit_group_path(group), class: 'btn btn-xs btn-primary'
-      = link_to 'Delete', group_path(group), class: 'btn btn-xs btn-danger', data: { method: 'delete', confirm: 'Are you sure?' } 
+      = link_to 'Delete', group_path(group), class: 'btn btn-xs btn-danger', data: { method: 'delete', confirm: 'Are you sure?' }
+      = link_to (group.is_featured == true ? 'Featured' : 'Feature'), feature_group_path(group), class: 'btn btn-xs btn-primary', data: {method: 'patch', remote: true}
       = link_to 'Add Members',  group_members_path(group), class: 'btn btn-xs btn-success'
     %button.btn.btn-default.btn-xs.pull-right{ data: { toggle: 'modal', target: '#group-widget-modal', name: group.name, url: group_widget_url(group)}} Widget

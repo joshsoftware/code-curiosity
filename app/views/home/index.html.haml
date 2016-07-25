@@ -28,3 +28,6 @@
         - INFO['home'].each_slice(2) do |data|
           .col-lg-5.col-md-5
             = render partial: 'info', collection: data, as: 'info'
+    - if @size > 0
+      .row.marketing
+        = render partial: 'featured_groups'

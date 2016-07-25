@@ -1,6 +1,6 @@
 module GroupHelper
   def find_group
-    if current_user
+    if current_user && !current_user.is_admin?
       @group = current_user.groups.where(id: (params[:group_id] || params[:id])).first
     else
       @group = Group.where(id: params[:id]).first
@@ -13,6 +13,10 @@ module GroupHelper
 
   def is_group_admin
     return @group.owner == current_user
+  end
+
+  def is_admin
+    return current_user.is_admin?
   end
 
 end

@@ -4,9 +4,10 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!, except: [ :show ]
   before_action :find_group, except: [:index, :new, :create]
   before_action :is_group_admin, only: [:update, :destroy, :update]
-
+  before_action :is_admin, only: [:feature]
+  
   def index
-    @groups = current_user.groups.page(params[:page])
+    @groups = current_user.is_admin? ? Group.order_by(name: :desc).page(params[:page]) : current_user.groups.page(params[:page])
   end
 
   def new
@@ -31,6 +32,13 @@ class GroupsController < ApplicationController
   def edit
   end
 
+  def feature
+    @group.update(is_featured: !@group.is_featured) 
+    respond_to do |format|
+      format.js { render 'groups/feature' }
+    end
+  end
+
   def update
     if @group.update_attributes(group_params)
       redirect_to group_path(@group)
@@ -48,6 +56,6 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.fetch(:group).permit(:name, :description)
+    params.fetch(:group).permit(:name, :description, :is_featured)
   end
 end

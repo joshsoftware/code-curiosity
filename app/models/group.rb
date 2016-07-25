@@ -8,6 +8,7 @@ class Group
   field :description, type: String
   field :owner_id, type: BSON::ObjectId
   field :private, type: Boolean, default: false
+  field :is_featured, type: Boolean, default: false
 
   has_and_belongs_to_many :members, class_name: 'User', inverse_of: 'groups'
   has_many :group_invitations

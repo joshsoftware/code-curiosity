@@ -33,3 +33,4 @@ widget_test/
 page_cache
 bin/dbload
 mongodump-*
+/config/mongid.yml

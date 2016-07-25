@@ -83,12 +83,14 @@ Rails.application.routes.draw do
   resources :goals, only: [:index]
   resource :redeem, only: [:create], controller: 'redeem'
   resources :groups do
+    member do
+    	patch :feature
+    end
     resources :members, only: [:index, :create, :destroy], controller: 'groups/members' do
       delete :destroy_invitation
       get :resend_invitation
     end
   end
-
   get 'accept_invitation/:group_id/:token' => 'groups/members#accept_invitation', as: :accept_invitation
   get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
   get 'widgets/group/:id(/:round_id)' => 'widgets#group', as: :group_widget
