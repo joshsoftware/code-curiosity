@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
   include GroupHelper
 
   before_action :authenticate_user!, except: [ :show ]
-  before_action :find_group, except: [:index, :new, :create]
+  before_action :find_group, except: [:index, :new, :create, :feature]
   before_action :is_group_admin, only: [:update, :destroy, :update]
   before_action :is_admin, only: [:feature]
   
@@ -33,6 +33,7 @@ class GroupsController < ApplicationController
   end
 
   def feature
+    @group = Group.where(id: params[:id]).first
     @group.update(is_featured: !@group.is_featured) 
     respond_to do |format|
       format.js { render 'groups/feature' }
