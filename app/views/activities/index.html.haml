@@ -1,6 +1,11 @@
 %section.content-header
   %h1 
     Contributions
+    = link_to sync_user_path(current_user), class: 'btn btn-success btn-social pull-right', remote: true do
+      %i.fa.fa-refresh
+      %b Sync
+    %a.btn.pull-right{href:"#", data: {toggle: 'tooltip', title: t('repositories.criteria_message'), placement: "bottom", trigger: "hover"}}
+      Not seeing a commit?
 %section.content
   .row
     .col-xs-12
