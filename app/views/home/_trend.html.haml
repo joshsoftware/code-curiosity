@@ -1,0 +1,12 @@
+%section.content-header
+  %h4 CodeCuriosity Trend
+%section.content
+  .row
+    .col-xs-12
+      .box
+        .box-body.no-padding
+          #points-chart-container
+
+          
+:javascript
+  multiLineChart(#{@xAxis},#{@user_trend},#{@contribution_trend},#{@redemption_trend}); 
