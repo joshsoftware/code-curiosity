@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   include HomeHelper
   before_action :featured_groups, only: [:index]
   before_action :featured_groups_size, only: [:index]
+  before_action :multi_line_chart, only: [:index]
   def index
     if user_signed_in?
       redirect_to dashboard_path
