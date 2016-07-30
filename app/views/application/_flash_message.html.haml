@@ -1,10 +1,8 @@
 :javascript
   if(#{flash[:notice].present?}){
-    flashNotification("#{flash[:notice]}", 'success')
-    close_noty_in(3000)
+    flashNotification("#{flash[:notice]}", 'success', 3000)
   }
 
   if(#{flash[:alert].present?}){
     flashNotification("#{flash[:alert]}", 'error')
-    close_noty_in(5000)
   }
