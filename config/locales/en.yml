@@ -26,7 +26,7 @@ en:
     unauthorized_access: "You are not authorized to access this page."
     login_required: "You must signin/signup to continue."
     subscription_successfull: "You have successfully subscribed for this challenge."
-    repository_sync: "Your repositories are getting synced, this may take a while."
+    contribution_sync: "Your contributions are getting synced, this may take a while."
     not_found: 'Invalid url.'
   user:
     celebrity_signup: "You're way over the top - contact the team and we shall work out a fixed income per month for you."

@@ -21,8 +21,6 @@ class UsersController < ApplicationController
       CommitJob.perform_later(current_user, 'all')
       ActivityJob.perform_later(current_user, 'all')
     end
-
-    redirect_to repositories_path, notice: I18n.t('messages.repository_sync')
   end
 
   def set_goal
