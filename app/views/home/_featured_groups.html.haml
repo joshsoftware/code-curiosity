@@ -1,19 +1,5 @@
 %h4
   Featured Groups
-.col-md-12.carousel.slide{:id=>"slide-images", :data => {:ride => "carousel" , :interval => "false"}}
-  .carousel-inner
-    - @featured_groups.each_with_index do |group, index|
-      - if index.eql? 0
-        .active.item
-          %div{:class => "#{widget_class()}"}
-            %iframe{src: group_widget_url(group), height:"380" ,width: "340" ,frameborder:"0"	}
-      - else
-        .item
-          %div{:class => "#{widget_class()}"}
-            %iframe{src: group_widget_url(group), height:"380" ,width: "340" ,frameborder:"0"	}
-
-    - if @size > 3
-      %a.left.carousel-control{:href => "#slide-images", :data => {:slide => "prev"}}
-        %i.glyphicon.glyphicon-chevron-left
-      %a.right.carousel-control{:href => "#slide-images", :data => {:slide => "next"}}
-        %i.glyphicon.glyphicon-chevron-right
+- @featured_groups.each_with_index do |group, index|
+  %div{:class => "#{widget_class()}"}
+    %iframe{src: group_widget_url(group), height:"380" ,width: "340" ,frameborder:"0"	}
