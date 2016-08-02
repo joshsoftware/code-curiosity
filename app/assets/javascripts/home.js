@@ -1,7 +1,7 @@
-function lineChart(xAxis, trendData, title, subTitle, divId, legendName, lineColor){
+function lineChart(xAxis, trendData, title, subTitle, divId, legendName, lineColor, chartType){
   $(divId).highcharts({
     chart: {
-      type: 'line'
+      type: chartType
     },
     title: {
       text: title,
@@ -12,18 +12,11 @@ function lineChart(xAxis, trendData, title, subTitle, divId, legendName, lineCol
       x: -20
     },
     xAxis: {
-      categories: xAxis
-    },
-    plotOptions: {
-      line: {
-        dataLabels: {
-          enabled: false
-        }
-      }
+      categories: xAxis,
     },
     yAxis: {
       title: {
-        text: 'Count'
+        text: "No. of " + legendName
       },
       plotLines: [{
         value: 0,

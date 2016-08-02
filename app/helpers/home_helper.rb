@@ -46,14 +46,15 @@ module HomeHelper
     users.map{ |user| @user_trend << sum += user[1].size}
     
     sum = 0
-    contributions.map{ |contribution| @contribution_trend << sum += contribution[1].sum(&:points)}
+    contributions.map{ |contribution| @contribution_trend << contribution[1].sum(&:points)}
     
     sum = 0
     #redemptions.map{ |redemption| @redemption_trend << sum += (redemption[1].sum(&:points).abs/REDEEM['one_dollar_to_points'])}
 
     index = 0
-    #Fill in 0 for those don't have any value for that specific month, otherwise the report will show mismatched axis values.
     @xAxis.each{ |value|
+      #Fill in 0 or previous value for those don't have any value for that 
+      #specific month, otherwise the report will show mismatched axis values.
       if !users.keys.include?(value)
         if index == 0
           @user_trend.insert(index,0)
@@ -61,12 +62,10 @@ module HomeHelper
 	  @user_trend.insert(index,@user_trend[index-1])
         end
       end
+      #Fill in 0 for those don't have any value for that specific month, 
+      #otherwise the report will show mismatched axis values.
       if contributions.keys.index(value).blank?
-        if index == 0
           @contribution_trend.insert(index,0)
-        elsif
-          @contribution_trend.insert(index,@contribution_trend[index-1])
-        end
       end
       #if redemptions.keys.index(value).blank?
         #@redemption_trend.insert(index,0)
