@@ -1,22 +1,180 @@
-%html
-  %body{style: 'padding: 15px;'}
+!!!
+%html{"data-dnd" => "true", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1", :name => "viewport"}/
+    / [if !mso]><!
+    %meta{:content => "IE=Edge", "http-equiv" => "X-UA-Compatible"}/
+    / <![endif]
+    /[if (gte mso 9)|(IE)]
+      <style type="text/css">
+      table {border-collapse: collapse;}
+      table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}
+      img {-ms-interpolation-mode: bicubic;}
+      </style>
     :css
-      .dl-horizontal dt{
-        float: left;
-        width: 160px;
-        overflow: hidden;
-        clear: left;
-        text-align: right;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-weight: 600;
+      body {
+        color: #000000;
       }
-      .dl-horizontal dd{
-        margin-left: 180px;
+      body a {
+        color: #1188e6;
+        text-decoration: none;
       }
-    = yield
-    %br/
-    %p
-      Thanks,
-      %br/
-      = image_tag 'logo_50pxh.png', height: 35
+      p { margin: 0; padding: 0; }
+      table[class="wrapper"] {
+        width:100% !important;
+        table-layout: fixed;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+      img[class="max-width"] {
+        max-width: 100% !important;
+      }
+      @media screen and (max-width:480px) {
+        .preheader .rightColumnContent,
+        .footer .rightColumnContent {
+            text-align: left !important;
+        }
+        .preheader .rightColumnContent div,
+        .preheader .rightColumnContent span,
+        .footer .rightColumnContent div,
+        .footer .rightColumnContent span {
+          text-align: left !important;
+        }
+        .preheader .rightColumnContent,
+        .preheader .leftColumnContent {
+          font-size: 80% !important;
+          padding: 5px 0;
+        }
+        table[class="wrapper-mobile"] {
+          width: 100% !important;
+          table-layout: fixed;
+        }
+        img[class="max-width"] {
+          height: auto !important;
+        }
+        a[class="bulletproof-button"] {
+          display: block !important;
+          width: auto !important;
+          font-size: 80%;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+        // 2 columns
+        #templateColumns{
+            width:100% !important;
+        }
+
+        .templateColumnContainer{
+            display:block !important;
+            width:100% !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+      }
+    :css
+      body, p, div { font-family: arial,sans-serif; }
+    :css
+      body, p, div { font-size: 14px; }
+  %body{"data-attributes" => "%7B%22dropped%22%3Atrue%2C%22bodybackground%22%3A%22%23ffffff%22%2C%22bodyfontname%22%3A%22arial%2Csans-serif%22%2C%22bodytextcolor%22%3A%22%23000000%22%2C%22bodylinkcolor%22%3A%22%231188e6%22%2C%22bodyfontsize%22%3A14%7D", :style => "min-width: 100%; margin: 0; padding: 0; font-size: 14px; font-family: arial,sans-serif; color: #000000; background-color: #ffffff; color: #000000;", :yahoofix => "true"}
+    %center.wrapper
+      .webkit
+        %table.wrapper{:bgcolor => "#ffffff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+          %tr
+            %td{:bgcolor => "#ffffff", :valign => "top", :width => "100%"}
+              /[if (gte mso 9)|(IE)]
+                <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                <td>
+              %table.outer{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", "data-attributes" => "%7B%22dropped%22%3Atrue%2C%22containerpadding%22%3A%220%2C0%2C0%2C0%22%2C%22containerwidth%22%3A600%2C%22containerbackground%22%3A%22%23ffffff%22%7D", :role => "content-container", :width => "100%"}
+                %tr
+                  %td{:width => "100%"}
+                    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                      %tr
+                        %td
+                          /[if (gte mso 9)|(IE)]
+                            <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                            <td>
+                          %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "width: 100%; max-width:600px;", :width => "100%"}
+                            %tr
+                              %td{:align => "left", :bgcolor => "#ffffff", :role => "modules-container", :style => "padding: 0px 0px 0px 0px; color: #000000; text-align: left;", :width => "100%"}
+                                %table.module.preheader.preheader-hide{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", "data-type" => "#{@preheader}", :role => "module", :style => "display:none !important; visibility:hidden; opacity:0; color:transparent; height:0; width:0;", :width => "100%"}
+                                  %tr
+                                    %td{:role => "module-content"}
+                                      %p
+                                %table.wrapper{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", "data-attributes" => "%7B%22child%22%3Afalse%2C%22link%22%3A%22%22%2C%22width%22%3A%22200%22%2C%22height%22%3A%22107%22%2C%22imagebackground%22%3A%22%23FFFFFF%22%2C%22url%22%3A%22https%3A//marketing-image-production.s3.amazonaws.com/uploads/cfeed64d571fcdbdea7974fcb7eb12ca6fa3f6090f28f31e44e6c76339c71614046685b426c487508d510f57e94a80237dff8b3df998ba9e659eae65b3e67048.png%22%2C%22alt_text%22%3A%22%22%2C%22dropped%22%3Atrue%2C%22imagemargin%22%3A%220%2C0%2C0%2C0%22%2C%22alignment%22%3A%22center%22%2C%22responsive%22%3Atrue%7D", "data-type" => "image", :role => "module", :style => "table-layout: fixed;", :width => "100%"}
+                                  %tr
+                                    %td{:align => "center", :role => "module-content", :style => "font-size:6px;line-height:10px;background-color:#FFFFFF;padding: 0px 0px 0px 0px;", :valign => "top"}
+                                      /[if mso]
+                                        <center>
+                                        <table width="200" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
+                                        <tr>
+                                        <td width="200" valign="top">
+                                      %img.max-width{:alt => "", :border => "0", :height => "", :src => "https://marketing-image-production.s3.amazonaws.com/uploads/cfeed64d571fcdbdea7974fcb7eb12ca6fa3f6090f28f31e44e6c76339c71614046685b426c487508d510f57e94a80237dff8b3df998ba9e659eae65b3e67048.png", :style => "display: block; color: #000; text-decoration: none; font-family: Helvetica, arial, sans-serif; font-size: 16px;  max-width: 200px !important; width: 100% !important; height: auto !important; ", :width => "200"}/
+                                      /[if mso]
+                                        </td></tr></table>
+                                        </center>
+                                %table.module{:border => "0", :cellpadding => "0", :cellspacing => "0", "data-attributes" => "%7B%22dropped%22%3Atrue%2C%22padding%22%3A%2210%2C10%2C10%2C10%22%2C%22containerbackground%22%3A%22%23ffffff%22%7D", "data-type" => "wysiwyg", :role => "module", :style => "table-layout: fixed;", :width => "100%"}
+                                  %tr
+                                    %td{:bgcolor => "#ffffff", :role => "module-content", :style => "padding: 10px 10px 10px 10px;"}
+                                      %div= yield
+                                %table.module{:border => "0", :cellpadding => "0", :cellspacing => "0", "data-attributes" => "%7B%22dropped%22%3Atrue%2C%22child%22%3Afalse%2C%22padding%22%3A%2210%2C10%2C10%2C10%22%2C%22containerbackground%22%3A%22%23ffffff%22%7D", "data-type" => "text", :role => "module", :style => "table-layout: fixed;", :width => "100%"}
+                                  %tr
+                                    %td{:bgcolor => "#ffffff", :height => "100%", :role => "module-content", :style => "padding: 10px 10px 10px 10px;", :valign => "top"}
+                                      %div  
+                                      %div Keep those contributions coming!
+                                      %div - Team CodeCuriosity 
+                                      %div  
+                                      %div
+                                        %em "Open Source is now fun and rewarding!"  
+                                      %div
+                                        %em #CodeCuriosity
+                                      %div  
+                                %table.wrapper{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", "data-attributes" => "%7B%22backgroundcolor%22%3A%22%23FFFFFF%22%2C%22iconsize%22%3A30%2C%22iconcolor%22%3A%22AUTO%22%2C%22borderradius%22%3A2%2C%22padding%22%3A%225%2C0%2C5%2C0%22%2C%22alignment%22%3A%22center%22%2C%22option_facebook%22%3A%7B%22checked%22%3Atrue%2C%22text%22%3A%22https%3A//www.facebook.com/joshsoftware%22%2C%22filename%22%3A%22facebook.png%22%2C%22title%22%3A%22Facebook%22%2C%22backgroundcolor%22%3A%22%233B579D%22%7D%2C%22option_twitter%22%3A%7B%22checked%22%3Atrue%2C%22text%22%3A%22https%3A//twitter.com/joshsoftware%22%2C%22filename%22%3A%22twitter.png%22%2C%22title%22%3A%22Twitter%22%2C%22backgroundcolor%22%3A%22%237AC4F7%22%7D%2C%22option_instagram%22%3A%7B%22checked%22%3Afalse%2C%22text%22%3A%22%22%2C%22filename%22%3A%22instagram.png%22%2C%22title%22%3A%22Instagram%22%2C%22backgroundcolor%22%3A%22%237F4B30%22%7D%2C%22option_googleplus%22%3A%7B%22checked%22%3Afalse%2C%22text%22%3A%22%22%2C%22filename%22%3A%22google-plus.png%22%2C%22title%22%3A%22Google+%22%2C%22backgroundcolor%22%3A%22%23D44132%22%7D%2C%22option_pinterest%22%3A%7B%22checked%22%3Afalse%2C%22text%22%3A%22%22%2C%22filename%22%3A%22pinterest.png%22%2C%22title%22%3A%22Pinterest%22%2C%22backgroundcolor%22%3A%22%23CB2027%22%7D%2C%22option_linkedin%22%3A%7B%22checked%22%3Atrue%2C%22text%22%3A%22https%3A//www.linkedin.com/company/josh-software-private-limited%22%2C%22filename%22%3A%22linkedin.png%22%2C%22backgroundcolor%22%3A%22%230077B5%22%7D%7D", "data-type" => "social", :role => "module", :style => "table-layout: fixed;", :width => "100%"}
+                                  %tr
+                                    %td{:align => "center", :role => "module-content", :style => "font-size:6px;line-height:10px;background-color:;padding: 5px 0px 5px 0px;", :valign => "top"}
+                                      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => ""}
+                                        %tr
+                                          %td{:style => "padding: 0px 5px;"}
+                                            %a{:alt => "Facebook", :border => "0", :href => "https://www.facebook.com/joshsoftware", :role => "social-icon-link", :style => "background-color: #3B579D; border-radius: 2px; -webkit-border-radius:2px; -moz-border-radius:2px; -ms-border-radius:2px; -o-border-radius:2px; color: white; display: inline-block; outline: none; text-decoration:none; border: none; font-family: Helvetica, arial, sans-serif;", :target => "_blank", :title => "Facebook"}
+                                              %img{:alt => "Facebook", :border => "0", :height => "30", :role => "social-icon", :src => "https://marketing-image-production.s3.amazonaws.com/social/white/facebook.png", :style => "height: 30px; width: 30px; border:none; color: white; font-family: Helvetica, arial, sans-serif;", :title => "Facebook", :width => "30"}/
+                                          %td{:style => "padding: 0px 5px;"}
+                                            %a{:alt => "Twitter", :border => "0", :href => "https://twitter.com/joshsoftware", :role => "social-icon-link", :style => "background-color: #7AC4F7; border-radius: 2px; -webkit-border-radius:2px; -moz-border-radius:2px; -ms-border-radius:2px; -o-border-radius:2px; color: white; display: inline-block; outline: none; text-decoration:none; border: none; font-family: Helvetica, arial, sans-serif;", :target => "_blank", :title => "Twitter"}
+                                              %img{:alt => "Twitter", :border => "0", :height => "30", :role => "social-icon", :src => "https://marketing-image-production.s3.amazonaws.com/social/white/twitter.png", :style => "height: 30px; width: 30px; border:none; color: white; font-family: Helvetica, arial, sans-serif;", :title => "Twitter", :width => "30"}/
+                                          %td{:style => "padding: 0px 5px;"}
+                                            %a{:alt => "undefined", :border => "0", :href => "https://www.linkedin.com/company/josh-software-private-limited", :role => "social-icon-link", :style => "background-color: #0077B5; border-radius: 2px; -webkit-border-radius:2px; -moz-border-radius:2px; -ms-border-radius:2px; -o-border-radius:2px; color: white; display: inline-block; outline: none; text-decoration:none; border: none; font-family: Helvetica, arial, sans-serif;", :target => "_blank", :title => "undefined"}
+                                              %img{:alt => "undefined", :border => "0", :height => "30", :role => "social-icon", :src => "https://marketing-image-production.s3.amazonaws.com/social/white/linkedin.png", :style => "height: 30px; width: 30px; border:none; color: white; font-family: Helvetica, arial, sans-serif;", :title => "undefined", :width => "30"}/
+                                %table.module.footer{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", "data-attributes" => "%7B%22dropped%22%3Atrue%2C%22columns%22%3A1%2C%22padding%22%3A%2210%2C5%2C10%2C5%22%2C%22containerbackground%22%3A%22%23ffffff%22%7D", "data-type" => "footer", :role => "module", :width => "100%"}
+                                  %tr
+                                    %td{:bgcolor => "#ffffff", :style => "padding: 10px 5px 10px 5px;"}
+                                      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                                        %tr{:role => "module-content"}
+                                          %td.templateColumnContainer{:align => "center", :height => "100%", :valign => "top", :width => "100%"}
+                                            %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :height => "100%", :width => "100%"}
+                                              %tr
+                                                %td.leftColumnContent{:height => "100%", :role => "column-one", :style => "height:100%;"}
+                                                  %table.module{:border => "0", :cellpadding => "0", :cellspacing => "0", "data-attributes" => "%7B%22dropped%22%3Atrue%2C%22child%22%3Afalse%2C%22padding%22%3A%220%2C0%2C0%2C0%22%2C%22containerbackground%22%3A%22%23ffffff%22%7D", "data-type" => "text", :role => "module", :style => "table-layout: fixed;", :width => "100%"}
+                                                    %tr
+                                                      %td{:bgcolor => "#ffffff", :height => "100%", :role => "module-content", :style => "padding: 0px 0px 0px 0px;", :valign => "top"}
+                                                        %div{:style => "font-size:12px;line-height:150%;margin:0;text-align:center;"}
+                                                          This platform is an initiative of by
+                                                          = succeed "." do
+                                                            %a{:href => "http://joshsoftware.com"} Josh Software
+                                                        %div{:style => "font-size:12px;line-height:150%;margin:0;text-align:center;"}
+                                                          We do not send unsolicited mail. You are receiving this because you have an active account on
+                                                          %a{:href => "https://codecuriosity.org"} codecuriosity.org
+                                                          - if @user
+                                                            You can change settings in your
+                                                            = link_to "profile page.", user_url(@user) 
+
+                          /[if (gte mso 9)|(IE)]
+                            </td>
+                            </td>
+                            </table>
+              /[if (gte mso 9)|(IE)]
+                </td>
+                </tr>
+                </table>

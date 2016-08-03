@@ -1,5 +1,5 @@
 class RedeemMailer < ApplicationMailer
-  default from: 'noreplay@codecuriosity.org'
+  default from: 'info@codecuriosity.org'
 
   def redeem_request(request)
     @user = request.user
