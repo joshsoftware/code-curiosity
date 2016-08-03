@@ -38,6 +38,9 @@ faq:
     question: How do I signup?
     answer: You can signup using your GitHub account and it's free.
   -
+    question: Can I leave CodeCuriosity?
+    answer: We would be really sad to see you go. However, if you still want to leave, just search for the CodeCuriosity Application in Github applications and revoke access. You can do this from your <a href='https://github.com/settings/applications' target='_blank'>Github Applications.</a>
+  -
     question: Why only Github? Why not BitBucket or GitLab or any other open-source systems?
     answer: We believe that Github is the centre of the universe and we do hope Github shows us the same love back! Having said that, we believe that most of the open-source contributions happen on Github and it helps to take baby steps. If we see a definite need to integrate with others, we shall do that in the far future!
   -
@@ -60,7 +63,7 @@ faq:
     answer: Automated scoring is done on commits, comments, opening an issue and closing an issue today. As we evolve, this may get more streamlined and we may include other factors too.
   -
     question:  How do I redeem my points?
-    answer: Redemptions are in the form of digital prizes or Github Merchandise or Company sponsored swag. You need to accumulate at least 50 points before you can redeem them.
+    answer: Redemptions are in the form of digital prizes or Github Merchandise or Company sponsored swag. You need to accumulate at least 100 points before you can redeem them.
   -
     question: Can I make real money from CodeCuriosity?
     answer: Not yet ;) It is our aim to sort out legal issues and if we get enough grants and contributions from the community, we would be more than happy to reward open source contributions with money. We dream to invent a new career - A full-time open source contributor who works for the community and not for a company!
