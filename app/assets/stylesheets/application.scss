@@ -18,11 +18,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+@import "admin/redeem_requests";
 @import "style";
 @import "home";
 @import "bars-pill";
 @import "info";
 @import "goals";
+@import "bootstrap2-toggle";
 
 .typeahead.dropdown-menu, .tt-hint, .tt-input, .tt-menu { 
   width: 90%; 
