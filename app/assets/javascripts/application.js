@@ -20,6 +20,7 @@
 //= require jquery.noty.packaged
 //= require stream_table
 //= require bootstrap-typeahead
+//= require bootstrap2-toggle
 //= require_tree .
 
 function onDocReady(){

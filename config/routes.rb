@@ -50,7 +50,7 @@ Rails.application.routes.draw do
     resources :rounds do
       get :mark_as_close
     end
-    resources :redeem_requests, only: [:index, :update]
+    resources :redeem_requests, only: [:index, :update, :destroy]
 
     get 'dashboard/index', as: 'dashboard'
   end
