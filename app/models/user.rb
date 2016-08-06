@@ -76,11 +76,7 @@ class User
   validates :email, :github_handle, :name, presence: true
 
   after_create do |user|
-    unless user.auto_created
-      user.subscribe_to_round
-      User.delay_for(2.second, queue: 'git').update_total_repos_stars(user.id.to_s)
-      UserReposJob.perform_later(user)
-    end
+    user.calculate_popularity unless user.auto_created
   end
 
   def self.from_omniauth(auth)
@@ -99,8 +95,17 @@ class User
       auth_token: User.encrypter.encrypt_and_sign(auth.credentials.token)
     })
 
+    # for auto_created users, we need to invoke the after_create callback.
+    user.calculate_popularity unless user.current_subscription
+
     user.save
     user
+  end
+  
+  def calculate_popularity
+    self.subscribe_to_round
+    User.delay_for(2.second, queue: 'git').update_total_repos_stars(self.id.to_s)
+    UserReposJob.perform_later(self)
   end
 
   def create_transaction(attrs = {})
