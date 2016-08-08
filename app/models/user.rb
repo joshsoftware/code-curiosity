@@ -95,10 +95,11 @@ class User
       auth_token: User.encrypter.encrypt_and_sign(auth.credentials.token)
     })
 
+    user.save
+    
     # for auto_created users, we need to invoke the after_create callback.
     user.calculate_popularity unless user.current_subscription
 
-    user.save
     user
   end
   
