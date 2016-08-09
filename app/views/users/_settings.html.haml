@@ -1,0 +1,14 @@
+.row
+  .col-md-6
+    .well
+      = simple_form_for(current_user, url: update_notification_user_path(current_user), method: 'put', remote: true) do |f|
+        %label.checkbox
+          = f.check_box :notify_monthly_progress 
+          Notify monthly progress
+        %label.checkbox
+          = f.check_box :notify_monthly_points
+          Notify monthly points
+        %button.btn.btn-primary{:type => 'submit'} Save
+  .col-md-6
+    .well
+      = link_to "Delete my account", user_path(current_user), class: 'btn btn-large btn-block btn-danger', data: { method: 'delete', confirm: 'This action is irreversible. Are you sure you want to delete your account?' }
