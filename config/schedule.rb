@@ -33,6 +33,10 @@ every :day, :at => '6:00am' do
  rake "round:update_scores"
 end
 
+every :day, :at => '8:00pm' do
+ rake "fetch_data:sync_repos"
+end
+
 every '59 23 27-31 * *' do
   rake 'round:next'
 end
