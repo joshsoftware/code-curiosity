@@ -8,7 +8,7 @@ namespace :subscription do
 
   desc "Send Progress emails"
   task send_progress_emails: :environment do
-    users = User.contestants
+    users = User.contestants.any_of({notify_monthly_points: nil}, {notify_monthly_points: true}) 
     round = Round.opened
     per_batch = 1000
 
@@ -26,7 +26,7 @@ namespace :subscription do
        [100, 150, "You've done it!" ],
        [150, 1000, "Splurge!"]
      ].each do |r|
-       User.where(:points.gte => r[0], :points.lt => r[1]).each do |user|
+       User.contestants.any_of({notify_monthly_points: nil}, {notify_monthly_points: true}).where(:points.gte => r[0], :points.lt => r[1]).each do |user|
          SubscriptionMailer.redeem_points(user, r[2]).deliver_later
        end
      end

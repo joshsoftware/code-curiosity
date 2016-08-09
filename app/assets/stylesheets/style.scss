@@ -33,6 +33,11 @@ html.turbolinks-progress-bar::before {
       background-color: #eee;
     }
   }
+  label.checkbox{
+    input{
+      margin-left: -15px;
+    }
+  }
 }
 
 .current-round{
@@ -186,3 +191,4 @@ form.add-members{
     margin-right: 5px;
   }
 }
+

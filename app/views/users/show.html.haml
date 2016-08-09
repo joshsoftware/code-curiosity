@@ -41,6 +41,8 @@
           - if logged_in_user?
             %li#wallet_tab_link
               = link_to 'Points History', '#wallet', data: { toggle: 'tab' }
+            %li#wallet_tab_link
+              = link_to 'Settings', '#settings', data: { toggle: 'tab' }
         .tab-content
           .tab-pane.active#rounds
             %table.table.table-bordered
@@ -56,6 +58,8 @@
           - if logged_in_user?
             .tab-pane#wallet
               = render 'transactions'
+            .tab-pane#settings
+              = render 'settings'
           %b 
             Info:
             %i= t('transaction.points_credit_info') 

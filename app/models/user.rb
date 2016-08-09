@@ -35,6 +35,8 @@ class User
   field :points,             type: Integer, default: 0
   field :level,              type: Integer, default: 1
   field :auto_created,       type: Boolean, default: false
+  field :notify_monthly_progress,    type: Boolean, default: true
+  field :notify_monthly_points,    type: Boolean, default: true
 
   field :activities_count,   type: Integer, default: 0
   field :commits_count,      type: Integer, default: 0

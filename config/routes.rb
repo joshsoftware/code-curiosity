@@ -15,9 +15,10 @@ Rails.application.routes.draw do
     #get 'sync'
   end
 
-  resources :users, except: [:destroy] do
+  resources :users do
     member do
       get 'sync'
+      put 'update_notification'
     end
 
     collection do

@@ -23,6 +23,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_notification
+    user_params = params.fetch(:user).permit(:notify_monthly_progress, :notify_monthly_points)
+    @user = User.find_by_slug(params[:id])
+    @user.update(user_params)
+  end
+
   def set_goal
     @goal = Goal.find(params[:goal_id])
     subscription = current_user.current_subscription
@@ -52,5 +58,12 @@ class UsersController < ApplicationController
             end
 
     render json: users
+  end
+
+   def destroy
+    user = current_user
+    sign_out current_user
+    user.delete
+    redirect_to root_url, notice: "Your account has been deleted successfully."
   end
 end
