@@ -69,9 +69,8 @@ class RedeemRequest
   end
 
   def send_notification
-    return
+    #return
     if coupon_code_changed? || comment_changed?
-      binding.pry
       RedeemMailer.coupon_code(self).deliver_later
     end
   end

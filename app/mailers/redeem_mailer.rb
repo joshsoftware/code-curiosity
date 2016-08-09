@@ -6,6 +6,7 @@ class RedeemMailer < ApplicationMailer
     @points = request.points
 
     mail(to: @user.email, subject: "[CODECURIOSITY] #{@points} points redemption request")
+    notify_admin(request)
   end
 
   def notify_admin(request)
