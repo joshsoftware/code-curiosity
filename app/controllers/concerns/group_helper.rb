@@ -12,11 +12,11 @@ module GroupHelper
   end
 
   def is_group_admin
-    return @group.owner == current_user
+    render json: nil, status: :unauthorized unless @group.owner == current_user
   end
 
   def is_admin
-    return current_user.is_admin?
+    render json: nil, status: :unauthorized unless current_user.is_admin?
   end
 
 end
