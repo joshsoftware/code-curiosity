@@ -13,7 +13,7 @@
                 %td{:align => "center", :bgcolor => "#1188e6", :style => "-webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px; font-size: 16px;"}
                   = link_to "Redeem Points", user_url(@user, anchor: "wallet"), class: "bulletproof-button", style: "height: px; width: px; font-size: 16px; line-height: px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; padding: 12px 18px 12px 18px; text-decoration: none; color: #ffffff; text-decoration: none; -webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px; border: 1px solid #1288e5; display: inline-block;", target: "_blank"
   - else
-    You have #{100 - @user.points} points. You need at least a 100 points for redemption. Go for it.
+    %p You have earned #{@user.points} till now. You need only #{100 - @user.points} more points to start redeeming them for rewards. Go! Go! Go!
     %p
       For more details on your points, check out your
       = link_to "CodeCuriosity profile", user_url(@user)
