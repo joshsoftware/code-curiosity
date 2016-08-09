@@ -36,4 +36,16 @@ namespace :fetch_data do
     end
   end
 
+  desc "Sync repositories for every user"
+  task :sync_repos => :environment do |t, args|
+    per_batch = 1000
+    users = User.where(auto_created: false)
+
+    0.step(users.count, per_batch) do |offset|
+      users.limit(per_batch).skip(offset).each do |user|
+        UserReposJob.perform_later(user)
+      end
+    end
+  end
+
 end
