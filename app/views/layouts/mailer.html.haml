@@ -167,8 +167,8 @@
                                                           We do not send unsolicited mail. You are receiving this because you have an active account on
                                                           %a{:href => "https://codecuriosity.org"} codecuriosity.org
                                                           - if @user
-                                                            You can change settings in your
-                                                            = link_to "profile page.", user_url(@user) 
+                                                            You can change notification settings in your
+                                                            = link_to "profile page.", user_url(@user, anchor: "settings") 
 
                           /[if (gte mso 9)|(IE)]
                             </td>
