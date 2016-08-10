@@ -41,3 +41,7 @@ redeem:
     - 25
     - 50
     - 100 
+  amazon_stores:
+    - amazon.com
+    - amazon.in
+    - amazon.uk
