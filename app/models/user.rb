@@ -180,7 +180,7 @@ class User
     user = User.find(user_id)
     star_count = 0
 
-    GITHUB.repos(user: user.github_handle).list(per_page: 100).each_page do |repos|
+    user.gh_client.repos(user: user.github_handle).list(per_page: 100).each_page do |repos|
       repos.each do |repo|
         if repo.stargazers_count >= REPOSITORY_CONFIG['popular']['stars']
           star_count += repo.stargazers_count

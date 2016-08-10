@@ -8,7 +8,7 @@ class CommitJob < ActiveJob::Base
       # repository moved or deleted means we no longer care about this repos.
       repo.destroy
     rescue Github::Error::Unauthorized
-      # Auth token issue or Access has been denied. 
+      # Auth token issue or Access has been denied OR Rate limit hit.
 
       # Reset the auth_token, so that it gets refereshed the next time
       # user logs in.
@@ -16,11 +16,12 @@ class CommitJob < ActiveJob::Base
       user.save
 
       # Refresh the gh_client because it's using a stale auth_token. 
-      # Here we use the App auth_token instead of user auth_token
       user.refresh_gh_client
-
-      # Call the same function one more time. If this fails, screw it!
-      CommitsFetcher.new(repo, user, round).fetch(duration.to_sym)
+      retry
+    rescue Github::Error::Forbidden
+      # Probably hit the Rate-limit, use another token
+      user.refresh_gh_client
+      retry
     end
   end
 
