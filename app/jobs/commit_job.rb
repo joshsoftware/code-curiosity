@@ -35,7 +35,7 @@ class CommitJob < ActiveJob::Base
       fetch_commits(repo, user, round, duration)
     else
       user.repositories.each do |repo|
-        fetch_commits(repo, user, round, duration)
+        CommitJob.perform_later(user, duration, repo)
       end
     end
   end
