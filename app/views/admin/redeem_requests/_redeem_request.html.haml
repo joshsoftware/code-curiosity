@@ -5,6 +5,7 @@
       = link_to redeem_request.retailer.upcase, redeem_request.gift_product_url, target: '_blank'
     - else
       = redeem_request.retailer.upcase
+  %td= redeem_request.store? ? redeem_request.store.upcase : "NA"
   %td= redeem_request.points
   %td= redeem_request.created_at.strftime('%D %T')
   %td= redeem_request.coupon_code

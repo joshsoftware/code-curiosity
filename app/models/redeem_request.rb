@@ -7,6 +7,7 @@ class RedeemRequest
   field :status,      type: Boolean, default: false
   field :points,      type: Integer
   field :retailer,    type: String, default: REDEEM['retailers'].first
+  field :store,       type: String
   field :address,     type: String
   field :gift_product_url, type: String
   field :comment, type: String
