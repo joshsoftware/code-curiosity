@@ -48,6 +48,7 @@ group :development, :test do
   gem 'mina'
   gem 'mina-sidekiq'
   gem 'brakeman', :require => false
+  gem 'database_cleaner'
 end
 
 group :development do
