@@ -32,9 +32,11 @@ class Activity
 
   def calculate_score_and_set
     words = description.to_s.split(/\W+/)
-    self.auto_score = 0
-    self.auto_score = 2 if words.length > 40
-    self.auto_score = 1 if words.length > 25
+    self.auto_score = case words.length
+                      when 0..25  then 0
+                      when 26..40 then 1
+                      else 2
+                      end
     self.save
   end
 
