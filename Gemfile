@@ -48,6 +48,7 @@ group :development, :test do
   gem 'mina'
   gem 'mina-sidekiq'
   gem 'brakeman', :require => false
+  gem 'simplecov', :require => false
 end
 
 group :development do
