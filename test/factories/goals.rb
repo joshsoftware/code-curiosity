@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :goal do
-    name "MyString"
-points 1
+    name "hiker"
+    points 10
   end
-
 end

@@ -10,7 +10,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'haml'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+#gem 'therubyracer', platforms: :ruby
 
 gem 'kaminari'
 gem 'jquery-rails'
@@ -35,6 +35,8 @@ gem 'mongoid-slug', '~> 5.2'
 
 gem 'rollbar'
 
+gem 'simplecov', :require => false, :group => :test
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
@@ -49,6 +51,10 @@ group :development, :test do
   gem 'mina-sidekiq'
   gem 'brakeman', :require => false
   gem 'simplecov', :require => false
+end
+
+group :test do
+  gem 'database_cleaner'
 end
 
 group :development do
