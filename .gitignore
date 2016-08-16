@@ -34,3 +34,4 @@ page_cache
 bin/dbload
 mongodump-*
 config/mongoid.yml
+coverage
