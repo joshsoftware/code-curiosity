@@ -4,5 +4,4 @@ FactoryGirl.define do
     description { Faker::Lorem.sentence }
     watchers {Faker::Number.digit}
   end
-
 end
