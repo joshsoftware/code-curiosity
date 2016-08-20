@@ -42,4 +42,21 @@ namespace :utils do
 
     puts dublicate_repos_with_activies.collect &:id
   end
+
+  desc "Hackathon Sync"
+  task :hackathon, [:group] => :environment do |t, args|
+    group = Group.where(name: args[:group]).first
+    if group # Ignore if incorrect name
+      type = "all"
+      round = Round.opened
+      group.members.each do |user|
+        UserReposJob.perform_later(user)
+        user.repositories.each do |repo| 
+          CommitJob.perform_later(user, type, repo, round)
+        end
+        ActivityJob.perform_later(user, type, round)
+      end
+    end
+  end
+
 end
