@@ -52,4 +52,12 @@ class Subscription
     #add the blank condition for the auto created users, goal will be blank for those users.
     !goal.blank? and points >= goal.points
   end
+
+  # Used in special cases where we want to set the default goal in case user has not set it.
+  # example: sending progress emails
+  def set_default_goal
+    self.goal = Goal.default_goal
+    self.save
+    self.goal
+  end
 end
