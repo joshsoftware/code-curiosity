@@ -1,7 +1,7 @@
 %h4= "Hello, #{@user.name}"
 %p
   Your goal for this month is
-  = link_to @subscription.goal.name, goals_url 
+  = link_to (@subscription.try(:goal) || @subscription.set_default_goal).name, goals_url 
 %p
   - if @subscription.goal_achived?
     You have achived your goal before time. Bravo! Do remember to
