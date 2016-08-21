@@ -1,7 +1,7 @@
 %h4= "Hello, #{@user.name}"
 %p
   Your goal for this month is
-  = link_to (@subscription.try(:goal) || @subscription.set_default_goal).name, goals_url 
+  = link_to (@subscription.try(:goal) || @subscription.set_default_goal).name, goals_url
 %p
   - if @subscription.goal_achived?
     You have achived your goal before time. Bravo! Do remember to
@@ -11,4 +11,4 @@
     Wake up and smell the coffee! Do your bit for the community please!
   - else
     Keep going, you still have some time!
-    = "You are only #{@subscription.goal.points - @subscription.points} required to achive your goal"
+    = "You are only #{@subscription.goal.points - @subscription.points} points away from reaching your goal!"
