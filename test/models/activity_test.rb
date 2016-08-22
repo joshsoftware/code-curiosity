@@ -29,15 +29,6 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal activity.max_rating, max_rating
   end
 
-  def test_activity_description_should_be_unique
-    activity = create(:activity, description: Faker::Lorem.words, commented_on: Time.now)
-    commenting_time = activity.commented_on
-    descrip = activity.description
-    new_activity = build(:activity, description: descrip, commented_on: commenting_time)
-    new_activity.save
-    assert_not_empty new_activity.errors[:description]
-  end
-
   def test_activities_count_of_user_is_zero_before_any_activity_is_created
     activity = build(:activity, description: Faker::Lorem.words)
     assert_equal activity.user.activities_count, 0
