@@ -13,7 +13,7 @@ class RedeemRequest
   field :comment, type: String
 
   belongs_to :user
-  has_one :transaction
+  has_one :transaction, :dependent => :destroy
 
   index({ commit_date: -1 })
 
@@ -29,6 +29,7 @@ class RedeemRequest
   after_create do |r|
     r.create_redeem_transaction
     RedeemMailer.redeem_request(r).deliver_later
+    RedeemMailer.notify_admin(r).deliver_later
   end
 
   after_save :send_notification
