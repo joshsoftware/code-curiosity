@@ -19,7 +19,7 @@ class RedeemMailer < ApplicationMailer
   def coupon_code(request)
     @user = request.user
     @redeem_request = request
-
+    
     mail(to: request.user.email, subject: "[CODECURIOSITY] Here is your gift!")
   end
 end
