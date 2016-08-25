@@ -6,55 +6,80 @@ class HackathonTest < ActiveSupport::TestCase
   def setup
     Sidekiq::Testing.fake!
     @hackathon = create(:hackathon, user: create(:user))
+    @hackathon_r = create(:hackathon_with_repositories, user: create(:user))
+
+    # Simulate commits and activities for this user (total user points should be: 6)
+    create_list(:commit, 2, repository: @hackathon_r.repositories.first, 
+			    auto_score: 2, user: @hackathon_r.user, round: @hackathon_r.round)
+    create_list(:activity, 2, repository: @hackathon_r.repositories.last, 
+			    auto_score: 1, user: @hackathon_r.user, round: @hackathon_r.round)
   end
 
   test "is_valid" do
-     assert(@hackathon.valid?)
-     assert(@hackathon.round.valid?)
-     assert(@hackathon.group.valid?)
+    assert @hackathon.valid? 
+    assert @hackathon.group.valid? 
+    assert @hackathon.round.valid? 
+    assert_equal @hackathon.round.status, "inactive" 
+    assert_empty @hackathon.repositories
+    assert_not_empty @hackathon_r.repositories
+  end
+
+  test "round_name_and_group_name_should_be_the_same" do
+    assert_not_empty @hackathon.round.name
+    assert_not_empty @hackathon.group.name
+    assert_equal @hackathon.round.name, @hackathon.group.name
   end
 
   test "does_not_create_any_goal" do
-  end
-
-  test "has_valid_hackathon_group" do
-  end
-
-  test "is_valid_if_there_is_only_group_admin_and_no_members_in_the_hackathon_group" do
-  end
-
-  test "has_valid_hackathon_round" do
-  end
-
-  test "hackathon_round_has_initial_state_as_inactive" do
+    assert_nil @hackathon.goal 
+    assert_nil @hackathon_r.goal 
   end
 
   test "sidekiq_job_should_be_enqueued_to_open_hackathon_round_at_start_datetime" do
   end
 
   test "update_interval_can_be_updated_if_hackathon_round_is_inactive" do
+    @hackathon.update_attribute(:update_interval, 5)
+    assert @hackathon.valid? 
+    assert_equal 5, @hackathon.update_interval
   end
 
   test "update_interval_cannot_be_updated_if_hackathon_round_is_open" do
+    @hackathon.round.update_attribute(:status, "open")
+    @hackathon.update_attribute(:update_interval, 5)
+    assert @hackathon.valid? == false
+    assert_not_empty @hackathon.errors[:update_interval]
+    assert_equal 15, @hackathon.update_interval
   end
 
   test "update_interval_cannot_be_updated_if_hackathon_round_is_closed" do
+    @hackathon.round.update_attribute(:status, "close")
+    @hackathon.update_attribute(:update_interval, 5)
+    assert @hackathon.valid? == false
+    assert_not_empty @hackathon.errors[:update_interval]
+    assert_equal 15, @hackathon.update_interval
   end
 
-  test "is_valid_if_repositories_array_is_blank" do
+  test "repositories_should_not_reference_hackathon" do #check inverse_of: nil
+    @hackathon_r.repositories.each do |r|
+      assert_equal false, r.has_attribute?(:hackathon_ids) 
+    end
+    assert_raises(NoMethodError) { @hackathon_r.repositories.first.hackathons.first }
   end
 
-  test "is_valid_if_repositories_array_has_valid_repository_ids" do
+  test "repositories_can_be_added_to_hackathon_if_status_is_open" do
+    @hackathon_r.round.update_attribute(:status, "open")
+    @hackathon_r.repositories << create(:repository)
+    assert_equal 4, @hackathon_r.repositories.count
   end
 
-  test "repositories_should_not_reference_hackathon" do#check inverse_of: nil
-  end
-
-  # Need to add test cases to add repositories.
   test "points_is_updated_if_round_spans_different_months" do  # eg. Hackathon is from 30-Mar till 2-Apr
   end
 
   test "points_is_updated_for_commits_and_activity_only_for_hackathon_repositories" do
+    dummy = create(:repository_with_activity_and_commits)
+    @hackathon_r.update_points 
+    assert_equal 6, @hackathon_r.points 
   end
 
   test "points_is_updated_for_all_commits_and_activity_if_hackathon_repositories_is_blank" do

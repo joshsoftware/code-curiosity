@@ -18,11 +18,11 @@ class Subscription
   end
 
   def commits_score
-    self.round.commits.where(user: user).inject(0){|r, o| r += o.final_score.to_i; r }
+    self.round.commits.where(user: user).inject(0){|r, o| r + o.final_score.to_i }
   end
 
   def activities_score
-    self.round.activities.where(user: user).inject(0){|r, o| r += o.final_score.to_i; r }
+    self.round.activities.where(user: user).inject(0){|r, o| r + o.final_score.to_i }
   end
 
   def update_points

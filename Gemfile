@@ -39,7 +39,6 @@ gem 'simplecov', :require => false, :group => :test
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'minitest'
   gem "minitest-rails", "~> 2.2.0"
@@ -58,6 +57,7 @@ group :test do
 end
 
 group :development do
+  gem 'web-console', '~> 2.0'
   gem 'haml-rails'
   gem 'quiet_assets'
 end

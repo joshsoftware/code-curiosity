@@ -5,18 +5,15 @@ FactoryGirl.define do
     group
     association :round, :hackathon, status: "inactive"
 
-    after(:create) do |hackathon, evaluator|
-       hackathon.group.owner_id = hackathon.user.id
-       hackathon.round.name = hackathon.group.name = "#{hackathon.user.name}'s Hackathon"
-    end
-
     factory :hackathon_with_repositories do
       transient do
         repos_count 3
       end
 
       after(:create) do |hackathon, evaluator|
-        create_list(:repositories, evaluator.repos_count, hackathon: hackathon)
+	evaluator.repos_count.times do
+	  hackathon.repositories << create(:repository_with_activity_and_commits)
+	end
       end
     end
   end
