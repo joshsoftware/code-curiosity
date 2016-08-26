@@ -75,5 +75,13 @@ class RedeemRequestTest < ActiveSupport::TestCase
     transaction_type = redeem_request.transaction.transaction_type
     assert_equal transaction_type, 'redeem_points'
   end 
- 
+  
+  def test_transaction_corresponding_to_redeem_request_must_be_destroyed_when_it_is_deleted
+    user = create(:user)
+    transaction = create(:transaction, :type => 'credit', :points => 5, user: user)
+    redeem_request = create(:redeem_request, :points => 1, user: user)
+    assert_difference 'Transaction.count', -1 do
+      redeem_request.destroy
+    end
+  end
 end
