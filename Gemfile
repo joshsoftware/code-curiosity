@@ -35,8 +35,6 @@ gem 'mongoid-slug', '~> 5.2'
 
 gem 'rollbar'
 
-gem 'simplecov', :require => false, :group => :test
-
 group :development, :test do
   gem 'byebug'
   gem 'spring'
