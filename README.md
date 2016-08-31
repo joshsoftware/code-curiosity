@@ -47,9 +47,14 @@ Still too complex for you? Start by reading and contributing back some documenta
 
 # Contributing to CodeCuriosity
 
-Fork this repository, raise issues, suggest features and help us make the change!
+If you have some cool ideas, comments or feedback - you can mail us at [info@codecuriosity.org](mailto:info@codecuriosity.org).
+
+We don't have a Slack / IRC channel or mailing list yet -- we shall work on it soon.
+
+To contribute to code, fork this repository, raise issues, suggest features and help us make the change!
 
 To test this locally,
 
 * create _.env.&lt;environment>_ file based on your environment i.e .env.development, .env.production. For local development, use .env.local
 * Add github app id and secret to _.env.&lt;environment>_ file. Refer _env.sample_
+*
