@@ -1,0 +1,23 @@
+notifications: 
+  email:
+    recipients:
+      - ENV['ADMIN_EMAILS'].split(',')
+    on_success: change
+    on_failure: always
+
+language: ruby
+
+rvm:
+  - '2.3.0'
+
+services:
+  - mongodb
+
+cache: bundler
+
+sudo: false  
+
+addons:
+  code_climate:
+    repo_token: ENV['CODECLIMATE_REPO_TOKEN']
+    
