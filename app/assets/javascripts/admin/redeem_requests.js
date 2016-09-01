@@ -17,7 +17,6 @@ $(document).on('page:change', function(event) {
   
   $('.check').change(function() {
     if($(this).is(':checked')){
-      console.log(this.checked);
       $.ajax({
         type: 'get',
         url: '/admin/redeem_requests', 
@@ -32,9 +31,6 @@ $(document).on('page:change', function(event) {
         data: {'status': true}
       })
     }
-
   })
     
-
-
 });

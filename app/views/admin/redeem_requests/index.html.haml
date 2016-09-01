@@ -8,11 +8,8 @@
   .row
     .col-xs-12
       .box.box-primary
-        .box-body.table-responsive
-          %table.table.table-bordered#user_table{data: {:type => @status}}
-            = render partial: 'tagtable'
-          .pagination-container
-            = paginate @redeem_requests
+        .box-body.table-responsive#user_table
+          = render partial: 'redeem'
 .modal.fade#coupon-code-modal            
   .modal-dialog
     .modal-content
