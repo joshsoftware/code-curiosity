@@ -34,6 +34,11 @@ class RedeemRequest
 
   after_save :send_notification
 
+
+  def self.total_points_redeemed
+    where(status: true).sum(&:points)
+  end
+
   def retailer_other?
     retailer == 'other'
   end
