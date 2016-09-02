@@ -14,7 +14,7 @@
             points
           and 
           %span.text
-            = "$#{number_with_delimiter(Transaction.total_points_redeemed/REDEEM['one_dollar_to_points'])}"
+            = "$#{number_with_delimiter(RedeemRequest.total_points_redeemed/REDEEM['one_dollar_to_points'])}"
           has been rewarded back to 
           %span.text
             = number_with_delimiter(RedeemRequest.where(status: true).count)
