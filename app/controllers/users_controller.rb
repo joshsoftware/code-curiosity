@@ -63,7 +63,12 @@ class UsersController < ApplicationController
    def destroy
     user = current_user
     sign_out current_user
-    user.delete
+
+    # We cannot delete the user completely, because there are plenty of associations.
+    # So, we manipulate the UID and set auto_created: true, so that no data will be fetched. 
+    user.uid = "#{user.uid}-DELETED"
+    user.auto_created = true
+    user.save
     redirect_to root_url, notice: "Your account has been deleted successfully."
   end
 end
