@@ -64,11 +64,11 @@ function multiLineChart(xAxis, users, contributions){
       type: 'line'
     },
     title: {
-      text: 'CodeCuriosity Usage Trend',
+      text: 'CodeCuriosity Impact',
       x: -20 //center
     },
     subtitle: {
-      text: 'Last Six Months',
+      text: 'Linear growth in users has exponential growth in contributions!',
       x: -20
     },
     xAxis: {
