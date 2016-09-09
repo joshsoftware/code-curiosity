@@ -1,22 +1,29 @@
-function lineChart(xAxis, trendData, title, subTitle, divId, legendName, lineColor, chartType){
-  $(divId).highcharts({
+function multiLineChart(xAxis, users, contributions){
+  $('#chart-container').highcharts({
     chart: {
-      type: chartType
+      type: 'line'
     },
     title: {
-      text: title,
+      text: 'CodeCuriosity Usage Trend',
       x: -20 //center
     },
     subtitle: {
-      text: subTitle,
+      text: 'Last Six Months',
       x: -20
     },
     xAxis: {
-      categories: xAxis,
+      categories: xAxis
+    },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          enabled: true
+        }
+      }
     },
     yAxis: {
       title: {
-        text: "No. of " + legendName
+        text: 'Count'
       },
       plotLines: [{
         value: 0,
@@ -34,11 +41,18 @@ function lineChart(xAxis, trendData, title, subTitle, divId, legendName, lineCol
       borderWidth: 0
     },
     series: [{
-      name: legendName,
-      data: trendData,
+      name: 'Users',
+      data: users,
       marker: { enabled: false },
-      color: lineColor,
+      color: '#3C8DBC',
       dataLabels: {color:'#3C8DBC',style: {"color": "contrast", "fontSize": "11px", "fontWeight": "bold", "textShadow": "0" }}
-    }] 
-  });  
-} 
+    }, {
+      name: 'Contributions',
+      data: contributions,
+      marker: { enabled: false },
+      color: '#00A65A',
+      dataLabels: {color:'#00A65A',style: {"color": "contrast", "fontSize": "11px", "fontWeight": "bold", "textShadow": "0" }}
+    }
+    ] 
+  });
+}

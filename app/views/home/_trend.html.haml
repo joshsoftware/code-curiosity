@@ -2,14 +2,8 @@
   %h4 CodeCuriosity Trend
 %section.content
   .row
-    .col-xs-6
-      .box-body.no-padding
-        #contributions-chart-container
-    .col-xs-6
-      .box-body.no-padding
-        #users-chart-container
-
+    .box-body.no-padding
+      #chart-container
           
 :javascript
-  lineChart(#{@xAxis},#{@contribution_trend},"OpenSource Contributions","Last Six Months", "#contributions-chart-container", "Contributions", '#00A65A','column'); 
-  lineChart(#{@xAxis},#{@user_trend},"User Registrations","Last Six Months", "#users-chart-container", "Users", '#F39C12','line'); 
+  multiLineChart(#{@xAxis},#{@user_trend},#{@contribution_trend})
