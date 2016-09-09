@@ -20,9 +20,9 @@ module HomeHelper
 
   def multi_line_chart
    
-    users = Subscription.collection.aggregate( [  { "$group" => { _id: "$round_id", total: { "$sum" => 1 } } } ] ).sort {|x, y| Date.parse(Round.find(y["_id"]).name) <=> Date.parse(Round.find(x["_id"]).name) }.collect { |r| [ Round.find(r["_id"]).name, r["total"] ] }[0..5].reverse
+    users = Subscription.collection.aggregate( [  { "$group" => { _id: "$round_id", total: { "$sum" => 1 } } } ] ).sort {|x, y| Date.parse(Round.find(y["_id"]).name) <=> Date.parse(Round.find(x["_id"]).name) }.collect { |r| [ Round.find(r["_id"]).name, r["total"] ] }[1..6].reverse
 
-    contributions = Subscription.collection.aggregate( [ {"$match" => { "created_at" => { "$gt" => Date.parse("march 2016") } } }, { "$group" => { _id: "$round_id", total: { "$sum" => "$points" } } } ]).sort {|x, y| Date.parse(Round.find(y["_id"]).name) <=> Date.parse(Round.find(x["_id"]).name) }.collect { |r| [ Round.find(r["_id"]).name, r["total"] ] }[0..5].reverse
+    contributions = Subscription.collection.aggregate( [ {"$match" => { "created_at" => { "$gt" => Date.parse("march 2016") } } }, { "$group" => { _id: "$round_id", total: { "$sum" => "$points" } } } ]).sort {|x, y| Date.parse(Round.find(y["_id"]).name) <=> Date.parse(Round.find(x["_id"]).name) }.collect { |r| [ Round.find(r["_id"]).name, r["total"] ] }[1..6].reverse
 
     @user_trend = []
     @contribution_trend = []
