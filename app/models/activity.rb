@@ -3,8 +3,16 @@ class Activity
   include Mongoid::Timestamps
   include JudgeScoringHelper
 
+  # Github event actions for Issue can be any of assigned, unassigned, labeled, unlabeled, opened, edited, closed or reopened.
+  # Refer https://developer.github.com/v3/activity/events/types/#issuesevent for more details.
+  ISSUE_ACTIONS = %W(assigned unassigned labeled unlabeled opened edited closed reopened)
+
+  # Actions ignored for scoring.
+  IGNORED_FOR_SCORING = %W(closed)
+
   field :description,     type: String
   field :event_type,      type: String
+  field :event_action,    type: String
   field :repo,            type: String
   field :ref_url,         type: String
   field :commented_on,    type: Time
@@ -19,7 +27,10 @@ class Activity
   embeds_many :scores, as: :scorable
   belongs_to :organization
 
+  scope :considered_for_scoring, -> { where(:event_action.nin => IGNORED_FOR_SCORING) }
+
   #validates :description, uniqueness: {:scope => :commented_on}
+  #validates :event_action, inclusion: { in: EVENT_ACTIONS }
 
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
 
