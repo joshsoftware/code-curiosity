@@ -34,3 +34,10 @@
         = link_to activities_path(anchor: 'activities'), class: 'small-box-footer' do
           More info
           %i.fa.fa-arrow-circle-right
+  .row
+    .box-body
+      #users-chart-container
+
+
+:javascript
+  userTrendChart(#{@xAxis}, #{@commits}, #{@activities}, #{@points}); 

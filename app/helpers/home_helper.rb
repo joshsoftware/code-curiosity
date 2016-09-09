@@ -29,7 +29,7 @@ module HomeHelper
     @user_xAxis = []
     @xAxis = []
     
-    users.map{ |user| @user_trend << user[1]; ; @user_xAxis << user[0]}
+    users.map{ |user| @user_trend << user[1]; @user_xAxis << user[0]}
     
     contributions.map{ |contribution| @contribution_trend << contribution[1]; @xAxis << contribution[0]}
     
