@@ -65,10 +65,17 @@ function multiLineChart(xAxis, users, contributions){
     },
     title: {
       text: 'CodeCuriosity Impact',
+      style: {
+        fontSize: '24px'
+      },
       x: -20 //center
     },
     subtitle: {
       text: 'Linear growth in users has exponential growth in contributions!',
+      style: {
+        color: '#3C8DBC',
+        fontSize: '18px'
+      },
       x: -20
     },
     xAxis: {
@@ -83,7 +90,7 @@ function multiLineChart(xAxis, users, contributions){
     },
     yAxis: {
       title: {
-        text: 'Count'
+        text: ''
       },
       plotLines: [{
         value: 0,
