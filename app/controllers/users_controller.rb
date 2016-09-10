@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_slug(params[:id])
+    @user = User.find(params[:id])
     @show_transactions = current_user == @user
 
     if @user
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   def update_notification
     user_params = params.fetch(:user).permit(:notify_monthly_progress, :notify_monthly_points)
-    @user = User.find_by_slug(params[:id])
+    @user = User.find(params[:id])
     @user.update(user_params)
   end
 
