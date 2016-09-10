@@ -39,19 +39,19 @@ function userTrendChart(xAxis, commits, activities, points) {
     series: [{
       name: 'Commits',
       data: commits,
-      marker: { enabled: false },
+      marker: { enabled: true },
       color: '#00A65A',
       dataLabels: {color:'#00A65A',style: {"color": "contrast", "fontSize": "11px", "fontWeight": "bold", "textShadow": "0" }}
     }, {
       name: 'Activities',
       data: activities,
-      marker: { enabled: false },
+      marker: { enabled: true },
       color: '#F39C12',
       dataLabels: {color:'#F39C12',style: {"color": "contrast", "fontSize": "11px", "fontWeight": "bold", "textShadow": "0" }}
     }, {
       name: 'Points',
       data: points,
-      marker: { enabled: false },
+      marker: { enabled: true },
       color: '#00C0EF',
       dataLabels: {color:'#00C0EF',style: {"color": "contrast", "fontSize": "11px", "fontWeight": "bold", "textShadow": "0" }}
     } 
@@ -110,13 +110,13 @@ function multiLineChart(xAxis, users, contributions){
     series: [{
       name: 'Users',
       data: users,
-      marker: { enabled: false },
+      marker: { enabled: true },
       color: '#3C8DBC',
       dataLabels: {color:'#3C8DBC',style: {"color": "contrast", "fontSize": "11px", "fontWeight": "bold", "textShadow": "0" }}
     }, {
       name: 'Contributions',
       data: contributions,
-      marker: { enabled: false },
+      marker: { enabled: true },
       color: '#00A65A',
       dataLabels: {color:'#00A65A',style: {"color": "contrast", "fontSize": "11px", "fontWeight": "bold", "textShadow": "0" }}
     }

@@ -45,6 +45,16 @@
               = link_to 'Settings', '#settings', data: { toggle: 'tab' }
         .tab-content
           .tab-pane.active#rounds
+            .row
+              .col-sm-12
+                .tweet-box.col-sm-12
+                  .tweet-content-img.pull-right
+                    %a.twitter-share-button{"data-text" => "Here is my #opensource contribution", "data-size" => 'large', "data-url" => request.original_url, :href => "https://twitter.com/share"} Tweet
+                    :javascript
+                      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+            .row
+              .box-body
+                #users-chart-container
             %table.table.table-bordered
               %thead
                 %tr
@@ -54,7 +64,7 @@
                   %th.col-xs-2 Activities
                   %th.col-xs-2 Points
               %tbody
-                = render partial: 'subscription', collection:  @user.subscriptions.desc(:created_at)
+                = render partial: 'subscription', collection:  @subscriptions.reverse
           - if logged_in_user?
             .tab-pane#wallet
               = render 'transactions'
