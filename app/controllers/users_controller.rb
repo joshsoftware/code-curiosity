@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include ContributionHelper
   before_action :authenticate_user!, except: [:show]
 
   def index
@@ -8,7 +9,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_slug(params[:id])
     @show_transactions = current_user == @user
-
+    contribution_data
     if @user
       render layout: current_user ? 'application' : 'public'
     else
