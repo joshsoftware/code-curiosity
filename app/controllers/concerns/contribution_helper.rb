@@ -1,6 +1,6 @@
 module ContributionHelper
-  def contribution_data
-    @subscriptions = current_user.subscriptions.where(:created_at.gt => Date.parse("Feb 2016")).asc(:created_at)
+  def contribution_data(user = current_user)
+    @subscriptions = user.subscriptions.where(:created_at.gt => Date.parse("Feb 2016")).asc(:created_at)
     @xAxis = []
     @commits = []
     @activities = []
