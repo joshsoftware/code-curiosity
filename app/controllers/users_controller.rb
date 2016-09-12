@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_slug(params[:id])
     @show_transactions = current_user == @user
-    contribution_data
+    contribution_data(@user)
     if @user
       render layout: current_user ? 'application' : 'public'
     else
