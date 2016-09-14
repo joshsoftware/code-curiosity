@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/igrigorik/bugspots.git
+  remote: https://github.com/igrigorik/bugspots.git
   revision: 4fb960eb79e5a86b95a26f604035ab68b3992d2c
   specs:
     bugspots (0.2.1)
@@ -7,11 +7,11 @@ GIT
       rugged (>= 0.21.0)
 
 GIT
-  remote: git://github.com/libgit2/rugged.git
-  revision: 23fa66471f8d4c2cb1bca80d6dc66d58bc847a97
+  remote: https://github.com/libgit2/rugged.git
+  revision: a3eba2692de13542bb5c69147e397264f0b4f206
   submodules: true
   specs:
-    rugged (0.25.0b5)
+    rugged (0.25.0b8)
 
 GEM
   remote: https://rubygems.org/
@@ -375,5 +375,8 @@ DEPENDENCIES
   web-console (~> 2.0)
   whenever
 
+RUBY VERSION
+   ruby 2.3.0p0
+
 BUNDLED WITH
-   1.12.5
+   1.13.1

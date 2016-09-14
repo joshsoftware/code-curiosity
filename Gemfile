@@ -27,8 +27,8 @@ gem 'omniauth-github', '~> 1.1.2'
 gem 'sidekiq', '~> 4.0'
 gem 'dotenv-rails'
 gem 'git', '~> 1.3'
-gem 'rugged', git: 'git://github.com/libgit2/rugged.git', submodules: true
-gem 'bugspots', git: 'git://github.com/igrigorik/bugspots.git'
+gem 'rugged', git: 'https://github.com/libgit2/rugged.git', submodules: true
+gem 'bugspots', git: 'https://github.com/igrigorik/bugspots.git'
 gem 'redis-rails'
 gem 'whenever', :require => false
 gem 'mongoid-slug', '~> 5.2'
