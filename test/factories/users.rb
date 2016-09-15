@@ -6,6 +6,7 @@ FactoryGirl.define do
     sign_in_count {Faker::Number.digit}
     active {random_boolean = [true, false].sample}
     is_judge {random_boolean = [true, false].sample}
+    auth_token { Faker::Crypto.sha256 }
     github_handle {Faker::Internet.user_name}
 
     factory :user_with_transactions do

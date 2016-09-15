@@ -94,6 +94,13 @@ Rails.application.routes.draw do
       get :resend_invitation
     end
   end
+
+  resources :hackathons do
+    member do
+      post :repositories
+      post :join
+    end
+  end
   get 'accept_invitation/:group_id/:token' => 'groups/members#accept_invitation', as: :accept_invitation
   get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
   get 'widgets/group/:id(/:round_id)' => 'widgets#group', as: :group_widget

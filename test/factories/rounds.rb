@@ -6,7 +6,7 @@ FactoryGirl.define do
     status {random = ["active","open","inactive"].sample}
 
     trait :hackathon do
-      from_date { Faker::Time.between(DateTime.now + 1, DateTime.now + 2)}
+      from_date { Faker::Time.between(DateTime.now - 1, DateTime.now + 2)}
       end_date  {Faker::Time.between(DateTime.now + 3, DateTime.now + 5)}
     end
 

@@ -47,7 +47,7 @@ namespace :utils do
   task :hackathon, [:group] => :environment do |t, args|
     group = Group.where(name: args[:group]).first
     if group # Ignore if incorrect name
-      type = "all"
+      type = "daily"
       round = Round.opened
       group.members.each do |user|
         UserReposJob.perform_later(user)
