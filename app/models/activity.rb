@@ -8,7 +8,7 @@ class Activity
   ISSUE_ACTIONS = %W(assigned unassigned labeled unlabeled opened edited closed reopened)
 
   # Actions ignored for scoring.
-  IGNORED_FOR_SCORING = %W(closed)
+  CONSIDERED_FOR_SCORING = %W(opened reopened)
 
   field :description,     type: String
   field :event_type,      type: String
@@ -27,7 +27,7 @@ class Activity
   embeds_many :scores, as: :scorable
   belongs_to :organization
 
-  scope :considered_for_scoring, -> { where(:event_action.nin => IGNORED_FOR_SCORING) }
+  scope :considered_for_scoring, -> { where(:event_action.in => CONSIDERED_FOR_SCORING) }
 
   #validates :description, uniqueness: {:scope => :commented_on}
   #validates :event_action, inclusion: { in: EVENT_ACTIONS }

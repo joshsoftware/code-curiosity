@@ -46,7 +46,7 @@ class SubscriptionTest < ActiveSupport::TestCase
     subscription = create(:subscription, user: user, round: round)
     activity = create_list(:activity, 3, auto_score: 1, user:user, round: round)
     create(:activity, event_action: :closed, user: user, round: round, auto_score: 1)
-    assert_equal subscription.activities_score, 3
+    assert_equal subscription.activities_score, 0
   end
 
   def test_update_total_points
