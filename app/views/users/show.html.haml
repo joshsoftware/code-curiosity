@@ -66,8 +66,9 @@
             .tab-pane#settings
               = render 'settings'
           %b 
-            Info:
-            %i= t('transaction.points_credit_info') 
+            - if logged_in_user?
+              Info:
+              %i= t('transaction.points_credit_info')
 - if logged_in_user?
   #redeem-modal
     .modal.fade
