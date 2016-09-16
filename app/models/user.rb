@@ -3,7 +3,7 @@ class User
   include Mongoid::Timestamps
   include GlobalID::Identification
   include UserGithubHelper
-
+  include Mongoid::Slug
   ROLES = {admin: 'Admin'}
 
   # Include default devise modules. Others available are:
@@ -67,6 +67,8 @@ class User
   has_many :redeem_requests
   has_many :group_invitations
   belongs_to :goal
+  
+  slug  :github_handle
 
   index(uid: 1)
   index(github_handle: 1)
@@ -198,10 +200,6 @@ class User
 
   def total_points
     @_t_p ||= self.transactions.sum(:points)
-  end
-
-  def self.find_by_slug(slug)
-    User.where(id: slug).first || User.where(github_handle: slug).first
   end
 
   def current_subscription(round = nil)
