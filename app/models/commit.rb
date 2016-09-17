@@ -41,7 +41,7 @@ class Commit
   end
 
   def info
-    @info ||= GITHUB.repos.commits.get(repository.owner, repository.name, sha) #rescue nil
+    @info ||= user.gh_client.repos.commits.get(repository.owner, repository.name, sha) #rescue nil
   end
 
   def max_rating
