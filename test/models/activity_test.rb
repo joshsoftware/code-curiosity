@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ActivityTest < ActiveSupport::TestCase
-
   def test_score_if_total_no_of_words_less_than_25
     activity = create(:activity, description: Faker::Lorem.words, user: create(:user))
     assert_equal activity.auto_score, nil
@@ -37,6 +36,13 @@ class ActivityTest < ActiveSupport::TestCase
   def test_activities_count_of_user_is_incremented_after_activity_is_created
     activity = create(:activity, description: Faker::Lorem.words)
     assert_equal activity.user.activities_count, 1
+  end
+
+  def consider_for_scoring_scope_should_not_retrive_closed_event_actions
+    opened_activity = create(:activity, description: Faker::Lorem.words, event_action: 'opened')
+    closed_activity = create(:activity, description: Faker::Lorem.words, event_action: 'closed')
+    assert_equal Activity.considered_for_scoring.count, 1
+    assert_equal Activity.considered_for_scoring.first, opened_activity
   end
 
 end

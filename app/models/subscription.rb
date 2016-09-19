@@ -21,8 +21,9 @@ class Subscription
     self.round.commits.where(user: user).inject(0){|r, o| r + o.final_score.to_i }
   end
 
+  # Retrieve the sum of final_score for all activities considered for scoring for the specified round and user.
   def activities_score
-    self.round.activities.where(user: user).inject(0){|r, o| r + o.final_score.to_i }
+    self.round.activities.considered_for_scoring.where(user: user).inject(0){|r, o| r + o.final_score.to_i }
   end
 
   def update_points
