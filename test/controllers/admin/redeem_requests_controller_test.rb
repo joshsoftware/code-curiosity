@@ -2,40 +2,50 @@ require "test_helper"
 
 class Admin::RedeemRequestsControllerTest < ActionController::TestCase 
  
-  def test_must_get_users_redemption_requests
+  test "must get users redemption requests" do
     seed_data
     xhr :get, :index, parameters, format: :js,  :id => @user.id
     assert_response :success
   end
-
-  def test_should_not_update_redeem_request_without_any_parameter
+  
+  test "should not update redeem_request without any parameter" do
     seed_data
     redeem_request = create(:redeem_request,:points => 100, user: @user)
     assert_raises ActionController::ParameterMissing do 
       put :update, :id => redeem_request.id
     end
   end
-
-  def test_must_update_redeem_requests_parameters
+  
+  test "must update redeem_requests when coupon_code is changed" do
     seed_data
     redeem_request = create(:redeem_request,:points => 100, user: @user)
     updated_coupon_code = 'josh24'
     patch :update, :id => redeem_request.id, redeem_request: {:coupon_code => updated_coupon_code}
     redeem_request.reload
-    assert_equal updated_coupon_code, redeem_request.coupon_code 
-    assert_response :redirect
+    assert_equal updated_coupon_code, redeem_request.coupon_code
+    assert_response :redirect  
   end
-
-  def test_should_destroy_redeem_request 
+   
+  test "must update redeem_requests when comment is changed" do
+    seed_data
+    redeem_request = create(:redeem_request,:points => 100, user: @user)
+    updated_comment = Faker::Lorem.word
+    patch :update, :id => redeem_request.id, redeem_request: {:comment => updated_comment}
+    redeem_request.reload
+    assert_equal updated_comment, redeem_request.comment
+    assert_response :redirect  
+  end
+ 
+  test "should destroy redeem_request" do 
     seed_data
     redeem_request = create(:redeem_request,:points => 100, user: @user)
     assert_difference('RedeemRequest.count', -1) do
       delete :destroy, id: redeem_request.id
     end
     assert_response :redirect
-  end
+  end  
 
-  def test_should_destroy_transaction_corresponding_to_redeem_request 
+  test "should destroy transaction corresponding to redeem_request" do 
     seed_data
     redeem_request = create(:redeem_request,:points => 100, user: @user)
     assert_difference('Transaction.count', -1) do
@@ -44,6 +54,33 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  test "should render index template" do
+    seed_data
+    redeem_request = create(:redeem_request,:points => 10, user: @user)
+    xhr :get, :index, parameters, format: :js,  :id => @user.id
+    assert_response :success
+    assert_template 'redeem_requests/index'
+    assert_template 'redeem_requests/_tagtable'
+    assert_template 'redeem_requests/_redeem_request' 
+  end
+ 
+  test "status should either be open or close" do
+    seed_data
+    redeem_request = create(:redeem_request,:points => 10, user: @user)
+    xhr :get, :index, parameters, format: :js,  :id => @user.id
+    assert_response :success
+    assert_not_nil assigns(:status)
+  end
+ 
+  test "on status open should render all whose status are open" do
+    seed_data
+    redeem_request = create_list(:redeem_request, 3, :points => 2, :status => false, user: @user)
+    xhr :get, :index, parameters, format: :js,  :id => @user.id
+    assert_response :success
+    assert_not_nil assigns(:status)
+    assert_equal redeem_request.count, 3
+  end
+ 
   def seed_data
     round = create(:round, :status => 'open')
     role = create(:role, :name => 'Admin')
