@@ -7,15 +7,15 @@ FactoryGirl.define do
     watchers {Faker::Number.digit}
 
     factory :repository_with_activity_and_commits do
-       transient do
-         count 2
-	 auto_score 2
-       end
+      transient do
+        count 2
+        auto_score 2
+      end
 
-       after(:create) do |repo, evaluator|
-         create_list(:commit, evaluator.count, repository: repo, auto_score: evaluator.auto_score)
-         create_list(:activity, evaluator.count, repository: repo, auto_score: evaluator.auto_score)
-       end
+      after(:create) do |repo, evaluator|
+        create_list(:commit, evaluator.count, repository: repo, auto_score: evaluator.auto_score)
+        create_list(:activity, evaluator.count, repository: repo, auto_score: evaluator.auto_score)
+      end
     end
   end
 end
