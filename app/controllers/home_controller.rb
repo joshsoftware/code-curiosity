@@ -1,8 +1,11 @@
 class HomeController < ApplicationController
   include HomeHelper
-  before_action :featured_groups, only: [:index]
-  before_action :featured_groups_size, only: [:index]
-  before_action :multi_line_chart, only: [:index]
+
+  #load the before_actions only if the user is not logged in.
+  before_action :featured_groups, only: [:index], unless: proc { user_signed_in? }
+  before_action :featured_groups_size, only: [:index], unless: proc { user_signed_in? }
+  before_action :multi_line_chart, only: [:index], unless: proc { user_signed_in? }
+
   def index
     if user_signed_in?
       redirect_to dashboard_path

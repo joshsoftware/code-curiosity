@@ -1,5 +1,5 @@
 class WidgetsController < ActionController::Base
-  before_filter :allow_iframe, :find_round
+  before_action :allow_iframe, :find_round
 
   def repo
     @repo = Repository.find(params[:id])

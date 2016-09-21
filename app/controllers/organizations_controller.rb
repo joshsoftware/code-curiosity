@@ -34,10 +34,10 @@ class OrganizationsController < ApplicationController
 
   def commits
     @commits = @org.commits
-                   .where(round: current_round)
-                   .order(commit_date: :desc )
-                   .page(params[:page])
-                   .per(20)
+    .where(round: current_round)
+    .order(commit_date: :desc )
+    .page(params[:page])
+    .per(20)
 
     respond_to do |format|
       format.html { render 'judging/commits' }
@@ -47,10 +47,10 @@ class OrganizationsController < ApplicationController
 
   def activities
     @activities = @org.activities
-                      .where(round: current_round)
-                      .order(commented_on: :desc )
-                      .page(params[:page])
-                      .per(20)
+    .where(round: current_round)
+    .order(commented_on: :desc )
+    .page(params[:page])
+    .per(20)
 
     respond_to do |format|
       format.html { render 'judging/activities' }
@@ -66,10 +66,10 @@ class OrganizationsController < ApplicationController
 
   def find_resource
     @resource = if params[:type] == 'commits'
-                 @org.commits.where(id: params[:resource_id]).first
-               else
-                 @org.activities.where(id: params[:resource_id]).first
-               end
+                  @org.commits.where(id: params[:resource_id]).first
+                else
+                  @org.activities.where(id: params[:resource_id]).first
+                end
 
     unless @resource
       render nothing: true, status: 404
