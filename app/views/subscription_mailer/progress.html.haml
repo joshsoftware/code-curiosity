@@ -4,7 +4,7 @@
   = link_to (@subscription.try(:goal) || @subscription.set_default_goal).name, goals_url
 %p
   - if @subscription.goal_achived?
-    You have achived your goal before time. Bravo! Do remember to
+    You have achieved your goal before time. Bravo! Do remember to
     = link_to "redeem points", user_url(@user)
     ! Well done.
   - elsif @subscription.points == 0
