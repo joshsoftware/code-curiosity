@@ -1,13 +1,6 @@
 require 'test_helper'
 
-class ActivityTest < ActiveSupport::TestCase
-  def activity
-    @activity ||= create(:activity)
-  end
-
-  def test_activity
-    assert activity.valid?
-  end
+class CommitTest < ActiveSupport::TestCase
 
   def test_commit_message_should_be_unique
     commit = create(:commit, message: Faker::Lorem.words, commit_date: Time.now)

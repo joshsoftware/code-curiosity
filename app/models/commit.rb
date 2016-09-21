@@ -19,9 +19,9 @@ class Commit
   belongs_to :user
   belongs_to :repository
   belongs_to :round
+  belongs_to :organization
   has_many :comments, as: :commentable
   embeds_many :scores, as: :scorable
-  belongs_to :organization
 
   validates :round, presence: true
   validates :message, uniqueness: {:scope => :commit_date}
