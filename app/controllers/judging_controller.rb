@@ -7,17 +7,17 @@ class JudgingController < ApplicationController
 
   def commits
     @commits = current_round.commits
-                            .page(params[:page])
-                            .per(20)
-                            .order(commit_date: :desc)
+    .page(params[:page])
+    .per(20)
+    .order(commit_date: :desc)
     #                       .in(repository: current_user.judges_repository_ids)
   end
 
   def activities
     @activities = current_round.activities
-                            .page(params[:page])
-                            .per(20)
-                            .order(commented_on: :desc)
+    .page(params[:page])
+    .per(20)
+    .order(commented_on: :desc)
     #                       .in(repository: current_user.judges_repository_ids)
   end
 
@@ -25,12 +25,12 @@ class JudgingController < ApplicationController
 
   def find_resource
     @resource = if params[:type] == 'commits'
-                 Commit.where(id: params[:resource_id]).first
-                 #Commit.where(id: params[:id]).in(repository: current_user.judges_repository_ids).first
-               else
-                 Activity.where(id: params[:resource_id]).first
-                 #Activity.where(id: params[:id]).in(repository: current_user.judges_repository_ids).first
-               end
+                  Commit.where(id: params[:resource_id]).first
+                  #Commit.where(id: params[:id]).in(repository: current_user.judges_repository_ids).first
+                else
+                  Activity.where(id: params[:resource_id]).first
+                  #Activity.where(id: params[:id]).in(repository: current_user.judges_repository_ids).first
+                end
 
     unless @resource
       render nothing: true, status: 404

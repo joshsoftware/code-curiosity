@@ -10,22 +10,28 @@ FactoryGirl.define do
       end_date  {Faker::Time.between(DateTime.now + 3, DateTime.now + 5)}
     end
 
+    trait :open do
+      from_date Date.today.beginning_of_month
+      end_date Date.today.end_of_month
+      status :open
+    end
+
     factory :round_with_commits do
-        transient do
-            commits_count 1
-        end
-        after(:create) do |round, evaluator|
-            create_list(:commit, evaluator.commits_count, :message => Faker::Lorem.sentence, round: round)
-        end
+      transient do
+        commits_count 1
+      end
+      after(:create) do |round, evaluator|
+        create_list(:commit, evaluator.commits_count, :message => Faker::Lorem.sentence, round: round)
+      end
     end
 
     factory :round_with_activities do
-        transient do
-            activities_count 1
-        end
-        after(:create) do |round, evaluator|
-            create_list(:activity, evaluator.activities_count, :description => Faker::Lorem.sentence, round: round)
-        end
+      transient do
+        activities_count 1
+      end
+      after(:create) do |round, evaluator|
+        create_list(:activity, evaluator.activities_count, :description => Faker::Lorem.sentence, round: round)
+      end
     end
 
   end
