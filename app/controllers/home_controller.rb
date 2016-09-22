@@ -51,4 +51,7 @@ class HomeController < ApplicationController
     end
   end
 
+  # methods from the HomeHelper module are public and need to be private
+  private :featured_groups, :featured_groups_size
+
 end
