@@ -11,11 +11,9 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :repositories, only: [:index, :show] do
-    #get 'sync'
-  end
+  resources :repositories, only: [:index]
 
-  resources :users do
+  resources :users, only: [:index, :show, :destroy] do
     member do
       get 'sync'
       put 'update_notification'
@@ -35,20 +33,20 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :repositories do
+    resources :repositories, only: [:index] do
       member do
         patch :add_judges
         get :assign_judge
       end
     end
-    resources :users do
-      get 'mark_as_judge'
+    resources :users, only: [:index] do
+      get :mark_as_judge
       get :login_as
       get :search, on: :collection
     end
 
-    resources :judges
-    resources :rounds do
+    resources :judges, only: [:index]
+    resources :rounds, only: [:index] do
       get :mark_as_close
     end
     resources :redeem_requests, only: [:index, :update, :destroy]

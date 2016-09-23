@@ -91,4 +91,7 @@ class Groups::MembersController < ApplicationController
     session[:group_invitation_url] = request.url
   end
 
+  # methods from the GroupHelper module are public and need to be private
+  private :find_group, :is_group_admin, :is_admin
+
 end

@@ -15,9 +15,9 @@ class HomeController < ApplicationController
 
   def leaderboard
     @subscriptions = current_round.subscriptions
-                                  .where(:points.gt => 0)
-                                  .order(points: :desc)
-                                  .page(1).per(5)
+    .where(:points.gt => 0)
+    .order(points: :desc)
+    .page(1).per(5)
 
     if user_signed_in?
       render layout: 'application'
@@ -33,13 +33,13 @@ class HomeController < ApplicationController
               Goal.where(id: params[:goal_id]).first
             elsif subscription
               subscription.goal
-          end
+            end
     @goal = Goal.default_goal unless @goal
 
     @points = current_round.subscriptions
-                           .where(goal_id: @goal.id)
-                           .order(points: :desc)
-                           .pluck(:points)
+    .where(goal_id: @goal.id)
+    .order(points: :desc)
+    .pluck(:points)
 
     if current_user
       if subscription && subscription.goal == @goal
@@ -53,5 +53,8 @@ class HomeController < ApplicationController
       render layout: 'info'
     end
   end
+
+  # methods from the HomeHelper module are public and need to be private
+  private :featured_groups, :featured_groups_size
 
 end
