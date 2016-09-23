@@ -46,6 +46,7 @@ class RedeemRequest
   def update_transaction_points
     if points.to_i > 0
       self.transaction.update(points: points)
+      self.user.update(points: self.user.total_points)
     end
   end
 

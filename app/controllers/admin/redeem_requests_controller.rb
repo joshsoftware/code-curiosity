@@ -18,7 +18,7 @@ class Admin::RedeemRequestsController < ApplicationController
     @redeem_request = RedeemRequest.find(params[:id])
     if @redeem_request
       @redeem_request.update_attributes(redeem_params)
-      @redeem_request.update_transaction_points if @redeem_request.retailer_other?
+      @redeem_request.update_transaction_points 
     end
     redirect_back
   end
