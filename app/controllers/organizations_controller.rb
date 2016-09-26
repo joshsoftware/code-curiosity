@@ -34,10 +34,10 @@ class OrganizationsController < ApplicationController
 
   def commits
     @commits = @org.commits
-    .where(round: current_round)
-    .order(commit_date: :desc )
-    .page(params[:page])
-    .per(20)
+                   .where(round: current_round)
+                   .order(commit_date: :desc )
+                   .page(params[:page])
+                   .per(20)
 
     respond_to do |format|
       format.html { render 'judging/commits' }
@@ -47,10 +47,10 @@ class OrganizationsController < ApplicationController
 
   def activities
     @activities = @org.activities
-    .where(round: current_round)
-    .order(commented_on: :desc )
-    .page(params[:page])
-    .per(20)
+                      .where(round: current_round)
+                      .order(commented_on: :desc )
+                      .page(params[:page])
+                      .per(20)
 
     respond_to do |format|
       format.html { render 'judging/activities' }
