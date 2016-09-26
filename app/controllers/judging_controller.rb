@@ -7,17 +7,17 @@ class JudgingController < ApplicationController
 
   def commits
     @commits = current_round.commits
-    .page(params[:page])
-    .per(20)
-    .order(commit_date: :desc)
+                            .page(params[:page])
+                            .per(20)
+                            .order(commit_date: :desc)
     #                       .in(repository: current_user.judges_repository_ids)
   end
 
   def activities
     @activities = current_round.activities
-    .page(params[:page])
-    .per(20)
-    .order(commented_on: :desc)
+                            .page(params[:page])
+                            .per(20)
+                            .order(commented_on: :desc)
     #                       .in(repository: current_user.judges_repository_ids)
   end
 
