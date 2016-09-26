@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class HomeControllerTest < ActionController::TestCase
-
-  before(:all) do
+  def setup
+    super
     @goal = create :goal
     @round = create :round, :open
     @user = create :user, auth_token: 'dah123rty', goal: @goal

@@ -2,14 +2,19 @@ require "test_helper"
 
 class JudgingControllerTest < ActionController::TestCase
 
+  def setup
+    super
+    @goal = create :goal
+    @round = create :round, name: 'first', from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month, status: :open
+    @user = create :user, auth_token: 'dah123rty', goal: @goal, is_judge: true
+    @org = create :organization, github_handle: 'dolores'
+    @org.users << @user
+    @repo = create :repository_with_activity_and_commits, organization: @org
+  end
+
   test 'commits' do
-    goal = create :goal
-    round = create :round, name: 'first', from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month, status: :open
-    user = create :user, auth_token: 'dah123rty', goal: goal, is_judge: true
-    org = Organization.setup('dolores', user)
-    repo = create :repository_with_activity_and_commits, organization: org
-    old_commit = create :commit, commit_date: round.from_date - 1.day
-    sign_in user
+    old_commit = create :commit, commit_date: @round.from_date - 1.day
+    sign_in @user
     get :commits
     assert_response :success
     assert_template :commits
@@ -20,13 +25,8 @@ class JudgingControllerTest < ActionController::TestCase
   end
 
   test 'activities' do
-    goal = create :goal
-    round = create :round, name: 'first', from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month, status: :open
-    user = create :user, auth_token: 'dah123rty', goal: goal, is_judge: true
-    org = Organization.setup('dolores', user)
-    repo = create :repository_with_activity_and_commits, organization: org
-    old_activity = create :activity, commented_on: round.from_date - 1.day
-    sign_in user
+    old_activity = create :activity, commented_on: @round.from_date - 1.day
+    sign_in @user
     get :activities
     assert_response :success
     assert_template :activities
@@ -37,14 +37,9 @@ class JudgingControllerTest < ActionController::TestCase
   end
 
   test 'comments' do
-    goal = create :goal
-    round = create :round, name: 'first', from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month, status: :open
-    user = create :user, auth_token: 'dah123rty', goal: goal, is_judge: true
-    org = Organization.setup('dolores', user)
-    repo = create :repository_with_activity_and_commits, organization: org
-    commit = repo.commits.first
-    comment = create :comment, is_public: true, commentable: commit, user: user
-    sign_in user
+    commit = @repo.commits.first
+    comment = create :comment, is_public: true, commentable: commit, user: @user
+    sign_in @user
     xhr :get, :comments, type: 'commits', resource_id: commit.id
     assert_response :success
     assert_template :comments
@@ -52,13 +47,8 @@ class JudgingControllerTest < ActionController::TestCase
   end
 
   test 'comment' do
-    goal = create :goal
-    round = create :round, name: 'first', from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month, status: :open
-    user = create :user, auth_token: 'dah123rty', goal: goal, is_judge: true
-    org = Organization.setup('dolores', user)
-    repo = create :repository_with_activity_and_commits, organization: org
-    activity = repo.activities.first
-    sign_in user
+    activity = @repo.activities.first
+    sign_in @user
     xhr :post, :comment, type: 'activity', resource_id: activity.id, comment: { content: 'some comment', is_public: true }
     assert_response :success
   end

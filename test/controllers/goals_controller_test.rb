@@ -1,7 +1,7 @@
 require "test_helper"
 
 class GoalsControllerTest < ActionController::TestCase
-  def test_index
+  test 'index' do
     goal = create :goal, points: 15
     goal_2 = create :goal, points: 30
     round = create :round, :open
@@ -17,19 +17,19 @@ class GoalsControllerTest < ActionController::TestCase
     assert assigns(:goals).first.points, 15
   end
 
-  def test_show
+  test 'show' do
     skip 'Method not defined'
     get :show
     assert_response :success
   end
 
-  def test_edit
+  test 'edit' do
     skip 'Method not defined'
     get :edit
     assert_response :success
   end
 
-  def test_update
+  test 'update' do
     skip 'Method not defined'
     get :update
     assert_response :success
