@@ -1,0 +1,101 @@
+{
+  "sha": "eb0df748bbf084ca522f5ce4ebcf508d16169b96",
+  "commit": {
+    "author": {
+      "name": "Gautam Rege",
+      "email": "gautam@joshsoftware.com",
+      "date": "2016-09-23T07:58:07Z"
+    },
+    "committer": {
+      "name": "Gautam Rege",
+      "email": "gautam@joshsoftware.com",
+      "date": "2016-09-23T07:58:07Z"
+    },
+    "message": "Fix for Admin to be able to update Redeem Request points\n\nA user may want to change an existing request to a larger one.\nSay, 10$ Github request to a 25$ request. Now, there is no option\nto change this unless it's other_retailer.\n\nEven then, the transactions were updated but user points were not!",
+    "tree": {
+      "sha": "1cc1730e9b6138071a4d34add092ab81d174afd5",
+      "url": "https://api.github.com/repos/joshsoftware/code-curiosity/git/trees/1cc1730e9b6138071a4d34add092ab81d174afd5"
+    },
+    "url": "https://api.github.com/repos/joshsoftware/code-curiosity/git/commits/eb0df748bbf084ca522f5ce4ebcf508d16169b96",
+    "comment_count": 0
+  },
+  "url": "https://api.github.com/repos/joshsoftware/code-curiosity/commits/eb0df748bbf084ca522f5ce4ebcf508d16169b96",
+  "html_url": "https://github.com/joshsoftware/code-curiosity/commit/eb0df748bbf084ca522f5ce4ebcf508d16169b96",
+  "comments_url": "https://api.github.com/repos/joshsoftware/code-curiosity/commits/eb0df748bbf084ca522f5ce4ebcf508d16169b96/comments",
+  "author": {
+    "login": "gautamrege",
+    "id": 61500,
+    "avatar_url": "https://avatars.githubusercontent.com/u/61500?v=3",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/gautamrege",
+    "html_url": "https://github.com/gautamrege",
+    "followers_url": "https://api.github.com/users/gautamrege/followers",
+    "following_url": "https://api.github.com/users/gautamrege/following{/other_user}",
+    "gists_url": "https://api.github.com/users/gautamrege/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/gautamrege/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/gautamrege/subscriptions",
+    "organizations_url": "https://api.github.com/users/gautamrege/orgs",
+    "repos_url": "https://api.github.com/users/gautamrege/repos",
+    "events_url": "https://api.github.com/users/gautamrege/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/gautamrege/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "gautamrege",
+    "id": 61500,
+    "avatar_url": "https://avatars.githubusercontent.com/u/61500?v=3",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/gautamrege",
+    "html_url": "https://github.com/gautamrege",
+    "followers_url": "https://api.github.com/users/gautamrege/followers",
+    "following_url": "https://api.github.com/users/gautamrege/following{/other_user}",
+    "gists_url": "https://api.github.com/users/gautamrege/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/gautamrege/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/gautamrege/subscriptions",
+    "organizations_url": "https://api.github.com/users/gautamrege/orgs",
+    "repos_url": "https://api.github.com/users/gautamrege/repos",
+    "events_url": "https://api.github.com/users/gautamrege/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/gautamrege/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "5cd5eedd9739710b1268e280e63998349ff3d900",
+      "url": "https://api.github.com/repos/joshsoftware/code-curiosity/commits/5cd5eedd9739710b1268e280e63998349ff3d900",
+      "html_url": "https://github.com/joshsoftware/code-curiosity/commit/5cd5eedd9739710b1268e280e63998349ff3d900"
+    }
+  ],
+  "stats": {
+    "total": 3,
+    "additions": 2,
+    "deletions": 1
+  },
+  "files": [
+    {
+      "sha": "a14227a037de52cb04202f657506f6c52f85afd2",
+      "filename": "app/controllers/admin/redeem_requests_controller.rb",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/joshsoftware/code-curiosity/blob/eb0df748bbf084ca522f5ce4ebcf508d16169b96/app/controllers/admin/redeem_requests_controller.rb",
+      "raw_url": "https://github.com/joshsoftware/code-curiosity/raw/eb0df748bbf084ca522f5ce4ebcf508d16169b96/app/controllers/admin/redeem_requests_controller.rb",
+      "contents_url": "https://api.github.com/repos/joshsoftware/code-curiosity/contents/app/controllers/admin/redeem_requests_controller.rb?ref=eb0df748bbf084ca522f5ce4ebcf508d16169b96",
+      "patch": "@@ -18,7 +18,7 @@ def update\n     @redeem_request = RedeemRequest.find(params[:id])\n     if @redeem_request\n       @redeem_request.update_attributes(redeem_params)\n-      @redeem_request.update_transaction_points if @redeem_request.retailer_other?\n+      @redeem_request.update_transaction_points \n     end\n     redirect_back\n   end"
+    },
+    {
+      "sha": "d600fd90b0c9edad04d09be57a3d867ba49cb8e2",
+      "filename": "app/models/redeem_request.rb",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "blob_url": "https://github.com/joshsoftware/code-curiosity/blob/eb0df748bbf084ca522f5ce4ebcf508d16169b96/app/models/redeem_request.rb",
+      "raw_url": "https://github.com/joshsoftware/code-curiosity/raw/eb0df748bbf084ca522f5ce4ebcf508d16169b96/app/models/redeem_request.rb",
+      "contents_url": "https://api.github.com/repos/joshsoftware/code-curiosity/contents/app/models/redeem_request.rb?ref=eb0df748bbf084ca522f5ce4ebcf508d16169b96",
+      "patch": "@@ -46,6 +46,7 @@ def retailer_other?\n   def update_transaction_points\n     if points.to_i > 0\n       self.transaction.update(points: points)\n+      self.user.update(points: self.user.total_points)\n     end\n   end\n "
+    }
+  ]
+}

@@ -2,6 +2,16 @@ require 'test_helper'
 
 class CommitTest < ActiveSupport::TestCase
 
+  def setup
+    stub_get("/repos/joshsoftware/code-curiosity/commits/eb0df748bbf084ca522f5ce4ebcf508d16169b96")
+    .to_return(body: File.read('test/fixtures/commit.json'), status: 200,
+    headers: {content_type: "application/json; charset=utf-8"})
+  end
+
+  def stub_get(path, endpoint = Github.endpoint.to_s)
+    stub_request(:get, endpoint + path)
+  end
+
   def test_commit_message_should_be_unique
     commit = create(:commit, message: Faker::Lorem.words, commit_date: Time.now)
     messaging_time = commit.commit_date
@@ -30,7 +40,7 @@ class CommitTest < ActiveSupport::TestCase
   end
 
   def test_commit_info
-    commit = create(:commit, message: Faker::Lorem.sentences, sha: 'master', repository: create(:repository, owner: 'plataformatec', name: 'devise'))
+    commit = create(:commit, message: Faker::Lorem.sentences, sha: 'eb0df748bbf084ca522f5ce4ebcf508d16169b96', repository: create(:repository, owner: 'joshsoftware', name: 'code-curiosity'))
     assert_not_nil commit.info
   end
 end
