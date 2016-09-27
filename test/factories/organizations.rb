@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :organization do
-    name "dolores"
-    website "test.github.com"
-    github_handle "dolores"
-
+    name "Josh Software Private Limited"
+    website "http://www.joshsoftware.com"
+    github_handle "joshsoftware"
+    
     factory :organization_with_repositories do
       transient do
         repositories_count 1

@@ -19,18 +19,18 @@ class OrganizationTest < ActiveSupport::TestCase
 
   def test_repo_syncing_when_last_repo_sync_time_is_less_than_an_hour
     repo_sync_time = 45.minutes.ago
-    organization = create(:organization, :github_handle => 'joshsoftware', :last_repo_sync_at => repo_sync_time)
+    organization = create(:organization, :last_repo_sync_at => repo_sync_time)
     assert organization.repo_syncing?
   end 
 
   def test_repo_syncing_when_last_repo_sync_time_is_greater_than_an_hour
     repo_sync_time = 2.hours.ago
-    organization = create(:organization, :github_handle => 'joshsoftware', :last_repo_sync_at => repo_sync_time)
+    organization = create(:organization, :last_repo_sync_at => repo_sync_time)
     assert_not organization.repo_syncing?
   end
 
   def test_organisation_informations_are_not_nil
-    organization = build(:organization, :github_handle => 'joshsoftware')
+    organization = build(:organization)
     assert_not_nil organization.info
   end
 
@@ -48,7 +48,7 @@ class OrganizationTest < ActiveSupport::TestCase
   end 
 
   def test_user_commits_and_update_all_commits_organization_belonging_to_a_repository
-    organization = create(:organization_with_repositories, :github_handle => 'joshsoftware')
+    organization = create(:organization_with_repositories)
     repository = create(:repository, name: "repo", source_url: Faker::Internet.url('github.com', "/#{Faker::Lorem.word}/#{Faker::Lorem.word}") , ssh_url: Faker::Internet.url('github.com', "/#{Faker::Lorem.word}/#{Faker::Lorem.word}"))
     commit = create(:commit, :message => Faker::Lorem.sentence)
     commit.repository = organization.repositories.first
@@ -59,7 +59,7 @@ class OrganizationTest < ActiveSupport::TestCase
   end
 
   def test_user_activities_and_update_all_activities_organization_belonging_to_a_repository
-    organization = create(:organization_with_repositories, :github_handle => 'joshsoftware')
+    organization = create(:organization_with_repositories)
     activity = create(:activity, :description => Faker::Lorem.sentence)
     activity.repository = organization.repositories.first
     activity.save

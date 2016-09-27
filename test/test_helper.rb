@@ -23,6 +23,7 @@ require "webmock/minitest"
 class ActionController::TestCase 
   include Devise::TestHelpers 
   include Warden::Test::Helpers 
+  WebMock.disable_net_connect!(:allow => "codeclimate.com")
 end
 
 class ActiveSupport::TestCase
