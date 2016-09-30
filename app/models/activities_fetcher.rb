@@ -34,6 +34,7 @@ class ActivitiesFetcher
 
     user_activity = user.activities.find_or_initialize_by(gh_id: activity.id)
     user_activity.event_type = type
+    user_activity.event_action = activity.payload['action']
     user_activity.description = activity.payload[type].body
     user_activity.repo = activity.repo.name
     user_activity.ref_url = activity.payload[type].html_url
