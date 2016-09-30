@@ -22,7 +22,7 @@ class Subscription
   end
 
   def activities_score
-    self.round.activities.where(user: user).inject(0){|r, o| r + o.final_score.to_i }
+    self.round.activities.considered_for_scoring.where(user: user).inject(0){|r, o| r + o.final_score.to_i }
   end
 
   def update_points
