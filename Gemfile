@@ -32,7 +32,7 @@ gem 'bugspots', git: 'https://github.com/igrigorik/bugspots.git'
 gem 'redis-rails'
 gem 'whenever', :require => false
 gem 'mongoid-slug', '~> 5.2'
-
+gem 'redcarpet'
 gem 'rollbar'
 
 group :development, :test do
