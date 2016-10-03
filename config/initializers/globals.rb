@@ -16,3 +16,5 @@ COMMIT_RATINGS = (0..5).to_a
 ACTIVITY_RATINGS = (0..2).to_a
 
 INFO = YAML.load_file('config/info.yml')
+
+MARKDOWN = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
