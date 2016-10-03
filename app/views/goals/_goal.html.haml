@@ -14,8 +14,10 @@
         bonus points. 
       %li.redeem
         = raw(goal.info['redeem_text'])
-      - unless selected_goal?(goal)
         %li
-          = link_to 'Set As Goal', set_goal_users_path(goal), class: 'button'
-  - if !selected_goal?(goal) && current_user.goal == goal
-    %h4.next-month-goal Next Month Goal
+          = link_to "Set As Next Month's Goal", set_goal_users_path(goal), class: 'button'
+  - if selected_goal?(goal)
+    %h4.next-month-goal Current Month's Goal
+  - if current_user.goal == goal
+    %h4.next-month-goal Next Month's Goal
+
