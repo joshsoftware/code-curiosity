@@ -30,11 +30,14 @@ class Activity
   scope :considered_for_scoring, -> { where(:event_action.in => CONSIDERED_FOR_SCORING) }
 
   #validates :description, uniqueness: {:scope => :commented_on}
+  validates :round, presence: true
 
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
 
   index({ commented_on: -1 })
   index({ event_type: 1, gh_id: 1 })
+
+  before_validation :set_round
 
   after_create do |a|
     a.user.inc(activities_count: 1)
@@ -52,5 +55,11 @@ class Activity
 
   def max_rating
     ACTIVITY_RATINGS.last
+  end
+
+  private
+
+  def set_round
+    self.round = Round.where(:from_date.lte => commented_on, :end_date.gte => commented_on).first unless self.round
   end
 end

@@ -39,7 +39,6 @@ class ActivitiesFetcher
     user_activity.repo = activity.repo.name
     user_activity.ref_url = activity.payload[type].html_url
     user_activity.commented_on = Time.parse(activity.created_at)
-    user_activity.round = round
     user_activity.user = user
     user_activity.repository = repo
     user_activity.organization_id = repo.organization_id
