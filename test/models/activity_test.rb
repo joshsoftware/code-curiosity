@@ -39,4 +39,11 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal activity.user.activities_count, 1
   end
 
+  def consider_for_scoring_scope_should_not_retrive_closed_event_actions
+    opened_activity = create(:activity, description: Faker::Lorem.words, event_action: 'opened')
+    closed_activity = create(:activity, description: Faker::Lorem.words, event_action: 'closed')
+    assert_equal Activity.considered_for_scoring.count, 1
+    assert_equal Activity.considered_for_scoring.first, opened_activity
+  end
+
 end
