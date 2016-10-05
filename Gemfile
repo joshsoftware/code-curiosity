@@ -53,6 +53,8 @@ end
 group :test do
   gem 'database_cleaner'
   gem "codeclimate-test-reporter", require: nil
+  gem 'minitest-rails-capybara'
+  gem 'poltergeist'
 end
 
 group :development do
