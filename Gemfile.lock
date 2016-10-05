@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/libgit2/rugged.git
-  revision: a3eba2692de13542bb5c69147e397264f0b4f206
+  revision: 37e0c11df5a5c2a1809d5a597cdebc94a8a7119d
   submodules: true
   specs:
     rugged (0.25.0b8)
@@ -67,7 +67,7 @@ GEM
     bson (4.1.1)
     builder (3.2.2)
     byebug (9.0.5)
-    capybara (2.8.1)
+    capybara (2.9.2)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -174,19 +174,19 @@ GEM
       mina
     mini_portile2 (2.1.0)
     minitest (5.9.0)
-    minitest-capybara (0.7.2)
+    minitest-capybara (0.8.2)
       capybara (~> 2.2)
       minitest (~> 5.0)
       rake
-    minitest-metadata (0.5.3)
+    minitest-metadata (0.6.0)
       minitest (>= 4.7, < 6.0)
     minitest-rails (2.2.1)
       minitest (~> 5.7)
       railties (~> 4.1)
-    minitest-rails-capybara (2.1.1)
-      capybara (~> 2.0)
-      minitest-capybara (~> 0.7.0)
-      minitest-metadata (~> 0.5.0)
+    minitest-rails-capybara (2.1.2)
+      capybara (~> 2.7)
+      minitest-capybara (~> 0.8)
+      minitest-metadata (~> 0.6)
       minitest-rails (~> 2.1)
     mongo (2.2.7)
       bson (~> 4.0)
@@ -356,6 +356,9 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
+    websocket-driver (0.6.4)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
     whenever (0.9.7)
       chronic (>= 0.6.3)
     xpath (2.0.0)
@@ -419,4 +422,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.13.1
+   1.12.5
