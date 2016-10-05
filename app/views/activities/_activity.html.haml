@@ -1,6 +1,6 @@
 %tr{data: {activity: activity.id.to_s}}
   = render partial: 'activities/score_cell', locals: { resource: activity }
-  %td= activity.commented_on.strftime("%d/%m/%Y")
+  %td= activity.commented_on.strftime("%m/%d/%Y")
   %td= activity.repo
   %td= activity.event_type
   %td= raw MARKDOWN.render(activity.description)

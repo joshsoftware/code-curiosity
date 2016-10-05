@@ -11,19 +11,19 @@ SimpleCov.start 'rails'
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
 require "minitest/rails"
-require "minitest/rails/capybara"
-require "capybara/poltergeist"
+require "webmock/minitest"
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
-# require "minitest/rails/capybara"
+require "minitest/rails/capybara"
 
 # Uncomment for awesome colorful output
- require "minitest/pride"
+#require "minitest/pride"
 
 class ActionController::TestCase 
   include Devise::TestHelpers 
   include Warden::Test::Helpers 
+  WebMock.disable_net_connect!(:allow => "codeclimate.com")
 end
 
 class ActiveSupport::TestCase
