@@ -3,5 +3,6 @@ FactoryGirl.define do
     message {Faker::Lorem.paragraph}
     association :user
     association :repository
+    association :round
   end
 end

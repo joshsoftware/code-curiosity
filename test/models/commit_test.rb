@@ -33,4 +33,19 @@ class CommitTest < ActiveSupport::TestCase
     commit = create(:commit, message: Faker::Lorem.sentences, sha: 'master', repository: create(:repository, owner: 'plataformatec', name: 'devise'))
     assert_not_nil commit.info
   end
+
+  def test_round_is_present
+    commit = create(:commit, message: Faker::Lorem.sentences)
+    assert commit.round.present?
+  end
+
+  def test_proper_round_is_assigned
+    round_1 = create :round, from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
+    round_2 = create :round, from_date: Date.today.beginning_of_month - 1.month, end_date: Date.today.end_of_month - 1.month
+    commit_1 = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today, round: nil)
+    assert_equal commit_1.round, round_1
+    commit_2 = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today - 1.month, round: nil)
+    assert_equal commit_2.round, round_2
+  end
+
 end
