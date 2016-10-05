@@ -11,9 +11,9 @@ class SubscriptionMailer < ApplicationMailer
     @subscription = user.subscriptions.where(round: round).first
 
     message = if @subscription.goal_achived?
-                "You have achived your goal before time."
+                "You have achieved your goal before time."
               else
-                "You have still time to achive your goal. Keep it up..."
+                "You have still time to achieve your goal. Keep it up..."
               end
 
     mail(to: user.email, subject: "[CODECURIOSITY] #{message}")
