@@ -3,7 +3,7 @@
   %td= activity.commented_on.strftime("%d/%m/%Y")
   %td= activity.repo
   %td= activity.event_type
-  %td= activity.description 
+  %td= raw MARKDOWN.render(activity.description)
   %td
     = link_to activity.ref_url, target: '_blank', class: 'btn btn-block btn-default btn-xs' do
       %i.fa.fa-fw.fa-share
