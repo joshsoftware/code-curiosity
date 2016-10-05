@@ -12,7 +12,7 @@ module UserGithubHelper
   end
 
   # In case we get a Github::Error::Unauthorized, we cannot use the user token.
-  # Here, we use any other users random token and the next time user logs in, 
+  # Here, we use any other users random token and the next time user logs in,
   # it will refresh the user auth_token and start working normally
   # This also helps us manage the Github API limits
   def refresh_gh_client
@@ -36,8 +36,8 @@ module UserGithubHelper
     all_repos
   end
 
-   def gh_orgs
-    @gh_orgs ||= gh_client.organizations.all(user: self.github_handle)
+  def gh_orgs
+    @gh_orgs ||= gh_client.organizations.all(user: github_handle)
   end
 
   def info

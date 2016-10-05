@@ -66,10 +66,10 @@ class OrganizationsController < ApplicationController
 
   def find_resource
     @resource = if params[:type] == 'commits'
-                 @org.commits.where(id: params[:resource_id]).first
-               else
-                 @org.activities.where(id: params[:resource_id]).first
-               end
+                  @org.commits.where(id: params[:resource_id]).first
+                else
+                  @org.activities.where(id: params[:resource_id]).first
+                end
 
     unless @resource
       render nothing: true, status: 404
