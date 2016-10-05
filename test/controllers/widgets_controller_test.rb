@@ -1,7 +1,20 @@
 require "test_helper"
 
 class WidgetsControllerTest < ActionController::TestCase
-  before(:all) do
+
+  let(:org) { 'joshsoftware' }
+  let(:request_path) { "/orgs/#{org}" }
+  let(:body) { File.read('test/fixtures/org.json') }
+  let(:status) { 200 }
+
+  def get_stub
+    stub_get(request_path).to_return(body: body, status: status,
+      headers: {content_type: "application/json; charset=utf-8"})
+  end
+
+  def setup
+    super
+    get_stub
     @goal = create :goal
     @round = create :round, :open
     @user = create :user, auth_token: 'dah123rty', goal: @goal
