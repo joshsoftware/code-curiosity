@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
 
   before_action :signout_old_login, :select_goal
   before_action :current_round
+  helper_method :current_round
+
+  protected
 
   def current_round
     @rounds = Round.order(from_date: :desc).limit(3)
@@ -14,10 +17,6 @@ class ApplicationController < ActionController::Base
                        Round.find_by({status: 'open'})
                      end
   end
-
-  helper_method :current_round
-
-  protected
 
   def signout_old_login
     if current_user && current_user.auth_token.blank?

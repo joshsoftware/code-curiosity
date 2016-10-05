@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
   before_action :find_group, except: [:index, :new, :create, :feature]
   before_action :is_group_admin, only: [:update, :destroy]
   before_action :is_admin, only: [:feature]
-  
+
   def index
     @groups = current_user.is_admin? ? Group.order_by(name: :desc).page(params[:page]) : current_user.groups.page(params[:page])
   end
@@ -15,7 +15,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-    render layout: 'info' unless current_user 
+    render layout: 'info' unless current_user
   end
 
   def create
@@ -34,7 +34,7 @@ class GroupsController < ApplicationController
 
   def feature
     @group = Group.where(id: params[:id]).first
-    @group.update(is_featured: !@group.is_featured) 
+    @group.update(is_featured: !@group.is_featured)
     respond_to do |format|
       format.js { render 'groups/feature' }
     end
@@ -59,4 +59,8 @@ class GroupsController < ApplicationController
   def group_params
     params.fetch(:group).permit(:name, :description, :is_featured)
   end
+
+  # methods from the GroupHelper module are public and need to be private
+  private :find_group, :is_group_admin, :is_admin
+
 end

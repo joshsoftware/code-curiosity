@@ -33,7 +33,7 @@ class HomeController < ApplicationController
               Goal.where(id: params[:goal_id]).first
             elsif subscription
               subscription.goal
-          end
+            end
     @goal = Goal.default_goal unless @goal
 
     @points = current_round.subscriptions
@@ -53,5 +53,8 @@ class HomeController < ApplicationController
       render layout: 'info'
     end
   end
+
+  # methods from the HomeHelper module are public and need to be private
+  private :featured_groups, :featured_groups_size
 
 end
