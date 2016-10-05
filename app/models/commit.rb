@@ -23,6 +23,7 @@ class Commit
   embeds_many :scores, as: :scorable
   belongs_to :organization
 
+  validates :round, presence: true
   validates :message, uniqueness: {:scope => :commit_date}
 
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
@@ -32,6 +33,8 @@ class Commit
   index({ commit_date: -1 })
   index({ sha: 1 })
   index(auto_score: 1)
+
+  before_validation :set_round
 
   after_create do |c|
     c.user.inc(commits_count: 1)
@@ -43,6 +46,12 @@ class Commit
 
   def max_rating
     COMMIT_RATINGS.last
+  end
+
+  private
+
+  def set_round
+    self.round = Round.where(:from_date.lte => commit_date, :end_date.gte => commit_date).first unless self.round
   end
 
 end

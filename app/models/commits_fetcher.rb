@@ -12,7 +12,7 @@ class CommitsFetcher
     user.gh_client.repos.branches(user: repo.owner, repo: repo.name).each do |branch|
       # Refer to issue https://rollbar.com/JoshSoftware/CodeCuriosity/items/8/
       # This is a quick fix where we ignore branches / repos that have moved.
-      # This is related to https://github.com/piotrmurach/github/pull/258 and 
+      # This is related to https://github.com/piotrmurach/github/pull/258 and
       # we need to fix properly later.
 
       # Check if the name of hte branch exists. In case it's moved, it will send
@@ -54,7 +54,6 @@ class CommitsFetcher
     commit.repository = repo
     commit.html_url = data['html_url']
     commit.comments_count = data['commit']['comment_count']
-    commit.round = round
     commit.organization_id = repo.organization_id
     commit.save
   end
