@@ -60,4 +60,18 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal Activity.considered_for_scoring.first, opened_activity
   end
 
+  def test_round_is_present
+    activity = create(:activity, description: Faker::Lorem.words)
+    assert activity.round.present?
+  end
+
+  def test_proper_round_is_assigned
+    round_1 = create :round, from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
+    round_2 = create :round, from_date: Date.today.beginning_of_month - 1.month, end_date: Date.today.end_of_month - 1.month
+    activity_1 = create :activity, description: Faker::Lorem.words, commented_on: Date.today, round: nil
+    assert_equal activity_1.round, round_1
+    activity_2 = create :activity, description: Faker::Lorem.words, commented_on: Date.today - 1.month, round: nil
+    assert_equal activity_2.round, round_2
+  end
+
 end
