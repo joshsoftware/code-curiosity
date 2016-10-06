@@ -1,7 +1,9 @@
 require "test_helper"
 
 class InfoControllerTest < ActionController::TestCase
-  def test_faq
+  
+  test 'faq' do
+    round = create(:round, status: 'open')
     get :faq
     assert_response :success
   end

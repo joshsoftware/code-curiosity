@@ -5,7 +5,7 @@ class Users::OmniauthCallbacksControllerTest < ActionController::TestCase
   include Devise::TestHelpers  
 
   test "github signup" do
-
+    
     OmniAuth.config.test_mode = true
 
     omniauth_hash = {
@@ -20,12 +20,17 @@ class Users::OmniauthCallbacksControllerTest < ActionController::TestCase
         {
           :login => 'hello'
         }
+      },
+      :credentials => {
+        :token => 'github_omiauth_test'
       }
     }
 
     OmniAuth.config.add_mock(:github, omniauth_hash)
 
-    request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github]    
+    request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github] 
+    round = create(:round, status: 'open')
+   
     get :github
 
     @user = assigns(:user)
