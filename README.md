@@ -1,3 +1,7 @@
+[![Code Climate](https://codeclimate.com/github/joshsoftware/code-curiosity/badges/gpa.svg)](https://codeclimate.com/github/joshsoftware/code-curiosity)
+[![Test Coverage](https://codeclimate.com/github/joshsoftware/code-curiosity/badges/coverage.svg)](https://codeclimate.com/github/joshsoftware/code-curiosity/coverage)
+[![Build Status](https://travis-ci.org/joshsoftware/code-curiosity.svg?branch=master)](https://travis-ci.org/joshsoftware/code-curiosity)
+
 **What can be measured, can be improved!**
 
 Everyone knows that running is a great exercise. However, by using a wearable like the Fitbit&#0153; to measure your activity, it has motivated people to run regularly.
