@@ -71,4 +71,10 @@ class UserTest < ActiveSupport::TestCase
     User.from_omniauth(@req_env)
   end
 
+  test 'deleted?' do
+    user = build :user
+    assert_not user.deleted?
+    user.update({deleted_at: Time.now, active: false})
+    assert user.deleted?
+  end
 end

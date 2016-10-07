@@ -53,6 +53,9 @@ class User
   field :last_repo_sync_at,  type: Time
   field :last_gh_data_sync_at, type: Time
 
+  # User account deletion
+  field :deleted_at, type: Time
+
   belongs_to :goal
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
@@ -66,8 +69,8 @@ class User
   has_and_belongs_to_many :judges_repositories, class_name: 'Repository', inverse_of: 'judges'
   has_and_belongs_to_many :roles, inverse_of: nil
   has_and_belongs_to_many :organizations
-  has_and_belongs_to_many :groups, class_name: 'Group', inverse_of: 'members' 
-  
+  has_and_belongs_to_many :groups, class_name: 'Group', inverse_of: 'members'
+
   slug  :github_handle
 
   index(uid: 1)
@@ -77,7 +80,8 @@ class User
   scope :contestants, -> { where(auto_created: false) }
   scope :judges, -> { where(is_judge: true) }
 
-  validates :email, :github_handle, :name, presence: true
+  validates :email, :github_handle, :name, :uid, presence: true
+  validates :uid, uniqueness: true
 
   after_create do |user|
     user.calculate_popularity unless user.auto_created
@@ -96,18 +100,20 @@ class User
       followers: auth.extra.raw_info.followers,
       public_repos: auth.extra.raw_info.public_repos,
       auto_created: false,
-      auth_token: User.encrypter.encrypt_and_sign(auth.credentials.token),
-      github_user_since: auth.extra.raw_info.created_at
+      github_user_since: auth.extra.raw_info.created_at,
+      deleted_at: nil,
+      active: true,
+      auth_token: User.encrypter.encrypt_and_sign(auth.credentials.token)
     })
 
     user.save
-    
+
     # for auto_created users, we need to invoke the after_create callback.
     user.calculate_popularity unless user.current_subscription
 
     user
   end
-  
+
   def calculate_popularity
     self.subscribe_to_round
     User.delay_for(2.second, queue: 'git').update_total_repos_stars(self.id.to_s)
@@ -219,6 +225,11 @@ class User
   def royalty_bonus_transaction
     self.transactions.where(transaction_type: 'royalty_bonus').first
   end
+
+  def deleted?
+    self.deleted_at.present? and !active
+  end
+
 end
 
 
