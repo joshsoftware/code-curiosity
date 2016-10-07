@@ -115,13 +115,9 @@ class GroupFlowsTest < ActionDispatch::IntegrationTest
     create_group
     visit group_widget_path(@group)
   
-    within '.box' do
-      within '.box-footer' do
-        page.execute_script "$('ul li:first .user-img').trigger('click')"
-      end
-    end
-    #clicking on user opens user profile on different window
-    page.switch_to_window(page.windows.last)
+    page.switch_to_window(page.window_opened_by{
+      page.find(:css, 'li', match: :first).click 
+    })
     #page.save_and_open_screenshot
     assert page.find('section.content-header').has_content?('User Profile')
     assert page.find('section.content').has_content?('josh')
@@ -133,12 +129,9 @@ class GroupFlowsTest < ActionDispatch::IntegrationTest
     create_group
     visit group_widget_path(@group)
   
-    within '.box' do
-      within '.box-footer' do
-        page.execute_script "$('ul li:first .user-img').trigger('click')"
-      end
-    end
-    page.switch_to_window(page.windows.last)
+    page.switch_to_window(page.window_opened_by{
+      page.find(:css, 'li', match: :first).click 
+    })
     #page.save_and_open_screenshot
     assert page.find('section.content-header').has_content?('User Profile')
   end

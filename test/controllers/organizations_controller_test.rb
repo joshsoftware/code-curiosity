@@ -1,12 +1,24 @@
 require "test_helper"
 
 class OrganizationsControllerTest < ActionController::TestCase
+
+  let(:org) { 'joshsoftware' }
+  let(:request_path) { "/orgs/#{org}" }
+  let(:body) { File.read('test/fixtures/org.json') }
+  let(:status) { 200 }
+
+  def get_stub
+    stub_get(request_path).to_return(body: body, status: status,
+      headers: {content_type: "application/json; charset=utf-8"})
+  end
+
   def setup
     super
+    get_stub
     @goal = create :goal
     @round = create :round, :open
-    @user = create :user, auth_token: 'dah123rty', goal: @goal
-    @org = create :organization, github_handle: 'dolores'
+    @user = create :user, auth_token: Faker::Lorem.word, goal: @goal
+    @org = create :organization
     @org.users << @user
     @repo = create :repository_with_activity_and_commits, organization: @org
   end
@@ -60,5 +72,4 @@ class OrganizationsControllerTest < ActionController::TestCase
     assert_response :success
     assert_template :activities
   end
-
 end
