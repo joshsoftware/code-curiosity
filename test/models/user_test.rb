@@ -77,4 +77,39 @@ class UserTest < ActiveSupport::TestCase
     user.update({deleted_at: Time.now, active: false})
     assert user.deleted?
   end
+
+  test 'set_royalty_bonus' do
+    user = create :user
+    user.expects(:calculate_royalty_bonus).returns(500)
+    user.set_royalty_bonus
+    assert_equal 1, user.transactions.count
+    transaction = user.transactions.first
+    assert_equal 'credit', transaction.type
+    assert_equal 'royalty_bonus', transaction.transaction_type
+    assert_equal 500, transaction.points
+    assert_equal 500, user.total_points
+
+    redeem_request_1 = create(:redeem_request, points: 100, address: 'baner', user: user)
+    redeem_request_2 = create(:redeem_request, points: 250, address: 'baner', user: user)
+    assert_equal 3, user.transactions.count
+
+    user.expects(:calculate_royalty_bonus).returns(600)
+    user.set_royalty_bonus
+    assert_equal 4, user.transactions.count
+    transaction = user.transactions.last
+    assert_equal 'credit', transaction.type
+    assert_equal 'royalty_bonus', transaction.transaction_type
+    assert_equal 100, transaction.points
+    assert_equal 250, user.total_points
+
+    user.expects(:calculate_royalty_bonus).returns(900)
+    user.set_royalty_bonus
+    assert_equal 5, user.transactions.count
+    transaction = user.transactions.last
+    assert_equal 'credit', transaction.type
+    assert_equal 'royalty_bonus', transaction.transaction_type
+    assert_equal 300, transaction.points
+    assert_equal 550, user.total_points
+  end
+
 end

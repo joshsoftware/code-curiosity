@@ -170,6 +170,13 @@ class User
     (repos_star_count * ([followers, 100].min/100.0)).round
   end
 
+  # Set the royalty bonus(RB) for a user based on the rating of the repositories owned.
+  # If the user signs up for the first time and if the RB is 450, credit 450 points to the user.
+  # If the user deletes his/her account and re-signs-up and if the calculated RB is 600, credit only 150 (ie. 600-450).
+  # If the user signs up for the first time and RB is 450,  and has earned 900 for the first round, his total points are 1350.
+  # If he deletes and re-signs-up with 550 RB, the new transaction of RB would be of 100(550-450) and total points would be 1450.
+  # The points earned via commits and activities and redeem requests of the user are already tracked via the transactions
+  # and hence need not be considered while calculating the royalty points.
   def set_royalty_bonus
     royalty_points = calculate_royalty_bonus
 
@@ -178,10 +185,14 @@ class User
     end
 
     if royalty_points > 0
-      self.transactions.create(points: royalty_points, transaction_type: 'royalty_bonus', type: 'credit')
+      royalty_bonuses = self.transactions.where(transaction_type: 'royalty_bonus', type: 'credit')
+      self.transactions.create(
+        points: royalty_bonuses.any? ? royalty_points - royalty_bonuses.sum(:points) : royalty_points,
+        transaction_type: 'royalty_bonus', type: 'credit'
+      )
     end
 
-    self.points = royalty_points
+    self.points = total_points
     self.save
   end
 
@@ -206,7 +217,7 @@ class User
   end
 
   def total_points
-    @_t_p ||= self.transactions.sum(:points)
+    self.transactions.sum(:points)
   end
 
   def current_subscription(round = nil)
