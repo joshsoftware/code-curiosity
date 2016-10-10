@@ -1,8 +1,8 @@
 require "test_helper"
 
 class RedeemRequestTest < ActiveSupport::TestCase
-  include ActiveJob::TestHelper 
-  
+  include ActiveJob::TestHelper
+
   def redeem_request
     @redeem_request ||= build(:redeem_request)
   end
@@ -39,7 +39,7 @@ class RedeemRequestTest < ActiveSupport::TestCase
   end
 
   test "whether retailer category is other" do
-    redeem_request = build(:redeem_request, :points => 2, :address => 'baner', :retailer => 'other', :gift_product_url => Faker::Internet.url, :address => 'baner')
+    redeem_request = build(:redeem_request, :points => 2, :address => 'baner', :retailer => 'other', :gift_product_url => Faker::Internet.url)
     assert redeem_request.retailer_other?
   end
 
@@ -75,8 +75,8 @@ class RedeemRequestTest < ActiveSupport::TestCase
     redeem_request = create(:redeem_request, :points => 2, user: user)
     transaction_type = redeem_request.transaction.transaction_type
     assert_equal transaction_type, 'redeem_points'
-  end 
-  
+  end
+
   test "transaction corresponding to redeem request must be destroyed when it is deleted" do
     user = create(:user)
     assert_equal user.transactions.count, 0
@@ -89,17 +89,17 @@ class RedeemRequestTest < ActiveSupport::TestCase
     assert_equal user.redeem_requests.count, 0
     assert_equal user.transactions.count, 1
   end
- 
+
   test "send notification only when coupon_code or comment is changed" do
     user = create(:user)
     assert_equal user.transactions.count, 0
     transaction = create(:transaction, :type => 'credit', :points => 4, user: user)
     assert_equal user.transactions.count, 1
-    assert_enqueued_jobs 3 do 
+    assert_enqueued_jobs 3 do
       redeem_request = create(:redeem_request, :points => 1, :coupon_code => 'abc', user: user)
     end
   end
- 
+
   test "redeem request must be updated when coupon_code or comment_changed" do
     user = create(:user)
     assert_equal user.transactions.count, 0
