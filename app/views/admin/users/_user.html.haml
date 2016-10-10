@@ -16,3 +16,5 @@
     %a{href: admin_user_login_as_path(user), class: "btn btn-primary btn-sm", data: {confirm: "Are you sure?"}}
       %i.fa.fa-user
       Login as
+    %a{href: admin_user_path(user.id), class: "btn btn-danger btn-sm", data: {method: 'delete', confirm: "Are you sure? This action is irreversible"}}
+      %i.fa.fa-trash

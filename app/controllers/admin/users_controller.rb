@@ -33,4 +33,17 @@ class Admin::UsersController < ApplicationController
 
     render :index
   end
+
+  def destroy
+    user = User.find(params[:id])
+
+    if user
+      user.destroy
+      redirect_to admin_users_path, notice: "#{user.name} has been deleted successfully"
+    else
+      redirect_to admin_users_path, notice: "User not found"
+    end
+    
+  end
+
 end

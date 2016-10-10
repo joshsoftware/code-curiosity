@@ -53,20 +53,20 @@ class User
   field :last_repo_sync_at,  type: Time
   field :last_gh_data_sync_at, type: Time
 
+  belongs_to :goal
   has_many :commits, dependent: :destroy
   has_many :activities, dependent: :destroy
+  has_many :transactions, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
+  has_many :rounds
+  has_many :comments, dependent: :destroy
+  has_many :redeem_requests, dependent: :destroy
+  has_many :group_invitations, dependent: :destroy
   has_and_belongs_to_many :repositories, class_name: 'Repository', inverse_of: 'users'
   has_and_belongs_to_many :judges_repositories, class_name: 'Repository', inverse_of: 'judges'
   has_and_belongs_to_many :roles, inverse_of: nil
-  has_many :transactions
-  has_many :subscriptions
-  has_many :rounds
-  has_many :comments
   has_and_belongs_to_many :organizations
-  has_and_belongs_to_many :groups, class_name: 'Group', inverse_of: 'members'
-  has_many :redeem_requests
-  has_many :group_invitations
-  belongs_to :goal
+  has_and_belongs_to_many :groups, class_name: 'Group', inverse_of: 'members' 
   
   slug  :github_handle
 

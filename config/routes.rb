@@ -39,7 +39,7 @@ Rails.application.routes.draw do
         get :assign_judge
       end
     end
-    resources :users, only: [:index] do
+    resources :users, only: [:index, :destroy] do
       get :mark_as_judge
       get :login_as
       get :search, on: :collection
