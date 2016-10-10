@@ -1,14 +1,14 @@
 require "test_helper"
 
 class TransactionTest < ActiveSupport::TestCase
- 
+
   def test_transaction_type_must_be_present
     transaction = build(:transaction, :type => nil)
     transaction.valid?
     assert_not_empty transaction.errors[:type]
   end
 
-  def test_points_must_be_present 
+  def test_points_must_be_present
     transaction = build(:transaction, :points => nil)
     transaction.valid?
     assert_not_empty transaction.errors[:points]
@@ -37,7 +37,7 @@ class TransactionTest < ActiveSupport::TestCase
     assert_equal transaction.user.points, 5
   end
 
-  def test_update_only_when_points_greater_than_zero 
+  def test_update_only_when_points_greater_than_zero
     transaction = build(:transaction,:points => 2, :type => 'credit', user: FactoryGirl.create(:user))
     transaction.user.points = 1
     transaction.update_user_total_points
@@ -51,7 +51,13 @@ class TransactionTest < ActiveSupport::TestCase
     assert_equal(transaction.user.points, 1)
   end
 
-  
+  def test_update_only_when_points_less_than_zero
+    transaction = build(:transaction, points: -2, type: 'debit', user: FactoryGirl.create(:user))
+    transaction.user.points = 3
+    transaction.update_user_total_points
+    assert_equal(transaction.user.points, 1)
+  end
+
   def test_check_total_points_before_redemption
     transaction = FactoryGirl.create_list(:transaction, 3, :type => 'credit', :transaction_type => 'Round', :points => 1)
     transaction = Transaction.where(:transaction_type.in => ['Round','royalty_bonus'])

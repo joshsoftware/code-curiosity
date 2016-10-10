@@ -40,9 +40,7 @@ class Transaction
   end
 
   def update_user_total_points
-    if points > 0
-      user.set(points: user.points + points)
-    end
+    user.set(points: user.points + points)
   end
 
   def self.total_points_before_redemption
