@@ -1,6 +1,5 @@
 module ActivitiesHelper
 
-
   def score_css_class(value)
     classes = {
       0 => 'zero',
@@ -12,6 +11,10 @@ module ActivitiesHelper
     }
 
     classes[value]
+  end
+
+  def markdown(description)
+    raw MARKDOWN.render(description)
   end
 
 end

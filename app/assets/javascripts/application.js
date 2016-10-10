@@ -21,6 +21,7 @@
 //= require stream_table
 //= require bootstrap-typeahead
 //= require bootstrap2-toggle
+//= require jquery.shorten
 //= require_tree .
 
 function onDocReady(){
