@@ -29,6 +29,12 @@ faq:
     answer: Points are the scores you have accumulated for your contributions. You can redeem these points for digital goods, currently on the Github Shop. We send you a gift-card of the amount you want and you can redeem that at the store!
     html_anchor: 'what-are-points'
   -
+    question:  How do I redeem my points?
+    answer: Redemptions are in the form of digital prizes or Github Merchandise or Company sponsored swag. You need to accumulate at least 100 points before you can redeem them. <span style='color:red'>Please note that you have to be registered on Github for at least 6 months and on CodeCuriosity for at least 3 months before you can redeem any points. In any month, you can redeem at most 500 Royalty points. </span>
+  -
+    question:  How long does the redemption process take?
+    answer: Usually, we redeem points within 1 or 2 days. All redemption requests are screened by our fraud detection team. We have come across cases of fraud (unfortunately) where users were trying to manipulate the system to make money in unfair ways. We have ejected these users from the system. <i style='color:blue'>This is indeed a sign that the initiative has been sucessful </i> :) If your redemption request is not processed within 4 days, please contact us and we shall discuss the reasons behind the delay.
+  -
     question: Ok. I bought the concept. But how do I start? This is all new to me!
     answer: "Don't worry! Start with <a href='http://codetriage.com' target='_blank'>Code Triage</a>. It's a very good way to choose which language and repositories you want to contribute to. It sends you some GitHub issues that you can look at everyday! Too complex for you? Start by reading and contributing back some documentation at <a href='http://www.docsdoctor.org' target='_blank'>DocsDoctor</a>."
   -
@@ -39,7 +45,7 @@ faq:
     answer: You can signup using your GitHub account and it's free.
   -
     question: Can I leave CodeCuriosity?
-    answer: We would be really sad to see you go. However, if you still want to leave, just search for the CodeCuriosity Application in Github applications and revoke access. You can do this from your <a href='https://github.com/settings/applications' target='_blank'>Github Applications.</a>
+    answer: We would be really sad to see you go. However, if you still want to leave, you can 'Delete Account' in the profile settings. You may also want to search for the CodeCuriosity Application in Github applications and revoke access. You can do this from your <a href='https://github.com/settings/applications' target='_blank'>Github Applications.</a> Of course, you are welcome to sign-up again and re-activate your account.
   -
     question: Why only Github? Why not BitBucket or GitLab or any other open-source systems?
     answer: We believe that Github is the centre of the universe and we do hope Github shows us the same love back! Having said that, we believe that most of the open-source contributions happen on Github and it helps to take baby steps. If we see a definite need to integrate with others, we shall do that in the far future!
@@ -62,14 +68,11 @@ faq:
     question: What is scored?
     answer: Automated scoring is done on commits, comments, opening an issue and closing an issue today. As we evolve, this may get more streamlined and we may include other factors too.
   -
-    question:  How do I redeem my points?
-    answer: Redemptions are in the form of digital prizes or Github Merchandise or Company sponsored swag. You need to accumulate at least 100 points before you can redeem them.
-  -
     question: Can I make real money from CodeCuriosity?
     answer: Not yet ;) It is our aim to sort out legal issues and if we get enough grants and contributions from the community, we would be more than happy to reward open source contributions with money. We dream to invent a new career - A full-time open source contributor who works for the community and not for a company!
   -
     question: How does CodeCuriosity sustain? What keeps is it going?
-    answer: Currently, we at Josh Software, keep it going. We would love to get some support from companies who support this cause. We would love to have companies like GitHub, Mozzila and others provide us grants to take this initiative to greater heights. What is critical is that grants are for ALL open source repositories equally - we do not believe in grants for specific repositories and we shall never allow that!
+    answer: Currently, we at Josh Software, keep it going. We would love to get some support from companies who support this cause. We would love to have companies like <a href="http://github.com">GitHub</a>, <a href="https://www.mozilla.org/en-US/foundation">Mozilla</a> and others provide us grants to take this initiative to greater heights. What is critical is that grants are for ALL open source repositories equally - we do not believe in grants for specific repositories and we shall never allow that!
   -
     question: Do companies or organisations benefit from CodeCuriosity?
     answer: Yes. We are in the process of giving a cumulative score to organisations that the github users belongs to. So, if you are working in a company that encourages you to contribute to open-source, the organization overall rating increases too! This is an algorithm that uses a weighted average of it's employees scores. This not only helps the organization get a better profile but also encourages developers to join such companies!
