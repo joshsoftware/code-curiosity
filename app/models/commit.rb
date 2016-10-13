@@ -52,7 +52,11 @@ class Commit
 
   # Find the closed round which can accomodate the commit. If non found, assign the open round.
   def set_round
-    self.round = Round.where(:from_date.lte => commit_date, :end_date.gte => commit_date, status: :close).first || Round.opened unless self.round
+    self.round = if Round.opened.from_date <= commit_date
+                   Round.opened
+                 else
+                   Round.where(:from_date.lte => commit_date, :end_date.gte => commit_date, status: :close).first
+                 end
   end
 
 end

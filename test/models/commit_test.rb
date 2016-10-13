@@ -6,6 +6,7 @@ class CommitTest < ActiveSupport::TestCase
     stub_get("/repos/joshsoftware/code-curiosity/commits/eb0df748bbf084ca522f5ce4ebcf508d16169b96")
     .to_return(body: File.read('test/fixtures/commit.json'), status: 200,
     headers: {content_type: "application/json; charset=utf-8"})
+    create :round, :open
   end
 
   def stub_get(path, endpoint = Github.endpoint.to_s)
@@ -50,7 +51,7 @@ class CommitTest < ActiveSupport::TestCase
   end
 
   def test_proper_round_is_assigned
-    open_round = create :round, :open, from_date: Date.today.beginning_of_month
+    open_round = Round.opened
     closed_round = create :round, :closed, from_date: Date.today.beginning_of_month - 1.month, end_date: Date.today.end_of_month - 1.month
     oldest_round = create :round, :closed, from_date: Date.today.beginning_of_month - 2.month, end_date: Date.today.end_of_month - 2.month
     assert_nil open_round.end_date

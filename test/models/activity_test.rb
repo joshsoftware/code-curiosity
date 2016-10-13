@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class ActivityTest < ActiveSupport::TestCase
+  def setup
+    super
+    create :round, :open
+  end
 
   def test_score_if_total_no_of_words_less_than_25
     activity = create(:activity, description: Faker::Lorem.words, user: create(:user))
@@ -52,7 +56,7 @@ class ActivityTest < ActiveSupport::TestCase
   end
 
   def test_proper_round_is_assigned
-    open_round = create :round, :open, from_date: Date.today.beginning_of_month
+    open_round = Round.opened
     closed_round = create :round, :closed, from_date: Date.today.beginning_of_month - 1.month, end_date: Date.today.end_of_month - 1.month
     oldest_round = create :round, :closed, from_date: Date.today.beginning_of_month - 2.month, end_date: Date.today.end_of_month - 2.month
     assert_nil open_round.end_date

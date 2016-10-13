@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :round do
     name {Faker::App.name}
-    from_date {Faker::Time.between(DateTime.now, DateTime.now + 1)}
-    end_date {Faker::Time.between(DateTime.now + 29, DateTime.now + 30)}
+    from_date Date.today.beginning_of_month - 1.month
+    end_date Date.today.end_of_month - 1.month
 
     trait :hackathon do
       from_date { Faker::Time.between(DateTime.now + 1, DateTime.now + 2)}

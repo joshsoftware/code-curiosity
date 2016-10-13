@@ -16,7 +16,7 @@ class JudgingControllerTest < ActionController::TestCase
     super
     get_stub
     @goal = create :goal
-    @round = create :round, name: 'first', from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month, status: :open
+    @round = create :round, :open
     @user = create :user, auth_token: Faker::Lorem.word, goal: @goal, is_judge: true
     @org = create :organization
     @org.users << @user
@@ -24,6 +24,7 @@ class JudgingControllerTest < ActionController::TestCase
   end
 
   test 'commits' do
+    round = create :round, :closed, from_date: @round.from_date - 10.days, end_date: @round.from_date - 1.day
     old_commit = create :commit, commit_date: @round.from_date - 1.day
     sign_in @user
     get :commits
@@ -36,6 +37,7 @@ class JudgingControllerTest < ActionController::TestCase
   end
 
   test 'activities' do
+    round = create :round, :closed, from_date: @round.from_date - 10.days, end_date: @round.from_date - 1.day
     old_activity = create :activity, commented_on: @round.from_date - 1.day
     sign_in @user
     get :activities

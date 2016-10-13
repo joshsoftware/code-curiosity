@@ -7,7 +7,7 @@ class ActivitiesControllerTest < ActionController::TestCase
   let(:other_user) { create :user, auth_token: 'dsadasda', goal: goal }
 
   before :all do
-    @round = create :round, status: :open
+    @round = create :round, :open
   end
 
   test 'should not render index for non-logged-in users' do

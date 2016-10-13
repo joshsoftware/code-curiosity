@@ -1,6 +1,10 @@
 require "test_helper"
 
 class SubscriptionTest < ActiveSupport::TestCase
+  def setup
+    super
+    create :round, :open
+  end
 
   def test_commits_count_will_be_zero_if_no_commit_exist
     user = create(:user)
@@ -34,9 +38,9 @@ class SubscriptionTest < ActiveSupport::TestCase
 
   def test_commits_score
     user = create(:user)
-    round = create(:round)
+    round = Round.opened
     subscription = create(:subscription, user: user, round: round)
-    commit = create_list(:commit, 2, :auto_score => 2, :commit_date => Faker::Time.between(DateTime.now - 1, DateTime.now), user: user, round: round)
+    commit = create_list(:commit, 2, :auto_score => 2, :commit_date => Faker::Time.between(DateTime.now - 1, DateTime.now), user: user)
     assert_equal subscription.commits_score, 4
   end
 

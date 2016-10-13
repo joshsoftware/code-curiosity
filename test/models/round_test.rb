@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RoundTest < ActiveSupport::TestCase
-  def test_must_create_round 
+  def test_must_create_round
     assert_difference 'Round.count' do
       user = create(:round)
     end
@@ -14,26 +14,26 @@ class RoundTest < ActiveSupport::TestCase
   end
 
 
-  def test_from_date_must_be_present 
+  def test_from_date_must_be_present
     round = build(:round,:from_date => nil)
     round.valid?
-    assert_not_empty round.errors[:from_date] 
+    assert_not_empty round.errors[:from_date]
   end
 
   def test_end_date_must_be_after_from_date
     round = build(:round)
-    round.end_date = Time.now - 20.days
+    round.end_date = round.from_date - 20.days
     round.valid?
     assert_not_empty round.errors[:end_date]
   end
- 
+
   def test_round_should_be_opened
     round = build(:round, :status => 'close')
     round.valid?
     assert_not round.open?
   end
 
-  def test_next_round_must_be_created_after_closing_current_round 
+  def test_next_round_must_be_created_after_closing_current_round
     round = build(:round, :status => 'open')
     assert_difference 'Round.count' do
       round.round_close
