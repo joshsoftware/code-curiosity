@@ -59,7 +59,8 @@ class Activity
 
   private
 
+  # Find the closed round which can accomodate the activity. If non found, assign the open round.
   def set_round
-    self.round = Round.where(:from_date.lte => commented_on, :end_date.gte => commented_on).first unless self.round
+    self.round = Round.where(:from_date.lte => commented_on, :end_date.gte => commented_on, status: :close).first || Round.opened unless self.round
   end
 end

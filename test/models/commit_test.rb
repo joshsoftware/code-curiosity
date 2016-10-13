@@ -50,12 +50,17 @@ class CommitTest < ActiveSupport::TestCase
   end
 
   def test_proper_round_is_assigned
-    round_1 = create :round, from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
-    round_2 = create :round, from_date: Date.today.beginning_of_month - 1.month, end_date: Date.today.end_of_month - 1.month
-    commit_1 = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today, round: nil)
-    assert_equal commit_1.round, round_1
-    commit_2 = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today - 1.month, round: nil)
-    assert_equal commit_2.round, round_2
+    open_round = create :round, :open, from_date: Date.today.beginning_of_month
+    closed_round = create :round, :closed, from_date: Date.today.beginning_of_month - 1.month, end_date: Date.today.end_of_month - 1.month
+    oldest_round = create :round, :closed, from_date: Date.today.beginning_of_month - 2.month, end_date: Date.today.end_of_month - 2.month
+    assert_nil open_round.end_date
+    assert_equal Round.count, 3
+    commit = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today, round: nil)
+    assert_equal commit.round, open_round
+    commit = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today - 1.month, round: nil)
+    assert_equal commit.round, closed_round
+    commit = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today - 2.month, round: nil)
+    assert_equal commit.round, oldest_round
   end
 
 end

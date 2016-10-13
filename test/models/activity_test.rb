@@ -52,12 +52,17 @@ class ActivityTest < ActiveSupport::TestCase
   end
 
   def test_proper_round_is_assigned
-    round_1 = create :round, from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
-    round_2 = create :round, from_date: Date.today.beginning_of_month - 1.month, end_date: Date.today.end_of_month - 1.month
-    activity_1 = create :activity, description: Faker::Lorem.words, commented_on: Date.today, round: nil
-    assert_equal activity_1.round, round_1
-    activity_2 = create :activity, description: Faker::Lorem.words, commented_on: Date.today - 1.month, round: nil
-    assert_equal activity_2.round, round_2
+    open_round = create :round, :open, from_date: Date.today.beginning_of_month
+    closed_round = create :round, :closed, from_date: Date.today.beginning_of_month - 1.month, end_date: Date.today.end_of_month - 1.month
+    oldest_round = create :round, :closed, from_date: Date.today.beginning_of_month - 2.month, end_date: Date.today.end_of_month - 2.month
+    assert_nil open_round.end_date
+    assert_equal Round.count, 3
+    activity = create :activity, description: Faker::Lorem.words, commented_on: Date.today, round: nil
+    assert_equal activity.round, open_round
+    activity = create :activity, description: Faker::Lorem.words, commented_on: Date.today - 1.month, round: nil
+    assert_equal activity.round, closed_round
+    activity = create :activity, description: Faker::Lorem.words, commented_on: Date.today - 2.month, round: nil
+    assert_equal activity.round, oldest_round
   end
 
 end
