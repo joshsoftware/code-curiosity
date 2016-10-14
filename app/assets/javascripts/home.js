@@ -1,10 +1,10 @@
-function userTrendChart(xAxis, commits, activities, points) {
+function userTrendChart(xAxis, commits, activities, points, username) {
   $('#users-chart-container').highcharts({
     chart: {
       type: 'line'
     },  
     title: {
-      text: 'Your Contribution Trend',
+      text: username + " Contribution Trend",
       x: -20 //center
     },    
     xAxis: { 
