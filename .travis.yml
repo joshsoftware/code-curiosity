@@ -10,6 +10,9 @@ language: ruby
 rvm:
   - '2.3.0'
 
+env:
+  - ENC_KEY='somerandomkey'
+
 services:
   - mongodb
   - redis-server
