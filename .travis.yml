@@ -10,8 +10,12 @@ language: ruby
 rvm:
   - '2.3.0'
 
+env:
+  - ENC_KEY='somerandomkeysomerandomkeysomerandomkeysomerandomkey'
+
 services:
   - mongodb
+  - redis-server
 
 cache: bundler
 
