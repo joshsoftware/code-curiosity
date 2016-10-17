@@ -61,13 +61,11 @@ namespace :utils do
 
   desc "Delete duplicate users"
   task delete_duplicate_users: :environment do
-    User.pluck(:github_handle).each do |handle|
+    User.where(uid: /DELETED/i).pluck(:github_handle).uniq.each do |handle|
       duplicate_users = User.where(github_handle: handle).order_by(created_at: :asc)
-      if duplicate_users.count > 1
-        duplicate_users[1..-1].each{|user| user.destroy }
-        original_user = duplicate_users[0]
-        original_user.set(uid: original_user.uid.split('-')[0])
-      end
+      duplicate_users[1..-1].each{|user| user.destroy }
+      original_user = duplicate_users[0]
+      original_user.set(uid: original_user.uid.split('-')[0])
     end
   end
 
