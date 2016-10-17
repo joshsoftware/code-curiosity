@@ -62,10 +62,30 @@ namespace :utils do
   desc "Delete duplicate users"
   task delete_duplicate_users: :environment do
     User.where(uid: /DELETED/i).pluck(:github_handle).uniq.each do |handle|
+      # Get the duplicate users in order of creation.
+      # Oldest record is the original record and has to be maintained. Delete other records.
       duplicate_users = User.where(github_handle: handle).order_by(created_at: :asc)
-      duplicate_users[1..-1].each{|user| user.destroy }
-      original_user = duplicate_users[0]
-      original_user.set(uid: original_user.uid.split('-')[0])
+
+      if duplicate_users.count > 1
+        # latest account of user was deleted?
+        original_user = duplicate_users[0]
+        if duplicate_users[-1].deleted?
+          original_user.set({deleted_at: Time.now, auto_created: true, active: false, uid: original_user.uid.split('-')[0]})
+        else
+          original_user.set({uid: original_user.uid.split('-')[0]})
+        end
+
+        # assign commits, activities and comments to the original record
+        duplicate_users[1..-1].each do |dup_user|
+          dup_user.commits.update_all({user_id: original_user.id})
+          dup_user.activities.update_all({user_id: original_user.id})
+          dup_user.comments.update_all({user_id: original_user.id})
+          dup_user.destroy
+        end
+      else
+        original_user = duplicate_users[0]
+        original_user.set({deleted_at: Time.now, auto_created: true, active: false, uid: original_user.uid.split('-')[0]})
+      end
     end
   end
 
