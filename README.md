@@ -29,7 +29,7 @@ Here are some questions that should help you get going. A lot more questions tha
 
 ### Who should use CodeCuriosity?
 
-Everyone who contributes to open source. It's not only fun but you're also making a difference! Since all commits are rewarded and everyone (experts and newbies alike) is rewarded, it's always encouraging. There are so many repository owners that are looking out for help from developers and CodeCuriosity not only helps you help others but also rewards you while doing it. It's about having your cake and eating it too!.
+Everyone who contributes to open source. It's not only fun but you're also making a difference! Since all commits are rewarded and everyone (experts and newbies alike) is rewarded, it's always encouraging. There are so many repository owners that are looking out for help from developers and CodeCuriosity not only helps you help others but also rewards you while doing it. It's about having your cake and eating it too!
 
 ### How does it work?
 We gamify open source contributions.
@@ -45,8 +45,8 @@ Points are the scores you have accumulated for your contributions. You can redee
 ### New to Open Source and don't know where to start?
 Don't worry! Start with [Code Triage](https://www.codetriage.com). It's a very good way to choose which language and repositories you want to contribute to. It sends you some GitHub issues that you can look at everyday!
 
-Still too complex for you? Start by reading and contributing back some documentation at [DocsDoctor](http://www.docsdoctor.org).
-
+Still too complex for you? Start by reading and contributing back some documentation at [Code Triage](http://www.codetriage.com) by clicking on the 'Triage Docs' button after chooosing a repository.  
+**Note:** As of now, only select programming languages are supported for Docs triage by Code Triage.
 
 
 # Contributing to CodeCuriosity
