@@ -36,7 +36,7 @@ faq:
     answer: Usually, we redeem points within 1 or 2 days. All redemption requests are screened by our fraud detection team. We have come across cases of fraud (unfortunately) where users were trying to manipulate the system to make money in unfair ways. We have ejected these users from the system. <i style='color:blue'>This is indeed a sign that the initiative has been sucessful </i> :) If your redemption request is not processed within 4 days, please contact us and we shall discuss the reasons behind the delay.
   -
     question: Ok. I bought the concept. But how do I start? This is all new to me!
-    answer: "Don't worry! Start with <a href='http://codetriage.com' target='_blank'>Code Triage</a>. It's a very good way to choose which language and repositories you want to contribute to. It sends you some GitHub issues that you can look at everyday! Too complex for you? Start by reading and contributing back some documentation at <a href='http://www.docsdoctor.org' target='_blank'>DocsDoctor</a>."
+    answer: "Don't worry! Start with <a href='http://codetriage.com' target='_blank'>Code Triage</a>. It's a very good way to choose which language and repositories you want to contribute to. It sends you some GitHub issues that you can look at everyday! Too complex for you? Start by reading and contributing back some documentation at <a href='http://www.codetriage.com' target='_blank'>Code Triage</a> by clicking on the 'Triage Docs' button after chooosing a repository."
   -
     question: I'm a newbie. What's in it for me?
     answer: If you need a push to start contributing, this is it! You not only build your profile, you earn points and you're contributing back.
