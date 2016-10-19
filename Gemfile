@@ -13,6 +13,7 @@ gem 'haml'
 #gem 'therubyracer', platforms: :ruby
 
 gem 'kaminari'
+gem 'kaminari-mongoid', '~> 0.1.0'
 gem 'jquery-rails'
 gem 'turbolinks', '~>2.5'
 gem 'jbuilder', '~> 2.0'
