@@ -49,7 +49,7 @@ class SubscriptionTest < ActiveSupport::TestCase
     assert_equal subscription.activities_score, 0
   end
 
-  def test_total_activities_score_when_event_type_is_comment
+  def test_total_activities_score_when_event_type_is_comment_and_event_action_is_created
     user = create(:user)
     round = create(:round)
     subscription = create(:subscription, user: user, round: round)
