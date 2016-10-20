@@ -120,7 +120,7 @@ class GroupFlowsTest < ActionDispatch::IntegrationTest
     })
     #page.save_and_open_screenshot
     assert page.find('section.content-header').has_content?('User Profile')
-    assert page.find('section.content').has_content?('josh')
+    assert page.find('section.content').has_content?('josh'.titleize)
   end
 
   test "clicking on the user name in the widget shows the user profile even if the user is not logged in" do

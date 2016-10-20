@@ -5,6 +5,7 @@ module ContributionHelper
     @commits = []
     @activities = []
     @points = []
+    @username = user.eql?(current_user) ? ['Your'] : ["#{user.name.titleize}'s"]
     @subscriptions.map{|s| @xAxis << s.round.name; @commits << s.commits_count; @activities << s.activities_count; @points << s.points}
   end
   

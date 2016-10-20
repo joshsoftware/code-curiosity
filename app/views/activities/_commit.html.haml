@@ -1,6 +1,6 @@
 %tr{data: {commit: commit.id.to_s}}
   = render partial: 'activities/score_cell', locals: { resource: commit }
-  %td= commit.commit_date.strftime('%m/%d/%Y')
+  %td= commit.commit_date.strftime('%d/%b/%Y')
   %td= commit.repository.name
   %td= commit.message
   %td

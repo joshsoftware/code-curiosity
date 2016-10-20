@@ -12,4 +12,4 @@
         %i= transaction.coupon_code
     - if transaction.redeem_transaction?
       %small.label{class: 'bg-primary' }= transaction.redeem_request.retailer.upcase
-  %td= transaction.created_at.strftime('%D %T')
+  %td= transaction.created_at.strftime('%d/%b/%Y %T')

@@ -6,6 +6,5 @@
   %td= format_points(subscription.points)
 /  
   %td= subscription.goal ? link_to(subscription.goal.name, goals_path) : '-'
-
 :javascript
-  userTrendChart(#{@xAxis}, #{@commits}, #{@activities}, #{@points}); 
+  userTrendChart(#{@xAxis}, #{@commits}, #{@activities}, #{@points}, #{@username});
