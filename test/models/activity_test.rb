@@ -39,11 +39,18 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal activity.user.activities_count, 1
   end
 
-  def consider_for_scoring_scope_should_not_retrive_closed_event_actions
+  def test_consider_for_scoring_scope_should_not_retrive_closed_event_actions
     opened_activity = create(:activity, description: Faker::Lorem.words, event_action: 'opened')
     closed_activity = create(:activity, description: Faker::Lorem.words, event_action: 'closed')
     assert_equal Activity.considered_for_scoring.count, 1
     assert_equal Activity.considered_for_scoring.first, opened_activity
+  end
+
+  def test_consider_for_scoring_scope_should_retrive_created_comment_event_actions
+    comment = create(:activity, description: Faker::Lorem.words, event_type: 'comment', event_action: 'created')
+    opened_activity = create(:activity, description: Faker::Lorem.words, event_action: 'opened')
+    closed_activity = create(:activity, description: Faker::Lorem.words, event_action: 'closed')
+    assert_equal Activity.considered_for_scoring.count, 2
   end
 
   def test_round_is_present

@@ -8,7 +8,7 @@ class Activity
   ISSUE_ACTIONS = %W(assigned unassigned labeled unlabeled opened edited closed reopened)
 
   # Actions ignored for scoring.
-  CONSIDERED_FOR_SCORING = %W(opened reopened)
+  CONSIDERED_FOR_SCORING = %W(opened reopened created)
 
   field :description,     type: String
   field :event_type,      type: String
