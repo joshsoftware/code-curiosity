@@ -7,8 +7,13 @@ class Activity
   # Refer https://developer.github.com/v3/activity/events/types/#issuesevent for more details.
   ISSUE_ACTIONS = %W(assigned unassigned labeled unlabeled opened edited closed reopened)
 
+  # We are persisting only IssueComment events. Please refer ActivitiesFetcher.
+  # Github events actions for IssueComment can be any of created, edited or deleted.
+  COMMENT_ACTIONS = %W(created edited deleted)
+
   # Actions ignored for scoring.
-  CONSIDERED_FOR_SCORING = %W(opened reopened)
+  ISSUES_CONSIDERED_FOR_SCORING = %W(opened reopened)
+  COMMENTS_CONSIDERED_FOR_SCORING = %W(created)
 
   field :description,     type: String
   field :event_type,      type: String
@@ -27,10 +32,14 @@ class Activity
   embeds_many :scores, as: :scorable
   belongs_to :organization
 
-  scope :considered_for_scoring, -> { where(:event_action.in => CONSIDERED_FOR_SCORING) }
+  scope :considered_for_scoring, -> { any_of(
+    { event_type: :issue, :event_action.in => ISSUES_CONSIDERED_FOR_SCORING },
+    { event_type: :comment, :event_action.in => COMMENTS_CONSIDERED_FOR_SCORING }
+  )}
 
   #validates :description, uniqueness: {:scope => :commented_on}
-  validates :round, presence: true
+  validates :round, :event_type, :gh_id, :repo, :ref_url, :commented_on, presence: true
+  validates :event_type, inclusion: { in: [ 'issue', 'comment' ] }
 
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
 

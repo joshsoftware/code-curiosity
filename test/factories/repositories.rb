@@ -14,7 +14,7 @@ FactoryGirl.define do
 
       after(:create) do |repo, evaluator|
         create_list(:commit, evaluator.count, repository: repo, auto_score: evaluator.auto_score)
-        create_list(:activity, evaluator.count, repository: repo, auto_score: evaluator.auto_score)
+        create_list(:activity, evaluator.count, :issue, repository: repo, auto_score: evaluator.auto_score)
       end
     end
   end

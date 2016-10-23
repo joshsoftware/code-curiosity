@@ -51,8 +51,8 @@ class ActivitiesControllerTest < ActionController::TestCase
   end
 
   test 'should retrieve activities only associated to the current user' do
-    create_list :activity, 15, user: user
-    other = create :activity, user: other_user
+    create_list :activity, 15, :issue, user: user
+    other = create :activity, :issue, user: other_user
     sign_in user
 
     get :index
@@ -61,7 +61,7 @@ class ActivitiesControllerTest < ActionController::TestCase
   end
 
   test 'should retrieve activities only for the current round' do
-    create_list :activity, 15, user: user
+    create_list :activity, 15, :issue, user: user
     @round.update({status: 'inactive'})
     round = create(:round, status: 'open')
     sign_in user
