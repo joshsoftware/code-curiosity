@@ -26,10 +26,10 @@
               - if @commits.any?
                 = render 'commits_table'
               - else
-                = render partial: 'callout_box', locals: { type: 'success', title: 'Keep Contributing', message: 'There are no commits for this round.'} 
+                = render partial: 'callout_box', locals: { type: 'success', title: 'Keep Contributing', message: 'There are no commits for this period.'} 
           .tab-pane#activities_tab
             .table-responsive.no-padding#activities
               - if @activities.any?
                 = render 'activities_table'
               - else
-                = render partial: 'callout_box', locals: { type: 'success', title: 'Keep Contributing', message: 'There are no activities for this round.'} 
+                = render partial: 'callout_box', locals: { type: 'success', title: 'Keep Contributing', message: 'There are no activities for this period.'} 
