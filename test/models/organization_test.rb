@@ -21,7 +21,7 @@ class OrganizationTest < ActiveSupport::TestCase
     repo_sync_time = 45.minutes.ago
     organization = create(:organization, :last_repo_sync_at => repo_sync_time)
     assert organization.repo_syncing?
-  end 
+  end
 
   def test_repo_syncing_when_last_repo_sync_time_is_greater_than_an_hour
     repo_sync_time = 2.hours.ago
@@ -38,14 +38,14 @@ class OrganizationTest < ActiveSupport::TestCase
     admin = create(:user)
     assert_difference 'Organization.count' do
       Organization.setup('joshsoftware', admin)
-    end 
+    end
   end
 
   def test_created_organization_must_have_user
     admin = create(:user)
     org = Organization.setup('joshsoftware', admin)
     assert_not_nil org.users
-  end 
+  end
 
   def test_user_commits_and_update_all_commits_organization_belonging_to_a_repository
     organization = create(:organization_with_repositories)
@@ -60,7 +60,7 @@ class OrganizationTest < ActiveSupport::TestCase
 
   def test_user_activities_and_update_all_activities_organization_belonging_to_a_repository
     organization = create(:organization_with_repositories)
-    activity = create(:activity, :description => Faker::Lorem.sentence)
+    activity = create(:activity, :issue, :description => Faker::Lorem.sentence)
     activity.repository = organization.repositories.first
     activity.save
     organization.link_user_activities

@@ -43,6 +43,25 @@ namespace :utils do
     puts dublicate_repos_with_activies.collect &:id
   end
 
+  desc "Update event_action for comments and activities"
+  task update_activities_event_action: :environment do
+    Activity.where(event_type: :comment, event_action: nil).update_all(event_action: :created)
+    user_ids = Activity.where(event_type: :issue, event_action: nil).pluck(:user_id).uniq
+    sample_user = User.where(auto_created: false, :auth_token.ne => nil).desc(:last_sign_in_at).first
+
+    user_ids.each do |user_id|
+      user = User.find user_id
+      next if user.nil?
+      #retrieve all activities performed by user
+      activities = ActivitiesFetcher.new(user).fetch
+      activities.select{|i| ActivitiesProcessor::TRACKING_EVENTS.key?(i.type)}.each do |a|
+        act = user.activities.where(event_type: :issue, gh_id: a.id, event_action: nil).first
+        act.set(event_action: a.payload['action']) if act
+        next if user.activities.where(event_action: nil).count == 0
+      end
+    end
+  end
+
   desc "Hackathon Sync"
   task :hackathon, [:group] => :environment do |t, args|
     group = Group.where(name: args[:group]).first

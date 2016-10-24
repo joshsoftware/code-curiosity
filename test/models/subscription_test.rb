@@ -28,7 +28,7 @@ class SubscriptionTest < ActiveSupport::TestCase
     user = create(:user)
     round = create(:round)
     subscription = create(:subscription, user: user, round: round)
-    activity = create(:activity, user: user, round: round)
+    activity = create(:activity, :issue, user: user, round: round)
     assert_not_nil subscription.activities_count
   end
 
@@ -44,8 +44,8 @@ class SubscriptionTest < ActiveSupport::TestCase
     user = create(:user)
     round = create(:round)
     subscription = create(:subscription, user: user, round: round)
-    activity = create_list(:activity, 3, :auto_score => 1, user:user, round: round)
-    create(:activity, event_action: :closed, user: user, round: round, auto_score: 1)
+    activity = create_list(:activity, 3, :issue, :auto_score => 1, user:user, round: round)
+    create(:activity, :issue, event_action: :closed, user: user, round: round, auto_score: 1)
     assert_equal subscription.activities_score, 0
   end
 
@@ -54,7 +54,7 @@ class SubscriptionTest < ActiveSupport::TestCase
     round = create(:round)
     subscription = create(:subscription, :points => 0, user: user, round: round)
     commit = create_list(:commit, 2, :auto_score => 2, user: user, round: round)
-    activity = create_list(:activity, 3, :auto_score => 1, user:user, round: round)
+    activity = create_list(:activity, 3, :issue, :auto_score => 1, user:user, round: round)
     subscription.update_points
     total_points = subscription.commits_score + subscription.activities_score
     assert_equal subscription.points, total_points

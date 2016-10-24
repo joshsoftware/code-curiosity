@@ -9,17 +9,17 @@ class HackathonTest < ActiveSupport::TestCase
     @hackathon_r = create(:hackathon_with_repositories, user: create(:user))
 
     # Simulate commits and activities for this user (total user points should be: 6)
-    create_list(:commit, 2, repository: @hackathon_r.repositories.first, 
+    create_list(:commit, 2, repository: @hackathon_r.repositories.first,
 			    auto_score: 2, user: @hackathon_r.user, round: @hackathon_r.round)
-    create_list(:activity, 2, repository: @hackathon_r.repositories.last, 
+    create_list(:activity, 2, :issue, repository: @hackathon_r.repositories.last,
 			    auto_score: 1, user: @hackathon_r.user, round: @hackathon_r.round)
   end
 
   test "is_valid" do
-    assert @hackathon.valid? 
-    assert @hackathon.group.valid? 
-    assert @hackathon.round.valid? 
-    assert_equal @hackathon.round.status, "inactive" 
+    assert @hackathon.valid?
+    assert @hackathon.group.valid?
+    assert @hackathon.round.valid?
+    assert_equal @hackathon.round.status, "inactive"
     assert_empty @hackathon.repositories
     assert_not_empty @hackathon_r.repositories
   end
@@ -31,8 +31,8 @@ class HackathonTest < ActiveSupport::TestCase
   end
 
   test "does_not_create_any_goal" do
-    assert_nil @hackathon.goal 
-    assert_nil @hackathon_r.goal 
+    assert_nil @hackathon.goal
+    assert_nil @hackathon_r.goal
   end
 
   test "sidekiq_job_should_be_enqueued_to_open_hackathon_round_at_start_datetime" do
@@ -40,7 +40,7 @@ class HackathonTest < ActiveSupport::TestCase
 
   test "update_interval_can_be_updated_if_hackathon_round_is_inactive" do
     @hackathon.update_attribute(:update_interval, 5)
-    assert @hackathon.valid? 
+    assert @hackathon.valid?
     assert_equal 5, @hackathon.update_interval
   end
 
@@ -64,7 +64,7 @@ class HackathonTest < ActiveSupport::TestCase
 
   test "repositories_should_not_reference_hackathon" do #check inverse_of: nil
     @hackathon_r.repositories.each do |r|
-      assert_equal false, r.has_attribute?(:hackathon_ids) 
+      assert_equal false, r.has_attribute?(:hackathon_ids)
     end
     assert_raises(NoMethodError) { @hackathon_r.repositories.first.hackathons.first }
   end
@@ -79,10 +79,10 @@ class HackathonTest < ActiveSupport::TestCase
   end
 
   test "points_is_updated_for_commits_and_activity_only_for_hackathon_repositories" do
-    skip 'pending' 
+    skip 'pending'
     dummy = create(:repository_with_activity_and_commits)
     @hackathon_r.update_points
-    assert_equal 6, @hackathon_r.points 
+    assert_equal 6, @hackathon_r.points
   end
 
   test "points_is_updated_for_all_commits_and_activity_if_hackathon_repositories_is_blank" do

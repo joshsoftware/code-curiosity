@@ -36,7 +36,7 @@ class JudgingControllerTest < ActionController::TestCase
   end
 
   test 'activities' do
-    old_activity = create :activity, commented_on: @round.from_date - 1.day
+    old_activity = create :activity, :issue, commented_on: @round.from_date - 1.day
     sign_in @user
     get :activities
     assert_response :success

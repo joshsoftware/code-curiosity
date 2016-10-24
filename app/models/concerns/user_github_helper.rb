@@ -16,8 +16,12 @@ module UserGithubHelper
   # it will refresh the user auth_token and start working normally
   # This also helps us manage the Github API limits
   def refresh_gh_client
-    u = User.where(:auth_token.ne => nil).all.sample
-    auth_tk = User.encrypter.decrypt_and_verify(u.auth_token)
+    begin
+      u = User.where(:auth_token.ne => nil).all.sample
+      auth_tk = User.encrypter.decrypt_and_verify(u.auth_token)
+    rescue ActiveSupport::MessageVerifier::InvalidSignature
+      retry
+    end
     @gh_client = Github.new({
       oauth_token: auth_tk,
       client_id: ENV['GIT_APP_ID'],
