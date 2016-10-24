@@ -51,7 +51,12 @@ class Commit
   private
 
   def set_round
-    self.round = Round.where(:from_date.lte => commit_date, :end_date.gte => commit_date).first unless self.round
+    # FIXME: This code was added to address a corner case for commits appearing in next round 
+    # instead of the last month. However, it will impact scoring and bonus points. Keeping this
+    # line commented in case we find a better fix. - Gautam
+
+    #self.round = Round.where(:from_date.lte => commit_date, :end_date.gte => commit_date).first unless self.round
+    self.round = Round.opened
   end
 
 end
