@@ -7,8 +7,13 @@ class Activity
   # Refer https://developer.github.com/v3/activity/events/types/#issuesevent for more details.
   ISSUE_ACTIONS = %W(assigned unassigned labeled unlabeled opened edited closed reopened)
 
-  # Actions ignored for scoring.
-  CONSIDERED_FOR_SCORING = %W(opened reopened)
+  # Actions considered for issue scoring.
+  ISSUE_CONSIDERED_FOR_SCORING = %W(opened reopened)
+
+  COMMENT_ACTIONS = %W(created edited deleted)
+
+  # Actions considered for comment scoring
+  COMMENT_CONSIDERED_FOR_SCORING = %W(created)
 
   field :description,     type: String
   field :event_type,      type: String
@@ -27,7 +32,8 @@ class Activity
   embeds_many :scores, as: :scorable
   belongs_to :organization
 
-  scope :considered_for_scoring, -> { where(:event_action.in => CONSIDERED_FOR_SCORING) }
+  scope :considered_for_scoring, -> { any_of({event_type: :issue, :event_action.in => ISSUE_CONSIDERED_FOR_SCORING},
+                                      {event_type: :comment, :event_action.in => COMMENT_CONSIDERED_FOR_SCORING}) }
 
   #validates :description, uniqueness: {:scope => :commented_on}
   validates :round, presence: true
