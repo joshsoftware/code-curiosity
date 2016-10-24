@@ -43,40 +43,22 @@ namespace :utils do
     puts dublicate_repos_with_activies.collect &:id
   end
 
-  desc "Update comment"
+  desc "Update event_action for comments and activities"
   task update_activities_event_action: :environment do
     Activity.where(event_type: :comment, event_action: nil).update_all(event_action: :created)
+    user_ids = Activity.where(event_type: :issue, event_action: nil).pluck(:user_id).uniq
+    sample_user = User.where(auto_created: false, :auth_token.ne => nil).desc(:last_sign_in_at).first
 
-    begin
-      # get most recent users
-      recent_users = User.where(:auth_token.ne => nil).order(updated_at: :desc).to_a[0..10]
-      user_ids = Activity.where(event_type: :issue, event_action: nil).pluck(:user_id)
-      # find users whose activity's event_actions are nil
-      users = User.where(:id.in => user_ids)
-      users.each do |user|
-        begin
-          recent_user = recent_users.sample
-
-          #retrieve all activities performed by user
-          activities = recent_user.gh_client.activity.events.performed(user.github_handle, auto_pagination: true, per_page: 200)
-          activities = activities.select{|i| ActivitiesFetcher::TRACKING_EVENTS.key?(i.type)}
-          activities.each do |a|
-            act = user.activities.where(event_type: :issue, gh_id: a.id, event_action: nil).first
-            act.set(event_action: a.payload['action']) if act
-            next if user.activities.where(event_action: nil).count == 0
-          end
-        rescue Github::Error::NotFound
-          # user not found
-          next
-        rescue ActiveSupport::MessageVerifier::InvalidSignature
-          # user auth token is invalid
-          retry
-        rescue
-          retry
-        end
+    user_ids.each do |user_id|
+      user = User.find user_id
+      next if user.nil?
+      #retrieve all activities performed by user
+      activities = ActivitiesFetcher.new(user).fetch
+      activities.select{|i| ActivitiesProcessor::TRACKING_EVENTS.key?(i.type)}.each do |a|
+        act = user.activities.where(event_type: :issue, gh_id: a.id, event_action: nil).first
+        act.set(event_action: a.payload['action']) if act
+        next if user.activities.where(event_action: nil).count == 0
       end
-    rescue Mongo::Error::OperationFailure
-      retry
     end
   end
 
