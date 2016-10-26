@@ -1,6 +1,10 @@
 require "test_helper"
 
 class SubscriptionTest < ActiveSupport::TestCase
+  def setup
+    super
+    create :round, :open
+  end
 
   def test_commits_count_will_be_zero_if_no_commit_exist
     user = create(:user)
@@ -34,35 +38,31 @@ class SubscriptionTest < ActiveSupport::TestCase
 
   def test_commits_score
     user = create(:user)
-    round = create(:round)
-    subscription = create(:subscription, user: user, round: round)
-    commit = create_list(:commit, 2, :auto_score => 2, :commit_date => Faker::Time.between(DateTime.now - 1, DateTime.now), user: user, round: round)
+    subscription = create(:subscription, user: user, round: Round.opened)
+    commit = create_list(:commit, 2, :auto_score => 2, :commit_date => Faker::Time.between(DateTime.now - 1, DateTime.now), user: user, round: Round.opened)
     assert_equal subscription.commits_score, 4
   end
 
   def test_total_activities_score
     user = create(:user)
-    round = create(:round)
-    subscription = create(:subscription, user: user, round: round)
-    activity = create_list(:activity, 3, :auto_score => 1, user:user, round: round)
-    create(:activity, event_action: :closed, user: user, round: round, auto_score: 1)
+    subscription = create(:subscription, user: user, round: Round.opened)
+    activity = create_list(:activity, 3, :auto_score => 1, user:user)
+    create(:activity, event_action: :closed, user: user, auto_score: 1)
     assert_equal subscription.activities_score, 0
   end
 
   def test_total_activities_score_when_event_type_is_comment_and_event_action_is_created
     user = create(:user)
-    round = create(:round)
-    subscription = create(:subscription, user: user, round: round)
-    create(:activity, event_type: :comment, event_action: :created, user: user, round: round, auto_score: 2)
+    subscription = create(:subscription, user: user, round: Round.opened)
+    create(:activity, event_type: :comment, event_action: :created, user: user, auto_score: 2)
     assert_equal subscription.activities_score, 2
   end
 
   def test_update_total_points
     user = create(:user)
-    round = create(:round)
-    subscription = create(:subscription, :points => 0, user: user, round: round)
-    commit = create_list(:commit, 2, :auto_score => 2, user: user, round: round)
-    activity = create_list(:activity, 3, :auto_score => 1, user:user, round: round)
+    subscription = create(:subscription, :points => 0, user: user, round: Round.opened)
+    commit = create_list(:commit, 2, :auto_score => 2, user: user)
+    activity = create_list(:activity, 3, :auto_score => 1, user:user)
     subscription.update_points
     total_points = subscription.commits_score + subscription.activities_score
     assert_equal subscription.points, total_points

@@ -5,6 +5,7 @@ class HackathonTest < ActiveSupport::TestCase
 
   def setup
     Sidekiq::Testing.fake!
+		create :round, :open
     @hackathon = create(:hackathon, user: create(:user))
     @hackathon_r = create(:hackathon_with_repositories, user: create(:user))
 
