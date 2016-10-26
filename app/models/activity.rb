@@ -50,12 +50,20 @@ class Activity
   end
 
   def calculate_score_and_set
-    words = description.to_s.split(/\W+/)
-    self.auto_score = case words.length
-                      when 0..25  then 0
-                      when 26..40 then 1
-                      else 2
-                      end
+    # Scoring of only opened_issue, reopened_issue and created_comment should be done, for others score should be zero
+    # Here event_type would be either issue or comment.
+    # For event_type :issue and event_action ["opened", "reopened"] scoring should be done
+    # And for event_type :comment and event_action ["created"] scoring should be done
+    if ActivitiesFetcher::TRACKING_EVENTS.values.include?(event_type) and eval "#{event_type.upcase}_CONSIDERED_FOR_SCORING.include?(event_action)"
+      words = description.to_s.split(/\W+/)
+      self.auto_score = case words.length
+                        when 0..25  then 0
+                        when 26..40 then 1
+                        else 2
+                        end
+    else
+      self.auto_score = 0
+    end
     self.save
   end
 
