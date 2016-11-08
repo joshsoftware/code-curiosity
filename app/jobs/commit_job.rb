@@ -7,6 +7,9 @@ class CommitJob < ActiveJob::Base
     rescue Github::Error::NotFound
       # repository moved or deleted means we no longer care about this repos.
       repo.destroy
+    rescue Github::Error::UnavailableForLegalReasons
+      # repository permission invoked.
+      repo.destroy
     rescue Github::Error::Unauthorized
       # Auth token issue or Access has been denied OR Rate limit hit.
 

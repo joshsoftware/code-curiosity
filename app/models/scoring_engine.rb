@@ -15,14 +15,14 @@ class ScoringEngine
       # Default git pull will pull 'origin/master'. We need to handle the case 
       # that repository has no master!
       # Rollbar#14 
-      self.git = Git.open(repo_dir).tap do |g| 
-        branch = g.branches.local.first.name # usually 'master'
-        remote = g.config["branch.#{branch}.remote"] # usually just 'origin'
-        g.pull(remote, branch)
-      end
+      self.git = Git.open(repo_dir) 
+      branch = self.git.branches.local.first.name # usually 'master'
+      remote = self.git.config["branch.#{branch}.remote"] # usually just 'origin'
+      self.git.pull(remote, branch)
     else
       self.git = Git.clone(repo.ssh_url, repo.id, path: Rails.root.join(config[:repositories]).to_s)
     end
+    self.git
   end
 
   def comments_score(commit)
