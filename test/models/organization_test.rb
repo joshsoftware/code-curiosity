@@ -3,6 +3,8 @@ require "test_helper"
 class OrganizationTest < ActiveSupport::TestCase
 
   def setup
+    super
+    create :round, :open
     stub_get("/orgs/joshsoftware").to_return(body: File.read('test/fixtures/org.json'), status: 200,
       headers: {content_type: "application/json; charset=utf-8"})
   end

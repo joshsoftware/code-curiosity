@@ -3,6 +3,8 @@ require 'test_helper'
 class CommitTest < ActiveSupport::TestCase
 
   def setup
+    super
+    create :round, :open
     stub_get("/repos/joshsoftware/code-curiosity/commits/eb0df748bbf084ca522f5ce4ebcf508d16169b96")
     .to_return(body: File.read('test/fixtures/commit.json'), status: 200,
     headers: {content_type: "application/json; charset=utf-8"})
@@ -50,6 +52,7 @@ class CommitTest < ActiveSupport::TestCase
   end
 
   def test_proper_round_is_assigned
+    skip "pending feature"
     round_1 = create :round, from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
     round_2 = create :round, from_date: Date.today.beginning_of_month - 1.month, end_date: Date.today.end_of_month - 1.month
     commit_1 = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today, round: nil)

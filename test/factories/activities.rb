@@ -4,5 +4,14 @@ FactoryGirl.define do
     commented_on { DateTime.now }
     association :user
     association :round
+
+    trait :issue do
+      event_type :issue
+    end
+
+    trait :comment do
+      event_type :comment
+    end
+
   end
 end
