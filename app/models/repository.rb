@@ -128,7 +128,7 @@ class Repository
     @git ||= Git.open(code_dir)
   end
 
-  PULL_REQ_MERGE_REGX = /merge pull/i
+  PULL_REQ_MERGE_REGX = /merge (pull|branch)/i
 
   def score_commits(round = nil)
     engine = ScoringEngine.new(self)
