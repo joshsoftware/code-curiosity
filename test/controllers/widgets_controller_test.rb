@@ -37,4 +37,22 @@ class WidgetsControllerTest < ActionController::TestCase
     assert_template :group
   end
 
+  test 'should show error if commit auto_score is nil' do
+    commit_1 = create(:commit, auto_score: nil, repository: @repo)
+    @user.repositories << @repo
+    @round.commits << commit_1
+    assert_nothing_raised RuntimeError do
+      @repo.leaders(@round)
+    end
+  end
+
+  test 'should display scores correctly in repo widget' do
+    commit_2 = create(:commit, auto_score: 1, repository: @repo)
+    @user.repositories << @repo
+    @round.commits << commit_2
+    assert_nothing_raised RuntimeError do
+      @repo.leaders(@round)
+    end
+  end
+
 end

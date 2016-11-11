@@ -3,7 +3,7 @@ module RepoLeaders
   def leaders(round)
     map = %Q{
         function() {
-          emit(this.user_id, this.judges_score || this.auto_score);
+          emit(this.user_id, this.judges_score || this.auto_score || 0);
         }
     }
 
