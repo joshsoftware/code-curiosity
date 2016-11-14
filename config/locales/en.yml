@@ -48,7 +48,7 @@ en:
     set_as_goal_next_month: "You had already set your goal to '%{current_goal}' for this month. Goal change to '%{name}' will be effective from next month."
     goal_change_faq: 'A user can set his or her current month goal only in the first week of the month. If a goal is set after the first week it will be activated in the next month.'
   transaction:
-    points_credit_info: Points will be credited to your account by end of the month.
+    points_credit_info: Points will be credited to your account by end of the month. Please note that you have to be registered on Github for at least 6 months and on CodeCuriosity for at least 3 months before you can redeem any points. In any month, you can redeem at most 500 Royalty points.
   redeem:
     request_created: 'We will send you a coupon code in a couple of days.'
   group:
