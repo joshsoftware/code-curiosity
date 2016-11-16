@@ -7,7 +7,7 @@ class Users::OmniauthCallbacksControllerTest < ActionController::TestCase
   test "github signup" do
     
     OmniAuth.config.test_mode = true
-
+    date = Date.new(2015, 10, 10)
     omniauth_hash = {
       :provider => 'github',
       :uid => '12345',
@@ -18,7 +18,8 @@ class Users::OmniauthCallbacksControllerTest < ActionController::TestCase
       :extra => {
         :raw_info => 
         {
-          :login => 'hello'
+          :login => 'hello',
+          :created_at => date
         }
       },
       :credentials => {
@@ -40,6 +41,7 @@ class Users::OmniauthCallbacksControllerTest < ActionController::TestCase
     assert_not_nil @user.name
     assert_not_nil @user.email
     assert_not_nil @user.github_handle
+    assert_equal date, @user.github_user_since
     assert_response :redirect
   end
 

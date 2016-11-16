@@ -96,7 +96,8 @@ class User
       followers: auth.extra.raw_info.followers,
       public_repos: auth.extra.raw_info.public_repos,
       auto_created: false,
-      auth_token: User.encrypter.encrypt_and_sign(auth.credentials.token)
+      auth_token: User.encrypter.encrypt_and_sign(auth.credentials.token),
+      github_user_since: auth.extra.raw_info.created_at
     })
 
     user.save

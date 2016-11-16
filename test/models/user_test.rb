@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-
   test "must save a new user with all params" do
     assert_difference 'User.count' do
       user = create(:user)
@@ -25,4 +24,39 @@ class UserTest < ActiveSupport::TestCase
     user.valid?
     assert_not_empty user.errors[:github_handle]
   end
+
+  test "github_user_since should not be nil" do
+    round = create :round, :open
+    subscription = create(:subscription, round: round)
+    omniauthentication
+    user = User.find_by name: 'test_user'
+    #assert user.github_user_since
+    assert_equal @date, user.github_user_since
+  end
+
+  def omniauthentication
+    @date = Date.new(2015, 10, 10)
+    OmniAuth.config.test_mode = true
+    omniauth_hash = {
+      provider:  'github',
+      uid: '12345',
+      info: {
+        name: 'test_user',
+        email: 'test@test.com'
+      },
+      extra: {
+        raw_info:
+        {
+          login: 'hello',
+          created_at: @date
+        }
+      },
+      credentials: {
+        token: 'github_omiauth_test'
+      }
+    }
+    @req_env = OmniAuth.config.add_mock(:github, omniauth_hash)
+    User.from_omniauth(@req_env)
+  end
+
 end
