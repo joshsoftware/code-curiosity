@@ -1,0 +1,89 @@
+{
+  "sha": "6cc7ecd9306a04fa4b084c184d89b8a21b6a5854",
+  "commit": {
+    "author": {
+      "name": "Prasad Surase",
+      "email": "prasadsurase@gmail.com",
+      "date": "2016-11-14T09:18:38Z"
+    },
+    "committer": {
+      "name": "Prasad Surase",
+      "email": "prasadsurase@gmail.com",
+      "date": "2016-11-14T09:18:38Z"
+    },
+    "message": "Updated README",
+    "tree": {
+      "sha": "303ef5c7564a9f41f15ee8d3c450b6d17cd58bd3",
+      "url": "https://api.github.com/repos/prasadsurase/dummy/git/trees/303ef5c7564a9f41f15ee8d3c450b6d17cd58bd3"
+    },
+    "url": "https://api.github.com/repos/prasadsurase/dummy/git/commits/6cc7ecd9306a04fa4b084c184d89b8a21b6a5854",
+    "comment_count": 0
+  },
+  "url": "https://api.github.com/repos/prasadsurase/dummy/commits/6cc7ecd9306a04fa4b084c184d89b8a21b6a5854",
+  "html_url": "https://github.com/prasadsurase/dummy/commit/6cc7ecd9306a04fa4b084c184d89b8a21b6a5854",
+  "comments_url": "https://api.github.com/repos/prasadsurase/dummy/commits/6cc7ecd9306a04fa4b084c184d89b8a21b6a5854/comments",
+  "author": {
+    "login": "prasadsurase",
+    "id": 562052,
+    "avatar_url": "https://avatars.githubusercontent.com/u/562052?v=3",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/prasadsurase",
+    "html_url": "https://github.com/prasadsurase",
+    "followers_url": "https://api.github.com/users/prasadsurase/followers",
+    "following_url": "https://api.github.com/users/prasadsurase/following{/other_user}",
+    "gists_url": "https://api.github.com/users/prasadsurase/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/prasadsurase/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/prasadsurase/subscriptions",
+    "organizations_url": "https://api.github.com/users/prasadsurase/orgs",
+    "repos_url": "https://api.github.com/users/prasadsurase/repos",
+    "events_url": "https://api.github.com/users/prasadsurase/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/prasadsurase/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "prasadsurase",
+    "id": 562052,
+    "avatar_url": "https://avatars.githubusercontent.com/u/562052?v=3",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/prasadsurase",
+    "html_url": "https://github.com/prasadsurase",
+    "followers_url": "https://api.github.com/users/prasadsurase/followers",
+    "following_url": "https://api.github.com/users/prasadsurase/following{/other_user}",
+    "gists_url": "https://api.github.com/users/prasadsurase/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/prasadsurase/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/prasadsurase/subscriptions",
+    "organizations_url": "https://api.github.com/users/prasadsurase/orgs",
+    "repos_url": "https://api.github.com/users/prasadsurase/repos",
+    "events_url": "https://api.github.com/users/prasadsurase/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/prasadsurase/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "a988878d584d57b76b09e91a13fd78b1fbff5381",
+      "url": "https://api.github.com/repos/prasadsurase/dummy/commits/a988878d584d57b76b09e91a13fd78b1fbff5381",
+      "html_url": "https://github.com/prasadsurase/dummy/commit/a988878d584d57b76b09e91a13fd78b1fbff5381"
+    }
+  ],
+  "stats": {
+    "total": 2,
+    "additions": 1,
+    "deletions": 1
+  },
+  "files": [
+    {
+      "sha": "58789ed12807428ff98605beacdb8d4ae508bcea",
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/prasadsurase/dummy/blob/6cc7ecd9306a04fa4b084c184d89b8a21b6a5854/README.md",
+      "raw_url": "https://github.com/prasadsurase/dummy/raw/6cc7ecd9306a04fa4b084c184d89b8a21b6a5854/README.md",
+      "contents_url": "https://api.github.com/repos/prasadsurase/dummy/contents/README.md?ref=6cc7ecd9306a04fa4b084c184d89b8a21b6a5854",
+      "patch": "@@ -1,2 +1,2 @@\n # dummy\n-to be deleted\n+to be deleted. A dummy github repository to test bugspot scoring logic."
+    }
+  ]
+}

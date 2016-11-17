@@ -12,13 +12,19 @@ class ScoringEngine
 
   def fetch_repo
     if Dir.exist?(repo_dir)
-      # Default git pull will pull 'origin/master'. We need to handle the case 
+      # Default git pull will pull 'origin/master'. We need to handle the case
       # that repository has no master!
-      # Rollbar#14 
-      self.git = Git.open(repo_dir) 
+      # Rollbar#14
+      self.git = Git.open(repo_dir)
       branch = self.git.branches.local.first.name # usually 'master'
       remote = self.git.config["branch.#{branch}.remote"] # usually just 'origin'
-      self.git.pull(remote, branch)
+      begin
+        self.git.pull(remote, branch)
+      rescue Git::GitExecuteError
+        #delete the repo dir and clone again
+        FileUtils.rm_r("#{Rails.root.join(config[:repositories]).to_s}/#{repo.id}")
+        self.git = Git.clone(repo.ssh_url, repo.id, path: Rails.root.join(config[:repositories]).to_s)
+      end
     else
       self.git = Git.clone(repo.ssh_url, repo.id, path: Rails.root.join(config[:repositories]).to_s)
     end
