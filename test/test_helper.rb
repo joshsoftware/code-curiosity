@@ -12,6 +12,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
 require "minitest/rails"
 require "webmock/minitest"
+require 'mocha/mini_test'
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
@@ -21,9 +22,9 @@ require 'capybara/poltergeist'
 # Uncomment for awesome colorful output
 #require "minitest/pride"
 
-class ActionController::TestCase 
-  include Devise::TestHelpers 
-  include Warden::Test::Helpers 
+class ActionController::TestCase
+  include Devise::TestHelpers
+  include Warden::Test::Helpers
   WebMock.disable_net_connect!(allow: "codeclimate.com")
 
   def stub_get(path, endpoint = Github.endpoint.to_s)
@@ -33,7 +34,7 @@ end
 
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
-  include FactoryGirl::Syntax::Methods 
+  include FactoryGirl::Syntax::Methods
   DatabaseCleaner.strategy = :truncation
   before { DatabaseCleaner.start }
   after  { DatabaseCleaner.clean }
