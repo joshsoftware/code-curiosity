@@ -23,10 +23,10 @@ class ScoringEngine
       rescue Git::GitExecuteError
         #delete the repo dir and clone again
         FileUtils.rm_r("#{Rails.root.join(config[:repositories]).to_s}/#{repo.id}")
-        self.git = Git.clone(repo.ssh_url, repo.id, path: Rails.root.join(config[:repositories]).to_s)
+        self.git = Git.clone("https://github.com/#{repo.owner}/#{repo.name}.git", repo.id, path: Rails.root.join(config[:repositories]).to_s)
       end
     else
-      self.git = Git.clone(repo.ssh_url, repo.id, path: Rails.root.join(config[:repositories]).to_s)
+      self.git = Git.clone("https://github.com/#{repo.owner}/#{repo.name}.git", repo.id, path: Rails.root.join(config[:repositories]).to_s)
     end
     self.git
   end
