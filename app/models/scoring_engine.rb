@@ -10,13 +10,17 @@ class ScoringEngine
     SCORING_ENGINE_CONFIG
   end
 
-  def fetch_repo
+  def fetch_repo(branch = nil)
     if Dir.exist?(repo_dir)
       # Default git pull will pull 'origin/master'. We need to handle the case
       # that repository has no master!
       # Rollbar#14
       self.git = Git.open(repo_dir)
-      branch = self.git.branches.local.first.name # usually 'master'
+      self.git.fetch
+      #gets the current repository branch. usually, is master.
+      branch = self.git.branches.local.first.name unless branch
+      #checkout to the branch. if branch hasnt changed, checkout is redundant.
+      self.git.checkout(branch)
       remote = self.git.config["branch.#{branch}.remote"] # usually just 'origin'
       begin
         self.git.pull(remote, branch)
@@ -27,6 +31,9 @@ class ScoringEngine
       end
     else
       self.git = Git.clone("https://github.com/#{repo.owner}/#{repo.name}.git", repo.id, path: Rails.root.join(config[:repositories]).to_s)
+      #gets the current repository branch. usually, is master.
+      branch = self.git.branches.local.first.name unless branch
+      self.git.checkout(branch)
     end
     self.git
   end
@@ -59,11 +66,25 @@ class ScoringEngine
   def bugspots_score(commit)
     return 0 if commit.info.nil?
     fetch_repo unless git
+    # search all the origin branches that holds the commit and return the branch name.
+    # git branch --all --contains <sha>
+    # ex., git branch --all --contains fd891813e0f4a85e4b55a25d12f6d4d7de35c90b in prasadsurase/code-curiosity
+    # "* delete-merge-conflict-repos\n  remotes/origin/delete-merge-conflict-repos"
+    branches = git.commit_branches(commit.sha, {all: true, contains: true})
+    branch = if branches.include?("\n")
+               branches.split("\n").first.gsub('*', '').strip!
+             else
+               branches.gsub('*', '').strip!
+             end
 
-    branch = git.gcommit(commit.sha).branch rescue nil
-    branch = commit.branch.present? ? commit.branch : git.branches.local.first.name
+    # remotes/origin/skip-merge-branch-commit-scoring
+    branch = git.branch(branch).name
+
+    #get the latest commits for the branch
+    git = fetch_repo(branch)
+
     bugspots = Bugspots.scan(repo_dir, branch).last
-    
+
     #bugspot scoring of such files which are in the Ignored_list should be zero.
     bugspots_scores = bugspots.inject({}) do |r, s|
       if (FileToBeIgnored.name_exist?(s.file))
