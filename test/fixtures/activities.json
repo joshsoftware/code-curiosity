@@ -1,0 +1,217 @@
+[
+  {
+    "id": "4623043770",
+    "type": "PushEvent",
+    "actor": {
+      "id": 562052,
+      "login": "prasadsurase",
+      "display_login": "prasadsurase",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/prasadsurase",
+      "avatar_url": "https://avatars.githubusercontent.com/u/562052?"
+    },
+    "repo": {
+      "id": 67219068,
+      "name": "prasadsurase/code-curiosity",
+      "url": "https://api.github.com/repos/prasadsurase/code-curiosity"
+    },
+    "payload": {
+      "push_id": 1318864572,
+      "size": 1,
+      "distinct_size": 1,
+      "ref": "refs/heads/some-controller-tests",
+      "head": "b5d2ebbba01eebd8734dc9ff6383d8e59847d594",
+      "before": "290d2c212654d3e68062337bfcd97655f52bcc09",
+      "commits": [
+        {
+          "sha": "b5d2ebbba01eebd8734dc9ff6383d8e59847d594",
+          "author": {
+            "email": "prasadsurase@gmail.com",
+            "name": "Prasad Surase"
+          },
+          "message": "Refactored controller test cases.",
+          "distinct": true,
+          "url": "https://api.github.com/repos/prasadsurase/code-curiosity/commits/b5d2ebbba01eebd8734dc9ff6383d8e59847d594"
+        }
+      ]
+    },
+    "public": true,
+    "created_at": "2016-09-27T09:38:55Z"
+  },
+  {
+    "id": "4617077010",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 562052,
+      "login": "prasadsurase",
+      "display_login": "prasadsurase",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/prasadsurase",
+      "avatar_url": "https://avatars.githubusercontent.com/u/562052?"
+    },
+    "repo": {
+      "id": 67219068,
+      "name": "prasadsurase/code-curiosity",
+      "url": "https://api.github.com/repos/prasadsurase/code-curiosity"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/prasadsurase/code-curiosity/issues/949",
+        "repository_url": "https://api.github.com/repos/prasadsurase/code-curiosity",
+        "labels_url": "https://api.github.com/repos/prasadsurase/code-curiosity/issues/949/labels{/name}",
+        "comments_url": "https://api.github.com/repos/prasadsurase/code-curiosity/issues/949/comments",
+        "events_url": "https://api.github.com/repos/prasadsurase/code-curiosity/issues/949/events",
+        "html_url": "https://github.com/prasadsurase/code-curiosity/issues/949",
+        "id": 179193005,
+        "number": 949,
+        "title": "Pass object to controller ?",
+        "user": {
+          "login": "Sashkan",
+          "id": 6276267,
+          "avatar_url": "https://avatars.githubusercontent.com/u/6276267?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Sashkan",
+          "html_url": "https://github.com/Sashkan",
+          "followers_url": "https://api.github.com/users/Sashkan/followers",
+          "following_url": "https://api.github.com/users/Sashkan/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Sashkan/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Sashkan/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Sashkan/subscriptions",
+          "organizations_url": "https://api.github.com/users/Sashkan/orgs",
+          "repos_url": "https://api.github.com/users/Sashkan/repos",
+          "events_url": "https://api.github.com/users/Sashkan/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Sashkan/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": null,
+        "assignees": [
+
+        ],
+        "milestone": null,
+        "comments": 1,
+        "created_at": "2016-09-26T10:33:34Z",
+        "updated_at": "2016-09-26T10:54:10Z",
+        "closed_at": null,
+        "body": "I'm working on my very first test using FactoryGirl, rspec and Capybara, and I was wondering: How do I pass a freshly created object to its testing method ?\r\n\r\nSo far I managed to create my factories, and my test. It creates a user, assigns him an ```onboard_token```, and then visits my page. On controller side, I'm retrieving the User with the ```find_by_onboard_token``` method.\r\n\r\nThe problem is, it cannot find such a user\r\n```\r\ntoken = params[:token]\r\n!User.where(onboard_token: token).empty?\r\n```\r\nI made sure ```params[:token]``` was present, but still, it's kinda hard to figure out the relationship between objects created in tests and their match in controller.\r\n\r\nHere is my test:\r\n```rb\r\n\r\nRSpec.describe UsersController, type: :controller do\r\n  render_views\r\n\r\n  before(:each) do\r\n    @user = FactoryGirl.create(:user)\r\n    sign_in @user\r\n  end\r\n\r\n  describe \"GET #onboard\", :js => true do\r\n\r\n    it \"simulates creator onboard\" do\r\n      visit onboard_path(:token => @user.onboard_token)\r\n      page.execute_script('$(\\'.two-parts-slide\\').css(\\'margin-left\\', \\'-100%\\');')\r\n      fill_in('whoami', with: 'Test Model')\r\n      fill_in('whoami2', with: 'Test Model')\r\n      fill_in('pw1', with: '12345678')\r\n      fill_in('pw2', with: '12345678')\r\n      if page.has_selector?('#agreeterms')\r\n        page.execute_script('$(\\'#agreeterms\\').prop(\\'checked\\', true);')\r\n      else\r\n        find('#agreeterms', :match == :first).trigger('click')\r\n      end\r\n      page.execute_script('$(\\'#submit-welcome\\').click();')\r\n      expect(@user.active).to eq(true)\r\n    end\r\n  end\r\n\r\n\r\nend\r\n\r\n\r\n```\r\n\r\nNow, I'm not even sure this comes from FactoryGirl, it might as well just come from my lack of experience with tests. Sorry if this sounds silly !\r\n"
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/prasadsurase/code-curiosity/issues/comments/249539246",
+        "html_url": "https://github.com/prasadsurase/code-curiosity/issues/949#issuecomment-249539246",
+        "issue_url": "https://api.github.com/repos/prasadsurase/code-curiosity/issues/949",
+        "id": 249539246,
+        "user": {
+          "login": "prasadsurase",
+          "id": 562052,
+          "avatar_url": "https://avatars.githubusercontent.com/u/562052?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/prasadsurase",
+          "html_url": "https://github.com/prasadsurase",
+          "followers_url": "https://api.github.com/users/prasadsurase/followers",
+          "following_url": "https://api.github.com/users/prasadsurase/following{/other_user}",
+          "gists_url": "https://api.github.com/users/prasadsurase/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/prasadsurase/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/prasadsurase/subscriptions",
+          "organizations_url": "https://api.github.com/users/prasadsurase/orgs",
+          "repos_url": "https://api.github.com/users/prasadsurase/repos",
+          "events_url": "https://api.github.com/users/prasadsurase/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/prasadsurase/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "created_at": "2016-09-26T10:54:10Z",
+        "updated_at": "2016-09-26T10:54:10Z",
+        "body": "@Sashkan This is not related to FactoryGirl. You are testing the controllers the wrong way. For controller tests, you need to pass the params to the controller action being tested without interacting through the UI. Please refer [rspec-controller-tests](https://www.relishapp.com/rspec/rspec-rails/v/3-5/docs/controller-specs) for more details."
+      }
+    },
+    "public": true,
+    "created_at": "2016-09-26T10:54:10Z",
+    "org": {
+      "id": 6183,
+      "login": "prasadsurase",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/prasadsurase",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6183?"
+    }
+  },
+  {
+    "id": "4606992285",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 562052,
+      "login": "prasadsurase",
+      "display_login": "prasadsurase",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/prasadsurase",
+      "avatar_url": "https://avatars.githubusercontent.com/u/562052?"
+    },
+    "repo": {
+      "id": 67219068,
+      "name": "prasadsurase/code-curiosity",
+      "url": "https://api.github.com/repos/prasadsurase/code-curiosity"
+    },
+    "payload": {
+      "action": "opened",
+      "issue": {
+        "url": "https://api.github.com/repos/prasadsurase/code-curiosity/issues/93",
+        "repository_url": "https://api.github.com/repos/prasadsurase/code-curiosity",
+        "labels_url": "https://api.github.com/repos/prasadsurase/code-curiosity/issues/93/labels{/name}",
+        "comments_url": "https://api.github.com/repos/prasadsurase/code-curiosity/issues/93/comments",
+        "events_url": "https://api.github.com/repos/prasadsurase/code-curiosity/issues/93/events",
+        "html_url": "https://github.com/prasadsurase/code-curiosity/issues/93",
+        "id": 178804008,
+        "number": 93,
+        "title": "Broken Github links on Employee details page.",
+        "user": {
+          "login": "prasadsurase",
+          "id": 562052,
+          "avatar_url": "https://avatars.githubusercontent.com/u/562052?v=3",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/prasadsurase",
+          "html_url": "https://github.com/prasadsurase",
+          "followers_url": "https://api.github.com/users/prasadsurase/followers",
+          "following_url": "https://api.github.com/users/prasadsurase/following{/other_user}",
+          "gists_url": "https://api.github.com/users/prasadsurase/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/prasadsurase/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/prasadsurase/subscriptions",
+          "organizations_url": "https://api.github.com/users/prasadsurase/orgs",
+          "repos_url": "https://api.github.com/users/prasadsurase/repos",
+          "events_url": "https://api.github.com/users/prasadsurase/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/prasadsurase/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [
+
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": null,
+        "assignees": [
+
+        ],
+        "milestone": null,
+        "comments": 0,
+        "created_at": "2016-09-23T07:25:54Z",
+        "updated_at": "2016-09-23T07:25:54Z",
+        "closed_at": null,
+        "body": "The github links on the employee details page in the 'Github' tab are broken. The link domain should be github.com and not code-curiosity.prasadsurase.com.\r\n\r\n<img width=\"1226\" alt=\"screen shot 2016-09-23 at 12 53 50 pm\" src=\"https://cloud.githubusercontent.com/assets/562052/18777450/d7de3258-818c-11e6-8082-3baf977d3420.png\">\r\n"
+      }
+    },
+    "public": true,
+    "created_at": "2016-09-23T07:25:55Z",
+    "org": {
+      "id": 130756,
+      "login": "prasadsurase",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/prasadsurase",
+      "avatar_url": "https://avatars.githubusercontent.com/u/130756?"
+    }
+  }
+]

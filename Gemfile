@@ -57,6 +57,8 @@ group :test do
   gem "codeclimate-test-reporter", require: nil
   gem 'minitest-rails-capybara'
   gem 'poltergeist'
+  gem 'mocha'
+  gem 'timecop'
 end
 
 group :development do
