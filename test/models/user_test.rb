@@ -37,13 +37,13 @@ class UserTest < ActiveSupport::TestCase
   test "user should not be able to redeem if user is not registered on github for atleast 6 months and on codecurisity for alteast 3 months" do
     round = create :round, :open
     user = create :user, github_user_since: Date.today
-    assert_not user.check_for_user_registration_date?
+    assert_not user.able_to_redeem?
   end
 
   test "user should be able to redeem if user is registered on github for atleast 6 months and on codecurisity for alteast 3 months" do
     round = create :round, :open
     user = create :user, github_user_since: Date.today - 6.months, created_at: Date.today - 3.months
-    assert user.check_for_user_registration_date?
+    assert user.able_to_redeem?
   end
 
   def omniauthentication

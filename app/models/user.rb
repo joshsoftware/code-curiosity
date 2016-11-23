@@ -212,7 +212,7 @@ class User
     User.where(github_handle: /^#{q}/i).limit(8).pluck(:github_handle, :id, :avatar_url)
   end
 
-  def check_for_user_registration_date?
+  def able_to_redeem?
     (github_user_since <= Date.today - 6.months) && (created_at <= Date.today - 3.months)
   end
 end

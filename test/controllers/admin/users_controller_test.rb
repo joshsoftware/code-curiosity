@@ -29,11 +29,12 @@ class Admin::UsersControllerTest < ActionController::TestCase
     @user.roles << @admin_role
     sign_in @user
     other_user = create :user, auth_token: 'dah123rty', goal: @goal
-    assert_equal other_user.transactions.count, 0
+    royalty_transaction = create :transaction, points: 0, transaction_type: 'royalty_bonus', type: 'credit', user: other_user
+    assert_equal other_user.transactions.count, 1
     transaction = create_list :transaction, 3, type: 'credit', user: other_user
-    assert_equal other_user.transactions.count, 3
-    redeem_request = create :redeem_request, points: 2, user: other_user
     assert_equal other_user.transactions.count, 4
+    redeem_request = create :redeem_request, points: 2, user: other_user
+    assert_equal other_user.transactions.count, 5
     delete :destroy, id: other_user.id
     assert_equal Transaction.count, 0
     assert_equal RedeemRequest.count, 0
