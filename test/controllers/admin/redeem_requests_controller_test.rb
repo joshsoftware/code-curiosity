@@ -87,6 +87,7 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     @user = create(:user, :auth_token => 'dah123rty', goal: create(:goal))
     @user.roles << role
     sign_in @user
+    royalty_transaction = create :transaction, points: 0, transaction_type: 'royalty_bonus', type: 'credit', user: @user
     transaction = create(:transaction, :type => 'credit', :points => 120, user: @user)
   end
 
