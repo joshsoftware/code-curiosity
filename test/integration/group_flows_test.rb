@@ -3,7 +3,7 @@ require "test_helper"
 class GroupFlowsTest < ActionDispatch::IntegrationTest
   before(:all) do
     @round = create(:round, status: 'open')
-    @user = create(:user, name: 'josh', auth_token: 'dah123rty', goal: create(:goal))
+    @user = create(:user, name: 'josh', auth_token: 'dah123rty', github_user_since: Date.today, goal: create(:goal))
     Warden.test_mode!
   end
 

@@ -31,8 +31,12 @@
               - else
                 %span.pull-right Not set yet
           - if logged_in_user?
-            = link_to '#', class: 'btn btn-primary btn-block', data: { toggle: 'modal', target: '#redeem-modal .modal' } do
-              %b Redeem Points
+            - if @user.able_to_redeem?
+              = link_to '#', class: "btn btn-primary btn-block", data: { toggle: 'modal', target: '#redeem-modal .modal' } do
+                %b Redeem Points
+            - else
+              %span.tool-tip{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Not met the redemption criteria"}
+                %span.btn.btn-primary.btn-block{:disabled => "disabled"} Redeem Points!
     .col-xs-9
       .nav-tabs-custom
         %ul.nav.nav-tabs
