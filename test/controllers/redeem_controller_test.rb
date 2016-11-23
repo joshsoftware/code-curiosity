@@ -43,7 +43,7 @@ class RedeemControllerTest < ActionController::TestCase
   def seed_round_and_user
     round = create(:round, :status => 'open')
     @user = create(:user, :auth_token => 'dah123rty', goal: create(:goal))
-    sign_in @user 
+    sign_in @user
     transaction = create(:transaction, :type => 'credit', :points => 120, user: @user)
   end
     
