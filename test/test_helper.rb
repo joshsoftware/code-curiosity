@@ -35,6 +35,7 @@ end
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include FactoryGirl::Syntax::Methods
+  WebMock.disable_net_connect!(allow: "codeclimate.com")
   DatabaseCleaner.strategy = :truncation
   before { DatabaseCleaner.start }
   after  { DatabaseCleaner.clean }

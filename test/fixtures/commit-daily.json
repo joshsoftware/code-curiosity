@@ -1,0 +1,72 @@
+[
+  {
+    "sha": "c28cc8fb99ceb2bfc180ef8ccf597d016d8dbe89",
+    "commit": {
+      "author": {
+        "name": "Prasad Surase",
+        "email": "prasadsurase@gmail.com",
+        "date": "2016-09-09T08:58:57Z"
+      },
+      "committer": {
+        "name": "Prasad Surase",
+        "email": "prasadsurase@gmail.com",
+        "date": "2016-09-09T08:58:57Z"
+      },
+      "message": "Added specs for ActivitiesController",
+      "tree": {
+        "sha": "075be44abe7152b599162fe10623d553fabee9ab",
+        "url": "https://api.github.com/repos/prasadsurase/code-curiosity/git/trees/075be44abe7152b599162fe10623d553fabee9ab"
+      },
+      "url": "https://api.github.com/repos/prasadsurase/code-curiosity/git/commits/c28cc8fb99ceb2bfc180ef8ccf597d016d8dbe89",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/prasadsurase/code-curiosity/commits/c28cc8fb99ceb2bfc180ef8ccf597d016d8dbe89",
+    "html_url": "https://github.com/prasadsurase/code-curiosity/commit/c28cc8fb99ceb2bfc180ef8ccf597d016d8dbe89",
+    "comments_url": "https://api.github.com/repos/prasadsurase/code-curiosity/commits/c28cc8fb99ceb2bfc180ef8ccf597d016d8dbe89/comments",
+    "author": {
+      "login": "prasadsurase",
+      "id": 562052,
+      "avatar_url": "https://avatars.githubusercontent.com/u/562052?v=3",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/prasadsurase",
+      "html_url": "https://github.com/prasadsurase",
+      "followers_url": "https://api.github.com/users/prasadsurase/followers",
+      "following_url": "https://api.github.com/users/prasadsurase/following{/other_user}",
+      "gists_url": "https://api.github.com/users/prasadsurase/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/prasadsurase/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/prasadsurase/subscriptions",
+      "organizations_url": "https://api.github.com/users/prasadsurase/orgs",
+      "repos_url": "https://api.github.com/users/prasadsurase/repos",
+      "events_url": "https://api.github.com/users/prasadsurase/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/prasadsurase/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "prasadsurase",
+      "id": 562052,
+      "avatar_url": "https://avatars.githubusercontent.com/u/562052?v=3",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/prasadsurase",
+      "html_url": "https://github.com/prasadsurase",
+      "followers_url": "https://api.github.com/users/prasadsurase/followers",
+      "following_url": "https://api.github.com/users/prasadsurase/following{/other_user}",
+      "gists_url": "https://api.github.com/users/prasadsurase/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/prasadsurase/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/prasadsurase/subscriptions",
+      "organizations_url": "https://api.github.com/users/prasadsurase/orgs",
+      "repos_url": "https://api.github.com/users/prasadsurase/repos",
+      "events_url": "https://api.github.com/users/prasadsurase/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/prasadsurase/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "62836b6d27f2accd8a4025c1a9727ac49c936501",
+        "url": "https://api.github.com/repos/prasadsurase/code-curiosity/commits/62836b6d27f2accd8a4025c1a9727ac49c936501",
+        "html_url": "https://github.com/prasadsurase/code-curiosity/commit/62836b6d27f2accd8a4025c1a9727ac49c936501"
+      }
+    ]
+  }
+]
