@@ -216,6 +216,9 @@ class User
     (github_user_since <= Date.today - 6.months) && (created_at <= Date.today - 3.months)
   end
 
+  def royalty_bonus_transaction
+    self.transactions.where(transaction_type: 'royalty_bonus').first
+  end
 end
 
 

@@ -23,6 +23,7 @@ class RedeemRequest
   validates :gift_product_url, format: { with: URI.regexp }, if: :retailer_other?
   validate :check_sufficient_balance, unless: :retailer_other?, on: :create
   validate :points_validations, unless: :retailer_other?
+  validate :redemption_points_validations, unless: :retailer_other?, on: :create
 
   before_validation {|r| r.points = r.points.to_i }
 
@@ -62,6 +63,26 @@ class RedeemRequest
     if retailer == 'amazon'
       if points.to_i == 0 || points.to_i % REDEEM['min_points'] != 0
         errors.add(:points, "points must be in multiple of #{REDEEM['min_points']}")
+      end
+    end
+  end
+
+  def redemption_points_validations
+    royalty_bonus = self.user.royalty_bonus_transaction
+
+    if royalty_bonus
+      royalty_points = royalty_bonus.points
+      total_points = self.user.total_points
+
+      #shows error if
+      #1 user's total_points is less than the points to be redeemed
+      #2 user's total_points is greater than the points to be redeemed but royalty_points redeemed for current_months
+      # are more than 500
+
+      #redeemed_royalty_points = points + royalty_points - total_points, should not be
+      #more than 500 royalty_points.
+      if total_points < points || (total_points >= points && (points + royalty_points - total_points > 500))
+        errors.add(:points, "at most 500 royalty points can be redeemed in this month")
       end
     end
   end
