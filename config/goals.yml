@@ -4,7 +4,7 @@ goals:
     bonus_points: 20
     image_url: 
     description: "I think I can earn %{points} in a month"
-    redeem_text: "Redeem 50 points (~5$) and gift yourself a pack of Github <a href='https://github.myshopify.com/products/octodex-sticker-packs' target='_blank'>stickers</a> or <a href='https://github.myshopify.com/products/atom-coasters' target='_blank'>coasters</a>!"
+    redeem_text: "Redeem 50 points (~5$) and gift yourself a pack of Github <a href='https://github.myshopify.com/products/octodex-sticker-packs' target='_blank'>stickers</a> or <a href='https://github.myshopify.com/products/atom-coasters' target='_blank'>coasters</a>"
   Mountaineer:
     points: 50 
     bonus_points: 75
@@ -16,4 +16,4 @@ goals:
     bonus_points: 250
     image_url: 
     description: "I'm reaching for Mars! Let me target %{points} for this month!"
-    redeem_text: "Redeem 550 points (~55$) and gift yourself a Github <a href='https://github.myshopify.com/products/invertocat-hoodie' target='_blank'>hoodie</a>!"
+    redeem_text: "Redeem 550 points (~55$) and gift yourself a Github <a href='https://github.myshopify.com/products/invertocat-hoodie' target='_blank'>hoodie</a>"
