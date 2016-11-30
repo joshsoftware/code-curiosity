@@ -71,4 +71,78 @@ class ScoringEngineTest < ActiveSupport::TestCase
     engine = ScoringEngine.new(@repo)
     engine.bugspots_score(@commit)
   end
+
+  test 'check comments_score of the commit' do
+    @engine = ScoringEngine.new(@repo)
+    assert_equal 0, @engine.comments_score(@commit)
+  end
+
+  test 'check commit_score of the commit when no files are excluded during scoring' do
+    stub_commit_for_bugspots_scoring
+    @engine = ScoringEngine.new(@repo)
+    assert_equal 273, @commit.info.stats.total
+    assert_equal 1, @engine.commit_score(@commit)
+  end
+
+  test 'check commit scoring should not be done for ignored_files' do
+    stub_commit_for_bugspots_scoring
+    @engine = ScoringEngine.new(@repo)
+    file_to_be_ignored = create :file_to_be_ignored, name: "Gemfile.lock"
+    @engine.bugspots_score(@commit)
+    assert_equal 103, @commit.info.stats.total
+    assert_equal 2.25, @engine.commit_score(@commit)
+  end
+
+  test 'check bugspots_score when no files are excluded during scoring ' do
+    stub_commit_for_bugspots_scoring
+    @engine = ScoringEngine.new(@repo)
+    assert_equal (0.3039).round(2), @engine.bugspots_score(@commit).round(2)
+  end
+
+  test 'check bugspots scoring when files are excluded' do
+    stub_commit_for_bugspots_scoring
+    @engine = ScoringEngine.new(@repo)
+    file_to_be_ignored = create :file_to_be_ignored, name: "Gemfile.lock"
+    assert_equal (0.126), @engine.bugspots_score(@commit).round(3)
+  end
+
+  test 'check bugspots should not do scoring of files such as Gemfile.lock or README' do
+    stub_commit_for_bugspots_scoring
+    @engine = ScoringEngine.new(@repo)
+    file_to_be_ignored = create :file_to_be_ignored, name: "Gemfile.lock"
+
+    Bugspots.stubs(:scan).returns(YAML.load(File.read("test/fixtures/bugspot.yml")))
+    repo_dir = Rails.root.join("repositories", @repo.id.to_s).to_s
+    bugspots = Bugspots.scan(repo_dir, "master").last
+
+    bugspots_scores = bugspots.inject({}){|r, s| if (FileToBeIgnored.name_exist?(s.file)) then s.score = "0.0000" end; r[s.file] = s; r}
+    max_score = bugspots_scores.max_by{|k,v| v.first.to_f}.last.score.to_f
+
+    total_score = @commit.info.files.inject(0) do |result, file|
+      file_score = bugspots_scores[file.filename]
+      if file_score
+        result += (bugspots_scores[file.filename].score.to_f * 5)/max_score
+      end
+      result
+    end
+
+    #without excluding any files, total_files_count is 10
+    assert_equal 10, @commit.info.files.count
+
+    #files_count after excluding files such as Gemfile.lock
+    valid_files_count = 9
+
+    scores = ([total_score/valid_files_count, 5].min)*(0.45)
+    bugspot_score = @engine.bugspots_score(@commit)
+    assert_equal bugspot_score.round(3), scores.round(3)
+  end
+
+  def stub_commit_for_bugspots_scoring
+    @repo = create :repository, ssh_url: 'git@github.com:prasadsurase/code-curiosity.git', owner: 'prasadsurase', name: 'code-curiosity'
+    @commit = create(:commit, message: Faker::Lorem.sentences, sha: '8a11b8031c06df55f0edf7d41aad22987a74165d', repository: @repo)
+    stub_get('/repos/prasadsurase/code-curiosity/commits/8a11b8031c06df55f0edf7d41aad22987a74165d').to_return(
+      body: File.read('test/fixtures/commit.json'), status: 200,
+      headers: {content_type: "application/json; charset=utf-8"}
+    )
+  end
 end
