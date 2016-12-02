@@ -34,6 +34,28 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal activity.max_rating, max_rating
   end
 
+  test "comments with same description for a repo and an user should exists atleast 1 hour apart" do
+    description = Faker::Lorem.words
+    user = create :user
+    commented_on = DateTime.now - 1.hour
+    activity = create(:activity, :comment, description: description, user: user, event_action: :created, repo: 'owner/repo',
+                      commented_on: commented_on)
+    assert activity.valid?
+    activity2 = build(:activity, :comment, description: description, user: user, event_action: :created, repo: 'owner/repo',
+                      commented_on: commented_on + 60.minutes)
+    refute activity2.valid?
+    assert_equal 1, activity2.errors.count
+    assert_equal activity2.errors.messages[:description], ['Duplicate comment for the same repository by the same user']
+    activity2 = build(:activity, :comment, description: Faker::Lorem.words, user: user, event_action: :created, repo: 'owner/repo',
+                      commented_on: commented_on + 60.minutes)
+    assert activity2.valid?
+    activity2 = build(:activity, :comment, description: description, user: user, event_action: :created, repo: 'owner/other-repo',
+                      commented_on: commented_on + 60.minutes)
+    assert activity2.valid?
+    activity2 = build(:activity, :comment, description: description, user: user, event_action: :created, repo: 'owner/repo',
+                      commented_on: commented_on + 61.minutes)
+  end
+
   test "activities count of user should be zero before any activity is created" do
     activity = build(:activity, description: Faker::Lorem.words)
     assert_equal activity.user.activities_count, 0
