@@ -19,9 +19,9 @@ services:
 
 cache: bundler
 
-sudo: false  
+sudo: false
 
 addons:
   code_climate:
     repo_token: ENV['CODECLIMATE_REPO_TOKEN']
-    
+
