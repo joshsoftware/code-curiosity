@@ -37,7 +37,7 @@ every :day, :at => '8:00pm' do
  rake "fetch_data:sync_repos"
 end
 
-every :day, at: => '10:00pm' do
+every :day, :at => '10:00pm' do
   command 'backup perform --trigger code_curiosity_backup'
 end
 
