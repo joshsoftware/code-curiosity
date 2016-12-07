@@ -202,6 +202,9 @@ GEM
     mongoid-compatibility (0.4.0)
       activesupport
       mongoid (>= 2.0)
+    mongoid-paranoia (2.0.0)
+      activesupport (~> 4.0)
+      mongoid (>= 4.0.0, <= 6.0.0)
     mongoid-slug (5.2.0)
       mongoid (>= 3.0)
       mongoid-compatibility
@@ -401,6 +404,7 @@ DEPENDENCIES
   minitest-rails-capybara
   mocha
   mongoid (~> 5.0)
+  mongoid-paranoia
   mongoid-slug (~> 5.2)
   omniauth-github (~> 1.1.2)
   poltergeist

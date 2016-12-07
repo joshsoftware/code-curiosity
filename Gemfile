@@ -35,6 +35,7 @@ gem 'whenever', :require => false
 gem 'mongoid-slug', '~> 5.2'
 gem 'redcarpet'
 gem 'rollbar'
+gem 'mongoid-paranoia'
 
 group :development, :test do
   gem 'byebug'
