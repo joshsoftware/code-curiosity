@@ -1,0 +1,1672 @@
+---
+- - !ruby/struct:Bugspots::Fix
+    message: fix datepicker issue
+    date: 2015-10-12 16:21:53.000000000 +05:30
+    files:
+    - app/views/dashboard/index.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: bug fix
+    date: 2015-10-13 17:55:07.000000000 +05:30
+    files:
+    - config/mongoid.yml
+  - !ruby/struct:Bugspots::Fix
+    message: 'Fix: Team delete confirmation.'
+    date: 2015-10-17 14:06:41.000000000 +05:30
+    files:
+    - Gemfile.lock
+    - app/views/teams/index.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: Merge branch 'master' of github.com:joshsoftware/code-curiosity
+    date: 2015-10-17 15:47:48.000000000 +05:30
+    files:
+    - app/assets/javascripts/teams.coffee
+    - app/controllers/application_controller.rb
+    - app/controllers/teams_controller.rb
+    - app/models/activity.rb
+    - app/models/commit.rb
+    - app/models/member.rb
+    - app/models/member_activity.rb
+    - app/models/score.rb
+    - app/models/team.rb
+    - app/views/teams/show.html.haml
+    - config/routes.rb
+    - lib/tasks/fetch_data.rake
+    - test/fixtures/member_activities.yml
+    - test/models/activity_test.rb
+    - test/models/member_activity_test.rb
+  - !ruby/struct:Bugspots::Fix
+    message: bug fix in fetching activities
+    date: 2015-10-19 12:26:53.000000000 +05:30
+    files:
+    - lib/tasks/fetch_data.rake
+  - !ruby/struct:Bugspots::Fix
+    message: 'refs #5 bug fix for modal datepicker load'
+    date: 2015-10-19 20:34:03.000000000 +05:30
+    files:
+    - app/assets/javascripts/dashboard.coffee
+  - !ruby/struct:Bugspots::Fix
+    message: Fix  /index direct access issue
+    date: 2015-10-20 17:02:31.000000000 +05:30
+    files:
+    - config/routes.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'closes #8 Added glyphicon to signify pending or done'
+    date: 2015-10-20 17:10:19.000000000 +05:30
+    files:
+    - app/helpers/scores_helper.rb
+    - app/views/teams/index.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: 'Fix #11 graph for empty data.'
+    date: 2015-10-23 10:58:45.000000000 +05:30
+    files:
+    - app/models/round.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'refs #14 fix alignment issue'
+    date: 2015-10-28 13:59:21.000000000 +05:30
+    files:
+    - app/views/dashboard/repositories.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: bug fix
+    date: 2015-12-28 11:58:00.000000000 +05:30
+    files:
+    - app/models/activity.rb
+    - app/models/commit.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'fixed #27'
+    date: 2015-12-25 16:37:54.000000000 +05:30
+    files:
+    - Gemfile
+    - Gemfile.lock
+    - app/controllers/users/omniauth_callbacks_controller.rb
+    - app/models/user.rb
+    - config/initializers/devise.rb
+    - config/initializers/globals.rb
+    - config/routes.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'change the score color after updating the score fixed #16'
+    date: 2015-12-28 14:56:25.000000000 +05:30
+    files:
+    - app/controllers/application_controller.rb
+    - app/views/application/score.js.haml
+  - !ruby/struct:Bugspots::Fix
+    message: bug fix in graphs
+    date: 2015-12-29 14:15:30.000000000 +05:30
+    files:
+    - app/assets/javascripts/dashboard_chart.js
+    - app/models/round.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'bug fixes in activity fetching fixed #28'
+    date: 2015-12-29 16:01:50.000000000 +05:30
+    files:
+    - app/controllers/users_controller.rb
+    - app/jobs/activity_job.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'fixed #31'
+    date: 2016-01-07 11:42:10.000000000 +05:30
+    files:
+    - app/controllers/repositories_controller.rb
+    - app/models/repository.rb
+    - app/views/repositories/_form.html.haml
+    - app/views/repositories/edit.js.haml
+    - app/views/repositories/index.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: fixed the issue with add new repo
+    date: 2016-01-08 13:22:51.000000000 +05:30
+    files:
+    - app/assets/javascripts/dashboard.coffee
+    - app/controllers/repositories_controller.rb
+    - app/models/repository.rb
+    - app/views/repositories/index.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: Fix sing in and sign out routes
+    date: 2016-01-27 17:37:06.000000000 +05:30
+    files:
+    - app/assets/stylesheets/home.scss
+    - app/assets/stylesheets/style.scss
+    - app/controllers/dashboard_controller.rb
+    - app/controllers/home_controller.rb
+    - app/helpers/home_helper.rb
+    - app/views/application/_footer.html.haml
+    - app/views/home/index.html.haml
+    - app/views/layouts/home.html.haml
+    - config/routes.rb
+    - public/apple-touch-icon.png
+    - test/controllers/home_controller_test.rb
+    - vendor/assets/javascripts/AdminLTE.js
+    - vendor/assets/stylesheets/AdminLTE.css
+    - vendor/assets/stylesheets/skin-black-light.css
+  - !ruby/struct:Bugspots::Fix
+    message: Added admin functioality
+    date: 2016-02-09 16:56:25.000000000 +05:30
+    files:
+    - app/controllers/admin/judges_controller.rb
+    - app/controllers/admin/repositories_controller.rb
+    - app/controllers/admin/rounds_controller.rb
+    - app/controllers/admin/users_controller.rb
+    - app/controllers/application_controller.rb
+    - app/controllers/dashboard_controller.rb
+    - app/controllers/users_controller.rb
+    - app/helpers/application_helper.rb
+    - app/models/round.rb
+    - app/models/user.rb
+    - app/views/admin/judges/_judges_table.html.haml
+    - app/views/admin/judges/index.html.haml
+    - app/views/admin/judges/index.js.erb
+    - app/views/admin/repositories/index.html.haml
+    - app/views/admin/rounds/index.html.haml
+    - app/views/admin/users/_users_table.html.haml
+    - app/views/admin/users/index.html.haml
+    - app/views/admin/users/index.js.erb
+    - app/views/application/_sidebar.html.haml
+    - config/routes.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Merge branch 'master' of github.com:joshsoftware/code-curiosity
+    date: 2016-02-09 20:33:19.000000000 +05:30
+    files:
+    - app/controllers/activities_controller.rb
+    - app/controllers/admin/judges_controller.rb
+    - app/controllers/admin/repositories_controller.rb
+    - app/controllers/admin/rounds_controller.rb
+    - app/controllers/admin/users_controller.rb
+    - app/controllers/application_controller.rb
+    - app/controllers/dashboard_controller.rb
+    - app/controllers/users_controller.rb
+    - app/helpers/application_helper.rb
+    - app/models/activity.rb
+    - app/models/concerns/score_helper.rb
+    - app/models/role.rb
+    - app/models/round.rb
+    - app/models/user.rb
+    - app/views/activities/_activity.html.haml
+    - app/views/activities/_commit.html.haml
+    - app/views/admin/judges/_judges_table.html.haml
+    - app/views/admin/judges/index.html.haml
+    - app/views/admin/judges/index.js.erb
+    - app/views/admin/repositories/index.html.haml
+    - app/views/admin/rounds/index.html.haml
+    - app/views/admin/users/_users_table.html.haml
+    - app/views/admin/users/index.html.haml
+    - app/views/admin/users/index.js.erb
+    - app/views/application/_sidebar.html.haml
+    - config/routes.rb
+    - db/seeds.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed admin sidebar opening issue or reload
+    date: 2016-02-10 15:40:21.000000000 +05:30
+    files:
+    - app/assets/javascripts/application.js
+  - !ruby/struct:Bugspots::Fix
+    message: Fix Public checkbox label position on Commit and Activities page
+    date: 2016-02-10 16:14:47.000000000 +05:30
+    files:
+    - app/assets/stylesheets/style.scss
+  - !ruby/struct:Bugspots::Fix
+    message: 'Fix: users -> repositories relations'
+    date: 2016-03-16 15:10:55.000000000 +05:30
+    files:
+    - app/models/repository.rb
+    - app/models/subscription.rb
+    - app/models/user.rb
+    - app/views/application/_user_nav.html.haml
+    - app/views/dashboard/index.html.haml
+    - app/views/repositories/index.html.haml
+    - app/views/users/show.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: Home Page ui
+    date: 2016-04-07 15:04:39.000000000 +05:30
+    files:
+    - app/assets/images/logo-home.png
+    - app/assets/stylesheets/home.scss
+    - app/assets/stylesheets/info.scss
+    - app/controllers/home_controller.rb
+    - app/helpers/home_helper.rb
+    - app/models/round.rb
+    - app/views/application/_footer.html.haml
+    - app/views/application/_user_nav.html.haml
+    - app/views/home/_info.html.haml
+    - app/views/home/index.html.haml
+    - app/views/info/faq.html.haml
+    - app/views/layouts/home.html.haml
+    - app/views/layouts/info.html.haml
+    - config/faq.yml
+    - config/info.yml
+    - config/initializers/assets.rb
+    - config/initializers/globals.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'Fix Repository not listing in "My Repositories" tab #43'
+    date: 2016-04-18 14:15:40.000000000 +05:30
+    files:
+    - app/assets/stylesheets/style.scss
+    - app/controllers/github/repos_controller.rb
+    - app/jobs/user_gh_repos_job.rb
+    - app/models/user.rb
+    - app/views/github/repos/_repo_row.html.haml
+    - app/views/github/repos/_repos.html.haml
+    - app/views/github/repos/index.html.haml
+    - config/locales/en.yml
+  - !ruby/struct:Bugspots::Fix
+    message: Added task to scoring at 12am, Fix repositories sync task
+    date: 2016-04-18 19:43:49.000000000 +05:30
+    files:
+    - app/controllers/repositories_controller.rb
+    - app/controllers/users_controller.rb
+    - app/jobs/activity_job.rb
+    - app/jobs/commit_job.rb
+    - app/jobs/scoring_job.rb
+    - app/models/commits_fetcher.rb
+    - app/models/repository.rb
+    - app/models/round.rb
+    - app/models/scoring_engine.rb
+    - app/models/user.rb
+    - app/views/users/show.html.haml
+    - config/schedule.rb
+    - lib/tasks/auto_score.rake
+    - lib/tasks/fetch_data.rake
+    - lib/tasks/round.rake
+  - !ruby/struct:Bugspots::Fix
+    message: Fix Dublicate Repos creation
+    date: 2016-04-19 18:37:24.000000000 +05:30
+    files:
+    - app/controllers/application_controller.rb
+    - app/controllers/repositories_controller.rb
+    - app/controllers/users_controller.rb
+    - app/jobs/activity_job.rb
+    - app/jobs/commit_job.rb
+    - app/jobs/user_gh_repos_job.rb
+    - app/models/activities_fetcher.rb
+    - app/models/commits_fetcher.rb
+    - app/models/concerns/user_level_helper.rb
+    - app/models/repository.rb
+    - app/models/transaction.rb
+    - app/models/user.rb
+    - app/views/application/_callout_box.html.haml
+    - app/views/application/_celebrity_box.html.haml
+    - app/views/application/_user_nav.html.haml
+    - app/views/dashboard/index.html.haml
+    - app/views/github/repos/index.html.haml
+    - app/views/repositories/index.html.haml
+    - app/views/users/_transaction.html.haml
+    - app/views/users/show.html.haml
+    - config/code_curiosity_config.yml
+    - config/initializers/globals.rb
+    - config/locales/en.yml
+    - config/user_group.yml
+    - lib/tasks/fetch_data.rake
+    - lib/tasks/round.rake
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #47 from HashNuke/master'
+    date: 2016-04-19 21:08:30.000000000 +05:30
+    files:
+    - app/controllers/application_controller.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Updated UI
+    date: 2016-04-20 18:43:23.000000000 +05:30
+    files:
+    - ".gitignore"
+    - app/assets/stylesheets/style.scss
+    - app/controllers/home_controller.rb
+    - app/helpers/application_helper.rb
+    - app/models/commit.rb
+    - app/models/commits_fetcher.rb
+    - app/models/repository.rb
+    - app/models/scoring_engine.rb
+    - app/models/user.rb
+    - app/views/activities/_commit.html.haml
+    - app/views/dashboard/index.html.haml
+    - app/views/home/_user.html.haml
+    - app/views/home/leaderboard.html.haml
+    - app/views/users/_subscription.html.haml
+    - app/views/users/show.html.haml
+    - config/locales/en.yml
+    - config/user_group.yml
+    - lib/tasks/auto_score.rake
+    - lib/tasks/fetch_data.rake
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed Tab selection in contribution page
+    date: 2016-04-21 12:43:35.000000000 +05:30
+    files:
+    - app/assets/javascripts/application.js
+    - app/views/dashboard/index.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: Fix activity fetcher
+    date: 2016-04-21 20:41:02.000000000 +05:30
+    files:
+    - app/models/activities_fetcher.rb
+    - app/models/repository.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fix repo listing of contributed repos
+    date: 2016-04-22 20:41:15.000000000 +05:30
+    files:
+    - app/jobs/user_gh_repos_job.rb
+    - lib/tasks/fetch_data.rake
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed typo in scoring_job
+    date: 2016-04-23 18:47:28.000000000 +05:30
+    files:
+    - app/jobs/scoring_job.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed scoring job ZeroDivisionError error
+    date: 2016-04-23 18:52:23.000000000 +05:30
+    files:
+    - app/models/scoring_engine.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fix Nil bugspots scoring hash
+    date: 2016-04-23 19:25:18.000000000 +05:30
+    files:
+    - app/models/scoring_engine.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'Scoring : Fix typo'
+    date: 2016-04-23 19:33:42.000000000 +05:30
+    files:
+    - app/models/scoring_engine.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed rake task round score update
+    date: 2016-04-23 19:55:08.000000000 +05:30
+    files:
+    - lib/tasks/round.rake
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed leaderboard view
+    date: 2016-04-23 20:11:48.000000000 +05:30
+    files:
+    - app/controllers/home_controller.rb
+    - app/views/home/_user.html.haml
+    - app/views/home/leaderboard.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed private method calling for subscription
+    date: 2016-04-25 15:11:11.000000000 +05:30
+    files:
+    - app/models/subscription.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed hashie warning on cancat array
+    date: 2016-04-26 16:17:32.000000000 +05:30
+    files:
+    - app/models/concerns/user_github_helper.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed reset_password_toekn error
+    date: 2016-04-26 16:33:33.000000000 +05:30
+    files:
+    - app/models/user.rb
+    - app/views/users/show.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed mongoid Cursor not found, cursor id
+    date: 2016-05-02 13:40:22.000000000 +05:30
+    files:
+    - app/jobs/activity_job.rb
+    - app/jobs/commit_job.rb
+    - lib/tasks/fetch_data.rake
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed round score update task
+    date: 2016-05-09 17:41:08.000000000 +05:30
+    files:
+    - ".gitignore"
+    - lib/tasks/round.rake
+  - !ruby/struct:Bugspots::Fix
+    message: Added organization public profile page
+    date: 2016-05-04 13:21:38.000000000 +05:30
+    files:
+    - app/controllers/application_controller.rb
+    - app/controllers/concerns/organization_helper.rb
+    - app/controllers/dashboard_controller.rb
+    - app/controllers/organization/repositories_controller.rb
+    - app/controllers/organization/users_controller.rb
+    - app/controllers/organizations_controller.rb
+    - app/controllers/repositories_controller.rb
+    - app/helpers/organizations_helper.rb
+    - app/models/organization.rb
+    - app/views/organizations/_form.html.haml
+    - app/views/organizations/_info.html.haml
+    - app/views/organizations/_repos.html.haml
+    - app/views/organizations/show.html.haml
+    - config/locales/en.yml
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed Org admin judging views
+    date: 2016-05-11 14:18:37.000000000 +05:30
+    files:
+    - app/assets/javascripts/comments.js
+    - app/controllers/concerns/judges_actions.rb
+    - app/controllers/concerns/organization_helper.rb
+    - app/controllers/judging_controller.rb
+    - app/controllers/organization/repositories_controller.rb
+    - app/controllers/organization/users_controller.rb
+    - app/controllers/organizations_controller.rb
+    - app/helpers/application_helper.rb
+    - app/models/concerns/judge_scoring_helper.rb
+    - app/views/comments/_form.html.haml
+    - app/views/judging/_activity.html.haml
+    - app/views/judging/_commit.html.haml
+    - app/views/judging/activities.html.haml
+    - app/views/judging/activities.js.haml
+    - app/views/judging/commits.html.haml
+    - app/views/judging/commits.js.haml
+    - app/views/organizations/activities.html.haml
+    - app/views/organizations/commits.html.haml
+    - config/routes.rb
+  - !ruby/struct:Bugspots::Fix
+    message: fixed update score task
+    date: 2016-05-11 14:19:38.000000000 +05:30
+    files:
+    - lib/tasks/round.rake
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed min value for points graph
+    date: 2016-05-19 19:54:15.000000000 +05:30
+    files:
+    - app/assets/javascripts/points_chart.js
+    - app/views/users/_subscription.html.haml
+    - app/views/users/show.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed Trend index page crashing because of subscription is empty
+    date: 2016-05-23 14:08:27.000000000 +05:30
+    files:
+    - app/assets/stylesheets/style.scss
+    - app/controllers/home_controller.rb
+    - app/models/goal.rb
+    - app/views/home/points.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed css for trend buttons
+    date: 2016-05-23 14:50:23.000000000 +05:30
+    files:
+    - app/assets/stylesheets/style.scss
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed User show page. Goal not found
+    date: 2016-05-23 16:50:01.000000000 +05:30
+    files:
+    - app/views/users/show.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: fixed typos and grammar errors in the general app
+    date: 2016-05-27 04:28:42.000000000 +05:30
+    files:
+    - config/locales/en.yml
+  - !ruby/struct:Bugspots::Fix
+    message: fixed typos and grammatical errors in the faq
+    date: 2016-05-27 04:32:44.000000000 +05:30
+    files:
+    - config/info.yml
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #48 from zhedar/typos'
+    date: 2016-05-27 12:42:22.000000000 +05:30
+    files:
+    - config/info.yml
+    - config/locales/en.yml
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed dublicate repo creation
+    date: 2016-05-27 19:22:07.000000000 +05:30
+    files:
+    - ".gitignore"
+    - app/helpers/goals_helper.rb
+    - app/jobs/user_repos_job.rb
+    - config/deploy.rb
+    - env.sample
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed round starting on end of the month
+    date: 2016-05-30 15:17:31.000000000 +05:30
+    files:
+    - config/schedule.rb
+    - lib/tasks/round.rake
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed crontab time format
+    date: 2016-05-30 15:26:59.000000000 +05:30
+    files:
+    - config/schedule.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed user image on graph
+    date: 2016-06-07 13:23:38.000000000 +05:30
+    files:
+    - Gemfile
+    - Gemfile.lock
+    - app/assets/javascripts/admin/redeem_requests.js
+    - app/assets/javascripts/points_chart.js
+    - app/controllers/admin/redeem_requests_controller.rb
+    - app/mailers/subscription_mailer.rb
+    - app/models/redeem_request.rb
+    - app/models/subscription.rb
+    - app/views/admin/redeem_requests/_redeem_request.html.haml
+    - app/views/admin/redeem_requests/index.html.haml
+    - app/views/redeem_mailer/coupon_code.html.haml
+    - app/views/subscription_mailer/progress.html.haml
+    - config/schedule.rb
+    - config/sidekiq.yml
+    - lib/tasks/round.rake
+    - lib/tasks/subscription.rake
+    - test/mailers/previews/redeem_mailer_preview.rb
+    - test/mailers/previews/subscription_mailer_preview.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Groups and Redeem form, ui fixes
+    date: 2016-06-09 18:56:30.000000000 +05:30
+    files:
+    - Gemfile
+    - Gemfile.lock
+    - app/assets/javascripts/application.js
+    - app/assets/javascripts/groups.coffee
+    - app/assets/javascripts/groups.js
+    - app/assets/javascripts/groups/members.coffee
+    - app/assets/stylesheets/application.scss
+    - app/assets/stylesheets/groups/members.scss
+    - app/assets/stylesheets/style.scss
+    - app/controllers/concerns/group_helper.rb
+    - app/controllers/groups/members_controller.rb
+    - app/controllers/groups_controller.rb
+    - app/controllers/users_controller.rb
+    - app/helpers/groups/members_helper.rb
+    - app/helpers/groups_helper.rb
+    - app/mailers/group_invitation_mailer.rb
+    - app/models/group.rb
+    - app/models/group_invitation.rb
+    - app/models/redeem_request.rb
+    - app/models/user.rb
+    - app/views/application/_sidebar.html.haml
+    - app/views/group_invitation_mailer/invite.html.haml
+    - app/views/group_invitation_mailer/invite.text.haml
+    - app/views/groups/_form.html.haml
+    - app/views/groups/_form_member.html.haml
+    - app/views/groups/_group.html.haml
+    - app/views/groups/_member.html.haml
+    - app/views/groups/_user.html.haml
+    - app/views/groups/destroy.html.haml
+    - app/views/groups/index.html.haml
+    - app/views/groups/members/_invitation.html.haml
+    - app/views/groups/members/_invitation_form.html.haml
+    - app/views/groups/members/_member.html.haml
+    - app/views/groups/members/create.js.haml
+    - app/views/groups/members/destroy.js.haml
+    - app/views/groups/members/index.html.haml
+    - app/views/groups/show.html.haml
+    - app/views/redeem/_new_modal.html.haml
+    - config/code_curiosity_config.yml
+    - config/initializers/globals.rb
+    - config/initializers/mongoid_ext.rb
+    - config/initializers/setup_mail.rb
+    - config/locales/en.yml
+    - config/routes.rb
+    - test/controllers/groups/members_controller_test.rb
+    - test/factories/group_invitations.rb
+    - test/helpers/groups/members_helper_test.rb
+    - test/mailers/group_invitation_mailer_test.rb
+    - test/mailers/previews/group_invitation_mailer_preview.rb
+    - test/models/group_invitation_test.rb
+    - vendor/assets/javascripts/bootstrap-typeahead.js
+  - !ruby/struct:Bugspots::Fix
+    message: Group Member access controll fix
+    date: 2016-06-20 13:28:13.000000000 +05:30
+    files:
+    - app/controllers/groups/members_controller.rb
+    - app/controllers/groups_controller.rb
+    - app/helpers/groups_helper.rb
+    - app/models/concerns/group_leaders.rb
+    - app/models/group.rb
+    - app/views/groups/_member.html.haml
+    - app/views/groups/members/_invitation.html.haml
+    - app/views/groups/members/_member.html.haml
+    - app/views/groups/members/destroy_invitation.js.haml
+    - app/views/groups/members/index.html.haml
+    - app/views/groups/members/resend_invitation.js.haml
+    - app/views/groups/show.html.haml
+    - config/locales/en.yml
+    - config/routes.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'Admin: Redeem request close/open'
+    date: 2016-06-20 15:42:15.000000000 +05:30
+    files:
+    - app/assets/javascripts/admin/redeem_requests.js
+    - app/controllers/admin/redeem_requests_controller.rb
+    - app/controllers/widgets_controller.rb
+    - app/models/concerns/group_leaders.rb
+    - app/models/transaction.rb
+    - app/views/admin/redeem_requests/_redeem_request.html.haml
+    - app/views/admin/redeem_requests/index.html.haml
+    - app/views/groups/show.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: 'Group Widget: Fixed Group leaders months listing'
+    date: 2016-06-20 15:50:38.000000000 +05:30
+    files:
+    - app/views/widgets/group.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: Admin :Fixed redeem request update
+    date: 2016-06-20 18:19:49.000000000 +05:30
+    files:
+    - app/controllers/admin/redeem_requests_controller.rb
+    - app/models/redeem_request.rb
+    - config/deploy.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed subscription mailer
+    date: 2016-06-21 15:00:53.000000000 +05:30
+    files:
+    - config/deploy.rb
+    - lib/tasks/subscription.rake
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed activities fetching
+    date: 2016-06-27 15:20:56.000000000 +05:30
+    files:
+    - app/models/activities_fetcher.rb
+    - app/models/repository.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed transaction page
+    date: 2016-06-30 10:30:48.000000000 +05:30
+    files:
+    - app/views/users/_transaction.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed Mongo Cursor timeout
+    date: 2016-06-30 12:59:23.000000000 +05:30
+    files:
+    - lib/tasks/fetch_data.rake
+  - !ruby/struct:Bugspots::Fix
+    message: Fixes Rollbar#14 repositories may not have a master
+    date: 2016-07-12 12:35:42.000000000 +05:30
+    files:
+    - app/models/scoring_engine.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'refs #51 fixed the slider alignment'
+    date: 2016-07-25 15:19:57.000000000 +05:30
+    files:
+    - app/assets/javascripts/home.js
+    - app/helpers/home_helper.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed some js issues
+    date: 2016-07-30 20:46:15.000000000 +05:30
+    files:
+    - app/controllers/users_controller.rb
+    - app/views/activities/index.html.haml
+    - app/views/users/sync.js.erb
+    - config/locales/en.yml
+    - vendor/assets/javascripts/AdminLTE.js
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed issue in flash message display
+    date: 2016-07-30 21:18:26.000000000 +05:30
+    files:
+    - app/views/application/_flash_message.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #65 from joshsoftware/some_fixes'
+    date: 2016-08-02 08:27:37.000000000 +05:30
+    files:
+    - app/controllers/users_controller.rb
+    - app/views/activities/index.html.haml
+    - app/views/application/_flash_message.html.haml
+    - app/views/users/sync.js.erb
+    - config/locales/en.yml
+    - vendor/assets/javascripts/AdminLTE.js
+  - !ruby/struct:Bugspots::Fix
+    message: Formatted and fixed typos in README (#74)
+    date: 2016-08-10 18:05:22.000000000 +05:30
+    files:
+    - README.md
+  - !ruby/struct:Bugspots::Fix
+    message: Fix auto scoring calculation in Activity model (#81)
+    date: 2016-08-12 16:31:58.000000000 +05:30
+    files:
+    - app/models/activity.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Added Testcases for the following Models (#85)
+    date: 2016-08-16 18:12:11.000000000 +05:30
+    files:
+    - Gemfile
+    - Gemfile.lock
+    - test/factories/activities.rb
+    - test/factories/comments.rb
+    - test/factories/commits.rb
+    - test/factories/goals.rb
+    - test/factories/group_invitations.rb
+    - test/factories/groups.rb
+    - test/factories/organizations.rb
+    - test/factories/redeem_requests.rb
+    - test/factories/repositories.rb
+    - test/factories/rounds.rb
+    - test/factories/subscriptions.rb
+    - test/factories/transactions.rb
+    - test/models/activity_test.rb
+    - test/models/comment_test.rb
+    - test/models/commit_test.rb
+    - test/models/goal_test.rb
+    - test/models/group_invitation_test.rb
+    - test/models/organization_test.rb
+    - test/models/redeem_request_test.rb
+    - test/models/round_test.rb
+    - test/models/subscription_test.rb
+    - test/models/transaction_test.rb
+    - test/test_helper.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fix text for the progress email (#89)
+    date: 2016-08-22 16:43:48.000000000 +05:30
+    files:
+    - app/views/subscription_mailer/progress.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: fixed the profile trend charted for other users
+    date: 2016-09-12 10:20:59.000000000 +05:30
+    files:
+    - app/controllers/concerns/contribution_helper.rb
+    - app/controllers/users_controller.rb
+  - !ruby/struct:Bugspots::Fix
+    message: refs#117 fixed it, now text will be visible to only signed-in users
+    date: 2016-09-14 17:52:55.000000000 +05:30
+    files:
+    - app/views/users/show.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #120 from BandanaPandey/user_show'
+    date: 2016-09-15 09:22:25.000000000 +05:30
+    files:
+    - app/views/users/show.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: Fix for Admin to be able to update Redeem Request points
+    date: 2016-09-23 13:28:07.000000000 +05:30
+    files:
+    - app/controllers/admin/redeem_requests_controller.rb
+    - app/models/redeem_request.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Altered gems with github paths to use https protocol to fix 'bundle'
+      warnings.
+    date: 2016-09-14 15:49:03.000000000 +05:30
+    files:
+    - Gemfile
+    - Gemfile.lock
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #119 from prasadsurase/fixed-gemfile-warnings'
+    date: 2016-10-05 13:00:11.000000000 +05:30
+    files:
+    - Gemfile
+    - Gemfile.lock
+  - !ruby/struct:Bugspots::Fix
+    message: Typo fix in mailer
+    date: 2016-09-21 11:09:24.000000000 +05:30
+    files:
+    - app/mailers/subscription_mailer.rb
+    - app/views/subscription_mailer/progress.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #131 from Shwetakale/mailer_typo'
+    date: 2016-10-05 14:19:08.000000000 +05:30
+    files:
+    - app/mailers/subscription_mailer.rb
+    - app/views/subscription_mailer/progress.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed controller method scopes. Removed unwanted routes
+    date: 2016-09-23 12:45:38.000000000 +05:30
+    files:
+    - Gemfile.lock
+    - app/controllers/application_controller.rb
+    - app/controllers/groups/members_controller.rb
+    - app/controllers/groups_controller.rb
+    - app/controllers/home_controller.rb
+    - config/routes.rb
+    - test/controllers/subscription_controller_test.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #136 from prasadsurase/fixed-controller-method-scopes-and-routes'
+    date: 2016-10-05 14:24:08.000000000 +05:30
+    files:
+    - app/controllers/application_controller.rb
+    - app/controllers/groups/members_controller.rb
+    - app/controllers/groups_controller.rb
+    - app/controllers/home_controller.rb
+    - config/routes.rb
+    - test/controllers/subscription_controller_test.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #140 from prasadsurase/fixed-issue-close-act-rewarded'
+    date: 2016-10-05 14:28:49.000000000 +05:30
+    files:
+    - app/models/activities_fetcher.rb
+    - app/models/activity.rb
+    - app/models/subscription.rb
+    - test/models/activity_test.rb
+    - test/models/subscription_test.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'Fix set goal refs #130'
+    date: 2016-10-03 21:36:45.000000000 +05:30
+    files:
+    - app/views/goals/_goal.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #143 from Shwetakale/issue_130'
+    date: 2016-10-05 14:35:53.000000000 +05:30
+    files:
+    - app/views/goals/_goal.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: 'Fixed bug: Wrong round assigned to activity and commits'
+    date: 2016-10-05 15:44:09.000000000 +05:30
+    files:
+    - Gemfile.lock
+    - app/models/activities_fetcher.rb
+    - app/models/activity.rb
+    - app/models/commit.rb
+    - app/models/commits_fetcher.rb
+    - test/factories/activities.rb
+    - test/factories/commits.rb
+    - test/models/activity_test.rb
+    - test/models/commit_test.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #147 from prasadsurase/fixed-wrong-round-assignment-issue'
+    date: 2016-10-05 17:07:54.000000000 +05:30
+    files:
+    - Gemfile.lock
+    - app/models/activities_fetcher.rb
+    - app/models/activity.rb
+    - app/models/commit.rb
+    - app/models/commits_fetcher.rb
+    - test/factories/activities.rb
+    - test/factories/commits.rb
+    - test/models/activity_test.rb
+    - test/models/commit_test.rb
+  - !ruby/struct:Bugspots::Fix
+    message: refs#138 Fixed DateFormat
+    date: 2016-10-05 17:00:10.000000000 +05:30
+    files:
+    - Gemfile.lock
+    - app/views/activities/_activity.html.haml
+    - app/views/activities/_commit.html.haml
+    - test/test_helper.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'refs #153 Fixed the length of message.'
+    date: 2016-10-17 14:22:49.000000000 +05:30
+    files:
+    - app/assets/javascripts/activities.js
+    - app/assets/javascripts/application.js
+    - app/helpers/activities_helper.rb
+    - app/views/activities/_activity.html.haml
+    - vendor/assets/javascripts/jquery.shorten.js
+  - !ruby/struct:Bugspots::Fix
+    message: 'Fixed set goal for the current month refs #130'
+    date: 2016-10-17 14:22:50.000000000 +05:30
+    files:
+    - Gemfile
+    - Gemfile.lock
+    - app/views/goals/_goal.html.haml
+    - config/goals.yml
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed typo mistake in goals
+    date: 2016-10-17 16:22:40.000000000 +05:30
+    files:
+    - config/goals.yml
+    - vendor/assets/javascripts/jquery.shorten.js
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #154 from BandanaPandey/contributions'
+    date: 2016-10-19 15:15:05.000000000 +05:30
+    files:
+    - Gemfile
+    - Gemfile.lock
+    - app/assets/javascripts/activities.js
+    - app/assets/javascripts/application.js
+    - app/helpers/activities_helper.rb
+    - app/views/activities/_activity.html.haml
+    - app/views/goals/_goal.html.haml
+    - config/goals.yml
+    - vendor/assets/javascripts/jquery.shorten.js
+  - !ruby/struct:Bugspots::Fix
+    message: 'Fixed contribution graph title refs #162'
+    date: 2016-10-19 16:10:33.000000000 +05:30
+    files:
+    - app/assets/javascripts/home.js
+    - app/controllers/concerns/contribution_helper.rb
+    - app/views/dashboard/index.html.haml
+    - app/views/users/_subscription.html.haml
+    - app/views/users/show.html.haml
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #163 from BandanaPandey/ui_check'
+    date: 2016-10-20 18:00:49.000000000 +05:30
+    files:
+    - app/assets/javascripts/home.js
+    - app/controllers/concerns/contribution_helper.rb
+    - app/views/activities/_activity.html.haml
+    - app/views/activities/_commit.html.haml
+    - app/views/dashboard/index.html.haml
+    - app/views/users/_subscription.html.haml
+    - app/views/users/_transaction.html.haml
+    - app/views/users/show.html.haml
+    - test/integration/group_flows_test.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed the activity comment issue
+    date: 2016-10-20 19:48:55.000000000 +05:30
+    files:
+    - app/models/activity.rb
+    - test/models/activity_test.rb
+    - test/models/subscription_test.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #173 from BandanaPandey/ui_check'
+    date: 2016-10-24 19:01:46.000000000 +05:30
+    files:
+    - app/models/activity.rb
+    - test/models/activity_test.rb
+    - test/models/subscription_test.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'refs #189 removed the tap method on fetch_repo, fixed typo in repository
+      model and additional exception handling on commit fetch job'
+    date: 2016-11-08 14:05:30.000000000 +05:30
+    files:
+    - app/jobs/commit_job.rb
+    - app/models/repository.rb
+    - app/models/scoring_engine.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Scoring of closed issue should not be done.
+    date: 2016-10-26 20:13:41.000000000 +05:30
+    files:
+    - app/models/activity.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #186 from BandanaPandey/ui_check'
+    date: 2016-11-08 15:22:02.000000000 +05:30
+    files:
+    - app/models/activity.rb
+    - test/controllers/judging_controller_test.rb
+    - test/factories/activities.rb
+    - test/models/activity_test.rb
+    - test/models/commit_test.rb
+    - test/models/hackathon_test.rb
+    - test/models/organization_test.rb
+    - test/models/subscription_test.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'refs #196 Fixed the FloatDomain issue of Widgets#repo'
+    date: 2016-11-11 14:29:25.000000000 +05:30
+    files:
+    - app/models/concerns/repo_leaders.rb
+    - test/controllers/widgets_controller_test.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #197 from BandanaPandey/ui_check'
+    date: 2016-11-11 15:19:51.000000000 +05:30
+    files:
+    - app/models/concerns/repo_leaders.rb
+    - test/controllers/widgets_controller_test.rb
+  - !ruby/struct:Bugspots::Fix
+    message: Fixed the failing specs
+    date: 2016-11-24 12:37:04.000000000 +05:30
+    files:
+    - test/fixtures/commit-daily.json
+    - test/models/commits_fetcher_test.rb
+    - test/test_helper.rb
+  - !ruby/struct:Bugspots::Fix
+    message: 'Merge pull request #205 from prasadsurase/fixed-failing-specs'
+    date: 2016-11-24 13:17:42.000000000 +05:30
+    files:
+    - test/fixtures/commit-daily.json
+    - test/models/commits_fetcher_test.rb
+    - test/test_helper.rb
+- - !ruby/struct:Bugspots::Spot
+    file: app/models/activity.rb
+    score: '1.6938'
+  - !ruby/struct:Bugspots::Spot
+    file: Gemfile.lock
+    score: '1.4327'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/activity_test.rb
+    score: '1.4223'
+  - !ruby/struct:Bugspots::Spot
+    file: test/test_helper.rb
+    score: '1.1522'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/subscription_test.rb
+    score: '1.0801'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/commits_fetcher_test.rb
+    score: '0.9348'
+  - !ruby/struct:Bugspots::Spot
+    file: test/fixtures/commit-daily.json
+    score: '0.9348'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/activities/_activity.html.haml
+    score: '0.8758'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/goals/_goal.html.haml
+    score: '0.7968'
+  - !ruby/struct:Bugspots::Spot
+    file: Gemfile
+    score: '0.7927'
+  - !ruby/struct:Bugspots::Spot
+    file: test/controllers/widgets_controller_test.rb
+    score: '0.7524'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/concerns/repo_leaders.rb
+    score: '0.7524'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/commit_test.rb
+    score: '0.7445'
+  - !ruby/struct:Bugspots::Spot
+    file: test/factories/activities.rb
+    score: '0.7445'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/users/show.html.haml
+    score: '0.6973'
+  - !ruby/struct:Bugspots::Spot
+    file: config/goals.yml
+    score: '0.6884'
+  - !ruby/struct:Bugspots::Spot
+    file: vendor/assets/javascripts/jquery.shorten.js
+    score: '0.6884'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/concerns/contribution_helper.rb
+    score: '0.5738'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/activities_fetcher.rb
+    score: '0.5273'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/javascripts/home.js
+    score: '0.5036'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/dashboard/index.html.haml
+    score: '0.4840'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/users/_subscription.html.haml
+    score: '0.4840'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/javascripts/application.js
+    score: '0.4707'
+  - !ruby/struct:Bugspots::Spot
+    file: app/helpers/activities_helper.rb
+    score: '0.4622'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/javascripts/activities.js
+    score: '0.4622'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/activities/_commit.html.haml
+    score: '0.4152'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/organization_test.rb
+    score: '0.4023'
+  - !ruby/struct:Bugspots::Spot
+    file: test/factories/commits.rb
+    score: '0.3884'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/scoring_engine.rb
+    score: '0.3811'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/repository.rb
+    score: '0.3739'
+  - !ruby/struct:Bugspots::Spot
+    file: app/jobs/commit_job.rb
+    score: '0.3610'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/hackathon_test.rb
+    score: '0.3561'
+  - !ruby/struct:Bugspots::Spot
+    file: test/controllers/judging_controller_test.rb
+    score: '0.3561'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/subscription_mailer/progress.html.haml
+    score: '0.3516'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/commits_fetcher.rb
+    score: '0.3468'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/commit.rb
+    score: '0.3438'
+  - !ruby/struct:Bugspots::Spot
+    file: config/routes.rb
+    score: '0.3167'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/groups_controller.rb
+    score: '0.3132'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/groups/members_controller.rb
+    score: '0.3132'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/home_controller.rb
+    score: '0.3060'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/application_controller.rb
+    score: '0.3033'
+  - !ruby/struct:Bugspots::Spot
+    file: test/controllers/subscription_controller_test.rb
+    score: '0.2974'
+  - !ruby/struct:Bugspots::Spot
+    file: app/mailers/subscription_mailer.rb
+    score: '0.2972'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/users/_transaction.html.haml
+    score: '0.2559'
+  - !ruby/struct:Bugspots::Spot
+    file: test/integration/group_flows_test.rb
+    score: '0.2422'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/subscription.rb
+    score: '0.1794'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/users_controller.rb
+    score: '0.1650'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/admin/redeem_requests_controller.rb
+    score: '0.1514'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/redeem_request.rb
+    score: '0.1489'
+  - !ruby/struct:Bugspots::Spot
+    file: config/locales/en.yml
+    score: '0.0915'
+  - !ruby/struct:Bugspots::Spot
+    file: vendor/assets/javascripts/AdminLTE.js
+    score: '0.0599'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/application/_flash_message.html.haml
+    score: '0.0597'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/users/sync.js.erb
+    score: '0.0597'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/activities/index.html.haml
+    score: '0.0597'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/group_invitation_test.rb
+    score: '0.0529'
+  - !ruby/struct:Bugspots::Spot
+    file: test/factories/group_invitations.rb
+    score: '0.0529'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/transaction_test.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/round_test.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/redeem_request_test.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/goal_test.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/comment_test.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/factories/transactions.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/factories/subscriptions.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/factories/rounds.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/factories/repositories.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/factories/redeem_requests.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/factories/organizations.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/factories/groups.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/factories/goals.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: test/factories/comments.rb
+    score: '0.0462'
+  - !ruby/struct:Bugspots::Spot
+    file: README.md
+    score: '0.0391'
+  - !ruby/struct:Bugspots::Spot
+    file: app/helpers/home_helper.rb
+    score: '0.0261'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/show.html.haml
+    score: '0.0250'
+  - !ruby/struct:Bugspots::Spot
+    file: config/deploy.rb
+    score: '0.0232'
+  - !ruby/struct:Bugspots::Spot
+    file: lib/tasks/round.rake
+    score: '0.0216'
+  - !ruby/struct:Bugspots::Spot
+    file: lib/tasks/fetch_data.rake
+    score: '0.0206'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/concerns/group_leaders.rb
+    score: '0.0183'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/stylesheets/style.scss
+    score: '0.0182'
+  - !ruby/struct:Bugspots::Spot
+    file: config/schedule.rb
+    score: '0.0177'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/members/index.html.haml
+    score: '0.0158'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/members/_member.html.haml
+    score: '0.0158'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/members/_invitation.html.haml
+    score: '0.0158'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/_member.html.haml
+    score: '0.0158'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/group.rb
+    score: '0.0158'
+  - !ruby/struct:Bugspots::Spot
+    file: app/helpers/groups_helper.rb
+    score: '0.0158'
+  - !ruby/struct:Bugspots::Spot
+    file: lib/tasks/subscription.rake
+    score: '0.0157'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/user.rb
+    score: '0.0156'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/admin/redeem_requests/index.html.haml
+    score: '0.0154'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/admin/redeem_requests/_redeem_request.html.haml
+    score: '0.0154'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/javascripts/admin/redeem_requests.js
+    score: '0.0154'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/transaction.rb
+    score: '0.0107'
+  - !ruby/struct:Bugspots::Spot
+    file: config/info.yml
+    score: '0.0102'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/javascripts/points_chart.js
+    score: '0.0099'
+  - !ruby/struct:Bugspots::Spot
+    file: config/initializers/globals.rb
+    score: '0.0093'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/widgets/group.html.haml
+    score: '0.0091'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/widgets_controller.rb
+    score: '0.0091'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/members/resend_invitation.js.haml
+    score: '0.0091'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/members/destroy_invitation.js.haml
+    score: '0.0091'
+  - !ruby/struct:Bugspots::Spot
+    file: ".gitignore"
+    score: '0.0089'
+  - !ruby/struct:Bugspots::Spot
+    file: config/code_curiosity_config.yml
+    score: '0.0082'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/application/_sidebar.html.haml
+    score: '0.0071'
+  - !ruby/struct:Bugspots::Spot
+    file: vendor/assets/javascripts/bootstrap-typeahead.js
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: test/mailers/previews/group_invitation_mailer_preview.rb
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: test/mailers/group_invitation_mailer_test.rb
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: test/helpers/groups/members_helper_test.rb
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: test/controllers/groups/members_controller_test.rb
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: config/initializers/setup_mail.rb
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: config/initializers/mongoid_ext.rb
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/redeem/_new_modal.html.haml
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/members/destroy.js.haml
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/members/create.js.haml
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/members/_invitation_form.html.haml
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/index.html.haml
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/destroy.html.haml
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/_user.html.haml
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/_group.html.haml
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/_form_member.html.haml
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/groups/_form.html.haml
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/group_invitation_mailer/invite.text.haml
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/group_invitation_mailer/invite.html.haml
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/group_invitation.rb
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/mailers/group_invitation_mailer.rb
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/helpers/groups/members_helper.rb
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/concerns/group_helper.rb
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/stylesheets/groups/members.scss
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/stylesheets/application.scss
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/javascripts/groups/members.coffee
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/javascripts/groups.js
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/javascripts/groups.coffee
+    score: '0.0067'
+  - !ruby/struct:Bugspots::Spot
+    file: test/mailers/previews/subscription_mailer_preview.rb
+    score: '0.0063'
+  - !ruby/struct:Bugspots::Spot
+    file: test/mailers/previews/redeem_mailer_preview.rb
+    score: '0.0063'
+  - !ruby/struct:Bugspots::Spot
+    file: config/sidekiq.yml
+    score: '0.0063'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/redeem_mailer/coupon_code.html.haml
+    score: '0.0063'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/repositories_controller.rb
+    score: '0.0055'
+  - !ruby/struct:Bugspots::Spot
+    file: app/jobs/activity_job.rb
+    score: '0.0053'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/organizations_controller.rb
+    score: '0.0052'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/organization/users_controller.rb
+    score: '0.0052'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/organization/repositories_controller.rb
+    score: '0.0052'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/concerns/organization_helper.rb
+    score: '0.0052'
+  - !ruby/struct:Bugspots::Spot
+    file: app/helpers/application_helper.rb
+    score: '0.0049'
+  - !ruby/struct:Bugspots::Spot
+    file: app/jobs/user_gh_repos_job.rb
+    score: '0.0047'
+  - !ruby/struct:Bugspots::Spot
+    file: env.sample
+    score: '0.0046'
+  - !ruby/struct:Bugspots::Spot
+    file: app/jobs/user_repos_job.rb
+    score: '0.0046'
+  - !ruby/struct:Bugspots::Spot
+    file: app/helpers/goals_helper.rb
+    score: '0.0046'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/home/points.html.haml
+    score: '0.0041'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/goal.rb
+    score: '0.0041'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/home/leaderboard.html.haml
+    score: '0.0033'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/home/_user.html.haml
+    score: '0.0033'
+  - !ruby/struct:Bugspots::Spot
+    file: app/jobs/scoring_job.rb
+    score: '0.0032'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/application/_user_nav.html.haml
+    score: '0.0032'
+  - !ruby/struct:Bugspots::Spot
+    file: config/user_group.yml
+    score: '0.0031'
+  - !ruby/struct:Bugspots::Spot
+    file: lib/tasks/auto_score.rake
+    score: '0.0031'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/round.rb
+    score: '0.0030'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/github/repos/index.html.haml
+    score: '0.0030'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/dashboard_controller.rb
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/organizations/commits.html.haml
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/organizations/activities.html.haml
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/judging/commits.js.haml
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/judging/commits.html.haml
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/judging/activities.js.haml
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/judging/activities.html.haml
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/judging/_commit.html.haml
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/judging/_activity.html.haml
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/comments/_form.html.haml
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/concerns/judge_scoring_helper.rb
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/judging_controller.rb
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/concerns/judges_actions.rb
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/javascripts/comments.js
+    score: '0.0029'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/organizations/show.html.haml
+    score: '0.0023'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/organizations/_repos.html.haml
+    score: '0.0023'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/organizations/_info.html.haml
+    score: '0.0023'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/organizations/_form.html.haml
+    score: '0.0023'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/organization.rb
+    score: '0.0023'
+  - !ruby/struct:Bugspots::Spot
+    file: app/helpers/organizations_helper.rb
+    score: '0.0023'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/repositories/index.html.haml
+    score: '0.0023'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/concerns/user_github_helper.rb
+    score: '0.0019'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/application/_celebrity_box.html.haml
+    score: '0.0015'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/application/_callout_box.html.haml
+    score: '0.0015'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/concerns/user_level_helper.rb
+    score: '0.0015'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/github/repos/_repos.html.haml
+    score: '0.0015'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/github/repos/_repo_row.html.haml
+    score: '0.0015'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/github/repos_controller.rb
+    score: '0.0015'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/layouts/home.html.haml
+    score: '0.0012'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/home/index.html.haml
+    score: '0.0012'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/application/_footer.html.haml
+    score: '0.0012'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/stylesheets/home.scss
+    score: '0.0012'
+  - !ruby/struct:Bugspots::Spot
+    file: config/initializers/assets.rb
+    score: '0.0011'
+  - !ruby/struct:Bugspots::Spot
+    file: config/faq.yml
+    score: '0.0011'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/layouts/info.html.haml
+    score: '0.0011'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/info/faq.html.haml
+    score: '0.0011'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/home/_info.html.haml
+    score: '0.0011'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/stylesheets/info.scss
+    score: '0.0011'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/images/logo-home.png
+    score: '0.0011'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/admin/users/index.js.erb
+    score: '0.0004'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/admin/users/index.html.haml
+    score: '0.0004'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/admin/users/_users_table.html.haml
+    score: '0.0004'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/admin/rounds/index.html.haml
+    score: '0.0004'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/admin/repositories/index.html.haml
+    score: '0.0004'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/admin/judges/index.js.erb
+    score: '0.0004'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/admin/judges/index.html.haml
+    score: '0.0004'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/admin/judges/_judges_table.html.haml
+    score: '0.0004'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/admin/users_controller.rb
+    score: '0.0004'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/admin/rounds_controller.rb
+    score: '0.0004'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/admin/repositories_controller.rb
+    score: '0.0004'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/admin/judges_controller.rb
+    score: '0.0004'
+  - !ruby/struct:Bugspots::Spot
+    file: db/seeds.rb
+    score: '0.0002'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/role.rb
+    score: '0.0002'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/concerns/score_helper.rb
+    score: '0.0002'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/activities_controller.rb
+    score: '0.0002'
+  - !ruby/struct:Bugspots::Spot
+    file: vendor/assets/stylesheets/skin-black-light.css
+    score: '0.0001'
+  - !ruby/struct:Bugspots::Spot
+    file: vendor/assets/stylesheets/AdminLTE.css
+    score: '0.0001'
+  - !ruby/struct:Bugspots::Spot
+    file: test/controllers/home_controller_test.rb
+    score: '0.0001'
+  - !ruby/struct:Bugspots::Spot
+    file: public/apple-touch-icon.png
+    score: '0.0001'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/javascripts/dashboard.coffee
+    score: '0.0001'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/repositories/edit.js.haml
+    score: '0.0001'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/repositories/_form.html.haml
+    score: '0.0001'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/javascripts/dashboard_chart.js
+    score: '0.0001'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/application/score.js.haml
+    score: '0.0001'
+  - !ruby/struct:Bugspots::Spot
+    file: config/initializers/devise.rb
+    score: '0.0001'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/users/omniauth_callbacks_controller.rb
+    score: '0.0001'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/teams/index.html.haml
+    score: '0.0000'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/dashboard/repositories.html.haml
+    score: '0.0000'
+  - !ruby/struct:Bugspots::Spot
+    file: app/helpers/scores_helper.rb
+    score: '0.0000'
+  - !ruby/struct:Bugspots::Spot
+    file: test/models/member_activity_test.rb
+    score: '0.0000'
+  - !ruby/struct:Bugspots::Spot
+    file: test/fixtures/member_activities.yml
+    score: '0.0000'
+  - !ruby/struct:Bugspots::Spot
+    file: app/views/teams/show.html.haml
+    score: '0.0000'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/team.rb
+    score: '0.0000'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/score.rb
+    score: '0.0000'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/member_activity.rb
+    score: '0.0000'
+  - !ruby/struct:Bugspots::Spot
+    file: app/models/member.rb
+    score: '0.0000'
+  - !ruby/struct:Bugspots::Spot
+    file: app/controllers/teams_controller.rb
+    score: '0.0000'
+  - !ruby/struct:Bugspots::Spot
+    file: app/assets/javascripts/teams.coffee
+    score: '0.0000'
+  - !ruby/struct:Bugspots::Spot
+    file: config/mongoid.yml
+    score: '0.0000'

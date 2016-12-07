@@ -58,14 +58,21 @@ class ScoringEngine
 
   def bugspots_score(commit)
     return 0 if commit.info.nil?
-
     fetch_repo unless git
 
     branch = git.gcommit(commit.sha).branch rescue nil
     branch = commit.branch.present? ? commit.branch : git.branches.local.first.name
-
     bugspots = Bugspots.scan(repo_dir, branch).last
-    bugspots_scores = bugspots.inject({}){|r, s| r[s.file] = s; r}
+    
+    #bugspot scoring of such files which are in the Ignored_list should be zero.
+    
+    bugspots_scores = bugspots.inject({}) do |r, s|
+      if (FileToBeIgnored.name_exist?(s.file))
+        s.score = "0.0000"
+      end
+      r[s.file] = s
+      r
+    end
 
     if bugspots_scores.any?
       max_score = bugspots_scores.max_by{|k,v| v.first.to_f}.last.score.to_f
@@ -75,8 +82,22 @@ class ScoringEngine
 
     return 0 if max_score.to_i == 0
 
+    total_changes = 0
+    files_count = 0
+
+    #Here files_count specifies how many files were changed excluding the ignored_files
+
+    #Here total_changes specifies how many lines has been changed(added/deleted) per file, but should not
+    # include changes of ignored_files for this commit
+
     total_score = commit.info.files.inject(0) do |result, file|
+
       file_score = bugspots_scores[file.filename]
+
+      unless FileToBeIgnored.name_exist?(file.filename)
+        total_changes += file.changes
+        files_count += 1
+      end
 
       if file_score
         result += (bugspots_scores[file.filename].score.to_f * config[:max_score])/max_score
@@ -85,15 +106,19 @@ class ScoringEngine
       result
     end
 
+    #Here we are setting commit.info.stats.total as total changes of files excluding changes of ignored_files
+    commit.info.stats.total = total_changes
+
+
     return 0 if total_score == 0
 
-    score = [ total_score/commit.info.files.count, config[:max_score] ].min
+    score = [ total_score/files_count, config[:max_score] ].min
 
     return score * config[:bugspot_weightage]
   end
 
   def calculate_score(commit)
-    score = commit_score(commit) + comments_score(commit) + bugspots_score(commit)
+    score = bugspots_score(commit) + commit_score(commit) + comments_score(commit)
     return 1 if score == 0
     return [score.round, config[:max_score]].min
   end
