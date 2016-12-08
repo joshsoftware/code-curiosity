@@ -9,7 +9,10 @@ class FileToBeIgnored
 
   def self.name_exist?(file_path)
     file_name = File.basename(file_path)
-    where(name: /#{file_name}$/).any?
+
+    return false if file_name.blank?
+
+    where(name: /(#{Regexp.escape(file_name)})$/).any?
   end
 
 end

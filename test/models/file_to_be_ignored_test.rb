@@ -39,6 +39,11 @@ class FileToBeIgnoredTest < ActiveSupport::TestCase
     assert_not FileToBeIgnored.name_exist?("config/application.rb")
   end
 
+  test 'file name contains brackets or special characters' do
+    file_1 = create :file_to_be_ignored, name: "Gemfile.lock", programming_language: "ruby"
+    assert_not FileToBeIgnored.name_exist?("thredds/dap4/d4tests/src/test/data/resources/TestHyrax/][")
+  end
+
   test 'folder path is present in the ignore list' do
   end
 
