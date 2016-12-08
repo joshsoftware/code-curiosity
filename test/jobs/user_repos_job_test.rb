@@ -115,6 +115,8 @@ class UserReposJobTest < ActiveJob::TestCase
   test 'destroy the repository if it is already persisted if the rating has dropped' do
     repo = create :repository, name: 'code-curiosity', ssh_url: 'git@github.com:prasadsurase/code-curiosity.git',
       owner: 'prasadsurase', stars: 26, gh_id: 67219068
+    @user.repositories << repo
+    @user.save
     User.any_instance.stubs(:fetch_all_github_repos).returns(
       JSON.parse(File.read('test/fixtures/repos.json')).collect{|i| Hashie::Mash.new(i)}
     )
@@ -123,19 +125,22 @@ class UserReposJobTest < ActiveJob::TestCase
     )
     assert_nil repo.deleted_at
     assert_equal 1, Repository.count
+    assert_equal 26, repo.stars
     UserReposJob.perform_now(@user)
     repo.reload
     refute_nil repo.deleted_at
     assert repo.destroyed?
-    assert_equal 26, repo.stars
-    assert_equal 24, repo.info.stargazers_count
-    assert_equal 0, Repository.count
     assert_equal 1, Repository.unscoped.count
+    assert_equal 0, Repository.count
+    assert_equal 24, repo.info.stargazers_count
+    assert_equal 24, repo.stars
   end
 
   test 'restore the repository if it is already persisted and destroyed if the rating has increased' do
     repo = create :repository, name: 'code-curiosity', ssh_url: 'git@github.com:prasadsurase/code-curiosity.git',
       owner: 'prasadsurase', stars: 24, gh_id: 67219068, deleted_at: Time.now - 2.days
+    @user.repositories << repo
+    @user.save
     User.any_instance.stubs(:fetch_all_github_repos).returns(
       JSON.parse(File.read('test/fixtures/repos.json')).collect{|i| Hashie::Mash.new(i)}
     )
@@ -144,16 +149,17 @@ class UserReposJobTest < ActiveJob::TestCase
     )
     refute_nil repo.deleted_at
     assert repo.destroyed?
+    assert_equal 24, repo.stars
     assert_equal 0, Repository.count
     assert_equal 1, Repository.unscoped.count
     UserReposJob.perform_now(@user)
     repo.reload
-    assert_nil repo.deleted_at
     refute repo.destroyed?
-    assert_equal 24, repo.stars
-    assert_equal 25, repo.info.stargazers_count
-    assert_equal 1, Repository.count
+    assert_nil repo.deleted_at
     assert_equal 1, Repository.unscoped.count
+    assert_equal 1, Repository.count
+    assert_equal 25, repo.info.stargazers_count
+    assert_equal 25, repo.stars
   end
 
 end
