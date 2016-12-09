@@ -16,7 +16,7 @@ class ActivitiesFetcher
                  end
 
     #repos = user.repositories.inject({}){|o, r| o[r.gh_id] = r; o}
-    activities = user.gh_client.activity.events.performed(user.github_handle, per_page: 200)
+    activities = user.gh_client.activity.events.performed(user.github_handle, auto_pagination: true)
 
     activities.each do |a|
       if TRACKING_EVENTS.key?(a.type) && Time.parse(a.created_at) > since_time
