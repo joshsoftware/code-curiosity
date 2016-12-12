@@ -37,6 +37,7 @@ class Activity
 
   #validates :description, uniqueness: {:scope => :commented_on}
   validates :round, presence: true
+  validate :check_duplicate_comments, on: :create
 
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
 
@@ -74,11 +75,19 @@ class Activity
   private
 
   def set_round
-    # FIXME: This code was added to address a corner case for commits appearing in next round 
+    # FIXME: This code was added to address a corner case for commits appearing in next round
     # instead of the last month. However, it will impact scoring and bonus points. Keeping this
     # line commented in case we find a better fix. - Gautam
 
     self.round = Round.opened
     #self.round = Round.where(:from_date.lte => commented_on, :end_date.gte => commented_on).first unless self.round
+  end
+
+  # validate if any comments with the same description, for the same repo and same user has been created in the last 1 hour.
+  def check_duplicate_comments
+    return unless event_type == 'comment' and event_action == 'created'
+    if Activity.where(event_type: 'comment', event_action: 'created', user_id: user_id, repo: repo, :commented_on.lte => commented_on, :commented_on.gte => commented_on - 1.hour, description: description).count > 0
+      errors.add(:description, 'Duplicate comment for the same repository by the same user')
+    end
   end
 end
