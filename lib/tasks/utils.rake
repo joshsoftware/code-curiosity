@@ -59,4 +59,36 @@ namespace :utils do
     end
   end
 
+  desc "Delete duplicate repositories"
+  task remove_dup_repos: :environment do
+    repos = Repository.pluck :gh_id
+    dup_repos = repos.select{|i| repos.count(i) > 1 }
+    dup_repos.each do |dup_repo|
+      dups = Repository.where(gh_id: dup_repo).asc(:created_at).to_a
+      original_repo = dups[0]
+      dups[1..-1].each do |dup|
+        # assign the users to the original repo
+        dup.users.each{|u| original_repo.users << u unless original_repo.users.include?(u) }
+
+        # assign the judges to the original repo
+        dup.judges.each{|a| original_repo.judges << a unless original_repo.judges.include?(a) }
+
+        # assign the commits to the original repo
+        dup.commits.each{|c| original_repo.commits << c unless original_repo.commits.include?(c) }
+
+        # assign the activities to the original repo
+        dup.activities.each{|a| original_repo.activities << a unless original_repo.activities.include?(a) }
+
+        # assign the code files to the original repo
+        dup.code_files.each{|a| original_repo.code_files << a unless original_repo.code_files.include?(a) }
+
+        # assign the repositories to the original repo
+        dup.repositories.each{|a| original_repo.repositories << a unless original_repo.repositories.include?(a) }
+
+        # soft delete the repository
+        dup.destroy
+      end
+    end
+  end
+
 end
