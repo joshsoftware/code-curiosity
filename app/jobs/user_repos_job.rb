@@ -20,9 +20,19 @@ class UserReposJob < ActiveJob::Base
   end
 
   def add_repo(gh_repo)
-    repo = Repository.where(gh_id: gh_repo.id).first
+    #check if the repository is not soft deleted and
+    repo = Repository.unscoped.where(gh_id: gh_repo.id).first
 
     if repo
+      if repo.info.stargazers_count < REPOSITORY_CONFIG['popular']['stars']
+        # soft delete the repository if the star rating has declined.
+        repo.set(stars: gh_repo.stargazers_count)
+        repo.destroy
+      else
+        # restore the repo if the repository was already soft deleted and the current star count is greater then the threshold
+        repo.restore if repo.destroyed?
+        repo.set(stars: repo.info.stargazers_count)
+      end
       repo.users << user unless repo.users.include?(user)
       return
     end
