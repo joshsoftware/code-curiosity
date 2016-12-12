@@ -7,7 +7,7 @@ class ActivitiesFetcherTest < ActiveSupport::TestCase
     Timecop.freeze(Time.parse @activities[1].fetch('created_at'))
     @user = create :user, github_handle: 'prasadsurase'
     @round = create :round, :open, from_date: @activities.collect{|i| Time.parse i['created_at']}.min.beginning_of_month
-    stub_get('/users/prasadsurase/events?per_page=200').to_return(
+    stub_get('/users/prasadsurase/events').to_return(
       body: File.read('test/fixtures/activities.json'), status: 200,
       headers: {content_type: "application/json; charset=utf-8"}
     )

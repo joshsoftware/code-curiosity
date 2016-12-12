@@ -33,7 +33,7 @@ class CommitsFetcher
       since: since_time,
       'until': round.end_date ? round.end_date.end_of_day : Time.now,
       sha: branch,
-      per_page: 200
+      auto_pagination: true
     })
 
     return if response.body.blank?

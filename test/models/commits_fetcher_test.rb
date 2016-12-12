@@ -56,7 +56,7 @@ class CommitsFetcherTest < ActiveSupport::TestCase
     Timecop.freeze(Time.parse(@commits.first.commit.committer.date))
     Github::Client::Repos.any_instance.stubs(:branches).returns([branch])
     assert_equal 1, @commits.select{|i| i.commit.author.date >= (Time.now - 30.hours)}.count
-    query_params = { per_page: 200, author: 'prasadsurase', sha: 'master', since: (Time.now - 30.hours), 'until' => @round.end_date.end_of_day }
+    query_params = { author: 'prasadsurase', sha: 'master', since: (Time.now - 30.hours), 'until' => @round.end_date.end_of_day }
     stub_get('/repos/prasadsurase/code-curiosity/commits').with(query: query_params).to_return(
       body: File.read(file_path), status: 200,
       headers: {content_type: "application/json; charset=utf-8"}
@@ -87,7 +87,7 @@ class CommitsFetcherTest < ActiveSupport::TestCase
     file_path = 'test/fixtures/commits.json'
     @commits = JSON.parse(File.read(file_path)).collect{|i| Hashie::Mash.new(i)}
 
-    query_params = { per_page: 200, author: 'prasadsurase', sha: 'master', since: @round.from_date.beginning_of_day, 'until' => @round.end_date.end_of_day }
+    query_params = { author: 'prasadsurase', sha: 'master', since: @round.from_date.beginning_of_day, 'until' => @round.end_date.end_of_day }
     stub_get('/repos/prasadsurase/code-curiosity/commits').with(query: query_params).to_return(
       body: File.read(file_path), status: 200,
       headers: {content_type: "application/json; charset=utf-8"}
