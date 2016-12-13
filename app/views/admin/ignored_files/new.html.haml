@@ -1,0 +1,9 @@
+%section.content-header
+  %h1 
+    Add File
+%section.content
+  .row
+    .col-xs-12
+      .box.box-primary
+        .box-body
+          = render partial: 'form', locals: { path: admin_ignored_files_path }

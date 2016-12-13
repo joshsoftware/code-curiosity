@@ -65,7 +65,6 @@ class ScoringEngine
     bugspots = Bugspots.scan(repo_dir, branch).last
     
     #bugspot scoring of such files which are in the Ignored_list should be zero.
-    
     bugspots_scores = bugspots.inject({}) do |r, s|
       if (FileToBeIgnored.name_exist?(s.file))
         s.score = "0.0000"
@@ -94,7 +93,10 @@ class ScoringEngine
 
       file_score = bugspots_scores[file.filename]
 
-      unless FileToBeIgnored.name_exist?(file.filename)
+      if FileToBeIgnored.name_exist?(file.filename)
+        ignored_file = FileToBeIgnored.where(name: file.filename).first
+        ignored_file.inc(count: 1)
+      else
         total_changes += file.changes
         files_count += 1
       end

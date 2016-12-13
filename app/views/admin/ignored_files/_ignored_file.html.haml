@@ -1,0 +1,8 @@
+%tr
+  %td= ignored_file.name
+  %td= (ignored_file.programming_language).titleize
+  %td= ignored_file.count
+  %td= ignored_file.ignored ? 'Yes' : 'No'
+  %td
+    = link_to 'Edit', edit_admin_ignored_file_path(ignored_file), class: 'btn btn-xs btn-primary'
+    = link_to 'Delete', admin_ignored_file_path(ignored_file), class: 'btn btn-xs btn-danger', data: { method: 'delete', confirm: 'Are you sure?' }

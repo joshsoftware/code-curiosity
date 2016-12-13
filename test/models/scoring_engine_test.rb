@@ -87,8 +87,9 @@ class ScoringEngineTest < ActiveSupport::TestCase
   test 'check commit scoring should not be done for ignored_files' do
     stub_commit_for_bugspots_scoring
     @engine = ScoringEngine.new(@repo)
-    file_to_be_ignored = create :file_to_be_ignored, name: "Gemfile.lock"
+    file_to_be_ignored = create :file_to_be_ignored, name: "Gemfile.lock", ignored: true
     @engine.bugspots_score(@commit)
+    assert_equal 1, file_to_be_ignored.reload.count
     assert_equal 103, @commit.info.stats.total
     assert_equal 2.25, @engine.commit_score(@commit)
   end
@@ -102,14 +103,15 @@ class ScoringEngineTest < ActiveSupport::TestCase
   test 'check bugspots scoring when files are excluded' do
     stub_commit_for_bugspots_scoring
     @engine = ScoringEngine.new(@repo)
-    file_to_be_ignored = create :file_to_be_ignored, name: "Gemfile.lock"
-    assert_equal (0.126), @engine.bugspots_score(@commit).round(3)
+    file_to_be_ignored = create :file_to_be_ignored, name: "Gemfile.lock", ignored: true
+    assert_equal (0.126).round(2), @engine.bugspots_score(@commit).round(2)
+    assert_equal 1, file_to_be_ignored.reload.count
   end
 
   test 'check bugspots should not do scoring of files such as Gemfile.lock or README' do
     stub_commit_for_bugspots_scoring
     @engine = ScoringEngine.new(@repo)
-    file_to_be_ignored = create :file_to_be_ignored, name: "Gemfile.lock"
+    file_to_be_ignored = create :file_to_be_ignored, name: "Gemfile.lock", ignored: true
 
     Bugspots.stubs(:scan).returns(YAML.load(File.read("test/fixtures/bugspot.yml")))
     repo_dir = Rails.root.join("repositories", @repo.id.to_s).to_s

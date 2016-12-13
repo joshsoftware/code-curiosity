@@ -1,0 +1,2 @@
+$('#ignored_file').html("<%=j(render(partial: 'ignored_file', collection: @ignored_files)) %>");
+$(".pagination-container").html("<%=j(paginate @ignored_files, remote: true)%>")

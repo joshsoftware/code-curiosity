@@ -49,7 +49,12 @@ Rails.application.routes.draw do
     resources :rounds, only: [:index] do
       get :mark_as_close
     end
+
     resources :redeem_requests, only: [:index, :update, :destroy]
+
+    resources :ignored_files, except: [:show] do
+      get :search, on: :collection
+    end
 
     get 'dashboard/index', as: 'dashboard'
   end

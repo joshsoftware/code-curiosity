@@ -1,0 +1,34 @@
+%section.content-header
+  %h1 
+    Files
+    %label.slide
+      %input.check#file{checked: 'checked', name: 'ignored', type: 'checkbox', data: {toggle: 'toggle', width: '80', height: '34', on: 'Scored', off: 'Ignored'}}
+    = link_to new_admin_ignored_file_path, class: 'btn btn-success pull-right'do
+      %b Add File
+%section.content
+  .row
+    .col-xs-12
+      .box.box-primary
+        .box-header
+          %h3.box-title
+            %span Files For Scoring:
+          .box-tools
+            = form_tag(search_admin_ignored_files_path, method: :get, class: 'col-xs-4 pull-right') do
+              .input-group.input-group-sm
+                = text_field_tag('q', params[:q], class: 'form-control pull-right', placeholder: 'filename/filepath')
+                .input-group-btn
+                  %button.btn.btn-default{type: 'submit'} Go
+        .box-body.table-responsive
+          - if @ignored_files.any?
+            %table.table.table-bordered
+              %thead
+                %tr
+                  %th.col-xs-5 Name/Path
+                  %th.col-xs-3 Programming Language
+                  %th.col-xs-1 Count
+                  %th.col-xs-1 Ignored
+                  %th.col-xs-2 Actions
+              %tbody#ignored_file
+                = render partial: 'ignored_file', collection: @ignored_files
+            .pagination-container
+              = paginate @ignored_files, remote: true
