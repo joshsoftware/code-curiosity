@@ -1,0 +1,6 @@
+= simple_form_for @ignored_file, url: path do |f|
+  .col-xs-6
+    = f.input :name
+    = f.input :programming_language
+    = f.input :ignored, as: :select, collection: { 'Yes' => 'true', 'No' => 'false'}, include_blank: false
+    %button.btn.btn-primary{type: 'submit'}= @ignored_file.persisted? ? 'Update' : 'Create'
