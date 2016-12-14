@@ -2,7 +2,7 @@
   = render partial: 'activities/score_cell', locals: { resource: activity }
   %td= activity.commented_on.strftime("%d/%b/%Y")
   %td= activity.repo
-  %td= activity.event_type
+  %td #{activity.event_type}-#{activity.event_action}
   %td
     -if activity.description.to_s.split(/\W+/).length > 10
       .shorten_read
