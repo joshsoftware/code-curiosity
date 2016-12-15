@@ -59,4 +59,17 @@ namespace :utils do
     end
   end
 
+  desc "Restore Repository and associated user"
+  task restore_repositories: :environment do
+    # get all deleted repositories
+    Repository.deleted.each do |deleted_repo|
+      # get the users for the deleted repository and recreate the relationship
+      deleted_repo.users.each do |user|
+        user.repositories << deleted_repo
+      end
+      # restore the repository.
+      deleted_repo.restore
+    end
+  end
+
 end
