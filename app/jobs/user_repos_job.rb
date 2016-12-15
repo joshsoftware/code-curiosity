@@ -24,15 +24,22 @@ class UserReposJob < ActiveJob::Base
     repo = Repository.unscoped.where(gh_id: gh_repo.id).first
 
     if repo
+      # Commenting the fuctionality since rails 4.2 has an issue with accessing soft deleted parent association. Refer rails issue#10643.
+=begin
       if repo.info.stargazers_count < REPOSITORY_CONFIG['popular']['stars']
-        # soft delete the repository if the star rating has declined.
         repo.set(stars: gh_repo.stargazers_count)
-        repo.destroy
+        # soft delete the repo if it isnt a fork and the star rating has declined.
+        repo.destroy if repo.source_gh_id.nil?
       else
         # restore the repo if the repository was already soft deleted and the current star count is greater then the threshold
-        repo.restore if repo.destroyed?
+        if repo.destroyed?
+          repo.restore
+          # recreate the relationship between repository and its associated users.
+          repo.users.each{|u| u.repositories << repo }
+        end
         repo.set(stars: repo.info.stargazers_count)
       end
+=end
       repo.users << user unless repo.users.include?(user)
       return
     end
