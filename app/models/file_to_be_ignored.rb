@@ -3,18 +3,19 @@ class FileToBeIgnored
   include Mongoid::Timestamps
 
   field :name, type: String
-  field :programming_language, type: String, default: "ruby"
+  field :programming_language, type: String
   field :ignored, type: Boolean, default: false
   field :count, type: Integer, default: 0
+  field :highest_score, type: Float, default: 0
 
-  validates :name, :programming_language, presence: true
+  validates :name, presence: true
 
   def self.name_exist?(file_path)
     file_name = File.basename(file_path)
 
     return false if file_name.blank?
 
-    where(name: /(#{Regexp.escape(file_name)})$/, ignored: true).any?
+    where(name: /(#{Regexp.escape(file_name)})$/).first
   end
 
 end

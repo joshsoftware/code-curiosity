@@ -66,9 +66,13 @@ class ScoringEngine
     
     #bugspot scoring of such files which are in the Ignored_list should be zero.
     bugspots_scores = bugspots.inject({}) do |r, s|
-      if (FileToBeIgnored.name_exist?(s.file))
-        s.score = "0.0000"
+
+      file = FileToBeIgnored.name_exist?(s.file)
+      if file
+        file.set(highest_score: s.score.to_f) if (s.score.to_f > file.highest_score)
+        s.score = "0.0000" if file.ignored?
       end
+
       r[s.file] = s
       r
     end
@@ -79,8 +83,6 @@ class ScoringEngine
       max_score = 0
     end
 
-    return 0 if max_score.to_i == 0
-
     total_changes = 0
     files_count = 0
 
@@ -90,19 +92,26 @@ class ScoringEngine
     # include changes of ignored_files for this commit
 
     total_score = commit.info.files.inject(0) do |result, file|
+      file_name = bugspots_scores[file.filename]
+      file_exist = FileToBeIgnored.name_exist?(file.filename)
 
-      file_score = bugspots_scores[file.filename]
-
-      if FileToBeIgnored.name_exist?(file.filename)
-        ignored_file = FileToBeIgnored.where(name: file.filename).first
-        ignored_file.inc(count: 1)
+      if file_exist && file_exist.ignored?
+        file_exist.inc(count: 1)
       else
         total_changes += file.changes
         files_count += 1
       end
 
-      if file_score
-        result += (bugspots_scores[file.filename].score.to_f * config[:max_score])/max_score
+      if file_name
+        bugspot_score = file_name.score.to_f
+
+        if file_exist && file_exist.programming_language.blank?
+          file_exist.set(programming_language: repo.languages.first)
+        elsif bugspot_score >= config[:bugspot_scores_threshold]
+          FileToBeIgnored.create(name: file.filename, programming_language: repo.languages.first, highest_score: bugspot_score)
+        end
+
+        result += (bugspot_score * config[:max_score])/max_score if max_score.to_i != 0
       end
 
       result
@@ -112,7 +121,7 @@ class ScoringEngine
     commit.info.stats.total = total_changes
 
 
-    return 0 if total_score == 0
+    return 0 if (total_score == 0 || files_count == 0)
 
     score = [ total_score/files_count, config[:max_score] ].min
 

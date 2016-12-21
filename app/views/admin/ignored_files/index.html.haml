@@ -15,20 +15,21 @@
           .box-tools
             = form_tag(search_admin_ignored_files_path, method: :get, class: 'col-xs-4 pull-right') do
               .input-group.input-group-sm
-                = text_field_tag('q', params[:q], class: 'form-control pull-right', placeholder: 'filename/filepath')
+                = text_field_tag('q', params[:q], class: 'form-control pull-right', placeholder: 'filename/programming_language/file_count')
                 .input-group-btn
                   %button.btn.btn-default{type: 'submit'} Go
         .box-body.table-responsive
-          - if @ignored_files.any?
-            %table.table.table-bordered
-              %thead
-                %tr
-                  %th.col-xs-5 Name/Path
-                  %th.col-xs-3 Programming Language
-                  %th.col-xs-1 Count
-                  %th.col-xs-1 Ignored
-                  %th.col-xs-2 Actions
-              %tbody#ignored_file
-                = render partial: 'ignored_file', collection: @ignored_files
-            .pagination-container
-              = paginate @ignored_files, remote: true
+          %table.table.table-bordered
+            %thead
+              %tr
+                %th.col-xs-4 Name/Path
+                %th.col-xs-2 Programming Language
+                %th.col-xs-1 Max Score
+                %th.col-xs-1 Count
+                %th.col-xs-1 Ignored
+                %th.col-xs-2 Actions
+                %th.col-xs-1 Ignored?
+            %tbody#ignored_file
+              = render partial: 'ignored_file', collection: @ignored_files
+          .pagination-container
+            = paginate @ignored_files, remote: true

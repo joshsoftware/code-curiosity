@@ -3,12 +3,15 @@ class Admin::IgnoredFilesController < ApplicationController
   
   before_action :authenticate_user!
   before_action :authenticate_admin!
-  before_action :find_ignored_file, except: [:index, :new, :create]
+  before_action :find_ignored_file, except: [:index, :new, :create, :update_ignore_field]
 
   def index
     @status = params[:ignored] ? params[:ignored] : false
-    
-    @ignored_files = FileToBeIgnored.where(:ignored => @status, name: /#{params[:query]}/).page(params[:page]) 
+
+    @ignored_files = FileToBeIgnored.any_of({:ignored => @status, name: /#{params[:query]}/},
+                                            {:ignored => @status, programming_language: params[:query]},
+                                            {:ignored => @status, count: params[:query]}).
+                                            order(highest_score: :desc).page(params[:page])
 
     if request.xhr?
       respond_to do|format|
@@ -47,7 +50,8 @@ class Admin::IgnoredFilesController < ApplicationController
       return
     end
 
-    @ignored_files = FileToBeIgnored.where(name: /#{params[:q]}/).order(name: :asc)
+    @ignored_files = FileToBeIgnored.any_of({name: /#{params[:q]}/}, {programming_language: params[:q]},
+                                            {count: params[:q]}).order(highest_score: :desc)
     @ignored_files = @ignored_files.page(1)
     render :index
   end
@@ -56,6 +60,14 @@ class Admin::IgnoredFilesController < ApplicationController
     @ignored_file.destroy
     flash[:success] = "Deleted Successfully"
     redirect_to admin_ignored_files_path
+  end
+
+  def update_ignore_field
+    @ignored_file = FileToBeIgnored.where(id: params[:ignored_file_id]).first
+
+    ignored_params = (params[:ignored_value] == "true") ? true : false
+
+    @ignored_file.update_attributes(ignored: ignored_params)
   end
 
   private
