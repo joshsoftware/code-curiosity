@@ -27,7 +27,7 @@ gem 'simple_form', '~> 3.2.1'
 gem 'omniauth-github', '~> 1.1.2'
 gem 'sidekiq', '~> 4.0'
 gem 'dotenv-rails'
-gem 'git', '~> 1.3'
+gem 'git', git: 'https://github.com/prasadsurase/ruby-git.git', branch: 'get-branches-having-a-commit'
 gem 'rugged', git: 'https://github.com/libgit2/rugged.git', submodules: true
 gem 'bugspots', git: 'https://github.com/igrigorik/bugspots.git'
 gem 'redis-rails'
