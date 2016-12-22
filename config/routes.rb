@@ -54,6 +54,7 @@ Rails.application.routes.draw do
 
     resources :ignored_files, except: [:show] do
       get :search, on: :collection
+      patch :update_ignore_field
     end
 
     get 'dashboard/index', as: 'dashboard'

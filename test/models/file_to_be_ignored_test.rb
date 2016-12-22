@@ -3,7 +3,7 @@ require "test_helper"
 class FileToBeIgnoredTest < ActiveSupport::TestCase
 
   def setup
-  super
+    super
   end
 
   test 'file name must be present' do
@@ -19,7 +19,8 @@ class FileToBeIgnoredTest < ActiveSupport::TestCase
     file_4 = create :file_to_be_ignored, name: "app/models/application.rb", programming_language: "ruby"
     assert FileToBeIgnored.name_exist?("Gemfile")
     assert FileToBeIgnored.name_exist?("Gemfile.lock")
-    assert_not FileToBeIgnored.name_exist?("application.rb")
+    assert FileToBeIgnored.name_exist?("application.rb")
+    assert_not FileToBeIgnored.name_exist?("application.rb").ignored?
   end
 
   test 'file name is absent in the ignore list' do
