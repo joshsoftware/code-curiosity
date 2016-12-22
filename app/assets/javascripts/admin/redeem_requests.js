@@ -12,10 +12,10 @@ $(document).on('page:change', function(event) {
   })
 
   $(function() {
-    $('.check').bootstrapToggle();
+    $('#redeem').bootstrapToggle();
   })
   
-  $('.check').change(function() {
+  $('#redeem').change(function() {
     if($(this).is(':checked')){
       console.log(this.checked);
       $.ajax({
