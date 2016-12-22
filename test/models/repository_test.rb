@@ -44,4 +44,11 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_not_equal Repository.count, Repository.required.count
   end
 
+  test 'info should retrieve repository information' do
+    repo = create :repository, name: 'mongoid-history', owner: 'aq1018', source_url: 'https://github.com/aq1018/mongoid-history'
+    info = repo.info
+    refute info.redirect?
+    assert info.success?
+  end
+
 end

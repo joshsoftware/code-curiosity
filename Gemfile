@@ -18,7 +18,7 @@ gem 'jquery-rails'
 gem 'turbolinks', '~>2.5'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'github_api', '~> 0.13'
+gem 'github_api', git: 'https://github.com/prasadsurase/github.git', branch: 'add-redirection-support'
 gem 'devise', '~> 3.5'
 gem 'highcharts-rails', '~> 4.2', '>= 4.2.5'
 gem 'bootstrap-datepicker-rails'

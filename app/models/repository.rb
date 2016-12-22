@@ -56,7 +56,7 @@ class Repository
   end
 
   def info
-    @info ||= GITHUB.repos.get(owner, name)
+    @info ||= GITHUB.repos.get(owner, name, {redirection: true})
   end
 
   def self.add_new(params, user)
