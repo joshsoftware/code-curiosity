@@ -70,12 +70,19 @@ class ScoringEngine
     # git branch --all --contains <sha>
     # ex., git branch --all --contains fd891813e0f4a85e4b55a25d12f6d4d7de35c90b in prasadsurase/code-curiosity
     # "* delete-merge-conflict-repos\n  remotes/origin/delete-merge-conflict-repos"
-    branches = git.commit_branches(commit.sha, {all: true, contains: true})
-    branch = if branches.include?("\n")
-               branches.split("\n").first.gsub('*', '').strip!
-             else
-               branches.gsub('*', '').strip!
-             end
+    begin
+      branches = git.commit_branches(commit.sha, {all: true, contains: true})
+      branch = if branches.include?("\n")
+                 branches.split("\n").first.gsub('*', '').strip!
+               else
+                 branches.gsub('*', '').strip!
+               end
+    rescue Git::GitExecuteError
+      branch = git.branches.local.first.name unless branch
+    end
+
+
+    # get the current git branch incase the commit is not found in any of the branches.
 
     # remotes/origin/skip-merge-branch-commit-scoring
     branch = git.branch(branch).name
