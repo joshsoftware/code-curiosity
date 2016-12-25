@@ -38,6 +38,7 @@ gem 'rollbar'
 gem 'mongoid-paranoia'
 gem 'mongoid-paperclip', require: 'mongoid_paperclip'
 gem 'stripe'
+gem 'react-rails'
 
 group :development, :test do
   gem 'byebug'

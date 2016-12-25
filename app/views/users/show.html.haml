@@ -1,6 +1,6 @@
 %section.content-header
   %h1 User Profile
-= render 'celebrity_box' if current_user && current_user.celebrity
+= react_component 'CelebrityBox', { type: 'info', title: '', message: t('user.celebrity_signup') } if current_user && current_user.celebrity
 %section.content
   .row
     .col-sm-4

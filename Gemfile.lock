@@ -75,6 +75,10 @@ GEM
     arel (6.0.3)
     autoprefixer-rails (6.4.0.1)
       execjs
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -321,6 +325,13 @@ GEM
     rake (11.2.2)
     rdoc (4.2.2)
       json (~> 1.4)
+    react-rails (1.10.0)
+      babel-transpiler (>= 0.7.0)
+      coffee-script-source (~> 1.8)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     redcarpet (3.3.4)
     redis (3.3.1)
     redis-actionpack (5.0.0)
@@ -470,6 +481,7 @@ DEPENDENCIES
   pry-nav
   quiet_assets
   rails (= 4.2.5)
+  react-rails
   redcarpet
   redis-rails
   rollbar
