@@ -1,6 +1,9 @@
-var PointsTile = React.createClass({
+class PointsTile extends React.Component {
+  constructor(props){
+    super(props);
+  }
 
-  render: function() {
+  render(){
     return (
       <div className={`small-box ${this.props.color}`}>
         <div className="inner">
@@ -16,4 +19,4 @@ var PointsTile = React.createClass({
       </div>
     );
   }
-});
+}

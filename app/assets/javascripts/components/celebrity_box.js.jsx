@@ -1,5 +1,9 @@
-var CelebrityBox = React.createClass({
-  render: function() {
+class CelebrityBox extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+  render() {
     return (
       <section>
         <div className="callout-info col-xs-12">
@@ -12,4 +16,4 @@ var CelebrityBox = React.createClass({
       </section>
     );
   }
-});
+}
