@@ -1,13 +1,1 @@
-%table.table.table-bordered
-  %thead
-    %tr
-      %th.col-xs-1 #
-      %th.col-xs-3  Points
-      %th Detail
-      %th Date
-  %tbody
-    = render partial: 'transaction', collection: @user.transactions.desc(:created_at)
-    %tr
-      %td 
-        %b Total
-      %td{ colspan: 4 }= @user.total_points 
+= react_component 'PointsHistory'

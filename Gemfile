@@ -39,6 +39,8 @@ gem 'mongoid-paranoia'
 gem 'mongoid-paperclip', require: 'mongoid_paperclip'
 gem 'stripe'
 gem 'react-rails'
+gem 'versionist'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   gem 'byebug'
