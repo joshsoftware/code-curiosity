@@ -5,7 +5,7 @@ class TransactionSerializerTest < ActiveSupport::TestCase
     super
     @redeem_request = create(:redeem_request, points: 50, retailer: 'other', address: 'pune', gift_product_url: Faker::Internet.url,
                             coupon_code: 'aitpune')
-    @transaction = create(:transaction, transaction_type: 'redeem_points', type: :debit, redeem_request: @redeem_request, points: -50)
+    @transaction = @redeem_request.transaction
   end
 
   test 'serialize the transaction' do
