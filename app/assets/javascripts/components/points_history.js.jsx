@@ -15,12 +15,6 @@ class PointsHistory extends React.Component {
     });
   }
 
-  total_points() {
-    return this.state.transactions.reduce((function(prev, curr) {
-      return prev + parseFloat(curr.points);
-    }), 0);
-  }
-
   render() {
     return (
       <table className="table table-bordered">
@@ -44,7 +38,7 @@ class PointsHistory extends React.Component {
             <td>
               <b>Total</b>
             </td>
-            <td colSpan="4">{ this.total_points() }</td>
+            <td colSpan="4">{ this.props.total_points }</td>
           </tr>
         </tbody>
       </table>
