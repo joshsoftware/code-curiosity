@@ -60,18 +60,7 @@
               = render partial: 'share_button'
             .row
               = react_component 'UserPointsChart', { xAxis: @xAxis, commits: @commits, activities: @activities, points: @points, username: @username }
-            %table.table.table-bordered
-              %thead
-                %tr
-                  %th.col-xs-1 #
-                  %th Name
-                  %th.col-xs-2 Commits
-                  %th.col-xs-2 Activities
-                  %th.col-xs-2 Points
-              %tbody
-                = render partial: 'subscription', collection:  @subscriptions.reverse
-          .tab-pane#wallet
-            = render 'transactions'
+            = react_component 'SubscriptionsHistory', { user_id: @user.id }
           - if logged_in_user?
             .tab-pane#settings
               = render 'settings'
