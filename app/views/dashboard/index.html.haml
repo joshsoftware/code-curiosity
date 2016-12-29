@@ -14,9 +14,4 @@
       = react_component 'PointsTile', { color: 'bg-yellow', title: 'Activities', points: current_user.activities_count,
         logo: 'ion-chatboxes', path: activities_path(anchor: 'activities') }
   .row
-    .box-body
-      #users-chart-container
-
-
-:javascript
-  userTrendChart(#{@xAxis}, #{@commits}, #{@activities}, #{@points}, #{@username});
+    = react_component 'UserPointsChart', { xAxis: @xAxis, commits: @commits, activities: @activities, points: @points, username: @username }

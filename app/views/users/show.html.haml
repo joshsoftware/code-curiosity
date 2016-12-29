@@ -59,8 +59,7 @@
             - if @show_transactions
               = render partial: 'share_button'
             .row
-              .box-body
-                #users-chart-container
+              = react_component 'UserPointsChart', { xAxis: @xAxis, commits: @commits, activities: @activities, points: @points, username: @username }
             %table.table.table-bordered
               %thead
                 %tr
