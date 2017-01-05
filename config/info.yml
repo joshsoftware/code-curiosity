@@ -17,10 +17,10 @@ faq:
     answer: CodeCuriosity is a platform that encourages contributions to open source. Everyone is rewarded for their efforts, no matter how big or small they are. This is not a "winner takes all" competition. CodeCuriosity rewards code commits, opening or commenting on issues and even consistency in open source contribution. In short, we create healthy competition among contributors that gives them the incentive to contribute. Our aim is to make open source contribution a habit!
   -
     question: Who should use CodeCuriosity?
-    answer: Everyone who contributes to open source. It's not only fun but you're also making a difference! Since all commits are rewarded and everyone (experts and newbies alike) is rewarded, it's always encouraging. There are so many repository owners that are looking out for help from developers and CodeCuriosity not only helps you help others but also rewards you while doing it. It's about having your cake and eating it too!.
+    answer: Everyone who contributes to open source. It's not only fun but you're also making a difference! Since all commits are rewarded and everyone (experts and newbies alike) is rewarded, it's always encouraging. There are so many repository owners that are looking out for help from developers and CodeCuriosity not only helps you help others but also rewards you while doing it. It's about having your cake and eating it too!
   -
     question: How does CodeCuriosity benefit me?
-    answer: You earn points for contributions. You can redeem points for rewards. You're contributing back to the community! This helps you build your open source profile, helps your organization recognize your hard work, helps you contribute back to the the community and also helps you to learn new things and get advice from the community - not to mention it's very satisfying.
+    answer: You earn points for contributions. You can redeem points for rewards. You're contributing back to the community! This helps you build your open source profile, helps your organization recognize your hard work, helps you contribute back to the community and also helps you to learn new things and get advice from the community - not to mention it's very satisfying.
   -
     question: How does it work?
     answer: We gamify open source contributions. Your only task is to sign-up with your GitHub account on CodeCuriosity. After that, we do the rest! The system analyses your commits and activities and they are automatically scored and shown on your dashboard. Everyone and everything is rewarded. You can choose your monthly goal when you log in and try to achieve it. Every month-end, the cumulative scores are added to your wallet and if you have achieved your goal, you get bonus points!
@@ -60,13 +60,13 @@ faq:
     answer: When a user signs up, CodeCuriosity profiles the user's and the user's owned repositories. For every repository that has more than 25 stars, a royalty bonus is credited based on a factor of number of stars and number of followers. Organization contributions are not counted (yet) and commits as collaborator to another repository is not counted.
   -
     question: How is the scoring done?
-    answer: The scoring is done automatically using an algorithm based on certain criteria. For example, is the commit in the critical path, does it fix an issue, the number of lines committed, the expertize of the user etc. This is always evolving and ideas are welcome. These scores can be over-ridden by langauge or domain experts as and when required.
+    answer: The scoring is done automatically using an algorithm based on certain criteria. For example, is the commit in the critical path, does it fix an issue, the number of lines committed, the expertize of the user etc. This is always evolving and ideas are welcome. These scores can be over-ridden by language or domain experts as and when required.
   -
     question: When is the scoring done?
     answer: Scoring is done continuously but the results may take some time to show. Every month-end, your wallet gets credited with the cumulative scores. If you have achieved your month's goal, your bonus points get credited to your wallet!
   -
     question: What is scored?
-    answer: Automated scoring is done on commits, comments, opening an issue and closing an issue today. As we evolve, this may get more streamlined and we may include other factors too.
+    answer: Automated scoring is done on commits, comments and opening an issue today. As we evolve, this may get more streamlined and we may include other factors too.
   -
     question: Can I make real money from CodeCuriosity?
     answer: Not yet ;) It is our aim to sort out legal issues and if we get enough grants and contributions from the community, we would be more than happy to reward open source contributions with money. We dream to invent a new career - A full-time open source contributor who works for the community and not for a company!
