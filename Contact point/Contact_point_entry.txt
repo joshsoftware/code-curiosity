@@ -1,0 +1,11 @@
+A suggestion about adding contact point in Main Website CodeCuriosity.
+
+1.  Actually, I have been there so much time so I thought why not we can add a  Forum main website CodeCuriosity, where contributors can more discuss thing more effective even when use their mobile device.
+	But I not familiar with your system and language (Ruby) so I can help right now.
+
+
+Or 
+2. we can also add a discuss forum from Disqus.It completely free and good expreince.
+	Disqus helps digital publishers build strong audiences
+
+(https://disqus.com/how/)
