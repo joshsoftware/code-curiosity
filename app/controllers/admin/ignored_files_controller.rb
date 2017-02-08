@@ -51,8 +51,7 @@ class Admin::IgnoredFilesController < ApplicationController
     end
 
     @ignored_files = FileToBeIgnored.any_of({name: /#{params[:q]}/}, {programming_language: params[:q]},
-                                            {count: params[:q]}).order(highest_score: :desc)
-    @ignored_files = @ignored_files.page(1)
+                                            {count: params[:q]}).order(highest_score: :desc).page(params[:page])
     render :index
   end
 

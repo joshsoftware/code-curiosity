@@ -29,7 +29,7 @@ class Admin::UsersController < ApplicationController
 
     @users = User.contestants.where(github_handle: /#{params[:q]}/)
     @users = User.contestants.where(email: params[:q]) if @users.none?
-    @users = @users.page(1)
+    @users = @users.page(params[:page])
 
     render :index
   end
