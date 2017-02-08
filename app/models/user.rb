@@ -220,5 +220,3 @@ class User
     self.transactions.where(transaction_type: 'royalty_bonus').first
   end
 end
-
-

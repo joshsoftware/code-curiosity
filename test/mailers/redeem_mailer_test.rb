@@ -5,6 +5,7 @@ class RedeemMailerTest < ActionMailer::TestCase
 
   def test_mail_is_enqueued_to_be_delivered_later
     user = create(:user)
+    round_1 = create :round, status: "open", name: Date.today.beginning_of_month.strftime("%b %Y"), from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
     transaction = create(:transaction, :type => 'credit', :points => 20, user: user)
     r = create(:redeem_request, :points => 2, user: user)
     assert_enqueued_jobs 1 do 
@@ -14,6 +15,7 @@ class RedeemMailerTest < ActionMailer::TestCase
 
   def test_mail_should_be_delivered
     user = create(:user)
+    round_1 = create :round, status: "open", name: Date.today.beginning_of_month.strftime("%b %Y"), from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
     transaction = create(:transaction, :type => 'credit', :points => 20, user: user)
     r = create(:redeem_request, :points => 2, user: user)
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
@@ -23,6 +25,7 @@ class RedeemMailerTest < ActionMailer::TestCase
 
   def test_mail_is_delivered_with_expected_content 
     user = create(:user)
+    round_1 = create :round, status: "open", name: Date.today.beginning_of_month.strftime("%b %Y"), from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
     transaction = create(:transaction, :type => 'credit', :points => 20, user: user)
     r = create(:redeem_request, :points => 2, user: user)
     perform_enqueued_jobs do 

@@ -68,26 +68,25 @@ class RedeemRequest
   end
 
   def redemption_points_validations
-    royalty_bonus = self.user.royalty_bonus_transaction
+    royalty_points = total_royalty_points
 
-    if royalty_bonus
-      royalty_points = royalty_bonus.points
+    if royalty_points
       total_points = self.user.total_points
 
-      #shows error if
-      #1 user's total_points is less than the points to be redeemed
-      #2 user's total_points is greater than the points to be redeemed but royalty_points redeemed for current_months
-      # are more than 500
+      #get all transactions having transaction_type as redeem_points for the user
+      transactions = redeem_points_transactions
 
-      #redeemed_royalty_points = points + royalty_points - total_points, should not be
-      #more than 500 royalty_points.
-      if total_points < points || (total_points >= points && (points + royalty_points - total_points > 500))
-        errors.add(:points, "at most 500 royalty points can be redeemed in this month")
-      end
+      #get redeemed_royalty_points_for_current_month, redeemed_royalty_points, redeemed_total_royalty_points
+      redeemed_royalty_point, total_redeemed_royalty, redeemed_round_points = get_royalty_and_round_points(transactions)
+
+      #threshold check is that atmost 500 royalty points can be redeemed in a month
+      royalty_points_threshold_check(total_points, royalty_points, redeemed_royalty_point, total_redeemed_royalty)
     end
   end
 
   def create_redeem_transaction
+    total_points = self.user.total_points
+
     self.create_transaction({
       type: 'debit',
       points: points,
@@ -95,6 +94,67 @@ class RedeemRequest
       description: 'Redeem',
       user_id: user_id
     })
+
+    #get all transactions having transaction_type as redeem_points for the user
+    transactions = redeem_points_transactions
+    #get redeemed_royalty_points_for_current_month, redeemed_royalty_points, redeemed_total_royalty_points
+    redeemed_royalty_point, total_redeemed_royalty, redeemed_round_point = get_royalty_and_round_points(transactions)
+
+    round_points, royalty_points = set_points(total_points, redeemed_round_point, redeemed_royalty_point)
+
+    create_redemption_transaction(round_points, royalty_points)
+  end
+
+  def set_points(total_points, redeemed_round_point, redeemed_royalty_point)
+    if total_round_points - redeemed_round_point - points >= 0
+      round_points = points
+      royalty_points = 0
+    elsif total_royalty_points && total_royalty_points - redeemed_royalty_point - points >= 0
+      round_points = total_round_points - redeemed_round_point
+      royalty_points = points - round_points
+    else
+      round_points = total_round_points
+      royalty_points = points - round_points
+    end
+
+    return [round_points, royalty_points]
+  end
+
+  def royalty_points_threshold_check(total_points, royalty_points, redeemed_royalty_point, total_redeemed_royalty)
+    royalty = 0
+    if total_points >= points
+      # royalty point to be redeemed if round points is less than the redeemed point
+      royalty = points - (total_points - royalty_points + total_redeemed_royalty) if (total_points - royalty_points + total_redeemed_royalty < points)
+    end
+    #shows error if
+      #1 user's total_points is less than the points to be redeemed
+      #2 user's total_points is greater than the points to be redeemed but royalty_points redeemed for current_months
+      # are more than 500
+    if total_points < points || (total_points >= points && (royalty + redeemed_royalty_point > 500))
+      errors.add(:points, "at most 500 royalty points can be redeemed in this month")
+    end
+  end
+
+  def create_redemption_transaction(round_points, royalty_points)
+    self.transaction.create_redemption_transaction({
+    round_points: round_points,
+    royalty_points: royalty_points,
+    round_name: Round.opened.name
+    })
+  end
+
+  def get_royalty_and_round_points(transactions)
+    redeemed_royalty_point = total_redeemed_royalty = redeemed_round_point = 0
+
+    transactions.each do |transaction|
+      if transaction.redemption_transaction
+        redeemed_round_point += transaction.redemption_transaction.round_points
+        redeemed_royalty_point += transaction.redemption_transaction.royalty_points if Round.opened.name.eql?(transaction.redemption_transaction.round_name)
+        total_redeemed_royalty += transaction.redemption_transaction.royalty_points
+      end
+    end
+
+    return [redeemed_royalty_point, total_redeemed_royalty, redeemed_round_point]
   end
 
   def send_notification
@@ -104,4 +164,15 @@ class RedeemRequest
     end
   end
 
+  def total_round_points
+    self.user.transactions.where(transaction_type: 'Round').sum(:points)
+  end
+
+  def total_royalty_points
+    self.user.royalty_bonus_transaction.points if self.user.royalty_bonus_transaction
+  end
+
+  def redeem_points_transactions
+    self.user.transactions.where(transaction_type: 'redeem_points')
+  end
 end
