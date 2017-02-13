@@ -120,6 +120,7 @@ class ScoringEngine
     # include changes of ignored_files for this commit
 
     total_score = commit.info.files.inject(0) do |result, file|
+
       file_name = bugspots_scores[file.filename]
       file_exist = FileToBeIgnored.name_exist?(file.filename)
 
@@ -136,10 +137,11 @@ class ScoringEngine
         if file_exist && file_exist.programming_language.blank?
           file_exist.set(programming_language: repo.languages.first)
         elsif bugspot_score >= config[:bugspot_scores_threshold]
-          FileToBeIgnored.create(name: file.filename, programming_language: repo.languages.first, highest_score: bugspot_score)
+          FileToBeIgnored.create(name: file.filename, programming_language: repo.languages.first, highest_score: bugspot_score) unless file_exist
+          file_exist.set(highest_score: bugspot_score) if (file_exist && bugspot_score > file_exist.highest_score)
         end
 
-        result += (bugspot_score * config[:max_score])/max_score if max_score.to_i != 0
+        result += (bugspot_score * config[:max_score])/max_score if max_score != 0
       end
 
       result
