@@ -4,21 +4,22 @@
       = image_tag 'logo-home.png'
     .row
       .box-header
-        %h4
-          %span.text
-            = number_with_delimiter(User.contestants.count )
-            users
-          have contributed 
-          %span.text
-            = number_with_delimiter(Transaction.total_points_before_redemption)
-            points
-          and 
-          %span.text
-            = "$#{number_with_delimiter(RedeemRequest.total_points_redeemed/REDEEM['one_dollar_to_points'])}"
-          has been rewarded back to 
-          %span.text
-            = number_with_delimiter(RedeemRequest.where(status: true).count)
-            contributors!  
+        .col-xs-12
+          %h4
+            %span.text
+              = number_with_delimiter(User.contestants.count )
+              users
+            have contributed
+            %span.text
+              = number_with_delimiter(Transaction.total_points_before_redemption)
+              points
+            and
+            %span.text
+              = "$#{number_with_delimiter(RedeemRequest.total_points_redeemed/REDEEM['one_dollar_to_points'])}"
+            has been rewarded back to
+            %span.text
+              = number_with_delimiter(RedeemRequest.where(status: true).count)
+              contributors!
     .row
       %a.btn.btn-primary.btn-lg{  href: omniauth_authorize_path(:user, :github) }
         %span.fa.fa-github
