@@ -12,6 +12,7 @@ class Transaction
   belongs_to :user
   belongs_to :subscription
   belongs_to :redeem_request
+  has_one :redemption_transaction
 
   validates :type, :points , presence: true
   validates :type, inclusion: { in: %w(credit debit) }
