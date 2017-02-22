@@ -165,7 +165,7 @@ class RedeemRequest
   end
 
   def total_round_points
-    self.user.transactions.where(transaction_type: 'Round').sum(:points)
+    self.user.transactions.where(:transaction_type.in => ['GoalBonus', 'Round']).sum(:points)
   end
 
   def total_royalty_points
