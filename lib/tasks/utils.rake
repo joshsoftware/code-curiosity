@@ -72,4 +72,29 @@ namespace :utils do
     end
   end
 
+  desc "Update user redeemed points transactions"
+  task update_user_redemed_points: :environment do
+    User.contestants.each do |user|
+      user.transactions.where(transaction_type: 'redeem_points').each do |transaction|
+        total_points = 0
+        points = transaction.points.abs
+        total_points = user.transactions.where(:created_at.lt => transaction.created_at).sum(:points)
+        royalty_points = user.royalty_bonus_transaction ? user.royalty_bonus_transaction.points : 0
+
+        redeemed_royalty_points = points + royalty_points - total_points
+
+        redeemed_royalty_points = 0 if redeemed_royalty_points <= 0
+
+        redeemed_royalty_points = points if redeemed_royalty_points > points
+
+        round_points = points - redeemed_royalty_points
+
+        transaction.create_redemption_transaction({
+          round_points: round_points,
+          royalty_points: redeemed_royalty_points,
+          round_name: transaction.created_at.strftime("%b %Y")
+          })
+      end
+    end
+  end
 end
