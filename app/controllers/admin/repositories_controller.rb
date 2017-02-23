@@ -16,4 +16,15 @@ class Admin::RepositoriesController < ApplicationController
    @repo.judges = User.find(params[:judges])
    @repo.save
   end
+
+  def search
+    if params[:q].blank?
+      redirect_to admin_repositories_path
+      return
+    end
+
+    @repos = Repository.where(name: /#{params[:q]}/).asc(:name).page(params[:page])
+
+    render :index
+  end
 end
