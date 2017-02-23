@@ -6,7 +6,7 @@
           %h3.box-title
             %span Users:  
           .box-tools
-            = form_tag(search_admin_users_path, method: :get, class: 'col-xs-4 pull-right') do
+            = form_tag(search_admin_users_path, method: :get, class: 'col-xs-3 col-md-4 pull-right') do
               .input-group.input-group-sm
                 = text_field_tag('q', params[:q], class: 'form-control pull-right', placeholder: 'github handle/email')
                 .input-group-btn
