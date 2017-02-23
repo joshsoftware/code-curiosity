@@ -13,7 +13,7 @@
           %h3.box-title
             %span Files For Scoring:
           .box-tools
-            = form_tag(search_admin_ignored_files_path, method: :get, class: 'col-xs-4 pull-right') do
+            = form_tag(search_admin_ignored_files_path, method: :get, class: 'col-xs-2 col-md-4 pull-right') do
               .input-group.input-group-sm
                 = text_field_tag('q', params[:q], class: 'form-control pull-right', placeholder: 'filename/programming_language/file_count')
                 .input-group-btn
