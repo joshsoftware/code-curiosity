@@ -24,6 +24,7 @@ class RedeemRequest
   validate :check_sufficient_balance, unless: :retailer_other?, on: :create
   validate :points_validations, unless: :retailer_other?
   validate :redemption_points_validations, unless: :retailer_other?, on: :create
+  validate :user_total_points, on: :create
 
   before_validation {|r| r.points = r.points.to_i }
 
@@ -35,6 +36,11 @@ class RedeemRequest
 
   after_save :send_notification
 
+  def user_total_points
+    if user.total_points == 0
+      errors.add(:gift_product_url, "insufficient balance. You have only #{user.total_points} points in your account.") if retailer_other?
+    end
+  end
 
   def self.total_points_redeemed
     where(status: true).sum(&:points)
