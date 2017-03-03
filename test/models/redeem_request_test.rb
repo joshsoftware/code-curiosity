@@ -50,7 +50,7 @@ class RedeemRequestTest < ActiveSupport::TestCase
   end
 
   test "whether retailer category is other" do
-    redeem_request = build(:redeem_request, :points => 2, :address => 'baner', :retailer => 'other', :gift_product_url => Faker::Internet.url, :address => 'baner')
+    redeem_request = build(:redeem_request, :points => 2, :retailer => 'other', :gift_product_url => Faker::Internet.url, :address => 'baner')
     assert redeem_request.retailer_other?
   end
 
@@ -238,4 +238,13 @@ class RedeemRequestTest < ActiveSupport::TestCase
     redeem_request_2 = create :redeem_request,points: 200, created_at: Date.today + 2.month, user: user
   end
 
+  test "should not redeem for others retailer if user total points is 0" do
+    user = create :user
+    round_1 = create :round, status: "open", from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
+    round_transaction = create :transaction, points: 0, type: 'credit', transaction_type: 'Round', user: user
+    redeem_request_1 = build :redeem_request, points: 0, address: 'baner', retailer: 'other', gift_product_url: Faker::Internet.url, user: user
+    redeem_request_1.valid?
+    assert_not_empty redeem_request_1.errors[:gift_product_url]
+    assert_equal redeem_request_1.errors[:gift_product_url].first, "insufficient balance. You have only 0 points in your account."
+  end
 end
