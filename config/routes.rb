@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :repositories, only: [:index] do
+      get :search, on: :collection
       member do
         patch :add_judges
         get :assign_judge
