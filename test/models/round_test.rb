@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class RoundTest < ActiveSupport::TestCase
-  def test_must_create_round 
+
+  def test_must_create_round
     assert_difference 'Round.count' do
       user = create(:round)
     end
@@ -14,10 +15,10 @@ class RoundTest < ActiveSupport::TestCase
   end
 
 
-  def test_from_date_must_be_present 
+  def test_from_date_must_be_present
     round = build(:round,:from_date => nil)
     round.valid?
-    assert_not_empty round.errors[:from_date] 
+    assert_not_empty round.errors[:from_date]
   end
 
   def test_end_date_must_be_after_from_date
@@ -26,14 +27,38 @@ class RoundTest < ActiveSupport::TestCase
     round.valid?
     assert_not_empty round.errors[:end_date]
   end
- 
-  def test_round_should_be_opened
-    round = build(:round, :status => 'close')
+
+  def test_default_status_should_be_inactive
+    round = build(:round)
     round.valid?
-    assert_not round.open?
+    assert round.inactive?
   end
 
-  def test_next_round_must_be_created_after_closing_current_round 
+  def test_round_should_be_opened
+    round = build(:round, :open)
+    round.valid?
+    assert round.open?
+  end
+
+  def test_round_should_be_closed
+    round = build(:round, status: :close)
+    round.valid?
+    assert round.closed?
+  end
+
+  def test_only_one_round_should_be_open
+    round_1 = create(:round, :open)
+    assert round_1.persisted?
+    assert round_1.valid?
+    assert round_1.open?
+
+    round_2 = build(:round, :open)
+    assert round_2.open?
+    assert round_1.valid?
+    refute round_2.valid?
+  end
+
+  def test_next_round_must_be_created_after_closing_current_round
     round = build(:round, :status => 'open')
     assert_difference 'Round.count' do
       round.round_close
@@ -60,4 +85,5 @@ class RoundTest < ActiveSupport::TestCase
     next_round = Round.first
     assert next_round.open?
   end
+
 end
