@@ -61,4 +61,3 @@ To test this locally,
 
 * create _.env.&lt;environment>_ file based on your environment i.e .env.development, .env.production. For local development, use .env.local
 * Add github app id and secret to _.env.&lt;environment>_ file. Refer _env.sample_
-*
