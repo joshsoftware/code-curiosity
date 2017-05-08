@@ -1,0 +1,6 @@
+.sticky-container
+  %ul.sticky
+    %li
+      %p
+        %a#rotate{ href: user_signed_in? ? "#" : omniauth_authorize_path(:user, :github, user: 'Sponsorer'), class: "btn btn-lg btn-success" } 
+          Sponsor
