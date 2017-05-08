@@ -28,6 +28,7 @@ class User
   field :github_handle,      type: String
   field :active,             type: Boolean, default: true
   field :is_judge,           type: Boolean, default: false
+  field :is_sponsorer,       type: Boolean, default: false
   field :name,               type: String
   field :provider,           type: String
   field :uid,                type: String
