@@ -36,6 +36,7 @@ gem 'mongoid-slug', '~> 5.2'
 gem 'redcarpet'
 gem 'rollbar'
 gem 'mongoid-paranoia'
+gem 'mongoid-paperclip', require: 'mongoid_paperclip'
 
 group :development, :test do
   gem 'byebug'
