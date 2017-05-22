@@ -10,6 +10,7 @@ YAML.load_file('config/code_curiosity_config.yml').tap do |config|
   SCORING_ENGINE_CONFIG = config['scoring_engine']
   USER = config['user']
   REDEEM = config['redeem']
+  SPONSOR = config['sponsor']
 end
 
 COMMIT_RATINGS = (0..5).to_a
