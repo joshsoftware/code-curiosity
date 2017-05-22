@@ -1,0 +1,22 @@
+.modal-dialog#test
+  .modal-content
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      %h3#myModalLabel New Sponsorer
+    .modal-body
+      %ul.errors
+      .nav-tabs-custom
+        %ul.nav.nav-tabs
+          %li.active
+            %a{href: '#individual', data: { toggle: 'tab'} }
+              %i.fa.fa-money
+              Individual
+          %li
+            %a{href: '#organization', data: { toggle: 'tab'} } 
+              %i.fa.fa-money
+              Company
+        .tab-content
+          .tab-pane.active#individual
+            = render 'sponsorer_details/individual'
+          .tab-pane#organization
+            = render 'sponsorer_details/organization'
