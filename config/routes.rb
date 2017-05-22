@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   resources :repositories, only: [:index]
 
+  resources :sponsorer_details
+
   resources :users, only: [:index, :show, :destroy] do
     member do
       get 'sync'
