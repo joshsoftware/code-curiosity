@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
     return true if params[:controller] == 'goals' && params[:action] == 'index'
     return true if params[:action] == 'set_goal' || params[:controller] == 'devise/sessions'
     return true if current_user.is_admin?
+    return true if current_user.is_sponsorer?
 
     if current_user.goal.blank?
       redirect_to goals_path, notice: I18n.t('goal.please_select')
@@ -45,6 +46,12 @@ class ApplicationController < ActionController::Base
 
   def authenticate_admin!
     unless current_user.is_admin?
+      redirect_back(notice: I18n.t('messages.unauthorized_access'))
+    end
+  end
+
+  def authenticate_sponsor!
+    if current_user && !current_user.is_sponsorer?
       redirect_back(notice: I18n.t('messages.unauthorized_access'))
     end
   end
