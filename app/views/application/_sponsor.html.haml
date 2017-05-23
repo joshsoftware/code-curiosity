@@ -2,5 +2,12 @@
   %ul.sticky
     %li
       %p
-        %a#rotate{ href: user_signed_in? ? "#" : omniauth_authorize_path(:user, :github, user: 'Sponsorer'), class: "btn btn-lg btn-success" } 
-          Sponsor
+        - if user_signed_in?
+          = link_to("Sponsor", new_sponsorer_detail_path, class: "btn btn-lg btn-success", id: "rotate", :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window')
+        - else
+          = link_to("Sponsor", omniauth_authorize_path(:user, :github, user: 'Sponsorer'), class: "btn btn-lg btn-success", id: "rotate")
+        
+#modal-window.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex =>"-1"}
+/ = link_to("Sponsor", user_signed_in? ? "#" : new_sponsorer_detail_path, class: "btn btn-lg btn-success", id: "rotate", :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window')
+/ %a#rotate{ href: user_signed_in? ? new_sponsorer_detail_path : omniauth_authorize_path(:user, :github, user: 'Sponsorer'), class: "btn btn-lg btn-success" }
+/  Sponsor
