@@ -46,6 +46,10 @@ class UserTest < ActiveSupport::TestCase
     assert user.able_to_redeem?
   end
 
+  test "sponsor should have one sponsorer_detail" do
+
+  end
+
   def omniauthentication
     @date = Date.new(2015, 10, 10)
     OmniAuth.config.test_mode = true
