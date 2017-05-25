@@ -20,13 +20,13 @@ user:
 
 sponsor:
   individual:
-    basic_plan: 10
-    intermediate_plan: 15
-    advanced_plan: 20
+    basic: 10
+    intermediate: 15
+    advanced: 20
   organization:
-    basic_plan: 150
-    intermediate_plan: 200
-    advanced_plan: 300 
+    basic: 150
+    intermediate: 200
+    advanced: 300 
 
 scoring_engine:
   :repositories: 'repositories' # repositories dir
