@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   resources :sponsorer_details
 
+  post "/stripe/webhooks", to: "stripe#webhooks"  
+
   resources :users, only: [:index, :show, :destroy] do
     member do
       get 'sync'
