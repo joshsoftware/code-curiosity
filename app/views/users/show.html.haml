@@ -30,6 +30,10 @@
                 = link_to 'Set Goal', goals_path, class: 'pull-right'
               - else
                 %span.pull-right Not set yet
+            - if current_user.is_sponsorer?
+              %li.list-group-item
+                %b Sponsorship Plan
+                %a.pull-right= @user.sponsorer_detail.payment_plan
           - if logged_in_user?
             - if @user.able_to_redeem?
               = link_to '#', class: "btn btn-primary btn-block", data: { toggle: 'modal', target: '#redeem-modal .modal' } do
@@ -47,6 +51,9 @@
               = link_to 'Points History', '#wallet', data: { toggle: 'tab' }
             %li#wallet_tab_link
               = link_to 'Settings', '#settings', data: { toggle: 'tab' }
+          - if @user.is_sponsorer?
+            %li#sponsor_tab_link
+              = link_to 'Plan Detils', '#sponsor', data: { toggle: 'tab'}
         .tab-content
           .tab-pane.active#rounds
             - if @show_transactions
@@ -69,6 +76,19 @@
               = render 'transactions'
             .tab-pane#settings
               = render 'settings'
+            - if @user.is_sponsorer?
+              .tab-pane#sponsor
+                .well
+                  %table.table
+                    %tr
+                      %th Payment Plan:
+                      %td= @plan[:name]
+                    %tr
+                      %th Subscribed at:
+                      %td= @plan[:subscribed_at].to_date.strftime("%d/%m/%y")
+                    %tr
+                      %th Subscription Amount:
+                      %td= @plan[:amount].to_s+"$/month"
           %b 
             - if logged_in_user?
               Info:

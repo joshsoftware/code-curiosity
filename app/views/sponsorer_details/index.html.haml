@@ -1,6 +1,28 @@
 %section.content-header
   %h1 Welcome to sponsor for CodeCuriosity!
 %section.content
+  .row
+    .col-sm-3
+      .box.box-primary
+        .box-body.box-profile
+          = image_tag (current_user.sponsorer_detail && current_user.sponsorer_detail.avatar.present?) ? @sponsor.avatar : avatar_url(@user), class: 'profile-user-img img-responsive', alt: @user.name
+          %h3.profile-username.text-center= @user.name.titleize
+          %p.text-muted.text-center
+            = link_to github_url(@user), target: '_blank' do
+              %i.fa.fa-github
+              = @user.github_handle
+    .col-sm-9
+      .nav-tabs-custom
+        %ul.nav.nav-tabs
+          %li.active#transactions_tab_link
+            = link_to 'Transactions', '#transaction', data: { toggle: 'tab'}
+          %li#transactions_tab_link
+            = link_to 'Sponsored Repositories', '#repositories', data: { toggle: 'tab'}
+        .tab-content
+          .tab-pane.active#transaction
+            %b Latest transaction
+          .tab-pane#repositories
+            %b Repositories sponsored
 
 :javascript
   var modal = "#{session[:modal]}"

@@ -9,6 +9,13 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @show_transactions = current_user == @user
+    if @user.is_sponsorer?
+      @sponsor = @user.sponsorer_detail
+      @plan = {}
+      @plan[:name] = @sponsor.payment_plan
+      @plan[:amount] = SPONSOR[@sponsor.sponsorer_type.downcase][@sponsor.payment_plan]
+      @plan[:subscribed_at] = @sponsor.subscribed_at
+    end
     contribution_data(@user)
     if @user
       render layout: current_user ? 'application' : 'public'
