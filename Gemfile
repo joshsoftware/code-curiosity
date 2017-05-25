@@ -37,6 +37,7 @@ gem 'redcarpet'
 gem 'rollbar'
 gem 'mongoid-paranoia'
 gem 'mongoid-paperclip', require: 'mongoid_paperclip'
+gem 'stripe'
 
 group :development, :test do
   gem 'byebug'
