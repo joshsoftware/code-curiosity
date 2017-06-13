@@ -1,5 +1,7 @@
 %h4= "Hello, #{@user.name}"
 %p
-  Your last payment failed to go through. 
-  please update your credit card details.
-  - CodeCuriosity
+  Unfortunately your most recent invoice payment was declined with the following message:
+%p  
+  #{@message}
+%p
+  Please update your payment information as soon as possible by logging in to our site.

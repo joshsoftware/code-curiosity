@@ -1,6 +1,8 @@
 class SponsorMailer < ApplicationMailer
-  def subscription_payment_failed(user)
+  layout "sponsor_mail_layout"
+  def subscription_payment_failed(user, message)
     @user = User.find(id: user)
+    @message = message
     mail(to: @user.email, subject: "Payment to CodeCuriosity failed")
   end
 

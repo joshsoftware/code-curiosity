@@ -1,5 +1,5 @@
 class StripeController < ApplicationController
-
+  require "stripe"
   protect_from_forgery :except => :webhooks
 
   def webhooks
@@ -9,23 +9,18 @@ class StripeController < ApplicationController
     #refer event types here https://stripe.com/docs/api#event_types
     case event_json['type']
       when 'customer.subscription.created'
-        subscriber = SponsorerDetail.find_by(customer_id: event.data.object.customer)
-        subscriber.subscribed_at = Time.at(event.data.object.start).to_datetime
-        subscriber.subscription_expires_at = Time.at(event.data.object.current_period_end).to_datetime
+        subscriber = SponsorerDetail.find_by(stripe_customer_id: event_object['customer'])
+        subscriber.subscribed_at = Time.at(event_object['start']).to_datetime
+        subscriber.subscription_expires_at = Time.at(event_object['current_period_end']).to_datetime
         subscriber.save
-      when 'invoice.payment_succeeded'
-        #send a mail regarding successfull payment and update expiry date
-        handle_success_invoice event_object
       when 'invoice.payment_failed'
         #send a mail regarding unsuccessfull payment
-        handle_failure_invoice event_object
-      when 'customer.subscription.deleted'
-        @sponsor = SponsorerDetail.find_by(customer.id)
-        @sponsor.subscription_id = nil
-        @sponsor.subscribed_at = nil
-        @sponsor.subscription_expires_at = nil
-        @sponsor.save
-      when 'customer.subscription.updated'
+        if event_object['attempt_count'] == 1
+          charge = Stripe::Charge.retrieve(event_object['charge'])
+          message = charge.failure_message
+          user_id = SponsorerDetail.find_by(stripe_customer_id: event_object['customer']).user_id
+          SponsorMailer.subscription_payment_failed(user_id.to_s, message).deliver_later
+        end
     end
     rescue Exception => ex
       render :json => {:status => 422, :error => "Webhook call failed"}
