@@ -22,11 +22,11 @@ class ActivityJob < ActiveJob::Base
         # Refresh the gh_client because it's using a stale auth_token. 
         # Here we use the App auth_token instead of user auth_token
         user.refresh_gh_client
-        retry
+        retry_job wait: 5.minutes
       rescue Github::Error::Forbidden
         # Probably hit the Rate-limit, use another token
         user.refresh_gh_client
-        retry
+        retry_job wait: 5.minutes
       end
     end
   end

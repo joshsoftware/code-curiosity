@@ -20,11 +20,11 @@ class CommitJob < ActiveJob::Base
 
       # Refresh the gh_client because it's using a stale auth_token. 
       user.refresh_gh_client
-      retry
+      retry_job wait: 5.minutes
     rescue Github::Error::Forbidden
       # Probably hit the Rate-limit, use another token
       user.refresh_gh_client
-      retry
+      retry_job wait: 5.minutes
     end
   end
 
