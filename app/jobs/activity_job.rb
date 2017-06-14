@@ -1,4 +1,5 @@
 class ActivityJob < ActiveJob::Base
+  include ActiveJobRetriesCount
   queue_as :git
 
   def perform(user, duration, round = nil)
@@ -22,11 +23,11 @@ class ActivityJob < ActiveJob::Base
         # Refresh the gh_client because it's using a stale auth_token. 
         # Here we use the App auth_token instead of user auth_token
         user.refresh_gh_client
-        retry_job wait: 5.minutes
+        retry_job wait: 5.minutes if retries_count < MAX_RETRY_COUNT
       rescue Github::Error::Forbidden
         # Probably hit the Rate-limit, use another token
         user.refresh_gh_client
-        retry_job wait: 5.minutes
+        retry_job wait: 5.minutes if retries_count < MAX_RETRY_COUNT
       end
     end
   end
