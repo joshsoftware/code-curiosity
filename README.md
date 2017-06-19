@@ -4,9 +4,9 @@
 
 **What can be measured, can be improved!**
 
-Everyone knows that running is a great exercise. However, by using a wearable like the Fitbit&#0153; to measure your activity, it has motivated people to run regularly.
+Everyone knows that running is a great exercise. However, by using a wearable like the Fitbit&#8482; to measure your activity, it has motivated people to run regularly.
 
-## CodeCuriosity aims to be the Fitbit&#0153; for open-source contributions
+## CodeCuriosity aims to be the Fitbit&#8482; for open-source contributions
 
 Code Curiosity is a platform to encourage open source contribution, build a cohesive and collaborative open source community and reward open source contributors across the world. It measures open-source contributions (code commits, issues and comments) and gives points that can be redeemed against Github or Amazon Gift Cards!
 
