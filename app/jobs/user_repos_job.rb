@@ -12,6 +12,9 @@ class UserReposJob < ActiveJob::Base
     user.set(last_repo_sync_at: Time.now)
     @user = user
 
+    Sidekiq.logger.info "************************* UserReposJob Logger Info ***************************"
+    Sidekiq.logger.info "Syncing repositories of #{user.github_handle}"
+
     gh_repos = user.fetch_all_github_repos
 
     gh_repos.each do |gh_repo|
@@ -22,6 +25,10 @@ class UserReposJob < ActiveJob::Base
   def add_repo(gh_repo)
     #check if the repository is not soft deleted and
     repo = Repository.unscoped.where(gh_id: gh_repo.id).first
+
+    Sidekiq.logger.info "Repository name: #{gh_repo.name}, Repository owner: #{gh_repo.owner.login}, Stars: #{gh_repo.stargazers_count}, Forked: #{gh_repo.fork}"
+
+    Sidekiq.logger.info "Repository already exists" if repo
 
     if repo
       # Commenting the fuctionality since rails 4.2 has an issue with accessing soft deleted parent association. Refer rails issue#10643.
@@ -40,6 +47,7 @@ class UserReposJob < ActiveJob::Base
         repo.set(stars: repo.info.stargazers_count)
       end
 =end
+      Sidekiq.logger.info "Repository does not include this user... Adding user" unless repo.users.include?(user)
       repo.users << user unless repo.users.include?(user)
       return
     end
@@ -49,6 +57,7 @@ class UserReposJob < ActiveJob::Base
     if repo.stars >= REPOSITORY_CONFIG['popular']['stars']
       user.repositories << repo
       user.save
+      Sidekiq.logger.info "Repository #{repo.name} persisted successfully for #{user.github_handle}"
       return
     end
 
@@ -59,5 +68,7 @@ class UserReposJob < ActiveJob::Base
     repo.source_gh_id = repo.info.source.id
     user.repositories << repo
     user.save
+    Sidekiq.logger.info "Persisted popular repository #{repo.name} for user #{user.github_handle
+    }"
   end
 end

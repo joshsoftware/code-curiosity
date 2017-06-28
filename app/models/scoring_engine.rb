@@ -85,7 +85,7 @@ class ScoringEngine
     # get the current git branch incase the commit is not found in any of the branches.
 
     # remotes/origin/skip-merge-branch-commit-scoring
-    branch = git.branch(branch).name
+    branch = get_current_git_branch(branch)
 
     #get the latest commits for the branch
     git = fetch_repo(branch)
@@ -162,6 +162,20 @@ class ScoringEngine
     score = bugspots_score(commit) + commit_score(commit) + comments_score(commit)
     return 1 if score == 0
     return [score.round, config[:max_score]].min
+  end
+
+  # If there is error while getting current git branch retry 3 times and then delete the repo directory and clone again
+  def get_current_git_branch(branch)
+    tries ||= 3
+    begin
+      branch = git.branch(branch).name
+    rescue
+      retry unless (tries -= 1).zero?
+      #delete repo directory and clone again
+      FileUtils.rm_r("#{Rails.root.join(config[:repositories]).to_s}/#{repo.id}")
+      self.git = Git.clone("https://github.com/#{repo.owner}/#{repo.name}.git", repo.id, path: Rails.root.join(config[:repositories]).to_s)
+      branch = git.branch(branch).name
+    end
   end
 
 end
