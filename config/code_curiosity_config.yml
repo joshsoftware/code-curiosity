@@ -14,6 +14,7 @@ round:
 repository:
   popular: 
     stars: 25
+  max_size: 50
 
 user:
   :royalty_points_threshold: 50_000
@@ -56,3 +57,4 @@ redeem:
     - amazon.com
     - amazon.in
     - amazon.uk
+
