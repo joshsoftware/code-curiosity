@@ -52,7 +52,7 @@ namespace :utils do
       group.members.each do |user|
         UserReposJob.perform_later(user)
         user.repositories.each do |repo| 
-          CommitJob.perform_later(user, type, repo, round)
+          CommitJob.perform_later(user.id.to_s, type, repo.id.to_s, round.id.to_s)
         end
         ActivityJob.perform_later(user, type, round)
       end
