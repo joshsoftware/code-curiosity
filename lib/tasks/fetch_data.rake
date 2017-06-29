@@ -12,7 +12,7 @@ namespace :fetch_data do
         #CommitJob.perform_later(user, type)
 
         user.repositories.each do |repo| 
-          CommitJob.perform_later(user, type, repo)
+          CommitJob.perform_later(user.id.to_s, type, repo.id.to_s)
         end
 
         ActivityJob.perform_later(user, type)
@@ -30,7 +30,7 @@ namespace :fetch_data do
       user  = User.find(subscription.user_id)
       
       user.repositories.each do |repo| 
-        CommitJob.perform_later(user, type, repo, round)
+        CommitJob.perform_later(user.id.to_s, type, repo.id.to_s, round.id.to_s)
       end
       ActivityJob.perform_later(user, type, round)
     end

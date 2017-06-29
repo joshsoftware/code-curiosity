@@ -33,20 +33,28 @@ class CommitJob < ActiveJob::Base
       Sidekiq.logger.info "Raised Github::Error::Forbidden Exception"
       user.refresh_gh_client
       retry_job wait: 5.minutes if @retries_count < MAX_RETRY_COUNT
+    rescue Mongo::Error::SocketError
+      retry_job wait: 5.minutes if @retries_count < MAX_RETRY_COUNT
     end
   end
 
-  def perform(user, duration, repo = nil, round = nil)
-    round = Round.opened unless round
-
+  def perform(user_id, duration, repo_id = nil, round_id = nil)
+    if round_id
+      round = Round.find(round_id)
+    else
+      round = Round.opened
+    end
+    
+    user = User.find(user_id)
     duration = 'all' if user.created_at > (Time.now - 24.hours)
     user.set(last_gh_data_sync_at: Time.now)
 
-    if repo
+    if repo_id
+      repo = Repository.find(repo_id)
       fetch_commits(repo, user, round, duration)
     else
       user.repositories.each do |repo|
-        CommitJob.perform_later(user, duration, repo)
+        CommitJob.perform_later(user.id.to_s, duration, repo.id.to_s)
       end
     end
   end
