@@ -16,6 +16,8 @@ class ScoringEngine
       # that repository has no master!
       # Rollbar#14
       self.git = Git.open(repo_dir)
+      Sidekiq.logger.info "#{self.git}"
+      Sidekiq.logger.info "#{self.git.branch}"
       self.git.fetch
       #gets the current repository branch. usually, is master.
       branch = self.git.branches.local.first.name unless branch

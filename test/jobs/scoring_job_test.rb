@@ -16,9 +16,9 @@ class ScoringJobTest < ActiveJob::TestCase
   end
 
   test 'perform' do
-    ScoringJob.perform_later(@repo, @round, 'commits')
+    ScoringJob.perform_later(@repo.id.to_s, @round.id.to_s, 'commits')
     assert_enqueued_jobs 1
-    ScoringJob.perform_later(@repo, @round, 'activities')
+    ScoringJob.perform_later(@repo.id.to_s, @round.id.to_s, 'activities')
     assert_enqueued_jobs 2
   end
 
@@ -28,7 +28,7 @@ class ScoringJobTest < ActiveJob::TestCase
     create :commit, user: @user, repository: @repo, message: 'random message', commit_date: Time.now, auto_score: nil
     create :commit, user: @user, repository: @repo, message: 'some message', commit_date: Time.now, auto_score: nil
     assert_equal 3, @repo.commits.count
-    ScoringJob.perform_now(@repo, @round, 'commits')
+    ScoringJob.perform_now(@repo.id.to_s, @round.id.to_s, 'commits')
     @repo.reload
     @repo.commits.each do |commit|
       refute_nil commit.auto_score
@@ -39,7 +39,7 @@ class ScoringJobTest < ActiveJob::TestCase
     message = 'some title and description of the issue'
     create_list(:activity, 3, description: message, event_type: 'issue', event_action: 'opened', auto_score: nil, user: @user)
     assert_equal 3, @user.activities_count
-    ScoringJob.perform_now(@repo, @round, 'activities')
+    ScoringJob.perform_now(@repo.id.to_s, @round.id.to_s, 'activities')
     @repo.activities.each do |activity|
       refute_nil activity.auto_score
     end
