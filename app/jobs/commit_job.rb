@@ -33,6 +33,8 @@ class CommitJob < ActiveJob::Base
       Sidekiq.logger.info "Raised Github::Error::Forbidden Exception"
       user.refresh_gh_client
       retry_job wait: 5.minutes if @retries_count < MAX_RETRY_COUNT
+    rescue Mongo::Error::SocketError
+      retry_job wait: 5.minutes if @retries_count < MAX_RETRY_COUNT
     end
   end
 
