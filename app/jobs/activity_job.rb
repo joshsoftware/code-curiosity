@@ -8,7 +8,7 @@ class ActivityJob < ActiveJob::Base
     else
       round = Round.opened
     end
-    binding.pry
+
     user = User.find(user_id) 
 
     Sidekiq.logger.info "******************* Activity Job Logger Info ***********************"
