@@ -74,6 +74,7 @@ class UserReposJobTest < ActiveJob::TestCase
     )
     assert_equal 0, Repository.count
     UserReposJob.perform_now(@user.id.to_s)
+    @user.reload
     assert_equal 1, Repository.count
     assert_equal 1, @user.repositories.count
     assert_equal 25, @user.repositories.first.stars
@@ -85,6 +86,7 @@ class UserReposJobTest < ActiveJob::TestCase
     )
     assert_equal 0, Repository.count
     UserReposJob.perform_now(@user.id.to_s)
+    @user.reload
     assert_equal 1, Repository.count
     assert_equal 1, @user.repositories.count
     user_repo = @user.repositories.first
@@ -101,6 +103,7 @@ class UserReposJobTest < ActiveJob::TestCase
     )
     assert_equal 0, Repository.count
     UserReposJob.perform_now(@user.id.to_s)
+    @user.reload
     assert_equal 2, Repository.count
     assert_equal 1, @user.repositories.count
     user_repo = @user.repositories.first

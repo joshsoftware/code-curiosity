@@ -8,7 +8,6 @@ class UserReposJob < ActiveJob::Base
   end
 
   def perform(user_id)
-
     user = User.find(user_id)
     
     return if user.repo_syncing?
