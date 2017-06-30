@@ -2,9 +2,17 @@ class ActivityJob < ActiveJob::Base
   include ActiveJobRetriesCount
   queue_as :git
 
-  def perform(user, duration, round = nil)
-    round = Round.opened unless round
+  def perform(user_id, duration, round_id = nil)
+    if round_id
+      round = Round.find(round_id)
+    else
+      round = Round.opened
+    end
+    binding.pry
+    user = User.find(user_id) 
+
     Sidekiq.logger.info "******************* Activity Job Logger Info ***********************"
+
     if round
       duration = 'all' if user.created_at > (Time.now - 24.hours)
       begin

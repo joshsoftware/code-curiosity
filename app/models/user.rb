@@ -111,7 +111,7 @@ class User
   def calculate_popularity
     self.subscribe_to_round
     User.delay_for(2.second, queue: 'git').update_total_repos_stars(self.id.to_s)
-    UserReposJob.perform_later(self)
+    UserReposJob.perform_later(self.id.to_s)
   end
 
   def create_transaction(attrs = {})
