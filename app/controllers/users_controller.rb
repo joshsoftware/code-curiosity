@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def sync
     unless current_user.gh_data_syncing?
       CommitJob.perform_later(current_user.id.to_s, 'all')
-      ActivityJob.perform_later(current_user, 'all')
+      ActivityJob.perform_later(current_user.id.to_s, 'all')
     end
   end
 
