@@ -3,7 +3,7 @@
   = f.hidden_field :sponsorer_type, value: 'ORGANIZATION'
   .form-group
     = f.label :Upload_Logo
-    = f.file_field :avatar, accept: 'image/png,image/jpeg,image/jpg'
+    = f.file_field :avatar, accept: 'image/png,image/jpeg,image/jpg', class: 'sponsorer_detail_avatar'
   .form-group
     = f.check_box :publish_profile, checked_value: "1", unchecked_value: "0"
     = f.label :publish_profile, "Allow to publish your organization's logo as sponsor"
