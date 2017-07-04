@@ -4,6 +4,7 @@ class SponsorerDetailsController < ApplicationController
   # after_action :set_sponsorer, only: [:create]
   before_action :authenticate_user!
   # before_action :authenticate_sponsor!, except: [:new, :create]
+  skip_before_action :select_goal
 
   def index
     @user = current_user
