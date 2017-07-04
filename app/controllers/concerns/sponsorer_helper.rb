@@ -1,15 +1,9 @@
 module SponsorerHelper
-  def createStripeCustomer(email, token)
+  def createStripeCustomer(email, token, plan)
     Stripe::Customer.create(
       :email => email,
-      :source => token
-      )
-  end
-
-  def createStripeSubscription(customer_id, plan_id)
-    Stripe::Subscription.create(
-      :customer => customer_id,
-      :plan => plan_id
+      :source => token,
+      :plan => plan
       )
   end
 end
