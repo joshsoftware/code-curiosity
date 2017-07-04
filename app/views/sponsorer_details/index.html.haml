@@ -14,15 +14,35 @@
     .col-sm-9
       .nav-tabs-custom
         %ul.nav.nav-tabs
-          %li.active#transactions_tab_link
-            = link_to 'Transactions', '#transaction', data: { toggle: 'tab'}
-          %li#transactions_tab_link
-            = link_to 'Sponsored Repositories', '#repositories', data: { toggle: 'tab'}
+          %li#card_details_tab_link
+            = link_to 'Credit Card details', '#credit_card', data: { toggle: 'tab'}
         .tab-content
-          .tab-pane.active#transaction
-            %b Latest transaction
-          .tab-pane#repositories
-            %b Repositories sponsored
+          .tab-pane#credit_card
+            .well
+              - if @card.nil?
+                = "You have not added any credit card... please update your payment information!"
+              - else
+                %table.table
+                  %tr
+                    %th Card ending in:
+                    %td= @card.last4
+                  %tr
+                    %th Expiry Month:
+                    %td= @card.exp_month
+                  %tr
+                    %th Expiry year:
+                    %td= @card.exp_year
+                  %tr
+                    %td
+                      = form_tag update_card_sponsorer_detail_path(current_user.id), method: 'post'  do
+                        %script.stripe-button{ src: "https://checkout.stripe.com/checkout.js",
+                                'data-key'=> "#{Rails.configuration.stripe[:publishable_key]}",
+                                'data-email' => current_user.email,
+                                'data-panel-label' => 'Change Card',
+                                'data-label' => 'Change Card',
+                                'data-name' => 'Change Card',
+                                'data-description' => 'Change your card',
+                                'data-billing-address' => 'false'}
 
 :javascript
   var modal = "#{session[:modal]}"

@@ -33,6 +33,11 @@ class SponsorerDetail
 
   private
 
+  def self.get_credit_card(customer_id)
+    customer = Stripe::Customer.retrieve(customer_id)
+    card = customer.sources.first
+  end
+
   def update_user_as_sponsor
     @user = self.user
     @role = Role.find_or_create_by(name: 'Sponsorer')

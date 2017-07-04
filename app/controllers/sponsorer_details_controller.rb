@@ -9,6 +9,7 @@ class SponsorerDetailsController < ApplicationController
   def index
     @user = current_user
     @sponsor = @user.sponsorer_detail
+    @card = SponsorerDetail.get_credit_card(@sponsor.stripe_customer_id) if @sponsor
   end
 
   def new
@@ -44,6 +45,18 @@ class SponsorerDetailsController < ApplicationController
     else
       flash[:error] = @sponsorer.errors.full_messages.join(',')
     end
+  end
+
+  def update_card
+    @sponsor = SponsorerDetail.find_by(user_id: params[:id])
+    customer = Stripe::Customer.retrieve(@sponsor.stripe_customer_id)
+    customer.source = params[:stripeToken]
+    if customer.save
+      redirect_to sponsorer_details_path, notice: 'Your card has been updated successfully'
+    end
+    rescue Stripe::InvalidRequestError => e
+      flash[:error] = e.message
+      redirect_to sponsorer_details_path
   end
 
   private
