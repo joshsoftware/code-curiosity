@@ -45,4 +45,8 @@
                                 'data-billing-address' => 'false'}
 
 :javascript
-  var modal = "#{session[:modal]}"
+  var sponser_flag = "#{session[:sponsor]}";
+  if(sponser_flag)
+    window.modal = sponser_flag
+  else
+    window.modal = "false";
