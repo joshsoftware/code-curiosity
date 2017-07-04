@@ -62,6 +62,7 @@ group :test do
   gem 'poltergeist'
   gem 'mocha'
   gem 'timecop'
+  gem 'stripe-ruby-mock', '~> 2.4.1', :require => 'stripe_mock'
 end
 
 group :development do
