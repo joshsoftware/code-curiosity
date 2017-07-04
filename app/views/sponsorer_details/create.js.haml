@@ -1,6 +1,0 @@
-$("ul.errors").html("")
-- if @sponsorer.errors.blank?
-  $("#modal-window").modal("hide")
-- else
-  - @sponsorer.errors.full_messages.each do |message|
-    $("ul.errors").append("<li>#{message.html_safe}</li>")
