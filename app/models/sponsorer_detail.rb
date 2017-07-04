@@ -9,6 +9,7 @@ class SponsorerDetail
   field :stripe_subscription_id, type: String
   field :subscribed_at, type: DateTime
   field :subscription_expires_at, type: DateTime
+  field :subscription_status, type: String
 
   has_mongoid_attached_file :avatar, 
     path: ':rails_root/public/system/sponsorer/:id/:style/:filename',
@@ -17,14 +18,10 @@ class SponsorerDetail
 
   belongs_to :user
 
-  validates :sponsorer_type, :user, :payment_plan, :stripe_customer_id, :stripe_subscription_id, presence: true
+  validates :sponsorer_type, :user, :payment_plan, :stripe_customer_id, :stripe_subscription_id, :subscribed_at, :subscription_expires_at, :subscription_status, presence: true
   validates :sponsorer_type, :inclusion => { :in => ['INDIVIDUAL','ORGANIZATION'] }
   validates :payment_plan, :inclusion => { :in => SPONSOR['individual'].keys }
   # validates :publish_profile, :inclusion => { :in => [true, false] }
-  # validates_attachment :avatar, presence: true,
-  #   content_type: { content_type: /\Aimage\/.*\Z/ },
-  #   file_name: { matches: [/png\Z/, /jpe?g\Z/] }
-  #   # size: { in: 0..10.kilobytes }
   # validate attachment presence
   # validates_attachment_presence :avatar
   # Validate filename
