@@ -16,6 +16,8 @@
         %ul.nav.nav-tabs
           %li#card_details_tab_link
             = link_to 'Credit Card details', '#credit_card', data: { toggle: 'tab'}
+          %li.active#subscription_details_tab_link
+            = link_to 'Subscription Details', '#subscription', data: { toggle: 'tab'}
         .tab-content
           .tab-pane#credit_card
             .well
@@ -43,6 +45,21 @@
                                 'data-name' => 'Change Card',
                                 'data-description' => 'Change your card',
                                 'data-billing-address' => 'false'}
+          .tab-pane.active#subscription
+            .well
+              - if @sponsor.nil?
+                = "You have not subscribed for any plan yet! Please subscribe by clicking on sponsor button and filling the form!"
+              - else
+                %table.table
+                  %tr
+                    %th Payment Plan:
+                    %td= @sponsor.payment_plan
+                  %tr
+                    %th Subscribed at:
+                    %td= @sponsor.subscribed_at.to_date.strftime("%d/%m/%y")
+                  %tr
+                    %th Subscription Amount:
+                    %td= SPONSOR[@sponsor.sponsorer_type.downcase][@sponsor.payment_plan].to_s+"$/month"
 
 :javascript
   var sponser_flag = "#{session[:sponsor]}";
