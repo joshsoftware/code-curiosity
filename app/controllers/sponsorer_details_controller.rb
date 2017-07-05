@@ -59,6 +59,18 @@ class SponsorerDetailsController < ApplicationController
       redirect_to sponsorer_details_path
   end
 
+  def cancel_subscription
+    @sponsor = SponsorerDetail.find_by(user_id: params[:id])
+    begin
+      Stripe::Subscription.retrieve(@sponsor.stripe_subscription_id).delete
+    rescue Stripe::StripeError => e
+      flash[:error] = e.message
+    else
+      flash[:notice] = "Your subscription has been cancelled successfully"
+    end
+    redirect_to sponsorer_details_path
+  end
+
   private
 
   def sponsorer_params

@@ -60,6 +60,11 @@
                   %tr
                     %th Subscription Amount:
                     %td= SPONSOR[@sponsor.sponsorer_type.downcase][@sponsor.payment_plan].to_s+"$/month"
+                  %tr
+                    %th Subscription Status:
+                    %td= @sponsor.subscription_status
+                  %tr
+                    %td= link_to "Cancel Subscription", cancel_subscription_sponsorer_detail_path(current_user.id), class: 'btn btn-danger', data: { method: 'get', confirm: 'Are you sure to cancel the subscription?' } unless @sponsor.subscription_status == 'canceled'
 
 :javascript
   var sponser_flag = "#{session[:sponsor]}";
