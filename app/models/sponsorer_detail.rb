@@ -18,7 +18,7 @@ class SponsorerDetail
 
   belongs_to :user
 
-  validates :sponsorer_type, :user, :payment_plan, :stripe_customer_id, :stripe_subscription_id, :subscribed_at, :subscription_expires_at, :subscription_status, presence: true
+  validates :sponsorer_type, :user, :payment_plan, presence: true
   validates :sponsorer_type, :inclusion => { :in => ['INDIVIDUAL','ORGANIZATION'] }
   validates :payment_plan, :inclusion => { :in => SPONSOR['individual'].keys }
   # validates :publish_profile, :inclusion => { :in => [true, false] }
