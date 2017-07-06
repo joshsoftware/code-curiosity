@@ -1,6 +1,19 @@
 require "test_helper"
+require 'stripe_mock'
 
 class SponsorerDetailTest < ActiveSupport::TestCase
+
+  def stripe_helper
+    StripeMock.create_test_helper
+  end
+
+  def setup
+    StripeMock.start
+  end
+
+  def teardown
+    StripeMock.stop
+  end
   
   test "sponsorer type must be present in sponsorer_detail" do
     sponsorer_detail = build(:sponsorer_detail, :sponsorer_type => nil)
@@ -14,16 +27,10 @@ class SponsorerDetailTest < ActiveSupport::TestCase
     assert sponsorer_detail.errors[:sponsorer_type].include?("is not included in the list")
   end
 
-  test "payment plan must be numeric" do
-    sponsorer_detail = build(:sponsorer_detail, :payment_plan => "string")
+  test "payment plan must be present" do
+    sponsorer_detail = build(:sponsorer_detail, :payment_plan => nil)
     sponsorer_detail.valid?
-    assert sponsorer_detail.errors[:payment_plan].include?("is not a number")
-  end
-
-  test "payment plan must be greater than zero" do
-    sponsorer_detail = build(:sponsorer_detail, :payment_plan => 0)
-    sponsorer_detail.valid?
-    assert sponsorer_detail.errors[:payment_plan].include?("must be greater than 0")
+    assert sponsorer_detail.errors[:payment_plan].include?("can't be blank")
   end
 
   # test "publish profile flag must be boolean" do
