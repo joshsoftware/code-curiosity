@@ -39,6 +39,8 @@ class StripeController < ApplicationController
   def handle_payment_succeded_event(subscriber, event_object)
     #send a mail regarding successfull payment, update expiry date
     subscriber.subscription_expires_at = Time.at(event_object['lines']['data'].first['period']['end']).to_datetime
+    plan = event_object['lines']['data'].first['plan']['name']
+    subscriber.save_payment_details(plan, event_object['amount_due'], event_object['date'])
     subscriber.save
   end
 

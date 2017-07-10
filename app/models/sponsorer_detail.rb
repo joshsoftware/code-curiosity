@@ -32,6 +32,11 @@ class SponsorerDetail
 
   after_create :update_user_as_sponsor
 
+  def save_payment_details(plan, amount, date)
+    payment = self.payments.build(subscription_plan: plan, amount: amount/100, date: Time.at(date).to_datetime)
+    payment.save
+  end
+
   private
 
   def self.get_credit_card(customer_id)
@@ -45,4 +50,5 @@ class SponsorerDetail
     @user.roles << @role unless @user.is_sponsorer?
     @user.set({is_sponsorer: true})
   end
+
 end
