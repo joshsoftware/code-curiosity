@@ -9,7 +9,10 @@ class SponsorerDetailsController < ApplicationController
   def index
     @user = current_user
     @sponsor = @user.sponsorer_detail
-    @card = SponsorerDetail.get_credit_card(@sponsor.stripe_customer_id) if @sponsor
+    if @sponsor
+      @card = SponsorerDetail.get_credit_card(@sponsor.stripe_customer_id)
+      @payments = @sponsor.payments.page(params[:page]).per(4)
+    end
   end
 
   def new
