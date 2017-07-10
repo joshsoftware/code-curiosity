@@ -17,6 +17,7 @@ class SponsorerDetail
     :styles => { :default => "300x300>"}
 
   belongs_to :user
+  has_many :payments
 
   validates :sponsorer_type, :user, :payment_plan, presence: true
   validates :sponsorer_type, :inclusion => { :in => ['INDIVIDUAL','ORGANIZATION'] }

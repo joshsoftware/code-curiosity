@@ -5,4 +5,5 @@ class Payment
   field :amount, type: Integer
   field :date, type: DateTime
 
+  belongs_to :sponsorer_detail
 end
