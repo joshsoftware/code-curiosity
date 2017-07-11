@@ -16,13 +16,15 @@ class ScoringEngine
       # that repository has no master!
       # Rollbar#14
       self.git = Git.open(repo_dir)
-      self.git.fetch
-      #gets the current repository branch. usually, is master.
-      branch = self.git.branches.local.first.name unless branch
-      #checkout to the branch. if branch hasnt changed, checkout is redundant.
-      self.git.checkout(branch)
-      remote = self.git.config["branch.#{branch}.remote"] # usually just 'origin'
+      Sidekiq.logger.info "#{self.git}"
+      Sidekiq.logger.info "#{self.git.branch}"
       begin
+        self.git.fetch
+        #gets the current repository branch. usually, is master.
+        branch = self.git.branches.local.first.name unless branch
+        #checkout to the branch. if branch hasnt changed, checkout is redundant.
+        self.git.checkout(branch)
+        remote = self.git.config["branch.#{branch}.remote"] # usually just 'origin'
         self.git.pull(remote, branch)
       rescue Git::GitExecuteError
         #delete the repo dir and clone again
