@@ -6,4 +6,8 @@ module SponsorerHelper
       :plan => plan
       )
   end
+
+  def delete_subscription(subscription_id)
+    Stripe::Subscription.retrieve(subscription_id).delete
+  end
 end

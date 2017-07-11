@@ -12,7 +12,7 @@ class SponsorerDetailsController < ApplicationController
     @sponsor = @user.sponsorer_detail
     if @sponsor
       @card = SponsorerDetail.get_credit_card(@sponsor.stripe_customer_id)
-      @payments = @sponsor.payments.page(params[:page]).per(4)
+      @payments = @sponsor.payments.page(params[:page])
     end
   end
 
@@ -65,7 +65,7 @@ class SponsorerDetailsController < ApplicationController
 
   def cancel_subscription
     begin
-      Stripe::Subscription.retrieve(@sponsor.stripe_subscription_id).delete
+      delete_subscription(@sponsor.stripe_subscription_id)
     rescue Stripe::StripeError => e
       flash[:error] = e.message
     else
