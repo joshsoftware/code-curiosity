@@ -1,5 +1,4 @@
 class SponsorMailer < ApplicationMailer
-  layout "sponsor_mail_layout"
   def subscription_payment_failed(user, message)
     @user = User.find(id: user)
     @message = message
