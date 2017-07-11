@@ -6,4 +6,7 @@ class Payment
   field :date, type: DateTime
 
   belongs_to :sponsorer_detail
+
+  validates :subscription_plan, :amount, :date, presence: true
+  validates :amount, numericality: { only_integer: true, greater_than: 0 }
 end
