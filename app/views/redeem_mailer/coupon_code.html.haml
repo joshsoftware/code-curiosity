@@ -1,3 +1,6 @@
+- content_for :signature do
+  = render 'application/mail_signature'
+  
 %h4= "Hello #{@user.name},"
 - if @redeem_request.coupon_code.present?
   %p= "Your coupon code is #{@redeem_request.coupon_code} for #{@redeem_request.retailer}"
