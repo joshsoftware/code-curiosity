@@ -83,7 +83,7 @@ class SponsorerDetailsControllerTest < ActionController::TestCase
     plan = stripe_helper.create_plan(amount: 15000, name: 'basic', id: 'basic-organization', interval: 'month', currency: 'usd')
 
     assert_difference 'SponsorerDetail.count', 0 do
-      post :create, sponsorer_detail: { sponsorer_type: "ORGANIZATION", avatar: nil, publish_profile: "1", payment_plan: "basic" }, stripeToken: stripe_helper.generate_card_token(last4: '4242', exp_year: Time.now.year + 1), stripeEmail: @user.email
+      post :create, sponsorer_detail: { sponsorer_type: "ORGANIZATION", avatar: nil, publish_profile: "1", payment_plan: "abc" }, stripeToken: stripe_helper.generate_card_token(last4: '4242', exp_year: Time.now.year + 1), stripeEmail: @user.email
     end
     assert_not_nil flash[:error]
   end
