@@ -5,6 +5,7 @@ class SponsorerDetailsController < ApplicationController
   before_action :authenticate_user!
   # before_action :authenticate_sponsor!, except: [:new, :create]
   skip_before_action :select_goal
+  before_action :load_sponsorer, only: [:update_card, :cancel_subscription]
 
   def index
     @user = current_user
@@ -35,7 +36,6 @@ class SponsorerDetailsController < ApplicationController
         @sponsorer.subscribed_at = Time.at(subscription.created).to_datetime
         @sponsorer.subscription_expires_at = Time.at(subscription.current_period_end).to_datetime
         @sponsorer.subscription_status = subscription.status
-
       rescue Stripe::StripeError => e
         flash[:error] = e.message
       else
@@ -51,19 +51,19 @@ class SponsorerDetailsController < ApplicationController
   end
 
   def update_card
-    @sponsor = SponsorerDetail.find_by(user_id: params[:id])
-    customer = Stripe::Customer.retrieve(@sponsor.stripe_customer_id)
-    customer.source = params[:stripeToken]
-    if customer.save
-      redirect_to sponsorer_details_path, notice: 'Your card has been updated successfully'
-    end
-    rescue Stripe::InvalidRequestError => e
+    begin
+      customer = Stripe::Customer.retrieve(@sponsor.stripe_customer_id)
+      customer.source = params[:stripeToken]
+    rescue Stripe::StripeError => e
       flash[:error] = e.message
-      redirect_to sponsorer_details_path
+    else 
+      customer.save
+      flash[:notice] = 'Your card has been updated successfully'
+    end
+    redirect_to sponsorer_details_path
   end
 
   def cancel_subscription
-    @sponsor = SponsorerDetail.find_by(user_id: params[:id])
     begin
       Stripe::Subscription.retrieve(@sponsor.stripe_subscription_id).delete
     rescue Stripe::StripeError => e
@@ -78,5 +78,9 @@ class SponsorerDetailsController < ApplicationController
 
   def sponsorer_params
     params.require(:sponsorer_detail).permit!
+  end
+
+  def load_sponsorer
+    @sponsor = SponsorerDetail.find_by(user_id: params[:id])
   end
 end
