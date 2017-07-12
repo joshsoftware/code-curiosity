@@ -41,7 +41,8 @@ class SponsorerDetailTest < ActiveSupport::TestCase
   # end
 
   test "sponsorer_detail must belong to user" do
-    sponsorer_detail = build(:sponsorer_detail, :user => nil)
+    sponsorer_detail = build(:sponsorer_detail)
+    sponsorer_detail.user = nil
     sponsorer_detail.valid?
     assert sponsorer_detail.errors[:user].include?("can't be blank")
   end
@@ -49,7 +50,7 @@ class SponsorerDetailTest < ActiveSupport::TestCase
   test "profile photo or organization logo is not compulsory" do
     sponsorer_detail = build(:sponsorer_detail, :avatar => nil)
     sponsorer_detail.valid?
-    assert sponsorer_detail.errors[:avatar].include?("can't be blank")
+    assert sponsorer_detail.errors[:avatar].blank?
   end
 
   test "user should upload only image as profile photo" do
