@@ -1,3 +1,6 @@
+- content_for :signature do
+  = render 'application/mail_signature'
+
 %h4= "Hello #{@user.name},"
 %p
   = @message

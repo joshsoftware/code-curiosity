@@ -36,6 +36,8 @@ gem 'mongoid-slug', '~> 5.2'
 gem 'redcarpet'
 gem 'rollbar'
 gem 'mongoid-paranoia'
+gem 'mongoid-paperclip', require: 'mongoid_paperclip'
+gem 'stripe'
 
 group :development, :test do
   gem 'byebug'
@@ -60,6 +62,7 @@ group :test do
   gem 'poltergeist'
   gem 'mocha'
   gem 'timecop'
+  gem 'stripe-ruby-mock', '~> 2.4.1', :require => 'stripe_mock'
 end
 
 group :development do

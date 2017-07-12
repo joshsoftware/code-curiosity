@@ -1,0 +1,8 @@
+
+- if !@sponsorer.errors.blank?
+  #modal-window.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex =>"-1"}
+    = render partial: 'new'
+
+:javascript
+  $("#modal-window").modal('show')
+  

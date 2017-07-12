@@ -13,6 +13,15 @@ Rails.application.routes.draw do
 
   resources :repositories, only: [:index]
 
+  resources :sponsorer_details do
+    member do
+      post 'update_card'
+      get 'cancel_subscription'
+    end
+  end
+
+  post "/stripe/webhooks", to: "stripe#webhooks"  
+
   resources :users, only: [:index, :show, :destroy] do
     member do
       get 'sync'
@@ -51,7 +60,11 @@ Rails.application.routes.draw do
       get :mark_as_close
     end
 
-    resources :redeem_requests, only: [:index, :update, :destroy]
+    resources :redeem_requests, only: [:index, :update, :destroy] do
+      collection do
+        get 'download'
+      end
+    end
 
     resources :ignored_files, except: [:show] do
       get :search, on: :collection

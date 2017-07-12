@@ -7,6 +7,7 @@
       = redeem_request.retailer.upcase
   %td= redeem_request.store? ? redeem_request.store.upcase : "NA"
   %td= redeem_request.points
+  %td= redeem_request.points/10
   %td= redeem_request.created_at.strftime('%D %T')
   %td= redeem_request.coupon_code
   %td= redeem_request.address

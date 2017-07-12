@@ -1,0 +1,81 @@
+%section.content-header
+  %h1 Welcome to sponsor for CodeCuriosity!
+%section.content
+  .row
+    .col-sm-3
+      .box.box-primary
+        .box-body.box-profile
+          = image_tag (current_user.sponsorer_detail && current_user.sponsorer_detail.avatar.present?) ? @sponsor.avatar : avatar_url(@user), class: 'profile-user-img img-responsive', alt: @user.name
+          %h3.profile-username.text-center= @user.name.titleize
+          %p.text-muted.text-center
+            = link_to github_url(@user), target: '_blank' do
+              %i.fa.fa-github
+              = @user.github_handle
+    .col-sm-9
+      .nav-tabs-custom
+        %ul.nav.nav-tabs
+          %li#card_details_tab_link
+            = link_to 'Credit Card details', '#credit_card', data: { toggle: 'tab'}
+          %li#subscription_details_tab_link
+            = link_to 'Subscription Details', '#subscription', data: { toggle: 'tab'}
+          %li.active#payments_tab_link
+            = link_to 'Payment Details', '#payments', data: { toggle: 'tab'}
+        .tab-content
+          .tab-pane#credit_card
+            .well
+              - if @card.nil?
+                = "You have not added any credit card... please update your payment information!"
+              - else
+                %table.table
+                  %tr
+                    %th Card ending in:
+                    %td= @card.last4
+                  %tr
+                    %th Expiry Month:
+                    %td= @card.exp_month
+                  %tr
+                    %th Expiry year:
+                    %td= @card.exp_year
+                  %tr
+                    %td
+                      = form_tag update_card_sponsorer_detail_path(current_user.id), method: 'post'  do
+                        %script.stripe-button{ src: "https://checkout.stripe.com/checkout.js",
+                                'data-key'=> "#{Rails.configuration.stripe[:publishable_key]}",
+                                'data-email' => current_user.email,
+                                'data-panel-label' => 'Change Card',
+                                'data-label' => 'Change Card',
+                                'data-name' => 'Change Card',
+                                'data-description' => 'Change your card',
+                                'data-billing-address' => 'false'}
+          .tab-pane#subscription
+            .well
+              - if @sponsor.nil?
+                = "You have not subscribed for any plan yet! Please subscribe by clicking on sponsor button and filling the form!"
+              - else
+                %table.table
+                  %tr
+                    %th Payment Plan:
+                    %td= @sponsor.payment_plan
+                  %tr
+                    %th Subscribed at:
+                    %td= @sponsor.subscribed_at.to_date.strftime("%d/%m/%y")
+                  %tr
+                    %th Subscription Amount:
+                    %td= SPONSOR[@sponsor.sponsorer_type.downcase][@sponsor.payment_plan].to_s+"$/month"
+                  %tr
+                    %th Subscription Status:
+                    %td= @sponsor.subscription_status
+                  %tr
+                    %td= link_to "Cancel Subscription", cancel_subscription_sponsorer_detail_path(current_user.id), class: 'btn btn-danger', data: { method: 'get', confirm: 'Are you sure to cancel the subscription?' } unless @sponsor.subscription_status == 'canceled'
+          .tab-pane.active#payments
+            - if @payments.present? && @payments.any?
+              = render 'payments_table'
+            - else
+              = render partial: 'callout_box', locals: { type: 'success', title: 'Keep Sponsoring', message: 'No payments yet'}
+
+:javascript
+  var sponser_flag = "#{session[:sponsor]}";
+  if(sponser_flag)
+    window.modal = sponser_flag
+  else
+    window.modal = "false";
