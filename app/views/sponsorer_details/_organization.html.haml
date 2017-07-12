@@ -1,0 +1,15 @@
+/ %script{:src => "https://checkout.stripe.com/checkout.js", :type => "text/javascript", :key => "#{Rails.configuration.stripe[:publishable_key]}"}
+= form_for(@sponsorer || SponsorerDetail.new, :url => { :controller => "sponsorer_details", :action => 'create' }, :html => { :multipart => true }, remote: true, authenticity_token: true, format: :js) do |f|
+  = f.hidden_field :sponsorer_type, value: 'ORGANIZATION'
+  .form-group
+    = f.label :Upload_Logo
+    = f.file_field :avatar, accept: 'image/png,image/jpeg,image/jpg', class: 'sponsorer_detail_avatar'
+  .form-group
+    = f.check_box :publish_profile, checked_value: "1", unchecked_value: "0"
+    = f.label :publish_profile, "Allow to publish your organization's logo as sponsor"
+  .form-group
+    = f.label :Payment_Plan_yearly_subscription
+    = f.select(:payment_plan, [[SPONSOR['organization'].keys[0]+"("+SPONSOR['organization'].values[0].to_s+"$/month)", SPONSOR['organization'].keys[0]],[SPONSOR['organization'].keys[1]+"("+SPONSOR['organization'].values[1].to_s+"$/month)", SPONSOR['organization'].keys[1]],[SPONSOR['organization'].keys[2]+"("+SPONSOR['organization'].values[2].to_s+"$/month)", SPONSOR['organization'].keys[2]]])
+  .actions
+    %script.stripe-button{ src: "https://checkout.stripe.com/checkout.js",
+      data: {key: "#{Rails.configuration.stripe[:publishable_key]}", description: "One year subscription", email: current_user.email, image: "https://stripe.com/img/documentation/checkout/marketplace.png", label: "Subscribe"}}

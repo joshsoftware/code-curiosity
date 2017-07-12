@@ -13,6 +13,15 @@ Rails.application.routes.draw do
 
   resources :repositories, only: [:index]
 
+  resources :sponsorer_details do
+    member do
+      post 'update_card'
+      get 'cancel_subscription'
+    end
+  end
+
+  post "/stripe/webhooks", to: "stripe#webhooks"  
+
   resources :users, only: [:index, :show, :destroy] do
     member do
       get 'sync'

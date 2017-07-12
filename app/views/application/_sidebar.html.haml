@@ -16,6 +16,11 @@
             %span Judging
       = render 'admin_sidebar' if current_user.is_admin?
       = render 'orgs_sidebar' if current_user.organizations.any?
+      - if current_user.is_sponsorer
+        %li
+          %a{href: sponsorer_details_path}
+            %i.fa.fa-gears
+            %span Sponsor
       %li{class: is_active(params[:action], 'goals')}
         = link_to goals_path do
           %i.fa.fa-trophy

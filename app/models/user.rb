@@ -28,6 +28,7 @@ class User
   field :github_handle,      type: String
   field :active,             type: Boolean, default: true
   field :is_judge,           type: Boolean, default: false
+  field :is_sponsorer,       type: Boolean, default: false
   field :name,               type: String
   field :provider,           type: String
   field :uid,                type: String
@@ -66,7 +67,8 @@ class User
   has_and_belongs_to_many :judges_repositories, class_name: 'Repository', inverse_of: 'judges'
   has_and_belongs_to_many :roles, inverse_of: nil
   has_and_belongs_to_many :organizations
-  has_and_belongs_to_many :groups, class_name: 'Group', inverse_of: 'members' 
+  has_and_belongs_to_many :groups, class_name: 'Group', inverse_of: 'members'
+  has_one :sponsorer_detail, dependent: :destroy 
   
   slug  :github_handle
 
@@ -127,6 +129,10 @@ class User
 
   def is_admin?
     roles.where(name: ROLES[:admin]).any?
+  end
+
+  def is_sponsorer?
+    roles.where(name: 'Sponsorer').any?
   end
 
   def repo_names

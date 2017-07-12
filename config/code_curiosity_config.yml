@@ -19,6 +19,16 @@ repository:
 user:
   :royalty_points_threshold: 50_000
 
+sponsor:
+  individual:
+    basic: 10
+    intermediate: 15
+    advanced: 20
+  organization:
+    basic: 150
+    intermediate: 200
+    advanced: 300 
+
 scoring_engine:
   :repositories: 'repositories' # repositories dir
   :max_score: 5
