@@ -25,6 +25,7 @@ require 'capybara/poltergeist'
 class ActionController::TestCase
   include Devise::TestHelpers
   include Warden::Test::Helpers
+  include ActiveJob::TestHelper
   WebMock.disable_net_connect!(allow: "codeclimate.com")
 
   def stub_get(path, endpoint = Github.endpoint.to_s)

@@ -1,7 +1,9 @@
 class Admin::RedeemRequestsController < ApplicationController
+  include Admin::RedeemRequestsHelper
   before_action :authenticate_user!
   before_action :authenticate_admin!
   before_action :load_redeem_request, only: [:index, :download] 
+
 
   def index
     @redeem_requests = @redeem_requests.page(params[:page])

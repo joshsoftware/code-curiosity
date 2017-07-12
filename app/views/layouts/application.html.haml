@@ -24,3 +24,5 @@
     - if flash.any?
       :javascript
         #{show_flash_notifications}
+    - unless current_user.is_sponsorer
+      = render 'sponsor'
