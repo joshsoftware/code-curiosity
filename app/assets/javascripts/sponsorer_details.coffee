@@ -6,7 +6,8 @@ $(document).on "ready", ->
   $('body').on 'change', '.sponsorer_detail_avatar', () ->
     inputFile = $(this).val();
     validateFiles(inputFile);
-  showmodal();
+  if window.location.pathname == '/sponsorer_details'
+    showmodal();
 
 showmodal = () ->
   if modal == "true"
@@ -27,5 +28,3 @@ validateFiles = (inputFile) ->
     $(inputFile).val ''
     $(this).val ''
   return
-
-    
