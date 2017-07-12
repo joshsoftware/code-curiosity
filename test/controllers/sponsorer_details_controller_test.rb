@@ -19,12 +19,13 @@ class SponsorerDetailsControllerTest < ActionController::TestCase
     assert_redirected_to new_user_session_path
   end
 
-  test "should not render index to normal user" do
-    @user.goal = create(:goal)
-    sign_in @user
-    get :index
-    assert_response :redirect
-  end
+  # No need of this testcase
+  # test "should not render index to normal user" do
+  #   @user.goal = create(:goal)
+  #   sign_in @user
+  #   get :index
+  #   assert_response :redirect
+  # end
 
   test "should render index to logged-in user who is sponsor" do
     @user.is_sponsorer = true
@@ -37,7 +38,7 @@ class SponsorerDetailsControllerTest < ActionController::TestCase
   end
 
   test "should skip set goal for every action related to sponsor" do
-
+    
   end
 
   test "should be compulsory to set goal if sponsor want to access pages other than sponsor" do

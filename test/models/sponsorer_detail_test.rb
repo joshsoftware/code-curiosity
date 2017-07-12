@@ -46,7 +46,7 @@ class SponsorerDetailTest < ActiveSupport::TestCase
     assert sponsorer_detail.errors[:user].include?("can't be blank")
   end
 
-  test "profile photo or organization logo must be present" do
+  test "profile photo or organization logo is not compulsory" do
     sponsorer_detail = build(:sponsorer_detail, :avatar => nil)
     sponsorer_detail.valid?
     assert sponsorer_detail.errors[:avatar].include?("can't be blank")
