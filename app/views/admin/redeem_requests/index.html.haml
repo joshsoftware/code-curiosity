@@ -1,9 +1,12 @@
 %section.content-header
   %h1 
-    Redeem Requests 
+    Redeem Requests
     %label.slide
       %input.check#redeem{checked: 'checked', name: 'status', type: 'checkbox', data: {toggle: 'toggle', width: '100', height: '40', on: 'Status Open', off: 'Status Close'}}
-      #console-event  
+      #console-event
+    .btn-group
+      %a.btn.btn-primary.glyphicon.glyphicon-download{:href => download_admin_redeem_requests_path(:status => "false")} Active
+      %a.btn.btn-primary.glyphicon.glyphicon-download{:href => download_admin_redeem_requests_path(:status => "true") } Completed
 %section.content
   .row
     .col-xs-12

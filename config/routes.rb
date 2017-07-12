@@ -51,7 +51,11 @@ Rails.application.routes.draw do
       get :mark_as_close
     end
 
-    resources :redeem_requests, only: [:index, :update, :destroy]
+    resources :redeem_requests, only: [:index, :update, :destroy] do
+      collection do
+        get 'download'
+      end
+    end
 
     resources :ignored_files, except: [:show] do
       get :search, on: :collection
