@@ -1,16 +1,17 @@
 %section.content-header
-  %h1 
-    Redeem Requests 
+  %h1
+    Redeem Requests
+    %span.badge $ #{total_capital_of_points}
     %label.slide
       %input.check#redeem{checked: 'checked', name: 'status', type: 'checkbox', data: {toggle: 'toggle', width: '100', height: '40', on: 'Status Open', off: 'Status Close'}}
-      #console-event  
+      #console-event
 %section.content
   .row
     .col-xs-12
       .box.box-primary
         .box-body.table-responsive#user_table
           = render partial: 'redeem'
-.modal.fade#coupon-code-modal            
+.modal.fade#coupon-code-modal
   .modal-dialog
     .modal-content
       = simple_form_for(RedeemRequest.new, url: '#', method: 'put') do |f|

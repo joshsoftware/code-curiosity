@@ -1,12 +1,14 @@
 class Admin::RedeemRequestsController < ApplicationController
+  include Admin::RedeemRequestsHelper
   before_action :authenticate_user!
   before_action :authenticate_admin!
+
 
   def index
     #status(false) = status(Open)
     #status(true) = status(Close)
     @status = params[:status] ? params[:status] : false
-    @redeem_requests = RedeemRequest.where(:status => @status).desc(:created_at).page(params[:page]) 
+    @redeem_requests = RedeemRequest.where(:status => @status).desc(:created_at).page(params[:page])
     if request.xhr?
       respond_to do|format|
         format.js
