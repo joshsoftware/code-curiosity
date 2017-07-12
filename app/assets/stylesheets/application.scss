@@ -31,3 +31,56 @@
 .typeahead.dropdown-menu, .tt-hint, .tt-input, .tt-menu {
   width: 90%;
 }
+
+.sticky-container{
+  padding:0px;
+  margin:0px;
+  position:fixed;
+  right:-105px;
+  top:60%;
+  width:200px;
+  z-index: 1100;
+}
+
+.sticky li{
+    list-style-type:none;
+    //background-color:#fff;
+    color:#808080;
+    height:43px;
+    padding:0px;
+    margin:0px 0px 1px 0px;
+    -webkit-transition:all 0.25s ease-in-out;
+    -moz-transition:all 0.25s ease-in-out;
+    -o-transition:all 0.25s ease-in-out;
+    transition:all 0.25s ease-in-out;
+    cursor:pointer;
+}
+.sticky li:hover{
+    margin-left:-15px;
+}
+.sticky li span{
+    float:left;
+}
+.sticky li p{
+    padding-top:5px;
+    margin:0px;
+    line-height:16px;
+    //font-size:11px;
+}
+
+.sticky li p a{
+    text-decoration:none;
+    color:#fff;
+}
+
+#rotate{
+  vertical-align: top;
+  //margin-top: 30%;
+  //margin-right: 0px;
+  //float: right;
+  //width:80px;height: 30px;
+  transform:rotate(7deg);
+  -ms-transform:rotate(90deg); /* IE 9 */
+  -moz-transform:rotate(90deg); /* Firefox */
+  -webkit-transform:rotate(90deg); /* Safari and Chrome */
+  -o-transform:rotate(90deg); /* Opera */}

@@ -1,3 +1,6 @@
+- content_for :signature do
+  = render 'application/mail_signature'
+
 %h5= "Hello #{@user.name},"
 
 =# url_for(host:"http://localhost:3000",controller: 'users',  action: 'index', only_path: false)

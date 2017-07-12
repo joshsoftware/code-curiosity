@@ -23,6 +23,9 @@
 # Ignore ENV variables
 *.env.*
 
+# Ignore local storage of profile photos
+/public/system/sponsorer
+
 1
 dump.rdb
 /repositories
