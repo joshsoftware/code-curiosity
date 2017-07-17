@@ -3,13 +3,13 @@ require "test_helper"
 class Admin::RedeemRequestsHelperTest < ActionView::TestCase
 
   test "check worth of points" do
-    create_user
-    redeem_request = create(:redeem_request,:points => 10, user: @user)
-    assert_equal redeem_request.points/10, total_capital_of_points     
-    assert_kind_of Fixnum, total_capital_of_points, "Must be a value"
+    seed_data
+    redeem_request = create(:redeem_request,:points => 100, user: @user)
+    total_capital = redeem_request.points/10
+    assert_equal total_capital, total_capital_of_points
   end
 
-  def create_user
+  def seed_data
     round = create(:round, :status => 'open')
     role = create(:role, :name => 'Admin')
     @user = create(:user, goal: create(:goal))
