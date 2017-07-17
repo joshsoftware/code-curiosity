@@ -32,14 +32,14 @@ class Admin::RedeemRequestsController < ApplicationController
 
   def download
     csv_string = CSV.generate do |csv|
-      csv << ["user","Gift Shop", "Store","Points","cost","Date","coupon Code","Address"]
+      csv << ["User","Gift Shop", "Store","Points","Cost","Date","Coupon Code","Address","Status"]
       @redeem_requests.each do |redeem_request|
-        csv << [redeem_request.user.email,redeem_request.retailer,redeem_request.store,redeem_request.points,redeem_request.points/10,redeem_request.updated_at.strftime(fmt='%F %T'),redeem_request.coupon_code,redeem_request.address]
+        csv << [redeem_request.user.email,redeem_request.retailer,redeem_request.store,redeem_request.points,redeem_request.points/10,redeem_request.updated_at.strftime(fmt='%F %T'),redeem_request.coupon_code,redeem_request.address,redeem_request.status]
       end
     end         
    send_data csv_string,
-   :type => 'text/csv; header=present;',
-   :disposition => "filename=requests.csv"
+   :type => 'text/csv; header = present;',
+   :disposition => "filename = requests.csv"
   end
 
   private
