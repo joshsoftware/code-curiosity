@@ -53,7 +53,7 @@ every '1 10 7 * *' do
   rake 'subscription:redeem_points'
 end
 
-every 2.day, :at => '10:30pm' do
+every :day, :at => '10:30am' do
   rake 'repo:delete_large_repositories'
 end
 
