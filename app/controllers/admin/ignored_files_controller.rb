@@ -14,7 +14,7 @@ class Admin::IgnoredFilesController < ApplicationController
                                             order(highest_score: :desc).page(params[:page])
 
     if request.xhr?
-      respond_to do|format|
+      respond_to do |format|
         format.js
       end
     end

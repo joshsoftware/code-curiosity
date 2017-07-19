@@ -2,20 +2,24 @@
   %thead
     %tr
       %th.col-xs-2 Name
-      %th.col-xs-5 Description
+      %th.col-xs-3 Description
       %th.col-xs-1 Stars
-      %th.col-xs-2 Judges
+      %th.col-xs-1.5 Judges
+      %th.col-xs-1 Ignored
       %th.col-xs-2 Actions
+      %th.col-xs-1 To be Ignored?
   %tbody     
     - @repos.each do |repo|
       %tr
         %td.col-xs-2 
           = link_to repo.name,  repo.source_url, target: "_blank"
-        %td.col-xs-5= repo.description
+        %td.col-xs-3= repo.description
         %td.col-xs-1= repo.stars
-        %td.col-xs-2{id: "judges_#{repo._id}"}= repo.judges_name
+        %td.col-xs-1.5{id: "judges_#{repo._id}"}= repo.judges_name
+        %td.col-xs-1= repo.to_be_ignored ? 'Yes' : 'No'
         %td.col-xs-2 
           %a{href: assign_judge_admin_repository_path(repo), class: "btn btn-primary btn-sm", "data-remote": "true"}
             %i.fa.fa-plus
             Assign Judge
-
+        %td.col-xs-1
+          %input.secondary{:type => "checkbox", name: "to_be_ignored",checked: check_boolean("#{repo.to_be_ignored}"), id: "#{repo.id}"}
