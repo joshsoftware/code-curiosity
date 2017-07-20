@@ -5,7 +5,6 @@ class RedeemRequestTest < ActiveSupport::TestCase
 
   def redeem_request
     @redeem_request ||= build(:redeem_request)
-    binding.pry
   end
 
   test "validity of redeem_request" do
