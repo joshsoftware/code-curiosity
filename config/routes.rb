@@ -62,7 +62,7 @@ Rails.application.routes.draw do
 
     resources :redeem_requests, only: [:index, :update, :destroy] do
       collection do
-        get 'download'
+        get :download
       end
     end
 
