@@ -4,7 +4,7 @@ class Admin::RepositoriesController < ApplicationController
 
   def index
     @status = params[:ignored] ? params[:ignored] : false
-    @repos = Repository.where(:to_be_ignored => @status).order(name: :asc).page(params[:page])
+    @repos = Repository.where(ignore: @status).order(name: :asc).page(params[:page])
     if request.xhr?
       respond_to do |format|
         format.js
@@ -26,7 +26,7 @@ class Admin::RepositoriesController < ApplicationController
   def update_ignore_field
     @repo_to_update = Repository.find(params[:id])
     ignore_value = params[:ignore_value]
-    @repo_to_update.update_attributes(to_be_ignored: ignore_value)
+    @repo_to_update.update_attributes(ignore: ignore_value)
   end
 
   def search
