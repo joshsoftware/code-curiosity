@@ -1,10 +1,15 @@
 %section.content-header
-  %h1
+  %h1 
     Redeem Requests
     %span.badge $ #{total_capital_of_points}
     %label.slide
       %input.check#redeem{checked: 'checked', name: 'status', type: 'checkbox', data: {toggle: 'toggle', width: '100', height: '40', on: 'Status Open', off: 'Status Close'}}
       #console-event
+    = link_to download_admin_redeem_requests_path(:status => "true"), class: "btn btn-primary glyphicon glyphicon-download" do
+      %b Completed
+    = link_to download_admin_redeem_requests_path(:status => "false"), class: "btn btn-primary glyphicon glyphicon-download" do
+      %b Active
+
 %section.content
   .row
     .col-xs-12
