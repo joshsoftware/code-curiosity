@@ -92,23 +92,49 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     assert_equal "text/csv; header = present;", response.content_type
   end
 
-  test "check header of csv file" do
+  test "check header of csv file for status false" do
     seed_data
     redeem_request = create(:redeem_request, :points => 100, user: @user)
-    get :download, params: { :status => "false" } || { :status => "true" }
+    get :download, params: { :status => "false" }
     assert_response :success
     attr = "User,Gift Shop,Store,Points,Cost,Date,Coupon Code,Address,Status".split(',')
     csv = CSV.parse response.body
     assert_equal csv[0],attr
   end
 
-  test "check fields of csv file" do
+  test "check header of csv file for status true" do
+    seed_data
+    redeem_request = create(:redeem_request, :points => 100, user: @user)
+    get :download, params: { :status => "true" }
+    assert_response :success
+    attr = "User,Gift Shop,Store,Points,Cost,Date,Coupon Code,Address,Status".split(',')
+    csv = CSV.parse response.body
+    assert_equal csv[0],attr
+  end
+
+  test "check fields of csv file for status true" do
     seed_data
     gift_shop = ["github","amazon","other"]
     store = [nil,"amazon.com","amazon.in","amazon.uk"]
     status = ["false","true"]
     redeem_request = create(:redeem_request, :points => 100, user: @user)
-    get :download, params: { :status => "false" } || {:status => "true"}
+    get :download, params: { :status => "true" }
+    assert_response :success
+    csv = CSV.parse response.body
+    assert_includes gift_shop, csv[1][1]
+    assert_includes store, csv[1][2]
+    assert_kind_of Fixnum, csv[1][3].to_i
+    assert_not_equal csv[1][3].to_i, csv[1][4].to_i
+    assert_includes status, csv[1][8]
+  end
+
+  test "check fields of csv file for status false" do
+    seed_data
+    gift_shop = ["github","amazon","other"]
+    store = [nil,"amazon.com","amazon.in","amazon.uk"]
+    status = ["false","true"]
+    redeem_request = create(:redeem_request, :points => 100, user: @user)
+    get :download, params: {:status => "false"}
     assert_response :success
     csv = CSV.parse response.body
     assert_includes gift_shop, csv[1][1]

@@ -34,7 +34,10 @@ class Admin::RedeemRequestsController < ApplicationController
     csv_string = CSV.generate do |csv|
       csv << ["User", "Gift Shop", "Store", "Points", "Cost", "Date", "Coupon Code", "Address", "Status"]
       @redeem_requests.each do |redeem_request|
-        csv << [redeem_request.user.email,redeem_request.retailer,redeem_request.store,redeem_request.points,redeem_request.points/10,redeem_request.updated_at.strftime(fmt='%F %T'),redeem_request.coupon_code,redeem_request.address,redeem_request.status]
+        csv << [redeem_request.user.email, redeem_request.retailer, redeem_request.store,
+          redeem_request.points, redeem_request.points/10,
+          redeem_request.updated_at.strftime(fmt='%F %T'), redeem_request.coupon_code,
+          redeem_request.address, redeem_request.status]
       end
     end         
    send_data csv_string, type: 'text/csv; header = present;', disposition: "filename = requests.csv"
@@ -47,8 +50,8 @@ class Admin::RedeemRequestsController < ApplicationController
   end
 
   def load_redeem_request
-    @status = params[:status] ? params[:status] : false
-    @redeem_requests = RedeemRequest.where(:status => @status).desc(:created_at)
+    @status = params[:status] || false
+    @redeem_requests = RedeemRequest.where(status: @status).desc(:created_at)
   end
 
 end
