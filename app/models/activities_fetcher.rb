@@ -22,7 +22,7 @@ class ActivitiesFetcher
       if TRACKING_EVENTS.key?(a.type) && Time.parse(a.created_at) > since_time
         repo = Repository.where(gh_id: a.repo.id).first
         repo = self.create_repo(a.repo.name) unless repo
-        create_activity(a, repo) if repo
+        create_activity(a, repo) if repo && repo.ignore == false
       end
     end
   end
