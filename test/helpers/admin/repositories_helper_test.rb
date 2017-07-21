@@ -7,7 +7,7 @@ class Admin::RepositoriesHelperTest < ActionView::TestCase
     assert_equal check_boolean("false"), false
   end
   
-  def test_sanity
-    flunk "Need real tests"
-  end
+  # def test_sanity
+  #   flunk "Need real tests"
+  # end
 end
