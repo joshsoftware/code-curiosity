@@ -3,8 +3,9 @@ class Admin::RepositoriesController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @status = params[:ignored] ? params[:ignored] : false
-    @repos = Repository.where(ignore: @status).order(name: :asc).page(params[:page])
+    @status = params[:ignored] || false
+    @repos = Repository.where(ignore: @status, name: /#{params[:query]}/).order(name: :asc)
+    .page(params[:page])
     if request.xhr?
       respond_to do |format|
         format.js
@@ -35,7 +36,7 @@ class Admin::RepositoriesController < ApplicationController
       return
     end
 
-    @repos = Repository.where(name: /#{params[:q]}/).asc(:name).page(params[:page])
+    @repos = Repository.required.where(name: /#{params[:q]}/).asc(:name).page(params[:page])
     render :index
   end
 end

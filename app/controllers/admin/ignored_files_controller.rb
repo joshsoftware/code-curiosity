@@ -7,7 +7,7 @@ class Admin::IgnoredFilesController < ApplicationController
 
   def index
     @status = params[:ignored] ? params[:ignored] : false
-
+    binding.pry
     @ignored_files = FileToBeIgnored.any_of({:ignored => @status, name: /#{params[:query]}/},
                                             {:ignored => @status, programming_language: params[:query]},
                                             {:ignored => @status, count: params[:query]}).

@@ -5,10 +5,11 @@ $(document).on('page:change', function(event) {
   })
 
   $('#repo').change(function() {
+    query = $("#q").val();
     $.ajax({
       type: 'get',
       url: '/admin/repositories',
-      data: { 'ignored': !(this.checked) }
+      data: { 'ignored': !(this.checked), query: query }
     })
   })
 
