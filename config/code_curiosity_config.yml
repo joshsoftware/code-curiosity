@@ -22,12 +22,12 @@ user:
 sponsor:
   individual:
     basic: 10
-    intermediate: 15
-    advanced: 20
+    silver: 15
+    gold: 20
   organization:
     basic: 150
-    intermediate: 200
-    advanced: 300 
+    silver: 200
+    gold: 300 
 
 scoring_engine:
   :repositories: 'repositories' # repositories dir

@@ -143,7 +143,12 @@ class Repository
       if commit.message =~ PULL_REQ_MERGE_REGX
         commit.set(auto_score: 0)
       else
-        commit.set(auto_score: engine.calculate_score(commit))
+        begin
+          Sidekiq.logger.info "Scoring for commit: #{commit.id}, Round: #{round.from_date}"
+          commit.set(auto_score: engine.calculate_score(commit))
+        rescue StandardError => e
+          Sidekiq.logger.info "Commit: #{commit.id}, Error: #{e}"
+        end
       end
     end
 
