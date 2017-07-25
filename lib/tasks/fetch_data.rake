@@ -11,7 +11,7 @@ namespace :fetch_data do
       users.limit(per_batch).skip(offset).each do |user|
         #CommitJob.perform_later(user, type)
 
-        user.repositories.each do |repo| 
+        user.repositories.required.each do |repo| 
           CommitJob.perform_later(user.id.to_s, type, repo.id.to_s)
         end
 
@@ -29,7 +29,7 @@ namespace :fetch_data do
       round = Round.find(subscription.round_id)
       user  = User.find(subscription.user_id)
       
-      user.repositories.each do |repo| 
+      user.repositories.required.each do |repo| 
         CommitJob.perform_later(user.id.to_s, type, repo.id.to_s, round.id.to_s)
       end
       ActivityJob.perform_later(user.id.to_s, type, round.id.to_s)

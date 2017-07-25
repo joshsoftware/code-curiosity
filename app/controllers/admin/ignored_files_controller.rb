@@ -6,15 +6,14 @@ class Admin::IgnoredFilesController < ApplicationController
   before_action :find_ignored_file, except: [:index, :new, :create, :update_ignore_field]
 
   def index
-    @status = params[:ignored] ? params[:ignored] : false
-
+    @status = params[:ignored] || false
     @ignored_files = FileToBeIgnored.any_of({:ignored => @status, name: /#{params[:query]}/},
                                             {:ignored => @status, programming_language: params[:query]},
                                             {:ignored => @status, count: params[:query]}).
                                             order(highest_score: :desc).page(params[:page])
 
     if request.xhr?
-      respond_to do|format|
+      respond_to do |format|
         format.js
       end
     end

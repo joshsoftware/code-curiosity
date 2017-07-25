@@ -38,4 +38,10 @@ class RepositoryTest < ActiveSupport::TestCase
     end
   end
 
+  test 'must return repositories which are valid for scoring' do
+    create_list(:repository, 10, ignore: false)
+    Repository.first.update_attributes(ignore: true)
+    assert_not_equal Repository.count, Repository.required.count
+  end
+
 end

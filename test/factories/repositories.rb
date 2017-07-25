@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :repository do
-    name {Faker::Name.name}
+    name { Faker::Name.name }
     ssh_url { Faker::Internet.url('github.com', "/#{Faker::Lorem.word}/#{Faker::Lorem.word}") }
     source_url { Faker::Internet.url('github.com', "/#{Faker::Lorem.word}/#{Faker::Lorem.word}") }
     description { Faker::Lorem.sentence }
-    watchers {Faker::Number.digit}
+    watchers { Faker::Number.digit }
 
     factory :repository_with_activity_and_commits do
       transient do

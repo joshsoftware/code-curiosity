@@ -5,6 +5,7 @@ class Admin::RedeemRequestsController < ApplicationController
   before_action :load_redeem_request, only: [:index, :download] 
 
 
+
   def index
     @redeem_requests = @redeem_requests.page(params[:page])
     if request.xhr?

@@ -53,7 +53,7 @@ class CommitJob < ActiveJob::Base
       repo = Repository.find(repo_id)
       fetch_commits(repo, user, round, duration)
     else
-      user.repositories.each do |repo|
+      user.repositories.required.each do |repo|
         CommitJob.perform_later(user.id.to_s, duration, repo.id.to_s)
       end
     end
