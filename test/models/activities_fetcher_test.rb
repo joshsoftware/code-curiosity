@@ -80,6 +80,6 @@ class ActivitiesFetcherTest < ActiveSupport::TestCase
     activities_fetcher = ActivitiesFetcher.new(@user, @round)
     activities_fetcher.fetch(:all)
     Repository.update_all(ignore: false)
-    assert_not_equal 1, Repository.required.count
+    assert_equal 1, Repository.required.count
   end
 end
