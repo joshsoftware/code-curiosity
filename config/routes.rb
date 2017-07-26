@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     resources :repositories, only: [:index] do
       get :search, on: :collection
       member do
+        patch :update_ignore_field
         patch :add_judges
         get :assign_judge
       end
