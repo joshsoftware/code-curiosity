@@ -120,8 +120,15 @@ class ScoringEngine
 
     #Here total_changes specifies how many lines has been changed(added/deleted) per file, but should not
     # include changes of ignored_files for this commit
+    begin
+      # If Github doesn't returns commit info if commit has been moved.
+      files = commit.info.files
+    rescue StandardError => e
+      Sidekiq.logger.info "Absent commit: #{commit.id}, Error: #{e}"
+      files = []
+    end
 
-    total_score = commit.info.files.inject(0) do |result, file|
+    total_score = files.inject(0) do |result, file|
 
       file_name = bugspots_scores[file.filename]
       file_exist = FileToBeIgnored.name_exist?(file.filename)
