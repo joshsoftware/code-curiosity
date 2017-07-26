@@ -3,7 +3,7 @@ class Admin::RepositoriesController < ApplicationController
   before_action :authenticate_admin!
   before_action :load_repository, only: [ :assign_judge, :add_judges, :update_ignore_field ]
 
-  def index 
+  def index
     status = params[:ignored] || false
     @repos = Repository.where(ignore: status, name: /#{params[:query]}/).
     order(name: :asc).page(params[:page])
