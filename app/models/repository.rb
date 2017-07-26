@@ -18,6 +18,7 @@ class Repository
   field :ssh_url,      type: String
   field :ignore_files, type: Array, default: []
   field :type,         type: String
+  field :ignore,       type: Boolean, default: false
 
   belongs_to :popular_repository, class_name: 'Repository', inverse_of: 'repositories'
   belongs_to :organization
@@ -36,6 +37,7 @@ class Repository
 
   scope :popular, -> { where(type: 'popular') }
   scope :users_repos, -> { where(:type.ne =>  'popular') }
+  scope :required, -> { where(ignore: false) }
 
   def popular?
     self.type == 'popular'
