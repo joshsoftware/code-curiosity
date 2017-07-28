@@ -144,6 +144,13 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     assert_includes status, csv[1][8]
   end
 
+  test "must get redeem requests with a specific store" do
+    seed_data
+    redeem_request = create(:redeem_request,points: 10, store: 'amazon.in', user: @user)
+    xhr :get, :index, parameters, format: :js, store: 'amazon.in'
+    assert_response :success
+  end
+
   def seed_data
     round = create(:round, :status => 'open')
     role = create(:role, :name => 'Admin')
