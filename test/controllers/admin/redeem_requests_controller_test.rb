@@ -144,11 +144,18 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     assert_includes status, csv[1][8]
   end
 
-  test "must get redeem requests with a specific store" do
+  test "must get redeem requests for specified store" do
     seed_data
-    redeem_request = create(:redeem_request,points: 10, store: 'amazon.in', user: @user)
-    xhr :get, :index, parameters, format: :js, store: 'amazon.in'
-    assert_response :success
+    redeem_request = create(:redeem_request, points: 10, status: false, store: 'amazon.in', user: @user)
+    xhr :get, :index, format: :js, store: 'amazon.in', status: false
+    assert_includes assigns(:redeem_requests), redeem_request
+  end
+
+  test "must not get redeem requests for unspecified store" do
+    seed_data
+    redeem_request = create(:redeem_request, points: 10, status: false, store: 'amazon.in', user: @user)
+    xhr :get, :index, format: :js, store: 'amazon.com', status: false
+    assert_not_includes assigns(:redeem_requests), redeem_request
   end
 
   def seed_data
