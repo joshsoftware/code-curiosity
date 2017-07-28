@@ -34,7 +34,8 @@ $(document).on('page:change', function(event) {
     }
 
   })
-    
 
-
+  $("a.closeDropdown").on( "click", function() {
+   $("#store").dropdown("toggle");
+  })
 });

@@ -2,10 +2,10 @@ class Admin::RedeemRequestsController < ApplicationController
   include Admin::RedeemRequestsHelper
   before_action :authenticate_user!
   before_action :authenticate_admin!
-  before_action :load_redeem_request, only: [:index, :download] 
-
+  before_action :load_redeem_request, only: [:index, :download]
 
   def index
+    @redeem_requests = @redeem_requests.where(store: params[:store]) if REDEEM['amazon_stores'].include?(params[:store])
     @redeem_requests = @redeem_requests.page(params[:page])
     if request.xhr?
       respond_to do|format|
@@ -39,7 +39,7 @@ class Admin::RedeemRequestsController < ApplicationController
           redeem_request.updated_at.strftime(fmt='%F %T'), redeem_request.coupon_code,
           redeem_request.address, redeem_request.status]
       end
-    end         
+    end
    send_data csv_string, type: 'text/csv; header = present;', disposition: "filename = requests.csv"
   end
 
