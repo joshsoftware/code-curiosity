@@ -14,7 +14,7 @@ class SponsorerDetailTest < ActiveSupport::TestCase
   def teardown
     StripeMock.stop
   end
-  
+
   test "sponsorer type must be present in sponsorer_detail" do
     sponsorer_detail = build(:sponsorer_detail, :sponsorer_type => nil)
     sponsorer_detail.valid?
@@ -54,8 +54,8 @@ class SponsorerDetailTest < ActiveSupport::TestCase
   end
 
   test "user should upload only image as profile photo" do
-    sponsorer_detail = build(:sponsorer_detail, :avatar => 
-      File.new(Rails.root.join('test', 'fixtures', 'test.csv')))
+    sponsorer_detail = build(:sponsorer_detail, :avatar =>
+                             File.new(Rails.root.join('test', 'fixtures', 'test.csv')))
     sponsorer_detail.valid?
     assert sponsorer_detail.errors[:avatar_content_type].include?("is invalid")
     assert sponsorer_detail.errors[:avatar_file_name].include?("is invalid")
@@ -71,7 +71,7 @@ class SponsorerDetailTest < ActiveSupport::TestCase
 
   test "must save a new sponsorer with all params" do
     assert_difference 'SponsorerDetail.count' do
-      sponsorer = create(:sponsorer_detail)
+      create(:sponsorer_detail)
     end
   end
 

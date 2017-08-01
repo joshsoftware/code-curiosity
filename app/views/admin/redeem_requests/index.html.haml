@@ -1,13 +1,13 @@
 %section.content-header
-  %h1 
+  %h1
     Redeem Requests
-    %span.badge $ #{total_capital_of_points}
+    %span.badge $ #{amount_for_store}
     %span.dropdown
       %button.btn.btn-default.dropdown-toggle#store{"data-toggle" => "dropdown", type: "button"} By Store
       %ul.dropdown-menu
         - REDEEM['amazon_stores'].each do |store|
           %li
-            =link_to "#{store} $#{capital_by_store(store)}", admin_redeem_requests_path(store: store), class: 'closeDropdown', remote: true
+            =link_to "#{store} $#{amount_for_store(store)}", admin_redeem_requests_path(store: store), class: 'closeDropdown', remote: true
         %li
           =link_to "All", admin_redeem_requests_path, class: 'closeDropdown', remote: true
 

@@ -29,9 +29,26 @@
         - INFO['home'].each_slice(2) do |data|
           .col-lg-5.col-md-5
             = render partial: 'info', collection: data, as: 'info'
+    .row
+      .col-md-12.col-xs-12
+        - @sponsorer_organizations.in_groups_of(4) do |group|
+          .row
+            - group.each do |company|
+              - if company
+                .col-md-3.col-xs-3
+                  = image_tag company.avatar_file_name, class: 'img-responsive', alt: "Responsive image"
+    .row
+      .col-md-12.col-xs-12
+        - @sponsorer_users.in_groups_of(4) do |group|
+          .row
+            - group.each do |user|
+              - if user
+                .col-md-3.col-xs-3
+                  = image_tag user.avatar_file_name, class: 'img-responsive', alt: "Responsive image"
+    .row.marketing
+      = render 'sponsorer_benefits'
     - if @size > 0
       .row.marketing
         = render partial: 'featured_groups'
     .row
       = render partial: 'trend'
-= render 'sponsor'

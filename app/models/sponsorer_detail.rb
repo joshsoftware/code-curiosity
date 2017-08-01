@@ -1,6 +1,7 @@
 class SponsorerDetail
   include Mongoid::Document
   include Mongoid::Paperclip
+  include Mongoid::Timestamps
 
   field :sponsorer_type, type: String
   field :payment_plan, type: String
@@ -11,13 +12,14 @@ class SponsorerDetail
   field :subscription_expires_at, type: DateTime
   field :subscription_status, type: String
 
-  has_mongoid_attached_file :avatar, 
+  has_mongoid_attached_file :avatar,
     path: ':rails_root/public/system/sponsorer/:id/:style/:filename',
     url: '/system/sponsorer/:id/:style/:filename',
     :styles => { :default => "300x300>"}
 
   belongs_to :user
-  has_many :payments
+  has_many :payments, inverse_of: :sponsorer_detail, dependent: :destroy
+  has_many :redeem_requests, inverse_of: :sponsorer_detail
 
   validates :sponsorer_type, :user, :payment_plan, presence: true
   validates :sponsorer_type, :inclusion => { :in => ['INDIVIDUAL','ORGANIZATION'] }
@@ -32,23 +34,27 @@ class SponsorerDetail
 
   after_create :update_user_as_sponsor
 
+  scope :organizations, -> { where(sponsorer_type: 'ORGANIZATION') }
+  scope :users, -> { where(sponsorer_type: 'INDIVIDUAL') }
+
   def save_payment_details(plan, amount, date)
     payment = self.payments.build(subscription_plan: plan, amount: amount/100, date: Time.at(date).to_datetime)
-    payment.save
+    payment.save!
+    user.reset_points
   end
 
   private
 
   def self.get_credit_card(customer_id)
     customer = Stripe::Customer.retrieve(customer_id)
-    card = customer.sources.first
+    customer.sources.first
   end
 
   def update_user_as_sponsor
-    @user = self.user
-    @role = Role.find_or_create_by(name: 'Sponsorer')
-    @user.roles << @role unless @user.is_sponsorer?
-    @user.set({is_sponsorer: true})
+    user = self.user
+    role = Role.find_or_create_by(name: 'Sponsorer')
+    user.roles << role unless user.is_sponsorer?
+    user.set({is_sponsorer: true})
   end
 
 end

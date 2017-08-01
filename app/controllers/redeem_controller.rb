@@ -3,6 +3,7 @@ class RedeemController < ApplicationController
 
   def create
     @redeem = current_user.redeem_requests.build(redeem_params)
+    @redeem.sponsorer_detail = current_user.active_sponsorer_detail
 
     if @redeem.save
       flash[:notice] = I18n.t('redeem.request_created')

@@ -68,8 +68,8 @@ class User
   has_and_belongs_to_many :roles, inverse_of: nil
   has_and_belongs_to_many :organizations
   has_and_belongs_to_many :groups, class_name: 'Group', inverse_of: 'members'
-  has_one :sponsorer_detail, dependent: :destroy 
-  
+  has_many :sponsorer_details, dependent: :destroy
+
   slug  :github_handle
 
   index(uid: 1)
@@ -103,13 +103,13 @@ class User
     })
 
     user.save
-    
+
     # for auto_created users, we need to invoke the after_create callback.
     user.calculate_popularity unless user.current_subscription
 
     user
   end
-  
+
   def calculate_popularity
     self.subscribe_to_round
     User.delay_for(2.second, queue: 'git').update_total_repos_stars(self.id.to_s)
@@ -224,5 +224,22 @@ class User
 
   def royalty_bonus_transaction
     self.transactions.where(transaction_type: 'royalty_bonus').first
+  end
+
+  def reset_points
+    if self.points > 0
+      p = self.points
+      self.transactions.create!(points: p, transaction_type: 'royalty_bonus', type: 'credit')
+      self.transactions.create!(points: -p, transaction_type: 'redeem_points', type: 'debit')
+      self.set(points: 0)
+    end
+  end
+
+  def active_sponsorer_detail
+    sponsorer_details.asc(:subscribed_at).where(subscription_status: :active).last
+  end
+
+  def sponsorer_detail
+    sponsorer_details.asc(:subscribed_at).last
   end
 end

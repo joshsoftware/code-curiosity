@@ -16,9 +16,9 @@
         %ul.nav.nav-tabs
           %li#card_details_tab_link
             = link_to 'Credit Card details', '#credit_card', data: { toggle: 'tab'}
-          %li#subscription_details_tab_link
+          %li.active#subscription_details_tab_link
             = link_to 'Subscription Details', '#subscription', data: { toggle: 'tab'}
-          %li.active#payments_tab_link
+          %li#payments_tab_link
             = link_to 'Payment Details', '#payments', data: { toggle: 'tab'}
         .tab-content
           .tab-pane#credit_card
@@ -47,8 +47,11 @@
                                 'data-name' => 'Change Card',
                                 'data-description' => 'Change your card',
                                 'data-billing-address' => 'false'}
-          .tab-pane#subscription
+          .tab-pane.active#subscription
             .well
+              - unless current_user.active_sponsorer_detail
+                = link_to("Sponsor", new_sponsorer_detail_path, class: "btn btn-lg btn-success", remote:true, data: { toggle: "modal", target: '#modal-window'})
+              %br
               - if @sponsor.nil?
                 = "You have not subscribed for any plan yet! Please subscribe by clicking on sponsor button and filling the form!"
               - else
@@ -67,7 +70,7 @@
                     %td= @sponsor.subscription_status
                   %tr
                     %td= link_to "Cancel Subscription", cancel_subscription_sponsorer_detail_path(current_user.id), class: 'btn btn-danger', data: { method: 'get', confirm: 'Are you sure to cancel the subscription?' } unless @sponsor.subscription_status == 'canceled'
-          .tab-pane.active#payments
+          .tab-pane#payments
             - if @payments.present? && @payments.any?
               = render 'payments_table'
             - else
@@ -75,7 +78,12 @@
 
 :javascript
   var sponser_flag = "#{session[:sponsor]}";
-  if(sponser_flag)
-    window.modal = sponser_flag
-  else
+  var user_is_sponsorer = "#{current_user.is_sponsorer}";
+  if(user_is_sponsorer == 'false'){
+    if(sponser_flag)
+      window.modal = sponser_flag;
+    else
+      window.modal = "false";
+  } else {
     window.modal = "false";
+  }

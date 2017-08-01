@@ -12,11 +12,13 @@ class SponsorerDetailsController < ApplicationController
     @sponsor = @user.sponsorer_detail
     if @sponsor
       @card = SponsorerDetail.get_credit_card(@sponsor.stripe_customer_id)
-      @payments = @sponsor.payments.page(params[:page])
+      @payments = Payment.where(:sponsorer_detail_id.in => @user.sponsorer_details.collect(&:id)).desc(:created_at).page params[:page]
+      #@payments = @sponsor.payments.page(params[:page])
     end
   end
 
   def new
+    session[:type] = 'Individual' unless session[:type]
     @sponsorer_detail = SponsorerDetail.new
   end
 
@@ -26,11 +28,8 @@ class SponsorerDetailsController < ApplicationController
     if @sponsorer.valid?
       begin
         plan_id = @sponsorer.payment_plan+"-"+@sponsorer.sponsorer_type.downcase
-
         customer = createStripeCustomer(current_user.email, params[:stripeToken], plan_id)
-
         @sponsorer.stripe_customer_id = customer.id
-        
         subscription = customer.subscriptions.data.first
         @sponsorer.stripe_subscription_id = subscription.id
         @sponsorer.subscribed_at = Time.at(subscription.created).to_datetime
@@ -56,7 +55,7 @@ class SponsorerDetailsController < ApplicationController
       customer.source = params[:stripeToken]
     rescue Stripe::StripeError => e
       flash[:error] = e.message
-    else 
+    else
       customer.save
       flash[:notice] = 'Your card has been updated successfully'
     end
@@ -66,6 +65,7 @@ class SponsorerDetailsController < ApplicationController
   def cancel_subscription
     begin
       delete_subscription(@sponsor.stripe_subscription_id)
+      @sponsor.user.set({is_sponsorer: false })
     rescue Stripe::StripeError => e
       flash[:error] = e.message
     else
@@ -81,6 +81,7 @@ class SponsorerDetailsController < ApplicationController
   end
 
   def load_sponsorer
-    @sponsor = SponsorerDetail.find_by(user_id: params[:id])
+    @sponsor = current_user.sponsorer_details.asc(:created_at).last
+    # @sponsor = SponsorerDetail.find_by(user_id: params[:id])
   end
 end

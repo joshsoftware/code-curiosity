@@ -6,10 +6,11 @@
       = (transaction.transaction_type || transaction.description).to_s.humanize
     %small.label{class: transaction.credit? ? 'bg-green' : 'bg-red'}
       = transaction.type.upcase
-    - if transaction.coupon_code.present? 
-      %h5
-        Coupon code:
-        %i= transaction.coupon_code
-    - if transaction.redeem_transaction?
-      %small.label{class: 'bg-primary' }= transaction.redeem_request.retailer.upcase
+    - if logged_in_user?
+      - if transaction.coupon_code.present?
+        %h5
+          Coupon code:
+          %i= transaction.coupon_code
+      - if transaction.redeem_transaction?
+        %small.label{class: 'bg-primary' }= transaction.redeem_request.retailer.upcase if transaction.redeem_request
   %td= transaction.created_at.strftime('%d/%b/%Y %T')

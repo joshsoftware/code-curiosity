@@ -1,0 +1,39 @@
+.col-xs-12
+  .box.box-default
+    .box-header
+      %h2 Be a Sponsorer
+    .box-body
+      .col-xs-12.col-sm-6.col-md-5.col-md-offset-1
+        %ul.false.g-green.goals
+          %li
+            %big Individual
+          %li.desc
+            Benefits
+            %ul
+              %li
+                %h4 Something goes here like placeholder
+              %li
+                %strong Something goes here like placeholder
+              %li Something goes here like placeholder
+          %li.redeem
+            %li
+              %h4 Something goes here like placeholder
+            %li
+              %strong Something goes here like placeholder
+            %li Something goes here like placeholder
+          %li
+            = link_to("Sponsor", omniauth_authorize_path(:user, :github, user: 'Individual'), class: "btn btn-lg btn-success")
+      .col-xs-12.col-sm-6.col-md-5.col-md-offset-1
+        %ul.false.g-green.goals
+          %li
+            %big Organization
+          %li.desc
+            Benefits
+            %ul
+              %li Something goes here like placeholder
+              %li Something goes here like placeholder
+              %li Something goes here like placeholder
+              %li Something goes here like placeholder
+          %li.redeem
+          %li
+            = link_to("Sponsor", omniauth_authorize_path(:user, :github, user: 'Organization'), class: "btn btn-lg btn-success")

@@ -8,6 +8,11 @@ module HomeHelper
     @size = @featured_groups.size
   end
 
+  def sponsorer_organizations
+    @sponsorer_organizations = SponsorerDetail.organizations
+    @sponsorer_users = SponsorerDetail.users
+  end
+
   def widget_class
     if @size > 2
       "col-md-4"

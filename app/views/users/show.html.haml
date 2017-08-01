@@ -42,9 +42,9 @@
         %ul.nav.nav-tabs
           %li.active#rounds_tab_link
             = link_to 'Rounds', '#rounds', data: { toggle: 'tab'}
+          %li#wallet_tab_link
+            = link_to 'Points History', '#wallet', data: { toggle: 'tab' }
           - if logged_in_user?
-            %li#wallet_tab_link
-              = link_to 'Points History', '#wallet', data: { toggle: 'tab' }
             %li#wallet_tab_link
               = link_to 'Settings', '#settings', data: { toggle: 'tab' }
         .tab-content
@@ -64,16 +64,16 @@
                   %th.col-xs-2 Points
               %tbody
                 = render partial: 'subscription', collection:  @subscriptions.reverse
+          .tab-pane#wallet
+            = render 'transactions'
           - if logged_in_user?
-            .tab-pane#wallet
-              = render 'transactions'
             .tab-pane#settings
               = render 'settings'
-          %b 
+          %b
             - if logged_in_user?
               Info:
               %i= t('transaction.points_credit_info')
 - if logged_in_user?
   #redeem-modal
     .modal.fade
-      = render 'redeem/new_modal'            
+      = render 'redeem/new_modal'

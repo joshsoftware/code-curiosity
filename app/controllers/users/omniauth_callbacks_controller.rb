@@ -4,15 +4,11 @@ class Users::OmniauthCallbacksController < ApplicationController
 
   def github
     @user = User.from_omniauth(request.env["omniauth.auth"])
-    if request.env["omniauth.params"].present? && request.env["omniauth.params"]["user"] == "Sponsorer"
+    if request.env["omniauth.params"].present? && ['Individual', 'Organization'].include?(request.env["omniauth.params"]["user"])
       @role = Role.find_or_create_by(name: 'Sponsorer')
       #fresh login of a non existing user as sponsorer
-      if @user.last_sign_in_at == nil
-        session[:sponsor] = true
-      else
-        #existing user
-        session[:sponsor] = true unless @user.is_sponsorer? #detects first time login as sponsorer
-      end
+      session[:sponsor] = true
+      session[:type] = request.env["omniauth.params"]["user"] || 'Individual'
       sign_in :user, @user
       redirect_to sponsorer_details_path #redirect to fill sponsor details
       flash[:notice] = "Signed in as sponsorer"

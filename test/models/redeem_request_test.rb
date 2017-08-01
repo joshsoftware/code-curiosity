@@ -95,8 +95,8 @@ class RedeemRequestTest < ActiveSupport::TestCase
     redeem_request = create(:redeem_request, :points => 2, user: user)
     transaction_type = redeem_request.transaction.transaction_type
     assert_equal transaction_type, 'redeem_points'
-  end 
-  
+  end
+
   test "transaction corresponding to redeem request must be destroyed when it is deleted" do
     user = create(:user)
     round_1 = create :round, status: "open", from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
@@ -111,7 +111,7 @@ class RedeemRequestTest < ActiveSupport::TestCase
     assert_equal user.redeem_requests.count, 0
     assert_equal user.transactions.count, 2
   end
- 
+
   test "send notification only when coupon_code or comment is changed" do
     user = create(:user)
     round_1 = create :round, status: "open", from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
@@ -119,7 +119,7 @@ class RedeemRequestTest < ActiveSupport::TestCase
     royalty_transaction = create :transaction, points: 100, transaction_type: 'royalty_bonus', type: 'credit', user: user
     transaction = create(:transaction, :type => 'credit', :points => 4, user: user)
     assert_equal user.transactions.count, 2
-    assert_enqueued_jobs 3 do 
+    assert_enqueued_jobs 3 do
       redeem_request = create(:redeem_request, :points => 1, :coupon_code => 'abc', user: user)
     end
   end
@@ -211,7 +211,8 @@ class RedeemRequestTest < ActiveSupport::TestCase
 
   test "user should be able to redeem atmost 500 royalty points in each and every round if redemption criteria is satisified" do
     user = create :user
-    round_1 = create :round, status: "open", name: Date.today.beginning_of_month.strftime("%b %Y"), from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
+    round_1 = create :round, status: "open", name: Date.today.beginning_of_month.strftime("%b %Y"), from_date: Date.today.beginning_of_month,
+      end_date: Date.today.end_of_month
     subscription = create(:subscription, user: user, round: round_1)
     royalty_points = 3308
     royalty_transaction = create :transaction, points: royalty_points, transaction_type: 'royalty_bonus', type: 'credit', user: user
@@ -223,7 +224,8 @@ class RedeemRequestTest < ActiveSupport::TestCase
     user.instance_variable_set(:@_t_p, nil)
 
     Round.destroy_all
-    round_2 = create :round, status: "open", name: Date.today.next_month.beginning_of_month.strftime("%b %Y"), from_date: Date.today.next_month.beginning_of_month, end_date: Date.today.next_month.end_of_month 
+    round_2 = create :round, status: "open", name: Date.today.next_month.beginning_of_month.strftime("%b %Y"),
+      from_date: Date.today.next_month.beginning_of_month, end_date: Date.today.next_month.end_of_month
     subscription = create(:subscription, user: user, round: round_2)
     redeem_request_1 = create :redeem_request,points: 100, created_at: Date.today.next_month, user: user
     user.instance_variable_set(:@_t_p, nil)
@@ -231,7 +233,8 @@ class RedeemRequestTest < ActiveSupport::TestCase
     user.instance_variable_set(:@_t_p, nil)
 
     Round.destroy_all
-    round_3 = create :round, status: "open", name: (Date.today + 2.month).beginning_of_month.strftime("%b %Y"), from_date: (Date.today + 2.month).beginning_of_month, end_date: (Date.today + 2.month).end_of_month
+    round_3 = create :round, status: "open", name: (Date.today + 2.month).beginning_of_month.strftime("%b %Y"),
+      from_date: (Date.today + 2.month).beginning_of_month, end_date: (Date.today + 2.month).end_of_month
     subscription = create(:subscription, user: user, round: round_3)
     redeem_request_1 = create :redeem_request,points: 300, created_at: Date.today + 2.month, user: user
     user.instance_variable_set(:@_t_p, nil)
@@ -246,5 +249,22 @@ class RedeemRequestTest < ActiveSupport::TestCase
     redeem_request_1.valid?
     assert_not_empty redeem_request_1.errors[:gift_product_url]
     assert_equal redeem_request_1.errors[:gift_product_url].first, "insufficient balance. You have only 0 points in your account."
+  end
+
+  test "should set the amount" do
+    user = create :user
+    round_1 = create :round, status: "open", name: Date.today.beginning_of_month.strftime("%b %Y"), from_date: Date.today.beginning_of_month,
+      end_date: Date.today.end_of_month
+    subscription = create(:subscription, user: user, round: round_1)
+    royalty_points = 1000
+    royalty_transaction = create :transaction, points: royalty_points, transaction_type: 'royalty_bonus', type: 'credit', user: user
+    round_transaction = create :transaction, points: 10, type: 'credit', user: user
+
+    redeem_request_1 = create :redeem_request, points: 100, user: user
+    assert_equal 5, redeem_request_1.amount
+
+    sponsorer_detail = create :sponsorer_detail, user: user
+    redeem_request_2 = create :redeem_request, points: 100, user: user
+    assert_equal 10, redeem_request_1.amount
   end
 end
