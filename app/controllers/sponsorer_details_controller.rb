@@ -13,7 +13,6 @@ class SponsorerDetailsController < ApplicationController
     if @sponsor
       @card = SponsorerDetail.get_credit_card(@sponsor.stripe_customer_id)
       @payments = Payment.where(:sponsorer_detail_id.in => @user.sponsorer_details.collect(&:id)).desc(:created_at).page params[:page]
-      #@payments = @sponsor.payments.page(params[:page])
     end
   end
 
@@ -82,6 +81,5 @@ class SponsorerDetailsController < ApplicationController
 
   def load_sponsorer
     @sponsor = current_user.sponsorer_details.asc(:created_at).last
-    # @sponsor = SponsorerDetail.find_by(user_id: params[:id])
   end
 end
