@@ -27,6 +27,11 @@
       %a.btn.btn-success.btn-lg{  href: "#sponsor"}
         %span
         Reward Contributors!
+    .row.marketing
+      .col-md-12.col-lg-offset-1.col-md-offset-1
+        - INFO['home'].each_slice(2) do |data|
+          .col-lg-5.col-md-5
+            = render partial: 'info', collection: data, as: 'info'
     .row.marketing#sponsor
       = render 'sponsorer_benefits'
     - if @size > 0
