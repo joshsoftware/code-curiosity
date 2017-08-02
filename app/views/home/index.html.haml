@@ -24,28 +24,10 @@
       %a.btn.btn-primary.btn-lg{  href: omniauth_authorize_path(:user, :github) }
         %span.fa.fa-github
         Sign in with Github
-    .row.marketing
-      .col-md-12.col-lg-offset-1.col-md-offset-1
-        - INFO['home'].each_slice(2) do |data|
-          .col-lg-5.col-md-5
-            = render partial: 'info', collection: data, as: 'info'
-    .row
-      .col-md-12.col-xs-12
-        - @sponsorer_organizations.in_groups_of(4) do |group|
-          .row
-            - group.each do |company|
-              - if company
-                .col-md-3.col-xs-3
-                  = image_tag company.avatar_file_name, class: 'img-responsive', alt: "Responsive image"
-    .row
-      .col-md-12.col-xs-12
-        - @sponsorer_users.in_groups_of(4) do |group|
-          .row
-            - group.each do |user|
-              - if user
-                .col-md-3.col-xs-3
-                  = image_tag user.avatar_file_name, class: 'img-responsive', alt: "Responsive image"
-    .row.marketing
+      %a.btn.btn-success.btn-lg{  href: "#sponsor"}
+        %span
+        Reward Contributors!
+    .row.marketing#sponsor
       = render 'sponsorer_benefits'
     - if @size > 0
       .row.marketing

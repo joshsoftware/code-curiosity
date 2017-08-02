@@ -1,17 +1,16 @@
 .col-xs-12
-  .box.box-default
-    .box-header
-      %h2 Be a Sponsorer
-    .box-body
-      - INFO['benefits'].keys.each do |key|
-        .col-xs-12.col-sm-4.col-md-4
-          %ul.false.g-green.goals
+  .box-header
+    %h2 Reward Opensource contributors!
+  .box-body
+    - INFO['benefits'].keys.each do |key|
+      .col-xs-12.col-sm-4.col-md-4
+        %ul.false.g-green.benefits
+          %li.title
+            %big #{key.camelize}
+          %li.desc
+            %ul.point
+              - INFO['benefits'][key].each do |stmt|
+                %li #{stmt}
+          - unless key == 'free'
             %li
-              %big #{key.camelize}
-            %li.desc
-              %ul
-                - INFO['benefits'][key].each do |stmt|
-                  %li #{stmt}
-            - unless key == 'free'
-              %li
-                = link_to("Sponsor", omniauth_authorize_path(:user, :github, user: key.camelize), class: "btn btn-lg btn-success")
+              = link_to("Subscribe", omniauth_authorize_path(:user, :github, user: key.camelize), class: "btn btn-lg btn-success")

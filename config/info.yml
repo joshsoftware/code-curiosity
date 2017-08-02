@@ -79,16 +79,20 @@ faq:
 
 benefits:
   free:
-    - Redeem 20 points for 1 USD
-    - Redeem upto 400 Royalty points worth 20 USD every month
+    - No subscription fee
+    - Redeem 20 points for $1
+    - Redeem upto 400 Royalty points worth $20 per month
     - Redeem after 3 months of joining
   individual:
-    - Reward the Community with 5 USD every month
-    - Redeem 10 points for 1 USD
-    - Redeem upto 500 Royalty points worth 50 USD every month
-    - CodeCuriosity Badge for “I reward OpenSource” (WIP)
-    - Redeem immediately
+    - $5 per month
+    - Redeem 10 points for $1
+    - Redeem upto 500 Royalty points worth $50 per month
+    - Redeem immediately after joining
+    - Custom CodeCuriosity Badge
   organization:
-    - Reward the Community with 250 USD every month
-    - Reward contributions to specific repositories, upto 100 USD
-    - Custom Judging for contributions to your repositories
+    - $250 per month
+    - Reward upto $100 for owned repos
+    - Logo on homepage as well as in all mailers
+    - Custom Judging for owned repos
+    - Custom CodeCuriosity Badge
+
