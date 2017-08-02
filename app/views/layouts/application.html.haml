@@ -18,11 +18,10 @@
       = render 'navbar'
       = render 'sidebar'
       .content-wrapper
-        = yield 
+        = yield
       %footer.main-footer
         = render 'footer'
+    = render 'sponsor'
     - if flash.any?
       :javascript
         #{show_flash_notifications}
-    - unless current_user.is_sponsorer
-      = render 'sponsor'

@@ -4,14 +4,14 @@
 
 $(document).on "ready", ->
   $('body').on 'change', '.sponsorer_detail_avatar', () ->
-    inputFile = $(this).val();
-    validateFiles(inputFile);
+    inputFile = $(this).val()
+    validateFiles(inputFile)
   if window.location.pathname == '/sponsorer_details'
-    showmodal();
+    showmodal()
 
 showmodal = () ->
   if modal == "true"
-    $("#rotate").click();
+    $("#rotate").click()
 
 validateFiles = (inputFile) ->
   extErrorMessage = 'Only image file with extension: .jpg, .jpeg, .gif or .png is allowed'

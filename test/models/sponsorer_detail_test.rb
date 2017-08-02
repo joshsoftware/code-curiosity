@@ -14,7 +14,7 @@ class SponsorerDetailTest < ActiveSupport::TestCase
   def teardown
     StripeMock.stop
   end
-  
+
   test "sponsorer type must be present in sponsorer_detail" do
     sponsorer_detail = build(:sponsorer_detail, :sponsorer_type => nil)
     sponsorer_detail.valid?
@@ -54,8 +54,8 @@ class SponsorerDetailTest < ActiveSupport::TestCase
   end
 
   test "user should upload only image as profile photo" do
-    sponsorer_detail = build(:sponsorer_detail, :avatar => 
-      File.new(Rails.root.join('test', 'fixtures', 'test.csv')))
+    sponsorer_detail = build(:sponsorer_detail, :avatar =>
+                             File.new(Rails.root.join('test', 'fixtures', 'test.csv')))
     sponsorer_detail.valid?
     assert sponsorer_detail.errors[:avatar_content_type].include?("is invalid")
     assert sponsorer_detail.errors[:avatar_file_name].include?("is invalid")
@@ -69,9 +69,26 @@ class SponsorerDetailTest < ActiveSupport::TestCase
     assert user.roles.where(name: 'Sponsorer').any?
   end
 
+  test 'save_payment_details should create the payment record and reset the user points' do
+    round = create :round, :open
+    user = create :user, github_user_since: Date.today - 6.months, created_at: Date.today - 3.months, points: 500
+    create(:subscription, round: round, user: user)
+    sponsorer_detail = create(:sponsorer_detail, user: user)
+    assert_equal 0, sponsorer_detail.payments.count
+    assert_equal 0, user.transactions.count
+    assert_equal 500, user.reload.points
+    plan = stripe_helper.create_plan(amount: 15000, name: 'base', id: 'base-organization', interval: 'month', currency: 'usd')
+    sponsorer_detail.save_payment_details(plan, 10000, Time.now - 2.days)
+    assert_equal 1, sponsorer_detail.payments.count
+    assert_equal 2, user.transactions.count
+    assert_equal 1, user.transactions.where(points: 500, transaction_type: 'royalty_bonus', type: 'credit').count
+    assert_equal 1, user.transactions.where(points: -500, transaction_type: 'redeem_points', type: 'debit').count
+    assert_equal 0, user.reload.points
+  end
+
   test "must save a new sponsorer with all params" do
     assert_difference 'SponsorerDetail.count' do
-      sponsorer = create(:sponsorer_detail)
+      create(:sponsorer_detail)
     end
   end
 

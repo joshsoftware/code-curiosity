@@ -21,13 +21,9 @@ user:
 
 sponsor:
   individual:
-    basic: 10
-    silver: 15
-    gold: 20
+    base: 5
   organization:
-    basic: 150
-    silver: 200
-    gold: 300 
+    base: 250
 
 scoring_engine:
   :repositories: 'repositories' # repositories dir

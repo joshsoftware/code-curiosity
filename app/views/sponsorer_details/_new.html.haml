@@ -7,16 +7,16 @@
       %ul.errors
       .nav-tabs-custom
         %ul.nav.nav-tabs
-          %li.active
+          %li{class: active_tab('Individual')}
             %a{href: '#individual', data: { toggle: 'tab'} }
               %i.fa.fa-money
               Individual
-          %li
-            %a{href: '#organization', data: { toggle: 'tab'} } 
+          %li{class: active_tab('Organization')}
+            %a{href: '#organization', data: { toggle: 'tab'} }
               %i.fa.fa-money
               Company
         .tab-content
-          .tab-pane.active#individual
+          .tab-pane#individual{class: active_tab('Individual')}
             = render 'sponsorer_details/individual'
-          .tab-pane#organization
+          .tab-pane#organization{class: active_tab('Organization')}
             = render 'sponsorer_details/organization'

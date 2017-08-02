@@ -76,3 +76,19 @@ faq:
   -
     question: Do companies or organisations benefit from CodeCuriosity?
     answer: Yes. We are in the process of giving a cumulative score to organisations that the github users belongs to. So, if you are working in a company that encourages you to contribute to open-source, the organization overall rating increases too! This is an algorithm that uses a weighted average of it's employees scores. This not only helps the organization get a better profile but also encourages developers to join such companies!
+
+benefits:
+  free:
+    - Redeem 20 points for 1 USD
+    - Redeem upto 400 Royalty points worth 20 USD every month
+    - Redeem after 3 months of joining
+  individual:
+    - Reward the Community with 5 USD every month
+    - Redeem 10 points for 1 USD
+    - Redeem upto 500 Royalty points worth 50 USD every month
+    - CodeCuriosity Badge for “I reward OpenSource” (WIP)
+    - Redeem immediately
+  organization:
+    - Reward the Community with 250 USD every month
+    - Reward contributions to specific repositories, upto 100 USD
+    - Custom Judging for contributions to your repositories

@@ -36,7 +36,7 @@ class Transaction
 
   def coupon_code
     if redeem_transaction?
-      return (@ccode ||= redeem_request.coupon_code)
+      return (@ccode ||= redeem_request.try(:coupon_code))
     end
   end
 

@@ -6,6 +6,7 @@ class RedeemRequest
   field :coupon_code, type: String
   field :status,      type: Boolean, default: false
   field :points,      type: Integer
+  field :amount,      type: Integer
   field :retailer,    type: String, default: REDEEM['retailers'].first
   field :store,       type: String
   field :address,     type: String
@@ -13,7 +14,8 @@ class RedeemRequest
   field :comment, type: String
 
   belongs_to :user
-  has_one :transaction, :dependent => :destroy
+  belongs_to :sponsorer_detail, inverse_of: :redeem_requests
+  has_one :transaction, dependent: :destroy
 
   index({ commit_date: -1 })
 
@@ -27,6 +29,7 @@ class RedeemRequest
   validate :user_total_points, on: :create
 
   before_validation {|r| r.points = r.points.to_i }
+  before_create :set_amount
 
   after_create do |r|
     r.create_redeem_transaction
@@ -133,9 +136,9 @@ class RedeemRequest
       royalty = points - (total_points - royalty_points + total_redeemed_royalty) if (total_points - royalty_points + total_redeemed_royalty < points)
     end
     #shows error if
-      #1 user's total_points is less than the points to be redeemed
-      #2 user's total_points is greater than the points to be redeemed but royalty_points redeemed for current_months
-      # are more than 500
+    #1 user's total_points is less than the points to be redeemed
+    #2 user's total_points is greater than the points to be redeemed but royalty_points redeemed for current_months
+    # are more than 500
     if total_points < points || (total_points >= points && (royalty + redeemed_royalty_point > 500))
       errors.add(:points, "at most 500 royalty points can be redeemed in this month")
     end
@@ -143,9 +146,9 @@ class RedeemRequest
 
   def create_redemption_transaction(round_points, royalty_points)
     self.transaction.create_redemption_transaction({
-    round_points: round_points,
-    royalty_points: royalty_points,
-    round_name: Round.opened.name
+      round_points: round_points,
+      royalty_points: royalty_points,
+      round_name: Round.opened.name
     })
   end
 
@@ -180,5 +183,16 @@ class RedeemRequest
 
   def redeem_points_transactions
     self.user.transactions.where(transaction_type: 'redeem_points')
+  end
+
+  private
+
+  def set_amount
+    denominator = if sponsorer_detail
+                    REDEEM['one_dollar_to_points']
+                  else
+                    REDEEM['one_dollar_to_points'] * 2
+                  end
+    self.amount = points/denominator
   end
 end

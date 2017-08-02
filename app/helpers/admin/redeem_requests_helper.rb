@@ -1,11 +1,9 @@
 module Admin::RedeemRequestsHelper
 
-  def total_capital_of_points
-    RedeemRequest.where(status: false).sum(:points)/REDEEM['one_dollar_to_points']
+  def amount_for_store(store = nil)
+    redeem_requests = RedeemRequest.where(status: false)
+    redeem_requests = redeem_requests.where(store: store) if store and REDEEM['amazon_stores'].include?(store)
+    redeem_requests.sum(:amount)
   end
 
-  def capital_by_store(store)
-    RedeemRequest.where(status: false, store: store).sum(:points)/REDEEM['one_dollar_to_points']
-  end
-  
 end

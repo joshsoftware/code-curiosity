@@ -2,10 +2,10 @@ require 'test_helper'
 
 class Users::OmniauthCallbacksControllerTest < ActionController::TestCase
 
-  include Devise::TestHelpers  
+  include Devise::TestHelpers
 
   test "github signup" do
-    
+
     OmniAuth.config.test_mode = true
     date = Date.new(2015, 10, 10)
     omniauth_hash = {
@@ -16,7 +16,7 @@ class Users::OmniauthCallbacksControllerTest < ActionController::TestCase
         :email => 'test@test.com'
       },
       :extra => {
-        :raw_info => 
+        :raw_info =>
         {
           :login => 'hello',
           :created_at => date
@@ -29,16 +29,16 @@ class Users::OmniauthCallbacksControllerTest < ActionController::TestCase
 
     OmniAuth.config.add_mock(:github, omniauth_hash)
 
-    
-    request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github] 
-    
+
+    request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github]
+
     round = create(:round, status: 'open')
-    
+
     get :github
 
     @user = assigns(:user)
 
-    assert @user.valid? 
+    assert @user.valid?
     assert @user.persisted?
     assert_not_nil @user.name
     assert_not_nil @user.email
@@ -58,7 +58,7 @@ class Users::OmniauthCallbacksControllerTest < ActionController::TestCase
         :email => 'test@test.com'
       },
       :extra => {
-        :raw_info => 
+        :raw_info =>
         {
           :login => 'hello',
           :created_at => date
@@ -72,26 +72,26 @@ class Users::OmniauthCallbacksControllerTest < ActionController::TestCase
       }
     }
 
-    OmniAuth.config.add_mock(:github, omniauth_hash)  
+    OmniAuth.config.add_mock(:github, omniauth_hash)
 
     request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github]
-    request.env['omniauth.params'] = OmniAuth.config.mock_auth[:github][:user_params] 
-  
+    request.env['omniauth.params'] = OmniAuth.config.mock_auth[:github][:user_params]
+
     round = create(:round, status: 'open')
-   
+
     get :github
 
     @user = assigns(:user)
 
     assert @user.valid?
     assert_response :redirect
-    assert_redirected_to sponsorer_details_path
+    assert_redirected_to root_path
   end
 
   test "existing user sign in as sponsorer" do
     # round = create(:round, :status => 'open')
     # @user = create(:user, :auth_token => 'dah123rty', goal: create(:goal))
-    # @user.last_sign_in_at = Time.zone.now 
+    # @user.last_sign_in_at = Time.zone.now
   end
 
   test "second time login of sponsorer" do
