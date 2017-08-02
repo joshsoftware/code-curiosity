@@ -1,4 +1,4 @@
-.goals{
+.cards{
   text-align: center;
   border: 1px solid #f0f0f0;
   color: #777;
@@ -121,6 +121,44 @@
     text-decoration: underline;
     cursor: auto;
     color: #999;
+  }
+}
+
+.goals{
+  @extend .cards;
+
+}
+
+.benefits{
+  @extend .cards;
+
+  li.title{
+  background-color: #13a913;
+
+    big{
+      color: white;
+    }
+  }
+
+  
+  li.desc{
+    padding: 0px 13px; 
+  
+    -webkit-padding-start: 13px;
+    li:first-child{ 
+      padding: 13px; 
+    }
+   
+    ul.point{
+      -webkit-padding-start: 0px;
+      li:nth-last-child(2), li:last-child {
+        padding: 13px;
+      }
+    }
+  }
+
+  li:first-child{
+    padding: 20px 13px;
   }
 }
 
