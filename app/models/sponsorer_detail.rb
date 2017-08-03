@@ -36,6 +36,8 @@ class SponsorerDetail
 
   scope :organizations, -> { where(sponsorer_type: 'ORGANIZATION') }
   scope :users, -> { where(sponsorer_type: 'INDIVIDUAL') }
+  scope :active, -> { where(subscription_status: 'active') }
+  scope :canceled, -> { where(subscription_status: 'canceled') }
 
   def save_payment_details(plan, amount, date)
     payment = self.payments.build(subscription_plan: plan, amount: amount/100, date: Time.at(date).to_datetime)

@@ -37,6 +37,11 @@ scoring_engine:
   :bugspot_weightage: 0.45
   :bugspot_scores_threshold: 2
 
+subscriptions:
+  free: 20
+  individual: 10
+  organization: 10
+
 redeem:
   min_points: 100
   one_dollar_to_points: 10
