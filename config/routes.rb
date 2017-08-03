@@ -56,6 +56,8 @@ Rails.application.routes.draw do
       get :search, on: :collection
     end
 
+    resources :subscriptions, only: [:index]
+
     resources :judges, only: [:index]
     resources :rounds, only: [:index] do
       get :mark_as_close
