@@ -1,22 +1,53 @@
 - content_for :signature do
   = render 'application/mail_signature'
 
-%h4= "Hello #{@user.name},"
 %p
-  = @message
+  = "Hi #{@user.name},"
+
+%br
 %p
-  - if @user.points > 100
-    = "You have #{@user.points} points! Why don't you redeem some?"
-    %p
-      %table.module{:border => "0", :cellpadding => "0", :cellspacing => "0", "data-attributes" => "%7B%22dropped%22%3Atrue%2C%22borderradius%22%3A6%2C%22buttonpadding%22%3A%2212%2C18%2C12%2C18%22%2C%22text%22%3A%22Your%20Bulletproof%20Button%22%2C%22alignment%22%3A%22center%22%2C%22fontsize%22%3A16%2C%22url%22%3A%22%22%2C%22height%22%3A%22%22%2C%22width%22%3A%22%22%2C%22containerbackground%22%3A%22%23ffffff%22%2C%22padding%22%3A%220%2C0%2C0%2C0%22%2C%22buttoncolor%22%3A%22%231188e6%22%2C%22textcolor%22%3A%22%23ffffff%22%2C%22bordercolor%22%3A%22%231288e5%22%7D", "data-type" => "button", :role => "module", :style => "table-layout: fixed;", :width => "100%"}
-        %tr
-          %td{:align => "center", :bgcolor => "#ffffff", :style => "padding: 10px 0px 0px 0px;"}
-            %table.wrapper-mobile{:border => "0", :cellpadding => "0", :cellspacing => "0"}
-              %tr
-                %td{:align => "center", :bgcolor => "#1188e6", :style => "-webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px; font-size: 16px;"}
-                  = link_to "Redeem Points", user_url(@user, anchor: "wallet"), class: "bulletproof-button", style: "height: px; width: px; font-size: 16px; line-height: px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; padding: 12px 18px 12px 18px; text-decoration: none; color: #ffffff; text-decoration: none; -webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px; border: 1px solid #1288e5; display: inline-block;", target: "_blank"
-  - else
-    %p You have earned #{@user.points} till now. You need only #{100 - @user.points} more points to start redeeming them for rewards. Go! Go! Go!
-    %p
-      For more details on your points, check out your
-      = link_to "CodeCuriosity profile", user_url(@user)
+  In just over a year, we have more than 1000+ registrations and about $5000 in redemptions. Thank you for your involvement ! 
+
+%br
+%p
+  %b
+    We have changed the
+    = link_to "Terms of Service", "/Terms_of_service_CodeCuriosity.pdf"
+    to make CodeCuriosity sustainable.
+  We cannot do this without your support! 
+
+%br
+%p
+  You have been subscribed to the default "Free" account and with effect from 1st Aug, 2017 the redemption ratio has been revised to 
+  %b 20 points to 1 USD.
+
+%br
+%p
+  To continue to enjoy the earlier redemption ratio of 
+  %b 10 points to 1 USD,
+  please upgrade your subscription to the "Individual" account. (5$ per month).
+
+  %table.module{:border => "0", :cellpadding => "0", :cellspacing => "0", "data-attributes" => "%7B%22dropped%22%3Atrue%2C%22borderradius%22%3A6%2C%22buttonpadding%22%3A%2212%2C18%2C12%2C18%22%2C%22text%22%3A%22Your%20Bulletproof%20Button%22%2C%22alignment%22%3A%22center%22%2C%22fontsize%22%3A16%2C%22url%22%3A%22%22%2C%22height%22%3A%22%22%2C%22width%22%3A%22%22%2C%22containerbackground%22%3A%22%23ffffff%22%2C%22padding%22%3A%220%2C0%2C0%2C0%22%2C%22buttoncolor%22%3A%22%231188e6%22%2C%22textcolor%22%3A%22%23ffffff%22%2C%22bordercolor%22%3A%22%231288e5%22%7D", "data-type" => "button", :role => "module", :style => "table-layout: fixed;", :width => "100%"}
+    %tr
+      %td{:align => "center", :bgcolor => "#ffffff", :style => "padding: 10px 0px 0px 0px;"}
+        %table.wrapper-mobile{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+          %tr
+            %td{:align => "center", :bgcolor => "#1188e6", :style => "-webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px; font-size: 16px;"}
+              = link_to "Subscribe for $5 plan", sponsorer_details_url, class: "bulletproof-button", style: "height: px; width: px; font-size: 16px; line-height: px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; padding: 12px 18px 12px 18px; text-decoration: none; color: #ffffff; text-decoration: none; -webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px; border: 1px solid #1288e5; display: inline-block;", target: "_blank"
+%br
+%p
+  Please consider this small subscription fee as rewarding the open-source community with $5 every month.
+  Of course, you can earn more every month by contributing 50 points each month! 
+%br
+%p
+  This change will help us make the system better See 
+  = link_to "Rewarding OpenSource", "https://codecuriosity.org/#sponsor"
+  on the home page for more details about how subscription helps you and the open source community!
+  Click on the 
+  = link_to "Sponsor", sponsorer_details_url
+  link in the sidebar if you're logged in.
+
+%br
+%p
+  When you support open source, you're supporting our dream. Help us be the game-changer in
+  %b rewarding open source!
