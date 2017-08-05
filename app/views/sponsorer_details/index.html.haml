@@ -76,6 +76,11 @@
             - else
               = render partial: 'callout_box', locals: { type: 'success', title: 'Keep Sponsoring', message: 'No payments yet'}
 
+  - if @sponsor.nil?
+    .row.marketing#sponsor
+      = render 'home/sponsorer_benefits'
+
+
 :javascript
   var sponser_flag = "#{session[:sponsor]}";
   var user_is_sponsorer = "#{current_user.is_sponsorer}";

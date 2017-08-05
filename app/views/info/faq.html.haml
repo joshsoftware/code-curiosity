@@ -1,4 +1,11 @@
 %h1.faq-title Frequent Questions
-%h4.faq-subtitle Simple answers to your most common questions 
+%h4.faq-subtitle 
+  Simple answers to your most common questions 
+  .callout-info.col-md-offset-2.col-md-8.col-sm-12.col-sm-offset-0
+    .alert.alert-error
+      Please review the
+      = link_to "Terms of Service", "/Terms_of_service_CodeCuriosity.pdf"
+      = ". Subscribe to CodeCuriosity and reward the open-source community"
+
 .faqs.col-md-offset-2.col-md-8.col-sm-12.col-sm-offset-0
   = render partial: 'faq', collection: INFO['faq']
