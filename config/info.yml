@@ -30,7 +30,7 @@ faq:
     html_anchor: 'what-are-points'
   -
     question:  How do I redeem my points?
-    answer: Redemptions are in the form of digital prizes or Github Merchandise or Company sponsored swag. You need to accumulate at least 100 points before you can redeem them. <span style='color:red'>Please note that you have to be registered on Github for at least 6 months and on CodeCuriosity for at least 3 months before you can redeem any points. In any month, you can redeem at most 500 Royalty points. </span>
+    answer: Redemptions are in the form of digital prizes or Github Merchandise or Company sponsored swag. You need to accumulate at least 100 points before you can redeem them. <span style='color:red'> Please note that only for the free plan you have to be registered on Github for at least 6 months and on CodeCuriosity for at least 3 months before you can redeem any points. In any month, you can redeem at most 500 Royalty points. </span>
   -
     question:  How long does the redemption process take?
     answer: Usually, we redeem points within 1 or 2 days. All redemption requests are screened by our fraud detection team. We have come across cases of fraud (unfortunately) where users were trying to manipulate the system to make money in unfair ways. We have ejected these users from the system. <i style='color:blue'>This is indeed a sign that the initiative has been sucessful </i> :) If your redemption request is not processed within 4 days, please contact us and we shall discuss the reasons behind the delay.
@@ -72,7 +72,7 @@ faq:
     answer: Not yet ;) It is our aim to sort out legal issues and if we get enough grants and contributions from the community, we would be more than happy to reward open source contributions with money. We dream to invent a new career - A full-time open source contributor who works for the community and not for a company!
   -
     question: How does CodeCuriosity sustain? What keeps is it going?
-    answer: Currently, we at Josh Software, keep it going. We would love to get some support from companies who support this cause. We would love to have companies like <a href="http://github.com">GitHub</a>, <a href="https://www.mozilla.org/en-US/foundation">Mozilla</a> and others provide us grants to take this initiative to greater heights. What is critical is that grants are for ALL open source repositories equally - we do not believe in grants for specific repositories and we shall never allow that!
+    answer: Currently, we at Josh Software, keep it going. We would love to get some support from indiviual and company plans to support this cause. We would love to have your company support this cause. If you need help convincing them, contact us! All the funds from subscription are utilized for rewarding open-source after administrative expenses.
   -
     question: Do companies or organisations benefit from CodeCuriosity?
     answer: Yes. We are in the process of giving a cumulative score to organisations that the github users belongs to. So, if you are working in a company that encourages you to contribute to open-source, the organization overall rating increases too! This is an algorithm that uses a weighted average of it's employees scores. This not only helps the organization get a better profile but also encourages developers to join such companies!
