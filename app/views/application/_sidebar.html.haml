@@ -16,7 +16,7 @@
             %span Judging
       = render 'admin_sidebar' if current_user.is_admin?
       = render 'orgs_sidebar' if current_user.organizations.any?
-      %li
+      %li.bg-green
         %a{href: sponsorer_details_path}
           %i.fa.fa-usd
           %span Sponsor
