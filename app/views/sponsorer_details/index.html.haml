@@ -11,6 +11,7 @@
             = link_to github_url(@user), target: '_blank' do
               %i.fa.fa-github
               = @user.github_handle
+
     .col-sm-9
       .nav-tabs-custom
         %ul.nav.nav-tabs
@@ -75,6 +76,10 @@
               = render 'payments_table'
             - else
               = render partial: 'callout_box', locals: { type: 'success', title: 'Keep Sponsoring', message: 'No payments yet'}
+        %b
+          Please read the
+          = link_to "Terms of Service", "/Terms_of_service_CodeCuriosity.pdf"
+          carefully.
 
   - if @sponsor.nil?
     .row.marketing#sponsor
