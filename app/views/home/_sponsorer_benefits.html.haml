@@ -13,4 +13,7 @@
                 %li #{stmt}
           - unless key == 'free'
             %li
-              = link_to("Subscribe", omniauth_authorize_path(:user, :github, user: key.camelize), class: "btn btn-lg btn-success")
+              - if user_signed_in?
+                = link_to("Subscribe", new_sponsorer_detail_path(type: key.camelize), class: "btn btn-lg btn-success", remote: true)
+              - else
+                = link_to("Subscribe", omniauth_authorize_path(:user, :github, user: key.camelize), class: "btn btn-lg btn-success")

@@ -17,7 +17,7 @@ class SponsorerDetailsController < ApplicationController
   end
 
   def new
-    session[:type] = 'Individual' unless session[:type]
+    session[:type] = params[:type] || session[:type] || 'Individual'
     @sponsorer_detail = SponsorerDetail.new
   end
 
