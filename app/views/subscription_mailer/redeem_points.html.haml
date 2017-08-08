@@ -41,7 +41,7 @@
 %br
 %p
   This change will help us make the system better See 
-  = link_to "Rewarding OpenSource", "https://codecuriosity.org/#sponsor"
+  = link_to "Rewarding OpenSource", Rails.application.config.action_mailer.asset_host + "#sponsor"
   on the home page for more details about how subscription helps you and the open source community!
   Click on the 
   = link_to "Sponsor", sponsorer_details_url
