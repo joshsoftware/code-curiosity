@@ -12,6 +12,7 @@ YAML.load_file('config/code_curiosity_config.yml').tap do |config|
   REDEEM = config['redeem']
   SPONSOR = config['sponsor']
   SUBSCRIPTIONS = config['subscriptions']
+  SPONSORER_THRESHOLD = config['sponsor_display_threshold']
 end
 
 COMMIT_RATINGS = (0..5).to_a

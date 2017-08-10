@@ -11,6 +11,7 @@ class SponsorerDetail
   field :subscribed_at, type: DateTime
   field :subscription_expires_at, type: DateTime
   field :subscription_status, type: String
+  field :organization_url, type: String
 
   has_mongoid_attached_file :avatar,
     path: ':rails_root/public/system/sponsorer/:id/:style/:filename',
@@ -35,9 +36,10 @@ class SponsorerDetail
   after_create :update_user_as_sponsor
 
   scope :organizations, -> { where(sponsorer_type: 'ORGANIZATION') }
-  scope :users, -> { where(sponsorer_type: 'INDIVIDUAL') }
+  scope :individuals, -> { where(sponsorer_type: 'INDIVIDUAL') }
   scope :active, -> { where(subscription_status: 'active') }
   scope :canceled, -> { where(subscription_status: 'canceled') }
+  scope :publish, -> { where(publish_profile: true) }
 
   def save_payment_details(plan, amount, date)
     payment = self.payments.build(subscription_plan: plan, amount: amount/100, date: Time.at(date).to_datetime)
