@@ -42,6 +42,7 @@ every :day, :at => '10:00pm' do
 end
 
 every '59 23 27-31 * *' do
+  rake "round:update_scores"
   rake 'round:next'
 end
 
