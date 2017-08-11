@@ -6,4 +6,4 @@
       - group.each do |sponsorer|
         - if sponsorer
           .img-center
-            = link_to image_tag( select_avatar(sponsorer), class: "img-responsive img-circle", width: 130, height: 130, alt: "Responsive image"), redirect(sponsorer)
+            = link_to image_tag( select_avatar(sponsorer), class: "img-responsive", width: 130, height: 130, alt: "Responsive image"), redirect(sponsorer)
