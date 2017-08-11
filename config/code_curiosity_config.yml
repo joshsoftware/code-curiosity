@@ -25,6 +25,10 @@ sponsor:
   organization:
     base: 250
 
+sponsor_display_threshold:
+  individual: 25
+  organization: 0
+
 scoring_engine:
   :repositories: 'repositories' # repositories dir
   :max_score: 5

@@ -5,6 +5,10 @@
   .form-group
     = f.label "Payment plan monthly subscription: $#{SPONSOR['organization']['base']}"
   .form-group
+    = f.label "Company URL"
+    %br
+    = f.text_field :organization_url, value: nil, size: 40, placeholder: "http://www.example.com"
+  .form-group
     = f.label :Upload_Logo
     = f.file_field :avatar, accept: 'image/png,image/jpeg,image/jpg', class: 'sponsorer_detail_avatar'
   .form-group
