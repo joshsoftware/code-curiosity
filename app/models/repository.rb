@@ -145,7 +145,8 @@ class Repository
       else
         begin
           Sidekiq.logger.info "Scoring for commit: #{commit.id}, Round: #{round.from_date}"
-          commit.set(auto_score: engine.calculate_score(commit))
+          # commit.set(auto_score: engine.calculate_score(commit))
+          ScoreCommitJob.perform_later(commit.id.to_s)
         rescue StandardError => e
           Sidekiq.logger.info "Commit: #{commit.id}, Error: #{e}"
         end

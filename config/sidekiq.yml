@@ -1,6 +1,7 @@
 :concurrency: 25
 :logfile: ./log/sidekiq.log
 :queues:
+  - score
   - git
   - mailers
   - rollbar
