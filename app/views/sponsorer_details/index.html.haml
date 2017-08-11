@@ -51,10 +51,10 @@
           .tab-pane.active#subscription
             .well
               - unless current_user.active_sponsorer_detail
-                = link_to("Sponsor", new_sponsorer_detail_path, class: "btn btn-lg btn-success", remote:true, data: { toggle: "modal", target: '#modal-window'})
+                = link_to("Subscribe", new_sponsorer_detail_path, class: "btn btn-lg btn-success", remote:true, data: { toggle: "modal", target: '#modal-window'})
               %br
               - if @sponsor.nil?
-                = "You have not subscribed for any plan yet! Please subscribe by clicking on sponsor button and filling the form!"
+                = "You have not subscribed for any plan yet! Please subscribe by clicking on Subscribe button and filling the form!"
               - else
                 %table.table
                   %tr
