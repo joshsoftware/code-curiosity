@@ -236,7 +236,7 @@ class User
   end
 
   def active_sponsorer_detail
-    sponsorer_details.asc(:subscribed_at).where(subscription_status: :active).last
+    sponsorer_details.asc(:subscribed_at).where(subscription_status: :active).asc(:created_at).last
   end
 
   def sponsorer_detail

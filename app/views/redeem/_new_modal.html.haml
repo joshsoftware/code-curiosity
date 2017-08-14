@@ -6,6 +6,11 @@
       %h4.modal-title
         Redeem Points
         %b.pull-right.maring-right-fifty= "$1.0 = #{redeem_request_value(current_user, REDEEM['one_dollar_to_points'])} points"
+      - unless current_user.active_sponsorer_detail
+        .text-center
+          #promote
+            %strong
+              = link_to "To avail a better redemption ratio of $1.0 = 10 points, please Upgrade Your Account", sponsorer_details_path
     .modal-body
       .nav-tabs-custom
         %ul.nav.nav-tabs
