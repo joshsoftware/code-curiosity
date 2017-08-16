@@ -1,5 +1,8 @@
 %tr
-  %td= link_to redeem_request.user.email, user_path(redeem_request.user), target: '_blank'
+  %td
+    - if redeem_request.user.active_sponsorer_detail
+      .badge $
+    = link_to redeem_request.user.email, user_path(redeem_request.user), target: '_blank'
   %td
     - if redeem_request.retailer_other?
       = link_to redeem_request.retailer.upcase, redeem_request.gift_product_url, target: '_blank'

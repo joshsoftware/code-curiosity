@@ -2,5 +2,7 @@
   = f.input :points, collection: github_points_options, include_blank: false, label: 'Gift Card Amount'
   = f.input :retailer, as: :hidden, input_html: { value: 'github'}
   %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Cancel
-  %button.btn.btn-primary{:type => 'submit'} Redeem
-
+  - if current_user.active_sponsorer_detail
+    = f.submit "Redeem", class: "btn btn-primary"
+  - else
+    %button.btn.btn-primary.submit-redeem{ type: "button", data: { points: current_user.points, free: SUBSCRIPTIONS['free'], paid: SUBSCRIPTIONS['individual']} } Redeem
