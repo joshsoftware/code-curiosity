@@ -5,4 +5,4 @@
     .col-md-6
       = f.input :store, collection: REDEEM['amazon_stores'], include_blank: false, label: 'Store'
   = f.input :retailer, as: :hidden, input_html: { value: 'amazon'}
-  = render 'redeem/submit_buttons'
+  = render 'redeem/submit_buttons', f: f
