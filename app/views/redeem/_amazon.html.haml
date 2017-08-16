@@ -1,12 +1,8 @@
-= simple_form_for(@redeem || RedeemRequest.new(user: current_user), url: redeem_path, html: { id: 'amazon_redeem_request'}, remote: true) do |f|
+= simple_form_for(@redeem || RedeemRequest.new(user: current_user), url: redeem_path, remote: true) do |f|
   .row
     .col-md-6
       = f.input :points, label: 'Points', hint: "Info: Redemption in multiple of #{REDEEM['min_points']} points."
     .col-md-6
       = f.input :store, collection: REDEEM['amazon_stores'], include_blank: false, label: 'Store'
   = f.input :retailer, as: :hidden, input_html: { value: 'amazon'}
-  %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Cancel
-  - if current_user.active_sponsorer_detail
-    = f.submit "Redeem", class: "btn btn-primary"
-  - else
-    %button.btn.btn-primary.submit-redeem{ type: "button", data: { points: current_user.points, free: SUBSCRIPTIONS['free'], paid: SUBSCRIPTIONS['individual']} } Redeem
+  = render 'redeem/submit_buttons'

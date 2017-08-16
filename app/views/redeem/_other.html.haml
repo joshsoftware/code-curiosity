@@ -3,8 +3,4 @@
     hint: 'Info: Ensure you have enough points in your account to include shipping charges too.'
   = f.input :address, as: :text, label: 'Shipping Address', input_html: { row: 4 }
   = f.input :retailer, as: :hidden, input_html: { value: 'other'}
-  %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Cancel
-  - if current_user.active_sponsorer_detail
-    = f.submit "Redeem", class: "btn btn-primary"
-  - else
-    %button.btn.btn-primary.submit-redeem{ type: "button", data: { points: current_user.points, free: SUBSCRIPTIONS['free'], paid: SUBSCRIPTIONS['individual']} } Redeem
+  = render 'redeem/submit_buttons'
