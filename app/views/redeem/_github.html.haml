@@ -1,4 +1,4 @@
 = simple_form_for(@redeem || RedeemRequest.new(user: current_user), url: redeem_path, remote: true) do |f|
   = f.input :points, collection: github_points_options, include_blank: false, label: 'Gift Card Amount'
   = f.input :retailer, as: :hidden, input_html: { value: 'github'}
-  = render 'redeem/submit_buttons'
+  = render 'redeem/submit_buttons', f: f

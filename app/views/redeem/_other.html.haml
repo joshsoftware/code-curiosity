@@ -3,4 +3,4 @@
     hint: 'Info: Ensure you have enough points in your account to include shipping charges too.'
   = f.input :address, as: :text, label: 'Shipping Address', input_html: { row: 4 }
   = f.input :retailer, as: :hidden, input_html: { value: 'other'}
-  = render 'redeem/submit_buttons'
+  = render 'redeem/submit_buttons', f: f
