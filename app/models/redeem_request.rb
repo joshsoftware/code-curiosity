@@ -138,9 +138,18 @@ class RedeemRequest
     #shows error if
     #1 user's total_points is less than the points to be redeemed
     #2 user's total_points is greater than the points to be redeemed but royalty_points redeemed for current_months
-    # are more than 500
-    if total_points < points || (total_points >= points && (royalty + redeemed_royalty_point > 500))
-      errors.add(:points, "at most 500 royalty points can be redeemed in this month")
+    # are more than 500 if user is sponsorer
+    #3 if user is on free plan he can only redeem 400 royalty points per month.
+    if self.user.is_sponsorer
+      royalty_points_threshold_check_as_per_user(total_points, royalty_points, redeemed_royalty_point, total_redeemed_royalty, royalty, 500)
+    else
+      royalty_points_threshold_check_as_per_user(total_points, royalty_points, redeemed_royalty_point, total_redeemed_royalty, royalty, 400)
+    end
+  end
+
+  def royalty_points_threshold_check_as_per_user(total_points, royalty_points, redeemed_royalty_point, total_redeemed_royalty, royalty, threshold_points)
+    if total_points < points || (total_points >= points && (royalty + redeemed_royalty_point > threshold_points))
+      errors.add(:points, "at most #{threshold_points} royalty points can be redeemed in this month")
     end
   end
 

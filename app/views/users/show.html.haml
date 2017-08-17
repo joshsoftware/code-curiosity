@@ -3,7 +3,7 @@
 = render 'celebrity_box' if current_user && current_user.celebrity
 %section.content
   .row
-    .col-sm-3
+    .col-sm-4
       .box.box-primary
         .box-body.box-profile
           = image_tag avatar_url(@user), class: 'profile-user-img img-responsive img-circle', alt: @user.name
@@ -31,13 +31,20 @@
               - else
                 %span.pull-right Not set yet
           - if logged_in_user?
-            - if @user.able_to_redeem?
+            - if @user.able_to_redeem? || @user.active_sponsorer_detail
               = link_to '#', class: "btn btn-primary btn-block", data: { toggle: 'modal', target: '#redeem-modal .modal' } do
                 %b Redeem Points
             - else
               %span.tool-tip{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Not met the redemption criteria"}
-                %span.btn.btn-primary.btn-block{:disabled => "disabled"} Redeem Points!
-    .col-sm-9
+                %span.btn.btn-primary.btn-block{:disabled => "disabled"} Redeem Points
+            %p
+              - unless current_user.active_sponsorer_detail
+                .text-center
+                  %strong
+                    #promote
+                      = link_to "Please upgrade to redeem points now", sponsorer_details_path
+
+    .col-sm-8
       .nav-tabs-custom
         %ul.nav.nav-tabs
           %li.active#rounds_tab_link
@@ -73,6 +80,17 @@
             - if logged_in_user?
               Info:
               %i= t('transaction.points_credit_info')
+              %br
+                %br
+                  %b
+                    = t('transaction.free_plan')
+                    %i= t('transaction.free_plan_info')
+              %p
+                %b
+                  = t('transaction.paid_plan')
+                  %i= t('transaction.paid_plan_info')
+
+
 - if logged_in_user?
   #redeem-modal
     .modal.fade
