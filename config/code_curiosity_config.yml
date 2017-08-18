@@ -29,6 +29,10 @@ sponsor_display_threshold:
   individual: 25
   organization: 0
 
+redeem_request_threshold:
+  free: 400
+  paid: 500
+
 scoring_engine:
   :repositories: 'repositories' # repositories dir
   :max_score: 5
