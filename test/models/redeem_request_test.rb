@@ -19,7 +19,7 @@ class RedeemRequestTest < ActiveSupport::TestCase
     assert_not_empty redeem_request.errors[:address]
   end
 
-  test "gift_produt_url must be present when retailer category is other" do
+  test "gift_product_url must be present when retailer category is other" do
     redeem_request = build(:redeem_request, :points => 2, :retailer => 'other', :address => 'pune')
     redeem_request.valid?
     assert_not_empty redeem_request.errors[:gift_product_url]
