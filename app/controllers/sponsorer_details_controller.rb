@@ -38,7 +38,6 @@ class SponsorerDetailsController < ApplicationController
         flash[:error] = e.message
       else
         if @sponsorer.save
-          SponsorMailer.notify_subscription_details(@sponsorer.user_id.to_s, @sponsorer.payment_plan, SPONSOR[@sponsorer.sponsorer_type.downcase][@sponsorer.payment_plan]).deliver_later
           redirect_to sponsorer_details_path  #sponsorer dashboard
           flash[:notice] = "saved sponsorship details successfully"
         end

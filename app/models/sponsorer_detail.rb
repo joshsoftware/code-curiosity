@@ -34,6 +34,7 @@ class SponsorerDetail
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   after_create :update_user_as_sponsor
+  after_create :notify_user_and_admin
 
   scope :organizations, -> { where(sponsorer_type: 'ORGANIZATION') }
   scope :individuals, -> { where(sponsorer_type: 'INDIVIDUAL') }
@@ -59,6 +60,11 @@ class SponsorerDetail
     role = Role.find_or_create_by(name: 'Sponsorer')
     user.roles << role unless user.is_sponsorer?
     user.set({is_sponsorer: true})
+  end
+
+  def notify_user_and_admin
+    SponsorMailer.notify_subscriber(user_id.to_s, payment_plan, SPONSOR[sponsorer_type.downcase][payment_plan]).deliver_later
+    SponsorMailer.notify_admin(user_id.to_s, payment_plan, SPONSOR[sponsorer_type.downcase][payment_plan]).deliver_later
   end
 
 end

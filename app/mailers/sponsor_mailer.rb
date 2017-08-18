@@ -5,10 +5,17 @@ class SponsorMailer < ApplicationMailer
     mail(to: @user.email, subject: "Payment to CodeCuriosity failed")
   end
 
-  def notify_subscription_details(user, plan, amount)
-    @user = User.find(id: user)
+  def notify_subscriber(user_id, plan, amount)
+    @user = User.find(id: user_id)
     @plan = plan
     @amount = amount
     mail(to: @user.email, subject: "Details of subscription as sponsor to CodeCuriosity")
+  end
+
+  def notify_admin(user_id, plan, amount)
+    @user = User.find(id: user_id)
+    @plan = plan
+    @amount = amount
+    mail(to: ENV['ADMIN_EMAILS'].split(','), subject: "New subscription for #{@user.name}")
   end
 end

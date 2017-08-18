@@ -70,4 +70,5 @@ group :development do
   gem 'haml-rails'
   gem 'quiet_assets'
   gem "letter_opener"
+  gem "letter_opener_web"
 end
