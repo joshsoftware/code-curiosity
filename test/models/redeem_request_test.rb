@@ -216,6 +216,8 @@ class RedeemRequestTest < ActiveSupport::TestCase
     assert_equal 2, user.redeem_requests.count
     user.instance_variable_set(:@_t_p, nil)
     assert_equal 600, user.total_points
+    redeem_request_1 = build :redeem_request, points: 200, user: user
+    assert_not redeem_request_1.valid?
   end
 
   test "paid user should be able to redeem multiple times but overall atmost 500 royalty_points can be redeemed in a month" do
@@ -233,6 +235,8 @@ class RedeemRequestTest < ActiveSupport::TestCase
     assert_equal 2, user.redeem_requests.count
     user.instance_variable_set(:@_t_p, nil)
     assert_equal 500, user.total_points
+    redeem_request_1 = build :redeem_request, points: 100, user: user
+    assert_not redeem_request_1.valid?
   end
 
   test "free user should be able to redeem atmost 400 royalty points in each and every round if redemption criteria is satisified" do

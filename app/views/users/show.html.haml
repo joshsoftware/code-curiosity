@@ -31,7 +31,7 @@
               - else
                 %span.pull-right Not set yet
           - if logged_in_user?
-            - if @user.able_to_redeem? || @user.active_sponsorer_detail
+            - if @user.active_sponsorer_detail || @user.able_to_redeem?
               = link_to '#', class: "btn btn-primary btn-block", data: { toggle: 'modal', target: '#redeem-modal .modal' } do
                 %b Redeem Points
             - else
