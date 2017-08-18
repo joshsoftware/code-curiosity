@@ -256,20 +256,10 @@ class RedeemRequestTest < ActiveSupport::TestCase
     subscription = create(:subscription, user: user, round: round_2)
     redeem_request_1 = create :redeem_request,points: 100, created_at: Date.today.next_month, user: user
     user.instance_variable_set(:@_t_p, nil)
-    redeem_request_2 = create :redeem_request,points: 300, created_at: Date.today.next_month, user: user
+    redeem_request_2 = build :redeem_request,points: 400, created_at: Date.today.next_month, user: user
+    assert_not redeem_request_2.valid?
     user.instance_variable_set(:@_t_p, nil)
-    assert_equal 4, user.redeem_requests.count
-    assert_empty redeem_request.errors[:points]
-
-
-    Round.destroy_all
-    round_3 = create :round, status: "open", name: (Date.today + 2.month).beginning_of_month.strftime("%b %Y"),
-      from_date: (Date.today + 2.month).beginning_of_month, end_date: (Date.today + 2.month).end_of_month
-    subscription = create(:subscription, user: user, round: round_3)
-    redeem_request_1 = create :redeem_request,points: 300, created_at: Date.today + 2.month, user: user
-    user.instance_variable_set(:@_t_p, nil)
-    redeem_request_2 = create :redeem_request,points: 100, created_at: Date.today + 2.month, user: user
-    assert_equal 6,user.redeem_requests.count
+    assert_equal 3, user.redeem_requests.count
   end
 
   test "paid user should be able to redeem atmost 500 royalty points in each and every round if redemption criteria is satisified" do
@@ -285,6 +275,8 @@ class RedeemRequestTest < ActiveSupport::TestCase
     user.instance_variable_set(:@_t_p, nil)
     redeem_request_2 = create :redeem_request, points: 400, user: user
     user.instance_variable_set(:@_t_p, nil)
+    assert_equal 2, user.redeem_requests.count
+    assert_empty redeem_request.errors[:points]
 
     Round.destroy_all
     round_2 = create :round, status: "open", name: Date.today.next_month.beginning_of_month.strftime("%b %Y"),
@@ -292,16 +284,10 @@ class RedeemRequestTest < ActiveSupport::TestCase
     subscription = create(:subscription, user: user, round: round_2)
     redeem_request_1 = create :redeem_request,points: 100, created_at: Date.today.next_month, user: user
     user.instance_variable_set(:@_t_p, nil)
-    redeem_request_2 = create :redeem_request,points: 200, created_at: Date.today.next_month, user: user
+    redeem_request_2 = build :redeem_request,points: 600, created_at: Date.today.next_month, user: user
     user.instance_variable_set(:@_t_p, nil)
-
-    Round.destroy_all
-    round_3 = create :round, status: "open", name: (Date.today + 2.month).beginning_of_month.strftime("%b %Y"),
-      from_date: (Date.today + 2.month).beginning_of_month, end_date: (Date.today + 2.month).end_of_month
-    subscription = create(:subscription, user: user, round: round_3)
-    redeem_request_1 = create :redeem_request,points: 300, created_at: Date.today + 2.month, user: user
-    user.instance_variable_set(:@_t_p, nil)
-    redeem_request_2 = create :redeem_request,points: 200, created_at: Date.today + 2.month, user: user
+    assert_not redeem_request_2.valid?
+    assert_equal 3, user.redeem_requests.count
   end
 
   test "should not redeem for others retailer if user total points is 0" do
