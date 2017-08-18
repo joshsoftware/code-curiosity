@@ -116,26 +116,9 @@ class SponsorerDetailsControllerTest < ActionController::TestCase
 
     stripe_helper.create_plan(amount: 15000, name: 'base', id: 'base-organization', interval: 'month', currency: 'usd')
 
-    assert_enqueued_jobs 1 do
+    assert_enqueued_jobs 2 do
       post :create, sponsorer_detail: { sponsorer_type: "ORGANIZATION", avatar: file, publish_profile: "1", payment_plan: "base" },
         stripeToken: stripe_helper.generate_card_token(last4: '4242', exp_year: Time.now.year + 1), stripeEmail: @user.email
-    end
-  end
-
-  test 'email is delivered with expected content' do
-    file = fixture_file_upload("#{Rails.root}/test/fixtures/rails.png", "image/png")
-    sign_in(@user)
-    stripe_helper = StripeMock.create_test_helper
-
-    stripe_helper.create_plan(amount: 15000, name: 'base', id: 'base-organization', interval: 'month', currency: 'usd')
-
-    perform_enqueued_jobs do
-      post :create, sponsorer_detail: { sponsorer_type: "ORGANIZATION", avatar: file, publish_profile: "1", payment_plan: "base" },
-        stripeToken: stripe_helper.generate_card_token(last4: '4242', exp_year: Time.now.year + 1), stripeEmail: @user.email
-
-      delivered_mail = ActionMailer::Base.deliveries.last
-      assert_equal delivered_mail.to, [@user.email]
-      assert_equal delivered_mail.subject, 'Details of subscription as sponsor to CodeCuriosity'
     end
   end
 
