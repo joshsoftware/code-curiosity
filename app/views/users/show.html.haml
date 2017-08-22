@@ -2,13 +2,20 @@
   %h1 User Profile
 = react_component 'CelebrityBox', { type: 'info', title: '', message: t('user.celebrity_signup') } if current_user && current_user.celebrity
 %section.content
+  #newform
   .row
     .col-sm-4
       .box.box-primary
         .box-body.box-profile
           = image_tag avatar_url(@user), class: 'profile-user-img img-responsive img-circle', alt: @user.name
           %h3.profile-username.text-center= @user.name.titleize
-          %p.text-muted.text-center
+          %p.text-muted
+            - unless @user.twitter_handle.present?
+              .pull-right
+                = link_to "Add your twitter handle", edit_user_path, remote: true, data: { toggle: "modal", target: "#newform"}
+            - else
+              %i.fa.fa-twitter
+              = @user.twitter_handle
             = link_to github_url(@user), target: '_blank' do
               %i.fa.fa-github
               = @user.github_handle

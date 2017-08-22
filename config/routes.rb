@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   post "/stripe/webhooks", to: "stripe#webhooks"
 
-  resources :users, only: [:index, :show, :destroy] do
+  resources :users, only: [:index, :show, :destroy, :edit, :update] do
     member do
       get 'sync'
       put 'update_notification'

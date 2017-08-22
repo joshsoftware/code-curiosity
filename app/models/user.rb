@@ -27,6 +27,7 @@ class User
   field :blocked,            type: Boolean, default: false
 
   field :github_handle,      type: String
+  field :twitter_handle,     type: String
   field :active,             type: Boolean, default: true
   field :is_judge,           type: Boolean, default: false
   field :is_sponsorer,       type: Boolean, default: false

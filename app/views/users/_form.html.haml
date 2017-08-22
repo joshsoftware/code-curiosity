@@ -1,0 +1,13 @@
+#userform.modal.fade{"aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      = simple_form_for(current_user, url: user_path(current_user.id), method: :patch, remote: true) do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4#exampleModalLabel.modal-title Edit User
+        .modal-body
+          = f.input :twitter_handle
+        .modal-footer
+          = f.button 'Close', data: { dismiss: 'modal'}
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
