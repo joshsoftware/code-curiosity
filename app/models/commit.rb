@@ -41,7 +41,7 @@ class Commit
   end
 
   def info
-    @info ||= repository ? user.gh_client.repos.commits.get(repository.owner, repository.name, sha) : nil
+    @info ||= repository ? user.gh_client.repos.commits.get(repository.owner, repository.name, sha, { redirection: true }) : nil
   end
 
   def max_rating

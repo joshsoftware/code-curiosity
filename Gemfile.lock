@@ -14,6 +14,19 @@ GIT
     rugged (0.25.0b8)
 
 GIT
+  remote: https://github.com/prasadsurase/github.git
+  revision: a019aff34aa31a662c5e21439d8f81593dcba352
+  branch: add-redirection-support
+  specs:
+    github_api (0.14.5)
+      addressable (~> 2.4.0)
+      descendants_tracker (~> 0.0.4)
+      faraday (~> 0.8, < 0.10)
+      faraday_middleware (= 0.10.0)
+      hashie (>= 3.4)
+      oauth2 (~> 1.0)
+
+GIT
   remote: https://github.com/prasadsurase/ruby-git.git
   revision: 1f26c1c4cc50f183a54ce1e42efcc3762fbdaaa1
   branch: get-branches-having-a-commit
@@ -130,14 +143,10 @@ GEM
       i18n (~> 0.5)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.10.0)
+      faraday (>= 0.7.4, < 0.10)
     font-awesome-rails (4.6.3.1)
       railties (>= 3.2, < 5.1)
-    github_api (0.14.5)
-      addressable (~> 2.4.0)
-      descendants_tracker (~> 0.0.4)
-      faraday (~> 0.8, < 0.10)
-      hashie (>= 3.4)
-      oauth2 (~> 1.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     haml (4.0.7)
@@ -435,7 +444,7 @@ DEPENDENCIES
   faker (~> 1.6.1)
   font-awesome-rails
   git!
-  github_api (~> 0.13)
+  github_api!
   haml
   haml-rails
   highcharts-rails (~> 4.2, >= 4.2.5)
