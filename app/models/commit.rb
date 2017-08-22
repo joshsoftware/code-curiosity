@@ -41,7 +41,7 @@ class Commit
   end
 
   def info
-    @info ||= user.gh_client.repos.commits.get(repository.owner, repository.name, sha) #rescue nil
+    @info ||= repository ? user.gh_client.repos.commits.get(repository.owner, repository.name, sha) : nil
   end
 
   def max_rating
@@ -51,7 +51,7 @@ class Commit
   private
 
   def set_round
-    # FIXME: This code was added to address a corner case for commits appearing in next round 
+    # FIXME: This code was added to address a corner case for commits appearing in next round
     # instead of the last month. However, it will impact scoring and bonus points. Keeping this
     # line commented in case we find a better fix. - Gautam
 
