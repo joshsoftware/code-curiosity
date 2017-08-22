@@ -1,1 +1,1 @@
-= react_component 'PointsHistory', total_points: @user.total_points
+= react_component 'PointsHistory', total_points: @user.total_points, user_id: @user.id.to_s, show_coupon_code: logged_in_user?

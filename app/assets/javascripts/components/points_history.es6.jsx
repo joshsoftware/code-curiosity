@@ -8,6 +8,7 @@ class PointsHistory extends React.Component {
     $.ajax({
       type: 'GET',
       url: '/transactions',
+      data: { id: this.props.user_id },
       dataType: 'JSON',
       success: (data) => { this.setState({ transactions: data }); },
         error: function(error){ alert('Error!'); },
@@ -16,6 +17,12 @@ class PointsHistory extends React.Component {
   }
 
   render() {
+    var rows = [];
+    this.state.transactions.map(function(transaction, index){
+      rows.push(<PointsHistoryRow key={transaction.id} show_coupon_code={this.props.show_coupon_code} index={index + 1} points={transaction.points} 
+        details={transaction.transaction_type} label={transaction.type} date={transaction.created_at} coupon_code={transaction.coupon_code}
+        redeem_request_retailer={transaction.redeem_request_retailer} />);
+    }.bind(this));
     return (
       <table className="table table-bordered">
         <thead>
@@ -28,11 +35,7 @@ class PointsHistory extends React.Component {
         </thead>
         <tbody>
           {
-            this.state.transactions.map(function(transaction, index){
-              return <PointsHistoryRow key={transaction.id} index={index + 1} points={transaction.points} 
-                details={transaction.transaction_type} label={transaction.type} date={transaction.created_at} coupon_code={transaction.coupon_code}
-                redeem_request_retailer={transaction.redeem_request_retailer} />
-            })
+            rows
           }
           <tr>
             <td>

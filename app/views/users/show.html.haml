@@ -61,6 +61,8 @@
             .row
               = react_component 'UserPointsChart', { xAxis: @xAxis, commits: @commits, activities: @activities, points: @points, username: @username }
             = react_component 'SubscriptionsHistory', { user_id: @user.id }
+          .tab-pane#wallet
+            = render 'transactions'
           - if logged_in_user?
             .tab-pane#settings
               = render 'settings'
