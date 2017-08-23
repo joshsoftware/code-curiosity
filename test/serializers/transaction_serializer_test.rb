@@ -3,8 +3,12 @@ require "test_helper"
 class TransactionSerializerTest < ActiveSupport::TestCase
   def setup
     super
-    @redeem_request = create(:redeem_request, points: 50, retailer: 'other', address: 'pune', gift_product_url: Faker::Internet.url,
-                            coupon_code: 'aitpune')
+    @goal = create :goal
+    @user = create :user, auth_token: 'dah123rty', goal: @goal
+    @round = create :round, :open
+    @transaction = create(:transaction, type: 'credit', points: 500, user: @user, transaction_type: 'royalty_bonus')
+    @redeem_request = create(:redeem_request, points: 100, retailer: 'other', address: 'pune', gift_product_url: Faker::Internet.url,
+                             coupon_code: 'aitpune', user: @user)
     @transaction = @redeem_request.transaction
   end
 
@@ -13,7 +17,7 @@ class TransactionSerializerTest < ActiveSupport::TestCase
     data = serializer.serializable_hash
 
     assert_equal @transaction.id, data[:id]
-    assert_equal -50, data[:points]
+    assert_equal -100, data[:points]
     assert_equal 'debit', data[:type]
     assert_equal 'Redeem points', data[:transaction_type]
     assert_equal 'aitpune', data[:coupon_code]

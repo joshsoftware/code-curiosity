@@ -22,19 +22,6 @@ class ScoringJobTest < ActiveJob::TestCase
     assert_enqueued_jobs 2
   end
 
-  test 'score commits' do
-    ScoringEngine.any_instance.expects(:calculate_score).returns(0).at_most(3)
-    create :commit, user: @user, repository: @repo, message: 'some random message', commit_date: Time.now, auto_score: nil
-    create :commit, user: @user, repository: @repo, message: 'random message', commit_date: Time.now, auto_score: nil
-    create :commit, user: @user, repository: @repo, message: 'some message', commit_date: Time.now, auto_score: nil
-    assert_equal 3, @repo.commits.count
-    ScoringJob.perform_now(@repo.id.to_s, @round.id.to_s, 'commits')
-    @repo.reload
-    @repo.commits.each do |commit|
-      refute_nil commit.auto_score
-    end
-  end
-
   test 'score activities' do
     message = 'some title and description of the issue'
     create_list(:activity, 3, description: message, event_type: 'issue', event_action: 'opened', auto_score: nil, user: @user)
