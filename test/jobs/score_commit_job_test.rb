@@ -26,7 +26,7 @@ class ScoreCommitJobTest < ActiveJob::TestCase
   test 'must score commit' do
     ScoringEngine.any_instance.stubs(:calculate_score).with(@commit).returns(2)
     ScoreCommitJob.perform_now(@commit.id.to_s)
-    assert_equal 1,Commit.count
-    assert_equal 2,@commit.reload.auto_score
+    assert_equal 1, Commit.count
+    assert_equal 2, @commit.reload.auto_score
   end
 end
