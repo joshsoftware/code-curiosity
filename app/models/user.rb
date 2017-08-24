@@ -85,6 +85,7 @@ class User
 
   validates :email, :github_handle, :name, presence: true
 
+  before_save :check_twitter_handle
   after_create do |user|
     user.calculate_popularity unless user.auto_created
   end
@@ -237,4 +238,11 @@ class User
   def sponsorer_detail
     sponsorer_details.asc(:created_at).last
   end
+
+  def check_twitter_handle
+    if self.twitter_handle.present? && !/^@/.match(self.twitter_handle)
+      self.twitter_handle = '@' + self.twitter_handle
+    end
+  end
+
 end

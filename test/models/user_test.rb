@@ -89,6 +89,13 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 1, User.contestants.blocked.count
   end
 
+  test 'append @ prefix in twitter handle if not present' do
+    user = create :user
+    assert_nil user.twitter_handle
+    user.update(twitter_handle: 'amitk')
+    assert /^@/.match(user.twitter_handle)
+  end
+
   def omniauthentication
     @date = Date.new(2015, 10, 10)
     OmniAuth.config.test_mode = true

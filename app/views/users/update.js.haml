@@ -1,1 +1,3 @@
 $('#userform').modal('hide');
+$('.modal-backdrop').remove();
+$('#twitter-handle').html("#{current_user.twitter_handle.present? ? current_user.twitter_handle : "Add your twitter handle" }"); 

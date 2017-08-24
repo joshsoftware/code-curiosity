@@ -28,8 +28,8 @@ class UsersController < ApplicationController
   end
 
   def update
-     if current_user.update user_params
-        return
+    if current_user.update user_params
+      return
     end
     render :edit
   end
@@ -100,6 +100,7 @@ class UsersController < ApplicationController
     user.save
     redirect_to root_url, notice: "Your account has been deleted successfully."
   end
+
   private
 
   def user_params

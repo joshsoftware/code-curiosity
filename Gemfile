@@ -57,6 +57,7 @@ group :development, :test do
   gem 'brakeman', :require => false
   gem 'simplecov', :require => false
   gem 'webmock'
+  gem 'twitter'
 end
 
 group :test do
