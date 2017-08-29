@@ -1,5 +1,5 @@
 class TransactionSerializer < ActiveModel::Serializer
-  attributes :id, :points, :type, :transaction_type, :description, :created_at, :coupon_code, :redeem_request_retailer
+  attributes :id, :points, :type, :transaction_type, :description, :created_at, :coupon_code, :redeem_request_retailer, :amount
 
   def transaction_type
     object.transaction_type.humanize
