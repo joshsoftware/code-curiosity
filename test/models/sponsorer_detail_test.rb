@@ -1,20 +1,6 @@
 require "test_helper"
-require 'stripe_mock'
 
 class SponsorerDetailTest < ActiveSupport::TestCase
-
-  def stripe_helper
-    StripeMock.create_test_helper
-  end
-
-  def setup
-    StripeMock.start
-  end
-
-  def teardown
-    StripeMock.stop
-  end
-
   test "sponsorer type must be present in sponsorer_detail" do
     sponsorer_detail = build(:sponsorer_detail, :sponsorer_type => nil)
     sponsorer_detail.valid?
@@ -77,6 +63,7 @@ class SponsorerDetailTest < ActiveSupport::TestCase
     assert_equal 0, sponsorer_detail.payments.count
     assert_equal 0, user.transactions.count
     assert_equal 500, user.reload.points
+    stripe_helper = StripeMock.create_test_helper(:mock)
     plan = stripe_helper.create_plan(amount: 15000, name: 'base', id: 'base-organization', interval: 'month', currency: 'usd')
     sponsorer_detail.save_payment_details(plan, 10000, Time.now - 2.days)
     assert_equal 1, sponsorer_detail.payments.count

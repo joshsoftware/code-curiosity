@@ -14,7 +14,7 @@ class Admin::SubscriptionsControllerTest < ActionController::TestCase
   end
 
   test 'should not access index if the current user is not an admin' do
-  sign_in create :user, auth_token: 'dah123rty', goal: @goal
+    sign_in create :user, auth_token: 'dah123rty', goal: @goal
     get :index
     assert_response :redirect
   end

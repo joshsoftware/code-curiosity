@@ -1,16 +1,10 @@
 require "test_helper"
-require "stripe_mock"
 
 class SponsorerDetailsControllerTest < ActionController::TestCase
 
   before(:all) do
     round = create(:round, :status => 'open')
     @user = create(:user, :auth_token => 'dah123rty')
-    StripeMock.start
-  end
-
-  after(:all) do
-    StripeMock.stop
   end
 
   test "should not render index to not-logged in user" do

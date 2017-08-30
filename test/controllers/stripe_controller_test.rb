@@ -1,21 +1,6 @@
 require "test_helper"
-require "stripe_mock"
 
 class StripeControllerTest < ActionController::TestCase
-  
-  def stripe_helper
-    StripeMock.create_test_helper
-  end
-
-  def setup
-    StripeMock.start
-    @sponsorer = create(:sponsorer_detail)
-  end
-
-  def teardown
-    StripeMock.stop
-  end
-
   test "should update the subscription details when subscription is created" do
     skip("test case yet to be completed")
   end

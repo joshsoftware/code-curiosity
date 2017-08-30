@@ -13,6 +13,10 @@ class V1::SubscriptionsControllerTest < ActionController::TestCase
     assert_equal 1, @user.subscriptions.count
   end
 
+  def teardown
+    super
+  end
+
   test 'response is success' do
     get :index, format: :json, id: @user.id
     assert_response :success

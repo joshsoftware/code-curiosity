@@ -7,7 +7,7 @@ FactoryGirl.define do
     association :user
 
     after(:build) do |sponsor|
-      helper = StripeMock.create_test_helper
+      helper = StripeMock.create_test_helper(:mock)
       helper.create_plan(amount: 1000, name: 'base', id: 'base-individual', interval: 'month', currency: 'usd')
       token = helper.generate_card_token(last4: "4242")
       customer = Stripe::Customer.create(email: sponsor.user.email, plan: 'base-individual', source: token)
