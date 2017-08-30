@@ -1,19 +1,6 @@
 require "test_helper"
-require 'stripe_mock'
 
 class SponsorerDetailTest < ActiveSupport::TestCase
-  def stripe_helper
-    StripeMock.create_test_helper
-  end
-
-  def setup
-    StripeMock.start
-  end
-
-  def teardown
-    StripeMock.stop
-  end
-
   test 'when customer subscription is created then the subscription should be marked as active'
 
   test 'when invoice payment is succeeded then payment should be recorded'
