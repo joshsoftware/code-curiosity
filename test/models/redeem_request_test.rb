@@ -317,7 +317,7 @@ class RedeemRequestTest < ActiveSupport::TestCase
     assert_equal 5, redeem_request_1.amount
 
     sponsorer_detail = create :sponsorer_detail, user: user
-    redeem_request_2 = create :redeem_request, points: 100, user: user
-    assert_equal 10, redeem_request_1.amount
+    redeem_request_2 = create :redeem_request, points: 100, user: user, sponsorer_detail: sponsorer_detail
+    assert_equal 10, redeem_request_2.reload.amount
   end
 end
