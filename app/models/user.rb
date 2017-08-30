@@ -223,7 +223,7 @@ class User
   end
 
   def royalty_bonus_transaction
-    self.transactions.where(transaction_type: 'royalty_bonus').first
+    self.transactions.where(transaction_type: 'royalty_bonus').asc(:created_at).first
   end
 
   def reset_points

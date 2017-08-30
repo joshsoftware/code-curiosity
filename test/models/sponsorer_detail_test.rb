@@ -79,4 +79,19 @@ class SponsorerDetailTest < ActiveSupport::TestCase
     end
   end
 
+  test "must update royalty bonus amount for user if user took subscription within 1 month after sign up" do
+    user = create :user, created_at: DateTime.parse("01/09/2017")
+    transaction = create :transaction, created_at: DateTime.parse("01/09/2017"), transaction_type: 'royalty_bonus', type: 'credit', points: 200, user: user
+    assert_equal 10, transaction.reload.amount
+    sponsorer_detail = create :sponsorer_detail, created_at: DateTime.parse("05/09/2017"), sponsorer_type: 'INDIVIDUAL', user: user
+    assert_equal 20, transaction.reload.amount
+  end
+
+  test "must not update royalty bonus amount for user if user took subscription after 1 month after sign up" do
+    user = create :user, created_at: DateTime.parse("01/09/2017")
+    transaction = create :transaction, created_at: DateTime.parse("01/09/2017"), transaction_type: 'royalty_bonus', type: 'credit', points: 200, user: user
+    assert_equal 10, transaction.reload.amount
+    sponsorer_detail = create :sponsorer_detail, created_at: DateTime.parse("05/10/2017"), sponsorer_type: 'INDIVIDUAL', user: user
+    assert_equal 10, transaction.reload.amount
+  end
 end

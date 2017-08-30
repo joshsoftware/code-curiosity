@@ -31,6 +31,9 @@ class ActionController::TestCase
   before { StripeMock.start }
   after { StripeMock.stop }
 
+  before { StripeMock.start }
+  after { StripeMock.stop }
+
   def stub_get(path, endpoint = Github.endpoint.to_s)
     stub_request(:get, endpoint + path)
   end
