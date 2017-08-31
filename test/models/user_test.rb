@@ -72,6 +72,7 @@ class UserTest < ActiveSupport::TestCase
     user = create :user, github_user_since: Date.today - 6.months, created_at: Date.today - 3.months, points: 500
     create(:subscription, round: round, user: user)
     create(:sponsorer_detail, user: user, subscription_status: :canceled)
+    sleep 1
     sponsorer_detail_2 = create(:sponsorer_detail, user: user, subscription_status: :canceled)
     assert_equal sponsorer_detail_2, user.sponsorer_detail
   end

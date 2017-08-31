@@ -43,13 +43,14 @@ class RedeemControllerTest < ActionController::TestCase
   def test_redeem_request_when_user_is_a_sponsorer
     seed_round_and_user
     create(:transaction, :type => 'credit', :points => 200, user: @user)
-    xhr :post, :create, redeem_request: {:retailer => 'amazon', :points => 100}, id: @user.id
+    xhr :post, :create, redeem_request: {:retailer => 'amazon', :points => 100}, user: @user
     assert_equal 1, RedeemRequest.count
     assert_nil RedeemRequest.last.sponsorer_detail
+    RedeemRequest.all.destroy
     sponsorer_detail = create :sponsorer_detail, user: @user
-    xhr :post, :create, redeem_request: {:retailer => 'amazon', :points => 100}, id: @user.id
-    assert_equal 2, RedeemRequest.count
-    assert_not_nil RedeemRequest.last.sponsorer_detail
+    xhr :post, :create, redeem_request: {:retailer => 'amazon', :points => 100}, user: @user
+    assert_equal 1, RedeemRequest.count
+    assert_not_nil RedeemRequest.first.sponsorer_detail
     assert_response :success
   end
 

@@ -1,6 +1,7 @@
 require "test_helper"
 
 class SponsorerDetailTest < ActiveSupport::TestCase
+
   test "sponsorer type must be present in sponsorer_detail" do
     sponsorer_detail = build(:sponsorer_detail, :sponsorer_type => nil)
     sponsorer_detail.valid?
@@ -63,6 +64,7 @@ class SponsorerDetailTest < ActiveSupport::TestCase
     assert_equal 0, sponsorer_detail.payments.count
     assert_equal 0, user.transactions.count
     assert_equal 500, user.reload.points
+    StripeMock.start
     stripe_helper = StripeMock.create_test_helper(:mock)
     plan = stripe_helper.create_plan(amount: 15000, name: 'base', id: 'base-organization', interval: 'month', currency: 'usd')
     sponsorer_detail.save_payment_details(plan, 10000, Time.now - 2.days)
@@ -71,6 +73,7 @@ class SponsorerDetailTest < ActiveSupport::TestCase
     assert_equal 1, user.transactions.where(points: 500, transaction_type: 'royalty_bonus', type: 'credit').count
     assert_equal 1, user.transactions.where(points: -500, transaction_type: 'redeem_points', type: 'debit').count
     assert_equal 0, user.reload.points
+    StripeMock.stop
   end
 
   test "must save a new sponsorer with all params" do
@@ -79,4 +82,19 @@ class SponsorerDetailTest < ActiveSupport::TestCase
     end
   end
 
+  test "must update royalty bonus amount for user if user took subscription within 1 month after sign up" do
+    user = create :user, created_at: DateTime.parse("01/09/2017")
+    transaction = create :transaction, created_at: DateTime.parse("01/09/2017"), transaction_type: 'royalty_bonus', type: 'credit', points: 200, user: user
+    assert_equal 10, transaction.reload.amount
+    sponsorer_detail = create :sponsorer_detail, created_at: DateTime.parse("05/09/2017"), sponsorer_type: 'INDIVIDUAL', user: user
+    assert_equal 20, transaction.reload.amount
+  end
+
+  test "must not update royalty bonus amount for user if user took subscription after 1 month after sign up" do
+    user = create :user, created_at: DateTime.parse("01/09/2017")
+    transaction = create :transaction, created_at: DateTime.parse("01/09/2017"), transaction_type: 'royalty_bonus', type: 'credit', points: 200, user: user
+    assert_equal 10, transaction.reload.amount
+    sponsorer_detail = create :sponsorer_detail, created_at: DateTime.parse("05/10/2017"), sponsorer_type: 'INDIVIDUAL', user: user
+    assert_equal 10, transaction.reload.amount
+  end
 end

@@ -13,7 +13,7 @@ require "rails/test_help"
 require "minitest/rails"
 require "webmock/minitest"
 require "mocha/mini_test"
-require 'stripe_mock'
+require "stripe_mock"
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
@@ -41,10 +41,11 @@ class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
   WebMock.disable_net_connect!(allow: "codeclimate.com")
   DatabaseCleaner.strategy = :truncation
-  before  do
+  before do
     DatabaseCleaner.start
     StripeMock.start
   end
+
   after do
     DatabaseCleaner.clean
     StripeMock.stop

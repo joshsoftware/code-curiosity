@@ -35,6 +35,7 @@ class SponsorerDetail
 
   after_create :update_user_as_sponsor
   after_create :notify_user_and_admin
+  after_create :update_royalty_bonus
 
   scope :organizations, -> { where(sponsorer_type: 'ORGANIZATION') }
   scope :individuals, -> { where(sponsorer_type: 'INDIVIDUAL') }
@@ -65,6 +66,16 @@ class SponsorerDetail
   def notify_user_and_admin
     SponsorMailer.notify_subscriber(user_id.to_s, payment_plan, SPONSOR[sponsorer_type.downcase][payment_plan]).deliver_later
     SponsorMailer.notify_admin(user_id.to_s, payment_plan, SPONSOR[sponsorer_type.downcase][payment_plan]).deliver_later
+  end
+
+  # update worth of royalty points of user if user took subscription within 1 month after
+  # signup to code curiosity
+  # first condition prevents transaction amount update when user create multiple subscriptions within 1 month after sign up
+  def update_royalty_bonus
+    if (user.sponsorer_details.count == 1) && (self.created_at - user.created_at <= 1.month) && (user.transactions.where(transaction_type: 'royalty_bonus').any?)
+      transaction = user.transactions.find_by transaction_type: 'royalty_bonus'
+      transaction.set(amount: transaction.points.to_f/SUBSCRIPTIONS[user.sponsorer_detail.sponsorer_type.downcase])
+    end
   end
 
 end
