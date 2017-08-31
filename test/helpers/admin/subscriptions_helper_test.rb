@@ -6,7 +6,7 @@ class Admin::SubscriptionsHelperTest < ActionView::TestCase
     create(:sponsorer_detail, sponsorer_type: "INDIVIDUAL",subscription_status: 'active')
     create(:sponsorer_detail, sponsorer_type: "INDIVIDUAL",subscription_status: 'canceled')
     create(:sponsorer_detail, sponsorer_type: "ORGANIZATION",subscription_status: 'active')
-    assert_equal 255, total_subscription_amount
+    assert_equal 260, total_subscription_amount
   end
 
 end

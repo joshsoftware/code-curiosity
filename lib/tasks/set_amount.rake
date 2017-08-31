@@ -28,7 +28,7 @@ namespace :set_amount do
       # take the very first sponsor plan taken by user and check whether it is taken within
       # a month after sign up
       if transaction.user.sponsorer_details.any? && transaction.user.sponsorer_details.asc(:created_at).first.created_at - transaction.user.created_at <= 1.month
-        transaction.set(amount: transaction.points.to_f/SUBSCRIPTIONS[sponsorer_detail.sponsorer_type.downcase])
+        transaction.set(amount: transaction.points.to_f/SUBSCRIPTIONS[transaction.user.sponsorer_detail.sponsorer_type.downcase])
       else
         transaction.set(amount: transaction.points.to_f/SUBSCRIPTIONS['free'])
       end

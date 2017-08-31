@@ -240,6 +240,6 @@ class User
   end
 
   def sponsorer_detail
-    sponsorer_details.asc(:subscribed_at).last
+    sponsorer_details.asc(:created_at).last
   end
 end
