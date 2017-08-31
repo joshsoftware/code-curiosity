@@ -15,7 +15,7 @@ class FileToBeIgnored
 
     return false if file_name.blank?
 
-    where(name: /(#{Regexp.escape(file_name)})$/).first
+    where(name: /(#{::Regexp.escape(file_name)})$/).first
   end
 
 end
