@@ -1,5 +1,7 @@
 class ScoreCommitJob < ActiveJob::Base
+  include Sidekiq::Status::Worker
   include ActiveJobRetriesCount
+  MAX_RETRY_COUNT = 10
   queue_as :score
 
   def perform(commit_id)

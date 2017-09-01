@@ -1,4 +1,5 @@
 class ActivityJob < ActiveJob::Base
+  include Sidekiq::Status::Worker
   include ActiveJobRetriesCount
   queue_as :git
 
@@ -9,7 +10,7 @@ class ActivityJob < ActiveJob::Base
       round = Round.opened
     end
 
-    user = User.find(user_id) 
+    user = User.find(user_id)
 
     Sidekiq.logger.info "******************* Activity Job Logger Info ***********************"
 
@@ -23,7 +24,7 @@ class ActivityJob < ActiveJob::Base
         Sidekiq.logger.info "Raised Github::Error::Notfound Exception"
         {}
       rescue Github::Error::Unauthorized
-        # Auth token issue or Access has been denied. 
+        # Auth token issue or Access has been denied.
 
         # Reset the auth_token, so that it gets refereshed the next time
         # user logs in.
@@ -32,7 +33,7 @@ class ActivityJob < ActiveJob::Base
         user.auth_token = nil
         user.save
 
-        # Refresh the gh_client because it's using a stale auth_token. 
+        # Refresh the gh_client because it's using a stale auth_token.
         # Here we use the App auth_token instead of user auth_token
         user.refresh_gh_client
         retry_job wait: 5.minutes if retries_count < MAX_RETRY_COUNT

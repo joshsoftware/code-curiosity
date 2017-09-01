@@ -1,4 +1,4 @@
-module ActiveJobRetriesCount  
+module ActiveJobRetriesCount
   extend ActiveSupport::Concern
   MAX_RETRY_COUNT = 5
 
@@ -25,4 +25,4 @@ module ActiveJobRetriesCount
     @retries_count = (retries_count || 0) + 1
     super(options)
   end
-end  
+end

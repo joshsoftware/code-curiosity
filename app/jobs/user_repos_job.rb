@@ -1,4 +1,5 @@
 class UserReposJob < ActiveJob::Base
+  include Sidekiq::Status::Worker
   queue_as :git
 
   attr_accessor :user
@@ -9,7 +10,7 @@ class UserReposJob < ActiveJob::Base
 
   def perform(user_id)
     user = User.find(user_id)
-    
+
     return if user.repo_syncing?
     user.set(last_repo_sync_at: Time.now)
     @user = user
