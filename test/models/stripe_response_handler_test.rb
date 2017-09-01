@@ -1,17 +1,29 @@
 require "test_helper"
 
 class SponsorerDetailTest < ActiveSupport::TestCase
-  test 'when customer subscription is created then the subscription should be marked as active'
+  test 'when customer subscription is created then the subscription should be marked as active' do
+    skip("Pending")
+  end
 
-  test 'when invoice payment is succeeded then payment should be recorded'
+  test 'when invoice payment is succeeded then payment should be recorded' do
+    skip("Pending")
+  end
 
-  test 'invoice payment is failed'
+  test 'invoice payment is failed' do
+    skip("Pending")
+  end
 
-  test 'customer subscription is updated'
+  test 'customer subscription is updated' do
+    skip("Pending")
+  end
 
-  test 'customer source is created'
+  test 'customer source is created' do
+    skip("Pending")
+  end
 
-  test 'customer subscription is deleted'
+  test 'customer subscription is deleted' do
+    skip("Pending")
+  end
 
   def seed
     @round = create :round, :open
