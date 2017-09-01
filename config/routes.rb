@@ -1,4 +1,9 @@
+require 'sidekiq/web'
+require 'sidekiq-status/web'
+
 Rails.application.routes.draw do
+
+  Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
 
   api_version('module': 'V1', header: {name: 'Accept', value: 'application/vnd.codecuriosity.org; version=1'}) do
     resources :transactions, only: [:index]
@@ -25,7 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-  post "/stripe/webhooks", to: "stripe#webhooks"  
+  post "/stripe/webhooks", to: "stripe#webhooks"
 
   resources :users, only: [:index, :show, :destroy] do
     member do
@@ -113,7 +118,7 @@ Rails.application.routes.draw do
   resource :redeem, only: [:create], controller: 'redeem'
   resources :groups do
     member do
-    	patch :feature
+      patch :feature
     end
     resources :members, only: [:index, :create, :destroy], controller: 'groups/members' do
       delete :destroy_invitation
@@ -137,4 +142,7 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
+  authenticate :user, lambda { |u| u.is_admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

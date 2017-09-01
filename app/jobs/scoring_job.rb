@@ -1,4 +1,5 @@
 class ScoringJob < ActiveJob::Base
+  include Sidekiq::Status::Worker
   include ActiveJobRetriesCount
 
   queue_as :git
@@ -11,7 +12,7 @@ class ScoringJob < ActiveJob::Base
     Sidekiq.logger.info "Scoring for Repository: #{repository.name}, User: #{repository.owner}, Current Round: from #{round.from_date}, Type: #{type}"
     begin
       if type == 'commits'
-        repository.score_commits(round) 
+        repository.score_commits(round)
       elsif type == 'activities'
         repository.score_activities(round)
       end

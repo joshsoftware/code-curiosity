@@ -40,6 +40,8 @@ class Commit
     c.user.inc(commits_count: 1)
   end
 
+  after_create :schedule_scoring_job
+
   def info
     @info ||= repository ? user.gh_client.repos.commits.get(repository.owner, repository.name, sha, { redirection: true }) : nil
   end
@@ -49,6 +51,13 @@ class Commit
   end
 
   private
+
+  def schedule_scoring_job
+    Sidekiq.logger.info "Scoring for commit: #{id}, Round: #{round.from_date}"
+    ScoreCommitJob.set(wait: Random.new.rand(20).minutes).perform_later(id.to_s)
+  rescue StandardError => e
+    Sidekiq.logger.info "Commit: #{id}, Error: #{e}"
+  end
 
   def set_round
     # FIXME: This code was added to address a corner case for commits appearing in next round
