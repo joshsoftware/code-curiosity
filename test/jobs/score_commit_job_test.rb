@@ -23,10 +23,16 @@ class ScoreCommitJobTest < ActiveJob::TestCase
     assert_enqueued_jobs 1
   end
 
-  test 'must score commit' do
+  test 'must score commit if repository is present' do
     ScoringEngine.any_instance.stubs(:calculate_score).with(@commit).returns(2)
     ScoreCommitJob.perform_now(@commit.id.to_s)
     assert_equal 1, Commit.count
     assert_equal 2, @commit.reload.auto_score
+  end
+
+  test 'must score commit to 0 if repository is absent' do
+    commit = create(:commit, message: Faker::Lorem.sentences, sha: 'eb0df748bbf084ca522f5ce4ebcf508d16169b96', repository: nil)
+    ScoreCommitJob.perform_now(commit.id.to_s)
+    assert_equal 0, commit.reload.auto_score    
   end
 end
