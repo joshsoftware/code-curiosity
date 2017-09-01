@@ -13,4 +13,8 @@ module UsersHelper
       #v*REDEEM['one_dollar_to_points']]
     end
   end
+
+  def remove_prefix(twitter_handle)
+    twitter_handle[1..twitter_handle.length]
+  end
 end
