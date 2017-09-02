@@ -65,6 +65,7 @@ class CommitTest < ActiveSupport::TestCase
     assert_equal commit_2.round, round_2
   end
 
+=begin
   test 'commit scoring job is scheduled after the commit is created' do
     clear_enqueued_jobs
     clear_performed_jobs
@@ -83,5 +84,6 @@ class CommitTest < ActiveSupport::TestCase
       commit.update({message: Faker::Lorem.sentences})
     end
   end
+=end
 
 end

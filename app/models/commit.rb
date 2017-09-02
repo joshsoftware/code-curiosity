@@ -40,7 +40,7 @@ class Commit
     c.user.inc(commits_count: 1)
   end
 
-  after_create :schedule_scoring_job
+  #after_create :schedule_scoring_job
 
   def info
     @info ||= repository ? user.gh_client.repos.commits.get(repository.owner, repository.name, sha, { redirection: true }) : nil
