@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show, :destroy, :edit, :update] do
     member do
+      patch :remove_handle
       get 'sync'
       put 'update_notification'
     end

@@ -10,11 +10,8 @@
           = image_tag avatar_url(@user), class: 'profile-user-img img-responsive img-circle', alt: @user.name
           %h3.profile-username.text-center= @user.name.titleize
           %p.text-muted
-            .pull-right
-              = link_to "#{ @user.twitter_handle.present? ? remove_prefix(@user.twitter_handle) : "Add your twitter handle" }", edit_user_path, remote: true, data: { toggle: "modal", target: "#newform"}, class: "%i fa fa-twitter", id: 'twitter-handle'
-              / .pull-right
-              /   %i.fa.fa-twitter
-              /   = @user.twitter_handle
+            - if logged_in_user?
+              = render 'twitter_data', user: @user
             = link_to github_url(@user), target: '_blank' do
               %i.fa.fa-github
               = @user.github_handle

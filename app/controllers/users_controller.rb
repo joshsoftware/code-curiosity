@@ -24,7 +24,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
@@ -32,6 +31,10 @@ class UsersController < ApplicationController
       return
     end
     render :edit
+  end
+
+  def remove_handle
+    current_user.update(twitter_handle: nil)
   end
 
   def sync

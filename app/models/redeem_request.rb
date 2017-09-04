@@ -30,7 +30,6 @@ class RedeemRequest
 
   before_validation {|r| r.points = r.points.to_i }
   before_create :set_amount
-  after_create :tweet
 
   after_create do |r|
     r.create_redeem_transaction
@@ -39,7 +38,6 @@ class RedeemRequest
   end
 
   after_save :send_notification
-  after_save :tweet
 
   def user_total_points
     if user.total_points == 0
@@ -198,15 +196,6 @@ class RedeemRequest
   end
 
   private
-
-  def tweet
-    if !status
-      message = "#Reward of $#{amount} requested by #{user.twitter_handle ? user.twitter_handle : user.name} #opensource"
-    elsif status_changed?
-      message = "Hooray! #{user.twitter_handle ? user.twitter_handle : user.name} has just been #rewarded $#{amount}. #opensource"
-    end
-    TWITTER_CLIENT.update(message);
-  end
 
   def set_amount
     denominator = if sponsorer_detail

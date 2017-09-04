@@ -1,12 +1,12 @@
 #userform.modal.fade{"aria-labelledby" => "EditUser", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
     .modal-content
-      = simple_form_for(current_user, url: user_path(current_user.id), method: :patch, remote: true) do |f|
+      = simple_form_for(current_user, url: user_path(current_user.id), validate: true, method: :patch, remote: true) do |f|
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %h4#EditUser.modal-title Edit User
         .modal-body
-          = f.input :twitter_handle
+          = f.input :twitter_handle, validate: { presence: true }
         .modal-footer
           = f.submit 'save', class: 'btn btn-primary'
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

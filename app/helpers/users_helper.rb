@@ -15,6 +15,6 @@ module UsersHelper
   end
 
   def remove_prefix(twitter_handle)
-    twitter_handle[1..twitter_handle.length]
+    twitter_handle[1..-1]
   end
 end

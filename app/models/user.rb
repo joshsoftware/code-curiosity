@@ -84,8 +84,9 @@ class User
   scope :judges, -> { where(is_judge: true) }
 
   validates :email, :github_handle, :name, presence: true
+  validates :twitter_handle, presence: true, format: { with: /\A@\w{1,15}\z/, message: "invalid Twitter handle"}, allow_nil: true
 
-  before_save :check_twitter_handle
+  before_validation :append_twitter_prefix
   after_create do |user|
     user.calculate_popularity unless user.auto_created
   end
@@ -239,9 +240,14 @@ class User
     sponsorer_details.asc(:created_at).last
   end
 
-  def check_twitter_handle
-    if self.twitter_handle.present? && !/^@/.match(self.twitter_handle)
-      self.twitter_handle = '@' + self.twitter_handle
+  def append_twitter_prefix
+    if self.twitter_handle.present?
+      self.twitter_handle.strip!
+      # Regex to match whether twitter handle provided by user contains @ sign at its
+      # begining or not
+      if !/^@/.match(self.twitter_handle)
+        self.twitter_handle = '@' + self.twitter_handle
+      end
     end
   end
 
