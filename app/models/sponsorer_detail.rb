@@ -46,7 +46,6 @@ class SponsorerDetail
   def save_payment_details(plan, amount, date)
     payment = self.payments.build(subscription_plan: plan, amount: amount/100, date: Time.at(date).to_datetime)
     payment.save!
-    user.reset_points
   end
 
   private

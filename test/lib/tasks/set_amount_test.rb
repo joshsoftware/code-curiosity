@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TransactionAmountCheck < ActiveSupport::TestCase
+class SetAmountTest < ActiveSupport::TestCase
   def setup
     @user = create :user
     CodeCuriosity::Application.load_tasks

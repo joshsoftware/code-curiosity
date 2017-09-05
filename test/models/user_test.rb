@@ -46,19 +46,6 @@ class UserTest < ActiveSupport::TestCase
     assert user.able_to_redeem?
   end
 
-  test "reset_points should move points to royalty points and set points to 0" do
-    round = create :round, :open
-    user = create :user, github_user_since: Date.today - 6.months, created_at: Date.today - 3.months, points: 500
-    create(:subscription, round: round, user: user)
-    assert_equal 0, user.transactions.count
-    assert_equal 500, user.reload.points
-    user.reset_points
-    assert_equal 2, user.transactions.count
-    assert_equal 1, user.transactions.where(points: 500, transaction_type: 'royalty_bonus', type: 'credit').count
-    assert_equal 1, user.transactions.where(points: -500, transaction_type: 'redeem_points', type: 'debit').count
-    assert_equal 0, user.reload.points
-  end
-
   test 'active_sponsorer_detail should return the active sponsorer detail' do
     round = create :round, :open
     user = create :user, github_user_since: Date.today - 6.months, created_at: Date.today - 3.months, points: 500
