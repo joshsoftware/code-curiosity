@@ -226,15 +226,6 @@ class User
     self.transactions.where(transaction_type: 'royalty_bonus').asc(:created_at).first
   end
 
-  def reset_points
-    if self.points > 0
-      p = self.points
-      self.transactions.create!(points: p, transaction_type: 'royalty_bonus', type: 'credit')
-      self.transactions.create!(points: -p, transaction_type: 'redeem_points', type: 'debit')
-      self.set(points: 0)
-    end
-  end
-
   def active_sponsorer_detail
     sponsorer_details.asc(:subscribed_at).where(subscription_status: :active).asc(:created_at).last
   end
