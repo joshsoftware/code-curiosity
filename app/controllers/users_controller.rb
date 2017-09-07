@@ -18,10 +18,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def block_user
+    user = User.find(params[:id])
+    user.update(blocked: true)
+  end
+
   def sync
     unless current_user.gh_data_syncing?
-      CommitJob.perform_later(current_user.id.to_s, 'all')
-      ActivityJob.perform_later(current_user.id.to_s, 'all')
+      unless current_user.blocked
+        CommitJob.perform_later(current_user.id.to_s, 'all')
+        ActivityJob.perform_later(current_user.id.to_s, 'all')
+      end
     end
   end
 
@@ -68,7 +75,7 @@ class UsersController < ApplicationController
       sponsor = user.sponsorer_detail
       begin
         delete_subscription(sponsor.stripe_subscription_id)
-      rescue 
+      rescue
         flash[:error] = "There was some problem while canceling your subscription. Please try after some time"
         redirect_to user_path and return
       end
