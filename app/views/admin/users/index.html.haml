@@ -4,7 +4,7 @@
       .box.box-primary
         .box-header
           %h3.box-title
-            %span Users:  
+            %span Users:
           .box-tools
             = form_tag(search_admin_users_path, method: :get, class: 'col-xs-3 col-md-4 pull-right') do
               .input-group.input-group-sm
@@ -16,10 +16,11 @@
             %thead
               %tr
                 %th.col-xs-2 Name
-                %th.col-xs-1 Handler  
+                %th.col-xs-1 Handler
                 %th.col-xs-1 Points
-                %th.col-xs-3 Email
+                %th.col-xs-2 Email
                 %th.col-xs-2 Joining Date
+                %th.col-xs-1 Block
                 %th.col-xs-3 Actions
             %tbody#users
               = render partial: 'user', collection: @users

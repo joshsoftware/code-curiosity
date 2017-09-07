@@ -64,6 +64,9 @@ Rails.application.routes.draw do
       get :mark_as_judge
       get :login_as
       get :search, on: :collection
+      member do
+        patch :block_user
+      end
     end
 
     resources :subscriptions, only: [:index]

@@ -37,7 +37,7 @@ class RepositoriesController < ApplicationController
 
   def sync
     unless current_user.gh_data_syncing?
-      CommitJob.perform_later(current_user.id.to_s, 'all', @repo.id.to_s)
+      CommitJob.perform_later(current_user.id.to_s, 'all', @repo.id.to_s) unless current_user.blocked
     end
 
     flash[:notice] = I18n.t('repositories.github_sync')

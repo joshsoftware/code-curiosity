@@ -64,6 +64,31 @@ class UserTest < ActiveSupport::TestCase
     assert_equal sponsorer_detail_2, user.sponsorer_detail
   end
 
+  test 'must return user which are contestants and not blocked' do
+    user_1 = create :user, auto_created: false, blocked: false
+    user_2 = create :user, auto_created: true, blocked: false
+    user_3 = create :user, auto_created: false, blocked: true
+    assert_includes User.contestants.allowed, user_1
+    assert_equal 1, User.contestants.allowed.count
+  end
+
+  test 'must return user which are contestants' do
+    user_1 = create :user, auto_created: false, blocked: false
+    user_2 = create :user, auto_created: true, blocked: false
+    user_3 = create :user, auto_created: false, blocked: true
+    assert_includes User.contestants, user_1
+    assert_includes User.contestants, user_3
+    assert_equal 2, User.contestants.count
+  end
+
+  test 'must return user which are contestants and blocked' do
+    user_1 = create :user, auto_created: false, blocked: false
+    user_2 = create :user, auto_created: true, blocked: false
+    user_3 = create :user, auto_created: false, blocked: true
+    assert_includes User.contestants.blocked, user_3
+    assert_equal 1, User.contestants.blocked.count
+  end
+
   def omniauthentication
     @date = Date.new(2015, 10, 10)
     OmniAuth.config.test_mode = true

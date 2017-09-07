@@ -24,6 +24,7 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
+  field :blocked,            type: Boolean, default: false
 
   field :github_handle,      type: String
   field :active,             type: Boolean, default: true
@@ -77,6 +78,8 @@ class User
   index(auto_created: 1)
 
   scope :contestants, -> { where(auto_created: false) }
+  scope :blocked,   -> { where(blocked: true) }
+  scope :allowed,   -> { where(blocked: false) }
   scope :judges, -> { where(is_judge: true) }
 
   validates :email, :github_handle, :name, presence: true
