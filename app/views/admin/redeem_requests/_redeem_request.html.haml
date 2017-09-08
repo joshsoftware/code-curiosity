@@ -1,6 +1,6 @@
 %tr
   %td
-    - if redeem_request.user.active_sponsorer_detail
+    - if redeem_request.user.is_sponsorer
       .badge $
     = link_to redeem_request.user.email, user_path(redeem_request.user), target: '_blank'
   %td
