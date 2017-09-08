@@ -23,6 +23,20 @@ class UsersController < ApplicationController
     user.update(blocked: true)
   end
 
+  def edit
+  end
+
+  def update
+    if current_user.update user_params
+      return
+    end
+    render :edit
+  end
+
+  def remove_handle
+    current_user.update(twitter_handle: nil)
+  end
+
   def sync
     unless current_user.gh_data_syncing?
       unless current_user.blocked
@@ -89,4 +103,11 @@ class UsersController < ApplicationController
     user.save
     redirect_to root_url, notice: "Your account has been deleted successfully."
   end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:twitter_handle)
+  end
+
 end

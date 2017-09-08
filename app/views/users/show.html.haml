@@ -2,13 +2,16 @@
   %h1 User Profile
 = react_component 'CelebrityBox', { type: 'info', title: '', message: t('user.celebrity_signup') } if current_user && current_user.celebrity
 %section.content
+  #userform
   .row
     .col-sm-4
       .box.box-primary
         .box-body.box-profile
           = image_tag avatar_url(@user), class: 'profile-user-img img-responsive img-circle', alt: @user.name
           %h3.profile-username.text-center= @user.name.titleize
-          %p.text-muted.text-center
+          %p.text-muted
+            - if logged_in_user?
+              = render 'twitter_data', user: @user
             = link_to github_url(@user), target: '_blank' do
               %i.fa.fa-github
               = @user.github_handle

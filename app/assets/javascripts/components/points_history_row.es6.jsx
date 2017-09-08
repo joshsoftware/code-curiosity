@@ -4,7 +4,7 @@ class PointsHistoryRow extends React.Component {
       <tr>
         <td>{ this.props.index }</td>
         <td>{ this.props.points }</td>
-        <td>{ "$" + Math.abs(this.props.amount) }</td>
+        <td>{ "$ " + Math.abs(this.props.amount) }</td>
         <td className="transaction-detail">
           <b>{ this.props.details }</b>
           <small className={`label ${this.props.label == 'credit' ? 'bg-green' : 'bg-red' }`}>{ this.props.label.toUpperCase() }</small>

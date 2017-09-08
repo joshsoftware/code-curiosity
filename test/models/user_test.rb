@@ -89,6 +89,44 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 1, User.contestants.blocked.count
   end
 
+  test 'append @ prefix in twitter handle if not present when updated' do
+    user = create :user
+    assert_nil user.twitter_handle
+    user.update(twitter_handle: 'amitk301293')
+    assert "@amitk301293", user.twitter_handle
+  end
+
+  test 'twitter handle must not be blank when updated' do
+    user = create :user
+    assert_nil user.twitter_handle
+    user.reload.update(twitter_handle: "")
+    assert_empty user.twitter_handle
+    assert_not user.valid?
+    user.reload.set(twitter_handle: "@amik301293")
+    assert user.valid?
+  end
+
+  test 'twitter handle must not contain spaces when updated' do
+    user = create :user
+    user.set(twitter_handle: "@amitk")
+    assert user.valid?
+    user.update(twitter_handle: "@amitk 301293")
+    assert_not user.valid?
+  end
+
+  test 'twitter handle must not contain special characters when updated' do
+    user = create :user
+    user.set(twitter_handle: "@amitk301293")
+    user.update(twitter_handle: "@amitk#301293")
+    assert_not user.valid?
+  end
+
+  test 'twitter handle length must be 15 or less when updated' do
+    user = create :user
+    user.update(twitter_handle: "@aswisdakimasdfeassdfsasdfsere")
+    assert_not user.valid?
+  end
+
   def omniauthentication
     @date = Date.new(2015, 10, 10)
     OmniAuth.config.test_mode = true
@@ -98,20 +136,19 @@ class UserTest < ActiveSupport::TestCase
       info: {
         name: 'test_user',
         email: 'test@test.com'
-      },
-      extra: {
-        raw_info:
-        {
-          login: 'hello',
-          created_at: @date
+        },
+        extra: {
+          raw_info:
+          {
+            login: 'hello',
+            created_at: @date
+          }
+          },
+          credentials: {
+            token: 'github_omiauth_test'
+          }
         }
-      },
-      credentials: {
-        token: 'github_omiauth_test'
-      }
-    }
-    @req_env = OmniAuth.config.add_mock(:github, omniauth_hash)
-    User.from_omniauth(@req_env)
+        @req_env = OmniAuth.config.add_mock(:github, omniauth_hash)
+        User.from_omniauth(@req_env)
   end
-
 end

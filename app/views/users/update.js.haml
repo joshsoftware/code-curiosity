@@ -1,0 +1,3 @@
+$('#userform').modal('hide')
+$('.modal-backdrop').remove();
+$('#twitter-data').replaceWith("#{escape_javascript(render "twitter_data", user: current_user)}");
