@@ -1,43 +1,17 @@
 %section.content-header
-  %h1 
+  %h1
     Dashboard
-= render 'celebrity_box' if current_user && current_user.celebrity
+= react_component 'CelebrityBox', { type: 'info', title: '', message: t('user.celebrity_signup') } if current_user && current_user.celebrity
 %section.content
   .row
     .col-lg-3.col-xs-6
-      .small-box.bg-aqua
-        .inner
-          %h3= format_points(current_user.total_points)
-          %p Points
-        .icon
-          %i.ion.ion-pie-graph
-        = link_to user_path(current_user), class: 'small-box-footer' do
-          More info
-          %i.fa.fa-arrow-circle-right
+      = react_component 'PointsTile', { color: 'bg-aqua', title: 'Points', points: format_points(current_user.total_points),
+        logo: 'ion-pie-graph', path: user_path(current_user) }
     .col-lg-3.col-xs-6
-      .small-box.bg-green
-        .inner
-          %h3= current_user.commits_count
-          %p Commits
-        .icon
-          %i.ion.ion-stats-bars
-        = link_to activities_path(anchor: 'commits'), class: 'small-box-footer' do
-          More info
-          %i.fa.fa-arrow-circle-right
+      = react_component 'PointsTile', { color: 'bg-green', title: 'Commits', points: current_user.commits_count,
+        logo: 'ion-stats-bars', path: activities_path(anchor: 'commits')}
     .col-lg-3.col-xs-6
-      .small-box.bg-yellow
-        .inner
-          %h3= current_user.activities_count
-          %p Activities
-        .icon
-          %i.ion.ion-chatboxes
-        = link_to activities_path(anchor: 'activities'), class: 'small-box-footer' do
-          More info
-          %i.fa.fa-arrow-circle-right
+      = react_component 'PointsTile', { color: 'bg-yellow', title: 'Activities', points: current_user.activities_count,
+        logo: 'ion-chatboxes', path: activities_path(anchor: 'activities') }
   .row
-    .box-body
-      #users-chart-container
-
-
-:javascript
-  userTrendChart(#{@xAxis}, #{@commits}, #{@activities}, #{@points}, #{@username});
+    = react_component 'UserPointsChart', { xAxis: @xAxis, commits: @commits, activities: @activities, points: @points, username: @username }

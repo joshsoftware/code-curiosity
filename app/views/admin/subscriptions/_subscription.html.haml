@@ -1,0 +1,7 @@
+%tr
+  %td= link_to subscription.user.name, user_path(subscription.user), target: '_blank'
+  %td= subscription.user.email
+  %td= subscription.sponsorer_type
+  %td= subscription.subscription_status.camelize
+  %td= SPONSOR["#{subscription.sponsorer_type.downcase}"]["base"]
+  %td= subscription.updated_at.strftime('%d/%m/%Y %H:%M')

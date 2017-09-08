@@ -1,0 +1,9 @@
+.container.center-aligned
+  .box-header
+    %h2= header
+  .box-body
+    - sponsorer_group.in_groups_of(4) do |group|
+      - group.each do |sponsorer|
+        - if sponsorer
+          .img-center
+            = link_to image_tag( select_avatar(sponsorer), class: "img-responsive", width: 130, height: 130, alt: "Responsive image"), redirect(sponsorer)

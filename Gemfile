@@ -18,7 +18,7 @@ gem 'jquery-rails'
 gem 'turbolinks', '~>2.5'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'github_api', '~> 0.13'
+gem 'github_api', git: 'https://github.com/prasadsurase/github.git', branch: 'add-redirection-support'
 gem 'devise', '~> 3.5'
 gem 'highcharts-rails', '~> 4.2', '>= 4.2.5'
 gem 'bootstrap-datepicker-rails'
@@ -27,7 +27,7 @@ gem 'simple_form', '~> 3.2.1'
 gem 'omniauth-github', '~> 1.1.2'
 gem 'sidekiq', '~> 4.0'
 gem 'dotenv-rails'
-gem 'git', '~> 1.3'
+gem 'git', git: 'https://github.com/prasadsurase/ruby-git.git', branch: 'get-branches-having-a-commit'
 gem 'rugged', git: 'https://github.com/libgit2/rugged.git', submodules: true
 gem 'bugspots', git: 'https://github.com/igrigorik/bugspots.git'
 gem 'redis-rails'
@@ -36,6 +36,12 @@ gem 'mongoid-slug', '~> 5.2'
 gem 'redcarpet'
 gem 'rollbar'
 gem 'mongoid-paranoia'
+gem 'mongoid-paperclip', require: 'mongoid_paperclip'
+gem 'stripe'
+gem 'react-rails'
+gem 'versionist'
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'sidekiq-status'
 
 group :development, :test do
   gem 'byebug'
@@ -60,10 +66,13 @@ group :test do
   gem 'poltergeist'
   gem 'mocha'
   gem 'timecop'
+  gem 'stripe-ruby-mock', '~> 2.4.1', :require => 'stripe_mock'
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'haml-rails'
   gem 'quiet_assets'
+  gem "letter_opener"
+  gem "letter_opener_web"
 end

@@ -76,4 +76,10 @@ class ActivitiesFetcherTest < ActiveSupport::TestCase
     assert_includes repository.languages, 'Ruby'
   end
 
+  test "don't fetch activities if repo is ignored " do
+    activities_fetcher = ActivitiesFetcher.new(@user, @round)
+    activities_fetcher.fetch(:all)
+    Repository.update_all(ignore: false)
+    assert_equal 1, Repository.required.count
+  end
 end

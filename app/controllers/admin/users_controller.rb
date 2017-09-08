@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin!
+  before_action :find_user, only: [:block_user, :destroy]
 
   def index
     @users = User.contestants.desc(:created_at).page(params[:page])
@@ -13,12 +14,14 @@ class Admin::UsersController < ApplicationController
 
   def login_as
     user = User.find(params[:user_id])
-
     if user
       sign_in :user, user
     end
-
     redirect_to root_path
+  end
+
+  def block_user
+    @user.update(blocked: params[:blocked]) if @user
   end
 
   def search
@@ -29,21 +32,23 @@ class Admin::UsersController < ApplicationController
 
     @users = User.contestants.where(github_handle: /#{params[:q]}/)
     @users = User.contestants.where(email: params[:q]) if @users.none?
-    @users = @users.page(1)
+    @users = @users.page(params[:page])
 
     render :index
   end
 
   def destroy
-    user = User.find(params[:id])
-
-    if user
-      user.destroy
-      redirect_to admin_users_path, notice: "#{user.name} has been deleted successfully"
+    if @user
+      @user.destroy
+      redirect_to admin_users_path, notice: "#{@user.name} has been deleted successfully"
     else
       redirect_to admin_users_path, notice: "User not found"
     end
-    
   end
 
+  private
+
+  def find_user
+    @user = User.find(params[:id])
+  end
 end

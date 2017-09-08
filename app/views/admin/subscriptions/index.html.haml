@@ -1,0 +1,23 @@
+%section.content-header
+  %h1
+    Subscriptions
+    %span.badge $ #{total_subscription_amount}
+%section.content
+  .row
+    .col-xs-12
+      .box.box-primary
+        .box-body.table-responsive
+          %table.table.table-hover.table-bordered
+            %thead
+              %tr
+                %th.col-xs-1 Name
+                %th.col-xs-2 Email
+                %th.col-xs-1 Type
+                %th.col-xs-1 Status
+                %th.col-xs-1 Amount
+                %th.col-xs-1 Created At
+
+            %tbody#subscriptions
+              = render partial: 'subscription', collection: @subscriptions
+          .pagination-container
+            = paginate @subscriptions, remote: true

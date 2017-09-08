@@ -2,22 +2,22 @@ function userTrendChart(xAxis, commits, activities, points, username) {
   $('#users-chart-container').highcharts({
     chart: {
       type: 'line'
-    },  
+    },
     title: {
       text: username + " Contribution Trend",
       x: -20 //center
-    },    
-    xAxis: { 
+    },
+    xAxis: {
       categories: xAxis
-    },    
+    },
     plotOptions: {
       bar: {
         dataLabels: {
           enabled: true
         }
-      } 
-    },    
-    yAxis: { 
+      }
+    },
+    yAxis: {
       title: {
         text: 'Count'
       },
@@ -54,7 +54,7 @@ function userTrendChart(xAxis, commits, activities, points, username) {
       marker: { enabled: true },
       color: '#00C0EF',
       dataLabels: {color:'#00C0EF',style: {"color": "contrast", "fontSize": "11px", "fontWeight": "bold", "textShadow": "0" }}
-    } 
+    }
     ]
   });
 }
@@ -120,6 +120,6 @@ function multiLineChart(xAxis, users, contributions){
       color: '#00A65A',
       dataLabels: {color:'#00A65A',style: {"color": "contrast", "fontSize": "11px", "fontWeight": "bold", "textShadow": "0" }}
     }
-    ] 
+    ]
   });
 }

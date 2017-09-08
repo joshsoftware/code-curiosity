@@ -8,7 +8,7 @@ class ScoringEngineTest < ActiveSupport::TestCase
     @commit = create :commit, repository: @repo, sha: '6cc7ecd9306a04fa4b084c184d89b8a21b6a5854'
     stub_get("/repos/prasadsurase/dummy/commits/6cc7ecd9306a04fa4b084c184d89b8a21b6a5854")
     .to_return(body: File.read('test/fixtures/dummy-commit.json'), status: 200,
-    headers: {content_type: "application/json; charset=utf-8"})
+               headers: {content_type: "application/json; charset=utf-8"})
   end
 
   def teardown
@@ -23,10 +23,57 @@ class ScoringEngineTest < ActiveSupport::TestCase
 
   test 'fetch_repo clones the repo if it doesnt exist' do
     engine = ScoringEngine.new(@repo)
-    assert_nil = engine.git
+    assert_nil engine.git
     refute Dir.exists?("#{Rails.root.join(engine.config[:repositories]).to_s}/#{@repo.id}")
     engine.fetch_repo
     assert Dir.exists?("#{Rails.root.join(engine.config[:repositories]).to_s}/#{@repo.id}")
+    refute_nil engine.git
+  end
+
+  test 'fetch_repo clones the repo if it doesnt exist and checksout to the specified branch' do
+    engine = ScoringEngine.new(@repo)
+    assert_nil engine.git
+    refute Dir.exists?("#{Rails.root.join(engine.config[:repositories]).to_s}/#{@repo.id}")
+    engine.fetch_repo('feature')
+    assert Dir.exists?("#{Rails.root.join(engine.config[:repositories]).to_s}/#{@repo.id}")
+    refute_nil engine.git
+    assert_equal 'feature', engine.git.branches.local.first.name
+  end
+
+  test 'fetch_repo updates the current repository branch if no branch is specified' do
+    engine = ScoringEngine.new(@repo)
+    refute Dir.exists?("#{Rails.root.join(engine.config[:repositories]).to_s}/#{@repo.id}")
+    engine.fetch_repo
+    assert Dir.exists?("#{Rails.root.join(engine.config[:repositories]).to_s}/#{@repo.id}")
+    assert_equal 'master', engine.git.branches.local.first.name
+    # checkout to initial commit and check the master's sha.
+    engine.git.reset_hard('546c6e578c16c24b0c24546e01ba0ecedd71b3af') # initial commit
+    assert_equal '546c6e578c16c24b0c24546e01ba0ecedd71b3af', engine.git.object('master').sha
+    # pull again and confirm that thats not the latest sha(pull was successfull).
+    engine.fetch_repo
+    refute_equal '546c6e578c16c24b0c24546e01ba0ecedd71b3af', engine.git.object('master').sha
+    assert Dir.exists?("#{Rails.root.join(engine.config[:repositories]).to_s}/#{@repo.id}")
+    assert_equal 'master', engine.git.branches.local.first.name
+  end
+
+  test 'fetch_repo checksout to the specified branch and updates that repository branch' do
+    engine = ScoringEngine.new(@repo)
+    refute Dir.exists?("#{Rails.root.join(engine.config[:repositories]).to_s}/#{@repo.id}")
+    engine.fetch_repo
+    assert Dir.exists?("#{Rails.root.join(engine.config[:repositories]).to_s}/#{@repo.id}")
+    assert_equal 'master', engine.git.branches.local.first.name
+
+    engine.fetch_repo('feature')
+    assert_equal 'feature', engine.git.branches.local.first.name
+
+    engine.fetch_repo('development')
+    assert_equal 'development', engine.git.branches.local.first.name
+  end
+
+  test 'bugspots_score returns 0 if commit info is not present' do
+    Commit.any_instance.stubs(:info).returns(nil)
+    engine = ScoringEngine.new(@repo)
+    assert_equal 0, engine.bugspots_score(@commit)
   end
 
   test 'fetch_repo updates the repo if it exists' do
@@ -57,12 +104,6 @@ class ScoringEngineTest < ActiveSupport::TestCase
     assert Dir.exists?("#{Rails.root.join(engine.config[:repositories]).to_s}/#{@repo.id}")
     # pull again and confirm that thats not the latest sha (deletion and clone was successfull).
     refute_equal '546c6e578c16c24b0c24546e01ba0ecedd71b3af', engine.git.object('master').sha
-  end
-
-  test 'bugspots_score returns 0 if commit info is not present' do
-    Commit.any_instance.stubs(:info).returns(nil)
-    engine = ScoringEngine.new(@repo)
-    assert_equal 0, engine.bugspots_score(@commit)
   end
 
   test 'bugspots_score of unwanted files should always be 0' do
@@ -97,15 +138,15 @@ class ScoringEngineTest < ActiveSupport::TestCase
   test 'check bugspots_score when no files are excluded during scoring ' do
     stub_commit_for_bugspots_scoring
     @engine = ScoringEngine.new(@repo)
-    assert_equal (0.3039).round(2), @engine.bugspots_score(@commit).round(2)
+    assert_not_equal 0, @engine.bugspots_score(@commit)
   end
 
   test 'check bugspots scoring when files are excluded' do
     stub_commit_for_bugspots_scoring
     @engine = ScoringEngine.new(@repo)
-    file_to_be_ignored = create :file_to_be_ignored, name: "Gemfile.lock", ignored: true
-    assert_equal (0.126).round(2), @engine.bugspots_score(@commit).round(2)
-    assert_equal 1, file_to_be_ignored.reload.count
+    file_to_be_ignored = create :file_to_be_ignored, name: "Gemfile", ignored: true
+    assert_equal 1, FileToBeIgnored.count
+    assert_not_equal 0, @engine.bugspots_score(@commit)
   end
 
   test 'check bugspots should not do scoring of files such as Gemfile.lock or README' do

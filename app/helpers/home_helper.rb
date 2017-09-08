@@ -8,6 +8,27 @@ module HomeHelper
     @size = @featured_groups.size
   end
 
+  def sponsorer_organizations
+    @sponsorer_organizations = SponsorerDetail.organizations.active.publish
+    @sponsorer_users = SponsorerDetail.individuals.active.publish
+  end
+
+  def select_avatar(sponsorer)
+    if sponsorer.avatar?
+      sponsorer.avatar
+    else
+      avatar_url(sponsorer.user)
+    end
+  end
+
+  def redirect(sponsorer)
+    if sponsorer.organization_url?
+      sponsorer.organization_url
+    else
+      user_path(sponsorer.user.github_handle.downcase)
+    end
+  end
+
   def widget_class
     if @size > 2
       "col-md-4"

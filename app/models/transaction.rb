@@ -8,10 +8,12 @@ class Transaction
   field :points ,           type: Integer, default: 0
   field :transaction_type,  type: String
   field :description,       type: String
+  field :amount,            type: Float, default: 0.0
 
   belongs_to :user
   belongs_to :subscription
   belongs_to :redeem_request
+  has_one :redemption_transaction
 
   validates :type, :points , presence: true
   validates :type, inclusion: { in: %w(credit debit) }
@@ -24,6 +26,7 @@ class Transaction
   end
 
   after_create :update_user_total_points
+  after_create :set_amount
 
   def credit?
     type == 'credit'
@@ -35,7 +38,7 @@ class Transaction
 
   def coupon_code
     if redeem_transaction?
-      return (@ccode ||= redeem_request.coupon_code)
+      return (@ccode ||= redeem_request.try(:coupon_code))
     end
   end
 
@@ -53,4 +56,11 @@ class Transaction
     Transaction.where(transaction_type: 'redeem_points').sum(:points).abs
   end
 
+  def set_amount
+    if user.is_sponsorer
+      set(amount: points.to_f/SUBSCRIPTIONS['individual'])
+    else
+      set(amount: points.to_f/SUBSCRIPTIONS['free'])
+    end
+  end
 end

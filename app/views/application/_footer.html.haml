@@ -1,7 +1,13 @@
-.pull-right.hidden-xs
+.pull-right
   Theme Credit © 
   %a{href: 'http://almsaeedstudio.com', target: '_blank'} Almsaeed Studio
 %strong
   Powered by
   %a{:href => 'http://joshsoftware.com', target: '_blank'} JoshSoftware
 
+.pull-right
+  = link_to "Terms of Service", "/Terms_of_service_CodeCuriosity.pdf", style: " float: right; position: relative; left: -30%; font-weight: bold;"
+%span.contact
+  %a{:href => "mailto:info@codecuriosity.org?Subject=CodeCuriosity%20Feedback", :target => "_top", style: " float: right; position: relative; left: -30%; font-weight: bold;"} 
+    %i.fa.fa-envelope-square
+    %span Contact Us

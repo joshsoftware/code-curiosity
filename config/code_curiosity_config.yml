@@ -14,9 +14,24 @@ round:
 repository:
   popular: 
     stars: 25
+  max_size: 100
 
 user:
   :royalty_points_threshold: 50_000
+
+sponsor:
+  individual:
+    base: 5
+  organization:
+    base: 250
+
+sponsor_display_threshold:
+  individual: 25
+  organization: 0
+
+redeem_request_threshold:
+  free: 400
+  paid: 500
 
 scoring_engine:
   :repositories: 'repositories' # repositories dir
@@ -28,6 +43,12 @@ scoring_engine:
   :commit_comments_weightage: 0.1
   :commit_default_weightage: 0.45
   :bugspot_weightage: 0.45
+  :bugspot_scores_threshold: 2
+
+subscriptions:
+  free: 20
+  individual: 10
+  organization: 10
 
 redeem:
   min_points: 100
@@ -45,3 +66,4 @@ redeem:
     - amazon.com
     - amazon.in
     - amazon.uk
+

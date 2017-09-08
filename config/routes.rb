@@ -1,11 +1,21 @@
+require 'sidekiq/web'
+require 'sidekiq-status/web'
+
 Rails.application.routes.draw do
+
+  Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
+
+  api_version('module': 'V1', header: {name: 'Accept', value: 'application/vnd.codecuriosity.org; version=1'}) do
+    resources :transactions, only: [:index]
+    resources :subscriptions, only: [:index]
+  end
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' },
     skip: [:sessions, :registrations, :passwords]
 
   devise_scope :user do
     get 'sign_in', :to => 'home#index', :as => :new_user_session
-    get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+    delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -13,8 +23,18 @@ Rails.application.routes.draw do
 
   resources :repositories, only: [:index]
 
-  resources :users, only: [:index, :show, :destroy] do
+  resources :sponsorer_details do
     member do
+      post 'update_card'
+      get 'cancel_subscription'
+    end
+  end
+
+  post "/stripe/webhooks", to: "stripe#webhooks"
+
+  resources :users, only: [:index, :show, :destroy, :edit, :update] do
+    member do
+      patch :remove_handle
       get 'sync'
       put 'update_notification'
     end
@@ -34,7 +54,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :repositories, only: [:index] do
+      get :search, on: :collection
       member do
+        patch :update_ignore_field
         patch :add_judges
         get :assign_judge
       end
@@ -43,17 +65,27 @@ Rails.application.routes.draw do
       get :mark_as_judge
       get :login_as
       get :search, on: :collection
+      member do
+        patch :block_user
+      end
     end
+
+    resources :subscriptions, only: [:index]
 
     resources :judges, only: [:index]
     resources :rounds, only: [:index] do
       get :mark_as_close
     end
 
-    resources :redeem_requests, only: [:index, :update, :destroy]
+    resources :redeem_requests, only: [:index, :update, :destroy] do
+      collection do
+        get :download
+      end
+    end
 
     resources :ignored_files, except: [:show] do
       get :search, on: :collection
+      patch :update_ignore_field
     end
 
     get 'dashboard/index', as: 'dashboard'
@@ -90,7 +122,7 @@ Rails.application.routes.draw do
   resource :redeem, only: [:create], controller: 'redeem'
   resources :groups do
     member do
-    	patch :feature
+      patch :feature
     end
     resources :members, only: [:index, :create, :destroy], controller: 'groups/members' do
       delete :destroy_invitation
@@ -109,4 +141,12 @@ Rails.application.routes.draw do
   get 'faq' => 'info#faq'
 
   root 'home#index'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+
+  authenticate :user, lambda { |u| u.is_admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

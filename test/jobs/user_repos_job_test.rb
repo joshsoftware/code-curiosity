@@ -22,7 +22,7 @@ class UserReposJobTest < ActiveJob::TestCase
   end
 
   test 'perform' do
-    UserReposJob.perform_later(@user)
+    UserReposJob.perform_later(@user.id.to_s)
     assert_enqueued_jobs 1
   end
 
@@ -30,7 +30,7 @@ class UserReposJobTest < ActiveJob::TestCase
     assert_nil @user.last_repo_sync_at
     @user.set(last_repo_sync_at: Time.now - 59.minutes)
     @user.expects(:fetch_all_github_repos).never
-    UserReposJob.perform_now(@user)
+    UserReposJob.perform_now(@user.id.to_s)
   end
 
   test "skip if unpopular and not a fork" do
@@ -44,7 +44,7 @@ class UserReposJobTest < ActiveJob::TestCase
       headers: {content_type: "application/json; charset=utf-8"}
     )
     assert_equal 0, Repository.count
-    UserReposJob.perform_now(@user)
+    UserReposJob.perform_now(@user.id.to_s)
     assert_equal 0, Repository.count
     assert_equal 0, @user.repositories.count
   end
@@ -63,7 +63,7 @@ class UserReposJobTest < ActiveJob::TestCase
       Hashie::Mash.new(JSON.parse(File.read('test/fixtures/unpopular-remote.json')))
     )
     assert_equal 0, Repository.count
-    UserReposJob.perform_now(@user)
+    UserReposJob.perform_now(@user.id.to_s)
     assert_equal 0, Repository.count
     assert_equal 0, @user.repositories.count
   end
@@ -73,7 +73,8 @@ class UserReposJobTest < ActiveJob::TestCase
       JSON.parse(File.read('test/fixtures/user-popular-repos.json')).collect{|i| Hashie::Mash.new(i)}
     )
     assert_equal 0, Repository.count
-    UserReposJob.perform_now(@user)
+    UserReposJob.perform_now(@user.id.to_s)
+    @user.reload
     assert_equal 1, Repository.count
     assert_equal 1, @user.repositories.count
     assert_equal 25, @user.repositories.first.stars
@@ -84,7 +85,8 @@ class UserReposJobTest < ActiveJob::TestCase
       JSON.parse(File.read('test/fixtures/popular-repos-with-forks.json')).collect{|i| Hashie::Mash.new(i)}
     )
     assert_equal 0, Repository.count
-    UserReposJob.perform_now(@user)
+    UserReposJob.perform_now(@user.id.to_s)
+    @user.reload
     assert_equal 1, Repository.count
     assert_equal 1, @user.repositories.count
     user_repo = @user.repositories.first
@@ -100,7 +102,8 @@ class UserReposJobTest < ActiveJob::TestCase
       Hashie::Mash.new(JSON.parse(File.read('test/fixtures/user-fork-repo.json')))
     )
     assert_equal 0, Repository.count
-    UserReposJob.perform_now(@user)
+    UserReposJob.perform_now(@user.id.to_s)
+    @user.reload
     assert_equal 2, Repository.count
     assert_equal 1, @user.repositories.count
     user_repo = @user.repositories.first
@@ -113,6 +116,7 @@ class UserReposJobTest < ActiveJob::TestCase
   end
 
   test 'destroy the repository if it is already persisted if the rating has dropped' do
+    skip 'unscoped association not supported for soft deleted repo'
     repo = create :repository, name: 'code-curiosity', ssh_url: 'git@github.com:prasadsurase/code-curiosity.git',
       owner: 'prasadsurase', stars: 26, gh_id: 67219068
     @user.repositories << repo
@@ -126,7 +130,7 @@ class UserReposJobTest < ActiveJob::TestCase
     assert_nil repo.deleted_at
     assert_equal 1, Repository.count
     assert_equal 26, repo.stars
-    UserReposJob.perform_now(@user)
+    UserReposJob.perform_now(@user.id.to_s)
     repo.reload
     refute_nil repo.deleted_at
     assert repo.destroyed?
@@ -137,6 +141,7 @@ class UserReposJobTest < ActiveJob::TestCase
   end
 
   test 'restore the repository if it is already persisted and destroyed if the rating has increased' do
+    skip 'unscoped association not supported for soft deleted repo'
     repo = create :repository, name: 'code-curiosity', ssh_url: 'git@github.com:prasadsurase/code-curiosity.git',
       owner: 'prasadsurase', stars: 24, gh_id: 67219068, deleted_at: Time.now - 2.days
     @user.repositories << repo
@@ -152,7 +157,7 @@ class UserReposJobTest < ActiveJob::TestCase
     assert_equal 24, repo.stars
     assert_equal 0, Repository.count
     assert_equal 1, Repository.unscoped.count
-    UserReposJob.perform_now(@user)
+    UserReposJob.perform_now(@user.id.to_s)
     repo.reload
     refute repo.destroyed?
     assert_nil repo.deleted_at

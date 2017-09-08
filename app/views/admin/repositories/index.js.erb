@@ -1,1 +1,2 @@
 $('#repos').html("<%=j render 'repos_table' %>");
+$(".pagination-container").html("<%=j(paginate @repos, remote: true)%>")

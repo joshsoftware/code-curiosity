@@ -38,4 +38,17 @@ class RepositoryTest < ActiveSupport::TestCase
     end
   end
 
+  test 'must return repositories which are valid for scoring' do
+    create_list(:repository, 10, ignore: false)
+    Repository.first.update_attributes(ignore: true)
+    assert_not_equal Repository.count, Repository.required.count
+  end
+
+  test 'info should retrieve repository information' do
+    repo = create :repository, name: 'mongoid-history', owner: 'aq1018', source_url: 'https://github.com/aq1018/mongoid-history'
+    info = repo.info
+    refute info.redirect?
+    assert info.success?
+  end
+
 end

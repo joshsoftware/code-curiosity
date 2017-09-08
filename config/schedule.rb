@@ -42,6 +42,7 @@ every :day, :at => '10:00pm' do
 end
 
 every '59 23 27-31 * *' do
+  rake "round:update_scores"
   rake 'round:next'
 end
 
@@ -51,5 +52,9 @@ end
 
 every '1 10 7 * *' do
   rake 'subscription:redeem_points'
+end
+
+every :day, :at => '10:30am' do
+  rake 'repo:delete_large_repositories'
 end
 

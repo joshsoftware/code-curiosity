@@ -22,6 +22,9 @@
 //= require bootstrap-typeahead
 //= require bootstrap2-toggle
 //= require jquery.shorten
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .
 
 function onDocReady(){

@@ -1,5 +1,5 @@
 namespace :round do
-  desc "Creat next round"
+  desc "Create next round"
   task :next => :environment do |t, args|
     tomorrow = (Time.now - 1.hour).tomorrow
     return unless tomorrow.day == 1
@@ -19,7 +19,7 @@ namespace :round do
     end
   end
 
-  desc "Update Round scores" 
+  desc "Update Round scores"
   task :update_scores,  [:round] => :environment do |t, args|
     round = args[:round].present? ? Round.find(args[:round]) : Round.opened
     round.subscriptions.all.each(&:update_points)

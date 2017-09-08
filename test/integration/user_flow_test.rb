@@ -38,7 +38,7 @@ class UserFlowTest < ActionDispatch::IntegrationTest
 
     within 'section.content' do
       within '.box' do
-        assert page.has_content?('Redeem Points!')
+        # assert page.has_content?('Redeem Points!')
         assert page.has_no_link?('Redeem Points')
         #page.save_and_open_screenshot
       end

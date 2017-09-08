@@ -50,11 +50,11 @@ namespace :utils do
       type = "all"
       round = Round.opened
       group.members.each do |user|
-        UserReposJob.perform_later(user)
+        UserReposJob.perform_later(user.id.to_s)
         user.repositories.each do |repo| 
-          CommitJob.perform_later(user, type, repo, round)
+          CommitJob.perform_later(user.id.to_s, type, repo.id.to_s, round.id.to_s)
         end
-        ActivityJob.perform_later(user, type, round)
+        ActivityJob.perform_later(user.id.to_s, type, round.id.to_s)
       end
     end
   end
@@ -89,4 +89,42 @@ namespace :utils do
     end
   end
 
+  desc "Restore Repository and associated user"
+  task restore_repositories: :environment do
+    # get all deleted repositories
+    Repository.deleted.each do |deleted_repo|
+      # get the users for the deleted repository and recreate the relationship
+      deleted_repo.users.each do |user|
+        user.repositories << deleted_repo
+      end
+      # restore the repository.
+      deleted_repo.restore
+    end
+  end
+
+  desc "Update user redeemed points transactions"
+  task update_user_redemed_points: :environment do
+    User.contestants.each do |user|
+      user.transactions.where(transaction_type: 'redeem_points').each do |transaction|
+        total_points = 0
+        points = transaction.points.abs
+        total_points = user.transactions.where(:created_at.lt => transaction.created_at).sum(:points)
+        royalty_points = user.royalty_bonus_transaction ? user.royalty_bonus_transaction.points : 0
+
+        redeemed_royalty_points = points + royalty_points - total_points
+
+        redeemed_royalty_points = 0 if redeemed_royalty_points <= 0
+
+        redeemed_royalty_points = points if redeemed_royalty_points > points
+
+        round_points = points - redeemed_royalty_points
+
+        transaction.create_redemption_transaction({
+          round_points: round_points,
+          royalty_points: redeemed_royalty_points,
+          round_name: transaction.created_at.strftime("%b %Y")
+        })
+      end
+    end
+  end
 end

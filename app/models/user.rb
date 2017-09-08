@@ -9,7 +9,7 @@ class User
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable, :registerable
   devise :database_authenticatable,
-         :rememberable, :trackable, :validatable, :omniauthable
+    :rememberable, :trackable, :validatable, :omniauthable
 
   ## Database authenticatable
   field :email,              type: String, default: ""
@@ -24,10 +24,13 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
+  field :blocked,            type: Boolean, default: false
 
   field :github_handle,      type: String
+  field :twitter_handle,     type: String
   field :active,             type: Boolean, default: true
   field :is_judge,           type: Boolean, default: false
+  field :is_sponsorer,       type: Boolean, default: false
   field :name,               type: String
   field :provider,           type: String
   field :uid,                type: String
@@ -70,6 +73,7 @@ class User
   has_and_belongs_to_many :roles, inverse_of: nil
   has_and_belongs_to_many :organizations
   has_and_belongs_to_many :groups, class_name: 'Group', inverse_of: 'members'
+  has_many :sponsorer_details, dependent: :destroy
 
   slug  :github_handle
 
@@ -78,11 +82,15 @@ class User
   index(auto_created: 1)
 
   scope :contestants, -> { where(auto_created: false) }
+  scope :blocked,   -> { where(blocked: true) }
+  scope :allowed,   -> { where(blocked: false) }
   scope :judges, -> { where(is_judge: true) }
 
   validates :email, :github_handle, :name, :uid, presence: true
   validates :uid, uniqueness: true
+  validates :twitter_handle, presence: true, format: { with: /\A@\w{1,15}\z/, message: "invalid Twitter handle"}, allow_nil: true
 
+  before_validation :append_twitter_prefix
   after_create do |user|
     user.calculate_popularity unless user.auto_created
   end
@@ -117,7 +125,7 @@ class User
   def calculate_popularity
     self.subscribe_to_round
     User.delay_for(2.second, queue: 'git').update_total_repos_stars(self.id.to_s)
-    UserReposJob.perform_later(self)
+    UserReposJob.perform_later(self.id.to_s)
   end
 
   def create_transaction(attrs = {})
@@ -133,6 +141,10 @@ class User
 
   def is_admin?
     roles.where(name: ROLES[:admin]).any?
+  end
+
+  def is_sponsorer?
+    roles.where(name: 'Sponsorer').any?
   end
 
   def repo_names
@@ -234,13 +246,30 @@ class User
   end
 
   def royalty_bonus_transaction
-    self.transactions.where(transaction_type: 'royalty_bonus').first
+    self.transactions.where(transaction_type: 'royalty_bonus').asc(:created_at).first
+  end
+
+  def active_sponsorer_detail
+    sponsorer_details.asc(:subscribed_at).where(subscription_status: :active).asc(:created_at).last
   end
 
   def deleted?
     self.deleted_at.present? and !active
   end
 
+  def sponsorer_detail
+    sponsorer_details.asc(:created_at).last
+  end
+
+  def append_twitter_prefix
+    if self.twitter_handle.present?
+      self.twitter_handle.strip!
+      # Regex to match whether twitter handle provided by user contains @ sign at its
+      # begining or not
+      if !/^@/.match(self.twitter_handle)
+        self.twitter_handle = '@' + self.twitter_handle
+      end
+    end
+  end
+
 end
-
-

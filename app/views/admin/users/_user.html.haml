@@ -4,12 +4,13 @@
   %td= user.points
   %td= user.email
   %td= user.created_at.strftime('%d/%m/%Y %T')
-  %td 
+  %td= check_box_tag user.id, 'blocked', user.blocked, { id: "#{user.id}", class: 'block'}
+  %td
     - if user.is_judge?
       %a{href: admin_user_mark_as_judge_path(user, flag: false), class: "btn btn-danger btn-sm", data: {confirm: "Are you sure?"}}
         %i.fa.fa-close
           Remove as judge
-    - else  
+    - else
       %a{href: admin_user_mark_as_judge_path(user, flag: true), class: "btn btn-primary btn-sm", data: {confirm: "Are you sure?"}}
         %i.fa.fa-check
           Mark as judge
@@ -18,3 +19,4 @@
       Login as
     %a{href: admin_user_path(user.id), class: "btn btn-danger btn-sm", data: {method: 'delete', confirm: "Are you sure? This action is irreversible"}}
       %i.fa.fa-trash
+

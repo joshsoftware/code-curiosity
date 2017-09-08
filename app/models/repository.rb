@@ -18,6 +18,7 @@ class Repository
   field :ssh_url,      type: String
   field :ignore_files, type: Array, default: []
   field :type,         type: String
+  field :ignore,       type: Boolean, default: false
 
   belongs_to :popular_repository, class_name: 'Repository', inverse_of: 'repositories'
   belongs_to :organization
@@ -36,6 +37,7 @@ class Repository
 
   scope :popular, -> { where(type: 'popular') }
   scope :users_repos, -> { where(:type.ne =>  'popular') }
+  scope :required, -> { where(ignore: false) }
 
   def popular?
     self.type == 'popular'
@@ -54,7 +56,7 @@ class Repository
   end
 
   def info
-    @info ||= GITHUB.repos.get(owner, name)
+    @info ||= GITHUB.repos.get(owner, name, {redirection: true})
   end
 
   def self.add_new(params, user)
@@ -141,7 +143,13 @@ class Repository
       if commit.message =~ PULL_REQ_MERGE_REGX
         commit.set(auto_score: 0)
       else
-        commit.set(auto_score: engine.calculate_score(commit))
+        begin
+          Sidekiq.logger.info "Scoring for commit: #{commit.id}, Round: #{round.from_date}"
+          # commit.set(auto_score: engine.calculate_score(commit))
+          ScoreCommitJob.perform_later(commit.id.to_s)
+        rescue StandardError => e
+          Sidekiq.logger.info "Commit: #{commit.id}, Error: #{e}"
+        end
       end
     end
 
