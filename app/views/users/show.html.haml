@@ -9,7 +9,7 @@
         .box-body.box-profile
           = image_tag avatar_url(@user), class: 'profile-user-img img-responsive img-circle', alt: @user.name
           %h3.profile-username.text-center= @user.name.titleize
-          %p.text-muted
+          %p.text-muted.text-center
             - if logged_in_user?
               = render 'twitter_data', user: @user
             = link_to github_url(@user), target: '_blank' do
