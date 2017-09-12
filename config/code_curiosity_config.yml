@@ -6,13 +6,13 @@ wallet:
   challenge_subscription: Challenge Subscription
 
 round:
-  states: 
+  states:
     inactive: inactive
     open: open
     close: close
 
 repository:
-  popular: 
+  popular:
     stars: 25
   max_size: 100
 
@@ -57,13 +57,15 @@ redeem:
     - github
     - amazon
     - other
-  github_redeem_amounts: 
+  github_redeem_amounts:
     - 10
     - 25
     - 50
-    - 100 
+    - 100
   amazon_stores:
     - amazon.com
     - amazon.in
     - amazon.uk
 
+account:
+  twitter: 'https://twitter.com/code_curiosity'
