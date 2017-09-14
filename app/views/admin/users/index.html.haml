@@ -1,13 +1,20 @@
+%section.content-header
+  %h1
+    Users :-
+    %label.slide
+      %input#blocked{checked: !(@status == "true"), type: 'checkbox', data: { toggle: 'toggle', width: '80', height: '40', on: 'Allowed', off: 'Blocked' }}
+
 %section.content
   .row
     .col-xs-12
       .box.box-primary
         .box-header
           %h3.box-title
-            %span Users:
+            %span Contestants:
           .box-tools
             = form_tag(search_admin_users_path, method: :get, class: 'col-xs-3 col-md-4 pull-right') do
               .input-group.input-group-sm
+                = hidden_field_tag 'status', @status
                 = text_field_tag('q', params[:q], class: 'form-control pull-right', placeholder: 'github handle/email')
                 .input-group-btn
                   %button.btn.btn-default{type: 'submit'} Go

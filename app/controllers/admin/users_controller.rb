@@ -4,7 +4,13 @@ class Admin::UsersController < ApplicationController
   before_action :find_user, only: [:block_user, :destroy]
 
   def index
-    @users = User.contestants.desc(:created_at).page(params[:page])
+    @status = params[:blocked] || false
+    @users = User.contestants.where(blocked: @status).desc(:created_at).page(params[:page])
+    if request.xhr?
+      respond_to do |format|
+        format.js
+      end
+    end
   end
 
   def mark_as_judge
@@ -29,9 +35,9 @@ class Admin::UsersController < ApplicationController
       redirect_to admin_users_path
       return
     end
-
-    @users = User.contestants.where(github_handle: /#{params[:q]}/)
-    @users = User.contestants.where(email: params[:q]) if @users.none?
+    @status = params[:status]
+    @users = User.contestants.where(blocked: params[:status], github_handle: /#{params[:q]}/)
+    @users = User.contestants.where(blocked: params[:status], email: params[:q]) if @users.none?
     @users = @users.page(params[:page])
 
     render :index
