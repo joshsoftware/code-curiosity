@@ -1,18 +1,22 @@
 %table.table.table-hover.table-bordered#repos
   %thead
     %tr
-      %th.col-xs-2 Name
+      %th.col-xs-2
+        Name
+        .badge Forks
       %th.col-xs-3 Description
       %th.col-xs-1 Stars
       %th.col-xs-1.5 Judges
       %th.col-xs-1 Ignored
       %th.col-xs-2 Actions
       %th.col-xs-1 To be Ignored?
-  %tbody     
+  %tbody
     - @repos.each do |repo|
       %tr
-        %td.col-xs-2 
+        %td.col-xs-2
           = link_to repo.name,  repo.source_url, target: "_blank"
+          - if repo.popular? || repo.source_gh_id.nil?
+            .badge= child_count(repo.id)
         %td.col-xs-3= repo.description
         %td.col-xs-1= repo.stars
         %td.col-xs-1.5{id: "judges_#{repo._id}"}= repo.judges_name
