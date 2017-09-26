@@ -26,6 +26,9 @@
               %b Activities
               %a.pull-right= @user.activities_count
             %li.list-group-item
+              %b Earned
+              %a.pull-right $ #{amount_earned @user}
+            %li.list-group-item
               %b Goal
               - if @user.current_subscription && @user.current_subscription.goal
                 = link_to @user.current_subscription.goal.name, trend_path, class: 'pull-right'

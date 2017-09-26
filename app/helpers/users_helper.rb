@@ -17,4 +17,8 @@ module UsersHelper
   def remove_prefix(twitter_handle)
     twitter_handle[1..-1]
   end
+
+  def amount_earned(user)
+    user.transactions.where(type: 'debit').sum(:amount).abs
+  end
 end
