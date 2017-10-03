@@ -2,6 +2,9 @@
   .box-header
     %h2= header
   .box-body
+    - ORGANIZATIONAL_SPONSORERS.each do |org|
+      .img-center
+        = link_to image_tag(org[1]["logo"], class: "img-responsive", width: 200, height: 200, alt: "Responsive image"), org[1]["link"], target: '_blank'
     - sponsorer_group.in_groups_of(4) do |group|
       - group.each do |sponsorer|
         - if sponsorer
