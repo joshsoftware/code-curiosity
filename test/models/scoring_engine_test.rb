@@ -180,6 +180,24 @@ class ScoringEngineTest < ActiveSupport::TestCase
     assert_equal bugspot_score.round(3), scores.round(3)
   end
 
+  test 'method should return nil if it is unable to clone repository' do
+    repo = create :repository, ssh_url: 'git@github.com:prasadsurase/code-curiosity.git', owner: 'prasadsurase', name: 'code-curiosity'
+    commit = create(:commit, message: Faker::Lorem.sentences, sha: '8a11b8031c06df55f0edf7d41aad22987a74165d', repository: repo)
+    engine = ScoringEngine.new(repo)
+    Git.stubs(:clone).raises(Git::GitExecuteError, {})
+    git = engine.send(:clone_repo, repo)
+    assert_nil git
+  end
+
+  test 'method should return git if it can clone repository' do
+    repo = create :repository, ssh_url: 'git@github.com:prasadsurase/code-curiosity.git', owner: 'prasadsurase', name: 'code-curiosity'
+    commit = create(:commit, message: Faker::Lorem.sentences, sha: '8a11b8031c06df55f0edf7d41aad22987a74165d', repository: repo)
+    engine = ScoringEngine.new(repo)
+    git = engine.send(:clone_repo, repo)
+    assert_not_nil git
+  end
+
+
   def stub_commit_for_bugspots_scoring
     @repo = create :repository, ssh_url: 'git@github.com:prasadsurase/code-curiosity.git', owner: 'prasadsurase', name: 'code-curiosity'
     @commit = create(:commit, message: Faker::Lorem.sentences, sha: '8a11b8031c06df55f0edf7d41aad22987a74165d', repository: @repo)
