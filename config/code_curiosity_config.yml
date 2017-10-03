@@ -33,6 +33,14 @@ redeem_request_threshold:
   free: 400
   paid: 500
 
+organizational_sponsorers:
+  josh:
+    logo: "org-josh-logo.png"
+    link: "http://www.joshsoftware.com"
+  ett:
+    logo: "org-ett-logo.png"
+    link: "https://www.facebook.com/Emerging-Technology-Trust-840341759454971/"
+
 scoring_engine:
   :repositories: 'repositories' # repositories dir
   :max_score: 5
