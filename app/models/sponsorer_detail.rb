@@ -36,6 +36,7 @@ class SponsorerDetail
   after_create :update_user_as_sponsor
   after_create :notify_user_and_admin
   after_create :update_royalty_bonus
+  after_update :revert_redeem_requests, if: :subscription_status_changed?
 
   scope :organizations, -> { where(sponsorer_type: 'ORGANIZATION') }
   scope :individuals, -> { where(sponsorer_type: 'INDIVIDUAL') }
@@ -77,4 +78,12 @@ class SponsorerDetail
     end
   end
 
+  # if user cancel his sponsorship this method will revert all his active redeem requests
+  # which he made during his sponsorship
+  def revert_redeem_requests
+    if subscription_status == 'canceled'
+      redeem_requests = user.redeem_requests.where(:created_at.gte => created_at, :created_at.lte => updated_at, status: false)
+      redeem_requests.destroy_all
+    end
+  end
 end
