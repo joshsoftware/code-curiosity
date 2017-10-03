@@ -39,5 +39,4 @@ class Admin::UsersControllerTest < ActionController::TestCase
     assert_equal RedeemRequest.count, 0
     assert_response :redirect
   end
-
 end

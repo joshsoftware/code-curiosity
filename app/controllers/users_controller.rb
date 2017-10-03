@@ -100,6 +100,7 @@ class UsersController < ApplicationController
     # So, we manipulate the UID and set auto_created: true, so that no data will be fetched.
     user.uid = "#{user.uid}-DELETED"
     user.auto_created = true
+    user.blocked = false if user.blocked
     user.save
     redirect_to root_url, notice: "Your account has been deleted successfully."
   end
