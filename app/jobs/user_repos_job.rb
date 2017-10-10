@@ -5,6 +5,9 @@ class UserReposJob < ActiveJob::Base
   attr_accessor :user
 
   rescue_from(StandardError) do |exception|
+    Sidekiq.logger.info "**************************************Exception *******************************"
+    Sidekiq.logger.info "User: #{user.github_handle}"
+    Sidekiq.logger.info "Exception: #{exception.inspect}"
     user.set(last_repo_sync_at: nil) if user
   end
 
@@ -17,6 +20,7 @@ class UserReposJob < ActiveJob::Base
 
     Sidekiq.logger.info "************************* UserReposJob Logger Info ***************************"
     Sidekiq.logger.info "Syncing repositories of #{user.github_handle}"
+    Sidekiq.logger.info "Last repository sync at: #{user.last_repo_sync_at}"
 
     gh_repos = user.fetch_all_github_repos
 
@@ -56,6 +60,7 @@ class UserReposJob < ActiveJob::Base
     end
 
     repo = Repository.build_from_gh_info(gh_repo)
+    Sidekiq.logger.info "Repository INFO: Name: #{repo.name} | Stars: #{repo.stars} "
 
     if repo.stars >= REPOSITORY_CONFIG['popular']['stars']
       user.repositories << repo
@@ -71,7 +76,6 @@ class UserReposJob < ActiveJob::Base
     repo.source_gh_id = repo.info.source.id
     user.repositories << repo
     user.save
-    Sidekiq.logger.info "Persisted popular repository #{repo.name} for user #{user.github_handle
-    }"
+    Sidekiq.logger.info "Persisted popular repository #{repo.name} for user #{user.github_handle}"
   end
 end
