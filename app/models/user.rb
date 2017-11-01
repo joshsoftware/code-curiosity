@@ -197,14 +197,17 @@ class User
     end
 
     if royalty_points > 0
+      self.transactions.create(points: royalty_points, transaction_type: 'royalty_bonus', type: 'credit')
+=begin
       royalty_bonuses = self.transactions.where(transaction_type: 'royalty_bonus', type: 'credit')
       self.transactions.create(
         points: royalty_bonuses.any? ? royalty_points - royalty_bonuses.sum(:points) : royalty_points,
         transaction_type: 'royalty_bonus', type: 'credit'
       )
+=end
     end
 
-    self.points = total_points
+    self.points = royalty_points
     self.save
   end
 
