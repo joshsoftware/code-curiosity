@@ -41,7 +41,7 @@ class Admin::RedeemRequestsHelperTest < ActionView::TestCase
     role = create(:role, :name => 'Admin')
     @user = create(:user, goal: create(:goal))
     @user.roles << role
-    transaction = create(:transaction, :type => 'credit', :points => 120, user: @user)
+    transaction = create(:transaction, :type => 'credit', :points => 420, user: @user)
   end
 
 end

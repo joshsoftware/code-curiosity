@@ -7,6 +7,7 @@ FactoryGirl.define do
     active {random_boolean = [true, false].sample}
     is_judge {random_boolean = [true, false].sample}
     github_handle {Faker::Internet.user_name}
+    uid { Faker::Number.number(6) }
 
     factory :user_with_transactions do
         transient do

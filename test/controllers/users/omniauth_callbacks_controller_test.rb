@@ -89,7 +89,7 @@ class Users::OmniauthCallbacksControllerTest < ActionController::TestCase
   end
 
   test "existing user sign in as sponsorer" do
-    # round = create(:round, :status => 'open')
+    round = create(:round, :status => 'open')
     # @user = create(:user, :auth_token => 'dah123rty', goal: create(:goal))
     # @user.last_sign_in_at = Time.zone.now
   end
@@ -98,5 +98,38 @@ class Users::OmniauthCallbacksControllerTest < ActionController::TestCase
 
   end
 
-end
+  test 're-signup' do
+    OmniAuth.config.test_mode = true
 
+    omniauth_hash = {
+      provider: 'github',
+      uid: '12345',
+      info: {
+        name: 'test user',
+        email: 'test@test.com'
+      },
+      extra: {
+        raw_info: { login: 'hello' }
+      },
+      credentials: { token: 'github_omiauth_test' }
+    }
+
+    OmniAuth.config.add_mock(:github, omniauth_hash)
+
+    request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github]
+    round = create(:round, status: 'open')
+
+    get :github
+    assert_equal User.count, 1
+
+    @user = assigns(:user)
+
+    sign_out @user
+    # update user to be set as deleted
+    @user.update({deleted_at: Time.now, auto_created: true, active: false})
+
+    get :github
+    @user = assigns(:user)
+    assert_equal User.count, 1
+  end
+end
