@@ -93,4 +93,84 @@ class SponsorerDetailTest < ActiveSupport::TestCase
     sponsorer_detail = create :sponsorer_detail, created_at: DateTime.parse("05/10/2017"), sponsorer_type: 'INDIVIDUAL', user: user
     assert_equal 10, transaction.reload.amount
   end
+
+  test "must only revert any active redeem request made during sponsorship" do
+    round = create :round, :open
+    user = create :user
+    create(:subscription, round: round, user: user)
+    create :transaction, transaction_type: 'royalty_bonus', type: 'credit', points: 1000, user: user
+    create :redeem_request, created_at: DateTime.parse("30/07/2017"), points: 200, user: user
+    assert_equal 1,user.redeem_requests.count
+    sponsorer_detail = create :sponsorer_detail, user: user, created_at: DateTime.parse("01/08/2017")
+    create :transaction, transaction_type: 'round', type: 'credit', points: 200, user: user
+    create :redeem_request, created_at: DateTime.parse("03/08/2017"), points: 200, user: user, sponsorer_detail: sponsorer_detail
+    assert_equal 2, user.redeem_requests.count
+    sponsorer_detail.update(subscription_status: 'canceled')
+    assert_equal 1, user.reload.redeem_requests.count
+  end
+
+  test "must not revert any completed redeem request made during sponsorship" do
+    round = create :round, :open
+    user = create :user
+    create(:subscription, round: round, user: user)
+    sponsorer_detail = create :sponsorer_detail, user: user, created_at: DateTime.parse("01/08/2017")
+    create :transaction, transaction_type: 'royalty_bonus', type: 'credit', points: 1000, user: user
+    create :transaction, transaction_type: 'round', type: 'credit', points: 200, user: user
+    redeem_request = create :redeem_request, created_at: DateTime.parse("03/08/2017"), points: 200, user: user, sponsorer_detail: sponsorer_detail
+    redeem_request.update(status: true)
+    assert_equal 1, user.redeem_requests.count
+    sponsorer_detail.update(subscription_status: 'canceled')
+    assert_equal 1, user.redeem_requests.count
+  end
+
+  test "must not revert any active redeem request not made during sponsorship" do
+    round = create :round, :open
+    user = create :user
+    create(:subscription, round: round, user: user)
+    create :transaction, transaction_type: 'royalty_bonus', type: 'credit', points: 1000, user: user
+    create :transaction, transaction_type: 'round', type: 'credit', points: 200, user: user
+    redeem_request = create :redeem_request, created_at: DateTime.parse("03/08/2017"), points: 200, user: user
+    sponsorer_detail = create :sponsorer_detail, user: user, created_at: DateTime.parse("01/10/2017")
+    assert_equal 1, user.redeem_requests.count
+    sponsorer_detail.update(subscription_status: 'canceled')
+    assert_equal 1, user.redeem_requests.count
+  end
+
+  test "must not revert any completed redeem request not made during sponsorship" do
+    round = create :round, :open
+    user = create :user
+    create(:subscription, round: round, user: user)
+    create :transaction, transaction_type: 'royalty_bonus', type: 'credit', points: 1000, user: user
+    create :transaction, transaction_type: 'round', type: 'credit', points: 200, user: user
+    redeem_request = create :redeem_request, created_at: DateTime.parse("03/08/2017"), points: 200, user: user
+    redeem_request.update(status: true)
+    sponsorer_detail = create :sponsorer_detail, user: user, created_at: DateTime.parse("08/09/2017")
+    assert_equal 1, user.redeem_requests.count
+    sponsorer_detail.update(subscription_status: 'canceled')
+    assert_equal 1, user.redeem_requests.count
+  end
+
+  test "must not revert any credit transactions made during sponsorship" do
+    round = create :round, :open
+    user = create :user
+    create(:subscription, round: round, user: user)
+    create :transaction, transaction_type: 'royalty_bonus', type: 'credit', points: 1000, user: user, created_at: DateTime.parse("08/09/2017")
+    create :transaction, transaction_type: 'round', type: 'credit', points: 200, user: user, created_at: DateTime.parse("30/09/2017")
+    sponsorer_detail = create :sponsorer_detail, user: user, created_at: DateTime.parse("08/09/2017")
+    assert_equal 2, user.transactions.where(type: 'credit').count
+    sponsorer_detail.update(subscription_status: 'canceled')
+    assert_equal 2, user.transactions.where(type: 'credit').count
+  end
+
+  test "must not revert any credit transactions not made during sponsorship" do
+    round = create :round, :open
+    user = create :user
+    create(:subscription, round: round, user: user)
+    create :transaction, transaction_type: 'royalty_bonus', type: 'credit', points: 1000, user: user, created_at: DateTime.parse("08/08/2017")
+    create :transaction, transaction_type: 'round', type: 'credit', points: 200, user: user, created_at: DateTime.parse("30/08/2017")
+    sponsorer_detail = create :sponsorer_detail, user: user, created_at: DateTime.parse("08/09/2017")
+    assert_equal 2, user.transactions.where(type: 'credit').count
+    sponsorer_detail.update(subscription_status: 'canceled')
+    assert_equal 2, user.transactions.where(type: 'credit').count
+  end
 end

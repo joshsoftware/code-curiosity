@@ -52,7 +52,7 @@ class Admin::RedeemRequestsController < ApplicationController
 
   def load_redeem_request
     @status = params[:status] || false
-    @redeem_requests = RedeemRequest.where(status: @status).desc(:created_at)
+    @redeem_requests = RedeemRequest.where(status: @status).desc(:sponsorer_detail).desc(:created_at)
   end
 
 end

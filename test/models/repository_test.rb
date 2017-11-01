@@ -51,4 +51,27 @@ class RepositoryTest < ActiveSupport::TestCase
     assert info.success?
   end
 
+  test 'must return parent repositories' do
+    repo = create :repository, type: 'popular', gh_id: 231232
+    repository_1 = create :repository, popular_repository_id: repo.id, type: nil
+    repository_2 = create :repository, source_gh_id: repo.gh_id, popular_repository_id: repo.id, type: nil
+    assert_equal 1, Repository.parent.count
+    assert_equal repo, Repository.parent.find_by(gh_id: 231232)
+  end
+
+  test 'must return child repositories whose parents are not present in DB' do
+    repo = create :repository, type: 'popular', gh_id: 231232
+    repository_1 = create :repository, type: nil
+    repository_2 = create :repository, popular_repository_id: repo.id, type: nil
+    assert_equal 2, Repository.parent.count
+    assert_not_nil Repository.parent.find(repository_1.id)
+  end
+
+  test 'must not return any child repositories whose parent are present in DB' do
+    repo = create :repository, type: 'popular', gh_id: 231232
+    repository_1 = create :repository, popular_repository_id: repo.id, type: nil
+    repository_2 = create :repository, source_gh_id: repo.gh_id, type: nil
+    assert_equal 1, Repository.parent.count
+    assert_not_nil Repository.parent.find(repo.id)
+  end
 end

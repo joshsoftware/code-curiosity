@@ -38,7 +38,7 @@ class Repository
   scope :popular, -> { where(type: 'popular') }
   scope :users_repos, -> { where(:type.ne =>  'popular') }
   scope :required, -> { where(ignore: false) }
-
+  scope :parent, -> { any_of({type: 'popular'}, {source_gh_id: nil, popular_repository_id: nil})}
   def popular?
     self.type == 'popular'
   end

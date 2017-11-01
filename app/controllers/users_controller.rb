@@ -98,7 +98,7 @@ class UsersController < ApplicationController
 
     # We cannot delete the user completely, because there are plenty of associations.
     # So, we manipulate the UID and set auto_created: true, so that no data will be fetched.
-    user.update({deleted_at: Time.now, auto_created: true, active: false})
+    user.update({deleted_at: Time.now, auto_created: true, active: false, blocked: user.blocked ? false : user.blocked })
     redirect_to root_url, notice: "Your account has been deleted successfully."
   end
 
