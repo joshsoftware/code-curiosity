@@ -23,6 +23,7 @@ class Transaction
 
   before_save do |t|
     t.points = t.credit? ? t.points.abs : -(t.points.abs)
+    t.amount = t.credit? ? t.amount.abs : -(t.amount.abs)
   end
 
   after_create :update_user_total_points
