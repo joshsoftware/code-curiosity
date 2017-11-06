@@ -6,7 +6,7 @@ class RedeemRequest
   field :coupon_code, type: String
   field :status,      type: Boolean, default: false
   field :points,      type: Integer
-  field :amount,      type: Integer
+  field :amount,      type: Float
   field :retailer,    type: String, default: REDEEM['retailers'].first
   field :store,       type: String
   field :address,     type: String
@@ -55,7 +55,8 @@ class RedeemRequest
 
   def update_transaction_points
     if points.to_i > 0
-      self.transaction.update(points: points)
+      update_amount
+      self.transaction.update(points: points, amount: amount)
       self.user.update(points: self.user.total_points)
     end
   end
@@ -203,6 +204,15 @@ class RedeemRequest
                   else
                     REDEEM['one_dollar_to_points'] * 2
                   end
-    self.amount = points/denominator
+    self.amount = points.to_f/denominator
+  end
+
+  def update_amount
+    denominator = if sponsorer_detail
+                    REDEEM['one_dollar_to_points']
+                  else
+                    REDEEM['one_dollar_to_points'] * 2
+                  end
+    self.set(amount: points.to_f/denominator)
   end
 end
