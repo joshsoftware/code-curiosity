@@ -9,12 +9,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @show_transactions = current_user == @user
-    contribution_data(@user)
     if @user
+      @show_transactions = current_user == @user
+      contribution_data(@user)
       render layout: current_user ? 'application' : 'public'
     else
-      redirect_to root_url, notice: 'Invalid user name'
+      redirect_to root_url, alert: I18n.t('user.not_exist_in_system')
     end
   end
 
