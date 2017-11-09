@@ -21,7 +21,7 @@ class ActivitiesFetcher
     activities.each do |a|
       if TRACKING_EVENTS.key?(a.type) && Time.parse(a.created_at) > since_time
         repo = Repository.where(gh_id: a.repo.id).first
-        repo = self.create_repo(a.repo.name) unless repo
+        repo = self.create_repo(a.repo.id) unless repo
         create_activity(a, repo) if repo && !repo.ignore
       end
     end
@@ -45,8 +45,8 @@ class ActivitiesFetcher
     user_activity.save
   end
 
-  def create_repo(repo_name)
-    info = user.gh_client.repos.get(*repo_name.split('/'))
+  def create_repo(repo_id)
+    info = user.gh_client.repos.get_by_id(repo_id)
 
     if info.stargazers_count >= REPOSITORY_CONFIG['popular']['stars']
       repo = Repository.build_from_gh_info(info)
