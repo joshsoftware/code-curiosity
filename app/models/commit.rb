@@ -43,7 +43,7 @@ class Commit
   #after_create :schedule_scoring_job
 
   def info
-    @info ||= repository ? user.gh_client.repos.commits.get(repository.owner, repository.name, sha, { redirection: true }) : nil
+    @info ||= repository ? user.gh_client.repos.commits.get(repository.owner, repository.name, sha) : nil
   end
 
   def max_rating
