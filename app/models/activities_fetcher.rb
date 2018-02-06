@@ -17,7 +17,6 @@ class ActivitiesFetcher
 
     #repos = user.repositories.inject({}){|o, r| o[r.gh_id] = r; o}
     activities = user.gh_client.activity.events.performed(user.github_handle, auto_pagination: true)
-
     activities.each do |a|
       if TRACKING_EVENTS.key?(a.type) && Time.parse(a.created_at) > since_time
         repo = Repository.where(gh_id: a.repo.id).first
@@ -29,9 +28,7 @@ class ActivitiesFetcher
 
   def create_activity(activity, repo)
     type = TRACKING_EVENTS[activity.type]
-
     return unless user.github_handle == activity.payload[type].user.login
-
     user_activity = user.activities.find_or_initialize_by(gh_id: activity.id)
     user_activity.event_type = type
     user_activity.event_action = activity.payload['action']

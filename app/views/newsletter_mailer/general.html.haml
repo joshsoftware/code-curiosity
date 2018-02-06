@@ -1,0 +1,58 @@
+:css
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) { img { max-width: 100%; } }
+- content_for :signature do
+  = render 'application/mail_signature'
+
+%h4= "Dear #{@user.name},"
+%p
+  As registered users on CodeCuriosity, we truly appreciate your contribution to open-source and in case you still haven't made a mark, we appreciate your intent!
+%br
+  %b What can be measured, can be improved - so we hope this is helping everyone!
+%br
+%br
+It's been a little over 2 years that we started this initiative and we have been pleasantly surprised with the response.
+At the end of 2016 we had posted what we achieved and our target for 2017.
+%br
+%p{align: "center"}
+/  %blockquote.twitter-tweet{"data-lang" => "en", align: "center"}
+/    %p{:dir => "ltr", :lang => "en"}>
+/      %a{:href => "https://t.co/XRnxaNRcbK"} https://t.co/XRnxaNRcbK
+/      has achieved its target for 2016. Got 600 subscribers and over 1700$ rewarded.
+/      = succeed "\u{1f91e}2000" do
+/        %br/
+/    — Gautam Rege (@gautamrege)
+/    %a{:href => "https://twitter.com/gautamrege/status/815057893800038400?ref_src=twsrc%5Etfw"} December 31, 2016
+/  %script{:async => "", :charset => "utf-8", :src => "https://platform.twitter.com/widgets.js"}
+%br
+%a{:href => "https://twitter.com/gautamrege/status/815057893800038400?ref_src=twsrc%5Etfw"}
+  %img{:alt => "tweet", :border => "0", :src =>  attachments.inline['tweet.png'].url, width: "100%"}/
+%br
+%br
+%p{:style => "color:blue;"}
+  %i
+    %b We are so proud that we have surpassed our expectations!
+%br
+%b{style: "color: red"}So, what’s next?
+%ul
+  %li
+    We need some support from the community. We aim to make quicker payouts on redemptions but since this is still a self-initiative, it takes it toll on our funds. We need all the help you can give us. Please be a paid subscriber on the $5 plan to help this cause get bigger (and get a better redemption ratio).
+  %br
+    %table.module{:border => "0", :cellpadding => "0", :cellspacing => "0", "data-attributes" => "%7B%22dropped%22%3Atrue%2C%22borderradius%22%3A6%2C%22buttonpadding%22%3A%2212%2C18%2C12%2C18%22%2C%22text%22%3A%22Your%20Bulletproof%20Button%22%2C%22alignment%22%3A%22center%22%2C%22fontsize%22%3A16%2C%22url%22%3A%22%22%2C%22height%22%3A%22%22%2C%22width%22%3A%22%22%2C%22containerbackground%22%3A%22%23ffffff%22%2C%22padding%22%3A%220%2C0%2C0%2C0%22%2C%22buttoncolor%22%3A%22%231188e6%22%2C%22textcolor%22%3A%22%23ffffff%22%2C%22bordercolor%22%3A%22%231288e5%22%7D", "data-type" => "button", :role => "module", :style => "table-layout: fixed;", :width => "100%"}
+      %tr
+        %td{:align => "center", :bgcolor => "#ffffff", :style => "padding: 10px 0px 0px 0px;"}
+          %table.wrapper-mobile{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+            %tr
+              %td{:align => "center", :bgcolor => "#1188e6", :style => "-webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px; font-size: 16px;"}
+                = link_to "Subscribe for $5 plan", sponsorer_details_url, class: "bulletproof-button", style: "height: px; width: px; font-size: 16px; line-height: px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; padding: 12px 18px 12px 18px; text-decoration: none; color: #ffffff; text-decoration: none; -webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px; border: 1px solid #1288e5; display: inline-block;", target: "_blank"
+  %br
+  %li
+    If anyone can help us <b>promote this to the top management of Github</b>, it would be great. We aim to help Github use “Social Rewarding” as one of their tag lines.
+  %br
+  %li
+    We plan to have a way to <b>export or embed your "open-source profile"</b>. We believe that this would be a great way to showcase your coding abilities for potential employers!
+  %br
+  %li
+    We are also looking for a way to get <b>corporate sponsors</b> a brief preview into hiring great talent — and great talent are those who consistently code and have some open-source contributions to show for it, right?
+%br
+%p
+  Next year, our target is to get 5 corporate sponsors ($250 per month) and do about $ 10,000 in redemptions and have a user base of 5000 developers!

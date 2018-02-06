@@ -1,3 +1,4 @@
+
 class Repository
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -56,7 +57,7 @@ class Repository
   end
 
   def info
-    @info ||= GITHUB.repos.get(owner, name, {redirection: true})
+    @info ||= GITHUB.repos.get(owner, name)
   end
 
   def self.add_new(params, user)

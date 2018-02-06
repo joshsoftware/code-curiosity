@@ -45,7 +45,7 @@ class Organization
   end
 
   def info
-    @info ||= GITHUB.orgs.get(github_handle, {redirection: true})
+    @info ||= GITHUB.orgs.get(github_handle)
   end
 
   def self.setup(github_handle, admin)
