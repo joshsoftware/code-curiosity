@@ -23,7 +23,7 @@ class SubscriptionMailer < ApplicationMailer
     @user = user
     @message = message
 
-    mail(to: user.email, subject: "[CODECURIOSITY] Terms of Service has changed. Please support our dream")
+    mail(to: user.email, subject: "[CODECURIOSITY] Your points for the month of #{Date.today.strftime("%B")}!")
   end
 
 end
