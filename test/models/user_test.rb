@@ -196,4 +196,24 @@ class UserTest < ActiveSupport::TestCase
 =end
   end
 
+  test 'upgrade account if user is offer winner' do
+    round = create :round, :open
+    offer = Offer.create(
+      email: 'test@test.com', 
+      name: 'test_user', 
+      active_from: Date.today + 5.day
+    )
+    omniauthentication
+    user = User.find_by name: 'test_user'
+    assert_equal user.active_sponsorer_detail, nil
+
+    offer.update_attributes(active_from: Date.today)
+    omniauthentication
+    assert_equal !!user.active_sponsorer_detail, true
+    assert_equal user.sponsorer_details.count, 1
+
+    omniauthentication
+    assert_equal user.sponsorer_details.count, 1
+  end
+
 end
