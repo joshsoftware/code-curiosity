@@ -265,7 +265,7 @@ class User
   end
 
   def sponsorer_detail
-    sponsorer_details.asc(:created_at).last
+    sponsorer_details.where(:stripe_customer_id.ne => nil).asc(:created_at).last
   end
 
   def append_twitter_prefix
