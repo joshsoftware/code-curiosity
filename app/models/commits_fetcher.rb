@@ -9,7 +9,7 @@ class CommitsFetcher
   end
 
   def fetch(type = :daily)
-    user.gh_client.repos.branches(repo.owner, repo.name, {auto_pagination: true}).each do |branch|
+    user.gh_client.repos.branches(user: repo.owner, repo: repo.name).list.each do |branch|
       # Refer to issue https://rollbar.com/JoshSoftware/CodeCuriosity/items/8/
       # This is a quick fix where we ignore branches / repos that have moved.
       # This is related to https://github.com/piotrmurach/github/pull/258 and
