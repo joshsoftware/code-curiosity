@@ -42,6 +42,7 @@ class ActivitiesFetcher
     user_activity.user = user
     user_activity.repository = repo
     user_activity.organization_id = repo.organization_id
+    user_activity.round = round
     user_activity.save
   end
 

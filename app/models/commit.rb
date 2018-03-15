@@ -65,7 +65,7 @@ class Commit
     # line commented in case we find a better fix. - Gautam
 
     #self.round = Round.where(:from_date.lte => commit_date, :end_date.gte => commit_date).first unless self.round
-    self.round = Round.opened
+    self.round = Round.opened unless self.round
   end
 
 end
