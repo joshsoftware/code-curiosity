@@ -55,6 +55,7 @@ class CommitsFetcher
     commit.html_url = data['html_url']
     commit.comments_count = data['commit']['comment_count']
     commit.organization_id = repo.organization_id
+    commit.round = round
     commit.save
   end
 

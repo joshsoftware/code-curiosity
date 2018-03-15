@@ -8,7 +8,7 @@ namespace :update_points do
     ActivityJob.perform_now(user.id.to_s, type, round.id.to_s)
 
     user.repositories.required.each do |repo|
-      CommitJob.perform_now(user.id.to_s, type, repo.id.to_s)
+      CommitJob.perform_now(user.id.to_s, type, repo.id.to_s, round.id.to_s)
     end
 
     activities_repo_ids = Activity.where(auto_score: nil, round: round, user: user)
