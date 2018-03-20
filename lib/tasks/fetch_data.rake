@@ -1,6 +1,7 @@
 namespace :fetch_data do
   desc "Fetch code-curiosity github repositories commits and activities periodically."
-  task :commits_and_activities, [:type] => :environment do |t, args|
+  task :commits_and_activities, [:round, :type] => :environment do |t, args|
+    round = args[:round] ? Round.find(args[:round]) : Round.opened
     type = args[:type] || 'daily'
     puts "Running for #{type}"
 
@@ -12,10 +13,10 @@ namespace :fetch_data do
         #CommitJob.perform_later(user, type)
 
         user.repositories.required.each do |repo|
-          CommitJob.perform_later(user.id.to_s, type, repo.id.to_s)
+          CommitJob.perform_later(user.id.to_s, type, repo.id.to_s, round.id.to_s)
         end
 
-        ActivityJob.perform_later(user.id.to_s, type)
+        ActivityJob.perform_later(user.id.to_s, type, round.id.to_s)
       end
     end
   end
