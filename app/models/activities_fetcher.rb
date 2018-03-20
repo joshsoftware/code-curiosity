@@ -15,11 +15,12 @@ class ActivitiesFetcher
                    round.from_date.beginning_of_day
                  end
 
+    end_time = round.end_date.try(:end_of_day) || Date.today.end_of_day
     #repos = user.repositories.inject({}){|o, r| o[r.gh_id] = r; o}
     activities = user.gh_client.activity.events.performed(user.github_handle, auto_pagination: true)
-
+    
     activities.each do |a|
-      if TRACKING_EVENTS.key?(a.type) && Time.parse(a.created_at) > since_time
+      if TRACKING_EVENTS.key?(a.type) && (Time.parse(a.created_at)).between?(since_time, end_time)
         repo = Repository.where(gh_id: a.repo.id).first
         repo = self.create_repo(a.repo.id) unless repo
         create_activity(a, repo) if repo && !repo.ignore
