@@ -143,7 +143,7 @@ class RedeemRequest
     #3 if user is on free plan he can only redeem 400 royalty points per month.
     royalty_points_threshold_check_as_per_user(total_points, royalty_points,
       redeemed_royalty_point, total_redeemed_royalty, royalty,
-      user.is_sponsorer ? REDEEM_THRESHOLD['paid'] : REDEEM_THRESHOLD['free'])
+      (Offer.is_winner?(user) || user.is_sponsorer) ? REDEEM_THRESHOLD['paid'] : REDEEM_THRESHOLD['free'])
   end
 
   # validating redeemption request limit for free and paid user
@@ -199,7 +199,7 @@ class RedeemRequest
   private
 
   def set_amount
-    denominator = if sponsorer_detail
+    denominator = if sponsorer_detail || Offer.is_winner?(user)
                     REDEEM['one_dollar_to_points']
                   else
                     REDEEM['one_dollar_to_points'] * 2
@@ -208,7 +208,7 @@ class RedeemRequest
   end
 
   def update_amount
-    denominator = if sponsorer_detail
+    denominator = if sponsorer_detail || Offer.is_winner?(user)
                     REDEEM['one_dollar_to_points']
                   else
                     REDEEM['one_dollar_to_points'] * 2

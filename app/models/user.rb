@@ -119,10 +119,6 @@ class User
     # for auto_created users, we need to invoke the after_create callback.
     user.calculate_popularity unless user.current_subscription
 
-    if Offer.is_winner?(user)
-      user.upgrade_account unless user.active_sponsorer_detail
-    end
-
     user
   end
 
@@ -277,14 +273,5 @@ class User
         self.twitter_handle = '@' + self.twitter_handle
       end
     end
-  end
-
-
-  def upgrade_account
-    sponsorer_details.create(
-      sponsorer_type: 'INDIVIDUAL',
-      subscription_status: 'active',
-      payment_plan:  SPONSOR['individual'].keys.first,
-    )
   end
 end
