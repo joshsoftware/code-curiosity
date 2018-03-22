@@ -16,7 +16,7 @@
     Keep going, you still have some time!
     = "You are only #{@subscription.goal.points - @subscription.points} points away from reaching your goal!"
 
-- if !@user.active_sponsorer_detail
+- if !@user.active_sponsorer_detail && !Offer.is_winner?(@user)
   %p
     %br
       %b

@@ -7,6 +7,45 @@ class RedeemRequestTest < ActiveSupport::TestCase
     @redeem_request ||= build(:redeem_request)
   end
 
+  describe 'if user is a contest winner' do
+    before do
+      @user = create :user
+      @offer = create :offer, email: @user.email
+      @round = create :round, :open
+      @round_transaction = create :transaction, points: 300, type: 'credit', transaction_type: 'Round', user: @user
+      @royalty_transaction = create :transaction, points: 200, transaction_type: 'royalty_bonus', type: 'credit', user: @user
+    end
+
+    test 'should be able to redeem points with same plan as INDIVIDUAL subscriber' do
+      redeem_request = create :redeem_request, points: 300, user: @user
+      assert_equal redeem_request.amount, 30.0
+    end
+
+    test 'should be able to redeem points without any sponsorer detail' do
+      redeem_request = create :redeem_request, points: 300, user: @user
+      assert_equal @user.redeem_requests.count, 1
+      assert_equal redeem_request.amount, 30.0
+    end
+
+    test 'should be able to redeem upto 500 royalty points in a month' do
+      redeem_request = build :redeem_request, points: 500, user: @user
+      assert redeem_request.valid?
+    end
+
+    test 'should not be able to redeem more than 500 royalty points in a month' do
+      redeem_request = build :redeem_request, points: 520, user: @user
+      assert_not redeem_request.valid?
+    end
+
+    describe 'if user is no more a contest winner' do
+      test 'should be able to redeem points with same plan as FREE subscriber' do
+        @offer.set active_till: Date.yesterday
+        redeem_request = create :redeem_request, points: 300, user: @user
+        assert_equal redeem_request.amount, 15.0
+      end
+    end
+  end
+
   test "validity of redeem_request" do
     user = create :user
     redeem_request = build(:redeem_request, :points => 2, :address => 'baner', user: user)

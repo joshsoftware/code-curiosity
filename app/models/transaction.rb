@@ -58,7 +58,7 @@ class Transaction
   end
 
   def set_amount
-    if user.is_sponsorer
+    if user.is_sponsorer || Offer.is_winner?(user)
       set(amount: points.to_f/SUBSCRIPTIONS['individual'])
     else
       set(amount: points.to_f/SUBSCRIPTIONS['free'])
