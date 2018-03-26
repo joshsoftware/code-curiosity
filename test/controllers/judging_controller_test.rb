@@ -24,26 +24,26 @@ class JudgingControllerTest < ActionController::TestCase
   end
 
   test 'commits' do
-    commit = create :commit
+    commit = create :commit, round: @round
     sign_in @user
     get :commits
     assert_response :success
     assert_template :commits
 
     commits = assigns(:commits)
-    assert commits.count, 1
+    assert_equal commits.count, 1
     assert commits.include? commit
   end
 
   test 'activities' do
-    activity = create :activity
+    activity = create :activity, round: @round
     sign_in @user
     get :activities
     assert_response :success
     assert_template :activities
 
     activities = assigns(:activities)
-    assert activities.count, 1
+    assert_equal activities.count, 1
     assert activities.include? activity
   end
 

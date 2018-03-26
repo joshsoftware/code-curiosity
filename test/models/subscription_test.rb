@@ -54,7 +54,8 @@ class SubscriptionTest < ActiveSupport::TestCase
   def test_total_activities_score_when_event_type_is_comment_and_event_action_is_created
     user = create(:user)
     subscription = create(:subscription, user: user, round: Round.opened)
-    create(:activity, event_type: :comment, event_action: :created, user: user, auto_score: 2)
+    create(:activity, event_type: :comment, event_action: :created, user: user,
+      round: Round.opened, auto_score: 2)
     assert_equal subscription.activities_score, 2
   end
 
