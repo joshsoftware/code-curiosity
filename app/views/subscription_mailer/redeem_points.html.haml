@@ -21,7 +21,7 @@
       For more details on your points, check out your
       = link_to "CodeCuriosity profile", user_url(@user)
 
-- if !@user.active_sponsorer_detail
+- if !@user.active_sponsorer_detail && !Offer.is_winner?(@user)
   %p
     %br
       %b

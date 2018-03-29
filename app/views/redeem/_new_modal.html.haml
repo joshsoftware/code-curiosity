@@ -6,7 +6,7 @@
       %h4.modal-title
         Redeem Points
         %b.pull-right.maring-right-fifty= "$1 : #{redeem_request_value(current_user, REDEEM['one_dollar_to_points'])} points"
-      - unless current_user.active_sponsorer_detail
+      - unless Offer.is_winner?(current_user) || current_user.active_sponsorer_detail
         .text-center{style: "font-size:14px"}
           %strong
             #promote
