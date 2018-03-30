@@ -6,4 +6,16 @@ module Admin::RedeemRequestsHelper
     redeem_requests.sum(:amount)
   end
 
+  def stores
+  	stores = REDEEM['amazon_stores'].map { |store| ["#{store} #{amount_for_store(store)}", store] }
+  	stores.unshift(['All'])
+	end
+
+	def users
+		[['Free', false], ['Paid', true]]
+	end
+
+	def status
+		[['Status Open', false], ['Status Closed', true]]
+	end
 end

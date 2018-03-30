@@ -2,23 +2,21 @@
   %h1
     Redeem Requests
     %span.badge $ #{amount_for_store}
-    %span.dropdown
-      %button.btn.btn-default.dropdown-toggle#store{"data-toggle" => "dropdown", type: "button"} By Store
-      %ul.dropdown-menu
-        - REDEEM['amazon_stores'].each do |store|
-          %li
-            =link_to "#{store} $#{amount_for_store(store)}", admin_redeem_requests_path(store: store), class: 'closeDropdown', remote: true
-        %li
-          =link_to "All", admin_redeem_requests_path, class: 'closeDropdown', remote: true
+    %br
+    %br
+  %label.slide
+  = link_to download_admin_redeem_requests_path(:status => "true"), class: "btn btn-primary glyphicon glyphicon-download" do
+    %b Completed
+  = link_to download_admin_redeem_requests_path(:status => "false"), class: "btn btn-primary glyphicon glyphicon-download" do
+    %b Active
 
-    %label.slide
-      %input.check#sponsorer{checked: 'checked', name: 'is_sponsorer', type: 'checkbox', data: {toggle: 'toggle', width: '100', height: '40', on: 'Free', off: 'Paid'}}
-      %input.check#redeem{checked: 'checked', name: 'status', type: 'checkbox', data: {toggle: 'toggle', width: '100', height: '40', on: 'Status Open', off: 'Status Close'}}
-      #console-event
-    = link_to download_admin_redeem_requests_path(:status => "true"), class: "btn btn-primary glyphicon glyphicon-download" do
-      %b Completed
-    = link_to download_admin_redeem_requests_path(:status => "false"), class: "btn btn-primary glyphicon glyphicon-download" do
-      %b Active
+  = form_for(RedeemRequest.new, url: admin_redeem_requests_path, method: 'get', remote: true, html: {id: 'filter'}) do |f|
+
+    = f.select :store, stores, {}, {class: "btn btn-primary"}
+
+    = f.select :user, users, {}, {class: "btn btn-primary"}
+
+    = f.select :status, status, {}, {class: "btn btn-primary"}
 
 %section.content
   .row

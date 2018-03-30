@@ -6,7 +6,6 @@ class Admin::RedeemRequestsController < ApplicationController
   before_action :load_redeem_request, only: [:index, :download]
 
   def index
-    @redeem_requests = @redeem_requests.where(store: params[:store]) if REDEEM['amazon_stores'].include?(params[:store])
     @redeem_requests = @redeem_requests.page(params[:page])
     if request.xhr?
       respond_to do|format|
@@ -51,11 +50,11 @@ class Admin::RedeemRequestsController < ApplicationController
   end
 
   def load_redeem_request
-    @status = params[:status] || false
-    @redeem_requests = RedeemRequest.where(status: @status).desc(:created_at)
-    return if params[:is_sponsorer].nil?
-    users = User.contestants.where(is_sponsorer: params[:is_sponsorer]).pluck(:id)
-    @redeem_requests = @redeem_requests.in(user_id: users).desc(:created_at)
+    default_params = {store: 'all', user: false, status: false}
+    filter_params = params[:redeem_request] || default_params
+    users = User.contestants.where(is_sponsorer: filter_params[:user]).pluck(:id)
+    @redeem_requests = RedeemRequest.where(status: filter_params[:status], :user_id.in => users).desc(:created_at)
+    @redeem_requests = @redeem_requests.where(store: filter_params[:store]) if REDEEM['amazon_stores'].include?(filter_params[:store])
   end
 
 end
