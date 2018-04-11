@@ -30,7 +30,7 @@ set :branch, 'master'
 set :shared_paths, [
   'config/mongoid.yml', 'config/secrets.yml', 'log',
   'config/git.yml', '.env.production', 'repositories',
-  'cache'
+  'cache', 'config/backup.yml'
 ]
 
 # Optional settings:
