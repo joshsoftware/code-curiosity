@@ -10,6 +10,12 @@ YAML.load_file('config/code_curiosity_config.yml').tap do |config|
   SCORING_ENGINE_CONFIG = config['scoring_engine']
   USER = config['user']
   REDEEM = config['redeem']
+  SPONSOR = config['sponsor']
+  SUBSCRIPTIONS = config['subscriptions']
+  SPONSORER_THRESHOLD = config['sponsor_display_threshold']
+  REDEEM_THRESHOLD = config['redeem_request_threshold']
+  ACCOUNT = config['account']
+  ORGANIZATIONAL_SPONSORERS = config['organizational_sponsorers']
 end
 
 COMMIT_RATINGS = (0..5).to_a

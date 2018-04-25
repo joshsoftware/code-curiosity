@@ -18,7 +18,8 @@ gem 'jquery-rails'
 gem 'turbolinks', '~>2.5'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'github_api', '~> 0.13'
+gem 'github_api', '~> 0.18.2'
+gem 'hashie', '~> 3.5'
 gem 'devise', '~> 3.5'
 gem 'highcharts-rails', '~> 4.2', '>= 4.2.5'
 gem 'bootstrap-datepicker-rails'
@@ -36,6 +37,12 @@ gem 'mongoid-slug', '~> 5.2'
 gem 'redcarpet'
 gem 'rollbar'
 gem 'mongoid-paranoia'
+gem 'mongoid-paperclip', require: 'mongoid_paperclip'
+gem 'stripe'
+gem 'react-rails'
+gem 'versionist'
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'sidekiq-status'
 
 group :development, :test do
   gem 'byebug'
@@ -60,10 +67,13 @@ group :test do
   gem 'poltergeist'
   gem 'mocha'
   gem 'timecop'
+  gem 'stripe-ruby-mock', '~> 2.4.1', :require => 'stripe_mock'
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'haml-rails'
   gem 'quiet_assets'
+  gem "letter_opener"
+  gem "letter_opener_web"
 end

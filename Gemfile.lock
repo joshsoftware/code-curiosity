@@ -42,6 +42,10 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_model_serializers (0.10.3)
+      actionpack (>= 4.1, < 6)
+      activemodel (>= 4.1, < 6)
+      jsonapi (= 0.1.1.beta2)
     activejob (4.2.5)
       activesupport (= 4.2.5)
       globalid (>= 0.3.0)
@@ -62,6 +66,10 @@ GEM
     arel (6.0.3)
     autoprefixer-rails (6.4.0.1)
       execjs
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -82,7 +90,10 @@ GEM
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
     chronic (0.10.2)
+    climate_control (0.1.0)
     cliver (0.3.2)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
     codeclimate-test-reporter (0.6.0)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.1)
@@ -97,6 +108,7 @@ GEM
     connection_pool (2.2.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
+    dante (0.2.0)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
@@ -109,6 +121,8 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     docile (1.1.5)
+    domain_name (0.5.20170404)
+      unf (>= 0.0.5, < 1.0.0)
     dotenv (2.1.1)
     dotenv-rails (2.1.1)
       dotenv (= 2.1.1)
@@ -126,11 +140,11 @@ GEM
       multipart-post (>= 1.2, < 3)
     font-awesome-rails (4.6.3.1)
       railties (>= 3.2, < 5.1)
-    github_api (0.14.5)
-      addressable (~> 2.4.0)
+    github_api (0.18.2)
+      addressable (~> 2.4)
       descendants_tracker (~> 0.0.4)
-      faraday (~> 0.8, < 0.10)
-      hashie (>= 3.4)
+      faraday (~> 0.8)
+      hashie (~> 3.5, >= 3.5.2)
       oauth2 (~> 1.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -143,7 +157,7 @@ GEM
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
     hashdiff (0.3.0)
-    hashie (3.4.4)
+    hashie (3.5.7)
     highcharts-rails (4.2.5)
       railties (>= 3.1)
     html2haml (2.0.0)
@@ -151,6 +165,8 @@ GEM
       haml (~> 4.0.0)
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
     i18n (0.7.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -160,12 +176,22 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    jsonapi (0.1.1.beta2)
+      json (~> 1.8)
     jwt (1.5.4)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kaminari-mongoid (0.1.2)
       kaminari
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
+    letter_opener_web (1.3.1)
+      actionmailer (>= 3.2)
+      letter_opener (~> 1.0)
+      railties (>= 3.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -175,6 +201,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mimemagic (0.3.2)
     mina (0.3.8)
       open4 (~> 1.3.4)
       rake
@@ -208,6 +235,9 @@ GEM
     mongoid-compatibility (0.4.0)
       activesupport
       mongoid (>= 2.0)
+    mongoid-paperclip (0.0.11)
+      mongoid
+      paperclip (>= 2.3.6, != 4.3.0)
     mongoid-paranoia (2.0.0)
       activesupport (~> 4.0)
       mongoid (>= 4.0.0, <= 6.0.0)
@@ -218,6 +248,7 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    netrc (0.11.0)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
@@ -239,6 +270,12 @@ GEM
     open4 (1.3.4)
     origin (2.2.0)
     orm_adapter (0.5.0)
+    paperclip (5.1.0)
+      activemodel (>= 4.2.0)
+      activesupport (>= 4.2.0)
+      cocaine (~> 0.5.5)
+      mime-types
+      mimemagic (~> 0.3.0)
     pkg-config (1.1.7)
     poltergeist (1.10.0)
       capybara (~> 2.1)
@@ -252,7 +289,7 @@ GEM
       pry (>= 0.9.10, < 0.11.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
-    rack (1.6.4)
+    rack (1.6.8)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -285,6 +322,13 @@ GEM
     rake (11.2.2)
     rdoc (4.2.2)
       json (~> 1.4)
+    react-rails (1.10.0)
+      babel-transpiler (>= 0.7.0)
+      coffee-script-source (~> 1.8)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     redcarpet (3.3.4)
     redis (3.3.1)
     redis-actionpack (5.0.0)
@@ -305,6 +349,10 @@ GEM
       redis (>= 2.2)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
+    rest-client (2.0.2)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rollbar (2.12.0)
       multi_json
     ruby_parser (3.8.2)
@@ -326,6 +374,8 @@ GEM
       connection_pool (~> 2.2, >= 2.2.0)
       redis (~> 3.2, >= 3.2.1)
       sinatra (>= 1.4.7)
+    sidekiq-status (0.6.0)
+      sidekiq (>= 2.7)
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
@@ -348,8 +398,14 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     stringex (2.6.1)
+    stripe (1.58.0)
+      rest-client (>= 1.4, < 4.0)
+    stripe-ruby-mock (2.4.1)
+      dante (>= 0.2.0)
+      multi_json (~> 1.0)
+      stripe (>= 1.31.0, <= 1.58.0)
     thor (0.19.1)
-    thread_safe (0.3.5)
+    thread_safe (0.3.6)
     tilt (2.0.5)
     timecop (0.8.1)
     turbolinks (2.5.3)
@@ -358,6 +414,13 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.1)
       execjs (>= 0.3.0, < 3)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.4)
+    versionist (1.5.0)
+      activesupport (>= 3)
+      railties (>= 3)
+      yard (~> 0.7)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (2.3.0)
@@ -376,11 +439,13 @@ GEM
       chronic (>= 0.6.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
+    yard (0.9.5)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers (~> 0.10.0)
   bootstrap-datepicker-rails
   bootstrap-sass (~> 3.3.6)
   brakeman
@@ -395,14 +460,17 @@ DEPENDENCIES
   faker (~> 1.6.1)
   font-awesome-rails
   git!
-  github_api (~> 0.13)
+  github_api (~> 0.18.2)
   haml
   haml-rails
+  hashie (~> 3.5)
   highcharts-rails (~> 4.2, >= 4.2.5)
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
   kaminari-mongoid (~> 0.1.0)
+  letter_opener
+  letter_opener_web
   mina
   mina-sidekiq
   minitest
@@ -410,6 +478,7 @@ DEPENDENCIES
   minitest-rails-capybara
   mocha
   mongoid (~> 5.0)
+  mongoid-paperclip
   mongoid-paranoia
   mongoid-slug (~> 5.2)
   omniauth-github (~> 1.1.2)
@@ -418,6 +487,7 @@ DEPENDENCIES
   pry-nav
   quiet_assets
   rails (= 4.2.5)
+  react-rails
   redcarpet
   redis-rails
   rollbar
@@ -425,12 +495,16 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sidekiq (~> 4.0)
+  sidekiq-status
   simple_form (~> 3.2.1)
   simplecov
   spring
+  stripe
+  stripe-ruby-mock (~> 2.4.1)
   timecop
   turbolinks (~> 2.5)
   uglifier (>= 1.3.0)
+  versionist
   web-console (~> 2.0)
   webmock
   whenever
@@ -439,4 +513,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.13.6
+   1.15.4

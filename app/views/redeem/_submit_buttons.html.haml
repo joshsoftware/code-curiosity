@@ -1,0 +1,5 @@
+%button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Cancel
+- if Offer.is_winner?(current_user) || current_user.active_sponsorer_detail
+  = f.submit "Redeem", class: "btn btn-primary"
+- else
+  %button.btn.btn-primary.submit-redeem{ type: "button", data: { points: current_user.points, free: SUBSCRIPTIONS['free'], paid: SUBSCRIPTIONS['individual']} } Redeem

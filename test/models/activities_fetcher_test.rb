@@ -12,7 +12,8 @@ class ActivitiesFetcherTest < ActiveSupport::TestCase
       headers: {content_type: "application/json; charset=utf-8"}
     )
 
-    stub_get('/repos/prasadsurase/code-curiosity').to_return(
+    # this Code-curiosity repo belongs to user prasadsurase.
+    stub_get('/repositories/67219068').to_return(
       body: File.read('test/fixtures/repo.json'), status: 200,
       headers: {content_type: "application/json; charset=utf-8"}
     )
@@ -27,6 +28,22 @@ class ActivitiesFetcherTest < ActiveSupport::TestCase
     Timecop.return
   end
 
+  describe 'fetch activities for a given round' do
+    test 'should create if present' do
+      @round = create :round, :open, from_date: 1.month.ago.beginning_of_month, end_date: 1.month.ago.end_of_month
+      activities_fetcher = ActivitiesFetcher.new(@user, @round)
+      activities_fetcher.fetch(:all)
+      assert_equal 1, Activity.count
+    end
+
+    test 'should not create if not present' do
+      @round = create :round, :open, from_date: 1.month.from_now.beginning_of_month, end_date: 1.month.from_now.end_of_month
+      activities_fetcher = ActivitiesFetcher.new(@user, @round)
+      activities_fetcher.fetch(:all)
+      assert_equal 0, Activity.count
+    end
+  end
+
   test 'fetch daily' do
     activities_fetcher = ActivitiesFetcher.new(@user, @round)
     activities_fetcher.fetch(:daily)
@@ -37,14 +54,14 @@ class ActivitiesFetcherTest < ActiveSupport::TestCase
   test 'fetch all' do
     activities_fetcher = ActivitiesFetcher.new(@user, @round)
     activities_fetcher.fetch(:all)
-    assert_equal 2, Activity.count
+    assert_equal 3, Activity.count
     assert_equal 1, Repository.count
   end
 
   test 'creates activity' do
     activities_fetcher = ActivitiesFetcher.new(@user, @round)
     activities_fetcher.fetch(:all)
-    assert_equal 2, Activity.count
+    assert_equal 3, Activity.count
     activity = Activity.first
     json_data = @activities[1]
     assert_equal activity.gh_id, json_data['id']
@@ -61,7 +78,7 @@ class ActivitiesFetcherTest < ActiveSupport::TestCase
   test 'creates repo if not present' do
     activities_fetcher = ActivitiesFetcher.new(@user, @round)
     activities_fetcher.fetch(:all)
-    assert_equal 2, Activity.count
+    assert_equal 3, Activity.count
     assert_equal 1, Repository.count
     repository = Repository.last
     data = @activities[1]['repo']
@@ -76,4 +93,10 @@ class ActivitiesFetcherTest < ActiveSupport::TestCase
     assert_includes repository.languages, 'Ruby'
   end
 
+  test "don't fetch activities if repo is ignored " do
+    activities_fetcher = ActivitiesFetcher.new(@user, @round)
+    activities_fetcher.fetch(:all)
+    Repository.update_all(ignore: false)
+    assert_equal 1, Repository.required.count
+  end
 end

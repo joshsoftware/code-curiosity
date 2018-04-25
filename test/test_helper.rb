@@ -13,6 +13,7 @@ require "rails/test_help"
 require "minitest/rails"
 require "webmock/minitest"
 require "mocha/mini_test"
+require "stripe_mock"
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
@@ -25,7 +26,10 @@ require 'capybara/poltergeist'
 class ActionController::TestCase
   include Devise::TestHelpers
   include Warden::Test::Helpers
+  include ActiveJob::TestHelper
   WebMock.disable_net_connect!(allow: "codeclimate.com")
+  before { StripeMock.start }
+  after { StripeMock.stop }
 
   def stub_get(path, endpoint = Github.endpoint.to_s)
     stub_request(:get, endpoint + path)
@@ -37,8 +41,15 @@ class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
   WebMock.disable_net_connect!(allow: "codeclimate.com")
   DatabaseCleaner.strategy = :truncation
-  before { DatabaseCleaner.start }
-  after  { DatabaseCleaner.clean }
+  before do
+    DatabaseCleaner.start
+    StripeMock.start
+  end
+
+  after do
+    DatabaseCleaner.clean
+    StripeMock.stop
+  end
 end
 
 class ActionDispatch::IntegrationTest
@@ -50,4 +61,6 @@ class ActionDispatch::IntegrationTest
     Capybara::Poltergeist::Driver.new(app, timeout: 1.minute, phantomjs_options: ['--load-images=no'])
   end
   WebMock.allow_net_connect!(allow: "codeclimate.com")
+  before { StripeMock.start }
+  after { StripeMock.stop }
 end

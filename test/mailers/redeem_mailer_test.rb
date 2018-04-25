@@ -10,7 +10,7 @@ class RedeemMailerTest < ActionMailer::TestCase
     r = create(:redeem_request, :points => 2, user: user)
     assert_enqueued_jobs 1 do 
       RedeemMailer.redeem_request(r).deliver_later
-    end 
+    end
   end
 
   def test_mail_should_be_delivered

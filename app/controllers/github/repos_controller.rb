@@ -3,7 +3,7 @@ class Github::ReposController < ApplicationController
 
   def sync
     unless current_user.repo_syncing?
-      UserReposJob.perform_later(current_user)
+      UserReposJob.perform_later(current_user.id.to_s) unless current_user.blocked
     end
   end
 end

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include ContributionHelper
+  include SponsorerHelper
   before_action :authenticate_user!, except: [:show]
 
   def index
@@ -8,19 +9,40 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @show_transactions = current_user == @user
-    contribution_data(@user)
     if @user
+      @show_transactions = current_user == @user
+      contribution_data(@user)
       render layout: current_user ? 'application' : 'public'
     else
-      redirect_to root_url, notice: 'Invalid user name'
+      redirect_to root_url, alert: I18n.t('user.not_exist_in_system')
     end
+  end
+
+  def block_user
+    user = User.find(params[:id])
+    user.update(blocked: true)
+  end
+
+  def edit
+  end
+
+  def update
+    if current_user.update user_params
+      return
+    end
+    render :edit
+  end
+
+  def remove_handle
+    current_user.update(twitter_handle: nil)
   end
 
   def sync
     unless current_user.gh_data_syncing?
-      CommitJob.perform_later(current_user, 'all')
-      ActivityJob.perform_later(current_user, 'all')
+      unless current_user.blocked
+        CommitJob.perform_later(current_user.id.to_s, 'all')
+        ActivityJob.perform_later(current_user.id.to_s, 'all')
+      end
     end
   end
 
@@ -63,13 +85,27 @@ class UsersController < ApplicationController
 
   def destroy
     user = current_user
+    if user.is_sponsorer && user.sponsorer_detail.subscription_status != 'canceled'
+      sponsor = user.sponsorer_detail
+      begin
+        delete_subscription(sponsor.stripe_subscription_id)
+      rescue
+        flash[:error] = "There was some problem while canceling your subscription. Please try after some time"
+        redirect_to user_path and return
+      end
+    end
     sign_out current_user
 
     # We cannot delete the user completely, because there are plenty of associations.
     # So, we manipulate the UID and set auto_created: true, so that no data will be fetched.
-    user.uid = "#{user.uid}-DELETED"
-    user.auto_created = true
-    user.save
+    user.update({deleted_at: Time.now, auto_created: true, active: false, blocked: user.blocked ? false : user.blocked })
     redirect_to root_url, notice: "Your account has been deleted successfully."
   end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:twitter_handle)
+  end
+
 end

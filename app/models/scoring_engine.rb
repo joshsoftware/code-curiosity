@@ -16,31 +16,36 @@ class ScoringEngine
       # that repository has no master!
       # Rollbar#14
       self.git = Git.open(repo_dir)
-      self.git.fetch
-      #gets the current repository branch. usually, is master.
-      branch = self.git.branches.local.first.name unless branch
-      #checkout to the branch. if branch hasnt changed, checkout is redundant.
-      self.git.checkout(branch)
-      remote = self.git.config["branch.#{branch}.remote"] # usually just 'origin'
+      Sidekiq.logger.info "#{self.git}"
+      Sidekiq.logger.info "#{self.git.branch}"
       begin
+        self.git.fetch
+        #gets the current repository branch. usually, is master.
+        branch = self.git.branches.local.first.name unless branch
+        #checkout to the branch. if branch hasnt changed, checkout is redundant.
+        self.git.checkout(branch)
+        remote = self.git.config["branch.#{branch}.remote"] # usually just 'origin'
         self.git.pull(remote, branch)
       rescue Git::GitExecuteError
         #delete the repo dir and clone again
         FileUtils.rm_r("#{Rails.root.join(config[:repositories]).to_s}/#{repo.id}")
-        self.git = Git.clone("https://github.com/#{repo.owner}/#{repo.name}.git", repo.id, path: Rails.root.join(config[:repositories]).to_s)
+        # self.git = Git.clone("https://github.com/#{repo.owner}/#{repo.name}.git", repo.id, path: Rails.root.join(config[:repositories]).to_s)
+        self.git = clone_repo(repo)
       end
     else
-      self.git = Git.clone("https://github.com/#{repo.owner}/#{repo.name}.git", repo.id, path: Rails.root.join(config[:repositories]).to_s)
-      #gets the current repository branch. usually, is master.
-      branch = self.git.branches.local.first.name unless branch
-      self.git.checkout(branch)
+      # self.git = Git.clone("https://github.com/#{repo.owner}/#{repo.name}.git", repo.id, path: Rails.root.join(config[:repositories]).to_s)
+      self.git = clone_repo(repo)
+      if self.git
+        #gets the current repository branch. usually, is master.
+        branch = self.git.branches.local.first.name unless branch
+        self.git.checkout(branch)
+      end
     end
     self.git
   end
 
   def comments_score(commit)
     return 0 if commit.comments_count == 0
-
     score = [
       commit.comments_count/config[:comments_to_points],
       config[:max_score]
@@ -66,6 +71,7 @@ class ScoringEngine
   def bugspots_score(commit)
     return 0 if commit.info.nil?
     fetch_repo unless git
+    return 0 unless git
     # search all the origin branches that holds the commit and return the branch name.
     # git branch --all --contains <sha>
     # ex., git branch --all --contains fd891813e0f4a85e4b55a25d12f6d4d7de35c90b in prasadsurase/code-curiosity
@@ -85,7 +91,7 @@ class ScoringEngine
     # get the current git branch incase the commit is not found in any of the branches.
 
     # remotes/origin/skip-merge-branch-commit-scoring
-    branch = git.branch(branch).name
+    branch = get_current_git_branch(branch)
 
     #get the latest commits for the branch
     git = fetch_repo(branch)
@@ -118,8 +124,15 @@ class ScoringEngine
 
     #Here total_changes specifies how many lines has been changed(added/deleted) per file, but should not
     # include changes of ignored_files for this commit
+    begin
+      # If Github doesn't returns commit info if commit has been moved.
+      files = commit.info.files
+    rescue StandardError => e
+      Sidekiq.logger.info "Absent commit: #{commit.id}, Error: #{e}"
+      files = []
+    end
 
-    total_score = commit.info.files.inject(0) do |result, file|
+    total_score = files.inject(0) do |result, file|
 
       file_name = bugspots_scores[file.filename]
       file_exist = FileToBeIgnored.name_exist?(file.filename)
@@ -162,6 +175,39 @@ class ScoringEngine
     score = bugspots_score(commit) + commit_score(commit) + comments_score(commit)
     return 1 if score == 0
     return [score.round, config[:max_score]].min
+  end
+
+  # If there is error while getting current git branch retry 3 times and then delete the repo directory and clone again
+  def get_current_git_branch(branch)
+    tries ||= 3
+    begin
+      branch = git.branch(branch).name
+    rescue
+      retry unless (tries -= 1).zero?
+      #delete repo directory and clone again
+      FileUtils.rm_r("#{Rails.root.join(config[:repositories]).to_s}/#{repo.id}")
+      self.git = Git.clone("https://github.com/#{repo.owner}/#{repo.name}.git", repo.id, path: Rails.root.join(config[:repositories]).to_s)
+      branch = git.branch(branch).name
+    end
+  end
+
+  private
+  # method to clone repository if repository failed to clone it will retry for ten times
+  # if it fails in all retries the method will return nil
+  # sometimes git clone fails stating
+  # No such file or directory
+  # fatal: cannot store pack file
+  # fatal: index-pack failed
+  def clone_repo(repo)
+    begin
+      retries ||= 0
+      Git.clone("https://github.com/#{repo.owner}/#{repo.name}.git", repo.id, path: Rails.root.join(config[:repositories]).to_s)
+    rescue Git::GitExecuteError
+      retry if (retries += 1) < 10
+      FileUtils.rm_r("#{Rails.root.join(config[:repositories]).to_s}/#{repo.id}") if Dir.exist?(repo_dir)
+      Sidekiq.logger.info "Unable to clone repositoriy: #{repo.id}"
+      return nil
+    end
   end
 
 end

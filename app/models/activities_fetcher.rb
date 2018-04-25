@@ -15,14 +15,15 @@ class ActivitiesFetcher
                    round.from_date.beginning_of_day
                  end
 
+    end_time = round.end_date.try(:end_of_day) || Date.today.end_of_day
     #repos = user.repositories.inject({}){|o, r| o[r.gh_id] = r; o}
     activities = user.gh_client.activity.events.performed(user.github_handle, auto_pagination: true)
-
+    
     activities.each do |a|
-      if TRACKING_EVENTS.key?(a.type) && Time.parse(a.created_at) > since_time
+      if TRACKING_EVENTS.key?(a.type) && (Time.parse(a.created_at)).between?(since_time, end_time)
         repo = Repository.where(gh_id: a.repo.id).first
-        repo = self.create_repo(a.repo.name) unless repo
-        create_activity(a, repo) if repo
+        repo = self.create_repo(a.repo.id) unless repo
+        create_activity(a, repo) if repo && !repo.ignore
       end
     end
   end
@@ -42,11 +43,12 @@ class ActivitiesFetcher
     user_activity.user = user
     user_activity.repository = repo
     user_activity.organization_id = repo.organization_id
+    user_activity.round = round
     user_activity.save
   end
 
-  def create_repo(repo_name)
-    info = user.gh_client.repos.get(*repo_name.split('/'))
+  def create_repo(repo_id)
+    info = user.gh_client.repos.get_by_id(repo_id)
 
     if info.stargazers_count >= REPOSITORY_CONFIG['popular']['stars']
       repo = Repository.build_from_gh_info(info)

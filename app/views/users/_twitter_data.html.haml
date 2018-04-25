@@ -1,0 +1,5 @@
+#twitter-data.pull-right
+  = link_to "#{ user.twitter_handle.present? ? remove_prefix(user.twitter_handle) : "Add your twitter handle" }", edit_user_path, remote: true, data: { toggle: "modal", target: "#newform"}, class: "fa fa-twitter", id: 'twitter-handle'
+  - if user.twitter_handle.present?
+    %span.tool-tip{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Remove"}
+      = link_to "", remove_handle_user_path, remote: true, class: "fa fa-remove", method: :patch

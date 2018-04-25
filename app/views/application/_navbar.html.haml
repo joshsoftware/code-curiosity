@@ -11,6 +11,9 @@
     .navbar-custom-menu
       %ul.nav.navbar-nav
         %li
+          = link_to ACCOUNT['twitter'], { :style=>'color:#1da1f2;', target: :_blank} do
+            %i.fa.fa-twitter
+        %li
           = link_to faq_path do
             %i.fa.fa-question
             FAQS

@@ -63,10 +63,7 @@ class Admin::IgnoredFilesController < ApplicationController
 
   def update_ignore_field
     @ignored_file = FileToBeIgnored.where(id: params[:ignored_file_id]).first
-
-    ignored_params = (params[:ignored_value] == "true") ? true : false
-
-    @ignored_file.update_attributes(ignored: ignored_params)
+    @ignored_file.update_attributes(ignored: params[:ignored_value] == "true")
   end
 
   private

@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   before_action :featured_groups, only: [:index], unless: proc { user_signed_in? }
   before_action :featured_groups_size, only: [:index], unless: proc { user_signed_in? }
   before_action :multi_line_chart, only: [:index], unless: proc { user_signed_in? }
+  before_action :sponsorer_organizations, only: [:index], unless: proc { user_signed_in? }
 
   def index
     if user_signed_in?

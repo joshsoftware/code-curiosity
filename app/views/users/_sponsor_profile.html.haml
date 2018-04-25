@@ -1,0 +1,13 @@
+.row
+  .col-md-4
+    .table
+      .well
+        %tr
+          %td Payment Plan:
+          %td @plan[:name]
+        %tr
+          %td Subscribed at:
+          %td @plan[:subscribed_at]
+        %tr
+          %td Subscription Amount:
+          %td @plan[:amount]

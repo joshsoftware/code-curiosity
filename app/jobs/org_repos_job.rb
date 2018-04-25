@@ -1,4 +1,5 @@
 class OrgReposJob < ActiveJob::Base
+  include Sidekiq::Status::Worker
   queue_as :git
 
   attr_accessor :org

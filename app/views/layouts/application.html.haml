@@ -5,6 +5,7 @@
     %meta{:charset => 'UTF-8'}/
     %meta{:content => 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', :name => 'viewport'}/
     %title CodeCuriosity
+    = favicon_link_tag asset_path('icon.png'), :rel => 'icon', :type =>  'image/png'
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -18,9 +19,10 @@
       = render 'navbar'
       = render 'sidebar'
       .content-wrapper
-        = yield 
+        = yield
       %footer.main-footer
         = render 'footer'
+    = render 'sponsor'
     - if flash.any?
       :javascript
         #{show_flash_notifications}

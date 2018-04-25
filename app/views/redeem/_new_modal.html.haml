@@ -3,18 +3,23 @@
     .modal-header
       %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', :type => 'button'}
         %span{'aria-hidden' => 'true'} &times;
-      %h4.modal-title 
-        Redeem Points 
-        %b.pull-right.maring-right-fifty= "$1.0 = #{REDEEM['one_dollar_to_points']} points"
+      %h4.modal-title
+        Redeem Points
+        %b.pull-right.maring-right-fifty= "$1 : #{redeem_request_value(current_user, REDEEM['one_dollar_to_points'])} points"
+      - unless Offer.is_winner?(current_user) || current_user.active_sponsorer_detail
+        .text-center{style: "font-size:14px"}
+          %strong
+            #promote
+              = link_to "Click here to upgrade to a better redemption ratio of $1 : 10 points", sponsorer_details_path
     .modal-body
       .nav-tabs-custom
         %ul.nav.nav-tabs
           %li.active
             %a{href: '#github_redeem', data: { toggle: 'tab'} }
-              %i.fa.fa-github-alt 
+              %i.fa.fa-github-alt
               Github
           %li
-            %a{href: '#amazon_redeem', data: { toggle: 'tab'} } 
+            %a{href: '#amazon_redeem', data: { toggle: 'tab'} }
               %i.fa.fa-amazon
               Amazon
           %li

@@ -1,0 +1,13 @@
+.container.center-aligned
+  .box-header
+    %h2= header
+  .box-body
+    - if organization
+      - ORGANIZATIONAL_SPONSORERS.each do |org|
+        .img-center
+          = link_to image_tag(org[1]["logo"], class: "img-responsive", width: 180, height: 180, alt: "Responsive image"), org[1]["link"], target: '_blank'
+    - sponsorer_group.in_groups_of(4) do |group|
+      - group.each do |sponsorer|
+        - if sponsorer
+          .img-center
+            = link_to image_tag( select_avatar(sponsorer), class: "img-responsive", width: 180, height: 180, alt: "Responsive image"), redirect(sponsorer)

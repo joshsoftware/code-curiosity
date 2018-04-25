@@ -40,8 +40,10 @@ class Commit
     c.user.inc(commits_count: 1)
   end
 
+  #after_create :schedule_scoring_job
+
   def info
-    @info ||= user.gh_client.repos.commits.get(repository.owner, repository.name, sha) #rescue nil
+    @info ||= repository ? user.gh_client.repos.commits.get(repository.owner, repository.name, sha, { redirection: true }) : nil
   end
 
   def max_rating
@@ -50,13 +52,20 @@ class Commit
 
   private
 
+  def schedule_scoring_job
+    Sidekiq.logger.info "Scoring for commit: #{id}, Round: #{round.from_date}"
+    ScoreCommitJob.set(wait: Random.new.rand(20).minutes).perform_later(id.to_s)
+  rescue StandardError => e
+    Sidekiq.logger.info "Commit: #{id}, Error: #{e}"
+  end
+
   def set_round
-    # FIXME: This code was added to address a corner case for commits appearing in next round 
+    # FIXME: This code was added to address a corner case for commits appearing in next round
     # instead of the last month. However, it will impact scoring and bonus points. Keeping this
     # line commented in case we find a better fix. - Gautam
 
     #self.round = Round.where(:from_date.lte => commit_date, :end_date.gte => commit_date).first unless self.round
-    self.round = Round.opened
+    self.round = Round.opened unless self.round
   end
 
 end

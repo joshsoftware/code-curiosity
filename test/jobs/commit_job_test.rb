@@ -17,17 +17,17 @@ class CommitJobTest < ActiveJob::TestCase
   end
 
   test 'perform' do
-    CommitJob.perform_later(@user)
+    CommitJob.perform_later(@user.id.to_s)
     assert_enqueued_jobs 1
-    CommitJob.perform_later(@user, 'all')
+    CommitJob.perform_later(@user.id.to_s, 'all')
     assert_enqueued_jobs 2
-    CommitJob.perform_later(@user, 'all', @repo, @round)
+    CommitJob.perform_later(@user.id.to_s, 'all', @repo.id.to_s, @round.id.to_s)
     assert_enqueued_jobs 3
   end
 
   test 'perform with Github::Error::UnavailableForLegalReasons exception' do
     CommitsFetcher.any_instance.stubs(:fetch).with(:all).raises(Github::Error::UnavailableForLegalReasons, {})
-    CommitJob.perform_now(@user, 'all', @repo, @round)
+    CommitJob.perform_now(@user.id.to_s, 'all', @repo.id.to_s, @round.id.to_s)
     @user.reload
     refute_nil @user.auth_token
     assert_equal 0, @user.repositories.count
@@ -36,7 +36,7 @@ class CommitJobTest < ActiveJob::TestCase
 
   test 'perform with Github::Error::NotFound exception' do
     CommitsFetcher.any_instance.stubs(:fetch).with(:all).raises(Github::Error::NotFound, {})
-    CommitJob.perform_now(@user, 'all', @repo, @round)
+    CommitJob.perform_now(@user.id.to_s, 'all', @repo.id.to_s, @round.id.to_s)
     @user.reload
     refute_nil @user.auth_token
     assert_equal 0, @user.repositories.count
@@ -47,7 +47,7 @@ class CommitJobTest < ActiveJob::TestCase
     skip 'Need to figure out how to test infinite retries'
     CommitsFetcher.any_instance.stubs(:fetch).with(:all).raises(Github::Error::Unauthorized, {})
     User.any_instance.stubs(:refresh_gh_client).returns(true)
-    CommitJob.perform_now(@user, 'all', @repo, @round)
+    CommitJob.perform_now(@user.id.to_s, 'all', @repo.id.to_s, @round.id.to_s)
     @user.reload
     assert_nil @user.auth_token
   end
@@ -56,7 +56,7 @@ class CommitJobTest < ActiveJob::TestCase
     skip 'Need to figure out how to test infinite retries'
     CommitsFetcher.any_instance.stubs(:fetch).with(:all).raises(Github::Error::Forbidden, {})
     User.any_instance.stubs(:refresh_gh_client).returns(true)
-    CommitJob.perform_now(@user, 'all', @repo, @round)
+    CommitJob.perform_now(@user.id.to_s, 'all', @repo.id.to_s, @round.id.to_s)
     @user.reload
     refute_nil @user.auth_token
   end

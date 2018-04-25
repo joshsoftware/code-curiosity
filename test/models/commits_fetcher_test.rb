@@ -26,7 +26,7 @@ class CommitsFetcherTest < ActiveSupport::TestCase
   end
 
   test 'fetch daily' do
-    Github::Client::Repos.any_instance.stubs(:branches).returns(['master'])
+    Github::Client::Repos::Branches.any_instance.stubs(:list).returns(['master'])
     CommitsFetcher.any_instance.stubs(:branch_commits).with('master').returns(true)
     commits_fetcher = CommitsFetcher.new(@repo, @user, @round)
     commits_fetcher.fetch(:daily)
@@ -34,7 +34,7 @@ class CommitsFetcherTest < ActiveSupport::TestCase
   end
 
   test 'fetch all' do
-    Github::Client::Repos.any_instance.stubs(:branches).returns(['master'])
+    Github::Client::Repos::Branches.any_instance.stubs(:list).returns(['master'])
     CommitsFetcher.any_instance.stubs(:branch_commits).with('master', :all).returns(true)
     commits_fetcher = CommitsFetcher.new(@repo, @user, @round)
     commits_fetcher.fetch(:all)
@@ -54,7 +54,7 @@ class CommitsFetcherTest < ActiveSupport::TestCase
     file_path = 'test/fixtures/commit-daily.json'
     @commits = JSON.parse(File.read(file_path)).collect{|i| Hashie::Mash.new(i)}
     Timecop.freeze(Time.parse(@commits.first.commit.committer.date))
-    Github::Client::Repos.any_instance.stubs(:branches).returns([branch])
+    Github::Client::Repos::Branches.any_instance.stubs(:list).returns([branch])
     assert_equal 1, @commits.select{|i| i.commit.author.date >= (Time.now - 30.hours)}.count
     query_params = { author: 'prasadsurase', sha: 'master', since: (Time.now - 30.hours), 'until' => @round.end_date.end_of_day }
     stub_get('/repos/prasadsurase/code-curiosity/commits').with(query: query_params).to_return(
@@ -93,7 +93,7 @@ class CommitsFetcherTest < ActiveSupport::TestCase
       headers: {content_type: "application/json; charset=utf-8"}
     )
 
-    Github::Client::Repos.any_instance.stubs(:branches).returns([branch])
+    Github::Client::Repos::Branches.any_instance.stubs(:list).returns([branch])
     assert_equal 17, @commits.select{|i| i.commit.author.date >= @round.from_date.beginning_of_day}.count
     commits_fetcher = CommitsFetcher.new(@repo, @user, @round)
     commits_fetcher.fetch(:all)

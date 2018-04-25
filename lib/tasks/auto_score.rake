@@ -4,11 +4,11 @@ task :auto_score, [:round] => :environment do |t, args|
 
   commits_repo_ids = Commit.where(auto_score: nil, round: round).distinct(:repository_id)
   Repository.find(commits_repo_ids).each do |repo|
-    ScoringJob.perform_later(repo, round, 'commits')
+    ScoringJob.perform_later(repo.id.to_s, round.id.to_s, 'commits')
   end
 
   activities_repo_ids = Activity.where(auto_score: nil, round: round).distinct(:repository_id)
   Repository.find(activities_repo_ids).each do |repo|
-    ScoringJob.perform_later(repo, round, 'activities')
+    ScoringJob.perform_later(repo.id.to_s, round.id.to_s, 'activities')
   end
 end
