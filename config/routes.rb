@@ -136,7 +136,6 @@ Rails.application.routes.draw do
   get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'
   #get 'leaderboard' => 'home#leaderboard'
-  get 'trend/(:goal_id)' => 'home#trend', as: :trend
 
   get 'faq' => 'info#faq'
 
