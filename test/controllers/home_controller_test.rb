@@ -27,16 +27,4 @@ class HomeControllerTest < ActionController::TestCase
     assert_template partial: '_trend'
   end
 
-  test 'should get trends' do
-    get :trend
-    assert_response :success
-    assert_template :trend
-  end
-
-  test 'should get trends for a goal' do
-    get :trend, goal_id: @goal.id
-    assert_response :success
-    assert_template :trend
-  end
-
 end
