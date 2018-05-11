@@ -62,7 +62,6 @@ Rails.application.routes.draw do
       end
     end
     resources :users, only: [:index, :destroy] do
-      get :mark_as_judge
       get :login_as
       get :search, on: :collection
       member do
