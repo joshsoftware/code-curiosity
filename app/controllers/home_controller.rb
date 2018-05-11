@@ -2,10 +2,7 @@ class HomeController < ApplicationController
   include HomeHelper
 
   #load the before_actions only if the user is not logged in.
-  before_action :featured_groups, only: [:index], unless: proc { user_signed_in? }
-  before_action :featured_groups_size, only: [:index], unless: proc { user_signed_in? }
   before_action :multi_line_chart, only: [:index], unless: proc { user_signed_in? }
-  before_action :sponsorer_organizations, only: [:index], unless: proc { user_signed_in? }
 
   def index
     if user_signed_in?
@@ -54,8 +51,5 @@ class HomeController < ApplicationController
       render layout: 'info'
     end
   end
-
-  # methods from the HomeHelper module are public and need to be private
-  private :featured_groups, :featured_groups_size
 
 end

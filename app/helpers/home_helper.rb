@@ -1,18 +1,5 @@
 module HomeHelper
 
-  def featured_groups
-    @featured_groups =  Group.where(is_featured: true)
-  end
-
-  def featured_groups_size
-    @size = @featured_groups.size
-  end
-
-  def sponsorer_organizations
-    @sponsorer_organizations = SponsorerDetail.organizations.active.publish
-    @sponsorer_users = SponsorerDetail.individuals.active.publish
-  end
-
   def select_avatar(sponsorer)
     if sponsorer.avatar?
       sponsorer.avatar
