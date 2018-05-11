@@ -88,7 +88,6 @@ Rails.application.routes.draw do
       patch :update_ignore_field
     end
 
-    get 'dashboard/index', as: 'dashboard'
   end
 
   namespace :github do
