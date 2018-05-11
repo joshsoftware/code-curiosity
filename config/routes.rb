@@ -67,8 +67,6 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :subscriptions, only: [:index]
-
     resources :rounds, only: [:index] do
       get :mark_as_close
     end
