@@ -10,7 +10,7 @@ class Users::OmniauthCallbacksController < ApplicationController
       session[:sponsor] = true
       session[:type] = request.env["omniauth.params"]["user"] || 'Individual'
       sign_in :user, @user
-      redirect_to sponsorer_details_path #redirect to fill sponsor details
+      redirect_to dashboard_path #redirect to fill sponsor details
       flash[:notice] = "Signed in as sponsorer"
       return
     end
@@ -21,7 +21,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     if session[:group_invitation_url].present?
       redirect_to session.delete(:group_invitation_url)
     else
-      redirect_to root_path
+      redirect_to dashboard_path
     end
   end
 
