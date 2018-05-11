@@ -28,14 +28,6 @@
             %li.list-group-item
               %b Earned
               %a.pull-right $ #{amount_earned @user}
-            %li.list-group-item
-              %b Goal
-              - if @user.current_subscription && @user.current_subscription.goal
-                = link_to @user.current_subscription.goal.name, trend_path, class: 'pull-right'
-              - elsif logged_in_user?
-                = link_to 'Set Goal', goals_path, class: 'pull-right'
-              - else
-                %span.pull-right Not set yet
           - if logged_in_user?
             - if Offer.is_winner?(current_user) || @user.active_sponsorer_detail || @user.able_to_redeem?
               = link_to '#', class: "btn btn-primary btn-block", data: { toggle: 'modal', target: '#redeem-modal .modal' } do

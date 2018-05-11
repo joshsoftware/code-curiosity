@@ -40,7 +40,6 @@ Rails.application.routes.draw do
     end
 
     collection do
-      get 'set_goal/:goal_id', action: :set_goal, as: 'set_goal'
       get 'search'
     end
   end
@@ -118,7 +117,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :goals, only: [:index]
   resource :redeem, only: [:create], controller: 'redeem'
   resources :groups do
     member do

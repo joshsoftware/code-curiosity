@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :signout_old_login, :select_goal
+  before_action :signout_old_login
   before_action :current_round
   helper_method :current_round
 
@@ -23,17 +23,6 @@ class ApplicationController < ActionController::Base
       sign_out current_user
       redirect_to root_path
       return false
-    end
-  end
-
-  def select_goal
-    return true unless current_user
-    return true if params[:controller] == 'goals' && params[:action] == 'index'
-    return true if params[:action] == 'set_goal' || params[:controller] == 'devise/sessions'
-    return true if current_user.is_admin?
-    
-    if current_user.goal.blank?
-      redirect_to goals_path, notice: I18n.t('goal.please_select')
     end
   end
 

@@ -52,27 +52,6 @@ class UsersController < ApplicationController
     @user.update(user_params)
   end
 
-  def set_goal
-    @goal = Goal.find(params[:goal_id])
-    subscription = current_user.current_subscription
-
-    if @goal.blank? || subscription.blank?
-      redirect_to goals_path, notice: I18n.t('messages.not_found')
-      return
-    end
-
-    current_user.set(goal_id: @goal.id)
-
-    if subscription.goal
-      message = I18n.t('goal.set_as_goal_next_month', { name: @goal.name, current_goal: subscription.goal.name })
-    else
-      message = I18n.t('goal.set_as_goal', { name: @goal.name })
-      subscription.set(goal_id: @goal.id)
-    end
-
-    redirect_to goals_path, notice: message
-  end
-
   def search
     users = if params[:query].present?
               User.where(github_handle: /^#{params[:query]}/i).limit(10).only(:id, :github_handle, :avatar_url, :name)
