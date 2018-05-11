@@ -6,11 +6,15 @@ class ScoreCommitJob < ActiveJob::Base
 
   def perform(commit_id)
     commit = Commit.find(commit_id)
-    if commit.repository
-      engine = ScoringEngine.new(commit.repository)
+    repository = commit.repository
+    if repository
+      engine = ScoringEngine.new(
+        commit: commit.as_json,
+        repository: repository.as_json
+      )
       begin
         Sidekiq.logger.info "Scoring for commit: #{commit.id}"
-        commit.set(auto_score: engine.calculate_score(commit))
+        commit.set(auto_score: engine.calculate_score)
       rescue StandardError => e
         Sidekiq.logger.info "Commit: #{commit.id}, Error: #{e}"
         retry_job wait: 5.minutes if retries_count < MAX_RETRY_COUNT

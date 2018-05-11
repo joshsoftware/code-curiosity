@@ -46,8 +46,20 @@ class Commit
     @info ||= repository ? user.gh_client.repos.commits.get(repository.owner, repository.name, sha, { redirection: true }) : nil
   end
 
+  def info_json
+    return {} unless info
+    {
+      stats: info.stats ? info.stats.as_json : nil,
+      files: info.files ? info.files.as_json : []
+    }
+  end
+
   def max_rating
     COMMIT_RATINGS.last
+  end
+
+  def as_json
+    super(methods: [:info_json]).with_indifferent_access
   end
 
   private

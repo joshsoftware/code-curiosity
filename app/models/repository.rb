@@ -134,7 +134,8 @@ class Repository
   PULL_REQ_MERGE_REGX = /merge (pull|branch)/i
 
   def score_commits(round = nil)
-    engine = ScoringEngine.new(self)
+    # Anuj: Commenting below as not used
+    #engine = ScoringEngine.new(self)
 
     _commits = self.commits.where(auto_score: nil)
     _commits = _commits.where(round: round) if round
@@ -180,5 +181,9 @@ class Repository
     Repository.create_repo_owner_account(gh_repo)
 
     return repo
+  end
+
+  def as_json
+    super.with_indifferent_access
   end
 end
