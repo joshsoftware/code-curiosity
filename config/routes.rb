@@ -56,12 +56,9 @@ Rails.application.routes.draw do
       get :search, on: :collection
       member do
         patch :update_ignore_field
-        patch :add_judges
-        get :assign_judge
       end
     end
     resources :users, only: [:index, :destroy] do
-      get :mark_as_judge
       get :login_as
       get :search, on: :collection
       member do
@@ -69,9 +66,6 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :subscriptions, only: [:index]
-
-    resources :judges, only: [:index]
     resources :rounds, only: [:index] do
       get :mark_as_close
     end
@@ -87,7 +81,6 @@ Rails.application.routes.draw do
       patch :update_ignore_field
     end
 
-    get 'dashboard/index', as: 'dashboard'
   end
 
   namespace :github do
@@ -134,7 +127,6 @@ Rails.application.routes.draw do
   get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'
   #get 'leaderboard' => 'home#leaderboard'
-  get 'trend/(:goal_id)' => 'home#trend', as: :trend
 
   get 'faq' => 'info#faq'
 
