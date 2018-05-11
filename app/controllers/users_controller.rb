@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  include ContributionHelper
   include SponsorerHelper
   before_action :authenticate_user!, except: [:show]
 
@@ -10,8 +9,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if @user
-      @show_transactions = current_user == @user
-      contribution_data(@user)
       render layout: current_user ? 'application' : 'public'
     else
       redirect_to root_url, alert: I18n.t('user.not_exist_in_system')
