@@ -7,14 +7,17 @@ class Commit
 
   attr_accessor :branch
 
-  field :message,        type: String
-  field :commit_date,    type: DateTime
-  field :html_url,       type: String
-  field :comments_count, type: Integer, default: 0
-  field :sha,            type: String
-  field :auto_score,     type: Integer
-  field :default_score,  type: Float, default: 0
-  field :bugspots_score, type: Float, default: 0
+  field :message,          type: String
+  field :commit_date,      type: DateTime
+  field :html_url,         type: String
+  field :comments_count,   type: Integer, default: 0
+  field :sha,              type: String
+  field :auto_score,       type: Integer
+  field :default_score,    type: Float, default: 0
+  field :bugspots_score,   type: Float, default: 0
+  field :score,            type: Float, default: 0
+  field :reward,           type: Float, default: 0
+  field :frequency_factor, type: Float, default: 1
 
   belongs_to :user
   belongs_to :repository
