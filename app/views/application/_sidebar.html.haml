@@ -9,11 +9,6 @@
         = link_to activities_path do
           %i.fa.fa-cubes
           %span Contributions
-      - if current_user.is_judge
-        %li{class: is_active('commits', 'judging') || is_active('activities', 'judging')}
-          = link_to commits_judging_index_path do
-            %i.fa.ion-ribbon-b
-            %span Judging
       = render 'admin_sidebar' if current_user.is_admin?
       = render 'orgs_sidebar' if current_user.organizations.any?
       %li{class: is_active('index', 'sponsorer_details')}

@@ -1,7 +1,7 @@
 class Admin::RepositoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin!
-  before_action :load_repository, only: [ :assign_judge, :add_judges, :update_ignore_field ]
+  before_action :load_repository, only: :update_ignore_field
   def index
     status = params[:ignored] || false
     @repos = Repository.parent.where(ignore: status, name: /#{params[:query]}/).
@@ -12,15 +12,6 @@ class Admin::RepositoriesController < ApplicationController
         format.js
       end
     end
-  end
-
-  def assign_judge
-    @judges = User.judges
-  end
-
-  def add_judges
-   @repo.judges = User.find(params[:judges])
-   @repo.save
   end
 
   def update_ignore_field
