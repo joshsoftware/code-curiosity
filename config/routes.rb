@@ -57,8 +57,6 @@ Rails.application.routes.draw do
       get :search, on: :collection
       member do
         patch :update_ignore_field
-        patch :add_judges
-        get :assign_judge
       end
     end
     resources :users, only: [:index, :destroy] do
@@ -71,7 +69,6 @@ Rails.application.routes.draw do
 
     resources :subscriptions, only: [:index]
 
-    resources :judges, only: [:index]
     resources :rounds, only: [:index] do
       get :mark_as_close
     end

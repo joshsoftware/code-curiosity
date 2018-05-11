@@ -14,15 +14,6 @@ class Admin::RepositoriesController < ApplicationController
     end
   end
 
-  def assign_judge
-    @judges = User.judges
-  end
-
-  def add_judges
-   @repo.judges = User.find(params[:judges])
-   @repo.save
-  end
-
   def update_ignore_field
     @repo.update_attributes(ignore: params[:ignore_value])
     repositories = Repository.any_of({popular_repository_id: @repo.id}, {source_gh_id: @repo.gh_id})

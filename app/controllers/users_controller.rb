@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:show]
 
   def index
-    @users = current_user.is_judge? ? User.contestants : [current_user]
+    @users = [current_user]
   end
 
   def show
