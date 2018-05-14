@@ -65,6 +65,23 @@ class CommitTest < ActiveSupport::TestCase
     assert_equal commit_2.round, round_2
   end
 
+  def test_frequency_factor_without_previous_commit
+    commit_1 = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today)
+    assert_equal commit_1.frequency_factor, 1
+  end
+
+  def test_frequency_factor_with_previous_commit
+    user = create(:user)
+    25.times.each do |n|
+      create(:commit, user: user, message: Faker::Lorem.sentences, commit_date: Date.today - (n + 1).day)
+    end
+    commit_1 = create(:commit, user: user, message: Faker::Lorem.sentences, commit_date: Date.today)
+    assert_equal commit_1.frequency_factor > 1.0, true
+  end
+
+  def test_frequency_factor_should_not_be_negative
+  end
+
 =begin
   test 'commit scoring job is scheduled after the commit is created' do
     clear_enqueued_jobs
