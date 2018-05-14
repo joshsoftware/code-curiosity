@@ -26,7 +26,6 @@ class Commit
   has_many :comments, as: :commentable
   embeds_many :scores, as: :scorable
 
-  validates :round, presence: true
   validates :message, uniqueness: {:scope => :commit_date}
 
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
@@ -44,6 +43,12 @@ class Commit
   end
 
   #after_create :schedule_scoring_job
+
+  before_create :set_frequency_factor
+
+  def set_frequency_factor
+    self.frequency_factor = FrequencyFactorCalculator.new(self).result
+  end
 
   def info
     @info ||= repository ? user.gh_client.repos.commits.get(repository.owner, repository.name, sha, { redirection: true }) : nil
