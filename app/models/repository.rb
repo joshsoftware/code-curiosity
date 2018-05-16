@@ -19,6 +19,7 @@ class Repository
   field :ignore_files, type: Array, default: []
   field :type,         type: String
   field :ignore,       type: Boolean, default: false
+  field :branches,     type: Array, default: ['master']
 
   belongs_to :popular_repository, class_name: 'Repository', inverse_of: 'repositories'
   belongs_to :organization
