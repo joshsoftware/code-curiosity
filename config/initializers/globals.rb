@@ -20,6 +20,7 @@ end
 
 COMMIT_RATINGS = (0..5).to_a
 ACTIVITY_RATINGS = (0..2).to_a
+GIT_INFO = YAML.load_file('config/git.yml')
 
 INFO = YAML.load_file('config/info.yml')
 
