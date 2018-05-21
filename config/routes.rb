@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   resources :repositories, only: [:index]
+  resources :commits, only: [:index]
 
   resources :sponsorer_details do
     member do
