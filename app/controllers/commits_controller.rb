@@ -2,12 +2,9 @@ class CommitsController < ApplicationController
   before_action :user_commits, only: [:index]
   
   def index
-    @commits = @commits.where(
-                              :commit_date.gte => params[:from],
-                              :commit_date.lte => params[:to],
-                              message: /#{params[:query]}/
-                             ) if params[:from] && params[:to] && params[:query]
-    @commits = @commits.page(params[:page])
+    @commits = @commits.in_range(params[:from], params[:to])
+                       .search_by(params[:query])
+                       .page(params[:page])
     if request.xhr?
       respond_to do|format|
         format.js

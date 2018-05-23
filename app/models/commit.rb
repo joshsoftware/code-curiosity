@@ -27,6 +27,12 @@ class Commit
   validates :message, uniqueness: {:scope => :commit_date}
 
   scope :for_round, -> (round_id) { where(:round_id => round_id) }
+  scope :in_range, -> (from, to) {
+    where(:commit_date.gte => from, :commit_date.lte => to) if from.presence && to.presence
+  }
+  scope :search_by, -> (query) {
+    where(message: /#{query}/i) if query.presence
+  }
 
   index({ user_id: 1, round_id: 1 })
   index({ repository_id: 1 })
