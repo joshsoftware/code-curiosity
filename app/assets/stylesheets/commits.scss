@@ -1,0 +1,16 @@
+// Place all the styles related to the Commits controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+form, button#reveal_all {
+  float: right;
+}
+
+td, th {
+  text-align: center;
+}
+
+.btn.btn-default, input#to, input#from{
+  margin-left: 5px;
+  margin-right: 5px;
+}

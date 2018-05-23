@@ -1,0 +1,14 @@
+- @commits.each do |commit|
+  %tr
+    %td= commit.commit_date.strftime("%d %B %y")
+    %td= commit.repository.name
+    %td
+      = commit.message
+      = link_to commit.html_url, class: 'btn btn-info btn-xs' do
+        %i.fa.fa-fw.fa-share
+        View
+    %td= commit.auto_score
+    %td
+      = link_to commits_path, class: 'btn btn-success btn-xs' do
+        %i.fa.fa-fw.fa-gift
+        Reveal
