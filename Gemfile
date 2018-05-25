@@ -43,6 +43,7 @@ gem 'react-rails'
 gem 'versionist'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'sidekiq-status'
+gem 'backup'
 
 group :development, :test do
   gem 'byebug'
