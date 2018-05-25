@@ -18,13 +18,13 @@ class ActivitiesController < ApplicationController
 
   def get_commits
     @commits  = current_user.commits
-    .for_round(@current_round.id)
-    .desc(:commit_date).page(params[:page])
+                            .desc(:commit_date)
+                            .page(params[:page])
   end
 
   def get_activities
     @activities = current_user.activities
-    .for_round(@current_round.id)
-    .desc(:commented_on).page(params[:page])
+                              .desc(:commented_on)
+                              .page(params[:page])
   end
 end

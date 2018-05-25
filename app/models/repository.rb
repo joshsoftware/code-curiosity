@@ -22,7 +22,6 @@ class Repository
   field :branches,     type: Array, default: ['master']
 
   belongs_to :popular_repository, class_name: 'Repository', inverse_of: 'repositories'
-  belongs_to :organization
   has_many :commits
   has_many :activities
   has_many :code_files
@@ -132,42 +131,12 @@ class Repository
     @git ||= Git.open(code_dir)
   end
 
-  PULL_REQ_MERGE_REGX = /merge (pull|branch)/i
-
-  def score_commits(round = nil)
-    engine = ScoringEngine.new(self)
-
-    _commits = self.commits.where(auto_score: nil)
-    _commits = _commits.where(round: round) if round
-
-    _commits.each do |commit|
-      if commit.message =~ PULL_REQ_MERGE_REGX
-        commit.set(auto_score: 0)
-      else
-        begin
-          Sidekiq.logger.info "Scoring for commit: #{commit.id}, Round: #{round.from_date}"
-          # commit.set(auto_score: engine.calculate_score(commit))
-          ScoreCommitJob.perform_later(commit.id.to_s)
-        rescue StandardError => e
-          Sidekiq.logger.info "Commit: #{commit.id}, Error: #{e}"
-        end
-      end
-    end
-
-    return true
-  end
-
   def set_files_commit_count
     git.ls_files.each do |file, options|
       code_file = self.code_files.find_or_initialize_by(name: file)
       code_file.commits_count = git.file_commits_count(file)
       code_file.save
     end
-  end
-
-  def score_activities(round = nil)
-    _activities = round ? activities.where(round: round) : activities
-    _activities.each(&:calculate_score_and_set)
   end
 
   def create_popular_repo

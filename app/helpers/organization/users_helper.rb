@@ -1,2 +1,0 @@
-module Organization::UsersHelper
-end

@@ -4,19 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :signout_old_login
-  before_action :current_round
-  helper_method :current_round
 
   protected
-
-  def current_round
-    @rounds = Round.order(from_date: :desc).limit(3)
-    @current_round = if session[:current_round]
-                       Round.find(session[:current_round])
-                     else
-                       Round.find_by({status: 'open'})
-                     end
-  end
 
   def signout_old_login
     if current_user && current_user.auth_token.blank?
