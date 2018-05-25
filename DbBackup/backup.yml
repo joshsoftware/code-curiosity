@@ -1,0 +1,21 @@
+database:
+  name: 'code_curiosity'
+  username: ''
+  password: ''
+  host: ''
+  port: ''
+storage:
+  access_key_id: ""
+  secret_access_key: ""
+  region: "region"
+  bucket: "bucket"
+encryptor:
+  passphrase: "passphrase"
+  mail: "mail@codecuriosity.com"
+notify:
+  authentication: "plain"
+  from: 'mail@codecuriosity.org'
+  to: 'mail@codecuriosity.com'
+  domain: "codecuriosity.org"
+  user_name: "user_name"
+  password: "password"
