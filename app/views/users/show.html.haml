@@ -38,7 +38,7 @@
                 %span.pull-right Not set yet
           - if logged_in_user?
             - if Offer.is_winner?(current_user) || @user.active_sponsorer_detail || @user.able_to_redeem?
-              = link_to '#', class: "btn btn-primary btn-block", data: { toggle: 'modal', target: '#redeem-modal .modal' } do
+              = link_to '#', class: "btn btn-primary btn-block disabled", data: { toggle: 'modal', target: '#redeem-modal .modal' } do
                 %b Redeem Points
             - else
               %span.tool-tip{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Not met the redemption criteria"}
