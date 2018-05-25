@@ -47,14 +47,13 @@ every '59 23 27-31 * *' do
 end
 
 every '1 1 21 * *' do
-  rake 'subscription:send_progress_emails'
+  # rake 'subscription:send_progress_emails'
 end
 
 every '1 10 7 * *' do
-  rake 'subscription:redeem_points'
+  # rake 'subscription:redeem_points'
 end
 
 every :day, :at => '10:30am' do
   rake 'repo:delete_large_repositories'
 end
-
