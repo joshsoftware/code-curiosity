@@ -74,6 +74,7 @@ class User
   has_and_belongs_to_many :organizations
   has_and_belongs_to_many :groups, class_name: 'Group', inverse_of: 'members'
   has_many :sponsorer_details, dependent: :destroy
+  has_many :challenges, dependent: :destroy
 
   slug  :github_handle
 

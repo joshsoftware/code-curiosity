@@ -7,6 +7,16 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  describe 'new user is registered on code curiosity' do
+    test 'should not have default challenge assigned' do
+    end
+  end
+
+  describe 'user deactivates his account' do
+    test 'should deactivates all his challenges' do
+    end
+  end
+  
   test "email address must be present" do
     user = build(:user,:email => nil)
     user.valid?

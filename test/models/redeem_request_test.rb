@@ -7,6 +7,14 @@ class RedeemRequestTest < ActiveSupport::TestCase
     @redeem_request ||= build(:redeem_request)
   end
 
+  describe 'user wants to redeem points' do
+    test 'can redeem at any time' do
+    end
+
+    test 'he can redeem upto certain limit(based on his level)' do
+    end
+  end
+  
   describe 'if user is a contest winner' do
     before do
       @user = create :user
