@@ -26,25 +26,18 @@ class Activity
   field :auto_score,      type: Integer
 
   belongs_to :user
-  belongs_to :round
   belongs_to :repository
   has_many :comments, as: :commentable
   embeds_many :scores, as: :scorable
-  belongs_to :organization
 
   scope :considered_for_scoring, -> { any_of({event_type: :issue, :event_action.in => ISSUE_CONSIDERED_FOR_SCORING},
                                       {event_type: :comment, :event_action.in => COMMENT_CONSIDERED_FOR_SCORING}) }
 
   #validates :description, uniqueness: {:scope => :commented_on}
-  validates :round, presence: true
   validate :check_duplicate_comments, on: :create
-
-  scope :for_round, -> (round_id) { where(:round_id => round_id) }
 
   index({ commented_on: -1 })
   index({ event_type: 1, gh_id: 1 })
-
-  before_validation :set_round
 
   after_create do |a|
     a.user.inc(activities_count: 1)
@@ -73,15 +66,6 @@ class Activity
   end
 
   private
-
-  def set_round
-    # FIXME: This code was added to address a corner case for commits appearing in next round
-    # instead of the last month. However, it will impact scoring and bonus points. Keeping this
-    # line commented in case we find a better fix. - Gautam
-
-    self.round = Round.opened unless self.round
-    #self.round = Round.where(:from_date.lte => commented_on, :end_date.gte => commented_on).first unless self.round
-  end
 
   # validate if any comments with the same description, for the same repo and same user has been created in the last 1 hour.
   def check_duplicate_comments

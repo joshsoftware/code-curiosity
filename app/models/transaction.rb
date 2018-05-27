@@ -11,9 +11,7 @@ class Transaction
   field :amount,            type: Float, default: 0.0
 
   belongs_to :user
-  belongs_to :subscription
   belongs_to :redeem_request
-  has_one :redemption_transaction
 
   validates :type, :points , presence: true
   validates :type, inclusion: { in: %w(credit debit) }
@@ -58,10 +56,7 @@ class Transaction
   end
 
   def set_amount
-    if user.is_sponsorer || Offer.is_winner?(user)
-      set(amount: points.to_f/SUBSCRIPTIONS['individual'])
-    else
-      set(amount: points.to_f/SUBSCRIPTIONS['free'])
-    end
+    #for now, using old conversion rate.
+    set(amount: points.to_f/SUBSCRIPTIONS['free'])
   end
 end

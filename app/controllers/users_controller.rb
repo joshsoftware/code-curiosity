@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  include SponsorerHelper
   before_action :authenticate_user!, except: [:show]
 
   def index
@@ -61,15 +60,7 @@ class UsersController < ApplicationController
 
   def destroy
     user = current_user
-    if user.is_sponsorer && user.sponsorer_detail.subscription_status != 'canceled'
-      sponsor = user.sponsorer_detail
-      begin
-        delete_subscription(sponsor.stripe_subscription_id)
-      rescue
-        flash[:error] = "There was some problem while canceling your subscription. Please try after some time"
-        redirect_to user_path and return
-      end
-    end
+
     sign_out current_user
 
     # We cannot delete the user completely, because there are plenty of associations.

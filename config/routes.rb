@@ -23,15 +23,6 @@ Rails.application.routes.draw do
 
   resources :repositories, only: [:index]
 
-  resources :sponsorer_details do
-    member do
-      post 'update_card'
-      get 'cancel_subscription'
-    end
-  end
-
-  post "/stripe/webhooks", to: "stripe#webhooks"
-
   resources :users, only: [:index, :show, :destroy, :edit, :update] do
     member do
       patch :remove_handle
@@ -66,9 +57,6 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :rounds, only: [:index] do
-      get :mark_as_close
-    end
     # It can be used in the future, hence commenting.
     # resources :redeem_requests, only: [:index, :update, :destroy] do
     #   collection do
@@ -99,32 +87,11 @@ Rails.application.routes.draw do
     concerns :judgeable, on: :collection
   end
 
-  resources :organizations, only: [:show, :edit, :update] do
-    concerns :judgeable, on: :member
-
-    resources :users, only: [:create, :destroy], controller: 'organization/users'
-    resources :repositories, only: [:index], controller: 'organization/repositories' do
-      collection do
-        get :sync
-      end
-    end
-  end
-
   resource :redeem, only: [:create], controller: 'redeem'
-  resources :groups do
-    member do
-      patch :feature
-    end
-    resources :members, only: [:index, :create, :destroy], controller: 'groups/members' do
-      delete :destroy_invitation
-      get :resend_invitation
-    end
-  end
-  get 'accept_invitation/:group_id/:token' => 'groups/members#accept_invitation', as: :accept_invitation
+  
   get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
   get 'widgets/group/:id(/:round_id)' => 'widgets#group', as: :group_widget
 
-  get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'
   #get 'leaderboard' => 'home#leaderboard'
 

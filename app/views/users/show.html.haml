@@ -28,6 +28,11 @@
             %li.list-group-item
               %b Earned
               %a.pull-right $ #{amount_earned @user}
+          - if logged_in_user?
+            = link_to '#', class: "btn btn-primary btn-block", data: { toggle: 'modal', target: '#redeem-modal .modal' } do
+              %b Redeem Points
+            %span.tool-tip{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Not met the redemption criteria"}
+              %span.btn.btn-primary.btn-block{:disabled => "disabled"} Redeem Points
     .col-sm-8
       .nav-tabs-custom
         %ul.nav.nav-tabs
