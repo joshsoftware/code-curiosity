@@ -1,11 +1,20 @@
 class RegistrationsController < Devise::RegistrationsController
+  
+  before_action :redirect_to_home, except: [:terms_and_conditions]
 
-  before_action :redirect_to_home
+  def terms_and_conditions
+    if params[:terms_and_conditions]
+      current_user.set(terms_and_conditions: params[:terms_and_conditions])
+      redirect_to dashboard_path
+    else
+      render 'terms_and_conditions'
+    end
+  end
 
   private
 
   def redirect_to_home
-    redierect_to root_path
+    redirect_to root_path
   end
 
   def sign_up_params

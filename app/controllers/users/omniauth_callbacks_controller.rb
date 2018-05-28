@@ -7,8 +7,12 @@ class Users::OmniauthCallbacksController < ApplicationController
     #normal user sign in
     sign_in :user, @user
 
-    redirect_to dashboard_path
-    flash[:notice] = "Signed in"
+    unless @user.terms_and_conditions
+      redirect_to terms_and_conditions_path
+    else
+      redirect_to dashboard_path
+      flash[:notice] = "Signed in successfully!"
+    end
   end
 
   def failure
