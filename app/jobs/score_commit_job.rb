@@ -1,3 +1,5 @@
+require ENV['SCORING_ALGO_PATH']
+
 class ScoreCommitJob < ActiveJob::Base
   include Sidekiq::Status::Worker
   include ActiveJobRetriesCount
