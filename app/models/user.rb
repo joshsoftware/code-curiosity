@@ -59,6 +59,9 @@ class User
   # User account deletion
   field :deleted_at, type: Time
 
+  # for accepting terms and conditions
+  field :terms_and_conditions, type: Boolean, default: false
+
   has_many :activities, dependent: :destroy
   has_many :commits, dependent: :destroy
   has_many :transactions, dependent: :destroy

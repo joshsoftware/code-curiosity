@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'sign_in', :to => 'home#index', :as => :new_user_session
     delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+    get 'terms_and_conditions' => 'registrations#terms_and_conditions'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
