@@ -21,6 +21,7 @@ class Commit
 
   belongs_to :user
   belongs_to :repository
+  belongs_to :pull_request
   has_many :comments, as: :commentable
   embeds_many :scores, as: :scorable
 
@@ -30,7 +31,7 @@ class Commit
   index({ repository_id: 1 })
   index({ commit_date: -1 })
   index({ sha: 1 })
-  index(auto_score: 1)
+  index(  auto_score: 1)
 
   after_create do |c|
     c.user.inc(commits_count: 1)

@@ -29,9 +29,13 @@ class Test
         commit_record.comments_count = commit['commit']['comment_count']
 
         commit_record.save
+        asscoiate_with_pull_request(commit_record)
+
       end
     end
   end
+
+  private
 
   def fetch_commits(repo_name, branch_name)
     ::VCS::GitCommit.new(
@@ -41,5 +45,22 @@ class Test
       from_date: from_date,
       to_date: to_date
     ).list
+  end
+
+  def asscoiate_with_pull_request(commit_record)
+    pr_info = fetch_pull_request(commit_record.sha)
+    if pr_info
+      pr = PullRequest.find_or_initialize_by(number: pr_info.number)
+      pr.label = pr_info.label
+      pr.created_on = pr_info.created_at
+      pr.comment_count = pr_info.comments
+      pr.author_association = pr_info.author_association
+      pr.commits << commit_record
+      pr.save
+    end
+  end
+
+  def fetch_pull_request(sha)
+    ::VCS::GitPullRequest.new(sha).get
   end
 end
