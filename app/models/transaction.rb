@@ -27,6 +27,8 @@ class Transaction
   after_create :update_user_total_points
   after_create :set_amount
 
+  FREE_SUBSCRIPTION = 20
+
   def credit?
     type == 'credit'
   end
@@ -57,6 +59,6 @@ class Transaction
 
   def set_amount
     #for now, using old conversion rate.
-    set(amount: points.to_f/SUBSCRIPTIONS['free'])
+    set(amount: points.to_f/FREE_SUBSCRIPTION)
   end
 end

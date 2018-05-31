@@ -3,9 +3,7 @@ require "test_helper"
 class TransactionSerializerTest < ActiveSupport::TestCase
   def setup
     super
-    @goal = create :goal
-    @user = create :user, auth_token: 'dah123rty', goal: @goal
-    @round = create :round, :open
+    @user = create :user, auth_token: 'dah123rty'
     @transaction = create(:transaction, type: 'credit', points: 500, user: @user, transaction_type: 'royalty_bonus')
     @redeem_request = create(:redeem_request, points: 100, retailer: 'other', address: 'pune', gift_product_url: Faker::Internet.url,
                              coupon_code: 'aitpune', user: @user)

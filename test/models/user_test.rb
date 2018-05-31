@@ -26,42 +26,10 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "github_user_since should not be nil" do
-    round = create :round, :open
-    create(:subscription, round: round)
     omniauthentication
     user = User.find_by name: 'test_user'
     #assert user.github_user_since
     assert_equal @date, user.github_user_since
-  end
-
-  test "user should not be able to redeem if user is not registered on github for atleast 6 months and on codecurisity for alteast 3 months" do
-    create :round, :open
-    user = create :user, github_user_since: Date.today
-    assert_not user.able_to_redeem?
-  end
-
-  test "user should be able to redeem if user is registered on github for atleast 6 months and on codecurisity for alteast 3 months" do
-    create :round, :open
-    user = create :user, github_user_since: Date.today - 6.months, created_at: Date.today - 3.months
-    assert user.able_to_redeem?
-  end
-
-  test 'active_sponsorer_detail should return the active sponsorer detail' do
-    round = create :round, :open
-    user = create :user, github_user_since: Date.today - 6.months, created_at: Date.today - 3.months, points: 500
-    create(:subscription, round: round, user: user)
-    sponsorer_detail = create(:sponsorer_detail, user: user, subscription_status: :active)
-    assert_equal sponsorer_detail, user.active_sponsorer_detail
-  end
-
-  test 'sponsorer_detail should return the latest sponsorer detail' do
-    round = create :round, :open
-    user = create :user, github_user_since: Date.today - 6.months, created_at: Date.today - 3.months, points: 500
-    create(:subscription, round: round, user: user)
-    create(:sponsorer_detail, user: user, subscription_status: :canceled)
-    sleep 1
-    sponsorer_detail_2 = create(:sponsorer_detail, user: user, subscription_status: :canceled)
-    assert_equal sponsorer_detail_2, user.sponsorer_detail
   end
 
   test 'must return user which are contestants and not blocked' do
@@ -158,42 +126,4 @@ class UserTest < ActiveSupport::TestCase
     user.update({deleted_at: Time.now, active: false})
     assert user.deleted?
   end
-
-  test 'set_royalty_bonus' do
-    user = create :user
-    round = create :round, :open
-    user.expects(:calculate_royalty_bonus).returns(500)
-    user.set_royalty_bonus
-    assert_equal 1, user.transactions.count
-    transaction = user.transactions.first
-    assert_equal 'credit', transaction.type
-    assert_equal 'royalty_bonus', transaction.transaction_type
-    assert_equal 500, transaction.points
-    assert_equal 500, user.total_points
-
-=begin
-    redeem_request_1 = create(:redeem_request, points: 100, address: 'baner', user: user)
-    redeem_request_2 = create(:redeem_request, points: 250, address: 'baner', user: user)
-    assert_equal 3, user.transactions.count
-
-    user.expects(:calculate_royalty_bonus).returns(600)
-    user.set_royalty_bonus
-    assert_equal 4, user.transactions.count
-    transaction = user.transactions.last
-    assert_equal 'credit', transaction.type
-    assert_equal 'royalty_bonus', transaction.transaction_type
-    assert_equal 100, transaction.points
-    assert_equal 250, user.total_points
-
-    user.expects(:calculate_royalty_bonus).returns(900)
-    user.set_royalty_bonus
-    assert_equal 5, user.transactions.count
-    transaction = user.transactions.last
-    assert_equal 'credit', transaction.type
-    assert_equal 'royalty_bonus', transaction.transaction_type
-    assert_equal 300, transaction.points
-    assert_equal 550, user.total_points
-=end
-  end
-
 end

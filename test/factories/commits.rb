@@ -4,6 +4,5 @@ FactoryGirl.define do
     commit_date { DateTime.now }
     association :user
     association :repository
-    association :round
   end
 end

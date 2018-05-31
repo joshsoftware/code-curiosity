@@ -1,3 +1,0 @@
-$("#activities").html("#{j(render partial: 'judging/activity', collection: @activities )}")
-$("#activities_pagination").html("#{j(paginate @activities, remote: true, window: 1, outer_window: 1) }")
-showRatingControl();

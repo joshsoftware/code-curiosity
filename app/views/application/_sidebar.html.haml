@@ -5,8 +5,4 @@
         = link_to root_path do
           %i.fa.fa-dashboard
           %span Dashboard
-      %li{class: is_active('index', 'activities')}
-        = link_to activities_path do
-          %i.fa.fa-cubes
-          %span Contributions
       = render 'admin_sidebar' if current_user.is_admin?

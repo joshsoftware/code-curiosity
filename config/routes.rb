@@ -36,13 +36,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :activities, only: [:index] do
-    collection do
-      get 'commits'
-      get 'activities'
-    end
-  end
-
   namespace :admin do
     resources :repositories, only: [:index] do
       get :search, on: :collection
@@ -59,11 +52,11 @@ Rails.application.routes.draw do
     end
 
     # It can be used in the future, hence commenting.
-    # resources :redeem_requests, only: [:index, :update, :destroy] do
-    #   collection do
-    #     get :download
-    #   end
-    # end
+    resources :redeem_requests, only: [:index, :update, :destroy] do
+      collection do
+        get :download
+      end
+    end
 
     resources :ignored_files, except: [:show] do
       get :search, on: :collection
@@ -89,7 +82,7 @@ Rails.application.routes.draw do
   end
 
   resource :redeem, only: [:create], controller: 'redeem'
-  
+
   get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
   get 'widgets/group/:id(/:round_id)' => 'widgets#group', as: :group_widget
 
