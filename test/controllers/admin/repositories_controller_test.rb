@@ -3,9 +3,8 @@ require "test_helper"
 class Admin::RepositoriesControllerTest < ActionController::TestCase
 
   def setup
-    round = create(:round, :status => 'open')
     role = create(:role, :name => 'Admin')
-    @user = create(:user, :auth_token => 'dah123rty', goal: create(:goal) )
+    @user = create(:user, :auth_token => 'dah123rty')
     @user.roles << role
     sign_in @user
     @repo = create(:repository, gh_id: 123439, type: 'popular')

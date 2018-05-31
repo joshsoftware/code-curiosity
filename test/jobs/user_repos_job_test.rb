@@ -4,7 +4,6 @@ class UserReposJobTest < ActiveJob::TestCase
   def setup
     super
     @user = create :user, github_handle: 'prasadsurase', auth_token: 'somerandomtoken'
-    @round = create :round, :open
     clear_enqueued_jobs
     clear_performed_jobs
     assert_no_performed_jobs

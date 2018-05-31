@@ -1,7 +1,0 @@
-%li
-  %a{href: user_url(subscription.user), target: '_blank'}
-    .user-img
-      %img.img-circle{alt: subscription.user.github_handle, src: avatar_url(subscription.user) }/
-    %span.username
-      = subscription.user.github_handle
-    %span.pull-right.badge.bg-blue= "#{subscription.points} points"

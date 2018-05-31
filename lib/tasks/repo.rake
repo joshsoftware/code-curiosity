@@ -27,6 +27,7 @@ namespace :repo do
     end
   end
 
+=begin
   desc "delete cloned repository whose commits got scored"
   task delete_repository_dir: :environment do
     # get all the repository ids whose commits belong to the current round
@@ -41,5 +42,6 @@ namespace :repo do
       FileUtils.rm_r(path) if Dir.exists?(path)
     end
   end
+=end
 
 end

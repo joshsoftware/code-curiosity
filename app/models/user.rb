@@ -62,13 +62,11 @@ class User
   # for accepting terms and conditions
   field :terms_and_conditions, type: Boolean, default: false
 
-  has_many :activities, dependent: :destroy
   has_many :commits, dependent: :destroy
   has_many :transactions, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :redeem_requests, dependent: :destroy
   has_and_belongs_to_many :repositories, class_name: 'Repository', inverse_of: 'users'
-  has_and_belongs_to_many :judges_repositories, class_name: 'Repository', inverse_of: 'judges'
   has_and_belongs_to_many :roles, inverse_of: nil
 
   slug  :github_handle
