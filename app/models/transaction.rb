@@ -5,7 +5,7 @@ class Transaction
   # TRANSACTION_TYPES = %w(royalty_bonus Round redeem_points)
 
   field :type,              type: String
-  field :points ,           type: Integer, default: 0
+  field :points,            type: Integer, default: 0
   field :transaction_type,  type: String
   field :description,       type: String
   field :amount,            type: Float, default: 0.0
@@ -26,8 +26,6 @@ class Transaction
 
   after_create :update_user_total_points
   after_create :set_amount
-
-  FREE_SUBSCRIPTION = 20
 
   def credit?
     type == 'credit'
@@ -59,6 +57,7 @@ class Transaction
 
   def set_amount
     #for now, using old conversion rate.
-    set(amount: points.to_f/FREE_SUBSCRIPTION)
+    denominator = REDEEM['one_dollar_to_points'] * 2
+    set(amount: points.to_f/denominator)
   end
 end

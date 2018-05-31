@@ -1,2 +1,3 @@
 %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Cancel
-%button.btn.btn-primary.submit-redeem{ type: "button", data: { points: current_user.points } } Redeem
+%button.btn.btn-primary.submit-redeem{ type: "button", data: { points: current_user.total_points, free: REDEEM['one_dollar_to_points'] * 2} }
+  Redeem
