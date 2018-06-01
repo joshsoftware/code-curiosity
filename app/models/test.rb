@@ -52,7 +52,7 @@ class Test
     if pr_info
       pr = PullRequest.find_or_initialize_by(number: pr_info.number)
       pr.label = pr_info.label
-      pr.created_on = pr_info.created_at
+      pr.created_at_git = pr_info.created_at
       pr.comment_count = pr_info.comments
       pr.author_association = pr_info.author_association
       pr.commits << commit_record
