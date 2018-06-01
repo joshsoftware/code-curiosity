@@ -1,9 +1,0 @@
-%tr{data: {commit: commit.id.to_s}}
-  = render partial: 'activities/score_cell', locals: { resource: commit }
-  %td= commit.commit_date.strftime('%d/%b/%Y')
-  %td= commit.repository.try(:name)
-  %td= commit.message
-  %td
-    = link_to commit.html_url, target: '_blank', class: 'btn btn-block btn-default btn-xs' do
-      %i.fa.fa-fw.fa-share
-      Open

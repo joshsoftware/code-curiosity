@@ -3,9 +3,7 @@ require 'test_helper'
 class HomeControllerTest < ActionController::TestCase
   def setup
     super
-    @goal = create :goal
-    @round = create :round, :open
-    @user = create :user, auth_token: 'dah123rty', goal: @goal
+    @user = create :user, auth_token: 'dah123rty'
   end
 
   test 'should get index for non logged-in user' do

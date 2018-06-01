@@ -23,11 +23,9 @@ class Repository
 
   belongs_to :popular_repository, class_name: 'Repository', inverse_of: 'repositories'
   has_many :commits
-  has_many :activities
   has_many :code_files
   has_many :repositories, class_name: 'Repository', inverse_of: 'popular_repository'
   has_and_belongs_to_many :users, class_name: 'User', inverse_of: 'repositories'
-  has_and_belongs_to_many :judges, class_name: 'User', inverse_of: 'judges_repositories'
 
   validates :name, :source_url, :ssh_url, presence: true
   #validate :verify_popularity

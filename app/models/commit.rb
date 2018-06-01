@@ -3,7 +3,7 @@ class Commit
   include Mongoid::Timestamps
   include JudgeScoringHelper
 
-  COMMIT_TYPE = {score: 'Scores', commit: 'Commits', activity: 'Activities'}
+  COMMIT_TYPE = {score: 'Scores', commit: 'Commits'}
 
   attr_accessor :branch
 

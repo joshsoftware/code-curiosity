@@ -5,9 +5,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
   def setup
     super
     @admin_role = create :role, :admin
-    @goal = create :goal, points: 15
-    @round = create :round, :open
-    @user = create :user, auth_token: 'dah123rty', goal: @goal
+    @user = create :user, auth_token: 'dah123rty'
   end
 
   test 'should not access index if the current user is non-admin' do
@@ -19,7 +17,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
   test 'should access users index only if the user is admin' do
     @user.roles << @admin_role
     sign_in @user
-    other_user = create :user, auth_token: Faker::Lorem.word, goal: @goal
+    other_user = create :user, auth_token: Faker::Lorem.word
     assert_equal User.count, 2
     get :index
     assert_response :success
@@ -28,7 +26,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
   test 'should destroy all associations of the user on destroying any user by admin' do
     @user.roles << @admin_role
     sign_in @user
-    other_user = create :user, auth_token: 'dah123rty', goal: @goal
+    other_user = create :user, auth_token: 'dah123rty'
     assert_equal other_user.transactions.count, 0
     transaction = create_list :transaction, 3, type: 'credit', user: other_user
     assert_equal other_user.transactions.count, 3
