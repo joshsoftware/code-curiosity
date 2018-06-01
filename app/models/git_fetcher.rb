@@ -1,4 +1,4 @@
-class Test
+class GitFetcher
   include VCS
 
   attr_reader :repo_owner, :repo_name,

@@ -12,7 +12,7 @@ class FetchCommitJob < ActiveJob::Base
     Sidekiq.logger.info "from: #{from_date} to: #{to_date}"
 
     begin
-      Test.new(
+      GitFetcher.new(
                repo_owner: repo_owner,
                repo_name: repo_name,
                branch_name: branch_name,
