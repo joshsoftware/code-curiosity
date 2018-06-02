@@ -2,9 +2,7 @@ require "test_helper"
 
 class CommitsControllerTest < ActionController::TestCase
   before do
-    goal  = create :goal, points: 10
-    round = create :round, :open
-    user  = create :user, :auth_token => 'dah123rty', goal: goal
+    user  = create :user, :auth_token => 'dah123rty'
     5.times.each do |i|
       create :commit, user: user, commit_date: Date.today, message: "commit_#{i}"
     end
