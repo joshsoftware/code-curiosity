@@ -11,4 +11,4 @@
       = react_component 'PointsTile', { color: 'bg-green', title: 'Commits', points: current_user.commits_count,
         logo: 'ion-stats-bars', path: commits_path}
   .row
-    = react_component 'UserPointsChart', { xAxis: @xAxis, commits: @commits, activities: @activities, points: @points, username: @username }
+    = react_component 'UserPointsChart', { xAxis: @xAxis, commits: @commits, points: @points, username: @username }

@@ -1,12 +1,15 @@
 module ContributionHelper
   def contribution_data(user = current_user)
-    @subscriptions = user.subscriptions.where(:created_at.gt => Date.parse("Feb 2016")).asc(:created_at)
+    @user_commits = user.commits.group_by {|t| t.commit_date.beginning_of_month }
+                                .sort
     @xAxis = []
     @commits = []
-    @activities = []
     @points = []
     @username = user.eql?(current_user) ? ['Your'] : ["#{user.name.titleize}'s"]
-    @subscriptions.map{|s| @xAxis << s.round.name; @commits << s.commits_count; @activities << s.activities_count; @points << s.points}
+    @user_commits.map do |key, value|
+      @xAxis << key.strftime('%b %Y')
+      @commits << value.count
+      @points << value.sum(&:auto_score)
+    end
   end
-  
 end

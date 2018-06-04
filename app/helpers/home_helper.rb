@@ -28,12 +28,72 @@ module HomeHelper
 
   def multi_line_chart
 
-    users = Subscription.collection.aggregate( [  { "$group" => { _id: "$round_id", total: { "$sum" => 1 } } } ] ).sort {|x, y| Date.parse(Round.find(y["_id"]).name) <=> Date.parse(Round.find(x["_id"]).name) }.collect { |r| [ Round.find(r["_id"]).name, r["total"] ] }
-    users = users[1..(users.count - 7)].reverse if users.any?
+    users = User.collection.aggregate(
+      [
+        {
+          "$match" => {"auto_created" => false }
+        },
+        {
+          "$project" => {
+            "month" => { "$month" => "$created_at"},
+            "year" => {"$year" => "$created_at"}
+          }
+        },
+        {
+          "$group" => {
+            _id: {"month" => "$month", "year" => "$year"},
+            total: { "$sum" => 1 }
+          }
+        }
+      ]
+    ).sort_by do |r|
+        [
+          Date.parse(
+            Date::ABBR_MONTHNAMES[r[:_id]["month"]] + " " + r[:_id]["year"].to_s
+          )
+        ]
+      end
+     .collect do |r|
+       [
+         Date::ABBR_MONTHNAMES[r[:_id]["month"]] + " " +r[:_id]["year"].to_s,
+         r["total"]
+       ]
+     end
 
-
-    contributions = Subscription.collection.aggregate( [ {"$match" => { "created_at" => { "$gt" => Date.parse("march 2016") } } }, { "$group" => { _id: "$round_id", total: { "$sum" => "$points" } } } ]).sort {|x, y| Date.parse(Round.find(y["_id"]).name) <=> Date.parse(Round.find(x["_id"]).name) }.collect { |r| [ Round.find(r["_id"]).name, r["total"] ] }
-    contributions = contributions[1..(contributions.count - 2)].reverse if contributions.any?
+    contributions = Commit.collection.aggregate(
+      [
+        {
+          "$match" => {
+            "commit_date" => { "$gt" => Date.parse("01/04/2016") }
+          }
+        },
+        {
+          "$project" => {
+            "month" => { "$month" => "$commit_date"},
+            "year" => {"$year" => "$commit_date"},
+            "auto_score" => 1
+          }
+        },
+        {
+          "$group" => {
+            _id: {"month" => "$month", "year" => "$year"},
+            total: { "$sum" => "$auto_score" }
+          }
+        }
+      ]
+    ).sort_by do |r|
+        [
+          Date.parse(
+            Date::ABBR_MONTHNAMES[r[:_id]["month"]] + " " + r[:_id]["year"].to_s
+          )
+        ]
+      end
+     .collect do |r|
+       [
+         Date::ABBR_MONTHNAMES[r[:_id]["month"]] + " " +r[:_id]["year"].to_s,
+         r["total"]
+       ]
+     end
 
     @user_trend = []
     @contribution_trend = []
@@ -41,10 +101,8 @@ module HomeHelper
     @xAxis = []
 
     users.map{ |user| @user_trend << user[1]; @user_xAxis << user[0]}
-
+    @user_trend = @user_trend.inject([]){ |acc, value| acc << acc.last.to_i + value.to_i }
     contributions.map{ |contribution| @contribution_trend << contribution[1]; @xAxis << contribution[0]}
-
-
  end
 
 end
