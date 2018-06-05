@@ -18,11 +18,11 @@ module HomeHelper
 
   def widget_class
     if @size > 2
-      "col-md-4"
+      'col-md-4'
     elsif @size == 2
-      "col-md-6"
+      'col-md-6'
     else
-      "col-md-12"
+      'col-md-12'
     end
   end
 
@@ -31,67 +31,68 @@ module HomeHelper
     users = User.collection.aggregate(
       [
         {
-          "$match" => {"auto_created" => false }
-        },
-        {
-          "$project" => {
-            "month" => { "$month" => "$created_at"},
-            "year" => {"$year" => "$created_at"}
+          '$match' => {
+            'auto_created' => false,
+            'created_at' => { '$gt' => Date.parse('Apr 2016') }
           }
         },
         {
-          "$group" => {
-            _id: {"month" => "$month", "year" => "$year"},
-            total: { "$sum" => 1 }
+          '$project' => {
+            'month' => { '$month' => '$created_at'},
+            'year' => {'$year' => '$created_at'}
+          }
+        },
+        {
+          '$group' => {
+            _id: {'month' => '$month', 'year' => '$year'},
+            total: { '$sum' => 1 }
+          }
+        },
+        {
+          '$sort' => {
+              '_id.year' => 1,
+              '_id.month' => 1
           }
         }
       ]
-    ).sort_by do |r|
-        [
-          Date.parse(
-            Date::ABBR_MONTHNAMES[r[:_id]["month"]] + " " + r[:_id]["year"].to_s
-          )
-        ]
-      end
-     .collect do |r|
+    ).collect do |r|
        [
-         Date::ABBR_MONTHNAMES[r[:_id]["month"]] + " " +r[:_id]["year"].to_s,
-         r["total"]
+         "#{Date::ABBR_MONTHNAMES[r['_id']['month']]} #{r['_id']['year']}",
+         r['total']
        ]
      end
 
     contributions = Commit.collection.aggregate(
       [
         {
-          "$match" => {
-            "commit_date" => { "$gt" => Date.parse("01/04/2016") }
+          '$match' => {
+            'commit_date' => { '$gt' => Date.parse('Apr 2016') }
           }
         },
         {
-          "$project" => {
-            "month" => { "$month" => "$commit_date"},
-            "year" => {"$year" => "$commit_date"},
-            "auto_score" => 1
+          '$project' => {
+            'month' => { '$month' => '$commit_date'},
+            'year' => {'$year' => '$commit_date'},
+            'auto_score' => 1
           }
         },
         {
-          "$group" => {
-            _id: {"month" => "$month", "year" => "$year"},
-            total: { "$sum" => "$auto_score" }
+          '$group' => {
+            _id: {'month' => '$month', 'year' => '$year'},
+            total: { '$sum' => '$auto_score' }
+          }
+        },
+        {
+          '$sort' => {
+              '_id.year' => 1,
+              '_id.month' => 1
           }
         }
       ]
-    ).sort_by do |r|
-        [
-          Date.parse(
-            Date::ABBR_MONTHNAMES[r[:_id]["month"]] + " " + r[:_id]["year"].to_s
-          )
-        ]
-      end
-     .collect do |r|
+    ).collect do |r|
        [
-         Date::ABBR_MONTHNAMES[r[:_id]["month"]] + " " +r[:_id]["year"].to_s,
-         r["total"]
+         "#{Date::ABBR_MONTHNAMES[r['_id']['month']]} #{r['_id']['year']}",
+         r['total']
        ]
      end
 
