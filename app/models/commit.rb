@@ -29,10 +29,10 @@ class Commit
 
   index({ user_id: 1 })
   scope :in_range, -> (from, to) {
-    where(:commit_date.gte => from, :commit_date.lte => to) if from.presence && to.presence
+    where(:commit_date.gte => from, :commit_date.lte => to)
   }
   scope :search_by, -> (query) {
-    where(message: /#{query}/i) if query.presence
+    where(message: /#{query}/i)
   }
 
   index({ repository_id: 1 })

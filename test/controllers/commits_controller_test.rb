@@ -8,7 +8,7 @@ class CommitsControllerTest < ActionController::TestCase
     end
     sign_in user
   end
-  
+
   def test_index
     get :index
     assert_response :success
@@ -17,17 +17,24 @@ class CommitsControllerTest < ActionController::TestCase
     assert_template partial: '_commits'
     assert_equal assigns(:commits).count, 5
   end
-  
+
+  describe 'date range is not provided' do
+    test "should display current month's commits" do
+      get :index
+      assert_equal assigns(:commits).count, 5
+    end
+  end
+
   test 'should display commits between two dates' do
     get :index, {from: Date.yesterday - 1, to: Date.yesterday}
     assert_equal assigns(:commits).count, 0
   end
-  
+
   test 'should search commits by search query' do
     get :index, {query: 'commit_1'}
     assert_equal assigns(:commits).count, 1
   end
-  
+
   test 'should display commits between two dates and search by query' do
     get :index, {from: Date.yesterday - 1, to: Date.yesterday, query: 'commit'}
     assert_equal assigns(:commits).count, 0
