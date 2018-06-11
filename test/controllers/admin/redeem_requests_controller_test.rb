@@ -56,8 +56,8 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
 
   test "should render index template" do
     seed_data
-    redeem_request = create(:redeem_request,:points => 10, user: @user)
-    xhr :get, :index, parameters, format: :js,  :id => @user.id
+    redeem_request = create(:redeem_request, :points => 10, user: @user)
+    xhr :get, :index, format: :js,  :id => @user.id
     assert_response :success
     assert_template 'redeem_requests/index'
     assert_template 'redeem_requests/_tagtable'
@@ -66,10 +66,10 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
 
   test "status should either be open or close" do
     seed_data
-    redeem_request = create(:redeem_request,:points => 10, user: @user)
+    redeem_request = create(:redeem_request, :points => 10, user: @user)
     xhr :get, :index, parameters, format: :js,  :id => @user.id
     assert_response :success
-    assert_not_nil assigns(:status)
+    assert_not_nil assigns(:filter_params['status'])
   end
 
   test "on status open should render all whose status are open" do
@@ -77,7 +77,7 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     redeem_request = create_list(:redeem_request, 3, :points => 2, :status => false, user: @user)
     xhr :get, :index, parameters, format: :js,  :id => @user.id
     assert_response :success
-    assert_not_nil assigns(:status)
+    assert_not_nil assigns(:filter_params['status'])
     assert_equal redeem_request.count, 3
   end
 
@@ -154,7 +154,7 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
   test "must not get redeem requests for unspecified store" do
     seed_data
     redeem_request = create(:redeem_request, points: 10, status: false, store: 'amazon.in', user: @user)
-    xhr :get, :index, format: :js, store: 'amazon.com', status: false
+    xhr :get, :index, format: :js, redeem_request: {store: 'amazon.com', status: false}
     assert_not_includes assigns(:redeem_requests), redeem_request
   end
 
@@ -191,6 +191,7 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     patch :update, id: redeem_request.id, redeem_request: {points: 300, coupon_code: "Order #67981"}
     assert_equal 15, RedeemRequest.first.amount
   end
+
   def seed_data
     round = create(:round, :status => 'open')
     role = create(:role, :name => 'Admin')

@@ -11,31 +11,7 @@ $(document).on('page:change', function(event) {
     modal.find('#redeem_request_status').val(button.data('status') + '');
   })
 
-  $(function() {
-    $('#redeem').bootstrapToggle();
-  })
-  
-  $('#redeem').change(function() {
-    if($(this).is(':checked')){
-      console.log(this.checked);
-      $.ajax({
-        type: 'get',
-        url: '/admin/redeem_requests', 
-        data: {'status': false}
-      })
-    }
-    else{
-      console.log($(this).is(':checked'));
-      $.ajax({
-        type: 'get',
-        url: '/admin/redeem_requests',
-        data: {'status': true}
-      })
-    }
-
-  })
-
-  $("a.closeDropdown").on( "click", function() {
-   $("#store").dropdown("toggle");
-  })
+  $('form#filter').on('change', function() {
+    $(this).submit()
+  });
 });
