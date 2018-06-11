@@ -28,6 +28,13 @@ class Commit
   validates :message, uniqueness: {:scope => :commit_date}
 
   index({ user_id: 1 })
+  scope :in_range, -> (from, to) {
+    where(:commit_date.gte => from, :commit_date.lte => to)
+  }
+  scope :search_by, -> (query) {
+    where(message: /#{query}/i)
+  }
+
   index({ repository_id: 1 })
   index({ commit_date: -1 })
   index({ sha: 1 })

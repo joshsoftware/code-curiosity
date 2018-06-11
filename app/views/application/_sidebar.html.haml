@@ -6,3 +6,7 @@
           %i.fa.fa-dashboard
           %span Dashboard
       = render 'admin_sidebar' if current_user.is_admin?
+      %li{class: is_active(params[:action], 'commits')}
+        = link_to commits_path do
+          %i.fa.fa-gift
+          %span Rewards
