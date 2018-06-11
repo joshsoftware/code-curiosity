@@ -132,6 +132,8 @@ test:
       options:
         read:
         max_pool_size: 1
+  options:
+    raise_not_found_error: false
 
 production:
   clients:
