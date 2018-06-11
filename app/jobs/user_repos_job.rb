@@ -56,6 +56,7 @@ class UserReposJob < ActiveJob::Base
 =end
       Sidekiq.logger.info "Repository does not include this user... Adding user" unless repo.users.include?(user)
       repo.users << user unless repo.users.include?(user)
+      repo.set(gh_repo_updated_at: gh_repo.updated_at)
       return
     end
 

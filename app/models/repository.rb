@@ -20,6 +20,8 @@ class Repository
   field :type,         type: String
   field :ignore,       type: Boolean, default: false
   field :branches,     type: Array, default: ['master']
+  field :gh_repo_created_at, type: Time
+  field :gh_repo_updated_at, type: Time
 
   belongs_to :popular_repository, class_name: 'Repository', inverse_of: 'repositories'
   has_many :commits
@@ -98,7 +100,9 @@ class Repository
       languages: [ info.language],
       gh_id: info.id,
       ssh_url: info.ssh_url,
-      owner: info.owner.login
+      owner: info.owner.login,
+      gh_repo_created_at: info.created_at,
+      gh_repo_updated_at: info.updated_at
     })
   end
 
