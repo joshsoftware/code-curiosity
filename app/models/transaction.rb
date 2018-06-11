@@ -57,7 +57,7 @@ class Transaction
 
   def set_amount
     #for now, using old conversion rate.
-    denominator = REDEEM['one_dollar_to_points'] * 2
+    denominator = REDEEM['one_dollar_to_points']
     set(amount: points.to_f/denominator)
   end
 end
