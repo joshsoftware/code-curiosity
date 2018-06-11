@@ -7,10 +7,9 @@ module UsersHelper
   def github_points_options
     REDEEM['github_redeem_amounts'].collect do |v|
       [
-        "$#{v}",
-        v
+        "$#{v} - #{v * REDEEM['one_dollar_to_points']} points",
+        v * REDEEM['one_dollar_to_points']
       ]
-      #v*REDEEM['one_dollar_to_points']]
     end
   end
 
