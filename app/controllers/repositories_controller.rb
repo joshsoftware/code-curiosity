@@ -44,6 +44,20 @@ class RepositoriesController < ApplicationController
     redirect_to repositories_path
   end
 
+  def search
+    repositories = Repository.required.parent
+                             .where(ignore: false, name: /#{params[:query]}/)
+                             .asc(:name).page(params[:page])
+
+    #To send required json data when search performed over repositories in sponsor form.
+    repos = repositories.collect do |repo|
+      { id: repo[:_id], text: "#{repo['owner']}/#{repo['name']}" }
+    end
+    respond_to do |format|
+      format.json { render :json => repos.as_json }
+    end
+  end
+
   private
 
   def find_repo

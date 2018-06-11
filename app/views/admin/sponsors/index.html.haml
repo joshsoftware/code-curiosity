@@ -1,0 +1,18 @@
+%section.content-header
+  %h1
+    Sponsors :-
+
+    = link_to new_admin_sponsor_path, class: 'btn btn-primary pull-right' do
+      Create Sponsor
+
+%section.content
+  .row
+    .col-xs-12
+      .box.box-primary
+        .box-header
+          %h3.box-title
+            %span
+          .box-tools
+
+        .box-body.table-responsive#sponsors
+          = render partial: 'sponsors_table'
