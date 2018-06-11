@@ -166,7 +166,7 @@ class UserReposJobTest < ActiveJob::TestCase
     assert_equal 25, repo.stars
   end
 
-  describe 'set gh_repo_updated_at' do
+  describe 'set gh_repo_updated_at and gh_repo_created_at' do
     before do
       User.any_instance.stubs(:fetch_all_github_repos).returns(
         JSON.parse(File.read('test/fixtures/repo.json'))
@@ -187,6 +187,7 @@ class UserReposJobTest < ActiveJob::TestCase
       assert_equal 0, Repository.count
       UserReposJob.perform_now(@user.id.to_s)
       assert_equal 1, Repository.count
+      assert_not_nil Repository.first.gh_repo_created_at
       assert_not_nil Repository.first.gh_repo_updated_at
     end
   end
