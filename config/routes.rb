@@ -22,8 +22,10 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :repositories, only: [:index]
   resources :commits, only: [:index]
+  resources :repositories, only: [:index] do
+    get :search, on: :collection
+  end
 
   resources :users, only: [:index, :show, :destroy, :edit, :update] do
     member do
@@ -52,6 +54,7 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :sponsors, only: [:new, :create, :index, :show]
     # It can be used in the future, hence commenting.
     resources :redeem_requests, only: [:index, :update, :destroy] do
       collection do

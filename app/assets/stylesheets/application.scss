@@ -28,6 +28,10 @@
 @import 'redeem';
 @import 'registrations';
 @import 'commits';
+@import 'select2';
+@import 'select2-bootstrap';
+@import 'bootstrap-datepicker';
+@import 'admin/sponsors';
 
 .typeahead.dropdown-menu, .tt-hint, .tt-input, .tt-menu {
   width: 90%;

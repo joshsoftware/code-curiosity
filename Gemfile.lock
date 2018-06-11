@@ -368,6 +368,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    select2-rails (4.0.3)
+      thor (~> 0.14)
     sexp_processor (4.7.0)
     sidekiq (4.1.4)
       concurrent-ruby (~> 1.0)
@@ -494,6 +496,7 @@ DEPENDENCIES
   rugged!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  select2-rails
   sidekiq (~> 4.0)
   sidekiq-status
   simple_form (~> 3.2.1)
@@ -513,4 +516,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.15.4
+   1.16.0
