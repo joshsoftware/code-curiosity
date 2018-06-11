@@ -1,4 +1,4 @@
-function userTrendChart(xAxis, commits, activities, points, username) {
+function userTrendChart(xAxis, commits, points, username) {
   $('#users-chart-container').highcharts({
     chart: {
       type: 'line'
@@ -42,12 +42,6 @@ function userTrendChart(xAxis, commits, activities, points, username) {
       marker: { enabled: true },
       color: '#00A65A',
       dataLabels: {color:'#00A65A',style: {"color": "contrast", "fontSize": "11px", "fontWeight": "bold", "textShadow": "0" }}
-    }, {
-      name: 'Activities',
-      data: activities,
-      marker: { enabled: true },
-      color: '#F39C12',
-      dataLabels: {color:'#F39C12',style: {"color": "contrast", "fontSize": "11px", "fontWeight": "bold", "textShadow": "0" }}
     }, {
       name: 'Points',
       data: points,

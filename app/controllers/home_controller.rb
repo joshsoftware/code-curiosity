@@ -1,13 +1,10 @@
 class HomeController < ApplicationController
-  include HomeHelper
-
-  #load the before_actions only if the user is not logged in.
-  #before_action :multi_line_chart, only: [:index], unless: proc { user_signed_in? }
-
   def index
     if user_signed_in?
       redirect_to dashboard_path
       return
+    else
+      @user_trend, @contribution_trend, @xAxis = MultiLineChart::Index.get
     end
   end
 
@@ -23,5 +20,4 @@ class HomeController < ApplicationController
       render layout: 'info'
     end
   end
-
 end

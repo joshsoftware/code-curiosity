@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!, except: [:webhook]
 
   def index
-   #contribution_data
+    contribution_data
   end
 
   def webhook
