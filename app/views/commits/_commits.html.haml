@@ -7,8 +7,14 @@
       = link_to commit.html_url, class: 'btn btn-info btn-xs' do
         %i.fa.fa-fw.fa-share
         View
-    %td= commit.auto_score
+    %td= commit.score
     %td
-      = link_to commits_path, class: 'btn btn-success btn-xs' do
-        %i.fa.fa-fw.fa-gift
-        Reveal
+      - if commit.is_reveal
+        = commit.reward
+      - else
+        = link_to reveal_commit_path(commit), method: 'patch',
+          class: 'btn btn-success btn-xs reveal', remote: true do
+          %i.fa.fa-fw.fa-gift
+          Reveal
+        .reward
+          = commit.reward

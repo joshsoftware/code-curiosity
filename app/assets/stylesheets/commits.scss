@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-form#filters, button#reveal_all {
+form#filters, .reveal_all {
   float: right;
 }
 
@@ -13,4 +13,8 @@ td, th {
 .btn.btn-default, input#to, input#from{
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.reward {
+  display: none;
 }
