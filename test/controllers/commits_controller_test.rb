@@ -1,6 +1,6 @@
 require "test_helper"
 
-class CommitsControllerTest < ActionController::TestCase
+describe CommitsController do
   before do
     user  = create :user, :auth_token => 'dah123rty'
     5.times.each do |i|

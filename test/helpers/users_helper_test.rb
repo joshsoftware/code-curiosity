@@ -11,7 +11,7 @@ class UsersHelperTest < ActionView::TestCase
     create :transaction, transaction_type: 'royalty_bonus', type: 'credit', points: 1000, user: user
     create :transaction, transaction_type: 'Round', type: 'credit', points: 100, user: user
     create :transaction, transaction_type: 'redeem_points', type: 'debit', points: 200, user: user
-    assert_equal 10, amount_earned(user)
+    assert_equal 20, amount_earned(user)
   end
 
   test 'must return 0 if user has no debit transactions' do
