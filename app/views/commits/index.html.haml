@@ -13,7 +13,7 @@
             %h3.box-title
               %span Contributions :-
             .box-tools
-              = form_tag(commits_path, method: :get, remote: true) do
+              = form_tag(commits_path, method: :get, remote: true, id: 'filters') do
                 .input-group.input-group-xs
                   = label_tag 'From:'
                   = date_field_tag :from, Date.today.beginning_of_month
