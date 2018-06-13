@@ -153,4 +153,21 @@ class Repository
 
     return repo
   end
+
+  def set_gh_repo_created_at
+    begin
+      info = GitApp.info.repos.get(owner, name)
+      set(gh_repo_created_at: info.created_at)
+    rescue Github::Error::NotFound
+      return true
+      # repository moved or deleted means we no longer care about this repos.
+    rescue Github::Error::UnavailableForLegalReasons
+      return true
+      # repository permission invoked.
+    rescue Github::Error::Unauthorized
+      GitApp.inc
+    rescue Github::Error::Forbidden
+      GitApp.inc
+    end
+  end
 end

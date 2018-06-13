@@ -6,4 +6,12 @@ namespace :set do
       commit.set(score: auto_score)
     end
   end
+
+  desc 'set gh_repo_created_at for all repos'
+  task gh_repo_created_at: :environment do
+    Repository.required.each do |repo|
+      while(!repo.set_gh_repo_created_at)
+      end
+    end
+  end
 end
