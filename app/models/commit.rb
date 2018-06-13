@@ -12,6 +12,7 @@ class Commit
   field :html_url,         type: String
   field :comments_count,   type: Integer, default: 0
   field :sha,              type: String
+  field :auto_score,       type: Integer
   field :score,            type: Float, default: 0
   field :reward,           type: Float, default: 0
   field :frequency_factor, type: Float, default: 1

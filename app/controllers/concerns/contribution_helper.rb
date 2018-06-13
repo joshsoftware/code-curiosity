@@ -9,7 +9,7 @@ module ContributionHelper
     @user_commits.map do |key, value|
       @xAxis << key.strftime('%b %Y')
       @commits << value.count
-      @points << value.sum(&:auto_score)
+      @points << value.sum(&:score)
     end
   end
 end
