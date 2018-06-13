@@ -25,7 +25,7 @@ class MultiLineChart::Contribution
         '$project' => {
         'month' => { '$month' => '$commit_date'},
         'year' => {'$year' => '$commit_date'},
-        'auto_score' => 1
+        'score' => 1
       }
       }
     end
@@ -34,7 +34,7 @@ class MultiLineChart::Contribution
       {
         '$group' => {
         _id: {'month' => '$month', 'year' => '$year'},
-        total: { '$sum' => '$auto_score' }
+        total: { '$sum' => '$score' }
       }
       }
     end
