@@ -16,6 +16,7 @@ class Commit
   field :score,            type: Float, default: 0
   field :reward,           type: Float, default: 0
   field :frequency_factor, type: Float, default: 1
+  field :lines,            type: Integer, default: 0
   field :is_reveal,        type: Boolean, default: false
 
   belongs_to :user

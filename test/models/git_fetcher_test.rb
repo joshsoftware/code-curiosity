@@ -9,7 +9,7 @@ class GitFetcherTest < ActiveSupport::TestCase
     @git_fetcher = GitFetcher.new(**options)
     create :repository, name: 'Facebook', owner: 'pain11'
   end
-    
+
   describe 'Commits found for given date range' do
     before do
       GitFetcher.any_instance.stubs(:fetch_commits).returns(
@@ -19,6 +19,11 @@ class GitFetcherTest < ActiveSupport::TestCase
         Hashie::Mash.new(
           JSON.parse(File.read('test/fixtures/pull_request.json'))
         )
+      )
+      GitFetcher.any_instance.stubs(:fetch_commit_stats).returns(
+        Hashie::Mash.new(
+          JSON.parse(File.read('test/fixtures/git_commit_stats.json'))
+        ).stats
       )
     end
 
@@ -69,6 +74,13 @@ class GitFetcherTest < ActiveSupport::TestCase
         assert_equal 0, Commit.count
         @git_fetcher.fetch_and_store_commits
         assert_equal 0, Commit.count
+      end
+
+      test 'set lines field' do
+        assert_equal 0, Commit.count
+        @git_fetcher.fetch_and_store_commits
+        assert_equal 1, Commit.count
+        assert_operator 0, :<, Commit.first.lines
       end
     end
   end
