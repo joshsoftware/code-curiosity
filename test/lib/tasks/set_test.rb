@@ -8,4 +8,22 @@ class SetTest < ActiveSupport::TestCase
     commit.reload
     assert_equal commit.score, commit.auto_score
   end
+
+  test 'set gh_repo_created_at for all repos' do
+    repo = create(:repository, name: 'code-curiosity', owner: 'joshsoftware')
+    assert_nil repo.gh_repo_created_at
+    Rake::Task['set:gh_repo_created_at'].execute
+    repo.reload
+    assert_not_nil repo.gh_repo_created_at
+  end
+
+  describe 'catch exception in case invalid repo or github error' do
+    test 'do not set gh_repo_created_at' do
+      # invalid repo name and owner
+      create_list(:repository, 2, owner: 'abc')
+      assert_equal Repository.where(gh_repo_created_at: nil).count, 2
+      Rake::Task['set:gh_repo_created_at'].execute
+      assert_equal Repository.where(gh_repo_created_at: nil).count, 2
+    end
+  end
 end
