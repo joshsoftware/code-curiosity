@@ -4,17 +4,21 @@
     %td= commit.repository.name
     %td
       = commit.message
-      = link_to commit.html_url, class: 'btn btn-info btn-xs' do
+      %br
+      = link_to commit.html_url, class: 'btn btn-xs' do
         %i.fa.fa-fw.fa-share
         View
     %td= commit.score
     %td
-      - if commit.is_reveal
-        = commit.reward
+      - if commit.reward.nil?
+        Not Yet Rewarded
       - else
-        = link_to reveal_commit_path(commit), method: 'patch',
-          class: 'btn btn-success btn-xs reveal', remote: true do
-          %i.fa.fa-fw.fa-gift
-          Reveal
-        .reward
+        - if commit.is_reveal
           = commit.reward
+        - else
+          = link_to reveal_commit_path(commit), method: 'patch',
+            class: 'btn btn-success btn-xs reveal', remote: true do
+            %i.fa.fa-fw.fa-gift
+            Reveal
+          .reward
+            = commit.reward
