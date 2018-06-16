@@ -28,6 +28,9 @@ class GitFetcher
         commit_record.html_url = commit['html_url']
         commit_record.comments_count = commit['commit']['comment_count']
 
+        stats = fetch_commit_stats(commit_record.sha, repo)
+        commit_record.lines = stats.total
+
         commit_record.save
         asscoiate_with_pull_request(commit_record)
 
@@ -45,6 +48,10 @@ class GitFetcher
       from_date: from_date,
       to_date: to_date
     ).list
+  end
+
+  def fetch_commit_stats(sha, repo)
+    ::VCS::GitCommitStats.new(sha, repo).list
   end
 
   def asscoiate_with_pull_request(commit_record)
