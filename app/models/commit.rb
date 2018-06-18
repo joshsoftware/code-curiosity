@@ -14,7 +14,7 @@ class Commit
   field :sha,              type: String
   field :auto_score,       type: Integer
   field :score,            type: Float, default: 0
-  field :reward,           type: Float, default: 0
+  field :reward,           type: Float
   field :frequency_factor, type: Float, default: 1
   field :lines,            type: Integer, default: 0
   field :is_reveal,        type: Boolean, default: false
