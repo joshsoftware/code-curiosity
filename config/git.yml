@@ -1,4 +1,3 @@
-App_1:
-  access_tokens: your_access_token
-  git_app_id: your_git_app_id
-  git_app_secret: your_git_app_secret
+access_token_1: your_access_token
+
+access_token_2: your_access_token
