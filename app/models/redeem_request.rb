@@ -24,7 +24,7 @@ class RedeemRequest
   validates :gift_product_url, format: { with: URI.regexp }, if: :retailer_other?
   validate :check_sufficient_balance, unless: :retailer_other?, on: :create
   validate :points_validations, unless: :retailer_other?
-  validate :user_total_points, on: :create
+  validate :user_redeemable_points, on: :create
 
   before_validation {|r| r.points = r.points.to_i }
   before_create :set_amount
@@ -37,8 +37,8 @@ class RedeemRequest
 
   after_save :send_notification
 
-  def user_total_points
-    if user.total_points == 0
+  def user_redeemable_points
+    if user.redeemable_points == 0
       errors.add(:gift_product_url, "insufficient balance. You have only #{user.total_points} points in your account.") if retailer_other?
     end
   end
@@ -55,15 +55,15 @@ class RedeemRequest
     if points.to_i > 0
       update_amount
       self.transaction.update(points: points, amount: amount)
-      self.user.update(points: self.user.total_points)
+      self.user.update(points: self.user.redeemable_points)
     end
   end
 
   protected
 
   def check_sufficient_balance
-    if user.total_points < points
-      errors.add(:points, "insufficient balance. You have only #{user.total_points} points in your account.")
+    if user.redeemable_points < points
+      errors.add(:points, "insufficient balance. You have only #{user.redeemable_points} points in your account.")
     end
   end
 
