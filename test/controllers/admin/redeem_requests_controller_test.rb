@@ -124,7 +124,7 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     assert_includes gift_shop, csv[1][1]
     assert_includes store, csv[1][2]
     assert_kind_of Fixnum, csv[1][3].to_i
-    assert_not_equal csv[1][3].to_i, csv[1][4].to_i
+    assert_equal csv[1][3].to_i, csv[1][4].to_i
     assert_includes status, csv[1][8]
   end
 
@@ -140,7 +140,7 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     assert_includes gift_shop, csv[1][1]
     assert_includes store, csv[1][2]
     assert_kind_of Fixnum, csv[1][3].to_i
-    assert_not_equal csv[1][3].to_i, csv[1][4].to_i
+    assert_equal csv[1][3].to_i, csv[1][4].to_i
     assert_includes status, csv[1][8]
   end
 
@@ -166,9 +166,9 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     assert_equal 1, RedeemRequest.count
     assert_equal 0, RedeemRequest.first.amount
     patch :update, id: redeem_request.id, redeem_request: {points: 300, coupon_code: "Order #67981"}
-    assert_equal 15, RedeemRequest.first.amount
+    assert_equal 300, RedeemRequest.first.amount
   end
-  
+
   def seed_data
     role = create(:role, :name => 'Admin')
     @user = create(:user, :auth_token => 'dah123rty')

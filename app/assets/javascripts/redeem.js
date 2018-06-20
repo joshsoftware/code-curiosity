@@ -8,10 +8,9 @@ var alert_user = function() {
     event.stopImmediatePropagation();
     var form = $(this).parent('form');
     var points = $(this).data().points;
-    var free = $(this).data().free;
       bootbox.confirm({
         title: 'Alert',
-        message: "Your " + points +" points are worth $" + (points/free) + "<br> Are you sure you want to continue?",
+        message: "You have $ " + points + " in your account. <br> Are you sure you want to continue?",
         buttons: {
           confirm: {
             label: 'Continue',

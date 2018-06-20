@@ -121,7 +121,7 @@ class RedeemRequestTest < ActiveSupport::TestCase
     redeem_request_1 = build :redeem_request, points: 0, address: 'baner', retailer: 'other', gift_product_url: Faker::Internet.url, user: user
     redeem_request_1.valid?
     assert_not_empty redeem_request_1.errors[:gift_product_url]
-    assert_equal redeem_request_1.errors[:gift_product_url].first, "insufficient balance. You have only 0 points in your account."
+    assert_equal redeem_request_1.errors[:gift_product_url].first, "insufficient balance. You have only $ 0 in your account."
   end
 
   # test "should set the amount" do

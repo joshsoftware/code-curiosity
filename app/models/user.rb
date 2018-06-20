@@ -6,6 +6,8 @@ class User
   include Mongoid::Slug
   ROLES = {admin: 'Admin'}
 
+  TRANSACTION_TYPES = ['royalty_bonus', 'Round', 'GoalBonus']
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable, :registerable
   devise :database_authenticatable,
@@ -141,11 +143,15 @@ class User
   end
 
   def total_points
-    self.commits.sum(:reward)
+    self.commits.sum(:reward) + amount_earned
   end
 
   def redeemable_points
-    self.transactions.sum(:points)
+    self.transactions.redeemable.sum(:points)
+  end
+
+  def amount_earned
+    self.transactions.credited(TRANSACTION_TYPES).sum(:amount)
   end
 
   def self.search(q)

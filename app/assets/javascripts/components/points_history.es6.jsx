@@ -19,7 +19,7 @@ class PointsHistory extends React.Component {
   render() {
     var rows = [];
     this.state.transactions.map(function(transaction, index){
-      rows.push(<PointsHistoryRow key={transaction.id} show_coupon_code={this.props.show_coupon_code} index={index + 1} points={transaction.points}
+      rows.push(<PointsHistoryRow key={transaction.id} show_coupon_code={this.props.show_coupon_code} index={index + 1}
       amount={transaction.amount}
         details={transaction.transaction_type} label={transaction.type} date={transaction.description.split(':')[1]} coupon_code={transaction.coupon_code}
         redeem_request_retailer={transaction.redeem_request_retailer} />);
@@ -29,7 +29,6 @@ class PointsHistory extends React.Component {
         <thead>
           <tr>
             <th className="col-xs-1">#</th>
-            <th className="col-xs-2">Points</th>
             <th className="col-xs-2">Amount($)</th>
             <th>Detail</th>
             <th>Date</th>
