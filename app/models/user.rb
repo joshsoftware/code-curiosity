@@ -113,7 +113,7 @@ class User
     transaction = self.transactions.create(attrs)
     return false if transaction.errors.any?
 
-    if attrs[:transaction_type] == 'credited'
+    if attrs[:type] == 'credit'
       self.inc(points: attrs[:points])
     else
       self.inc(points: -attrs[:points])
@@ -141,6 +141,10 @@ class User
   end
 
   def total_points
+    self.commits.sum(:reward)
+  end
+
+  def redeemable_points
     self.transactions.sum(:points)
   end
 

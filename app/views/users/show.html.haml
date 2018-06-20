@@ -17,8 +17,11 @@
               = @user.github_handle
           %ul.list-group.list-group-unbordered
             %li.list-group-item
-              %b Points
-              %a.pull-right= format_points(@user.total_points)
+              %b Reward
+              %a.pull-right $ #{format_points(@user.total_points)}
+            %li.list-group-item
+              %b Redeemable Reward
+              %a.pull-right $ #{format_points(@user.redeemable_points)}
             %li.list-group-item
               %b Commits
               %a.pull-right= @user.commits_count
@@ -31,14 +34,17 @@
     .col-sm-8
       .nav-tabs-custom
         %ul.nav.nav-tabs
-          %li#wallet_tab_link
+          %li.active#wallet_tab_link
             = link_to 'Points History', '#wallet', data: { toggle: 'tab' }
           - if logged_in_user?
             %li#wallet_tab_link
               = link_to 'Settings', '#settings', data: { toggle: 'tab' }
         .tab-content
           .tab-pane.active#wallet
-            = render 'transactions'
+            - if current_user.transactions.any?
+              = render 'transactions'
+            - else
+              = render partial: 'callout_box', locals: {type: 'info', title: '', message: 'You have not earned or redeemed yet.'}
           - if logged_in_user?
             .tab-pane#settings
               = render 'settings'

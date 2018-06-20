@@ -29,5 +29,7 @@
         - INFO['home'].each_slice(2) do |data|
           .col-lg-5.col-md-5
             = render partial: 'info', collection: data, as: 'info'
+    .row.marketing
+      = render partial: 'subscribers_list'
     .row
       = render partial: 'trend'

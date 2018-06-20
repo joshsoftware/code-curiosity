@@ -21,7 +21,7 @@ class PointsHistory extends React.Component {
     this.state.transactions.map(function(transaction, index){
       rows.push(<PointsHistoryRow key={transaction.id} show_coupon_code={this.props.show_coupon_code} index={index + 1} points={transaction.points}
       amount={transaction.amount}
-        details={transaction.transaction_type} label={transaction.type} date={transaction.created_at} coupon_code={transaction.coupon_code}
+        details={transaction.transaction_type} label={transaction.type} date={transaction.description.split(':')[1]} coupon_code={transaction.coupon_code}
         redeem_request_retailer={transaction.redeem_request_retailer} />);
     }.bind(this));
     return (
@@ -39,12 +39,6 @@ class PointsHistory extends React.Component {
           {
             rows
           }
-          <tr>
-            <td>
-              <b>Total</b>
-            </td>
-            <td colSpan="1">{ this.props.total_points }</td>
-          </tr>
         </tbody>
       </table>
     );

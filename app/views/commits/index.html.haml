@@ -2,10 +2,11 @@
   %h1
     Rewards :-
 
-    = link_to reveal_commits_path, method: 'patch',
-      class: 'btn btn-success reveal_all', remote: true do
-      %i.fa.fa-fw.fa-gift
-      Reveal All
+    - if @commits.any?
+      = link_to reveal_commits_path, method: 'patch',
+        class: 'btn btn-success reveal_all', remote: true do
+        %i.fa.fa-fw.fa-gift
+        Reveal All
 
 %section.content
   .row
