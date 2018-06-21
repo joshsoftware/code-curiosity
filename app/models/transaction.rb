@@ -2,7 +2,7 @@ class Transaction
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  # TRANSACTION_TYPES = %w(royalty_bonus Round redeem_points)
+  TRANSACTION_TYPES = ['royalty_bonus', 'Round', 'GoalBonus', 'daily reward']
 
   field :type,              type: String
   field :points ,           type: Integer, default: 0
@@ -18,6 +18,9 @@ class Transaction
 
   index(user_id: 1, type: 1)
   index(transaction_type: 1)
+
+  scope :redeemable, -> { where(:created_at.gte => TRANSACTION['date']) }
+  scope :credited, -> (types) { where(:transaction_type.in => types) }
 
   before_save do |t|
     t.points = t.credit? ? t.points.abs : -(t.points.abs)
@@ -48,7 +51,7 @@ class Transaction
   end
 
   def self.total_points_before_redemption
-    Transaction.where(:transaction_type.in => ['royalty_bonus', 'Round']).sum(:points)
+    Transaction.credited(TRANSACTION_TYPES).sum(:points)
   end
 
   def self.total_points_redeemed
@@ -56,8 +59,6 @@ class Transaction
   end
 
   def set_amount
-    #for now, using old conversion rate.
-    denominator = REDEEM['one_dollar_to_points']
-    set(amount: points.to_f/denominator)
+    set(amount: points.to_f)
   end
 end

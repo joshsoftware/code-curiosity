@@ -39,7 +39,7 @@ class RedeemRequest
 
   def user_redeemable_points
     if user.redeemable_points == 0
-      errors.add(:gift_product_url, "insufficient balance. You have only #{user.total_points} points in your account.") if retailer_other?
+      errors.add(:gift_product_url, "insufficient balance. You have only $ #{user.redeemable_points} in your account.") if retailer_other?
     end
   end
 
@@ -63,14 +63,14 @@ class RedeemRequest
 
   def check_sufficient_balance
     if user.redeemable_points < points
-      errors.add(:points, "insufficient balance. You have only #{user.redeemable_points} points in your account.")
+      errors.add(:points, "insufficient balance. You have only $ #{user.redeemable_points} in your account.")
     end
   end
 
   def points_validations
     if retailer == 'amazon'
-      if points.to_i == 0 || points.to_i % REDEEM['min_points'] != 0
-        errors.add(:points, "points must be in multiple of #{REDEEM['min_points']}")
+      if points.to_i == 0 || points.to_i % REDEEM['min_amount'] != 0
+        errors.add(:points, "Amount must be in multiple of #{REDEEM['min_amount']}")
       end
     end
   end
@@ -80,7 +80,7 @@ class RedeemRequest
       type: 'debit',
       points: points,
       transaction_type: 'redeem_points',
-      description: 'Redeem',
+      description: "Redeem:#{Date.today - 1}",
       user_id: user_id
     })
   end
@@ -99,14 +99,10 @@ class RedeemRequest
   private
 
   def set_amount
-    # for now, using old conversion rate.
-    denominator = REDEEM['one_dollar_to_points'] * 2
-    self.amount = points.to_f/denominator
+    self.set(amount: points.to_f)
   end
 
   def update_amount
-    # for now, using old conversion rate.
-    denominator = REDEEM['one_dollar_to_points'] * 2
-    self.set(amount: points.to_f/denominator)
+    self.set(amount: points.to_f)
   end
 end

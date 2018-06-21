@@ -10,6 +10,7 @@ class SetTest < ActiveSupport::TestCase
   end
 
   test 'set gh_repo_created_at for all repos' do
+    GitApp.stubs(:info).returns(GITHUB)
     repo = create(:repository, name: 'code-curiosity', owner: 'joshsoftware')
     assert_nil repo.gh_repo_created_at
     Rake::Task['set:gh_repo_created_at'].execute

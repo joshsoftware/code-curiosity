@@ -11,6 +11,7 @@ YAML.load_file('config/code_curiosity_config.yml').tap do |config|
   REDEEM_THRESHOLD = config['redeem_request_threshold']
   ACCOUNT = config['account']
   ORGANIZATIONAL_SPONSORERS = config['organizational_sponsorers']
+  TRANSACTION = config['transaction']
 end
 
 COMMIT_RATINGS = (0..5).to_a

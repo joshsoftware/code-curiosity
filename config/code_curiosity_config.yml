@@ -35,7 +35,7 @@ scoring_engine:
   :bugspot_scores_threshold: 2
 
 redeem:
-  min_points: 100
+  min_amount: 5
   one_dollar_to_points: 10
   retailers:
     - github
@@ -53,3 +53,6 @@ redeem:
 
 account:
   twitter: 'https://twitter.com/code_curiosity'
+
+transaction:
+  date: '18/06/2018'

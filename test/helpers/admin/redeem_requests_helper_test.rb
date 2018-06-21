@@ -7,7 +7,7 @@ class Admin::RedeemRequestsHelperTest < ActionView::TestCase
     create(:redeem_request, points: 100, user: @user)
     create(:redeem_request, points: 100, user: @user, store: 'amazon.in')
     create(:redeem_request, points: 100, user: @user, store: 'amazon.uk')
-    assert_equal 15, amount_for_store
+    assert_equal 300, amount_for_store
   end
 
   test "check value of points if store is provided" do
@@ -15,7 +15,7 @@ class Admin::RedeemRequestsHelperTest < ActionView::TestCase
     create(:redeem_request, points: 100, user: @user)
     create(:redeem_request, points: 100, user: @user, store: 'amazon.in')
     create(:redeem_request, points: 100, user: @user, store: 'amazon.uk')
-    assert_equal 5, amount_for_store('amazon.in')
+    assert_equal 100, amount_for_store('amazon.in')
   end
 
   def seed_data
