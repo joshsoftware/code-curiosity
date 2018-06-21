@@ -1,6 +1,7 @@
 class Commit
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Search
   include JudgeScoringHelper
 
   COMMIT_TYPE = {score: 'Scores', commit: 'Commits'}
@@ -27,12 +28,14 @@ class Commit
 
   validates :message, uniqueness: {:scope => :commit_date}
 
+  search_in :message, repository: :name
+
   index({ user_id: 1 })
   scope :in_range, -> (from, to) {
     where(:commit_date.gte => from, :commit_date.lte => to)
   }
   scope :search_by, -> (query) {
-    where(message: /#{query}/i)
+    full_text_search(query)
   }
 
   index({ repository_id: 1 })

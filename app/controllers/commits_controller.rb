@@ -7,6 +7,7 @@ class CommitsController < ApplicationController
     @commits = @commits.in_range(from, to)
                        .search_by(params[:query])
                        .page(params[:page])
+                       .includes(:repository)
   end
 
   def reveal

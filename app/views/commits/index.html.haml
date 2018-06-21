@@ -22,7 +22,7 @@
                 = date_field_tag :from, Date.today.beginning_of_month
                 = label_tag 'To:'
                 = date_field_tag :to, Date.today
-                = text_field_tag :query, nil, placeholder: 'search'
+                = text_field_tag :query, nil, placeholder: 'Repository name/Description'
                 %button.btn.btn-default.btn-sm{type: 'submit'} Go
 
         .box-body.table-responsive#commits

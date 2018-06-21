@@ -31,7 +31,7 @@ describe CommitsController do
   end
 
   test 'should search commits by search query' do
-    get :index, {query: 'commit_1'}
+    get :index, {query: '1'}
     assert_equal assigns(:commits).count, 1
   end
 
