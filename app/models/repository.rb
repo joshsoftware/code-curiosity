@@ -141,19 +141,6 @@ class Repository
     end
   end
 
-  def create_popular_repo
-    gh_repo = self.info.source
-    repo = Repository.where(gh_id: gh_repo.id).first
-    return repo if repo
-
-    repo = Repository.build_from_gh_info(gh_repo)
-    repo.type = 'popular'
-    repo.save
-    Repository.create_repo_owner_account(gh_repo)
-
-    return repo
-  end
-
   def set_gh_repo_created_at
     begin
       info = GitApp.info.repos.get(owner, name)
