@@ -7,11 +7,11 @@
         .col-xs-12
           %h4
             %span.text
-              = number_with_delimiter(User.contestants.count )
+              = number_with_delimiter(User.contestants.count)
               users
             have contributed
             %span.text
-              = number_with_delimiter(Transaction.total_points_before_redemption)
+              = number_with_delimiter(User.contestants.sum(:points))
               points
             and
             %span.text

@@ -30,28 +30,6 @@ class TransactionTest < ActiveSupport::TestCase
     assert transaction.redeem_transaction?
   end
 
-  def test_update_user_total_points_after_transaction_is_created
-    transaction = build(:transaction, :type => 'credit', :points => 2)
-    transaction.user.points = 3
-    transaction.save
-    assert_equal transaction.user.points, 5
-  end
-
-  def test_update_only_when_points_greater_than_zero
-    transaction = build(:transaction,:points => 2, :type => 'credit', user: FactoryGirl.create(:user))
-    transaction.user.points = 1
-    transaction.update_user_total_points
-    assert_equal(transaction.user.points, 3)
-  end
-
-  def test_no_updation_when_points_equal_to_zero
-    transaction = build(:transaction, :points => 0, :type => 'credit')
-    transaction.user.points = 1
-    transaction.update_user_total_points
-    assert_equal(transaction.user.points, 1)
-  end
-
-
   def test_check_total_points_before_redemption
     transaction = FactoryGirl.create_list(:transaction, 3, :type => 'credit', :transaction_type => 'Round', :points => 1)
     transaction = Transaction.where(:transaction_type.in => ['Round','royalty_bonus'])
