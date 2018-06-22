@@ -31,6 +31,7 @@ class PointsHistory extends React.Component {
             <th className="col-xs-1">#</th>
             <th className="col-xs-2">Amount($)</th>
             <th>Detail</th>
+            <th>Labels</th>
             <th>Date</th>
           </tr>
         </thead>

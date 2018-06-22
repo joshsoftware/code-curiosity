@@ -17,13 +17,12 @@
             %span Contributions :-
           .box-tools
             = form_tag(commits_path, method: :get, remote: true, id: 'filters') do
-              .input-group.input-group-xs
-                = label_tag 'From:'
-                = date_field_tag :from, Date.today.beginning_of_month
-                = label_tag 'To:'
-                = date_field_tag :to, Date.today
-                = text_field_tag :query, nil, placeholder: 'Repository name/Description'
-                %button.btn.btn-default.btn-sm{type: 'submit'} Go
+              %table
+                %tr
+                  %td= date_field_tag :from, Date.today.beginning_of_month
+                  %td= date_field_tag :to, Date.today
+                  %td= text_field_tag :query, nil, placeholder: 'Repository name/Description'
+                  %td= submit_tag 'Go'
 
         .box-body.table-responsive#commits
           = render partial: 'commits_table'

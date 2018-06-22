@@ -37,6 +37,7 @@ class Commit
   scope :search_by, -> (query) {
     full_text_search(query)
   }
+  scope :with_reward, -> { where(:reward.ne => nil) }
 
   index({ repository_id: 1 })
   index({ commit_date: -1 })
