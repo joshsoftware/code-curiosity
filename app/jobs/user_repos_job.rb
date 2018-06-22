@@ -68,6 +68,6 @@ class UserReposJob < ActiveJob::Base
     user_repo.save
     user.repositories << user_repo
     user.save
-    Sidekiq.logger.info "Persisted repository #{repo.name} for user #{user.github_handle}"
+    Sidekiq.logger.info "Persisted repository #{user_repo.name} for user #{user.github_handle}"
   end
 end
