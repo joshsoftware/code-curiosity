@@ -14,4 +14,12 @@ namespace :set do
       end
     end
   end
+
+  desc 'Calculate and set user points'
+  task user_points: :environment do
+    User.contestants.each do |user|
+      credited_points = user.transactions.where(type: 'credit').sum(:points)
+      user.set(points: credited_points)
+    end
+  end
 end
