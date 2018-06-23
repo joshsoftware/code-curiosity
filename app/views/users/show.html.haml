@@ -17,7 +17,7 @@
               = @user.github_handle
           %ul.list-group.list-group-unbordered
             %li.list-group-item
-              %b Reward
+              %b Points
               %a.pull-right $ #{format_points(@user.points)}
             %li.list-group-item
               %b Redeemable Reward
@@ -25,6 +25,9 @@
             %li.list-group-item
               %b Commits
               %a.pull-right= @user.commits_count
+            %li.list-group-item
+              %b Redeemable
+              %a.pull-right $ #{format_points(@user.redeemable_points)}
             %li.list-group-item
               %b Earned
               %a.pull-right $ #{amount_earned @user}

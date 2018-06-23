@@ -10,11 +10,14 @@ td, th {
   text-align: center;
 }
 
-.btn.btn-default, input#to, input#from{
-  margin-left: 5px;
+input#query, input#to, input#from{
   margin-right: 5px;
 }
 
 .reward {
   display: none;
+}
+
+input#query {
+  width: 200px;
 }

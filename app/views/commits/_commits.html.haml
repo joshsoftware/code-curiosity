@@ -8,17 +8,17 @@
       = link_to commit.html_url, class: 'btn btn-xs' do
         %i.fa.fa-fw.fa-share
         View
-    %td= commit.score
+    %td= commit.score.to_i
     %td
       - if commit.reward.nil?
         Not Yet Rewarded
       - else
         - if commit.is_reveal
-          = commit.reward
+          = "$ #{commit.reward}"
         - else
           = link_to reveal_commit_path(commit), method: 'patch',
             class: 'btn btn-success btn-xs reveal', remote: true do
             %i.fa.fa-fw.fa-gift
             Reveal
           .reward
-            = commit.reward
+            = "$ #{commit.reward}"

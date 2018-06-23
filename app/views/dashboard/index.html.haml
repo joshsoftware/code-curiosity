@@ -11,4 +11,8 @@
       = react_component 'PointsTile', { color: 'bg-green', title: 'Commits', points: current_user.commits_count,
         logo: 'ion-stats-bars', path: commits_path}
   .row
-    = react_component 'UserPointsChart', { xAxis: @xAxis, commits: @commits, points: @points, username: @username }
+    .col-xs-12
+      - if current_user.commits_count.equal?(0)
+        = render partial: 'callout_box', locals: {type: 'info', title: 'Keep Contributing', message: 'There are no commits.'}
+      - else
+        = react_component 'UserPointsChart', { xAxis: @xAxis, commits: @commits, points: @points, username: @username }
