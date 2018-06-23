@@ -5,7 +5,7 @@
 %section.content
   .row
     .col-lg-3.col-xs-6
-      = react_component 'PointsTile', { color: 'bg-aqua', title: 'Points', points: format_points(current_user.total_points),
+      = react_component 'PointsTile', { color: 'bg-aqua', title: 'Points', points: format_points(current_user.points),
         logo: 'ion-pie-graph', path: user_path(current_user) }
     .col-lg-3.col-xs-6
       = react_component 'PointsTile', { color: 'bg-green', title: 'Commits', points: current_user.commits_count,

@@ -18,7 +18,10 @@
           %ul.list-group.list-group-unbordered
             %li.list-group-item
               %b Points
-              %a.pull-right #{format_points(@user.total_points)}
+              %a.pull-right $ #{format_points(@user.points)}
+            %li.list-group-item
+              %b Redeemable Reward
+              %a.pull-right $ #{format_points(@user.redeemable_points)}
             %li.list-group-item
               %b Commits
               %a.pull-right= @user.commits_count
