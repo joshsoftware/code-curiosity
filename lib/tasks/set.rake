@@ -22,4 +22,9 @@ namespace :set do
       user.set(points: credited_points)
     end
   end
+
+  desc 'Remove forked repos'
+  task remove_forked_repos: :environment do
+    Repository.where(:source_gh_id.ne => nil).destroy_all
+  end
 end
