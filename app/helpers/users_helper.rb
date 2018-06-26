@@ -17,4 +17,9 @@ module UsersHelper
   def amount_earned(user)
     user.transactions.where(type: 'debit').sum(:amount).abs
   end
+
+  def level(points)
+    BADGE.select{|key, value| points.in?(value['min']..value['max'])}
+         .keys.first
+  end
 end

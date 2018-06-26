@@ -26,6 +26,8 @@
 //= require react_ujs
 //= require components
 //= require select2
+//= require bootstrap/bootstrap-rails-tooltip
+//= require bootstrap/bootstrap-rails-popover
 //= require_tree .
 
 function onDocReady(){

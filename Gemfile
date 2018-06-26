@@ -45,6 +45,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'sidekiq-status'
 gem 'select2-rails'
 gem 'mongoid_search'
+gem 'bootstrap-popover-rails'
 
 group :development, :test do
   gem 'byebug'

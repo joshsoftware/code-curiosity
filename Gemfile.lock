@@ -75,6 +75,7 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.6.1.1)
       railties (>= 3.0)
+    bootstrap-popover-rails (0.1.0)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -453,6 +454,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   bootstrap-datepicker-rails
+  bootstrap-popover-rails
   bootstrap-sass (~> 3.3.6)
   brakeman
   bugspots!
