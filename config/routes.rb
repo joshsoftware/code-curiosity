@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :repositories, only: [:index] do
+    resources :repositories, only: [:index, :create] do
       get :search, on: :collection
       member do
         patch :update_ignore_field

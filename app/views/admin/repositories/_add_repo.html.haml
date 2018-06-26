@@ -1,0 +1,12 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', :type => 'button'}
+        %i.fa.fa-close
+      %h4.modal-title
+        Add Repository
+    .modal-body
+      = simple_form_for(Repository.new, url: admin_repositories_path, method: 'post') do |f|
+        = f.input :name
+        = f.input :owner
+        = f.submit 'Add', class: 'btn btn-primary btn-block'

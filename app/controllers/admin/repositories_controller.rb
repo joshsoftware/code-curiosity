@@ -14,6 +14,23 @@ class Admin::RepositoriesController < ApplicationController
     end
   end
 
+  def create
+    gh_repo = Repository.new(repo_params).info
+    repo = gh_repo && !gh_repo.fork ? Repository.build_from_gh_info(gh_repo) : false
+    if repo && repo.save
+      flash[:success] = "Repository Created Successfully!"
+    else
+      flash[:error] = if !gh_repo
+                        'Repository not found'
+                      elsif gh_repo.fork
+                        'Cannot add forked repository'
+                      else
+                        repo.errors.full_messages.join(',')
+                      end
+    end
+    redirect_to admin_repositories_path
+  end
+
   def update_ignore_field
     @repo.update_attributes(ignore: params[:ignore_value])
     repositories = Repository.any_of({popular_repository_id: @repo.id}, {source_gh_id: @repo.gh_id})
@@ -39,5 +56,9 @@ class Admin::RepositoriesController < ApplicationController
 
   def load_repository
     @repo = Repository.find(params[:id])
+  end
+
+  def repo_params
+    params.require(:repository).permit(:name, :owner)
   end
 end
