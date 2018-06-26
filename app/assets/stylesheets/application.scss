@@ -32,6 +32,9 @@
 @import 'select2-bootstrap';
 @import 'bootstrap-datepicker';
 @import 'admin/sponsors';
+@import 'bootstrap/bootstrap-rails-tooltip';
+@import 'bootstrap/bootstrap-rails-popover';
+@import 'users';
 
 .typeahead.dropdown-menu, .tt-hint, .tt-input, .tt-menu {
   width: 90%;

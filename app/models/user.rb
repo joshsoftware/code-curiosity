@@ -62,6 +62,9 @@ class User
   # for accepting terms and conditions
   field :terms_and_conditions, type: Boolean, default: false
 
+  # for language wise badges
+  field :badges, type: Hash, default: {}
+
   has_many :commits, dependent: :destroy
   has_many :transactions, dependent: :destroy
   has_many :comments, dependent: :destroy
