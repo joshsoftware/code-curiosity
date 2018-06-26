@@ -7,10 +7,10 @@ namespace :set do
     end
   end
 
-  desc 'set gh_repo_created_at for all repos'
-  task gh_repo_created_at: :environment do
+  desc 'set gh_repo_created_at and language for all repos'
+  task repo_fields: :environment do
     Repository.required.each do |repo|
-      while(!repo.set_gh_repo_created_at)
+      while(!repo.set_fields)
       end
     end
   end
@@ -26,5 +26,17 @@ namespace :set do
   desc 'Remove forked repos'
   task remove_forked_repos: :environment do
     Repository.where(:source_gh_id.ne => nil).destroy_all
+  end
+
+  desc 'Set user badges'
+  task badges: :environment do
+    User.contestants.each do |user|
+      user.commits.includes(:repository).each do |commit|
+        language = commit.repository.language
+        user.badges[language] = 0 if user.badges[language].nil?
+        user.badges[language] += commit.score
+        user.save
+      end
+    end
   end
 end

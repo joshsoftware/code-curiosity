@@ -141,10 +141,10 @@ class Repository
     end
   end
 
-  def set_gh_repo_created_at
+  def set_fields
     begin
       info = GitApp.info.repos.get(owner, name)
-      set(gh_repo_created_at: info.created_at)
+      set(gh_repo_created_at: info.created_at, language: info.language)
     rescue Github::Error::NotFound
       return true
       # repository moved or deleted means we no longer care about this repos.
