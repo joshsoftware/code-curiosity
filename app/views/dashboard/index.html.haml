@@ -5,13 +5,14 @@
 %section.content
   .row
     .col-lg-3.col-xs-6
-      = react_component 'PointsTile', { color: 'bg-aqua', title: 'Points', points: format_points(current_user.total_points),
+      = react_component 'PointsTile', { color: 'bg-aqua', title: 'Points', points: format_points(current_user.points),
         logo: 'ion-pie-graph', path: user_path(current_user) }
     .col-lg-3.col-xs-6
       = react_component 'PointsTile', { color: 'bg-green', title: 'Commits', points: current_user.commits_count,
-        logo: 'ion-stats-bars', path: activities_path(anchor: 'commits')}
-    .col-lg-3.col-xs-6
-      = react_component 'PointsTile', { color: 'bg-yellow', title: 'Activities', points: current_user.activities_count,
-        logo: 'ion-chatboxes', path: activities_path(anchor: 'activities') }
+        logo: 'ion-stats-bars', path: commits_path}
   .row
-    = react_component 'UserPointsChart', { xAxis: @xAxis, commits: @commits, activities: @activities, points: @points, username: @username }
+    .col-xs-12
+      - if current_user.commits_count.equal?(0)
+        = render partial: 'callout_box', locals: {type: 'info', title: 'Keep Contributing', message: 'There are no commits.'}
+      - else
+        = react_component 'UserPointsChart', { xAxis: @xAxis, commits: @commits, points: @points, username: @username }

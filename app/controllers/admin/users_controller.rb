@@ -13,11 +13,6 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def mark_as_judge
-    User.find(params[:user_id]).set(is_judge: params[:flag])
-    redirect_to admin_users_path
-  end
-
   def login_as
     user = User.find(params[:user_id])
     if user

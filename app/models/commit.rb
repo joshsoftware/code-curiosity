@@ -1,9 +1,10 @@
 class Commit
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Search
   include JudgeScoringHelper
 
-  COMMIT_TYPE = {score: 'Scores', commit: 'Commits', activity: 'Activities'}
+  COMMIT_TYPE = {score: 'Scores', commit: 'Commits'}
 
   attr_accessor :branch
 
@@ -13,30 +14,35 @@ class Commit
   field :comments_count,   type: Integer, default: 0
   field :sha,              type: String
   field :auto_score,       type: Integer
-  field :default_score,    type: Float, default: 0
-  field :bugspots_score,   type: Float, default: 0
   field :score,            type: Float, default: 0
-  field :reward,           type: Float, default: 0
+  field :reward,           type: Float
   field :frequency_factor, type: Float, default: 1
+  field :lines,            type: Integer, default: 0
+  field :is_reveal,        type: Boolean, default: false
 
   belongs_to :user
   belongs_to :repository
-  belongs_to :round
-  belongs_to :organization
+  belongs_to :pull_request
   has_many :comments, as: :commentable
   embeds_many :scores, as: :scorable
 
   validates :message, uniqueness: {:scope => :commit_date}
 
-  scope :for_round, -> (round_id) { where(:round_id => round_id) }
+  search_in :message, repository: :name
 
-  index({ user_id: 1, round_id: 1 })
+  index({ user_id: 1 })
+  scope :in_range, -> (from, to) {
+    where(:commit_date.gte => from, :commit_date.lte => to)
+  }
+  scope :search_by, -> (query) {
+    full_text_search(query)
+  }
+  scope :with_reward, -> { where(:reward.ne => nil) }
+
   index({ repository_id: 1 })
   index({ commit_date: -1 })
   index({ sha: 1 })
-  index(auto_score: 1)
-
-  before_validation :set_round
+  index(  score: 1)
 
   after_create do |c|
     c.user.inc(commits_count: 1)
@@ -66,14 +72,4 @@ class Commit
   rescue StandardError => e
     Sidekiq.logger.info "Commit: #{id}, Error: #{e}"
   end
-
-  def set_round
-    # FIXME: This code was added to address a corner case for commits appearing in next round
-    # instead of the last month. However, it will impact scoring and bonus points. Keeping this
-    # line commented in case we find a better fix. - Gautam
-
-    #self.round = Round.where(:from_date.lte => commit_date, :end_date.gte => commit_date).first unless self.round
-    self.round = Round.opened unless self.round
-  end
-
 end

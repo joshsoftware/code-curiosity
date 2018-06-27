@@ -1,7 +1,7 @@
 class Admin::RepositoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin!
-  before_action :load_repository, only: [ :assign_judge, :add_judges, :update_ignore_field ]
+  before_action :load_repository, only: :update_ignore_field
   def index
     status = params[:ignored] || false
     @repos = Repository.parent.where(ignore: status, name: /#{params[:query]}/).
@@ -14,13 +14,21 @@ class Admin::RepositoriesController < ApplicationController
     end
   end
 
-  def assign_judge
-    @judges = User.judges
-  end
-
-  def add_judges
-   @repo.judges = User.find(params[:judges])
-   @repo.save
+  def create
+    gh_repo = Repository.new(repo_params).info
+    repo = gh_repo && !gh_repo.fork ? Repository.build_from_gh_info(gh_repo) : false
+    if repo && repo.save
+      flash[:success] = "Repository Created Successfully!"
+    else
+      flash[:error] = if !gh_repo
+                        'Repository not found'
+                      elsif gh_repo.fork
+                        'Cannot add forked repository'
+                      else
+                        repo.errors.full_messages.join(',')
+                      end
+    end
+    redirect_to admin_repositories_path
   end
 
   def update_ignore_field
@@ -48,5 +56,9 @@ class Admin::RepositoriesController < ApplicationController
 
   def load_repository
     @repo = Repository.find(params[:id])
+  end
+
+  def repo_params
+    params.require(:repository).permit(:name, :owner)
   end
 end

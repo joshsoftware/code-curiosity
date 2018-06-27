@@ -4,7 +4,7 @@ class UserPointsChart extends React.Component {
   }
 
   componentDidMount() {
-    userTrendChart(this.props.xAxis, this.props.commits, this.props.activities, this.props.points, this.props.username);
+    userTrendChart(this.props.xAxis, this.props.commits, this.props.points, this.props.username);
   }
 
   render () {
@@ -16,4 +16,3 @@ class UserPointsChart extends React.Component {
     );
   }
 }
-

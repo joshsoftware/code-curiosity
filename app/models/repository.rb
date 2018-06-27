@@ -19,17 +19,18 @@ class Repository
   field :ignore_files, type: Array, default: []
   field :type,         type: String
   field :ignore,       type: Boolean, default: false
+  field :branches,     type: Array, default: ['master']
+  field :gh_repo_created_at, type: Time
+  field :gh_repo_updated_at, type: Time
 
   belongs_to :popular_repository, class_name: 'Repository', inverse_of: 'repositories'
-  belongs_to :organization
   has_many :commits
-  has_many :activities
   has_many :code_files
   has_many :repositories, class_name: 'Repository', inverse_of: 'popular_repository'
   has_and_belongs_to_many :users, class_name: 'User', inverse_of: 'repositories'
-  has_and_belongs_to_many :judges, class_name: 'User', inverse_of: 'judges_repositories'
 
   validates :name, :source_url, :ssh_url, presence: true
+  validates :gh_id, uniqueness: true
   #validate :verify_popularity
 
   index(source_url: 1)
@@ -56,7 +57,11 @@ class Repository
   end
 
   def info
-    @info ||= GITHUB.repos.get(owner, name, {redirection: true})
+    begin
+      @info ||= GITHUB.repos.get(owner, name, {redirection: true})
+    rescue Github::Error::NotFound
+      return false
+    end
   end
 
   def self.add_new(params, user)
@@ -100,7 +105,9 @@ class Repository
       languages: [ info.language],
       gh_id: info.id,
       ssh_url: info.ssh_url,
-      owner: info.owner.login
+      owner: info.owner.login,
+      gh_repo_created_at: info.created_at,
+      gh_repo_updated_at: info.updated_at
     })
   end
 
@@ -131,31 +138,6 @@ class Repository
     @git ||= Git.open(code_dir)
   end
 
-  PULL_REQ_MERGE_REGX = /merge (pull|branch)/i
-
-  def score_commits(round = nil)
-    engine = ScoringEngine.new(self)
-
-    _commits = self.commits.where(auto_score: nil)
-    _commits = _commits.where(round: round) if round
-
-    _commits.each do |commit|
-      if commit.message =~ PULL_REQ_MERGE_REGX
-        commit.set(auto_score: 0)
-      else
-        begin
-          Sidekiq.logger.info "Scoring for commit: #{commit.id}, Round: #{round.from_date}"
-          # commit.set(auto_score: engine.calculate_score(commit))
-          ScoreCommitJob.perform_later(commit.id.to_s)
-        rescue StandardError => e
-          Sidekiq.logger.info "Commit: #{commit.id}, Error: #{e}"
-        end
-      end
-    end
-
-    return true
-  end
-
   def set_files_commit_count
     git.ls_files.each do |file, options|
       code_file = self.code_files.find_or_initialize_by(name: file)
@@ -164,21 +146,20 @@ class Repository
     end
   end
 
-  def score_activities(round = nil)
-    _activities = round ? activities.where(round: round) : activities
-    _activities.each(&:calculate_score_and_set)
-  end
-
-  def create_popular_repo
-    gh_repo = self.info.source
-    repo = Repository.where(gh_id: gh_repo.id).first
-    return repo if repo
-
-    repo = Repository.build_from_gh_info(gh_repo)
-    repo.type = 'popular'
-    repo.save
-    Repository.create_repo_owner_account(gh_repo)
-
-    return repo
+  def set_fields
+    begin
+      info = GitApp.info.repos.get(owner, name)
+      set(gh_repo_created_at: info.created_at, language: info.language)
+    rescue Github::Error::NotFound
+      return true
+      # repository moved or deleted means we no longer care about this repos.
+    rescue Github::Error::UnavailableForLegalReasons
+      return true
+      # repository permission invoked.
+    rescue Github::Error::Unauthorized
+      GitApp.inc
+    rescue Github::Error::Forbidden
+      GitApp.inc
+    end
   end
 end

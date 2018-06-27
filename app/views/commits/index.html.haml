@@ -1,0 +1,28 @@
+%section.content-header
+  %h1
+    Rewards :-
+
+    - if @commits.any?
+      = link_to reveal_commits_path, method: 'patch',
+        class: 'btn btn-success reveal_all', remote: true do
+        %i.fa.fa-fw.fa-gift
+        Reveal All
+
+%section.content
+  .row
+    .col-xs-12
+      .box.box-primary
+        .box-header
+          %h3.box-title
+            %span Contributions :-
+          .box-tools
+            = form_tag(commits_path, method: :get, remote: true, id: 'filters') do
+              %table
+                %tr
+                  %td= date_field_tag :from, Date.today.beginning_of_month
+                  %td= date_field_tag :to, Date.today
+                  %td= text_field_tag :query, nil, placeholder: 'Repository name/Description'
+                  %td= submit_tag 'Go'
+
+        .box-body.table-responsive#commits
+          = render partial: 'commits_table'

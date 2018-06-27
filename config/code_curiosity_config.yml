@@ -5,29 +5,10 @@ wallet:
   subscription_amount: 150
   challenge_subscription: Challenge Subscription
 
-round:
-  states:
-    inactive: inactive
-    open: open
-    close: close
-
 repository:
   popular:
     stars: 25
   max_size: 100
-
-user:
-  :royalty_points_threshold: 50_000
-
-sponsor:
-  individual:
-    base: 5
-  organization:
-    base: 250
-
-sponsor_display_threshold:
-  individual: 25
-  organization: 0
 
 redeem_request_threshold:
   free: 400
@@ -54,13 +35,8 @@ scoring_engine:
   :bugspot_scores_threshold: 2
   :frequency_factor_threshold: 30
 
-subscriptions:
-  free: 20
-  individual: 10
-  organization: 10
-
 redeem:
-  min_points: 100
+  min_amount: 5
   one_dollar_to_points: 10
   retailers:
     - github
@@ -78,3 +54,6 @@ redeem:
 
 account:
   twitter: 'https://twitter.com/code_curiosity'
+
+transaction:
+  date: '18/06/2018'

@@ -1,5 +1,0 @@
-- if @group.owner == current_user
-  $('#group-members').html("#{j render partial: "member", collection: @group.members}");
-  = raw show_flash_notifications
-- else
-  Turbolinks.visit("#{groups_path}")

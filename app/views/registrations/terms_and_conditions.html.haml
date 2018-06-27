@@ -1,0 +1,17 @@
+%section.content-header
+  %h1#tac Terms and Conditions
+%section.content
+  #terms_and_conditions
+  .row
+    .col-sm-6.col-sm-offset-3
+      .panel.panel-info
+        .panel-body
+          - INFO['terms_and_conditions'].each do |info|
+            %ul.list-group.list-group-unbordered
+              %li.list-group-item
+                %b= info['title']
+                %p= info['description']
+
+          .panel-footer
+            = link_to terms_and_conditions_path(terms_and_conditions: true), class: "btn btn-primary btn-block" do
+              %b Accept

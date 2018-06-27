@@ -5,7 +5,6 @@ class CommitTest < ActiveSupport::TestCase
 
   def setup
     super
-    create :round, :open
     stub_get("/repos/joshsoftware/code-curiosity/commits/eb0df748bbf084ca522f5ce4ebcf508d16169b96")
     .to_return(body: File.read('test/fixtures/commit.json'), status: 200,
                headers: {content_type: "application/json; charset=utf-8"})
@@ -50,20 +49,6 @@ class CommitTest < ActiveSupport::TestCase
     assert_nil commit.info
   end
 
-  def test_round_is_present
-    commit = create(:commit, message: Faker::Lorem.sentences)
-    assert commit.round.present?
-  end
-
-  def test_proper_round_is_assigned
-    skip "pending feature"
-    round_1 = create :round, from_date: Date.today.beginning_of_month, end_date: Date.today.end_of_month
-    round_2 = create :round, from_date: Date.today.beginning_of_month - 1.month, end_date: Date.today.end_of_month - 1.month
-    commit_1 = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today, round: nil)
-    assert_equal commit_1.round, round_1
-    commit_2 = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today - 1.month, round: nil)
-    assert_equal commit_2.round, round_2
-  end
 
   def test_frequency_factor_without_previous_commit
     commit_1 = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today)
@@ -81,26 +66,4 @@ class CommitTest < ActiveSupport::TestCase
 
   def test_frequency_factor_should_not_be_negative
   end
-
-=begin
-  test 'commit scoring job is scheduled after the commit is created' do
-    clear_enqueued_jobs
-    clear_performed_jobs
-    assert_enqueued_jobs 0
-    assert_enqueued_with(job: ScoreCommitJob) do
-      create(:commit, message: Faker::Lorem.sentences, sha: 'eb0df748bbf084ca522f5ce4ebcf508d16169b96', repository: create(:repository, owner: 'joshsoftware', name: 'code-curiosity'))
-    end
-  end
-
-  test 'commit scoring job is not scheduled after the commit is updated' do
-    commit = create(:commit, message: Faker::Lorem.sentences, sha: 'eb0df748bbf084ca522f5ce4ebcf508d16169b96', repository: create(:repository, owner: 'joshsoftware', name: 'code-curiosity'))
-    clear_enqueued_jobs
-    clear_performed_jobs
-    assert_enqueued_jobs 0
-    assert_no_enqueued_jobs do
-      commit.update({message: Faker::Lorem.sentences})
-    end
-  end
-=end
-
 end

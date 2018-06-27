@@ -6,9 +6,7 @@ class V1::TransactionsControllerTest < ActionController::TestCase
   def setup
     super
     @request.env['Accept'] = 'application/vnd.codecuriosity.org; version=1'
-    @goal = create :goal
-    @user = create :user, auth_token: 'dah123rty', goal: @goal
-    @round = create :round, :open
+    @user = create :user, auth_token: 'dah123rty'
     @transaction = create(:transaction, type: 'credit', points: 500, user: @user, transaction_type: 'royalty_bonus')
     @redeem_request = create(:redeem_request, points: 100, retailer: 'other', address: 'pune', gift_product_url: Faker::Internet.url,
                              coupon_code: 'aitpune', user: @user)
@@ -37,7 +35,7 @@ class V1::TransactionsControllerTest < ActionController::TestCase
   end
 
   test 'doesnt retrieve transactions of other users' do
-    user = create :user, auth_token: 'dah123', goal: @goal
+    user = create :user, auth_token: 'dah123'
     transactions = FactoryGirl.create_list(:transaction, 3, type: 'credit', transaction_type: 'Round', points: 1, user: user)
     sign_in @user
     assert_equal 4, @user.transactions.count

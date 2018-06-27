@@ -5,31 +5,8 @@
         = link_to root_path do
           %i.fa.fa-dashboard
           %span Dashboard
-      %li{class: is_active('index', 'activities')}
-        = link_to activities_path do
-          %i.fa.fa-cubes
-          %span Contributions
-      - if current_user.is_judge
-        %li{class: is_active('commits', 'judging') || is_active('activities', 'judging')}
-          = link_to commits_judging_index_path do
-            %i.fa.ion-ribbon-b
-            %span Judging
       = render 'admin_sidebar' if current_user.is_admin?
-      = render 'orgs_sidebar' if current_user.organizations.any?
-      %li{class: is_active('index', 'sponsorer_details')}
-        %a{href: sponsorer_details_path}
-          %i.fa.fa-usd
-          %span Subscribe
-      %li{class: is_active(params[:action], 'goals')}
-        = link_to goals_path do
-          %i.fa.fa-trophy
-          %span Goals
-      %li{class: is_active(params[:action], 'groups') || is_active(params[:action], 'groups/members')}
-        =  link_to groups_path do
-          %i.fa.fa-users
-          %span Groups
-      %li{class: is_active(params[:action], 'users')}
-        =  link_to user_path(current_user, anchor: 'wallet') do
+      %li{class: is_active(params[:action], 'commits')}
+        = link_to commits_path do
           %i.fa.fa-gift
-          %span Redeem points
-
+          %span Rewards

@@ -124,7 +124,7 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     assert_includes gift_shop, csv[1][1]
     assert_includes store, csv[1][2]
     assert_kind_of Fixnum, csv[1][3].to_i
-    assert_not_equal csv[1][3].to_i, csv[1][4].to_i
+    assert_equal csv[1][3].to_i, csv[1][4].to_i
     assert_includes status, csv[1][8]
   end
 
@@ -140,7 +140,7 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     assert_includes gift_shop, csv[1][1]
     assert_includes store, csv[1][2]
     assert_kind_of Fixnum, csv[1][3].to_i
-    assert_not_equal csv[1][3].to_i, csv[1][4].to_i
+    assert_equal csv[1][3].to_i, csv[1][4].to_i
     assert_includes status, csv[1][8]
   end
 
@@ -166,35 +166,12 @@ class Admin::RedeemRequestsControllerTest < ActionController::TestCase
     assert_equal 1, RedeemRequest.count
     assert_equal 0, RedeemRequest.first.amount
     patch :update, id: redeem_request.id, redeem_request: {points: 300, coupon_code: "Order #67981"}
-    assert_equal 15, RedeemRequest.first.amount
+    assert_equal 300, RedeemRequest.first.amount
   end
 
-  test "when redeem_request is updated update redeem_request amount in ratio 1:10 points if redeem_request has sponsorer_detail" do
-    seed_data
-    sponsorer_detail = create(:sponsorer_detail)
-    create(:transaction, :type => 'credit', :points => 1000, user: @user)
-    redeem_request = create(:redeem_request, store: nil, retailer: 'other',
-      address: "House Number-168/17A, Freehold\r\nNear Shatabdi Public School\r\nSector-23,Sanjay Nagar\r\nGhaziabad-201002", gift_product_url: "https://github.myshopify.com/products/arctocat", points: 0, sponsorer_detail: sponsorer_detail, user: @user)
-    assert_equal 1, RedeemRequest.count
-    assert_equal 0, RedeemRequest.first.amount
-    patch :update, id: redeem_request.id, redeem_request: {points: 300, coupon_code: "Order #67981"}
-    assert_equal 30, RedeemRequest.first.amount
-  end
-
-  test "when redeem_request is updated update redeem_request amount in ratio 1:20 points if redeem_request has no sponsorer_detail" do
-    seed_data
-    create(:transaction, :type => 'credit', :points => 200, user: @user)
-    redeem_request = create(:redeem_request, store: nil, retailer: 'other',
-      address: "House Number-168/17A, Freehold\r\nNear Shatabdi Public School\r\nSector-23,Sanjay Nagar\r\nGhaziabad-201002", gift_product_url: "https://github.myshopify.com/products/arctocat", points: 0, user: @user)
-    assert_equal 1, RedeemRequest.count
-    assert_equal 0, RedeemRequest.first.amount
-    patch :update, id: redeem_request.id, redeem_request: {points: 300, coupon_code: "Order #67981"}
-    assert_equal 15, RedeemRequest.first.amount
-  end
   def seed_data
-    round = create(:round, :status => 'open')
     role = create(:role, :name => 'Admin')
-    @user = create(:user, :auth_token => 'dah123rty', goal: create(:goal))
+    @user = create(:user, :auth_token => 'dah123rty')
     @user.roles << role
     sign_in @user
     transaction = create(:transaction, :type => 'credit', :points => 120, user: @user)

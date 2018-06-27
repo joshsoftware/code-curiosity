@@ -1,0 +1,11 @@
+%table.table.table-hover.table-bordered
+  %thead
+    %tr
+      %th.col-xs-1 Name
+      %th.col-xs-1 Organisation/Individual
+
+  %tbody
+    = render partial: 'sponsors'
+
+.pagination-container
+  = paginate @sponsors, remote: true
