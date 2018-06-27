@@ -30,6 +30,7 @@ class Repository
   has_and_belongs_to_many :users, class_name: 'User', inverse_of: 'repositories'
 
   validates :name, :source_url, :ssh_url, presence: true
+  validates :gh_id, uniqueness: true
   #validate :verify_popularity
 
   index(source_url: 1)
@@ -56,7 +57,11 @@ class Repository
   end
 
   def info
-    @info ||= GITHUB.repos.get(owner, name, {redirection: true})
+    begin
+      @info ||= GITHUB.repos.get(owner, name, {redirection: true})
+    rescue Github::Error::NotFound
+      return false
+    end
   end
 
   def self.add_new(params, user)
