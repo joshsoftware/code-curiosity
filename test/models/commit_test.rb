@@ -48,4 +48,22 @@ class CommitTest < ActiveSupport::TestCase
     commit = create(:commit, message: Faker::Lorem.sentences, sha: 'eb0df748bbf084ca522f5ce4ebcf508d16169b96', repository: nil)
     assert_nil commit.info
   end
+
+
+  def test_frequency_factor_without_previous_commit
+    commit_1 = create(:commit, message: Faker::Lorem.sentences, commit_date: Date.today)
+    assert_equal commit_1.frequency_factor, 1
+  end
+
+  def test_frequency_factor_with_previous_commit
+    user = create(:user)
+    25.times.each do |n|
+      create(:commit, user: user, message: Faker::Lorem.sentences, commit_date: Date.today - (n + 1).day)
+    end
+    commit_1 = create(:commit, user: user, message: Faker::Lorem.sentences, commit_date: Date.today)
+    assert_equal commit_1.frequency_factor > 1.0, true
+  end
+
+  def test_frequency_factor_should_not_be_negative
+  end
 end

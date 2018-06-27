@@ -33,6 +33,7 @@ scoring_engine:
   :commit_default_weightage: 0.45
   :bugspot_weightage: 0.45
   :bugspot_scores_threshold: 2
+  :frequency_factor_threshold: 30
 
 redeem:
   min_amount: 5
