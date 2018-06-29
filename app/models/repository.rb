@@ -14,7 +14,7 @@ class Repository
   field :source_url,   type: String
   field :gh_id,        type: Integer
   field :source_gh_id, type: Integer
-  field :languages,    type: Array
+  field :language,     type: String
   field :ssh_url,      type: String
   field :ignore_files, type: Array, default: []
   field :type,         type: String
@@ -102,7 +102,7 @@ class Repository
       watchers: info.watchers_count,
       stars: info.stargazers_count,
       forks: info.forks_count,
-      languages: [ info.language],
+      language: info.language,
       gh_id: info.id,
       ssh_url: info.ssh_url,
       owner: info.owner.login,
