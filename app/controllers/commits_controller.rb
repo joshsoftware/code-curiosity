@@ -22,6 +22,6 @@ class CommitsController < ApplicationController
   private
 
   def user_commits
-    @commits = current_user.commits.asc(:commit_date)
+    @commits = current_user.commits.desc(:commit_date)
   end
 end

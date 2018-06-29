@@ -16,10 +16,10 @@ class GitFetcher
     commits_list = fetch_commits(repo_name, branch_name)
 
     commits_list.each do |commit|
-      user = User.contestants.find_by(email: commit['commit']['author']['email'])
+      user = User.contestants.find_by(github_handle: commit['author']['login'])
       repo = Repository.find_by(name: repo_name, owner: repo_owner)
 
-      if user && user.created_at < commit['commit']['committer']['date']
+      if user && valid_commit?(user, commit['commit']['committer']['date'], commit['commit']['message'])
         commit_record = user.commits.find_or_initialize_by( sha: commit['sha'] )
 
         commit_record.repository = repo
@@ -69,5 +69,17 @@ class GitFetcher
 
   def fetch_pull_request(sha)
     ::VCS::GitPullRequest.new(sha).get
+  end
+
+  def valid_commit?(user, date, message)
+    !merge_pull_request_commit?(message) && committed_after_sign_up?(user, date)
+  end
+
+  def merge_pull_request_commit?(message)
+    /merge pull request/i.match(message)
+  end
+
+  def committed_after_sign_up?(user, commit_date)
+    user.created_at < commit_date
   end
 end
