@@ -17,13 +17,14 @@ class Admin::RepositoriesController < ApplicationController
   def create
     gh_repo = Repository.new(repo_params).info
     repo = gh_repo && !gh_repo.fork ? Repository.build_from_gh_info(gh_repo) : false
+
     if repo && repo.save
-      flash[:success] = "Repository Created Successfully!"
+      flash[:success] = I18n.t('repositories.successfully_added')
     else
       flash[:error] = if !gh_repo
-                        'Repository not found'
+                        I18n.t('repositories.not_found')
                       elsif gh_repo.fork
-                        'Cannot add forked repository'
+                        I18n.t('repositories.forked_repo')
                       else
                         repo.errors.full_messages.join(',')
                       end

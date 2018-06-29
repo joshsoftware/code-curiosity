@@ -5,6 +5,7 @@ FactoryGirl.define do
     source_url { Faker::Internet.url('github.com', "/#{Faker::Lorem.word}/#{Faker::Lorem.word}") }
     description { Faker::Lorem.sentence }
     watchers {Faker::Number.digit}
+    gh_id {Faker::Number.number(6)}
 
     factory :repository_with_activity_and_commits do
       transient do
