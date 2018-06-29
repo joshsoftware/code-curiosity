@@ -26,4 +26,8 @@ class SubscriptionMailer < ApplicationMailer
     mail(to: user.email, subject: "[CODECURIOSITY] Your points for the month of #{Date.today.strftime("%B")}!")
   end
 
+  def new_t_and_c(user)
+    @user = user
+    mail(to: user.email, subject: "[CODECURIOSITY] New Redemption Strategy")
+  end
 end
