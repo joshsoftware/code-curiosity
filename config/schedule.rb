@@ -33,3 +33,11 @@ every :day, :at => '10:30am' do
   rake 'repo:delete_large_repositories'
 end
 
+
+every :day, :at => '00:00am' do
+  rake 'fetch_commits'
+end
+
+every :day, :at => '01:00am' do
+  rake 'score_and_reward'
+end
