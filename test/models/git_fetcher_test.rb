@@ -39,7 +39,7 @@ class GitFetcherTest < ActiveSupport::TestCase
       before do
         @user = create(
                   :user,
-                  email: 'rahul.rj9421@gmail.com',
+                  github_handle: 'pain11',
                   created_at: Date.parse('2018-02-04')
                 )
       end
