@@ -8,10 +8,14 @@
       = link_to commit.html_url, class: 'btn btn-xs' do
         %i.fa.fa-fw.fa-share
         View
-    %td= commit.score.to_i
     %td
       - if commit.reward.nil?
-        Not Yet Rewarded
+        %a.scores.fa.fa-hourglass-2
+      - else
+        = commit.score.to_i
+    %td
+      - if commit.reward.nil?
+        %a.rewards.fa.fa-hourglass-2
       - else
         - if commit.is_reveal
           = "$ #{commit.reward}"

@@ -19,8 +19,9 @@
             %li.list-group-item
               %b Badge
               - @user.badges.each do |badge, points|
-                .badge.pull-right{class: "#{level(points)}", data: {title: badge, content: "#{level(points).capitalize} Level!\n You have contributed #{points} points in #{badge}."}}
-                  #{badge}
+                - if points > 0
+                  .badge.pull-right{class: "#{level(points)}", data: {title: badge, content: "#{level(points).capitalize} Level!\n You have contributed #{points} points in #{badge}."}}
+                    #{badge}
             %li.list-group-item
               %b Points
               %a.pull-right #{format_points(@user.points)}
