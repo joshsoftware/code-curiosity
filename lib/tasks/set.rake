@@ -32,10 +32,12 @@ namespace :set do
   task badges: :environment do
     User.contestants.each do |user|
       user.commits.includes(:repository).each do |commit|
-        language = commit.repository.language
-        user.badges[language] = 0 if user.badges[language].nil?
-        user.badges[language] += commit.score
-        user.save
+        language = commit.repository&.language
+        if language
+          user.badges[language] = 0 if user.badges[language].nil?
+          user.badges[language] += commit.score
+          user.save
+        end
       end
     end
   end
