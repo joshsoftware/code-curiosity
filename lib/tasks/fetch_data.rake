@@ -1,42 +1,4 @@
 namespace :fetch_data do
-  desc "Fetch code-curiosity github repositories commits and activities periodically."
-  task :commits_and_activities, [:round, :type] => :environment do |t, args|
-    round = args[:round] ? Round.find(args[:round]) : Round.opened
-    type = args[:type] || 'daily'
-    puts "Running for #{type}"
-
-    per_batch = 1000
-    # disable fetching of repos for blocked users
-    users = User.contestants.allowed
-    0.step(users.count, per_batch) do |offset|
-      users.limit(per_batch).skip(offset).each do |user|
-        #CommitJob.perform_later(user, type)
-
-        user.repositories.required.each do |repo|
-          CommitJob.perform_later(user.id.to_s, type, repo.id.to_s, round.id.to_s)
-        end
-
-        ActivityJob.perform_later(user.id.to_s, type, round.id.to_s)
-      end
-    end
-  end
-
-  desc "Fetch data for all rounds"
-  task :all_rounds => :environment do |t, args|
-    type = 'all'
-    users = User.contestants.allowed
-
-    Subscription.all.each do |subscription|
-      round = Round.find(subscription.round_id)
-      user  = User.find(subscription.user_id)
-
-      user.repositories.required.each do |repo|
-        CommitJob.perform_later(user.id.to_s, type, repo.id.to_s, round.id.to_s)
-      end
-      ActivityJob.perform_later(user.id.to_s, type, round.id.to_s)
-    end
-  end
-
   desc "Sync repositories for every user"
   task :sync_repos => :environment do |t, args|
     per_batch = 1000

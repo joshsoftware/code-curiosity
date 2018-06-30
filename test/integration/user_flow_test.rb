@@ -2,8 +2,7 @@ require "test_helper"
 
 class UserFlowTest < ActionDispatch::IntegrationTest
   before(:all) do
-    @round = create(:round, status: 'open')
-    @user = create(:user, name: 'josh', auth_token: 'dah123rty', github_user_since: Date.today , goal: create(:goal))
+    @user = create(:user, name: 'josh', auth_token: 'dah123rty', github_user_since: Date.today)
     Warden.test_mode!
   end
 
@@ -25,13 +24,12 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   #     within '.box' do
   #       assert page.has_content?('Redeem Points')
   #       assert page.has_link?('Redeem Points')
-  #       # click_link('Redeem Points')
+  #       click_link('Redeem Points')
   #       #page.save_and_open_screenshot
   #     end
   #   end
   #   #page.save_and_open_screenshot
   # end
-
   # test "user cannot redeem when redemption criterias will not be met" do
   #   login_as @user
   #   visit user_path(@user)

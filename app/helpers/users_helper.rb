@@ -5,12 +5,8 @@ module UsersHelper
   end
 
   def github_points_options
-    REDEEM['github_redeem_amounts'].collect do |v|
-      [
-        "$#{v} - #{v * redeem_request_value(current_user, REDEEM['one_dollar_to_points'])} points",
-        v * redeem_request_value(current_user, REDEEM['one_dollar_to_points'])
-      ]
-      #v*REDEEM['one_dollar_to_points']]
+    REDEEM['github_redeem_amounts'].collect do |amount|
+      ["$#{amount}", amount]
     end
   end
 
@@ -20,5 +16,10 @@ module UsersHelper
 
   def amount_earned(user)
     user.transactions.where(type: 'debit').sum(:amount).abs
+  end
+
+  def level(points)
+    BADGE.select{|key, value| points.in?(value['min']..value['max'])}
+         .keys.first
   end
 end

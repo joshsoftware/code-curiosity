@@ -16,21 +16,25 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'sign_in', :to => 'home#index', :as => :new_user_session
     delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+    get 'terms_and_conditions' => 'registrations#terms_and_conditions'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :repositories, only: [:index]
-
-  resources :sponsorer_details do
+  resources :commits, only: [:index] do
     member do
-      post 'update_card'
-      get 'cancel_subscription'
+      patch :reveal
+    end
+
+    collection do
+      patch :reveal
     end
   end
 
-  post "/stripe/webhooks", to: "stripe#webhooks"
+  resources :repositories, only: [:index] do
+    get :search, on: :collection
+  end
 
   resources :users, only: [:index, :show, :destroy, :edit, :update] do
     member do
@@ -40,29 +44,18 @@ Rails.application.routes.draw do
     end
 
     collection do
-      get 'set_goal/:goal_id', action: :set_goal, as: 'set_goal'
       get 'search'
     end
   end
 
-  resources :activities, only: [:index] do
-    collection do
-      get 'commits'
-      get 'activities'
-    end
-  end
-
   namespace :admin do
-    resources :repositories, only: [:index] do
+    resources :repositories, only: [:index, :create] do
       get :search, on: :collection
       member do
         patch :update_ignore_field
-        patch :add_judges
-        get :assign_judge
       end
     end
     resources :users, only: [:index, :destroy] do
-      get :mark_as_judge
       get :login_as
       get :search, on: :collection
       member do
@@ -70,13 +63,8 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :subscriptions, only: [:index]
-
-    resources :judges, only: [:index]
-    resources :rounds, only: [:index] do
-      get :mark_as_close
-    end
-
+    resources :sponsors, only: [:new, :create, :index, :show]
+    # It can be used in the future, hence commenting.
     resources :redeem_requests, only: [:index, :update, :destroy] do
       collection do
         get :download
@@ -88,7 +76,6 @@ Rails.application.routes.draw do
       patch :update_ignore_field
     end
 
-    get 'dashboard/index', as: 'dashboard'
   end
 
   namespace :github do
@@ -107,36 +94,13 @@ Rails.application.routes.draw do
     concerns :judgeable, on: :collection
   end
 
-  resources :organizations, only: [:show, :edit, :update] do
-    concerns :judgeable, on: :member
-
-    resources :users, only: [:create, :destroy], controller: 'organization/users'
-    resources :repositories, only: [:index], controller: 'organization/repositories' do
-      collection do
-        get :sync
-      end
-    end
-  end
-
-  resources :goals, only: [:index]
   resource :redeem, only: [:create], controller: 'redeem'
-  resources :groups do
-    member do
-      patch :feature
-    end
-    resources :members, only: [:index, :create, :destroy], controller: 'groups/members' do
-      delete :destroy_invitation
-      get :resend_invitation
-    end
-  end
-  get 'accept_invitation/:group_id/:token' => 'groups/members#accept_invitation', as: :accept_invitation
+
   get 'widgets/repo/:id(/:round_id)' => 'widgets#repo', as: :repo_widget
   get 'widgets/group/:id(/:round_id)' => 'widgets#group', as: :group_widget
 
-  get 'change_round/:id' => "dashboard#change_round", as: :change_round
   get 'dashboard' => 'dashboard#index'
   #get 'leaderboard' => 'home#leaderboard'
-  get 'trend/(:goal_id)' => 'home#trend', as: :trend
 
   get 'faq' => 'info#faq'
 

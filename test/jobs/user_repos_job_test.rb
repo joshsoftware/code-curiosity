@@ -4,7 +4,6 @@ class UserReposJobTest < ActiveJob::TestCase
   def setup
     super
     @user = create :user, github_handle: 'prasadsurase', auth_token: 'somerandomtoken'
-    @round = create :round, :open
     clear_enqueued_jobs
     clear_performed_jobs
     assert_no_performed_jobs
@@ -33,86 +32,26 @@ class UserReposJobTest < ActiveJob::TestCase
     UserReposJob.perform_now(@user.id.to_s)
   end
 
-  test "skip if unpopular and not a fork" do
-    file_path = 'test/fixtures/unpopular-repos.json'
-    repos = JSON.parse(File.read(file_path)).collect{|i| Hashie::Mash.new(i)}
-    assert_equal 1, repos.count
-    assert_equal 0, repos.first.stargazers_count
-    refute repos.first.fork
-    stub_get('/users/prasadsurase/repos?per_page=100').to_return(
-      body: File.read(file_path), status: 200,
-      headers: {content_type: "application/json; charset=utf-8"}
-    )
-    assert_equal 0, Repository.count
-    UserReposJob.perform_now(@user.id.to_s)
-    assert_equal 0, Repository.count
-    assert_equal 0, @user.repositories.count
-  end
-
-  test "skip if unpopular, is forked and remote is unpopular" do
-    file_path = 'test/fixtures/unpopular-forked-repos.json'
-    repos = JSON.parse(File.read(file_path)).collect{|i| Hashie::Mash.new(i)}
-    assert_equal 1, repos.count
-    assert_equal 0, repos.first.stargazers_count
-    assert repos.first.fork
-    stub_get('/users/prasadsurase/repos?per_page=100').to_return(
-      body: File.read(file_path), status: 200,
-      headers: {content_type: "application/json; charset=utf-8"}
-    )
-    Repository.any_instance.stubs(:info).returns(
-      Hashie::Mash.new(JSON.parse(File.read('test/fixtures/unpopular-remote.json')))
-    )
-    assert_equal 0, Repository.count
-    UserReposJob.perform_now(@user.id.to_s)
-    assert_equal 0, Repository.count
-    assert_equal 0, @user.repositories.count
-  end
-
-  test "persist if is popular and it not a fork" do
+  test 'persist if unforked and popular' do
     User.any_instance.stubs(:fetch_all_github_repos).returns(
-      JSON.parse(File.read('test/fixtures/user-popular-repos.json')).collect{|i| Hashie::Mash.new(i)}
+      JSON.parse(File.read('test/fixtures/unforked_repo.json'))
+          .collect{|i| Hashie::Mash.new(i)}
     )
     assert_equal 0, Repository.count
     UserReposJob.perform_now(@user.id.to_s)
-    @user.reload
     assert_equal 1, Repository.count
-    assert_equal 1, @user.repositories.count
-    assert_equal 25, @user.repositories.first.stars
+    assert_equal Repository.first.owner, @user.github_handle
   end
 
-  test "persist if is popular and is a fork and remote is unpopular" do
+  test 'Create source repo if forked' do
     User.any_instance.stubs(:fetch_all_github_repos).returns(
-      JSON.parse(File.read('test/fixtures/popular-repos-with-forks.json')).collect{|i| Hashie::Mash.new(i)}
+      JSON.parse(File.read('test/fixtures/repo.json'))
+          .collect{|i| Hashie::Mash.new(i)}
     )
     assert_equal 0, Repository.count
     UserReposJob.perform_now(@user.id.to_s)
-    @user.reload
     assert_equal 1, Repository.count
-    assert_equal 1, @user.repositories.count
-    user_repo = @user.repositories.first
-    assert_equal 26, user_repo.stars
-    assert_nil user_repo.source_gh_id
-  end
-
-  test "persist if unpopular, is a fork and remote is popular" do
-    User.any_instance.stubs(:fetch_all_github_repos).returns(
-      JSON.parse(File.read('test/fixtures/repos.json')).collect{|i| Hashie::Mash.new(i)}
-    )
-    Repository.any_instance.stubs(:info).returns(
-      Hashie::Mash.new(JSON.parse(File.read('test/fixtures/user-fork-repo.json')))
-    )
-    assert_equal 0, Repository.count
-    UserReposJob.perform_now(@user.id.to_s)
-    @user.reload
-    assert_equal 2, Repository.count
-    assert_equal 1, @user.repositories.count
-    user_repo = @user.repositories.first
-    assert_equal 24, user_repo.stars
-    assert_equal 42095647, user_repo.source_gh_id
-    parent_repo = Repository.asc(:created_at).first
-    refute_equal user_repo, parent_repo
-    assert_equal 37, parent_repo.stars
-    assert_nil parent_repo.source_gh_id
+    assert_not_equal Repository.first.owner, @user.github_handle
   end
 
   test 'destroy the repository if it is already persisted if the rating has dropped' do
@@ -167,4 +106,29 @@ class UserReposJobTest < ActiveJob::TestCase
     assert_equal 25, repo.stars
   end
 
+  describe 'set gh_repo_updated_at and gh_repo_created_at' do
+    before do
+      User.any_instance.stubs(:fetch_all_github_repos).returns(
+        JSON.parse(File.read('test/fixtures/unforked_repo.json'))
+            .collect{|i| Hashie::Mash.new(i)}
+      )
+    end
+
+    test 'when repo is already present' do
+      create :repository, gh_id: 67219068
+
+      assert_equal 1, Repository.count
+      UserReposJob.perform_now(@user.id.to_s)
+      assert_equal 1, Repository.count
+      assert_not_nil Repository.first.gh_repo_updated_at
+    end
+
+    test 'when new repo is created' do
+      assert_equal 0, Repository.count
+      UserReposJob.perform_now(@user.id.to_s)
+      assert_equal 1, Repository.count
+      assert_not_nil Repository.first.gh_repo_created_at
+      assert_not_nil Repository.first.gh_repo_updated_at
+    end
+  end
 end

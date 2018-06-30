@@ -1,3 +1,10 @@
+terms_and_conditions:
+  -
+    title: Welcome to Code-curiosity!
+    description: Description of new Code-curiosity.
+  -
+    title: New Rules
+    description: Explain new Code-curiosity rules.
 home:
   -
     question: Who should use CodeCuriosity?
@@ -7,7 +14,7 @@ home:
     answer: You earn points for contributions. You can redeem points for rewards. You're contributing back to the community!
   -
     question: How does it work?
-    answer: Set a monthly goal for yourself and earn points. Redeem points and buy something from the GitHub Shop!
+    answer: Just keep on contributing and earn points. Redeem points and buy something from the GitHub Shop!
   -
     question: I'm a newbie. What's in it for me?
     answer: If you need a push to start contributing, this is it! You not only build your profile, you earn points and you're contributing back.
@@ -23,14 +30,14 @@ faq:
     answer: You earn points for contributions. You can redeem points for rewards. You're contributing back to the community! This helps you build your open source profile, helps your organization recognize your hard work, helps you contribute back to the community and also helps you to learn new things and get advice from the community - not to mention it's very satisfying.
   -
     question: How does it work?
-    answer: We gamify open source contributions. Your only task is to sign-up with your GitHub account on CodeCuriosity. After that, we do the rest! The system analyses your commits and activities and they are automatically scored and shown on your dashboard. Everyone and everything is rewarded. You can choose your monthly goal when you log in and try to achieve it. Every month-end, the cumulative scores are added to your wallet and if you have achieved your goal, you get bonus points!
+    answer: We gamify open source contributions. Your only task is to sign-up with your GitHub account on CodeCuriosity. After that, we do the rest! The system analyses your commits, they are automatically scored and shown on your dashboard. Everyone and everything is rewarded. Every day, the cumulative scores are added to your wallet!
   -
     question: What are points and how do they work?
     answer: Points are the scores you have accumulated for your contributions. You can redeem these points for digital goods, currently on the Github Shop. We send you a gift-card of the amount you want and you can redeem that at the store!
     html_anchor: 'what-are-points'
   -
     question:  How do I redeem my points?
-    answer: Redemptions are in the form of digital prizes or Github Merchandise or Company sponsored swag. You need to accumulate at least 100 points before you can redeem them. <span style='color:red'> Please note that only for the free plan you have to be registered on Github for at least 6 months and on CodeCuriosity for at least 3 months before you can redeem any points. In any month, you can redeem at most 500 Royalty points. </span>
+    answer: Redemptions are in the form of digital prizes or Github Merchandise or Company sponsored swag. 
   -
     question:  How long does the redemption process take?
     answer: Usually, we redeem points within 1 or 2 days. All redemption requests are screened by our fraud detection team. We have come across cases of fraud (unfortunately) where users were trying to manipulate the system to make money in unfair ways. We have ejected these users from the system. <i style='color:blue'>This is indeed a sign that the initiative has been sucessful </i> :) If your redemption request is not processed within 4 days, please contact us and we shall discuss the reasons behind the delay.
@@ -57,16 +64,16 @@ faq:
     answer: There could be couple of reasons - The origin repository of your forked repository may not have sufficient stars or it is syncing in the background and may take sometime to reflect.
   -
     question: How are past contributions rewarded?
-    answer: When a user signs up, CodeCuriosity profiles the user's and the user's owned repositories. For every repository that has more than 25 stars, a royalty bonus is credited based on a factor of number of stars and number of followers. Organization contributions are not counted (yet) and commits as collaborator to another repository is not counted.
+    answer: When a user signs up, CodeCuriosity profiles the user's and the user's owned repositories. For every repository that has more than 25 stars. Organization contributions are not counted (yet) and commits as collaborator to another repository is not counted.
   -
     question: How is the scoring done?
     answer: The scoring is done automatically using an algorithm based on certain criteria. For example, is the commit in the critical path, does it fix an issue, the number of lines committed, the expertize of the user etc. This is always evolving and ideas are welcome. These scores can be over-ridden by language or domain experts as and when required.
   -
     question: When is the scoring done?
-    answer: Scoring is done continuously but the results may take some time to show. Every month-end, your wallet gets credited with the cumulative scores. If you have achieved your month's goal, your bonus points get credited to your wallet!
+    answer: Scoring is done at end of every day. 
   -
     question: What is scored?
-    answer: Automated scoring is done on commits, comments and opening an issue today. As we evolve, this may get more streamlined and we may include other factors too.
+    answer: Automated scoring is done on commits, commits which are merged with default branch of non-forked repo. As we evolve, this may get more streamlined and we may include other factors too.
   -
     question: Can I make real money from CodeCuriosity?
     answer: Not yet ;) It is our aim to sort out legal issues and if we get enough grants and contributions from the community, we would be more than happy to reward open source contributions with money. We dream to invent a new career - A full-time open source contributor who works for the community and not for a company!
@@ -95,4 +102,3 @@ benefits:
     - Logo on homepage as well as in all mailers
     - Custom Judging for owned repos
     - Custom CodeCuriosity Badge
-

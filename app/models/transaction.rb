@@ -2,7 +2,7 @@ class Transaction
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  # TRANSACTION_TYPES = %w(royalty_bonus Round redeem_points)
+  TRANSACTION_TYPES = ['royalty_bonus', 'Round', 'GoalBonus', 'daily reward']
 
   field :type,              type: String
   field :points ,           type: Integer, default: 0
@@ -11,9 +11,7 @@ class Transaction
   field :amount,            type: Float, default: 0.0
 
   belongs_to :user
-  belongs_to :subscription
   belongs_to :redeem_request
-  has_one :redemption_transaction
 
   validates :type, :points , presence: true
   validates :type, inclusion: { in: %w(credit debit) }
@@ -21,12 +19,14 @@ class Transaction
   index(user_id: 1, type: 1)
   index(transaction_type: 1)
 
+  scope :redeemable, -> { where(:created_at.gte => TRANSACTION['date']) }
+  scope :credited, -> (types) { where(:transaction_type.in => types) }
+
   before_save do |t|
     t.points = t.credit? ? t.points.abs : -(t.points.abs)
     t.amount = t.credit? ? t.amount.abs : -(t.amount.abs)
   end
 
-  after_create :update_user_total_points
   after_create :set_amount
 
   def credit?
@@ -43,14 +43,8 @@ class Transaction
     end
   end
 
-  def update_user_total_points
-    if points > 0
-      user.set(points: user.points + points)
-    end
-  end
-
   def self.total_points_before_redemption
-    Transaction.where(:transaction_type.in => ['royalty_bonus', 'Round']).sum(:points)
+    Transaction.credited(TRANSACTION_TYPES).sum(:points)
   end
 
   def self.total_points_redeemed
@@ -58,10 +52,6 @@ class Transaction
   end
 
   def set_amount
-    if user.is_sponsorer || Offer.is_winner?(user)
-      set(amount: points.to_f/SUBSCRIPTIONS['individual'])
-    else
-      set(amount: points.to_f/SUBSCRIPTIONS['free'])
-    end
+    set(amount: points.to_f)
   end
 end

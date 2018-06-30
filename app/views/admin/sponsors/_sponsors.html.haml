@@ -1,0 +1,6 @@
+- @sponsors.each do |sponsor|
+  %tr
+    %td
+      = link_to admin_sponsor_path(sponsor) do
+        = sponsor.name
+    %td= sponsor.is_individual ? 'Organisation' : 'Individual'

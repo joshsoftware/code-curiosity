@@ -1,0 +1,9 @@
+bronze:
+  min: 1
+  max: 50
+silver:
+  min: 51
+  max: 100
+gold:
+  min: 101
+  max: 200

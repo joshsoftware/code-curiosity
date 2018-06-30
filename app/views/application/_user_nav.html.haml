@@ -1,13 +1,3 @@
-%li.dropdown.tasks-menu
-  %a.dropdown-toggle{ data: { toggle: 'dropdown' }}
-    %i.fa.fa-calendar :
-    %span.current-round= current_round.from_date.strftime("%b %Y")
-  %ul.dropdown-menu
-    %li
-      %ul.menu
-        - @rounds.each do |round|
-          %li
-            = link_to round.from_date.strftime("%b %Y"), change_round_path(round)
 %li.dropdown.user.user-menu
   %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
     %img.user-image#profile-pic{:alt => current_user.name, :src => avatar_url}/

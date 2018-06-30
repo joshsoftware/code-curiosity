@@ -16,9 +16,9 @@ module ScoresHelper
     # TODO: optimize this using mongoDB aggregation query to get the number
     # of commits that have less than 3 scores.
     # Kept a case statement incase we need more color codes later on
-    counter = user.commits.for_round(current_round.id).includes(:scores).select { |c| c.scores.count < 3 }.count
+    counter = user.commits.includes(:scores).select { |c| c.scores.count < 3 }.count
     if counter == 0
-      counter = user.activities.for_round(current_round.id).includes(:scores).select { |c| c.scores.count < 3 }.count
+      counter = user.activities.includes(:scores).select { |c| c.scores.count < 3 }.count
     end
     case counter
     when 0

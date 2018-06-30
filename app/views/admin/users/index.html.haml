@@ -1,6 +1,7 @@
 %section.content-header
   %h1
-    Users :-
+    Users
+    %span.badge #{@users.count}
     %label.slide
       %input#blocked{checked: !(@status == "true"), type: 'checkbox', data: { toggle: 'toggle', width: '80', height: '40', on: 'Allowed', off: 'Blocked' }}
 

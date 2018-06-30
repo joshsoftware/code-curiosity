@@ -1,0 +1,23 @@
+// Place all the styles related to the Commits controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+form#filters, .reveal_all {
+  float: right;
+}
+
+td, th {
+  text-align: center;
+}
+
+input#query, input#to, input#from{
+  margin-right: 5px;
+}
+
+.reward {
+  display: none;
+}
+
+input#query {
+  width: 200px;
+}

@@ -7,11 +7,11 @@
         .col-xs-12
           %h4
             %span.text
-              = number_with_delimiter(User.contestants.count )
+              = number_with_delimiter(User.contestants.count)
               users
             have contributed
             %span.text
-              = number_with_delimiter(Transaction.total_points_before_redemption)
+              = number_with_delimiter(User.contestants.sum(:points))
               points
             and
             %span.text
@@ -24,23 +24,12 @@
       %a.btn.btn-primary.btn-lg{  href: omniauth_authorize_path(:user, :github) }
         %span.fa.fa-github
         Sign in with Github
-      %a.btn.btn-success.btn-lg{  href: "#sponsor"}
-        %span
-        Reward Contributors!
     .row.marketing
       .col-md-12.col-lg-offset-1.col-md-offset-1
         - INFO['home'].each_slice(2) do |data|
           .col-lg-5.col-md-5
             = render partial: 'info', collection: data, as: 'info'
     .row.marketing
-      - if @sponsorer_organizations.count >= SPONSORER_THRESHOLD['organization']
-        = render partial: 'subscribers_list', locals: {header: "Organization Sponsors", sponsorer_group: @sponsorer_organizations, organization: true}
-      - if @sponsorer_users.count >= SPONSORER_THRESHOLD['individual']
-        = render partial: 'subscribers_list', locals: {header: "Individual Sponsors", sponsorer_group: @sponsorer_users, organization: false}
-    .row.marketing#sponsor
-      = render 'sponsorer_benefits'
-    - if @size > 0
-      .row.marketing
-        = render partial: 'featured_groups'
+      = render partial: 'subscribers_list'
     .row
       = render partial: 'trend'

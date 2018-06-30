@@ -1,0 +1,28 @@
+- @commits.each do |commit|
+  %tr
+    %td= commit.commit_date.strftime("%d %B %y")
+    %td= commit.repository.name
+    %td
+      = commit.message
+      %br
+      = link_to commit.html_url, class: 'btn btn-xs' do
+        %i.fa.fa-fw.fa-share
+        View
+    %td
+      - if commit.reward.nil?
+        %a.scores.fa.fa-hourglass-2
+      - else
+        = commit.score.to_i
+    %td
+      - if commit.reward.nil?
+        %a.rewards.fa.fa-hourglass-2
+      - else
+        - if commit.is_reveal
+          = "$ #{commit.reward}"
+        - else
+          = link_to reveal_commit_path(commit), method: 'patch',
+            class: 'btn btn-success btn-xs reveal', remote: true do
+            %i.fa.fa-fw.fa-gift
+            Reveal
+          .reward
+            = "$ #{commit.reward}"

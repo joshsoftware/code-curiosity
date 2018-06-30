@@ -8,14 +8,9 @@ class UsersHelperTest < ActionView::TestCase
 
   test 'must return sum amount of only debit transactions made by user' do
     user = create :user
-    create :transaction, transaction_type: 'royalty_bonus', type: 'credit', points: 1000, user: user
-    create :transaction, transaction_type: 'Round', type: 'credit', points: 100, user: user
+    create :transaction, transaction_type: 'daily reward', type: 'credit', points: 100, user: user
     create :transaction, transaction_type: 'redeem_points', type: 'debit', points: 200, user: user
-    assert_equal 10, amount_earned(user)
-    # user becomes a sponsorer helper method should return amount according to that
-    create :sponsorer_detail, user: user
-    create :transaction, transaction_type: 'redeem_points', type: 'debit', points: 300, user: user
-    assert_equal 40, amount_earned(user)
+    assert_equal 200, amount_earned(user)
   end
 
   test 'must return 0 if user has no debit transactions' do

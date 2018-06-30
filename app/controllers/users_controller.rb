@@ -1,17 +1,13 @@
 class UsersController < ApplicationController
-  include ContributionHelper
-  include SponsorerHelper
   before_action :authenticate_user!, except: [:show]
 
   def index
-    @users = current_user.is_judge? ? User.contestants : [current_user]
+    @users = [current_user]
   end
 
   def show
     @user = User.find(params[:id])
     if @user
-      @show_transactions = current_user == @user
-      contribution_data(@user)
       render layout: current_user ? 'application' : 'public'
     else
       redirect_to root_url, alert: I18n.t('user.not_exist_in_system')
@@ -52,27 +48,6 @@ class UsersController < ApplicationController
     @user.update(user_params)
   end
 
-  def set_goal
-    @goal = Goal.find(params[:goal_id])
-    subscription = current_user.current_subscription
-
-    if @goal.blank? || subscription.blank?
-      redirect_to goals_path, notice: I18n.t('messages.not_found')
-      return
-    end
-
-    current_user.set(goal_id: @goal.id)
-
-    if subscription.goal
-      message = I18n.t('goal.set_as_goal_next_month', { name: @goal.name, current_goal: subscription.goal.name })
-    else
-      message = I18n.t('goal.set_as_goal', { name: @goal.name })
-      subscription.set(goal_id: @goal.id)
-    end
-
-    redirect_to goals_path, notice: message
-  end
-
   def search
     users = if params[:query].present?
               User.where(github_handle: /^#{params[:query]}/i).limit(10).only(:id, :github_handle, :avatar_url, :name)
@@ -85,15 +60,7 @@ class UsersController < ApplicationController
 
   def destroy
     user = current_user
-    if user.is_sponsorer && user.sponsorer_detail.subscription_status != 'canceled'
-      sponsor = user.sponsorer_detail
-      begin
-        delete_subscription(sponsor.stripe_subscription_id)
-      rescue
-        flash[:error] = "There was some problem while canceling your subscription. Please try after some time"
-        redirect_to user_path and return
-      end
-    end
+
     sign_out current_user
 
     # We cannot delete the user completely, because there are plenty of associations.

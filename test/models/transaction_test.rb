@@ -1,14 +1,14 @@
 require "test_helper"
 
 class TransactionTest < ActiveSupport::TestCase
- 
+
   def test_transaction_type_must_be_present
     transaction = build(:transaction, :type => nil)
     transaction.valid?
     assert_not_empty transaction.errors[:type]
   end
 
-  def test_points_must_be_present 
+  def test_points_must_be_present
     transaction = build(:transaction, :points => nil)
     transaction.valid?
     assert_not_empty transaction.errors[:points]
@@ -30,28 +30,6 @@ class TransactionTest < ActiveSupport::TestCase
     assert transaction.redeem_transaction?
   end
 
-  def test_update_user_total_points_after_transaction_is_created
-    transaction = build(:transaction, :type => 'credit', :points => 2)
-    transaction.user.points = 3
-    transaction.save
-    assert_equal transaction.user.points, 5
-  end
-
-  def test_update_only_when_points_greater_than_zero 
-    transaction = build(:transaction,:points => 2, :type => 'credit', user: FactoryGirl.create(:user))
-    transaction.user.points = 1
-    transaction.update_user_total_points
-    assert_equal(transaction.user.points, 3)
-  end
-
-  def test_no_updation_when_points_equal_to_zero
-    transaction = build(:transaction, :points => 0, :type => 'credit')
-    transaction.user.points = 1
-    transaction.update_user_total_points
-    assert_equal(transaction.user.points, 1)
-  end
-
-  
   def test_check_total_points_before_redemption
     transaction = FactoryGirl.create_list(:transaction, 3, :type => 'credit', :transaction_type => 'Round', :points => 1)
     transaction = Transaction.where(:transaction_type.in => ['Round','royalty_bonus'])
@@ -81,41 +59,4 @@ class TransactionTest < ActiveSupport::TestCase
     transaction.redeem_request = redeem_request
     assert_not_nil transaction.coupon_code
   end
-
-  test "set amount $1:10 points if user is active sponsorer during transaction with type redeem points" do
-    user = create :user, is_sponsorer: true
-    transaction = create :transaction, transaction_type: 'redeem_points', type: 'debit', points: 200, user: user
-    assert_equal -20, transaction.reload.amount
-  end
-
-  test "set amount $1:10 points if user is active sponsorer during transaction with type round" do
-    user = create :user, is_sponsorer: true
-    transaction = create :transaction, transaction_type: 'Round', type: 'credit', points: 200, user: user
-    assert_equal 20, transaction.reload.amount
-  end
-
-  test "set amount $1:10 points if user is active sponsorer during transaction with type goal bonus" do
-    user = create :user, is_sponsorer: true
-    transaction = create :transaction, transaction_type: 'GoalBonus', type: 'credit', points: 200, user: user
-    assert_equal 20, transaction.reload.amount
-  end
-
-  test "set amount $1:20 points if user is not an active sponsorer during transaction" do
-    user = create :user, is_sponsorer: false
-    transaction = create :transaction, transaction_type: 'redeem_points', type: 'debit', points: 200, user: user
-    assert_equal -10, transaction.reload.amount
-  end
-
-  test "set amount $1:20 points if user is active sponsorer during transaction with type round" do
-    user = create :user, is_sponsorer: false
-    transaction = create :transaction, transaction_type: 'Round', type: 'credit', points: 200, user: user
-    assert_equal 10, transaction.reload.amount
-  end
-
-  test "set amount $1:20 points if user is active sponsorer during transaction with type goal bonus" do
-    user = create :user, is_sponsorer: false
-    transaction = create :transaction, transaction_type: 'GoalBonus', type: 'credit', points: 200, user: user
-    assert_equal 10, transaction.reload.amount
-  end
-
 end

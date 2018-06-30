@@ -4,9 +4,8 @@ class Admin::IgnoredFilesControllerTest < ActionController::TestCase
 
   def setup
     super
-    round = create(:round, :status => 'open')
     role = create(:role, :name => 'Admin')
-    @user = create(:user, :auth_token => 'dah123rty', goal: create(:goal))
+    @user = create(:user, :auth_token => 'dah123rty')
     @user.roles << role
     sign_in @user
   end

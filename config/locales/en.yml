@@ -34,19 +34,16 @@ en:
     not_found: 'User #{name} not found.'
     not_exist_in_system: 'User does not exist in CodeCuriosity.'
   repositories:
-    criteria_message: "It’s probably not met the minimum criteria - either the repos or their origins should have at least 25 stars. This makes your contributions valuable." 
+    criteria_message: "It’s probably not met the minimum criteria - either the repos or their origins should have at least 25 stars. This makes your contributions valuable."
     contribute_to: "Repository you would like to contribute or source(fork) repository requires minimum %{stars} stars."
     not_found: 'Repository does not exist on GitHub.'
     github_sync: 'Your repositories are getting synced, this may take a while.'
     dont_have_populer_repos: "There are no repositories with more than 25 stars in GitHub."
+    forked_repo: 'Can not add forked repository.'
+    successfully_added: 'Repository added successfully!'
   organizations:
     minimum_admin_users: "You can't remove users. At least one user is required in admin group."
     no_leaders: 'No one here!'
-  goal:
-    please_select: 'Please select a goal!'
-    set_as_goal: "Goal set to '%{name}'!"
-    set_as_goal_next_month: "You had already set your goal to '%{current_goal}' for this month. Goal change to '%{name}' will be effective from next month."
-    goal_change_faq: 'A user can set his or her current month goal only in the first week of the month. If a goal is set after the first week it will be activated in the next month.'
   transaction:
     points_credit_info: Points will be credited to your account by end of the month.
     free_plan: On a free plan
@@ -57,8 +54,8 @@ en:
     request_created: 'We will send you a coupon code in a couple of days.'
   group:
     member:
-      create: 
-        user_not_found: 'User is not present. Please try valid user github handle.' 
+      create:
+        user_not_found: 'User is not present. Please try valid user github handle.'
         already_member: "%{user} is already member of %{group} group"
         already_invited: "%{user} is already invited to %{group} group"
         invitation: "Successfully sent invitation to %{user}."

@@ -1,0 +1,12 @@
+= simple_form_for(@sponsor, url: admin_sponsors_path, method: 'post') do |f|
+  .col-xs-6
+    = f.input :name
+    = f.input :is_individual, as: :boolean
+    = f.simple_fields_for :budgets do |p|
+      = p.input :start_date, input_html: { class: 'datepicker'}
+      = p.input :end_date, input_html: { class: 'datepicker' }
+      = p.input :amount, as: :float
+      = p.input :is_all_repos, as: :boolean, label: 'All Repositories', input_html: { checked: true, id: 'is_all_repos'}
+      = p.select :repository_ids, [], {}, {multiple: true, disabled: true, id: 'budget_repo_ids'}
+    = f.submit 'create', id: 'create_sponsor', class: 'btn btn-primary btn-block' do
+      = @sponsor.persisted? ? 'Update' : 'Create'

@@ -59,21 +59,18 @@ class User
   # User account deletion
   field :deleted_at, type: Time
 
-  belongs_to :goal
+  # for accepting terms and conditions
+  field :terms_and_conditions, type: Boolean, default: false
+
+  # for language wise badges
+  field :badges, type: Hash, default: {}
+
   has_many :commits, dependent: :destroy
-  has_many :activities, dependent: :destroy
   has_many :transactions, dependent: :destroy
-  has_many :subscriptions, dependent: :destroy
-  has_many :rounds
   has_many :comments, dependent: :destroy
   has_many :redeem_requests, dependent: :destroy
-  has_many :group_invitations, dependent: :destroy
   has_and_belongs_to_many :repositories, class_name: 'Repository', inverse_of: 'users'
-  has_and_belongs_to_many :judges_repositories, class_name: 'Repository', inverse_of: 'judges'
   has_and_belongs_to_many :roles, inverse_of: nil
-  has_and_belongs_to_many :organizations
-  has_and_belongs_to_many :groups, class_name: 'Group', inverse_of: 'members'
-  has_many :sponsorer_details, dependent: :destroy
 
   slug  :github_handle
 
@@ -91,9 +88,6 @@ class User
   validates :twitter_handle, presence: true, format: { with: /\A@\w{1,15}\z/, message: "invalid Twitter handle"}, allow_nil: true
 
   before_validation :append_twitter_prefix
-  after_create do |user|
-    user.calculate_popularity unless user.auto_created
-  end
 
   def self.from_omniauth(auth)
     user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -115,24 +109,14 @@ class User
     })
 
     user.save
-
-    # for auto_created users, we need to invoke the after_create callback.
-    user.calculate_popularity unless user.current_subscription
-
     user
-  end
-
-  def calculate_popularity
-    self.subscribe_to_round
-    User.delay_for(2.second, queue: 'git').update_total_repos_stars(self.id.to_s)
-    UserReposJob.perform_later(self.id.to_s)
   end
 
   def create_transaction(attrs = {})
     transaction = self.transactions.create(attrs)
     return false if transaction.errors.any?
 
-    if attrs[:transaction_type] == 'credited'
+    if attrs[:type] == 'credit'
       self.inc(points: attrs[:points])
     else
       self.inc(points: -attrs[:points])
@@ -143,20 +127,8 @@ class User
     roles.where(name: ROLES[:admin]).any?
   end
 
-  def is_sponsorer?
-    roles.where(name: 'Sponsorer').any?
-  end
-
   def repo_names
     judges_repositories.map(&:name).join(",")
-  end
-
-  def score_all
-    Round.all.each do |round|
-      self.repositories.each do |repository|
-        repository.score_commits(round)
-      end
-    end
   end
 
   def repo_syncing?
@@ -167,77 +139,12 @@ class User
     last_gh_data_sync_at.present? && (Time.now - last_gh_data_sync_at) < 3600
   end
 
-  def subscribe_to_round(round = nil)
-    round = round || Round.opened
-    return false unless round
-
-    last_subscription = subscriptions.desc(:created_at).first
-
-    subscriptions.find_or_create_by(round: round) do |subscription|
-      subscription.goal = self.goal || last_subscription.try(:goal)
-    end
-  end
-
-  def calculate_royalty_bonus
-    (repos_star_count * ([followers, 100].min/100.0)).round
-  end
-
-  # Set the royalty bonus(RB) for a user based on the rating of the repositories owned.
-  # If the user signs up for the first time and if the RB is 450, credit 450 points to the user.
-  # If the user deletes his/her account and re-signs-up and if the calculated RB is 600, credit only 150 (ie. 600-450).
-  # If the user signs up for the first time and RB is 450,  and has earned 900 for the first round, his total points are 1350.
-  # If he deletes and re-signs-up with 550 RB, the new transaction of RB would be of 100(550-450) and total points would be 1450.
-  # The points earned via commits and activities and redeem requests of the user are already tracked via the transactions
-  # and hence need not be considered while calculating the royalty points.
-  def set_royalty_bonus
-    royalty_points = calculate_royalty_bonus
-
-    if royalty_points >= USER[:royalty_points_threshold]
-      self.celebrity = true
-    end
-
-    if royalty_points > 0
-      self.transactions.create(points: royalty_points, transaction_type: 'royalty_bonus', type: 'credit')
-=begin
-      royalty_bonuses = self.transactions.where(transaction_type: 'royalty_bonus', type: 'credit')
-      self.transactions.create(
-        points: royalty_bonuses.any? ? royalty_points - royalty_bonuses.sum(:points) : royalty_points,
-        transaction_type: 'royalty_bonus', type: 'credit'
-      )
-=end
-    end
-
-    self.points = royalty_points
-    self.save
-  end
-
-  def self.update_total_repos_stars(user_id)
-    user = User.find(user_id)
-    star_count = 0
-
-    user.gh_client.repos(user: user.github_handle).list(per_page: 100).each_page do |repos|
-      repos.each do |repo|
-        if repo.stargazers_count >= REPOSITORY_CONFIG['popular']['stars']
-          star_count += repo.stargazers_count
-        end
-      end
-    end
-
-    user.set(repos_star_count: star_count)
-    user.set_royalty_bonus
-  end
-
   def self.encrypter
     @_encrypter ||= ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['ENC_KEY']))
   end
 
-  def total_points
-    self.transactions.sum(:points)
-  end
-
-  def current_subscription(round = nil)
-    round = Round.opened unless round
-    @_csu ||= subscriptions.where(round_id: round.id).first
+  def redeemable_points
+    transactions.redeemable.sum(:points)
   end
 
   def self.search(q)
@@ -248,20 +155,8 @@ class User
     (github_user_since <= Date.today - 6.months) && (created_at <= Date.today - 3.months)
   end
 
-  def royalty_bonus_transaction
-    self.transactions.where(transaction_type: 'royalty_bonus').asc(:created_at).first
-  end
-
-  def active_sponsorer_detail
-    sponsorer_details.asc(:subscribed_at).where(subscription_status: :active).asc(:created_at).last
-  end
-
   def deleted?
     self.deleted_at.present? and !active
-  end
-
-  def sponsorer_detail
-    sponsorer_details.where(:stripe_customer_id.ne => nil).asc(:created_at).last
   end
 
   def append_twitter_prefix
