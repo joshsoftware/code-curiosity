@@ -2,7 +2,7 @@
   %h1
     Rewards :-
 
-    - if @commits.any?
+    - if @commits.any? && @commits.with_reward.where(is_reveal: false).any?
       = link_to reveal_commits_path, method: 'patch',
         class: 'btn btn-success reveal_all', remote: true do
         %i.fa.fa-fw.fa-gift

@@ -15,4 +15,16 @@ $(document).on('page:change', function(event) {
       $('.reward').fadeIn('slow').show();
     });
   });
+
+  $(document).ready(function() {
+    $('.scores').tooltip({
+      title: 'Not Yet Scored, Be Patient!',
+      placement: 'left'
+    });
+
+    $('.rewards').tooltip({
+      title: 'Not Yet Rewarded, Be Patient!',
+      placement: 'left'
+    });
+  });
 });
