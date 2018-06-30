@@ -1,7 +1,7 @@
 - @commits.each do |commit|
   %tr
     %td= commit.commit_date.strftime("%d %B %y")
-    %td= commit.repository.name
+    %td= commit.repository&.name
     %td
       = commit.message
       %br
