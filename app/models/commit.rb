@@ -64,6 +64,10 @@ class Commit
     COMMIT_RATINGS.last
   end
 
+  def non_rewardable_commit?
+    commit_date < NEW_FEATURE_LAUNCH_DATE - 1.day
+  end
+
   private
 
   def schedule_scoring_job

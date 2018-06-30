@@ -21,3 +21,5 @@ INFO = YAML.load_file('config/info.yml')
 BADGE = YAML.load_file('config/badge.yml')
 
 MARKDOWN = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
+
+NEW_FEATURE_LAUNCH_DATE = Date.new(2018,7,1)
