@@ -8,5 +8,6 @@
       = p.input :amount, as: :float
       = p.input :is_all_repos, as: :boolean, label: 'All Repositories', input_html: { checked: true, id: 'is_all_repos'}
       = p.select :repository_ids, [], {}, {multiple: true, disabled: true, id: 'budget_repo_ids'}
-    = f.submit 'create', id: 'create_sponsor', class: 'btn btn-primary btn-block' do
+    = f.submit id: 'create_sponsor', class: 'btn btn-primary' do
       = @sponsor.persisted? ? 'Update' : 'Create'
+    = link_to "Cancel", :back, class: 'btn btn-primary'

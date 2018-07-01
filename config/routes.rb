@@ -63,8 +63,8 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :sponsors, only: [:new, :create, :index, :show]
-    # It can be used in the future, hence commenting.
+    resources :sponsors
+
     resources :redeem_requests, only: [:index, :update, :destroy] do
       collection do
         get :download
