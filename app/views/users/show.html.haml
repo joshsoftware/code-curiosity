@@ -46,10 +46,10 @@
               = link_to 'Settings', '#settings', data: { toggle: 'tab' }
         .tab-content
           .tab-pane.active#wallet
-            - if current_user.transactions.any?
+            - if current_user.transactions.where(hidden: false).any?
               = render 'transactions'
             - else
-              = render partial: 'callout_box', locals: {type: 'info', title: '', message: 'You have not earned or redeemed yet.'}
+              = render partial: 'callout_box', locals: {type: 'info', title: '', message: 'No records found.'}
           - if logged_in_user?
             .tab-pane#settings
               = render 'settings'
