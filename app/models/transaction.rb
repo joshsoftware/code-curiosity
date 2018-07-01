@@ -9,6 +9,7 @@ class Transaction
   field :transaction_type,  type: String
   field :description,       type: String
   field :amount,            type: Float, default: 0.0
+  field :hidden,            type: Boolean, default: false
 
   belongs_to :user
   belongs_to :redeem_request
