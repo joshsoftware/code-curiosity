@@ -19,7 +19,7 @@ class Transaction
   index(user_id: 1, type: 1)
   index(transaction_type: 1)
 
-  scope :redeemable, -> { where(:created_at.gte => TRANSACTION['date']) }
+  scope :redeemable, -> { where(:created_at.gte => NEW_FEATURE_LAUNCH_DATE) }
   scope :credited, -> (types) { where(:transaction_type.in => types) }
 
   before_save do |t|
