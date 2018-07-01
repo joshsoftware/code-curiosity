@@ -41,4 +41,18 @@ namespace :set do
       end
     end
   end
+
+  desc 'Create last month transaction'
+  task create_last_month_transaction: :environment do
+    last_month = Time.now.beginning_of_month.last_month..Time.now.end_of_month.last_month
+    User.contestants.each do |user|
+      last_month_points = user.commits.where(commit_date: last_month).sum(&:score)
+      user.create_transaction(
+        type: 'credit',
+        points: last_month_points,
+        description: "Round: #{Time.now.strftime('%B %Y')}",
+        transaction_type: 'Round'
+      )
+    end
+  end
 end

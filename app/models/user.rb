@@ -115,12 +115,6 @@ class User
   def create_transaction(attrs = {})
     transaction = self.transactions.create(attrs)
     return false if transaction.errors.any?
-
-    if attrs[:type] == 'credit'
-      self.inc(points: attrs[:points])
-    else
-      self.inc(points: -attrs[:points])
-    end
   end
 
   def is_admin?
