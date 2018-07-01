@@ -26,6 +26,18 @@ class Admin::SponsorsController < ApplicationController
     end
   end
 
+  def edit
+    @sponsor = Sponsor.find(params[:id])
+  end
+
+  def destroy
+    Sponsor.find(params[:id]).destroy
+    @sponsors = Sponsor.all.page(params[:page])
+
+    flash[:success] = "Sponsor Destroyed Successfully!"
+    render :index
+  end
+
   private
 
   def sponsor_params

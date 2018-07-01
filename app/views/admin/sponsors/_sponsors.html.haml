@@ -4,3 +4,6 @@
       = link_to admin_sponsor_path(sponsor) do
         = sponsor.name
     %td= sponsor.is_individual ? 'Organisation' : 'Individual'
+    %td
+      = link_to 'Edit', edit_admin_sponsor_path(sponsor.id), class: 'btn btn-primary'
+      = link_to 'Destory', admin_sponsor_path(sponsor.id), method: :delete, confirm: "Are you sure?", class: 'btn btn-danger'
