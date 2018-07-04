@@ -250,6 +250,9 @@ GEM
       mongoid (>= 3.0)
       mongoid-compatibility
       stringex (~> 2.0)
+    mongoid_paranoia (0.2.1)
+      mongoid (>= 4)
+      mongoid-compatibility
     mongoid_search (0.3.6)
       fast-stemmer (~> 1.0.0)
       mongoid (>= 3.0.0)
@@ -493,6 +496,7 @@ DEPENDENCIES
   mongoid-paperclip
   mongoid-paranoia
   mongoid-slug (~> 5.2)
+  mongoid_paranoia
   mongoid_search
   omniauth-github (~> 1.1.2)
   poltergeist
@@ -527,4 +531,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.16.1
+   1.16.2

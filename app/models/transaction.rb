@@ -1,5 +1,6 @@
 class Transaction
   include Mongoid::Document
+  include Mongoid::Paranoia
   include Mongoid::Timestamps
 
   TRANSACTION_TYPES = ['royalty_bonus', 'Round', 'GoalBonus', 'daily reward']
