@@ -23,19 +23,25 @@
                   .badge.pull-right{class: "#{level(points)}", data: {title: badge, content: "#{level(points).capitalize} Level!\n You have contributed #{points} points in #{badge}."}}
                     #{badge}
             %li.list-group-item
-              %b Points
+              %b Total Points
               %a.pull-right #{format_points(@user.points)}
             %li.list-group-item
               %b Commits
               %a.pull-right= @user.commits_count
             %li.list-group-item
-              %b Redeemable
+              %b Redeemable Amount
               %a.pull-right $ #{format_points(@user.redeemable_points)}
             %li.list-group-item
               %b Earned
               %a.pull-right $ #{amount_earned @user}
           = link_to '#', class: "btn btn-primary btn-block", data: { toggle: 'modal', target: '#redeem-modal .modal' } do
-            %b Redeem Points
+            %b 
+              Redeem
+              = "($#{format_points(@user.redeemable_points)})"
+          %br
+          %p 
+            %b Note:
+            Only contributions made after 1 July, 2018 will be considered for redeemption.
     .col-sm-8
       .nav-tabs-custom
         %ul.nav.nav-tabs
