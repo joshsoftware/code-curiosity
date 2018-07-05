@@ -1,6 +1,7 @@
 class RedeemRequest
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Paranoia
   include GlobalID::Identification
 
   field :coupon_code, type: String
