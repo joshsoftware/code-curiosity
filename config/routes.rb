@@ -76,6 +76,7 @@ Rails.application.routes.draw do
       patch :update_ignore_field
     end
 
+    resources :commits, only: [:index]
   end
 
   namespace :github do

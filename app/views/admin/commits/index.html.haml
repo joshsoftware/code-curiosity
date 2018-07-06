@@ -1,0 +1,21 @@
+%section.content-header
+%h1 Commits
+%section.content
+  .row
+    .col-xs-12
+      .box.box-primary
+        .box-header
+          .box-tools
+            = form_tag(admin_commits_path, method: :get, remote: true, id: 'filters') do
+              %table
+                %tr
+                  %td= date_field_tag :from, Date.yesterday
+                  %td= date_field_tag :to, Date.yesterday
+                  %td= text_field_tag :query, nil, placeholder: 'Name of User, repository or description'
+                  %td= submit_tag 'Go'
+      .box-body.table-responsive#commits
+        - if @commits.any?
+          = render partial: 'commits_table'
+        - else
+          = 'No commits'
+          

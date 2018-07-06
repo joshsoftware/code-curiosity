@@ -1,0 +1,18 @@
+- if @commits.any?
+  %table.table.table-hover.table-bordered
+    %thead
+      %tr
+        %th.col-xs-2 Commit Date
+        %th.col-xs-2 User
+        %th.col-xs-2 Repository Name
+        %th.col-xs-7 Description
+        %th.col-xs-1 Score
+        %th.col-xs-1 Reward($)
+    %tbody
+      = render partial: 'commits'
+
+  .pagination-container
+    = paginate @commits, remote: true
+
+- else
+  = render partial: 'callout_box', locals: {type: 'success', title: 'No Contributions', message: 'There are no commits.'}

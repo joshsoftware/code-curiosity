@@ -28,7 +28,7 @@ class Commit
 
   validates :message, uniqueness: {:scope => :commit_date}
 
-  search_in :message, repository: :name
+  search_in :message, repository: :name, user: :name
 
   index({ user_id: 1 })
   scope :in_range, -> (from, to) {
