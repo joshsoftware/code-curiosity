@@ -41,7 +41,9 @@
           %br
           %p 
             %b Note:
-            Only contributions made after 1 July, 2018 will be considered for redeemption.
+            Only contributions made after 1 July, 2018 will be considered for redemption.
+            = link_to '#', data: { toggle: 'modal', target: '#info-modal .modal' } do 
+              %b Click here for more info
     .col-sm-8
       .nav-tabs-custom
         %ul.nav.nav-tabs
@@ -63,3 +65,6 @@
   #redeem-modal
     .modal.fade
       = render 'redeem/new_modal'
+  #info-modal
+    .modal.fade
+      = render 'info/new_terms_modal'
