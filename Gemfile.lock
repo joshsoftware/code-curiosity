@@ -1,19 +1,4 @@
 GIT
-  remote: https://github.com/igrigorik/bugspots.git
-  revision: 4fb960eb79e5a86b95a26f604035ab68b3992d2c
-  specs:
-    bugspots (0.2.1)
-      rainbow
-      rugged (>= 0.21.0)
-
-GIT
-  remote: https://github.com/libgit2/rugged.git
-  revision: 37e0c11df5a5c2a1809d5a597cdebc94a8a7119d
-  submodules: true
-  specs:
-    rugged (0.25.0b8)
-
-GIT
   remote: https://github.com/prasadsurase/ruby-git.git
   revision: 1f26c1c4cc50f183a54ce1e42efcc3762fbdaaa1
   branch: get-branches-having-a-commit
@@ -329,7 +314,6 @@ GEM
       activesupport (= 4.2.5)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rainbow (2.1.0)
     rake (11.2.2)
     rdoc (4.2.2)
       json (~> 1.4)
@@ -464,7 +448,6 @@ DEPENDENCIES
   bootstrap-popover-rails
   bootstrap-sass (~> 3.3.6)
   brakeman
-  bugspots!
   byebug
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
@@ -508,7 +491,6 @@ DEPENDENCIES
   redcarpet
   redis-rails
   rollbar
-  rugged!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   select2-rails
