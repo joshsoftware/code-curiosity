@@ -9,13 +9,12 @@
             = form_tag(admin_commits_path, method: :get, remote: true, id: 'filters') do
               %table
                 %tr
-                  %td= date_field_tag :from, Date.yesterday
-                  %td= date_field_tag :to, Date.yesterday
+                  %td= date_field_tag :from, Date.today.beginning_of_month
+                  %td= date_field_tag :to, Date.today
                   %td= text_field_tag :query, nil, placeholder: 'Name of User, repository or description'
                   %td= submit_tag 'Go'
-      .box-body.table-responsive#commits
-        - if @commits.any?
-          = render partial: 'commits_table'
-        - else
-          = 'No commits'
-          
+        .box-body.table-responsive#commits
+          - if @commits.any?
+            = render partial: 'commits_table'
+          - else
+            = 'No commits'
