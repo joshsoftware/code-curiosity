@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'pry-nav'
 
 class CommitRewardTest < ActiveSupport::TestCase
   def setup
@@ -38,7 +37,6 @@ class CommitRewardTest < ActiveSupport::TestCase
 
     assert_equal @user2.points, 4
     assert_equal @user2.transactions[0].points, 3
-
   end
 
   test 'should check if badge is updated' do
