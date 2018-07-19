@@ -1,4 +1,10 @@
 class CommitReward
+  attr_accessor :date
+
+  def initialize(date)
+    @date = date
+  end
+
   def calculate
     set_score
     set_reward_for_commit
@@ -9,7 +15,7 @@ class CommitReward
 
   def set_score
     day_commits.each do |commit|
-      score = rand(10)
+      score = CommitScore.new(commit, commit.repository).calculate
       commit.set(score: score)
       update_user_badge(commit)
     end
@@ -37,10 +43,10 @@ class CommitReward
   end
 
   def current_date_range 
-    Date.yesterday.beginning_of_day..Date.yesterday.end_of_day
+    @date.beginning_of_day..@date.end_of_day
   end
 
-  def day_commits 
+  def day_commits
     Commit.where(commit_date: current_date_range)
   end
 
