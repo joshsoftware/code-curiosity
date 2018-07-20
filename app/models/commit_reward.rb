@@ -23,7 +23,7 @@ class CommitReward
 
   def set_reward_for_commit
     day_commits.each do |commit|
-      commit.update(reward: rand(10))
+      commit.update(reward: rand(6..10))
     end
   end
 
@@ -42,7 +42,7 @@ class CommitReward
     end
   end
 
-  def current_date_range 
+  def current_date_range
     @date.beginning_of_day..@date.end_of_day
   end
 

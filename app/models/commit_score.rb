@@ -6,6 +6,6 @@ class CommitScore
   end
   
   def calculate
-    rand(10)
+    rand(6..10)
   end
 end
