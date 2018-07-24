@@ -23,6 +23,12 @@ require 'capybara/poltergeist'
 # Uncomment for awesome colorful output
 #require "minitest/pride"
 
+require 'vcr'
+
+VCR.configure do |config|
+  config.ignore_hosts 'codeclimate.com'
+end
+
 class ActionController::TestCase
   include Devise::TestHelpers
   include Warden::Test::Helpers
