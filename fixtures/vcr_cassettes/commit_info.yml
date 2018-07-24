@@ -1,0 +1,69 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/joshsoftware/code-curiosity/commits/eb0df748bbf084ca522f5ce4ebcf508d16169b96?redirection=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 11:11:21 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 403 Forbidden
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '0'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.014511'
+      X-Github-Request-Id:
+      - C8C0:63CA:47214C:A64907:5B570958
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"API rate limit exceeded for 114.143.133.250. (But here''s
+        the good news: Authenticated requests get a higher rate limit. Check out the
+        documentation for more details.)","documentation_url":"https://developer.github.com/v3/#rate-limiting"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 11:11:21 GMT
+recorded_with: VCR 4.0.0
