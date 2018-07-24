@@ -25,10 +25,12 @@ class RepositoryTest < ActiveSupport::TestCase
   end
 
   test 'info should retrieve repository information' do
-    repo = create :repository, name: 'mongoid-history', owner: 'aq1018', source_url: 'https://github.com/aq1018/mongoid-history'
-    info = repo.info
-    refute info.redirect?
-    assert info.success?
+    VCR.use_cassette("repo_info", record: :new_episodes) do
+      repo = create :repository, name: 'mongoid-history', owner: 'aq1018', source_url: 'https://github.com/aq1018/mongoid-history'
+      info = repo.info
+      refute info.redirect?
+      assert info.success?
+    end
   end
 
   test 'must return parent repositories' do
