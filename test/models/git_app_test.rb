@@ -3,6 +3,12 @@ require "test_helper"
 class GitAppTest < ActiveSupport::TestCase
   GIT_INFO = YAML.load_file('config/git.yml')
   
+  def setup
+    @user =  create :user, name: 'user'
+    @user.auth_token = User.encrypter.encrypt_and_sign('631375614b9ea46165cf63ae7ee522291e912592')
+    @user.save
+  end
+
   def git_app
     @git_app ||= GitApp.new
   end
@@ -11,15 +17,17 @@ class GitAppTest < ActiveSupport::TestCase
     assert git_app.valid?
   end
 
-  test 'inc function should increament access_token_counter' do
-    assert_equal GitApp.access_token_counter, 1
-    GitApp.inc
-    assert_equal GitApp.access_token_counter, 2
+  test 'info method should update access_token when it is nil' do
+    assert_equal GitApp.access_token, nil
+    GitApp.info
+    assert_equal GitApp.access_token, '631375614b9ea46165cf63ae7ee522291e912592'
   end
 
-  test 'inc function should repeat counter from 1 after it reaches to GIT_INFO.count' do
-    GitApp.access_token_counter = GIT_INFO.count
-    GitApp.inc
-    assert_equal GitApp.access_token_counter, 1
+  test 'update token method should update access_token whenever called' do
+    @user.auth_token = User.encrypter.encrypt_and_sign('5d96b0c2abd3c8a850960a40a9703113ce0218f2')
+    @user.save
+    GitApp.update_token
+    assert_equal GitApp.access_token, '5d96b0c2abd3c8a850960a40a9703113ce0218f2'
   end
+
 end
