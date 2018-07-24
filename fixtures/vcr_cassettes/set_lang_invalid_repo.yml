@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.github.com/repos/abc/Ralph%20Boyer?access_token=5d96b0c2abd3c8a850960a40a9703113ce0218f2
+    uri: https://api.github.com/repos/abc1/xyz1?access_token=your_access_token
     body:
       encoding: US-ASCII
       string: ''
@@ -14,7 +14,7 @@ http_interactions:
       User-Agent:
       - Github API Ruby Gem 0.18.2
       Authorization:
-      - token 5d96b0c2abd3c8a850960a40a9703113ce0218f2
+      - token your_access_token
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -25,7 +25,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Tue, 24 Jul 2018 11:09:53 GMT
+      - Tue, 24 Jul 2018 16:48:49 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -37,7 +37,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '4988'
       X-Ratelimit-Reset:
-      - '1532432482'
+      - '1532453608'
       X-Oauth-Scopes:
       - read:org, user:email, user:follow
       X-Accepted-Oauth-Scopes:
@@ -64,17 +64,17 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Runtime-Rack:
-      - '0.028836'
+      - '0.035857'
       X-Github-Request-Id:
-      - 9062:63CA:470853:A60DE5:5B570900
+      - 593C:54FC:553015:C29F13:5B575870
     body:
       encoding: ASCII-8BIT
       string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/#get"}'
     http_version: 
-  recorded_at: Tue, 24 Jul 2018 11:09:53 GMT
+  recorded_at: Tue, 24 Jul 2018 16:48:49 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/abc/Amina%20Sawayn?access_token=5d96b0c2abd3c8a850960a40a9703113ce0218f2
+    uri: https://api.github.com/repos/abc2/xyz2?access_token=your_access_token
     body:
       encoding: US-ASCII
       string: ''
@@ -86,7 +86,7 @@ http_interactions:
       User-Agent:
       - Github API Ruby Gem 0.18.2
       Authorization:
-      - token 5d96b0c2abd3c8a850960a40a9703113ce0218f2
+      - token your_access_token
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -97,7 +97,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Tue, 24 Jul 2018 11:09:54 GMT
+      - Tue, 24 Jul 2018 16:48:50 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -109,7 +109,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '4987'
       X-Ratelimit-Reset:
-      - '1532432482'
+      - '1532453608'
       X-Oauth-Scopes:
       - read:org, user:email, user:follow
       X-Accepted-Oauth-Scopes:
@@ -136,12 +136,300 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Runtime-Rack:
-      - '0.022872'
+      - '0.024967'
       X-Github-Request-Id:
-      - 906B:63CA:47089F:A60E7A:5B570902
+      - FA49:54FC:5530A8:C2A026:5B575872
     body:
       encoding: ASCII-8BIT
       string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/#get"}'
     http_version: 
-  recorded_at: Tue, 24 Jul 2018 11:09:54 GMT
+  recorded_at: Tue, 24 Jul 2018 16:48:51 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/abc1/xyz1?access_token=your_access_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 16:48:52 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 404 Not Found
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4986'
+      X-Ratelimit-Reset:
+      - '1532453608'
+      X-Oauth-Scopes:
+      - read:org, user:email, user:follow
+      X-Accepted-Oauth-Scopes:
+      - repo
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.036059'
+      X-Github-Request-Id:
+      - B802:54FC:55314A:C2A11C:5B575873
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/#get"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 16:48:52 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/abc2/xyz2?access_token=your_access_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 16:48:53 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 404 Not Found
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4985'
+      X-Ratelimit-Reset:
+      - '1532453608'
+      X-Oauth-Scopes:
+      - read:org, user:email, user:follow
+      X-Accepted-Oauth-Scopes:
+      - repo
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.038001'
+      X-Github-Request-Id:
+      - C499:54FB:2162C6:53B7AC:5B575875
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/#get"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 16:48:54 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/abc1/xyz1?access_token=your_access_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 16:48:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 404 Not Found
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4984'
+      X-Ratelimit-Reset:
+      - '1532453608'
+      X-Oauth-Scopes:
+      - read:org, user:email, user:follow
+      X-Accepted-Oauth-Scopes:
+      - repo
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.065861'
+      X-Github-Request-Id:
+      - BE40:54FC:553247:C2A384:5B575876
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/#get"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 16:48:55 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/abc2/xyz2?access_token=your_access_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 16:48:56 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 404 Not Found
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4983'
+      X-Ratelimit-Reset:
+      - '1532453608'
+      X-Oauth-Scopes:
+      - read:org, user:email, user:follow
+      X-Accepted-Oauth-Scopes:
+      - repo
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.028254'
+      X-Github-Request-Id:
+      - FF6A:54FD:7B129C:F345C2:5B575878
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/#get"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 16:48:57 GMT
 recorded_with: VCR 4.0.0

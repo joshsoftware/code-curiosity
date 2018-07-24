@@ -1,28 +1,20 @@
 class GitApp
   include Mongoid::Document
-  GIT_INFO = YAML.load_file('config/git.yml')
-
-  @@access_token_counter = 1
-
-  def self.access_token_counter
-    @@access_token_counter
-  end
-
-  def self.access_token_counter=(number)
-    @@access_token_counter = number
-  end
+  
+  @@access_token = nil
 
   def self.info
-    access_token = GIT_INFO["access_token_#{access_token_counter}"]
+    update_token if @@access_token.nil?
+
     Github.new(
-               oauth_token: access_token,
+               oauth_token: @@access_token,
                client_id: ENV['GIT_APP_ID'],
                client_secret: ENV['GIT_APP_SECRET']
               )
   end
 
-  def self.inc
-    self.access_token_counter += 1
-    self.access_token_counter = 1 if self.access_token_counter > GIT_INFO.count
+  def self.update_token
+    user = User.where(:auth_token.ne => nil).all.sample
+    @@access_token = User.encrypter.decrypt_and_verify(user.auth_token)
   end
 end
