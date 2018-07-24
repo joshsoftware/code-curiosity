@@ -151,15 +151,15 @@ class Repository
       info = GitApp.info.repos.get(owner, name)
       set(gh_repo_created_at: info.created_at, language: info.language)
     rescue Github::Error::NotFound
-      return true
       # repository moved or deleted means we no longer care about this repos.
-    rescue Github::Error::UnavailableForLegalReasons
       return true
+    rescue Github::Error::UnavailableForLegalReasons
       # repository permission invoked.
+      return true
     rescue Github::Error::Unauthorized
-      GitApp.inc
+      GitApp.update_token
     rescue Github::Error::Forbidden
-      GitApp.inc
+      GitApp.update_token
     end
   end
 end

@@ -8,7 +8,9 @@ class FetchCommitsTest < ActiveSupport::TestCase
   test 'daily commits' do
     VCR.use_cassette("my_commits", record: :new_episodes) do
       repo = create :repository, name: 'tanya-josh', owner: 'tanya-saroha', language: 'Ruby'
-      user = create  :user, github_handle: 'tanya-saroha', created_at: Date.yesterday - 1 
+      auth_token = User.encrypter.encrypt_and_sign('your_access_token')
+      create  :user, github_handle: 'tanya-saroha', created_at: Date.yesterday - 1, auth_token: auth_token
+
       assert_equal repo.commits.count, 0
       Sidekiq::Testing.inline!
 
