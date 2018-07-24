@@ -14,26 +14,27 @@ class GitFetcher
 
   def fetch_and_store_commits
     commits_list = fetch_commits(repo_name, branch_name)
-
     commits_list.each do |commit|
-      user = User.contestants.find_by(github_handle: commit['author']['login'])
-      repo = Repository.find_by(name: repo_name, owner: repo_owner)
+      if commit['author']
+        user = User.contestants.find_by(github_handle: commit['author']['login'])
+        repo = Repository.find_by(name: repo_name, owner: repo_owner)
 
-      if user && valid_commit?(user, commit['commit']['committer']['date'], commit['commit']['message'])
-        commit_record = user.commits.find_or_initialize_by( sha: commit['sha'] )
+        if user && valid_commit?(user, commit['commit']['committer']['date'], commit['commit']['message'])
+          commit_record = user.commits.find_or_initialize_by( sha: commit['sha'] )
 
-        commit_record.repository = repo
-        commit_record.message = commit['commit']['message']
-        commit_record.commit_date = commit['commit']['committer']['date']
-        commit_record.html_url = commit['html_url']
-        commit_record.comments_count = commit['commit']['comment_count']
+          commit_record.repository = repo
+          commit_record.message = commit['commit']['message']
+          commit_record.commit_date = commit['commit']['committer']['date']
+          commit_record.html_url = commit['html_url']
+          commit_record.comments_count = commit['commit']['comment_count']
 
-        stats = fetch_commit_stats(commit_record.sha, repo)
-        commit_record.lines = stats.total
+          stats = fetch_commit_stats(commit_record.sha, repo)
+          commit_record.lines = stats.total
 
-        commit_record.save
-        asscoiate_with_pull_request(commit_record)
+          commit_record.save
+          asscoiate_with_pull_request(commit_record)
 
+        end
       end
     end
   end

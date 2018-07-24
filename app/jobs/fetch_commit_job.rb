@@ -22,16 +22,20 @@ class FetchCommitJob < ActiveJob::Base
     rescue Github::Error::NotFound
       # repository moved or deleted means we no longer care about this repos.
       Sidekiq.logger.info "Raised Github::Error::NotFound Exception"
+      repo = Repository.find_by(name: repo_name)
+      repo.destroy
     rescue Github::Error::UnavailableForLegalReasons
       # repository permission invoked.
       Sidekiq.logger.info "Raised Github::Error::UnavailableForLegalReasons Exception"
+      repo = Repository.find_by(name: repo_name)
+      repo.destroy
     rescue Github::Error::Unauthorized
       Sidekiq.logger.info "Raised Github::Error::Unauthorized Exception"
-      GitApp.inc
+      GitApp.update_token
       retry_job wait: 5.minutes if @retries_count < MAX_RETRY_COUNT
     rescue Github::Error::Forbidden
       Sidekiq.logger.info "Raised Github::Error::Forbidden Exception"
-      GitApp.inc
+      GitApp.update_token
       retry_job wait: 5.minutes if @retries_count < MAX_RETRY_COUNT
     rescue Mongo::Error::SocketError
       retry_job wait: 5.minutes if @retries_count < MAX_RETRY_COUNT
