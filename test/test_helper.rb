@@ -1,4 +1,5 @@
 require "codeclimate-test-reporter"
+require 'sidekiq/testing'
 CodeClimate::TestReporter.start
 
 require 'simplecov'
@@ -26,6 +27,8 @@ require 'capybara/poltergeist'
 require 'vcr'
 
 VCR.configure do |config|
+  config.cassette_library_dir = "fixtures/vcr_cassettes"
+  config.hook_into :webmock
   config.ignore_hosts 'codeclimate.com'
 end
 

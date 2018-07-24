@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class ScoreAndRewardTest < ActiveSupport::TestCase
+  setup do
+    CodeCuriosity::Application.load_tasks
+  end
+
   def test_score_and_reward_calculations
     repo = create :repository, name: 'tanya-josh', owner: 'tanya-saroha', language: 'Ruby'
     user = create  :user, github_handle: 'tanya-saroha', created_at: Date.yesterday - 1 

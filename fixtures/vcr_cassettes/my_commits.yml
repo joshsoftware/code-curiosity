@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=004c1756c196d9263627787d40ff53a2fdb3a551&sha=master&since=2018-07-18%2000:00:00%20UTC&until=2018-07-18%2023:59:59%20UTC
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
     body:
       encoding: US-ASCII
       string: ''
@@ -14,7 +14,7 @@ http_interactions:
       User-Agent:
       - Github API Ruby Gem 0.18.2
       Authorization:
-      - token 004c1756c196d9263627787d40ff53a2fdb3a551
+      - token your_access_token
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -25,7 +25,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 19 Jul 2018 13:45:36 GMT
+      - Tue, 24 Jul 2018 10:50:35 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -35,21 +35,23 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4999'
+      - '4993'
       X-Ratelimit-Reset:
-      - '1532011536'
+      - '1532432482'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
       - Accept, Authorization, Cookie, X-GitHub-OTP
       Etag:
-      - W/"9c6c6d8027e10515027ebfc394a50540"
+      - W/"68000576baf1b4104b96fa68a7101f59"
       Last-Modified:
-      - Wed, 18 Jul 2018 12:57:30 GMT
+      - Mon, 23 Jul 2018 05:15:53 GMT
       X-Oauth-Scopes:
-      - ''
+      - read:org, user:email, user:follow
       X-Accepted-Oauth-Scopes:
       - ''
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
@@ -70,27 +72,21 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Runtime-Rack:
-      - '0.275997'
+      - '0.056779'
       X-Github-Request-Id:
-      - D933:7858:26DBD29:5FC6F4E:5B5095FF
+      - 9ED2:63C9:61E235:E8A78C:5B57047A
     body:
       encoding: ASCII-8BIT
-      string: '[{"sha":"4efcff773c34fdfe710d453d6c67243ba9944fd2","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0OjRlZmNmZjc3M2MzNGZkZmU3MTBkNDUzZDZjNjcyNDNiYTk5NDRmZDI=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T12:57:30Z"},"committer":{"name":"GitHub","email":"noreply@github.com","date":"2018-07-18T12:57:30Z"},"message":"Merge
-        pull request #1 from tanya-saroha/test_branch\n\ncommit 3","tree":{"sha":"bd968a92de4e40fc8a4604fd047be166f18f3c5f","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/bd968a92de4e40fc8a4604fd047be166f18f3c5f"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/4efcff773c34fdfe710d453d6c67243ba9944fd2","comment_count":0,"verification":{"verified":true,"reason":"valid","signature":"-----BEGIN
-        PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJbTzk6CRBK7hj4Ov3rIwAAdHIIACIgA2Pxbveymhjbqgr1eBSm\npOo4V39FTG74BCPJc2nrGy5S4xtZUKNx5CHH3c4ZbDK7a0hh1gs/z5hDoCqQElzI\nL3U1IQ+cYqc1CJDD5mn2iVOsXYminq9plOuI34B+t75gLMXUBq/U6S5xMblTVXCB\nBIR2VBkAwJs7m2112DeNa5PXbCIcdwaY3XCjf6VHaU5Hed2B7Rrl8/AGCP4+7+Ll\nE92OQhAnIYQa6Ihk4q52qLR/xsBd8ODgSSvkFA3WxcKphG4cBigO54V9aZpIJKtr\nZ56umTGEvBAWGPsF2R1PBXQuVXPKLuKP/rWT/2Iz+/WmvdZYRgk2QHCe9iPzexU=\n=1aMU\n-----END
-        PGP SIGNATURE-----\n","payload":"tree bd968a92de4e40fc8a4604fd047be166f18f3c5f\nparent
-        04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b\nparent 0b5fe0e0ff66bc5f473d66ba684acce51b79faf7\nauthor
-        tanya-saroha <tanya@joshsoftware.com> 1531918650 +0530\ncommitter GitHub <noreply@github.com>
-        1531918650 +0530\n\nMerge pull request #1 from tanya-saroha/test_branch\n\ncommit
-        3"}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/4efcff773c34fdfe710d453d6c67243ba9944fd2","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/4efcff773c34fdfe710d453d6c67243ba9944fd2","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/4efcff773c34fdfe710d453d6c67243ba9944fd2/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"web-flow","id":19864447,"node_id":"MDQ6VXNlcjE5ODY0NDQ3","avatar_url":"https://avatars3.githubusercontent.com/u/19864447?v=4","gravatar_id":"","url":"https://api.github.com/users/web-flow","html_url":"https://github.com/web-flow","followers_url":"https://api.github.com/users/web-flow/followers","following_url":"https://api.github.com/users/web-flow/following{/other_user}","gists_url":"https://api.github.com/users/web-flow/gists{/gist_id}","starred_url":"https://api.github.com/users/web-flow/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/web-flow/subscriptions","organizations_url":"https://api.github.com/users/web-flow/orgs","repos_url":"https://api.github.com/users/web-flow/repos","events_url":"https://api.github.com/users/web-flow/events{/privacy}","received_events_url":"https://api.github.com/users/web-flow/received_events","type":"User","site_admin":false},"parents":[{"sha":"04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b"},{"sha":"0b5fe0e0ff66bc5f473d66ba684acce51b79faf7","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7"}]},{"sha":"0b5fe0e0ff66bc5f473d66ba684acce51b79faf7","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0OjBiNWZlMGUwZmY2NmJjNWY0NzNkNjZiYTY4NGFjY2U1MWI3OWZhZjc=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T12:56:26Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T12:56:26Z"},"message":"commit
-        3","tree":{"sha":"bd968a92de4e40fc8a4604fd047be166f18f3c5f","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/bd968a92de4e40fc8a4604fd047be166f18f3c5f"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[{"sha":"04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b"}]},{"sha":"04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0OjA0ZDk0ZTZjN2NlMGM2M2IzZTdiODkwNTRiYzU5MzZkYzRjZjE1MmI=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T09:57:47Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T09:57:47Z"},"message":"Test
-        file 2 commit 2","tree":{"sha":"a1c7203ace39201bee863848bf0a0b64886982e9","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/a1c7203ace39201bee863848bf0a0b64886982e9"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[{"sha":"0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f"}]},{"sha":"0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0OjBmZDdhNDk3NmVmOGVhODUwNmZhMzNmNTUwY2QzNjY4YjJkNDFkOGY=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T09:57:35Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T09:57:35Z"},"message":"Test
-        file 1 commit 1","tree":{"sha":"c510abf4c7c3e0dc4bf07db9344c61c4e6ee7cbc","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/c510abf4c7c3e0dc4bf07db9344c61c4e6ee7cbc"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[]}]'
+      string: '[{"sha":"9979610f8d56f55c157388db1fba71550697d96b","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0Ojk5Nzk2MTBmOGQ1NmY1NWMxNTczODhkYjFmYmE3MTU1MDY5N2Q5NmI=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:53Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:53Z"},"message":"Commit
+        9","tree":{"sha":"e8235870fdc8ccf9c6de5c8b4002b8127bf26e61","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/e8235870fdc8ccf9c6de5c8b4002b8127bf26e61"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/9979610f8d56f55c157388db1fba71550697d96b","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/9979610f8d56f55c157388db1fba71550697d96b","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/9979610f8d56f55c157388db1fba71550697d96b","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/9979610f8d56f55c157388db1fba71550697d96b/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[{"sha":"da33918b61c58f69ccb6f9340eda24cf2d1707d6","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/da33918b61c58f69ccb6f9340eda24cf2d1707d6","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/da33918b61c58f69ccb6f9340eda24cf2d1707d6"}]},{"sha":"da33918b61c58f69ccb6f9340eda24cf2d1707d6","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0OmRhMzM5MThiNjFjNThmNjljY2I2ZjkzNDBlZGEyNGNmMmQxNzA3ZDY=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:46Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:46Z"},"message":"Commit
+        8","tree":{"sha":"8deb66e8f1eda51662cd4c97343d4fd0441c36f8","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/8deb66e8f1eda51662cd4c97343d4fd0441c36f8"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/da33918b61c58f69ccb6f9340eda24cf2d1707d6","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/da33918b61c58f69ccb6f9340eda24cf2d1707d6","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/da33918b61c58f69ccb6f9340eda24cf2d1707d6","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/da33918b61c58f69ccb6f9340eda24cf2d1707d6/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[{"sha":"87517b12804bdf68c8afefc5c3068f4e56dc697d","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/87517b12804bdf68c8afefc5c3068f4e56dc697d","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/87517b12804bdf68c8afefc5c3068f4e56dc697d"}]},{"sha":"87517b12804bdf68c8afefc5c3068f4e56dc697d","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0Ojg3NTE3YjEyODA0YmRmNjhjOGFmZWZjNWMzMDY4ZjRlNTZkYzY5N2Q=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:41Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:41Z"},"message":"Commit
+        7","tree":{"sha":"7a7ea3ad13cab187c76a3a6ad18bd2e0cf8de777","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/7a7ea3ad13cab187c76a3a6ad18bd2e0cf8de777"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/87517b12804bdf68c8afefc5c3068f4e56dc697d","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/87517b12804bdf68c8afefc5c3068f4e56dc697d","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/87517b12804bdf68c8afefc5c3068f4e56dc697d","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/87517b12804bdf68c8afefc5c3068f4e56dc697d/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[{"sha":"66bf5d545369a8acb019622e1b2b187dbba335b9","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/66bf5d545369a8acb019622e1b2b187dbba335b9","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/66bf5d545369a8acb019622e1b2b187dbba335b9"}]},{"sha":"66bf5d545369a8acb019622e1b2b187dbba335b9","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0OjY2YmY1ZDU0NTM2OWE4YWNiMDE5NjIyZTFiMmIxODdkYmJhMzM1Yjk=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:34Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:34Z"},"message":"Commit
+        6","tree":{"sha":"b69a7d371fef54b510b5b9e33849f29a8771b93e","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/b69a7d371fef54b510b5b9e33849f29a8771b93e"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/66bf5d545369a8acb019622e1b2b187dbba335b9","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/66bf5d545369a8acb019622e1b2b187dbba335b9","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/66bf5d545369a8acb019622e1b2b187dbba335b9","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/66bf5d545369a8acb019622e1b2b187dbba335b9/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[{"sha":"00d577ee6f55af3f9fefe82f6b99ebb3f08c7a02","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/00d577ee6f55af3f9fefe82f6b99ebb3f08c7a02","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/00d577ee6f55af3f9fefe82f6b99ebb3f08c7a02"}]}]'
     http_version: 
-  recorded_at: Thu, 19 Jul 2018 13:45:36 GMT
+  recorded_at: Tue, 24 Jul 2018 10:50:35 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7?access_token=004c1756c196d9263627787d40ff53a2fdb3a551
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits/9979610f8d56f55c157388db1fba71550697d96b?access_token=your_access_token
     body:
       encoding: US-ASCII
       string: ''
@@ -102,7 +98,7 @@ http_interactions:
       User-Agent:
       - Github API Ruby Gem 0.18.2
       Authorization:
-      - token 004c1756c196d9263627787d40ff53a2fdb3a551
+      - token your_access_token
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -113,7 +109,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 19 Jul 2018 13:45:43 GMT
+      - Tue, 24 Jul 2018 10:50:37 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -123,21 +119,23 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4998'
+      - '4992'
       X-Ratelimit-Reset:
-      - '1532011536'
+      - '1532432482'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
       - Accept, Authorization, Cookie, X-GitHub-OTP
       Etag:
-      - W/"de387ee57e1c0d699fab2d3af2fe91e3"
+      - W/"ccf22e65a326d6ebd01b315a53ddf3f9"
       Last-Modified:
-      - Wed, 18 Jul 2018 12:56:26 GMT
+      - Mon, 23 Jul 2018 05:15:53 GMT
       X-Oauth-Scopes:
-      - ''
+      - read:org, user:email, user:follow
       X-Accepted-Oauth-Scopes:
       - ''
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
@@ -158,20 +156,20 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Runtime-Rack:
-      - '0.044299'
+      - '0.041292'
       X-Github-Request-Id:
-      - D945:785E:7F0848E:F3B5CB1:5B509606
+      - 9EDB:63CB:92C60F:13E1545:5B57047C
     body:
       encoding: ASCII-8BIT
-      string: '{"sha":"0b5fe0e0ff66bc5f473d66ba684acce51b79faf7","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0OjBiNWZlMGUwZmY2NmJjNWY0NzNkNjZiYTY4NGFjY2U1MWI3OWZhZjc=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T12:56:26Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T12:56:26Z"},"message":"commit
-        3","tree":{"sha":"bd968a92de4e40fc8a4604fd047be166f18f3c5f","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/bd968a92de4e40fc8a4604fd047be166f18f3c5f"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[{"sha":"04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b"}],"stats":{"total":11,"additions":11,"deletions":0},"files":[{"sha":"906061f0169a915f42d121a152dfb2ccc3276d32","filename":"test4","status":"added","additions":2,"deletions":0,"changes":2,"blob_url":"https://github.com/tanya-saroha/tanya-josh/blob/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7/test4","raw_url":"https://github.com/tanya-saroha/tanya-josh/raw/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7/test4","contents_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/contents/test4?ref=0b5fe0e0ff66bc5f473d66ba684acce51b79faf7","patch":"@@
-        -0,0 +1,2 @@\n+hey this is test file 4\n+"},{"sha":"0649303f55c93e2ba575fa76819fa1844d509943","filename":"test5","status":"added","additions":9,"deletions":0,"changes":9,"blob_url":"https://github.com/tanya-saroha/tanya-josh/blob/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7/test5","raw_url":"https://github.com/tanya-saroha/tanya-josh/raw/0b5fe0e0ff66bc5f473d66ba684acce51b79faf7/test5","contents_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/contents/test5?ref=0b5fe0e0ff66bc5f473d66ba684acce51b79faf7","patch":"@@
-        -0,0 +1,9 @@\n+\n+ihello how\n+are\n+you\n+ait\n+ruby\n+josh\n+railss\n+"}]}'
+      string: '{"sha":"9979610f8d56f55c157388db1fba71550697d96b","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0Ojk5Nzk2MTBmOGQ1NmY1NWMxNTczODhkYjFmYmE3MTU1MDY5N2Q5NmI=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:53Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:53Z"},"message":"Commit
+        9","tree":{"sha":"e8235870fdc8ccf9c6de5c8b4002b8127bf26e61","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/e8235870fdc8ccf9c6de5c8b4002b8127bf26e61"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/9979610f8d56f55c157388db1fba71550697d96b","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/9979610f8d56f55c157388db1fba71550697d96b","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/9979610f8d56f55c157388db1fba71550697d96b","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/9979610f8d56f55c157388db1fba71550697d96b/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[{"sha":"da33918b61c58f69ccb6f9340eda24cf2d1707d6","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/da33918b61c58f69ccb6f9340eda24cf2d1707d6","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/da33918b61c58f69ccb6f9340eda24cf2d1707d6"}],"stats":{"total":6,"additions":6,"deletions":0},"files":[{"sha":"c96b630c7783a130fe624bf22c2549a5d8dbeb02","filename":"test5","status":"modified","additions":6,"deletions":0,"changes":6,"blob_url":"https://github.com/tanya-saroha/tanya-josh/blob/9979610f8d56f55c157388db1fba71550697d96b/test5","raw_url":"https://github.com/tanya-saroha/tanya-josh/raw/9979610f8d56f55c157388db1fba71550697d96b/test5","contents_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/contents/test5?ref=9979610f8d56f55c157388db1fba71550697d96b","patch":"@@
+        -6,4 +6,10 @@ ait\n ruby\n josh\n railss\n+this\n+is\n+the\n+last\n+file\n+commit
+        nine\n "}]}'
     http_version: 
-  recorded_at: Thu, 19 Jul 2018 13:45:43 GMT
+  recorded_at: Tue, 24 Jul 2018 10:50:37 GMT
 - request:
     method: get
-    uri: https://api.github.com/search/issues?access_token=004c1756c196d9263627787d40ff53a2fdb3a551&q=sha:0b5fe0e0ff66bc5f473d66ba684acce51b79faf7
+    uri: https://api.github.com/search/issues?access_token=your_access_token&q=sha:9979610f8d56f55c157388db1fba71550697d96b
     body:
       encoding: US-ASCII
       string: ''
@@ -183,7 +181,7 @@ http_interactions:
       User-Agent:
       - Github API Ruby Gem 0.18.2
       Authorization:
-      - token 004c1756c196d9263627787d40ff53a2fdb3a551
+      - token your_access_token
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -194,7 +192,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 19 Jul 2018 13:45:45 GMT
+      - Tue, 24 Jul 2018 10:50:39 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -206,13 +204,15 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '29'
       X-Ratelimit-Reset:
-      - '1532008005'
+      - '1532429499'
       Cache-Control:
       - no-cache
       X-Oauth-Scopes:
-      - ''
+      - read:org, user:email, user:follow
       X-Accepted-Oauth-Scopes:
       - ''
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
@@ -233,19 +233,17 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Runtime-Rack:
-      - '0.104089'
+      - '0.041684'
       X-Github-Request-Id:
-      - D947:785B:3D3EED8:8DFDB69:5B509608
+      - 9EE5:63CB:92C6DB:13E16D0:5B57047E
     body:
       encoding: ASCII-8BIT
-      string: '{"total_count":1,"incomplete_results":false,"items":[{"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/issues/1","repository_url":"https://api.github.com/repos/tanya-saroha/tanya-josh","labels_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/issues/1/labels{/name}","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/issues/1/comments","events_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/issues/1/events","html_url":"https://github.com/tanya-saroha/tanya-josh/pull/1","id":342316680,"node_id":"MDExOlB1bGxSZXF1ZXN0MjAyMjQzOTMw","number":1,"title":"commit
-        3","user":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"labels":[],"state":"closed","locked":false,"assignee":null,"assignees":[],"milestone":null,"comments":3,"created_at":"2018-07-18T12:57:02Z","updated_at":"2018-07-18T12:57:30Z","closed_at":"2018-07-18T12:57:30Z","author_association":"OWNER","pull_request":{"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/pulls/1","html_url":"https://github.com/tanya-saroha/tanya-josh/pull/1","diff_url":"https://github.com/tanya-saroha/tanya-josh/pull/1.diff","patch_url":"https://github.com/tanya-saroha/tanya-josh/pull/1.patch"},"body":"Please
-        merge the new branch","score":100.0}]}'
+      string: '{"total_count":0,"incomplete_results":false,"items":[]}'
     http_version: 
-  recorded_at: Thu, 19 Jul 2018 13:45:45 GMT
+  recorded_at: Tue, 24 Jul 2018 10:50:39 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b?access_token=004c1756c196d9263627787d40ff53a2fdb3a551
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits/da33918b61c58f69ccb6f9340eda24cf2d1707d6?access_token=your_access_token
     body:
       encoding: US-ASCII
       string: ''
@@ -257,7 +255,7 @@ http_interactions:
       User-Agent:
       - Github API Ruby Gem 0.18.2
       Authorization:
-      - token 004c1756c196d9263627787d40ff53a2fdb3a551
+      - token your_access_token
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -268,7 +266,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 19 Jul 2018 13:45:48 GMT
+      - Tue, 24 Jul 2018 10:50:41 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -278,21 +276,23 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4997'
+      - '4991'
       X-Ratelimit-Reset:
-      - '1532011536'
+      - '1532432482'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
       - Accept, Authorization, Cookie, X-GitHub-OTP
       Etag:
-      - W/"8adc95385cac3a61f3e6a2d5df07ca77"
+      - W/"39e57402816dba2ec9ca760506dedc60"
       Last-Modified:
-      - Wed, 18 Jul 2018 09:57:47 GMT
+      - Mon, 23 Jul 2018 05:15:46 GMT
       X-Oauth-Scopes:
-      - ''
+      - read:org, user:email, user:follow
       X-Accepted-Oauth-Scopes:
       - ''
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
@@ -313,18 +313,20 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Runtime-Rack:
-      - '0.041047'
+      - '0.048807'
       X-Github-Request-Id:
-      - D94D:785D:605DD89:CD2216B:5B50960B
+      - 9EF5:63CB:92C801:13E191C:5B570480
     body:
       encoding: ASCII-8BIT
-      string: '{"sha":"04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0OjA0ZDk0ZTZjN2NlMGM2M2IzZTdiODkwNTRiYzU5MzZkYzRjZjE1MmI=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T09:57:47Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T09:57:47Z"},"message":"Test
-        file 2 commit 2","tree":{"sha":"a1c7203ace39201bee863848bf0a0b64886982e9","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/a1c7203ace39201bee863848bf0a0b64886982e9"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[{"sha":"0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f"}],"stats":{"total":0,"additions":0,"deletions":0},"files":[{"sha":"e69de29bb2d1d6434b8b29ae775ad8c2e48c5391","filename":"test3","status":"added","additions":0,"deletions":0,"changes":0,"blob_url":"https://github.com/tanya-saroha/tanya-josh/blob/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b/test3","raw_url":"https://github.com/tanya-saroha/tanya-josh/raw/04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b/test3","contents_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/contents/test3?ref=04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b"}]}'
+      string: '{"sha":"da33918b61c58f69ccb6f9340eda24cf2d1707d6","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0OmRhMzM5MThiNjFjNThmNjljY2I2ZjkzNDBlZGEyNGNmMmQxNzA3ZDY=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:46Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:46Z"},"message":"Commit
+        8","tree":{"sha":"8deb66e8f1eda51662cd4c97343d4fd0441c36f8","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/8deb66e8f1eda51662cd4c97343d4fd0441c36f8"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/da33918b61c58f69ccb6f9340eda24cf2d1707d6","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/da33918b61c58f69ccb6f9340eda24cf2d1707d6","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/da33918b61c58f69ccb6f9340eda24cf2d1707d6","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/da33918b61c58f69ccb6f9340eda24cf2d1707d6/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[{"sha":"87517b12804bdf68c8afefc5c3068f4e56dc697d","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/87517b12804bdf68c8afefc5c3068f4e56dc697d","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/87517b12804bdf68c8afefc5c3068f4e56dc697d"}],"stats":{"total":4,"additions":4,"deletions":0},"files":[{"sha":"c0317272c057c0cae02f04430ab7666ac6081a35","filename":"test4","status":"modified","additions":4,"deletions":0,"changes":4,"blob_url":"https://github.com/tanya-saroha/tanya-josh/blob/da33918b61c58f69ccb6f9340eda24cf2d1707d6/test4","raw_url":"https://github.com/tanya-saroha/tanya-josh/raw/da33918b61c58f69ccb6f9340eda24cf2d1707d6/test4","contents_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/contents/test4?ref=da33918b61c58f69ccb6f9340eda24cf2d1707d6","patch":"@@
+        -5,4 +5,8 @@ this is line4\n this is line5\n this is line6\n \n+Adding more
+        lines\n+line 9\n+ line 10\n+commit 8\n "}]}'
     http_version: 
-  recorded_at: Thu, 19 Jul 2018 13:45:48 GMT
+  recorded_at: Tue, 24 Jul 2018 10:50:41 GMT
 - request:
     method: get
-    uri: https://api.github.com/search/issues?access_token=004c1756c196d9263627787d40ff53a2fdb3a551&q=sha:04d94e6c7ce0c63b3e7b89054bc5936dc4cf152b
+    uri: https://api.github.com/search/issues?access_token=your_access_token&q=sha:da33918b61c58f69ccb6f9340eda24cf2d1707d6
     body:
       encoding: US-ASCII
       string: ''
@@ -336,7 +338,7 @@ http_interactions:
       User-Agent:
       - Github API Ruby Gem 0.18.2
       Authorization:
-      - token 004c1756c196d9263627787d40ff53a2fdb3a551
+      - token your_access_token
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -347,7 +349,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 19 Jul 2018 13:45:49 GMT
+      - Tue, 24 Jul 2018 10:50:43 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -359,13 +361,15 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '28'
       X-Ratelimit-Reset:
-      - '1532008005'
+      - '1532429499'
       Cache-Control:
       - no-cache
       X-Oauth-Scopes:
-      - ''
+      - read:org, user:email, user:follow
       X-Accepted-Oauth-Scopes:
       - ''
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
@@ -386,17 +390,17 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Runtime-Rack:
-      - '0.039402'
+      - '0.047059'
       X-Github-Request-Id:
-      - D952:785D:605DE56:CD22339:5B50960D
+      - 9F04:63CC:D20AFD:18D2056:5B570483
     body:
       encoding: ASCII-8BIT
       string: '{"total_count":0,"incomplete_results":false,"items":[]}'
     http_version: 
-  recorded_at: Thu, 19 Jul 2018 13:45:50 GMT
+  recorded_at: Tue, 24 Jul 2018 10:50:43 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f?access_token=004c1756c196d9263627787d40ff53a2fdb3a551
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits/87517b12804bdf68c8afefc5c3068f4e56dc697d?access_token=your_access_token
     body:
       encoding: US-ASCII
       string: ''
@@ -408,7 +412,7 @@ http_interactions:
       User-Agent:
       - Github API Ruby Gem 0.18.2
       Authorization:
-      - token 004c1756c196d9263627787d40ff53a2fdb3a551
+      - token your_access_token
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -419,7 +423,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 19 Jul 2018 13:45:51 GMT
+      - Tue, 24 Jul 2018 10:50:46 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -429,21 +433,23 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4996'
+      - '4990'
       X-Ratelimit-Reset:
-      - '1532011536'
+      - '1532432482'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
       - Accept, Authorization, Cookie, X-GitHub-OTP
       Etag:
-      - W/"a58535016cf8a45590eb9f541793b215"
+      - W/"8b75b921fbe825139d33000ff08a046c"
       Last-Modified:
-      - Wed, 18 Jul 2018 09:57:35 GMT
+      - Mon, 23 Jul 2018 05:15:41 GMT
       X-Oauth-Scopes:
-      - ''
+      - read:org, user:email, user:follow
       X-Accepted-Oauth-Scopes:
       - ''
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
@@ -464,18 +470,19 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Runtime-Rack:
-      - '0.044693'
+      - '0.046637'
       X-Github-Request-Id:
-      - D954:785B:3D3F104:8DFE106:5B50960F
+      - 9F0A:63C9:61E5D2:E8AF23:5B570485
     body:
       encoding: ASCII-8BIT
-      string: '{"sha":"0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0OjBmZDdhNDk3NmVmOGVhODUwNmZhMzNmNTUwY2QzNjY4YjJkNDFkOGY=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T09:57:35Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-18T09:57:35Z"},"message":"Test
-        file 1 commit 1","tree":{"sha":"c510abf4c7c3e0dc4bf07db9344c61c4e6ee7cbc","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/c510abf4c7c3e0dc4bf07db9344c61c4e6ee7cbc"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[],"stats":{"total":0,"additions":0,"deletions":0},"files":[{"sha":"e69de29bb2d1d6434b8b29ae775ad8c2e48c5391","filename":"test2","status":"added","additions":0,"deletions":0,"changes":0,"blob_url":"https://github.com/tanya-saroha/tanya-josh/blob/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f/test2","raw_url":"https://github.com/tanya-saroha/tanya-josh/raw/0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f/test2","contents_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/contents/test2?ref=0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f"}]}'
+      string: '{"sha":"87517b12804bdf68c8afefc5c3068f4e56dc697d","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0Ojg3NTE3YjEyODA0YmRmNjhjOGFmZWZjNWMzMDY4ZjRlNTZkYzY5N2Q=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:41Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:41Z"},"message":"Commit
+        7","tree":{"sha":"7a7ea3ad13cab187c76a3a6ad18bd2e0cf8de777","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/7a7ea3ad13cab187c76a3a6ad18bd2e0cf8de777"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/87517b12804bdf68c8afefc5c3068f4e56dc697d","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/87517b12804bdf68c8afefc5c3068f4e56dc697d","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/87517b12804bdf68c8afefc5c3068f4e56dc697d","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/87517b12804bdf68c8afefc5c3068f4e56dc697d/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[{"sha":"66bf5d545369a8acb019622e1b2b187dbba335b9","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/66bf5d545369a8acb019622e1b2b187dbba335b9","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/66bf5d545369a8acb019622e1b2b187dbba335b9"}],"stats":{"total":3,"additions":3,"deletions":0},"files":[{"sha":"1263fe9f53171bb63480d8b7980e0a9aff0d8e39","filename":"test3","status":"modified","additions":3,"deletions":0,"changes":3,"blob_url":"https://github.com/tanya-saroha/tanya-josh/blob/87517b12804bdf68c8afefc5c3068f4e56dc697d/test3","raw_url":"https://github.com/tanya-saroha/tanya-josh/raw/87517b12804bdf68c8afefc5c3068f4e56dc697d/test3","contents_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/contents/test3?ref=87517b12804bdf68c8afefc5c3068f4e56dc697d","patch":"@@
+        -0,0 +1,3 @@\n+Adding content in test 3\n+this is commit 7\n+"}]}'
     http_version: 
-  recorded_at: Thu, 19 Jul 2018 13:45:51 GMT
+  recorded_at: Tue, 24 Jul 2018 10:50:46 GMT
 - request:
     method: get
-    uri: https://api.github.com/search/issues?access_token=004c1756c196d9263627787d40ff53a2fdb3a551&q=sha:0fd7a4976ef8ea8506fa33f550cd3668b2d41d8f
+    uri: https://api.github.com/search/issues?access_token=your_access_token&q=sha:87517b12804bdf68c8afefc5c3068f4e56dc697d
     body:
       encoding: US-ASCII
       string: ''
@@ -487,7 +494,7 @@ http_interactions:
       User-Agent:
       - Github API Ruby Gem 0.18.2
       Authorization:
-      - token 004c1756c196d9263627787d40ff53a2fdb3a551
+      - token your_access_token
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -498,7 +505,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 19 Jul 2018 13:45:53 GMT
+      - Tue, 24 Jul 2018 10:50:48 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -510,13 +517,15 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '27'
       X-Ratelimit-Reset:
-      - '1532008005'
+      - '1532429499'
       Cache-Control:
       - no-cache
       X-Oauth-Scopes:
-      - ''
+      - read:org, user:email, user:follow
       X-Accepted-Oauth-Scopes:
       - ''
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
@@ -537,12 +546,2150 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Runtime-Rack:
-      - '0.091252'
+      - '0.047921'
       X-Github-Request-Id:
-      - D958:785D:605E064:CD227D2:5B509611
+      - 9F14:63CC:D20DC0:18D25E3:5B570487
     body:
       encoding: ASCII-8BIT
       string: '{"total_count":0,"incomplete_results":false,"items":[]}'
     http_version: 
-  recorded_at: Thu, 19 Jul 2018 13:45:53 GMT
+  recorded_at: Tue, 24 Jul 2018 10:50:48 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits/66bf5d545369a8acb019622e1b2b187dbba335b9?access_token=your_access_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:50:50 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4989'
+      X-Ratelimit-Reset:
+      - '1532432482'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      Etag:
+      - W/"d0e6d73a83dbe26d49eb8b02cc41ae82"
+      Last-Modified:
+      - Mon, 23 Jul 2018 05:15:34 GMT
+      X-Oauth-Scopes:
+      - read:org, user:email, user:follow
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.051514'
+      X-Github-Request-Id:
+      - 9F1F:63C9:61E782:E8B287:5B570489
+    body:
+      encoding: ASCII-8BIT
+      string: '{"sha":"66bf5d545369a8acb019622e1b2b187dbba335b9","node_id":"MDY6Q29tbWl0MTQxNDAyMjU0OjY2YmY1ZDU0NTM2OWE4YWNiMDE5NjIyZTFiMmIxODdkYmJhMzM1Yjk=","commit":{"author":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:34Z"},"committer":{"name":"tanya-saroha","email":"tanya@joshsoftware.com","date":"2018-07-23T05:15:34Z"},"message":"Commit
+        6","tree":{"sha":"b69a7d371fef54b510b5b9e33849f29a8771b93e","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/trees/b69a7d371fef54b510b5b9e33849f29a8771b93e"},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/git/commits/66bf5d545369a8acb019622e1b2b187dbba335b9","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/66bf5d545369a8acb019622e1b2b187dbba335b9","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/66bf5d545369a8acb019622e1b2b187dbba335b9","comments_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/66bf5d545369a8acb019622e1b2b187dbba335b9/comments","author":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"committer":{"login":"tanya-saroha","id":40762474,"node_id":"MDQ6VXNlcjQwNzYyNDc0","avatar_url":"https://avatars2.githubusercontent.com/u/40762474?v=4","gravatar_id":"","url":"https://api.github.com/users/tanya-saroha","html_url":"https://github.com/tanya-saroha","followers_url":"https://api.github.com/users/tanya-saroha/followers","following_url":"https://api.github.com/users/tanya-saroha/following{/other_user}","gists_url":"https://api.github.com/users/tanya-saroha/gists{/gist_id}","starred_url":"https://api.github.com/users/tanya-saroha/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tanya-saroha/subscriptions","organizations_url":"https://api.github.com/users/tanya-saroha/orgs","repos_url":"https://api.github.com/users/tanya-saroha/repos","events_url":"https://api.github.com/users/tanya-saroha/events{/privacy}","received_events_url":"https://api.github.com/users/tanya-saroha/received_events","type":"User","site_admin":false},"parents":[{"sha":"00d577ee6f55af3f9fefe82f6b99ebb3f08c7a02","url":"https://api.github.com/repos/tanya-saroha/tanya-josh/commits/00d577ee6f55af3f9fefe82f6b99ebb3f08c7a02","html_url":"https://github.com/tanya-saroha/tanya-josh/commit/00d577ee6f55af3f9fefe82f6b99ebb3f08c7a02"}],"stats":{"total":5,"additions":5,"deletions":0},"files":[{"sha":"31850711facf804391f603726c69de57b326a13e","filename":"test2","status":"modified","additions":5,"deletions":0,"changes":5,"blob_url":"https://github.com/tanya-saroha/tanya-josh/blob/66bf5d545369a8acb019622e1b2b187dbba335b9/test2","raw_url":"https://github.com/tanya-saroha/tanya-josh/raw/66bf5d545369a8acb019622e1b2b187dbba335b9/test2","contents_url":"https://api.github.com/repos/tanya-saroha/tanya-josh/contents/test2?ref=66bf5d545369a8acb019622e1b2b187dbba335b9","patch":"@@
+        -9,4 +9,9 @@ Josh Software\n Pune\n MH\n \n+changing file2 contents\n+to check
+        for commit fetching\n+adding 5 lines\n+this is a test\n+this is commit six\n
+        "}]}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:50:50 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/issues?access_token=your_access_token&q=sha:66bf5d545369a8acb019622e1b2b187dbba335b9
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:50:51 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '30'
+      X-Ratelimit-Remaining:
+      - '26'
+      X-Ratelimit-Reset:
+      - '1532429499'
+      Cache-Control:
+      - no-cache
+      X-Oauth-Scopes:
+      - read:org, user:email, user:follow
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Oauth-Client-Id:
+      - f361454cd4cf493ec6ab
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.044818'
+      X-Github-Request-Id:
+      - 9F25:63CB:92CC1F:13E2224:5B57048B
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total_count":0,"incomplete_results":false,"items":[]}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:50:52 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:58:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '34'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.016991'
+      X-Github-Request-Id:
+      - AEDC:63CA:466446:A471E7:5B570665
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:58:47 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:58:48 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '33'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.020893'
+      X-Github-Request-Id:
+      - AEE9:63CC:D35B5F:18FC892:5B570668
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:58:48 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:58:50 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '32'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.019410'
+      X-Github-Request-Id:
+      - AEF7:63CA:4664D7:A47362:5B570669
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:58:50 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:58:52 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '31'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.019047'
+      X-Github-Request-Id:
+      - AF05:63C9:62881D:EA368C:5B57066B
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:58:52 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:58:53 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '30'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.018936'
+      X-Github-Request-Id:
+      - AF0C:63CB:93F593:1405F05:5B57066D
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:58:53 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:58:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '29'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.018220'
+      X-Github-Request-Id:
+      - AF16:63CC:D35EFD:18FCF6F:5B57066E
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:58:55 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:58:57 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '28'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.032619'
+      X-Github-Request-Id:
+      - E713:63CB:93F77F:140627D:5B570671
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:58:57 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '27'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.015188'
+      X-Github-Request-Id:
+      - E71D:63CC:D36145:18FD346:5B570672
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:02 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '26'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.017286'
+      X-Github-Request-Id:
+      - E72B:63CA:4667CB:A47B5E:5B570675
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:03 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:04 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '25'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.015080'
+      X-Github-Request-Id:
+      - E737:63C9:628C73:EA4173:5B570678
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:04 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:06 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '24'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.018975'
+      X-Github-Request-Id:
+      - E744:63CC:D367E9:18FE0C9:5B570679
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:06 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:08 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '23'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.016262'
+      X-Github-Request-Id:
+      - E75A:63CC:D36988:18FE3FF:5B57067B
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:08 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:11 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '22'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.136163'
+      X-Github-Request-Id:
+      - E763:63CC:D36B68:18FE7D3:5B57067E
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:11 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:13 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '21'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.015815'
+      X-Github-Request-Id:
+      - E771:63C9:628FCA:EA49F0:5B570681
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:14 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:16 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '20'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.020403'
+      X-Github-Request-Id:
+      - E7A3:63CC:D36F12:18FEF24:5B570684
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:16 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:18 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '19'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.015362'
+      X-Github-Request-Id:
+      - E7AF:63CC:D37000:18FF116:5B570685
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:18 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:21 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '18'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.023991'
+      X-Github-Request-Id:
+      - E7BE:63CC:D37156:18FF3A8:5B570688
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:21 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:22 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '17'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.016525'
+      X-Github-Request-Id:
+      - E7E3:63CC:D3728B:18FF5D8:5B57068A
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:22 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '16'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.015047'
+      X-Github-Request-Id:
+      - E7F0:63CC:D373A7:18FF81C:5B57068C
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:24 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:27 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '15'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.018445'
+      X-Github-Request-Id:
+      - E80F:63C9:6292D9:EA52A0:5B57068E
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:27 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:29 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '14'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.026074'
+      X-Github-Request-Id:
+      - E829:63C9:6293C4:EA54EF:5B570691
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:30 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:32 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '13'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.015694'
+      X-Github-Request-Id:
+      - E838:63CA:466E97:A48C83:5B570693
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:33 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:35 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '12'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.017912'
+      X-Github-Request-Id:
+      - E873:63CC:D37AE0:190061A:5B570697
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:35 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:37 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '11'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.020140'
+      X-Github-Request-Id:
+      - E886:63CB:94109C:14091B5:5B570698
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:37 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:39 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '10'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.020119'
+      X-Github-Request-Id:
+      - E8C6:63CC:D37D5F:1900AF2:5B57069A
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:39 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:41 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '9'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.018871'
+      X-Github-Request-Id:
+      - E908:63CB:94138D:140964B:5B57069C
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:42 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:43 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '8'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.025580'
+      X-Github-Request-Id:
+      - E91B:63C9:629760:EA5E84:5B57069F
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:43 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:45 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '7'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.015163'
+      X-Github-Request-Id:
+      - E979:63CC:D38110:19012AE:5B5706A1
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:45 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '6'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.016628'
+      X-Github-Request-Id:
+      - E9A1:63CB:9416A0:1409C88:5B5706A3
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:47 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/tanya-saroha/tanya-josh/commits?access_token=your_access_token&sha=master&since=2018-07-23%2000:00:00%20UTC&until=2018-07-23%2023:59:59%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token your_access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 24 Jul 2018 10:59:50 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '83'
+      Status:
+      - 401 Unauthorized
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '5'
+      X-Ratelimit-Reset:
+      - '1532431666'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.019519'
+      X-Github-Request-Id:
+      - E9B8:63CA:467181:A4940A:5B5706A4
+    body:
+      encoding: UTF-8
+      string: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
+    http_version: 
+  recorded_at: Tue, 24 Jul 2018 10:59:50 GMT
 recorded_with: VCR 4.0.0
