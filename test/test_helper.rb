@@ -1,4 +1,5 @@
 require "codeclimate-test-reporter"
+require 'sidekiq/testing'
 CodeClimate::TestReporter.start
 
 require 'simplecov'
@@ -22,6 +23,14 @@ require 'capybara/poltergeist'
 
 # Uncomment for awesome colorful output
 #require "minitest/pride"
+
+require 'vcr'
+
+VCR.configure do |config|
+  config.cassette_library_dir = "fixtures/vcr_cassettes"
+  config.hook_into :webmock
+  config.ignore_hosts 'codeclimate.com'
+end
 
 class ActionController::TestCase
   include Devise::TestHelpers

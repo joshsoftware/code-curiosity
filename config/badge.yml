@@ -1,0 +1,9 @@
+bronze:
+  min: rand(10)
+  max: rand(10)
+silver:
+  min: rand(10)
+  max: rand(10)
+gold:
+  min: rand(10)
+  max: rand(10)

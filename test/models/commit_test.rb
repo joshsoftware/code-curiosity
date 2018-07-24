@@ -42,11 +42,13 @@ class CommitTest < ActiveSupport::TestCase
   end
 
   def test_commit_info
-    commit = create(:commit, message: Faker::Lorem.sentences, sha: 'eb0df748bbf084ca522f5ce4ebcf508d16169b96', repository: create(:repository, owner: 'joshsoftware', name: 'code-curiosity'))
-    assert_not_nil commit.info
+    VCR.use_cassette("commit_info", record: :new_episodes) do
+      commit = create(:commit, message: Faker::Lorem.sentences, sha: 'eb0df748bbf084ca522f5ce4ebcf508d16169b96', repository: create(:repository, owner: 'joshsoftware', name: 'code-curiosity'))
+      assert_not_nil commit.info
 
-    commit = create(:commit, message: Faker::Lorem.sentences, sha: 'eb0df748bbf084ca522f5ce4ebcf508d16169b96', repository: nil)
-    assert_nil commit.info
+      commit = create(:commit, message: Faker::Lorem.sentences, sha: 'eb0df748bbf084ca522f5ce4ebcf508d16169b96', repository: nil)
+      assert_nil commit.info
+    end
   end
 
 
