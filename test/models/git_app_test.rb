@@ -5,8 +5,6 @@ class GitAppTest < ActiveSupport::TestCase
   
   def setup
     @user =  create :user, name: 'user'
-    @user.auth_token = User.encrypter.encrypt_and_sign('631375614b9ea46165cf63ae7ee522291e912592')
-    @user.save
   end
 
   def git_app
@@ -18,7 +16,8 @@ class GitAppTest < ActiveSupport::TestCase
   end
 
   test 'info method should update access_token when it is nil' do
-    assert_equal GitApp.access_token, nil
+    @user.auth_token = User.encrypter.encrypt_and_sign('631375614b9ea46165cf63ae7ee522291e912592')
+    @user.save
     GitApp.info
     assert_equal GitApp.access_token, '631375614b9ea46165cf63ae7ee522291e912592'
   end
@@ -29,5 +28,4 @@ class GitAppTest < ActiveSupport::TestCase
     GitApp.update_token
     assert_equal GitApp.access_token, '5d96b0c2abd3c8a850960a40a9703113ce0218f2'
   end
-
 end

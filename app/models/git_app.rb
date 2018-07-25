@@ -8,7 +8,7 @@ class GitApp
   end
 
   def self.info
-    update_token if @@access_token.nil?
+    update_token
     Github.new(
                oauth_token: @@access_token,
                client_id: ENV['GIT_APP_ID'],
