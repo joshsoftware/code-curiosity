@@ -31,7 +31,7 @@ set :shared_paths, [
   'config/mongoid.yml', 'config/secrets.yml', 'log',
   'config/git.yml', '.env.production', 'repositories',
   'cache', 'config/backup.yml', 'config/badge.yml', 'config/points.yml',
-  'app/models/commit_reward.rb', 'app/services/repo_budget.rb', 'app/services/commit_score.rb'
+  'app/models/repo_budget.rb', 'app/models/commit_score.rb'
 ]
 
 # Optional settings:
