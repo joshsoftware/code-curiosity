@@ -7,7 +7,8 @@ class CommitReward
 
   def calculate
     set_score
-    set_reward_for_commit
+    repo_budget = RepoBudget.new(@date).calculate
+    set_reward_for_commit(repo_budget)
     create_transaction
   end
 
@@ -15,15 +16,20 @@ class CommitReward
 
   def set_score
     day_commits.each do |commit|
-      score = CommitScore.new(commit, commit.repository).calculate
+      score = 0
+      score = CommitScore.new(commit, commit.repository).calculate if commit.repository
       commit.set(score: score)
       update_user_badge(commit)
     end
   end
 
-  def set_reward_for_commit
+  def set_reward_for_commit(repo_budget)
     day_commits.each do |commit|
-      commit.update(reward: rand(6..10))
+      commit.update(reward: 0)
+      if commit.repository
+        id = commit.repository.id.to_s
+        commit.update(reward: (commit.score * repo_budget[id][:factor]).round(2))
+      end
     end
   end
 
@@ -52,9 +58,10 @@ class CommitReward
 
   def update_user_badge(commit)
     user = commit.user
-    language = commit.repository.language
-    user.badges[language] = 0 if user.badges[language].nil?
-    user.badges[language] += commit.score
-    user.save
+    if !commit.repository.nil?
+      language = commit.repository.language
+      user.badges[language] += commit.score if !user.badges[language].nil?
+      user.save
+    end
   end
 end
