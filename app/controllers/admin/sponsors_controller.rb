@@ -30,6 +30,17 @@ class Admin::SponsorsController < ApplicationController
     @sponsor = Sponsor.find(params[:id])
   end
 
+  def update
+    @sponsor = Sponsor.find(params[:id])
+    if @sponsor.update(sponsor_params)
+      flash[:success] = "Sponsor Updated Successfully!"
+      redirect_to admin_sponsors_path
+    else
+      flash[:error] = @sponsor.errors.full_messages.join(',')
+      render :edit
+    end
+  end
+
   def destroy
     Sponsor.find(params[:id]).destroy
     @sponsors = Sponsor.all.page(params[:page])
@@ -41,6 +52,6 @@ class Admin::SponsorsController < ApplicationController
   private
 
   def sponsor_params
-    params.require(:sponsor).permit(:name, :is_individual, budgets_attributes: [:start_date, :end_date, :amount, :is_all_repos, repository_ids: []] )
+    params.require(:sponsor).permit(:name, :is_individual, budgets_attributes: [:id, :start_date, :end_date, :amount, :is_all_repos, repository_ids: []] )
   end
 end
