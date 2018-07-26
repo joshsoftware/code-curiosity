@@ -20,7 +20,7 @@ class Budget
   private
 
   def calculate_day_amount
-    number_of_days = (end_date - start_date).to_i
+    number_of_days = (end_date - start_date).to_i + 1
     amount/number_of_days
   end
 end
