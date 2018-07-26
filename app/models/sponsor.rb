@@ -5,7 +5,8 @@ class Sponsor
   field :is_individual, type: Boolean, default: false
 
   has_many :budgets, dependent: :destroy
-  accepts_nested_attributes_for :budgets
+
+  accepts_nested_attributes_for :budgets, allow_destroy: true
 
   validates :name, presence: true
   validates :name, uniqueness: true

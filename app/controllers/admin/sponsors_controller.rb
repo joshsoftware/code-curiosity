@@ -52,6 +52,8 @@ class Admin::SponsorsController < ApplicationController
   private
 
   def sponsor_params
-    params.require(:sponsor).permit(:name, :is_individual, budgets_attributes: [:id, :start_date, :end_date, :amount, :is_all_repos, repository_ids: []] )
+    params.require(:sponsor).permit(:name, :is_individual, 
+                                    budgets_attributes: 
+                                    [:id, :start_date, :end_date, :amount, :is_all_repos, :_destroy, repository_ids: []] )
   end
 end

@@ -8,8 +8,8 @@ class Budget
   field :amount,        type: Float
   field :is_all_repos,	type: Boolean, default: false
 
-  has_and_belongs_to_many :repositories
   belongs_to :sponsor
+  has_and_belongs_to_many :repositories
 
   validates :start_date, :end_date, :amount, presence: true
 
