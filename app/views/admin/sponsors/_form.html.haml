@@ -1,8 +1,10 @@
-= simple_form_for(@sponsor, url: admin_sponsors_path, method: 'post') do |f|
+= simple_form_for([:admin, @sponsor]) do |f|
   .col-xs-6
     = f.input :name
     = f.input :is_individual, as: :boolean
     = f.simple_fields_for :budgets do |p|
+      - unless p.object.new_record?
+        = p.input :id, as: :hidden
       = p.input :start_date, input_html: { class: 'datepicker'}
       = p.input :end_date, input_html: { class: 'datepicker' }
       = p.input :amount, as: :float
