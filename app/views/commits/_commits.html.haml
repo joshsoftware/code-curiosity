@@ -20,7 +20,7 @@
         - if commit.reward.nil?
           %a.rewards.fa.fa-hourglass-2
         - else
-          - if commit.is_reveal
+          - if commit.is_reveal || commit.reward.zero?
             = "$ #{commit.reward}"
           - else
             = link_to reveal_commit_path(commit), method: 'patch',

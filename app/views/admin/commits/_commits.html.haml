@@ -21,12 +21,4 @@
         - if commit.reward.nil?
           %a.rewards.fa.fa-hourglass-2
         - else
-          - if commit.is_reveal
-            = "$ #{commit.reward}"
-          - else
-            = link_to reveal_commit_path(commit), method: 'patch',
-              class: 'btn btn-success btn-xs reveal', remote: true do
-              %i.fa.fa-fw.fa-gift
-              Reveal
-            .reward
-              = "$ #{commit.reward}"
+          = "$ #{commit.reward}"
