@@ -244,6 +244,7 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    nested_form (0.3.2)
     netrc (0.11.0)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
@@ -482,6 +483,7 @@ DEPENDENCIES
   mongoid-slug (~> 5.2)
   mongoid_paranoia
   mongoid_search
+  nested_form
   omniauth-github (~> 1.1.2)
   poltergeist
   pry

@@ -1,15 +1,26 @@
-= simple_form_for([:admin, @sponsor]) do |f|
-  .col-xs-6
+= simple_nested_form_for([:admin, @sponsor]) do |f|
+  .col-xs-6.sponsor_form
     = f.input :name
     = f.input :is_individual, as: :boolean
     = f.simple_fields_for :budgets do |p|
-      - unless p.object.new_record?
-        = p.input :id, as: :hidden
-      = p.input :start_date, input_html: { class: 'datepicker'}
-      = p.input :end_date, input_html: { class: 'datepicker' }
-      = p.input :amount, as: :float
-      = p.input :is_all_repos, as: :boolean, label: 'All Repositories', input_html: { checked: true, id: 'is_all_repos'}
-      = p.select :repository_ids, [], {}, {multiple: true, disabled: true, id: 'budget_repo_ids'}
-    = f.submit id: 'create_sponsor', class: 'btn btn-primary' do
-      = @sponsor.persisted? ? 'Update' : 'Create'
-    = link_to "Cancel", :back, class: 'btn btn-primary'
+      .well
+        - unless p.object.new_record?
+          = p.input :id, as: :hidden
+        = p.input :start_date, input_html: { class: 'datepicker' }, disabled: !p.object.new_record?
+        = p.input :end_date, input_html: { class: 'datepicker' }, disabled: !p.object.new_record?
+        = p.input :amount, as: :float, disabled: !p.object.new_record?
+        = p.input :is_all_repos, as: :boolean, label: 'All Repositories', input_html: { checked: true, class: 'is_all_repos'}, disabled: p.object.is_deactivated
+        = p.select :repository_ids, [], {}, {multiple: true, disabled: true, class: 'budget_repo_ids'}
+        = p.input :is_deactivated, as: :boolean, label: 'Deactivate', checked: true, disabled: p.object.is_deactivated
+        %br
+        %br
+        - if p.object.new_record?
+          = p.link_to_remove "Remove Budget", class: 'btn btn-danger pull-right'
+        %br
+    = f.link_to_add "Add New Budget", :budgets, class: 'btn btn-primary pull-right'
+    %div
+      %br
+      = f.submit class: 'btn btn-primary' do
+        = @sponsor.persisted? ? 'Update' : 'Create'
+      = link_to "Cancel", :back, class: 'btn btn-default'
+

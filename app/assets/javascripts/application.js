@@ -28,6 +28,7 @@
 //= require select2
 //= require bootstrap/bootstrap-rails-tooltip
 //= require bootstrap/bootstrap-rails-popover
+//= require jquery_nested_form
 //= require_tree .
 
 function onDocReady(){

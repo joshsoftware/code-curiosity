@@ -46,6 +46,7 @@ gem 'select2-rails'
 gem 'mongoid_search'
 gem 'bootstrap-popover-rails'
 gem 'mongoid_paranoia'
+gem "nested_form"
 
 group :development, :test do
   gem 'byebug'
