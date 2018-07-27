@@ -1,5 +1,13 @@
 %section.content-header
-%h1 Commits
+  %nav.navbar.navbar-default
+    .container-fluid
+      .navbar-header
+        %a.navbar-brand
+          Commits
+      %p.navbar-text.navbar-right.pull-right
+        Reward:
+        %span.badge= "$#{@commits.sum(:reward)}"
+        &nbsp&nbsp
 %section.content
   .row
     .col-xs-12
