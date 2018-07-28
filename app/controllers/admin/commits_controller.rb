@@ -7,7 +7,6 @@ class Admin::CommitsController < ApplicationController
     @commits = Commit.all.in_range(from, to)
                        .search_by(params[:query])
     @sum = @commits.sum(:reward)
-    @commits = @commits.page(params[:page])
-
+    #@commits = @commits.page(params[:page])
   end
 end

@@ -42,7 +42,7 @@ $(document).on('page:change', function(event) {
   $('.sidebar').off('click')
   $.AdminLTE.tree('.sidebar');
 
-  selectTabUsingUrlHash();
+  $('.commits_table').DataTable();
 });
 
 function selectTabUsingUrlHash(){

@@ -1,3 +1,4 @@
 :plain
   $("#commits").html("#{j render(partial: 'commits_table')}"); 
+  $('.commits_table').DataTable();
   $(".badge").html("#{@sum}"); 

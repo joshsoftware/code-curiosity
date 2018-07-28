@@ -14,7 +14,7 @@ class Commit
   field :comments_count,   type: Integer, default: 0
   field :sha,              type: String
   field :auto_score,       type: Integer
-  field :score,            type: Float, default: 0
+  field :score,            type: Float
   field :reward,           type: Float
   field :frequency_factor, type: Float, default: 1
   field :lines,            type: Integer, default: 0
@@ -35,7 +35,7 @@ class Commit
     where(:commit_date.gte => from, :commit_date.lte => to)
   }
   scope :search_by, -> (query) {
-    full_text_search(query)
+    full_text_search(query, match: :all)
   }
   scope :with_reward, -> { where(:reward.ne => nil) }
 
