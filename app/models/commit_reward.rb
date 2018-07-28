@@ -28,7 +28,7 @@ class CommitReward
       commit.update(reward: 0)
       if commit.repository
         id = commit.repository.id.to_s
-        reward = (commit.score * repo_budget[id][:factor]).floor
+        reward = (commit.score * repo_budget[id][:factor]).round(1)
         commit.update(reward: reward)
       end
     end

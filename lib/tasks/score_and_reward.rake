@@ -6,3 +6,12 @@ task :score_and_reward, [:from_date, :to_date] => :environment do |t, args|
 
   date.each{ |date| CommitReward.new(date).calculate }
 end
+
+desc 'Recalculate score and reward'
+task recalculate_score_and_reward: :environment do
+  Transaction.redeemable.destroy_all
+  date  = NEW_FEATURE_LAUNCH_DATE..Date.today
+  date.each{ |date| CommitReward.new(date).calculate }
+  puts "-----------------"
+  puts RedeemRequest.count
+end
