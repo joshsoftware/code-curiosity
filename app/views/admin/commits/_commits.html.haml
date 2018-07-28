@@ -13,7 +13,7 @@
       - if commit.score.nil?
         %a.scores.fa.fa-hourglass-2
       - else
-        = commit.score.to_i
+        = commit.score
     %td
       - if commit.non_rewardable_commit?
         %span -
