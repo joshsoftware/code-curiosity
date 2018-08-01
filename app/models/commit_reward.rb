@@ -16,20 +16,28 @@ class CommitReward
 
   def set_score
     day_commits.each do |commit|
-      score = 0
+      commit.update(score: 0)
       score = CommitScore.new(commit, commit.repository).calculate if commit.repository
-      commit.set(score: score)
+      commit.update(score: score) if score
       update_user_badge(commit)
     end
   end
 
   def set_reward_for_commit(repo_budget)
     day_commits.each do |commit|
+      reward = 0
       commit.update(reward: 0)
-      if commit.repository
-        id = commit.repository.id.to_s
-        reward = (commit.score * repo_budget[id][:factor]).round(1)
-        commit.update(reward: reward)
+      if commit.score > 0
+        if commit.repository
+          repo_id = commit.repository_id.to_s
+          budgets.each do |budget|  
+            budget_id = budget.id
+            if commit.reward < commit.score && repo_budget[budget_id]
+              reward += (commit.score * repo_budget[budget_id][repo_id][:factor]).round(1)
+              commit.update(reward: reward)
+            end
+          end
+        end
       end
     end
   end
@@ -37,15 +45,18 @@ class CommitReward
   def create_transaction
     day_commits.group_by(&:user_id).map do |user_id, commits|
       user = User.find(user_id)
-      user.create_transaction(
+      points = commits.sum{|c| c.reward.to_f }
+      if points > 0 
+        user.create_transaction(
         type: 'credit',
         points: commits.sum{|c| c.reward.to_f },
         description: "Daily reward: #{Date.today - 1}",
-        transaction_type: 'daily reward'
-      )
-      user.points = user.points.nil? ? 0 : user.points
-      user.points += commits.sum(&:score)
-      user.save
+        transaction_type: 'daily reward',
+        )
+        user.points = user.points.nil? ? 0 : user.points
+        user.points += commits.sum(&:score)
+        user.save
+      end
     end
   end
 
@@ -61,8 +72,15 @@ class CommitReward
     user = commit.user
     if !commit.repository.nil?
       language = commit.repository.language
-      user.badges[language] += commit.score if !user.badges[language].nil?
-      user.save
+      if language
+        user.badges[language] = 0 if user.badges[language].nil?
+        user.badges[language] += commit.score
+        user.save
+      end
     end
+  end
+
+  def budgets
+    Budget.activated.where(:start_date.lte => @date, :end_date.gte => @date)
   end
 end

@@ -6,17 +6,17 @@ class ScoreAndRewardTest < ActiveSupport::TestCase
   end
 
   def test_score_and_reward_calculations
-    repo = create :repository, name: 'tanya-josh', owner: 'tanya-saroha', language: 'Ruby'
+    repo = create :repository, name: 'tanya-josh', owner: 'tanya-saroha', language: 'Ruby', stars: 200, forks: 500, watchers: 500, gh_repo_created_at: Date.today << 4
     user = create  :user, github_handle: 'tanya-saroha', created_at: Date.yesterday - 1 
-    commit = create :commit, message: 'commit1', repository_id: repo.id
+    commit = create :commit, message: 'commit1', repository_id: repo.id, commit_date: Date.yesterday, lines: 10
+    budget = create :budget, start_date: Date.new(2018,07,01), end_date: Date.new(2018,07,31), amount: 310, is_all_repos: true
 
-    assert_equal commit.score, 0
+    assert_nil commit.score
     assert_nil commit.reward
 
     Rake::Task['score_and_reward'].invoke
     commit.reload
-
-    assert commit.score > 5
-    assert commit.reward > 5
+    assert_equal commit.score, 0.6
+    assert_equal commit.reward, 10
   end
 end
