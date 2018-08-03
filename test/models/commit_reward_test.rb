@@ -37,6 +37,6 @@ class CommitRewardTest < ActiveSupport::TestCase
     CommitReward.new(Date.yesterday).calculate
     #binding.pry
     @user.reload
-    #assert_equal @user.badges, { "Ruby" => @user.points }
+    assert_equal @user.badges, { "Ruby" => @user.points }
   end
 end

@@ -9,12 +9,12 @@ class FetchCommitsTest < ActiveSupport::TestCase
     VCR.use_cassette("my_commits", record: :new_episodes) do
       repo = create :repository, name: 'tanya-josh', owner: 'tanya-saroha', language: 'Ruby'
       auth_token = User.encrypter.encrypt_and_sign('your_access_token')
-      create  :user, github_handle: 'tanya-saroha', created_at: Date.yesterday - 1, auth_token: auth_token
+      create  :user, github_handle: 'tanya-saroha', created_at: Date.new(2018,07,01), auth_token: auth_token
 
       assert_equal repo.commits.count, 0
       Sidekiq::Testing.inline!
 
-      Rake::Task['fetch_commits'].invoke
+      Rake::Task[:fetch_commits.invoke
 
       Sidekiq::Testing.inline!
       repo.reload
