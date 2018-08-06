@@ -27,15 +27,14 @@ class CommitReward
     day_commits.each do |commit|
       reward = 0
       commit.update(reward: 0)
-      if commit.score > 0
-        if commit.repository
-          repo_id = commit.repository_id.to_s
-          budgets.each do |budget|  
-            budget_id = budget.id
-            if commit.reward < commit.score && repo_budget[budget_id]
-              reward += (commit.score * repo_budget[budget_id][repo_id][:factor]).round(1)
-              commit.update(reward: reward)
-            end
+      if commit.score > 0 && commit.repository        
+        repo_id = commit.repository_id.to_s
+        budgets.each do |budget|  
+          budget_id = budget.id
+          if commit.reward < commit.score && repo_budget[budget_id]
+            reward += (commit.score * repo_budget[budget_id][repo_id][:factor]).round(1)
+            reward = 5 if reward > commit.score && reward > 5
+            commit.update(reward: reward)
           end
         end
       end
