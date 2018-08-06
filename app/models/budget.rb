@@ -6,6 +6,7 @@ class Budget
   field :end_date,       type: Date
   field :day_amount,     type: Float
   field :amount,         type: Float
+  field :carry_amount,   type: Float, default: 0
   field :is_all_repos,   type: Boolean, default: false
   field :is_deactivated, type: Boolean, default: false
 
@@ -24,6 +25,6 @@ class Budget
 
   def calculate_day_amount
     number_of_days = (end_date - start_date).to_i + 1
-    amount/number_of_days
+    (amount/number_of_days) + carry_amount
   end
 end

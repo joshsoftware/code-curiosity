@@ -10,28 +10,46 @@ class CommitRewardTest < ActiveSupport::TestCase
 
     create_list :commit, 3, user: @user, commit_date: Date.yesterday, repository: @repository1, lines: 50
     create_list :commit, 2, user: @user, commit_date: Date.today, repository: @repository2, lines:50
-    create :commit, user: @user, commit_date: Date.yesterday - 1, repository: @repository2, lines: 50
+    create :commit, user: @user, commit_date: Date.today + 1, repository: @repository2, lines: 50
+    create :commit, user: @user, commit_date: Date.today + 2, repository: @repository2, lines: 500
   end
 
   test 'checks if reward is calculated as per date' do
     CommitReward.new(Date.yesterday).calculate
-    @user.reload
-    assert_equal day_commits(Date.yesterday).count, 3
     assert_equal day_commits(Date.yesterday)[0].score, 0.94
     assert_equal day_commits(Date.yesterday)[0].reward, 3.3
 
     CommitReward.new(Date.today).calculate
-    @user.reload
-    assert_equal day_commits(Date.today).count, 2
     assert_equal day_commits(Date.today)[0].score, 0.47
     assert_equal day_commits(Date.today)[0].reward, 5
   end
 
   test 'Reward should never exceed 5' do
-    CommitReward.new(Date.yesterday - 1).calculate
-    @user.reload
-    assert_equal @user.commits[5].score, 0.47
-    assert_equal @user.commits[5].reward, 5
+    CommitReward.new(Date.today + 1).calculate
+    assert_equal day_commits(Date.today + 1)[0].score, 0.47
+    assert_equal day_commits(Date.today + 1)[0].reward, 5
+  end
+
+  test 'Carry Amount should not exceed 5' do
+    CommitReward.new(Date.today + 1).calculate
+    assert_equal day_commits(Date.today + 1)[0].score, 0.47
+    assert_equal day_commits(Date.today + 1)[0].reward, 5
+
+    @budget.reload
+
+    CommitReward.new(Date.today + 2).calculate
+    assert_equal @budget.carry_amount, 5
+  end
+
+  test 'Day Amount should not exceed 15' do
+    CommitReward.new(Date.today + 1).calculate
+    assert_equal day_commits(Date.today + 1)[0].score, 0.47
+    assert_equal day_commits(Date.today + 1)[0].reward, 5
+
+    @budget.reload
+
+    CommitReward.new(Date.today + 2).calculate
+    assert_equal @budget.day_amount, 15
   end
 
   test 'should check if transactions are created properly' do

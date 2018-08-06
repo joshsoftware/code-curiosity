@@ -25,17 +25,20 @@ class CommitReward
 
   def set_reward_for_commit(repo_budget)
     day_commits.each do |commit|
-      reward = 0
       commit.update(reward: 0)
       if commit.score > 0 && commit.repository        
         repo_id = commit.repository_id.to_s
-        budgets.each do |budget|  
+        budgets.each do |budget|
           budget_id = budget.id
+          reward = 0
           if commit.reward < commit.score && repo_budget[budget_id]
             reward += (commit.score * repo_budget[budget_id][repo_id][:factor]).round(1)
             reward = 5 if reward > commit.score && reward > 5
             commit.update(reward: reward)
           end
+          budget.day_amount -= reward
+          budget.day_amount > 5 ? budget.carry_amount = 5 : budget.carry_amount = budget.day_amount
+          budget.save
         end
       end
     end
