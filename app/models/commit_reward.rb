@@ -40,7 +40,7 @@ class CommitReward
       user.create_transaction(
         type: 'credit',
         points: commits.sum{|c| c.reward.to_f },
-        description: "Daily reward: #{Date.today - 1}",
+        description: "Daily reward: #{@date}",
         transaction_type: 'daily reward'
       )
       user.points = user.points.nil? ? 0 : user.points
