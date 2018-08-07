@@ -14,7 +14,7 @@ class FetchCommitsTest < ActiveSupport::TestCase
       assert_equal repo.commits.count, 0
       Sidekiq::Testing.inline!
 
-      Rake::Task[:fetch_commits.invoke
+      Rake::Task[:fetch_commits].invoke
 
       Sidekiq::Testing.inline!
       repo.reload
