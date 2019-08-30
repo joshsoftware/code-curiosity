@@ -12,7 +12,7 @@ Code Curiosity is a platform to encourage open source contribution, build a cohe
 
 **CodeCuriosity aims to reward everyone (experts or newbies) and everything (minor changes to features).**
 
-Out of the 30M+ open-source developers on Github, if we can motivate even a fraction to contribute more, we are sure we can make the open-soure community more vibrant and rewarding! We reward open-source contributions from our own pocket, so **_"The more money we lose, the more the open-source community gains."_**
+Out of the 30M+ open-source developers on Github, if we can motivate even a fraction to contribute more, we are sure we can make the open-source community more vibrant and rewarding! We reward open-source contributions from our own pocket, so **_"The more money we lose, the more the open-source community gains."_**
 
 ## Are you or your company interested in supporting CodeCuriosity?
 
