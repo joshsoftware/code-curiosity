@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.7.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.0'
+gem 'rails', '~> 4.2'
 gem 'mongoid'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0'
@@ -52,7 +52,7 @@ group :development, :test do
   gem 'byebug'
   gem 'spring'
   gem 'minitest'
-  gem "minitest-rails", "~> 5.0.0"
+  gem "minitest-rails", "~> 2.2.1"
   gem "factory_girl_rails", "~> 4.0"
   gem 'faker', '~> 1.6.1'
   gem 'pry'
