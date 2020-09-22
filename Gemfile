@@ -31,7 +31,7 @@ gem 'dotenv-rails'
 gem 'git', git: 'https://github.com/prasadsurase/ruby-git.git', branch: 'get-branches-having-a-commit'
 gem 'redis-rails'
 gem 'whenever', :require => false
-gem 'mongoid-slug', '~> 5.2'
+gem 'mongoid-slug'
 gem 'redcarpet'
 gem 'rollbar'
 gem 'mongoid-paperclip', require: 'mongoid_paperclip'
