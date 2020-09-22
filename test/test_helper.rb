@@ -24,6 +24,9 @@ require 'capybara/poltergeist'
 # Uncomment for awesome colorful output
 #require "minitest/pride"
 
+# Mongoid adapter for DatabaseCleaner
+require 'database_cleaner/mongoid'
+
 require 'vcr'
 
 VCR.configure do |config|

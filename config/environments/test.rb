@@ -13,8 +13,10 @@ Rails.application.configure do
   config.eager_load = true
 
   # Configure static file server for tests with Cache-Control for performance.
-  config.serve_static_files   = true
-  config.static_cache_control = 'public, max-age=3600'
+  # config.serve_static_files   = true # deprecated in Rails 5.0, removed from 5.1
+  config.public_file_server.enabled = true
+  # config.static_cache_control = 'public, max-age=3600' # Deprecated in Rails 5, removed from 5.1
+  config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=3600' }
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true

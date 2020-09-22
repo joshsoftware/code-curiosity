@@ -66,7 +66,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner'
+  gem 'database_cleaner-mongoid'
   gem "codeclimate-test-reporter", require: nil
   gem 'minitest-rails-capybara'
   gem 'poltergeist'

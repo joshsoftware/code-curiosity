@@ -102,7 +102,14 @@ GEM
       safe_yaml (~> 1.0.0)
     crass (1.0.6)
     dante (0.2.0)
-    database_cleaner (1.5.3)
+    database_cleaner (1.8.5)
+    database_cleaner-mongo (1.8.1)
+      database_cleaner (~> 1.8.0)
+      mongo
+    database_cleaner-mongoid (1.8.1)
+      database_cleaner (~> 1.8.0)
+      database_cleaner-mongo (~> 1.8.0)
+      mongoid
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -447,7 +454,7 @@ DEPENDENCIES
   byebug
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
-  database_cleaner
+  database_cleaner-mongoid
   devise
   dotenv-rails
   factory_girl_rails (~> 4.0)
