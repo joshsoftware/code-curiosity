@@ -7,6 +7,7 @@ class DashboardController < ApplicationController
   end
 
   def webhook
-    render :nothing
+    # render :nothing # removed in rails 5.1
+    head :ok
   end
 end
