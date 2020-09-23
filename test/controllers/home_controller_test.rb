@@ -3,7 +3,6 @@ require 'test_helper'
 class HomeControllerTest < ActionController::TestCase
   def setup
     super
-binding.pry
     @user = create :user, auth_token: 'dah123rty'
   end
 
