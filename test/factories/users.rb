@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     name {Faker::Name.name}
     email { Faker::Internet.email }
@@ -11,7 +11,7 @@ FactoryGirl.define do
 
     factory :user_with_transactions do
         transient do
-            transactions_count 1
+            transactions_count {1}
         end
         after(:create) do |user, evaluator|
             create_list(:transaction, evaluator.transactions_count, :points => 1, :type => 'credit', user: user)

@@ -1,5 +1,5 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :comment do
-    content "MyString"
+    content { "MyString" }
   end
 end

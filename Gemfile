@@ -53,7 +53,7 @@ group :development, :test do
   gem 'spring'
   gem 'minitest'
   gem "minitest-rails", '~> 6.0.0'
-  gem "factory_girl_rails", "~> 4.0"
+  gem "factory_bot_rails"
   gem 'faker', '~> 1.6.1'
   gem 'pry'
   gem 'pry-nav'
@@ -70,6 +70,7 @@ group :test do
   gem 'database_cleaner-mongoid'
   gem "codeclimate-test-reporter", require: nil
   gem 'poltergeist'
+  gem 'webdrivers'
   gem 'mocha'
   gem 'timecop'
   gem 'stripe-ruby-mock', '~> 2.4.1', :require => 'stripe_mock'

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :git_app do
     
   end

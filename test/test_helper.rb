@@ -50,7 +50,7 @@ end
 
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
   WebMock.disable_net_connect!(allow: "codeclimate.com")
   DatabaseCleaner.strategy = :truncation
   before do
@@ -59,20 +59,24 @@ class ActiveSupport::TestCase
   end
 
   after do
-    DatabaseCleaner.clean
+    # DatabaseCleaner.clean
     StripeMock.stop
   end
 end
 
-class ActionDispatch::IntegrationTest
-  include Warden::Test::Helpers
-  include Rails.application.routes.url_helpers
-  include Capybara::DSL
-  Capybara.current_driver = :poltergeist
-  Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, timeout: 1.minute, phantomjs_options: ['--load-images=no'])
-  end
-  WebMock.allow_net_connect!(allow: "codeclimate.com")
-  before { StripeMock.start }
-  after { StripeMock.stop }
-end
+# class ActionDispatch::IntegrationTest
+#   include Warden::Test::Helpers
+#   include Rails.application.routes.url_helpers
+#   include Capybara::DSL
+#   Capybara.current_driver = :poltergeist
+#   Capybara.register_driver :poltergeist do |app|
+#     Capybara::Poltergeist::Driver.new(app, timeout: 1.minute, phantomjs_options: ['--load-images=no'])
+#   end
+#   WebMock.allow_net_connect!(allow: "codeclimate.com")
+#   before { StripeMock.start }
+#   after { StripeMock.stop }
+# end
+
+# class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
+#   driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
+# end

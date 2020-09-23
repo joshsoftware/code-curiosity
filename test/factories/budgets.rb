@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :budget do
     start_date {Date.today}
     end_date {Date.tomorrow}

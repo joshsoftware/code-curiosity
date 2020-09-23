@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :score do
     value { Faker::Number.number(1) }
     comment { Faker::Lorem.sentence }

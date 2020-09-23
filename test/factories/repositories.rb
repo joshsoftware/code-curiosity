@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :repository do
     name {Faker::Name.name}
     ssh_url { Faker::Internet.url('github.com', "/#{Faker::Lorem.word}/#{Faker::Lorem.word}") }
@@ -9,8 +9,8 @@ FactoryGirl.define do
 
     factory :repository_with_activity_and_commits do
       transient do
-        count 2
-        score 2
+        count {2}
+        score {2}
       end
 
       after(:create) do |repo, evaluator|

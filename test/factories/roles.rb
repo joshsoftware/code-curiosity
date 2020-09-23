@@ -1,9 +1,9 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :role do
     name {Faker::Name.first_name}
 
     trait :admin do
-      name 'Admin'
+      name {'Admin'}
     end
 
   end
