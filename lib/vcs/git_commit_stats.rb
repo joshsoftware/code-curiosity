@@ -1,4 +1,4 @@
-module VCS
+module Vcs
   class GitCommitStats
     attr_reader :sha, :repo
 

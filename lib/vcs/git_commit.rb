@@ -1,4 +1,4 @@
-module VCS
+module Vcs
   class GitCommit
     attr_reader :repo_owner, :repo_name,
                 :branch_name, :from_date, :to_date
