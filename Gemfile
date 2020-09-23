@@ -2,10 +2,10 @@ source 'https://rubygems.org'
 
 ruby '2.7.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.1.7'
+gem 'rails', '~> 6.0'
 gem 'mongoid'
-gem 'bootstrap-sass', '~> 3.3.6'
-gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass'
+gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 gem 'haml'
@@ -51,7 +51,7 @@ group :development, :test do
   gem 'byebug'
   gem 'spring'
   gem 'minitest'
-  gem "minitest-rails", '~> 3.0'
+  gem "minitest-rails", '~> 6.0.0'
   gem "factory_girl_rails", "~> 4.0"
   gem 'faker', '~> 1.6.1'
   gem 'pry'
@@ -68,7 +68,6 @@ end
 group :test do
   gem 'database_cleaner-mongoid'
   gem "codeclimate-test-reporter", require: nil
-  gem 'minitest-rails-capybara'
   gem 'poltergeist'
   gem 'mocha'
   gem 'timecop'
