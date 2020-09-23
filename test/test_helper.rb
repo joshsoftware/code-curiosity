@@ -1,6 +1,6 @@
-require "codeclimate-test-reporter"
+# require "codeclimate-test-reporter"
 require 'sidekiq/testing'
-CodeClimate::TestReporter.start
+# CodeClimate::TestReporter.start
 
 require 'simplecov'
 
@@ -13,13 +13,13 @@ require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
 require "minitest/rails"
 require "webmock/minitest"
-require "mocha/mini_test"
+require "mocha/minitest"
 require "stripe_mock"
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
-require "minitest/rails/capybara"
-require 'capybara/poltergeist'
+# require "minitest/rails/capybara"
+# require 'capybara/poltergeist'
 
 # Uncomment for awesome colorful output
 #require "minitest/pride"
