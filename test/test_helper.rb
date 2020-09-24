@@ -36,7 +36,7 @@ VCR.configure do |config|
 end
 
 class ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   include Warden::Test::Helpers
   include ActiveJob::TestHelper
   WebMock.disable_net_connect!(allow: "codeclimate.com")
