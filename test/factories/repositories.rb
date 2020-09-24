@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :repository do
     name {Faker::Name.name}
-    ssh_url { Faker::Internet.url('github.com', "/#{Faker::Lorem.word}/#{Faker::Lorem.word}") }
-    source_url { Faker::Internet.url('github.com', "/#{Faker::Lorem.word}/#{Faker::Lorem.word}") }
+    ssh_url { Faker::Internet.url(host: 'github.com', path: "/#{Faker::Lorem.word}/#{Faker::Lorem.word}") }
+    source_url { Faker::Internet.url(host: 'github.com', path: "/#{Faker::Lorem.word}/#{Faker::Lorem.word}") }
     description { Faker::Lorem.sentence }
     watchers {Faker::Number.digit}
-    gh_id {Faker::Number.number(6)}
+    gh_id {Faker::Number.number(digits: 6)}
 
     factory :repository_with_activity_and_commits do
       transient do
