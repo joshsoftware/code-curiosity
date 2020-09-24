@@ -18,7 +18,7 @@ gem 'kaminari-mongoid'
 gem 'jquery-rails'
 gem 'turbolinks', '~>2.5'
 gem 'jbuilder'
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', '~> 1.1', group: :doc
 gem 'github_api', '~> 0.18.2'
 gem 'hashie', '~> 3.5'
 gem 'devise'
