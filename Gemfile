@@ -55,6 +55,7 @@ group :development, :test do
   gem "minitest-rails", '~> 6.0.0'
   gem "factory_bot_rails"
   gem 'faker'
+  gem 'rubocop-faker'
   gem 'pry'
   gem 'pry-nav'
   gem 'mina'
