@@ -1,4 +1,4 @@
-class FetchCommitJob < ActiveJob::Base
+class FetchCommitJob < ApplicationJob
   include Sidekiq::Status::Worker
   include ActiveJobRetriesCount
   queue_as :git

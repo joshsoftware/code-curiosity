@@ -1,4 +1,4 @@
-module VCS
+module Vcs
   class GitRepository
     attr_reader :git_username
 

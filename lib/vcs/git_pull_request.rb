@@ -1,4 +1,4 @@
-module VCS
+module Vcs
   class GitPullRequest
     attr_reader :sha
 

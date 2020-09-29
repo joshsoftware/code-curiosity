@@ -1,5 +1,5 @@
 class GitFetcher
-  include VCS
+  include Vcs
 
   attr_reader :repo_owner, :repo_name,
               :branch_name, :from_date, :to_date
@@ -42,7 +42,7 @@ class GitFetcher
   private
 
   def fetch_commits(repo_name, branch_name)
-    ::VCS::GitCommit.new(
+    ::Vcs::GitCommit.new(
       repo_owner: repo_owner,
       repo_name: repo_name,
       branch_name: branch_name,
@@ -52,7 +52,7 @@ class GitFetcher
   end
 
   def fetch_commit_stats(sha, repo)
-    ::VCS::GitCommitStats.new(sha, repo).list
+    ::Vcs::GitCommitStats.new(sha, repo).list
   end
 
   def asscoiate_with_pull_request(commit_record)
@@ -69,7 +69,7 @@ class GitFetcher
   end
 
   def fetch_pull_request(sha)
-    ::VCS::GitPullRequest.new(sha).get
+    ::Vcs::GitPullRequest.new(sha).get
   end
 
   def valid_commit?(user, date, message)

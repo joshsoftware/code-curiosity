@@ -20,7 +20,8 @@ module JudgesActions
 
   def rate
     @resource.rate(current_user, params[:rating])
-    render nothing: true
+    # render nothing: true # removed in rails 5.1
+    head :ok
   end
 
   private

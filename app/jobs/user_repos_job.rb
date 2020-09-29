@@ -1,4 +1,4 @@
-class UserReposJob < ActiveJob::Base
+class UserReposJob < ApplicationJob
   include Sidekiq::Status::Worker
   queue_as :git
 
