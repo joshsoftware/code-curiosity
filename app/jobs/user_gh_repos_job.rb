@@ -1,4 +1,4 @@
-class UserGhReposJob < ActiveJob::Base
+class UserGhReposJob < ApplicationJob
   queue_as :git
 
   attr_accessor :user, :type

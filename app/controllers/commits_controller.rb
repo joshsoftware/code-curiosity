@@ -16,7 +16,8 @@ class CommitsController < ApplicationController
     else
       @commits.set(is_reveal: true)
     end
-    render nothing: true
+    # render nothing: true # removed in rails 5.1
+    head :ok
   end
 
   private

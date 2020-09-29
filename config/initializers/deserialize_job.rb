@@ -1,7 +1,5 @@
 # Overrides the deserialize method to pass retry count during subsequent retries of failed job
-if ActiveJob::Base.method_defined?(:deserialize)  
-  fail 'This no longer needed.'
-else  
+unless ActiveJob::Base.method_defined?(:deserialize)
   module ActiveJob
     class Base
       def self.deserialize(job_data)

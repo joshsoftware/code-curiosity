@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :commit do
     message { Faker::Lorem.paragraph }
     commit_date { DateTime.now }

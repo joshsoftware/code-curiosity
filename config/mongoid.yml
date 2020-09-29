@@ -130,7 +130,6 @@ test:
       hosts:
         - localhost:27017
       options:
-        read:
         max_pool_size: 1
   options:
     raise_not_found_error: false

@@ -1,4 +1,4 @@
-module VCS
+module Vcs
   class GitBranch
     attr_reader :git_username, :repo_name
 
