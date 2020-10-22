@@ -1,8 +1,8 @@
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
-require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
-# require 'mina/rvm'    # for rvm support. (http://rvm.io)
+#require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
+require 'mina/rvm'    # for rvm support. (http://rvm.io)
 require 'mina_sidekiq/tasks'
 require 'mina/whenever'
 
@@ -44,10 +44,10 @@ set :shared_paths, [
 task :environment do
   # If you're using rbenv, use this to load the rbenv environment.
   # Be sure to commit your .ruby-version or .rbenv-version to your repository.
-  invoke :'rbenv:load'
+  # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  # invoke :'rvm:use[ruby-2.2.4@codecuriosity]'
+  invoke :'rvm:use[ruby-2.7.1]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
