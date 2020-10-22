@@ -92,4 +92,7 @@ Rails.application.configure do
     enable_starttls_auto: true
     #domain: 'codecuriosity.org'
   }
+
+  config.action_controller.default_url_options = { protocol: 'https', port: nil, host: 'codecuriosity.org' }
+  OmniAuth.config.full_host = ->(_) { "https://codecuriosity.org" }
 end

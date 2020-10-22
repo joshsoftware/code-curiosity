@@ -134,7 +134,7 @@ class User
   end
 
   def self.encrypter
-    @_encrypter ||= ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['ENC_KEY']))
+    @_encrypter ||= ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['ENC_KEY'])[0..31])
   end
 
   def redeemable_points
