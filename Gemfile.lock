@@ -595,7 +595,7 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
-    redcarpet (3.5.0)
+    redcarpet (3.5.1)
     redis (4.2.2)
     redis-actionpack (5.2.0)
       actionpack (>= 5, < 7)
