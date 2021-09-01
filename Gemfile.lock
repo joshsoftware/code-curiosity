@@ -592,7 +592,7 @@ GEM
       json (>= 1.8)
       nokogiri (~> 1.5)
       optimist (~> 3.0)
-    rdoc (6.2.1)
+    rdoc (6.3.2)
     react-rails (2.6.1)
       babel-transpiler (>= 0.7.0)
       connection_pool
