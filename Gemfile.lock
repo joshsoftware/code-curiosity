@@ -150,7 +150,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.7)
-    connection_pool (2.2.3)
+    connection_pool (2.2.5)
     crack (0.4.4)
     crass (1.0.6)
     dante (0.2.0)
@@ -600,7 +600,7 @@ GEM
       railties (>= 3.2)
       tilt
     redcarpet (3.5.0)
-    redis (4.2.2)
+    redis (4.5.1)
     redis-actionpack (5.2.0)
       actionpack (>= 5, < 7)
       redis-rack (>= 2.1.0, < 3)
@@ -664,7 +664,7 @@ GEM
       rubyzip (>= 1.2.2)
     semantic_range (2.3.0)
     sexp_processor (4.15.1)
-    sidekiq (6.1.2)
+    sidekiq (6.4.0)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
@@ -815,7 +815,7 @@ DEPENDENCIES
   sass-rails
   sdoc (~> 1.1)
   select2-rails (~> 4.0.13)
-  sidekiq (~> 6.1.2)
+  sidekiq (~> 6.4.0)
   sidekiq-status
   simple_form
   simplecov
